@@ -1,0 +1,51 @@
+id: RR-MRRT-KNIE-PRAETEP
+version: 1.2
+status: pilot
+modalitaet: Roentgen
+region: Knie
+indikation: Praeoperative Planung TEP bei Primaerarthrose
+sprache: de
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+geprueft: 2026-05-12
+naechste-pruefung: 2026-11-12
+klassifikationen:
+  - name: Kellgren-Lawrence
+    quelle: KL 1957
+  - name: CPAK
+    quelle: MacDessi SJ et al. Bone Joint J 2021;103-B(3):329-337
+referenzen:
+  - "MacDessi SJ et al. Bone Joint J 2021;103-B(3):329-337"
+  - "Paley D. Principles of Deformity Correction. Springer 2002"
+  - "Kellgren JH, Lawrence JS. Ann Rheum Dis 1957;16:494-502"
+ki-tools:
+  - name: LAMA (IB Lab)
+    status: produktiv-lizenziert
+    output: DICOM SR
+  - name: KOALA (IB Lab)
+    status: testphase
+    output: DICOM SR
+standorte:
+  - (Standort wird vom anwendenden Haus eingetragen)
+loinc-codes:
+  - code: LP410789-0
+    description: Hip-knee-ankle angle
+  - code: LP35279-5
+    description: Leg length discrepancy
+  - code: LP410785-8
+    description: Kellgren-Lawrence score
+projektionen:
+  - ap-stehend
+  - seitlich
+  - patella-tangential
+  - ganzbein-einseitig-mit-kalibrationskugel
+  - rosenberg-optional
+modi:
+  - manuell
+  - lama-vorbefuellt
+  - hybrid-validierung
+output:
+  - fliesstext
+  - json
+  - fhir-bundle
