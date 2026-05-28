@@ -1,5 +1,44 @@
 # Changelog: Röntgen Knie präoperativ vor TEP
 
+## v1.3.1 – 2026-05-23
+
+### Korrigiert – Defaults-Hygiene (Patient Safety)
+
+- **KL-Selects** (medial, lateral, patellofemoral): keine Default-Werte mehr. Leere Option ist Default und Pflichtfeld.
+- **Seitenangabe**: leere Option ergänzt ("– bitte wählen –"), kein automatisches „re." mehr.
+- **Knochenstruktur**: leere Option ergänzt, kein „altersentsprechend" als Default mehr.
+- **Klinische Angabe**: Textfeld leer (vorher „Schmerzhafte Gonarthrose, präoperative Planung TEP" vorbefüllt).
+
+**Hintergrund:** In v1.3 waren in den drei KL-Selects Default-Werte aktiv (medial 4, lateral 1, PF 2). Diese stammten aus dem UI-Aufbau und wären in produktiver Nutzung ein Befundungsrisiko: der generierte Befundtext hätte Default-Werte als aktive Befunde interpretiert. Konsequente Bereinigung im Sinne der für strukturierte Befundung geltenden Anchoring-Vermeidung.
+
+### Neu – Pflichtfeld-Validierung (visuell)
+
+- Roter pulsierender Punkt-Indikator an allen Pflichtfeldern, solange leer.
+- Pflichtfelder optisch hervorgehoben (roter Rand) bis Eingabe erfolgt.
+- Befundtext und Beurteilung werden erst generiert, wenn Seite gewählt ist.
+- Auto-Beurteilung wird erst generiert, wenn mindestens ein KL-Wert gesetzt ist.
+- FHIR/JSON-Export blockt mit klarer Fehlermeldung, solange Seite fehlt.
+
+### Erweitert – Beurteilungslogik
+
+- Beurteilungstext jetzt auch für KL ≤ 1 sinnvoll: „Keine bzw. allenfalls fragliche radiologische Arthrosezeichen".
+- Der EndoCert-Konformitätssatz erscheint unabhängig vom Arthrosegrad (gehört zur Achsenvermessung, nicht zur Diagnose).
+- TEP-Indikationssatz erscheint nur ab KL ≥ 3 (vorher unbedingt, was inkonsistent war).
+
+### Defaults-Policy (neu, repo-weit verbindlich)
+
+Aufnahme in den Style-Guide:
+
+| Feldtyp | Default-Erlaubt? |
+|---|---|
+| Diagnostische Klassifikation (KL, Dejour, Patella-Höhe, Tilt, Bone Quality) | ❌ nie |
+| Klinische Angabe / Indikation | ❌ nie |
+| Seitenangabe | ❌ nie |
+| Verlaufstrend | ❌ nie (Voruntersuchung patientenspezifisch) |
+| Technik-Standardprojektionen | ✅ ja erlaubt, da Protokoll-fix |
+| Optionale Zusatzprojektionen (z. B. Rosenberg) | ✅ nein erlaubt als Default |
+| Modus-Schalter (Manuell/LAMA/Hybrid) | ✅ Manuell als sicherer Default |
+
 ## v1.3 – 2026-05-21
 
 ### Neu – RadLex-Codierung (non-negotiable Standard)
