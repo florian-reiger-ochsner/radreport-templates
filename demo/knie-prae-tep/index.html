@@ -4,15 +4,15 @@
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8">
-<title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.3 RadLex)</title>
+<title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.3.1 RadLex)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
 <meta name="dcterms.title" content="Röntgen Knie präoperativ vor Totalendoprothese"/>
 <meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). Inklusive CPAK-Berechnung und FHIR-Export. RadLex/LOINC/SNOMED-codiert."/>
 <meta name="dcterms.language" content="de"/>
 <meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date" content="2026-05-21"/>
-<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.3"/>
+<meta name="dcterms.date" content="2026-05-23"/>
+<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.3.1"/>
 <meta name="rrt:specialty" content="Radiology"/>
 <meta name="rrt:subspecialty" content="Musculoskeletal Radiology"/>
 <meta name="rrt:modality" content="DX"/>
@@ -355,6 +355,49 @@ button.secondary:hover{
 .codesystem-legend .local{background:#fdf4e3;color:#8b6914;border:1px solid #c4a558;}
 .codesystem-legend .needs{background:#fbe9e7;color:#9c2c1a;border:1px solid #c45848;}
 
+/* ============ PFLICHTFELD-INDIKATOR ============ */
+.req-indicator{
+  display:inline-block;
+  width:6px;height:6px;border-radius:50%;
+  background:#c45848;
+  margin-left:6px;
+  vertical-align:middle;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:0.4}
+  50%{opacity:1}
+}
+select.required-empty,
+.side-toggle.required-empty{
+  border-color:#c45848;
+  box-shadow:0 0 0 2px rgba(196,88,72,0.1);
+}
+.side-toggle{border:1px solid var(--field-border)}
+.side-toggle.required-empty{
+  border-color:#c45848 !important;
+  box-shadow:0 0 0 2px rgba(196,88,72,0.1);
+}
+.side-empty-option{
+  padding:8px 18px;
+  font-size:14px;
+  color:var(--ink-muted);
+  background:var(--bg);
+  cursor:pointer;
+  font-weight:500;
+}
+.side-toggle input[type="radio"]:checked + .side-empty-option{
+  background:var(--ink-muted);color:#fff;
+}
+.empty-state{
+  padding:12px 16px;
+  background:var(--bg-alt);
+  color:var(--ink-muted);
+  font-style:italic;
+  border-radius:4px;
+  font-size:13px;
+}
+
 </style>
 </head>
 <body>
@@ -365,7 +408,7 @@ button.secondary:hover{
 <section class="input-pane">
 
   <h1 class="doc-title">Planungsröntgen Knie vor TEP</h1>
-  <div class="doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.3 · RadLex-codiert · HJK Wien</div>
+  <div class="doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.3.1 · RadLex-codiert · HJK Wien</div>
   <div class="title-rule"></div>
 
   <!-- MODE SWITCHER -->
@@ -384,11 +427,13 @@ button.secondary:hover{
 
   <!-- ====================== SEITE ====================== -->
   <div class="h2-wrap">
-    <h2>Seite <span class="rl-badge">RID5824/5825</span></h2>
+    <h2>Seite <span class="rl-badge">RID5824/5825</span> <span class="req-indicator" id="req_seite" title="Pflichtfeld"></span></h2>
     <div class="h2-rule"></div>
   </div>
-  <div class="side-toggle">
-    <input type="radio" name="seite" id="seite-re" value="re." data-radlex="RID5825" data-en="right" checked>
+  <div class="side-toggle" id="side_toggle">
+    <input type="radio" name="seite" id="seite-none" value="" checked>
+    <label for="seite-none" class="side-empty-option">– bitte wählen –</label>
+    <input type="radio" name="seite" id="seite-re" value="re." data-radlex="RID5825" data-en="right">
     <label for="seite-re">re.</label>
     <input type="radio" name="seite" id="seite-li" value="li." data-radlex="RID5824" data-en="left">
     <label for="seite-li">li.</label>
@@ -492,40 +537,40 @@ button.secondary:hover{
 
   <!-- ====================== ARTHROSE / KL ====================== -->
   <div class="h2-wrap">
-    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rl-badge">LOINC LP410785-8</span></h2>
+    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rl-badge">LOINC LP410785-8</span> <span class="req-indicator" title="Pflichtfeld"></span></h2>
     <div class="h2-rule"></div>
-    <div class="h2-sub">Kompartiment-spezifisch (KL 1957). Werte 0–4.</div>
+    <div class="h2-sub">Kompartiment-spezifisch (KL 1957). Werte 0–4. Pflichtfelder.</div>
   </div>
   <div class="row three">
     <label>
-      <span class="lbl"><span>Medial</span></span>
-      <select id="kl_med" data-radlex-field="osteoarthritis-grade-medial">
-        <option value="" data-radlex-status="needs-mapping">–</option>
+      <span class="lbl"><span>Medial <span class="req-indicator" id="req_kl_med"></span></span></span>
+      <select id="kl_med" data-radlex-field="osteoarthritis-grade-medial" class="required-empty">
+        <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
-        <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
-        <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
-        <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)" selected>4 – schwer</option>
-      </select>
-    </label>
-    <label>
-      <span class="lbl"><span>Lateral</span></span>
-      <select id="kl_lat" data-radlex-field="osteoarthritis-grade-lateral">
-        <option value="" data-radlex-status="needs-mapping">–</option>
-        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
-        <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)" selected>1 – fraglich</option>
         <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
         <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
         <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)">4 – schwer</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Patellofemoral</span></span>
-      <select id="kl_pf" data-radlex-field="osteoarthritis-grade-pf">
-        <option value="" data-radlex-status="needs-mapping">–</option>
+      <span class="lbl"><span>Lateral <span class="req-indicator" id="req_kl_lat"></span></span></span>
+      <select id="kl_lat" data-radlex-field="osteoarthritis-grade-lateral" class="required-empty">
+        <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
-        <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)" selected>2 – gering</option>
+        <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
+        <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
+        <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)">4 – schwer</option>
+      </select>
+    </label>
+    <label>
+      <span class="lbl"><span>Patellofemoral <span class="req-indicator" id="req_kl_pf"></span></span></span>
+      <select id="kl_pf" data-radlex-field="osteoarthritis-grade-pf" class="required-empty">
+        <option value="" data-radlex-status="needs-mapping" selected>–</option>
+        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
+        <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
+        <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
         <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
         <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)">4 – schwer</option>
       </select>
@@ -620,7 +665,8 @@ button.secondary:hover{
   <label>
     <span class="lbl"><span>Qualitative Beurteilung</span></span>
     <select id="bone_q" data-radlex-field="bone-quality">
-      <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate bone density" selected>altersentsprechend</option>
+      <option value="" data-radlex-status="needs-mapping" selected>–</option>
+      <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate bone density">altersentsprechend</option>
       <option value="osteopen" data-radlex-status="local" data-en="osteopenic bone density">osteopen</option>
       <option value="osteoporotisch" data-radlex="RID3406" data-en="osteoporosis">osteoporotisch</option>
     </select>
@@ -632,7 +678,7 @@ button.secondary:hover{
     <div class="h2-rule"></div>
   </div>
   <label>
-    <textarea id="indikation" placeholder="Indikation, Beschwerden, geplantes OP-Datum">Schmerzhafte Gonarthrose, präoperative Planung TEP</textarea>
+    <textarea id="indikation" placeholder="Indikation, Beschwerden, geplantes OP-Datum"></textarea>
   </label>
 
   <!-- ====================== VORUNTERSUCHUNG ====================== -->
@@ -796,23 +842,35 @@ function gn(id) { const v = parseFloat(document.getElementById(id).value); retur
 function gc(id) { return document.getElementById(id).checked; }
 
 function generateTechnik() {
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  if (!seiteEl || !seiteEl.value) {
+    return '⚠️ Bitte zuerst Seite (re. / li.) wählen.';
+  }
   const proj = [];
   if (gv('proj_ap') === 'ja') proj.push('a.p. stehend');
   if (gv('proj_lat') === 'ja') proj.push('seitlich');
   if (gv('proj_pat') === 'ja') proj.push('Patella tangential');
   if (gv('proj_lla') === 'ja') proj.push('Ganzbein-Standaufnahme der Untersuchungsseite');
   if (gv('proj_rb') === 'ja') proj.push('Rosenberg-Aufnahme');
-  const seite = document.querySelector('input[name="seite"]:checked').value;
+  const seite = seiteEl.value;
   const kugel = gv('proj_kugel') === 'ja'
     ? ' Kalibrationskugel mitabgebildet, Längenmessungen entsprechend kalibriert.'
     : '';
   return `Planungsröntgen Knie ${seite} in folgenden Projektionen: ${proj.join(', ') || '–'}.${kugel}`;
 }
 
-function generateKlinik() { return gv('indikation') + '.'; }
+function generateKlinik() {
+  const ind = gv('indikation').trim();
+  if (!ind) return '–';
+  return ind.endsWith('.') ? ind : ind + '.';
+}
 
 function generateBefund() {
-  const seite = document.querySelector('input[name="seite"]:checked').value;
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  if (!seiteEl || !seiteEl.value) {
+    return '⚠️ Befund kann erst nach Auswahl der Seite generiert werden.';
+  }
+  const seite = seiteEl.value;
   const lines = [];
   const hka = gn('hka'), mad = gn('mad'), lld = gn('lld');
   const mldfa = gn('mldfa'), mmpta = gn('mmpta'), jlca = gn('jlca');
@@ -894,10 +952,15 @@ function generateBefund() {
 }
 
 function generateBeurteilung() {
-  const seite = document.querySelector('input[name="seite"]:checked').value;
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  if (!seiteEl || !seiteEl.value) return '';
+  const seite = seiteEl.value;
   const hka = gn('hka');
   const cpak = calculateCPAK();
   const klM = gv('kl_med'), klL = gv('kl_lat'), klPF = gv('kl_pf');
+
+  // Mindestanforderung: mindestens ein KL-Wert muss gesetzt sein, sonst keine Auto-Beurteilung
+  if (!klM && !klL && !klPF) return '';
 
   const parts = [];
   // Hauptdiagnose
@@ -910,6 +973,8 @@ function generateBeurteilung() {
     parts.push(`Fortgeschrittene Gonarthrose ${seite}, ${kompartimente.join('-')}-betont (KL ${klMax}).`);
   } else if (klMax === 2) {
     parts.push(`Mäßige Gonarthrose ${seite} (KL 2).`);
+  } else if (klMax <= 1) {
+    parts.push(`Keine bzw. allenfalls fragliche radiologische Arthrosezeichen ${seite}.`);
   }
 
   // Achse
@@ -921,16 +986,51 @@ function generateBeurteilung() {
 
   if (cpak) parts.push(`CPAK-Phänotyp Typ ${cpak.type}.`);
 
-  parts.push('Befunde mit dem klinischen Bild einer Primärgonarthrose vereinbar; TEP-Indikation aus radiologischer Sicht gegeben.');
+  if (klMax >= 3) {
+    parts.push('Befunde mit dem klinischen Bild einer Primärgonarthrose vereinbar; TEP-Indikation aus radiologischer Sicht gegeben.');
+  }
   parts.push('Die präoperative Achsenvermessung ist EndoCert-konform dokumentiert (kalibrierter Tragachsenwinkel; Vorabdokumentation für postoperative Verlaufskontrolle).');
 
   return parts.join(' ');
 }
 
 // ===========================================================================
+// PFLICHTFELD-VALIDIERUNG (visuell)
+// ===========================================================================
+function updateRequiredIndicators() {
+  // Seite
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  const seiteOk = seiteEl && seiteEl.value;
+  const reqSeite = document.getElementById('req_seite');
+  const sideToggle = document.getElementById('side_toggle');
+  if (seiteOk) {
+    reqSeite.style.display = 'none';
+    sideToggle.classList.remove('required-empty');
+  } else {
+    reqSeite.style.display = 'inline-block';
+    sideToggle.classList.add('required-empty');
+  }
+
+  // KL-Selects
+  ['kl_med','kl_lat','kl_pf'].forEach(id => {
+    const sel = document.getElementById(id);
+    const reqId = 'req_' + id;
+    const reqEl = document.getElementById(reqId);
+    if (sel.value === '') {
+      sel.classList.add('required-empty');
+      if (reqEl) reqEl.style.display = 'inline-block';
+    } else {
+      sel.classList.remove('required-empty');
+      if (reqEl) reqEl.style.display = 'none';
+    }
+  });
+}
+
+// ===========================================================================
 // PREVIEW UPDATE
 // ===========================================================================
 function updatePreview() {
+  updateRequiredIndicators();
   document.getElementById('prev_technik').textContent = generateTechnik();
   document.getElementById('prev_klinik').textContent = generateKlinik();
   document.getElementById('prev_befund').textContent = generateBefund();
@@ -1001,10 +1101,15 @@ function getCodingFromCheckbox(checkboxId) {
 function showExport(format) {
   const area = document.getElementById('exportArea');
   const seite = document.querySelector('input[name="seite"]:checked');
+  if (!seite || !seite.value) {
+    area.textContent = '// Export nicht möglich: Bitte zuerst Seite (re. / li.) wählen.';
+    area.classList.add('show');
+    return;
+  }
   const cpak = calculateCPAK();
   const data = {
     metadata: {
-      template: 'HJK-MRRT-KNIE-PRAETEP', version: '1.3',
+      template: 'HJK-MRRT-KNIE-PRAETEP', version: '1.3.1',
       seite: seite.value,
       seite_radlex: { code: seite.getAttribute('data-radlex'), system: 'http://radlex.org', display: seite.getAttribute('data-en') },
       datum: new Date().toISOString(),
