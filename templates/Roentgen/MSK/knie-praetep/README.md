@@ -51,6 +51,9 @@ Nur Primärarthrose. Revisionsplanung ist ein **separates Template** (in Entwick
 - **JSON** strukturiert (Backup, KI-Training)
 - **FHIR Bundle** (DiagnosticReport + Observations mit LOINC)
 
+  ## Dokumentation
+- [Messleitfaden](./docs/messleitfaden.html) – Anleitung zu allen Messungen und Klassifikationen
+
 ## Quellen
 
 - MacDessi SJ et al. Coronal Plane Alignment of the Knee (CPAK) classification. Bone Joint J 2021;103-B(3):329-337
