@@ -1,5 +1,5 @@
 id: RR-MRRT-KNIE-PRAETEP
-version: 1.3.1
+version: 1.4
 status: pilot
 modalitaet: Roentgen
 region: Knie
@@ -8,8 +8,8 @@ sprache: de
 autoren:
   - florian-reiger-ochsner
 reviewer: []
-geprueft: 2026-05-28
-naechste-pruefung: 2026-11-28
+geprueft: 2026-06-08
+naechste-pruefung: 2026-12-08
 klassifikationen:
   - name: Kellgren-Lawrence
     quelle: KL 1957
