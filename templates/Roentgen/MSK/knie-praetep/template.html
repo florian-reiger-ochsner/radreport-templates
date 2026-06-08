@@ -3,21 +3,21 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
+  <!-- Build: 2026-05-29T04:06:43.368Z | radreport-core.css inlined for MRRT-conformance -->
 <meta charset="UTF-8">
-<title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.3.1 RadLex)</title>
+<title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.4)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
 <meta name="dcterms.title" content="Röntgen Knie präoperativ vor Totalendoprothese"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). Inklusive CPAK-Berechnung und FHIR-Export. RadLex/LOINC/SNOMED-codiert."/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). Inklusive CPAK-Berechnung und FHIR-Export. RadLex/LOINC/SNOMED-codiert. Verwendet radreport-core.css als Shared Stylesheet."/>
 <meta name="dcterms.language" content="de"/>
 <meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
 <meta name="dcterms.date" content="2026-05-23"/>
-<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.3.1"/>
+<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.4"/>
 <meta name="rrt:specialty" content="Radiology"/>
 <meta name="rrt:subspecialty" content="Musculoskeletal Radiology"/>
 <meta name="rrt:modality" content="DX"/>
 <meta name="rrt:bodyregion" content="Knee"/>
-<!-- RadLex Body Region Coding -->
 <meta name="rrt:bodyregion.code" content="RID2472"/>
 <meta name="rrt:bodyregion.codesystem" content="http://radlex.org"/>
 <meta name="rrt:bodyregion.codesystem.version" content="4.1"/>
@@ -25,394 +25,756 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
-
 <style>
+/* Inlined from radreport-core.css – do not edit here, edit source */
+/* =============================================================================
+   RADREPORT – CORE STYLESHEET
+   =============================================================================
+   Single Source of Truth für visuelle Eigenschaften aller Radreport-Templates.
+   IHE MRRT-kompatibel (über Build-Inlining in MRRT-Output).
+
+   Version:   1.0.0
+   Datum:     2026-05-23
+   Autor:     F. Reiger-Ochsner, HJK Wien
+
+   Verwendung:
+   - Externe Einbindung (Demos, Messleitfäden, GitHub Pages):
+     <link rel="stylesheet" href="../../shared/styles/radreport-core.css">
+   - MRRT-Build (template.source.html → template.html):
+     node shared/scripts/inline-css.js <source-html>
+
+   Naming-Convention:
+   - Tokens:          :root { --rr-* }
+   - Komponenten:     .rr-*
+   - Status-Modifier: .rr-is-* (z.B. .rr-is-active, .rr-is-required-empty)
+   - Utility:         .rr-u-* (z.B. .rr-u-mt-lg)
+
+   Sektionen:
+   1.  Design-Tokens
+   2.  Reset & Base
+   3.  Layout (App-Grid, Panes)
+   4.  Typografie (Titel, Headings)
+   5.  Mode-Switch
+   6.  Helper-Info-Box
+   7.  Side-Toggle (re./li./bds.)
+   8.  Form-Grid (Rows)
+   9.  Labels & Inputs
+   10. AI-States & RadLex-Badges
+   11. Details/Collapsibles
+   12. Grade-Summary (KL, RAMRIS, Lung-RADS, generisch)
+   13. Result-Box (CPAK, generische Berechnungs-Outputs)
+   14. Pflichtfeld-Validierung
+   15. Preview-Pane
+   16. Buttons & Actions
+   17. Export-Area
+   18. CodeSystem-Legende
+   19. Utilities
+   20. Print
+   ============================================================================= */
+
+
+/* =============================================================================
+   1. DESIGN-TOKENS
+   ============================================================================= */
 :root {
-  --bg: #ffffff;
-  --bg-alt: #f7f8fa;
-  --bg-card: #ffffff;
-  --ink: #2c3e50;
-  --ink-soft: #5a6c7d;
-  --ink-muted: #8b97a3;
-  --ink-faint: #b8c2cc;
-  --accent: #2c5f8d;
-  --accent-light: #4a86b8;
-  --accent-pale: #e8f0f7;
-  --rule: #e6eaef;
-  --rule-soft: #f0f3f6;
-  --field-bg: #ffffff;
-  --field-border: #d8dee5;
-  --field-focus: #ffffff;
-  --ai-tint: #f4f9fd;
-  --ai-border: #2c5f8d;
-  --radlex-tint: #f5f1f7;
-  --radlex-border: #7a4e96;
-  --warn: #c47f2a;
-  --shadow-sm: 0 1px 2px rgba(44, 62, 80, 0.04);
-  --shadow-md: 0 2px 8px rgba(44, 62, 80, 0.06);
+  /* Farben – HJK Clinical Light Theme */
+  --rr-bg:           #ffffff;
+  --rr-bg-alt:       #f7f8fa;
+  --rr-bg-card:      #ffffff;
+  --rr-ink:          #2c3e50;
+  --rr-ink-soft:     #5a6c7d;
+  --rr-ink-muted:    #8b97a3;
+  --rr-ink-faint:    #b8c2cc;
+  --rr-accent:       #2c5f8d;
+  --rr-accent-light: #4a86b8;
+  --rr-accent-pale:  #e8f0f7;
+  --rr-rule:         #e6eaef;
+  --rr-rule-soft:    #f0f3f6;
+  --rr-field-bg:     #ffffff;
+  --rr-field-border: #d8dee5;
+  --rr-ai-tint:      #f4f9fd;
+  --rr-ai-border:    #2c5f8d;
+  --rr-radlex-tint:  #f5f1f7;
+  --rr-radlex-ink:   #7a4e96;
+  --rr-warn:         #c47f2a;
+  --rr-critical:     #c45848;
+  --rr-success:      #2d7a4f;
+
+  /* Typografie */
+  --rr-font-sans:  "Source Sans 3", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  --rr-font-serif: "Source Serif 4", Georgia, serif;
+  --rr-font-mono:  "SF Mono", "Menlo", "JetBrains Mono", monospace;
+
+  /* Font-Size Scale */
+  --rr-fs-xs:   11px;
+  --rr-fs-sm:   12px;
+  --rr-fs-base: 15px;
+  --rr-fs-md:   13px;
+  --rr-fs-lg:   14px;
+  --rr-fs-xl:   20px;
+  --rr-fs-2xl:  28px;
+  --rr-fs-3xl:  32px;
+
+  /* Spacing (8px-Skala) */
+  --rr-space-xs:  0.25rem;  /* 4px */
+  --rr-space-sm:  0.5rem;   /* 8px */
+  --rr-space-md:  1rem;     /* 16px */
+  --rr-space-lg:  1.5rem;   /* 24px */
+  --rr-space-xl:  2rem;     /* 32px */
+  --rr-space-2xl: 3.5rem;   /* 56px */
+
+  /* Layout */
+  --rr-max-width: 1600px;
+  --rr-radius:    6px;
+  --rr-radius-sm: 4px;
+  --rr-radius-xs: 3px;
+
+  /* Shadows */
+  --rr-shadow-sm: 0 1px 2px rgba(44, 62, 80, 0.04);
+  --rr-shadow-md: 0 2px 8px rgba(44, 62, 80, 0.06);
+
+  /* Breakpoints (für Doku, nicht im CSS verwendbar) */
+  --rr-bp-md: 760px;
+  --rr-bp-lg: 1100px;
 }
 
-*{box-sizing:border-box}
-html,body{
-  margin:0;padding:0;
-  background:var(--bg-alt);
-  color:var(--ink);
-  font-family:"Source Sans 3","Segoe UI",-apple-system,BlinkMacSystemFont,sans-serif;
-  line-height:1.6;
-  font-size:15px;
-  font-weight:400;
-  -webkit-font-smoothing:antialiased;
+
+/* =============================================================================
+   2. RESET & BASE
+   ============================================================================= */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--rr-bg-alt);
+  color: var(--rr-ink);
+  font-family: var(--rr-font-sans);
+  font-size: var(--rr-fs-base);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
 
-.app{
-  display:grid;
-  grid-template-columns:minmax(480px,1fr) minmax(440px,540px);
-  gap:0;
-  min-height:100vh;
-  max-width:1600px;
-  margin:0 auto;
-  background:var(--bg);
-}
-@media (max-width:1100px){.app{grid-template-columns:1fr}}
 
-.input-pane{
-  padding:56px 64px 100px;
-  background:var(--bg);
-  border-right:1px solid var(--rule);
-}
-.preview-pane{
-  padding:56px 56px 100px;
-  background:var(--bg-alt);
-  position:sticky;
-  top:0;
-  height:100vh;
-  overflow-y:auto;
+/* =============================================================================
+   3. LAYOUT
+   ============================================================================= */
+.rr-app {
+  display: grid;
+  grid-template-columns: minmax(480px, 1fr) minmax(440px, 540px);
+  gap: 0;
+  min-height: 100vh;
+  max-width: var(--rr-max-width);
+  margin: 0 auto;
+  background: var(--rr-bg);
 }
 
-h1.doc-title{
-  font-family:"Source Sans 3",sans-serif;
-  font-weight:600;
-  font-size:32px;
-  line-height:1.25;
-  margin:0 0 6px;
-  letter-spacing:-0.02em;
-  color:var(--ink);
-}
-.doc-sub{
-  font-size:13px;
-  color:var(--ink-muted);
-  letter-spacing:0.04em;
-  text-transform:uppercase;
-}
-.title-rule{
-  width:48px;height:2px;background:var(--accent);margin:24px 0 40px;
-}
-.h2-wrap{margin:36px 0 16px}
-h2{
-  font-family:"Source Sans 3",sans-serif;
-  font-size:13px;
-  font-weight:600;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin:0 0 4px;
-}
-.h2-rule{height:1px;background:var(--rule);margin:8px 0 0}
-.h2-sub{
-  font-size:12px;
-  color:var(--ink-muted);
-  font-style:italic;
-  margin-top:6px;
+@media (max-width: 1100px) {
+  .rr-app { grid-template-columns: 1fr; }
 }
 
-.mode-switch{
-  display:flex;
-  gap:0;
-  background:var(--bg-alt);
-  border:1px solid var(--rule);
-  border-radius:6px;
-  padding:3px;
-  margin:0 0 12px;
-}
-.mode-switch input[type="radio"]{display:none}
-.mode-switch label{
-  flex:1;text-align:center;padding:8px 12px;cursor:pointer;
-  font-size:12px;font-weight:500;color:var(--ink-soft);
-  border-radius:4px;transition:all 0.15s;letter-spacing:0.02em;
-}
-.mode-switch input[type="radio"]:checked + label{
-  background:var(--bg);color:var(--accent);box-shadow:var(--shadow-sm);font-weight:600;
+.rr-input-pane {
+  padding: var(--rr-space-2xl) 64px 100px;
+  background: var(--rr-bg);
+  border-right: 1px solid var(--rr-rule);
 }
 
-.helper-info{
-  background:var(--accent-pale);
-  border-left:3px solid var(--accent);
-  padding:10px 14px;
-  font-size:13px;
-  color:var(--ink-soft);
-  margin-bottom:8px;
-  border-radius:0 4px 4px 0;
+.rr-preview-pane {
+  padding: var(--rr-space-2xl) var(--rr-space-2xl) 100px;
+  background: var(--rr-bg-alt);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-.side-toggle{
-  display:inline-flex;border:1px solid var(--field-border);border-radius:6px;overflow:hidden;
-}
-.side-toggle input[type="radio"]{display:none}
-.side-toggle label{
-  padding:8px 18px;cursor:pointer;font-size:14px;font-weight:500;
-  background:var(--bg);color:var(--ink-soft);transition:all 0.15s;
-}
-.side-toggle input[type="radio"]:checked + label{
-  background:var(--accent);color:#fff;
+
+/* =============================================================================
+   4. TYPOGRAFIE
+   ============================================================================= */
+.rr-doc-title {
+  font-family: var(--rr-font-sans);
+  font-weight: 600;
+  font-size: var(--rr-fs-3xl);
+  line-height: 1.25;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+  color: var(--rr-ink);
 }
 
-.row{display:grid;gap:16px 20px;grid-template-columns:1fr 1fr;margin-top:14px}
-.row.three{grid-template-columns:1fr 1fr 1fr}
-.row.full{grid-template-columns:1fr}
-@media (max-width:760px){.row,.row.three{grid-template-columns:1fr}}
-
-label{display:block;font-size:13px}
-.lbl{
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:11px;color:var(--ink-muted);letter-spacing:0.1em;
-  text-transform:uppercase;font-weight:600;margin-bottom:6px;
-}
-.lbl > span:first-child{display:flex;align-items:center;gap:6px}
-.ai-badge{
-  background:var(--accent);color:#fff;
-  font-size:9px;letter-spacing:0.08em;padding:2px 5px;border-radius:3px;
-  text-transform:uppercase;display:none;
-}
-.rl-badge{
-  background:var(--radlex-tint);
-  color:var(--radlex-border);
-  border:1px solid var(--radlex-border);
-  font-size:9px;letter-spacing:0.06em;padding:1px 4px;border-radius:3px;
-  text-transform:uppercase;font-weight:600;
-  font-family:"SF Mono","Menlo",monospace;
-}
-input[type="text"],input[type="number"],input[type="date"],select,textarea{
-  width:100%;padding:10px 12px;font-size:14px;
-  border:1px solid var(--field-border);background:var(--field-bg);
-  border-radius:4px;color:var(--ink);
-  font-family:inherit;
-  transition:border 0.15s,box-shadow 0.15s;
-}
-input:focus,select:focus,textarea:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 3px var(--accent-pale);
-}
-input.ai-filled{
-  background:var(--ai-tint);
-  border-color:var(--ai-border);
-}
-textarea{min-height:80px;resize:vertical;line-height:1.5}
-.field-note{
-  font-size:11px;color:var(--ink-muted);margin-top:4px;line-height:1.4;
+.rr-doc-sub {
+  font-size: var(--rr-fs-md);
+  color: var(--rr-ink-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-details{
-  border:1px solid var(--rule);border-radius:6px;
-  margin-top:12px;background:var(--bg);
-}
-details summary{
-  cursor:pointer;padding:12px 16px;font-size:13px;font-weight:600;
-  color:var(--ink-soft);letter-spacing:0.06em;text-transform:uppercase;
-  list-style:none;
-}
-details summary::-webkit-details-marker{display:none}
-details summary::before{content:"▸ ";color:var(--accent);margin-right:6px}
-details[open] summary::before{content:"▾ "}
-details > div{padding:0 16px 16px}
-
-.kl-summary{
-  background:var(--bg-alt);
-  border-radius:6px;
-  padding:16px 20px;
-  margin-top:12px;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:16px;
-}
-.kl-item{
-  font-size:12px;
-  color:var(--ink-muted);
-  text-transform:uppercase;
-  letter-spacing:0.06em;
-}
-.kl-item strong{
-  display:block;
-  font-size:20px;
-  font-weight:600;
-  color:var(--accent);
-  font-family:"Source Sans 3",sans-serif;
-  margin-top:4px;
-  letter-spacing:0;
-  text-transform:none;
+.rr-title-rule {
+  width: 48px;
+  height: 2px;
+  background: var(--rr-accent);
+  margin: var(--rr-space-lg) 0 40px;
 }
 
-.cpak-box{
-  background:linear-gradient(to right,var(--accent-pale),var(--bg-alt));
-  border:1px solid var(--accent-pale);
-  border-radius:6px;
-  padding:18px 22px;
-  margin-top:16px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-.cpak-result{
-  font-family:"Source Serif 4",serif;
-  font-size:28px;
-  font-weight:600;
-  color:var(--accent);
-  min-width:80px;
-}
-.cpak-detail{font-size:13px;color:var(--ink-soft);line-height:1.5}
+.rr-h2-wrap { margin: 36px 0 var(--rr-space-md); }
 
-/* ============ PREVIEW ============ */
-.preview-title{
-  font-family:"Source Sans 3",sans-serif;
-  font-size:13px;font-weight:600;
-  letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--accent);margin:0;
-}
-.preview-title-rule{height:1px;background:var(--rule);margin:8px 0 28px}
-.preview-section{margin-bottom:26px}
-.preview-section h4{
-  font-size:10px;color:var(--ink-muted);letter-spacing:0.14em;
-  text-transform:uppercase;margin:0 0 8px;font-weight:600;
-}
-.preview-section .content{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:15px;line-height:1.7;color:var(--ink);
-  white-space:pre-wrap;
-}
-.preview-section textarea{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:15px;line-height:1.7;
-  min-height:90px;
-  background:var(--bg);
+.rr-h2-wrap h2,
+.rr-h2 {
+  font-family: var(--rr-font-sans);
+  font-size: var(--rr-fs-md);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rr-accent);
+  margin: 0 0 4px;
 }
 
-.actions{
-  display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;
-}
-button{
-  background:var(--accent);color:#fff;
-  padding:10px 18px;font-size:13px;font-weight:600;
-  border:none;border-radius:5px;cursor:pointer;
-  letter-spacing:0.01em;
-  transition:all 0.15s;
-  box-shadow:var(--shadow-sm);
-}
-button:hover{background:var(--accent-light);transform:translateY(-1px);box-shadow:var(--shadow-md)}
-button.secondary{
-  background:var(--bg);
-  color:var(--ink-soft);
-  border:1px solid var(--field-border);
-  box-shadow:none;
-}
-button.secondary:hover{
-  background:var(--accent-pale);
-  color:var(--accent);
-  border-color:var(--accent);
-  transform:none;
+.rr-h2-rule {
+  height: 1px;
+  background: var(--rr-rule);
+  margin: var(--rr-space-sm) 0 0;
 }
 
-.export-area{
-  display:none;
-  margin-top:20px;
-  padding:20px;
-  background:#1e2a36;
-  color:#a8c4dd;
-  border-radius:6px;
-  font-family:"SF Mono","Menlo",monospace;
-  font-size:11px;
-  white-space:pre;
-  overflow-x:auto;
-  max-height:400px;
-  overflow-y:auto;
-  line-height:1.5;
+.rr-h2-sub {
+  font-size: var(--rr-fs-sm);
+  color: var(--rr-ink-muted);
+  font-style: italic;
+  margin-top: 6px;
 }
-.export-area.show{display:block}
 
-.codesystem-legend{
-  margin-top:8px;
-  font-size:10px;
-  color:var(--ink-muted);
-  letter-spacing:0.04em;
-  font-family:"SF Mono","Menlo",monospace;
-}
-.codesystem-legend .badge-mini{
-  display:inline-block;
-  padding:1px 5px;
-  border-radius:3px;
-  margin-right:4px;
-  font-weight:600;
-}
-.codesystem-legend .verified{background:#e8f5ec;color:#2d6a4f;border:1px solid #2d6a4f;}
-.codesystem-legend .local{background:#fdf4e3;color:#8b6914;border:1px solid #c4a558;}
-.codesystem-legend .needs{background:#fbe9e7;color:#9c2c1a;border:1px solid #c45848;}
 
-/* ============ PFLICHTFELD-INDIKATOR ============ */
-.req-indicator{
-  display:inline-block;
-  width:6px;height:6px;border-radius:50%;
-  background:#c45848;
-  margin-left:6px;
-  vertical-align:middle;
-  animation:pulse 2s ease-in-out infinite;
+/* =============================================================================
+   5. MODE-SWITCH
+   ============================================================================= */
+.rr-mode-switch {
+  display: flex;
+  gap: 0;
+  background: var(--rr-bg-alt);
+  border: 1px solid var(--rr-rule);
+  border-radius: var(--rr-radius);
+  padding: 3px;
+  margin: 0 0 12px;
 }
-@keyframes pulse{
-  0%,100%{opacity:0.4}
-  50%{opacity:1}
+
+.rr-mode-switch input[type="radio"] { display: none; }
+
+.rr-mode-switch label {
+  flex: 1;
+  text-align: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: var(--rr-fs-sm);
+  font-weight: 500;
+  color: var(--rr-ink-soft);
+  border-radius: var(--rr-radius-sm);
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
 }
-select.required-empty,
-.side-toggle.required-empty{
-  border-color:#c45848;
-  box-shadow:0 0 0 2px rgba(196,88,72,0.1);
+
+.rr-mode-switch input[type="radio"]:checked + label {
+  background: var(--rr-bg);
+  color: var(--rr-accent);
+  box-shadow: var(--rr-shadow-sm);
+  font-weight: 600;
 }
-.side-toggle{border:1px solid var(--field-border)}
-.side-toggle.required-empty{
-  border-color:#c45848 !important;
-  box-shadow:0 0 0 2px rgba(196,88,72,0.1);
+
+
+/* =============================================================================
+   6. HELPER-INFO-BOX
+   ============================================================================= */
+.rr-helper-info {
+  background: var(--rr-accent-pale);
+  border-left: 3px solid var(--rr-accent);
+  padding: 10px 14px;
+  font-size: var(--rr-fs-md);
+  color: var(--rr-ink-soft);
+  margin-bottom: var(--rr-space-sm);
+  border-radius: 0 var(--rr-radius-sm) var(--rr-radius-sm) 0;
 }
-.side-empty-option{
-  padding:8px 18px;
-  font-size:14px;
-  color:var(--ink-muted);
-  background:var(--bg);
-  cursor:pointer;
-  font-weight:500;
+
+
+/* =============================================================================
+   7. SIDE-TOGGLE
+   ============================================================================= */
+.rr-side-toggle {
+  display: inline-flex;
+  border: 1px solid var(--rr-field-border);
+  border-radius: var(--rr-radius);
+  overflow: hidden;
 }
-.side-toggle input[type="radio"]:checked + .side-empty-option{
-  background:var(--ink-muted);color:#fff;
+
+.rr-side-toggle input[type="radio"] { display: none; }
+
+.rr-side-toggle label {
+  padding: 8px 18px;
+  cursor: pointer;
+  font-size: var(--rr-fs-lg);
+  font-weight: 500;
+  background: var(--rr-bg);
+  color: var(--rr-ink-soft);
+  transition: all 0.15s;
 }
-.empty-state{
-  padding:12px 16px;
-  background:var(--bg-alt);
-  color:var(--ink-muted);
-  font-style:italic;
-  border-radius:4px;
-  font-size:13px;
+
+.rr-side-toggle input[type="radio"]:checked + label {
+  background: var(--rr-accent);
+  color: #fff;
+}
+
+.rr-side-empty-option {
+  font-style: italic;
+  color: var(--rr-ink-muted) !important;
+}
+
+.rr-side-toggle input[type="radio"]:checked + .rr-side-empty-option {
+  background: var(--rr-ink-muted) !important;
+  color: #fff !important;
+}
+
+
+/* =============================================================================
+   8. FORM-GRID
+   ============================================================================= */
+.rr-row {
+  display: grid;
+  gap: var(--rr-space-md) 20px;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 14px;
+}
+
+.rr-row-three { grid-template-columns: 1fr 1fr 1fr; }
+.rr-row-full  { grid-template-columns: 1fr; }
+
+@media (max-width: 760px) {
+  .rr-row,
+  .rr-row-three { grid-template-columns: 1fr; }
+}
+
+
+/* =============================================================================
+   9. LABELS & INPUTS
+   ============================================================================= */
+label { display: block; font-size: var(--rr-fs-md); }
+
+.rr-lbl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--rr-fs-xs);
+  color: var(--rr-ink-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.rr-lbl > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: var(--rr-fs-lg);
+  border: 1px solid var(--rr-field-border);
+  background: var(--rr-field-bg);
+  border-radius: var(--rr-radius-sm);
+  color: var(--rr-ink);
+  font-family: inherit;
+  transition: border 0.15s, box-shadow 0.15s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--rr-accent);
+  box-shadow: 0 0 0 3px var(--rr-accent-pale);
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.rr-field-note {
+  font-size: var(--rr-fs-xs);
+  color: var(--rr-ink-muted);
+  margin-top: var(--rr-space-xs);
+  line-height: 1.4;
+}
+
+
+/* =============================================================================
+   10. AI-STATES & RADLEX-BADGES
+   ============================================================================= */
+input.rr-is-ai-filled,
+.rr-is-ai-filled {
+  background: var(--rr-ai-tint);
+  border-color: var(--rr-ai-border);
+}
+
+.rr-ai-badge {
+  background: var(--rr-accent);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 5px;
+  border-radius: var(--rr-radius-xs);
+  text-transform: uppercase;
+  display: none;
+}
+
+.rr-ai-badge.rr-is-active { display: inline-block; }
+
+.rr-rl-badge {
+  background: var(--rr-radlex-tint);
+  color: var(--rr-radlex-ink);
+  border: 1px solid var(--rr-radlex-ink);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  padding: 1px 4px;
+  border-radius: var(--rr-radius-xs);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: var(--rr-font-mono);
+}
+
+
+/* =============================================================================
+   11. DETAILS / COLLAPSIBLES
+   ============================================================================= */
+details {
+  border: 1px solid var(--rr-rule);
+  border-radius: var(--rr-radius);
+  margin-top: 12px;
+  background: var(--rr-bg);
+}
+
+details summary {
+  cursor: pointer;
+  padding: 12px var(--rr-space-md);
+  font-size: var(--rr-fs-md);
+  font-weight: 600;
+  color: var(--rr-ink-soft);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  list-style: none;
+}
+
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▸ "; color: var(--rr-accent); margin-right: 6px; }
+details[open] summary::before { content: "▾ "; }
+details > div { padding: 0 var(--rr-space-md) var(--rr-space-md); }
+
+
+/* =============================================================================
+   12. GRADE-SUMMARY (generisch für KL, RAMRIS, Lung-RADS, etc.)
+   ============================================================================= */
+.rr-grade-summary {
+  background: var(--rr-bg-alt);
+  border-radius: var(--rr-radius);
+  padding: var(--rr-space-md) 20px;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--rr-space-md);
+}
+
+.rr-grade-item {
+  font-size: var(--rr-fs-sm);
+  color: var(--rr-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.rr-grade-item strong {
+  display: block;
+  font-size: var(--rr-fs-xl);
+  font-weight: 600;
+  color: var(--rr-accent);
+  font-family: var(--rr-font-sans);
+  margin-top: 4px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+
+/* =============================================================================
+   13. RESULT-BOX (CPAK, generische Berechnungs-Outputs)
+   ============================================================================= */
+.rr-result-box,
+.rr-cpak-box {
+  background: linear-gradient(to right, var(--rr-accent-pale), var(--rr-bg-alt));
+  border: 1px solid var(--rr-accent-pale);
+  border-radius: var(--rr-radius);
+  padding: 18px 22px;
+  margin-top: var(--rr-space-md);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.rr-result-value,
+.rr-cpak-result {
+  font-family: var(--rr-font-serif);
+  font-size: var(--rr-fs-2xl);
+  font-weight: 600;
+  color: var(--rr-accent);
+  min-width: 80px;
+}
+
+.rr-result-detail,
+.rr-cpak-detail {
+  font-size: var(--rr-fs-md);
+  color: var(--rr-ink-soft);
+  line-height: 1.5;
+}
+
+
+/* =============================================================================
+   14. PFLICHTFELD-VALIDIERUNG
+   ============================================================================= */
+.rr-req-indicator {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rr-critical);
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: rr-pulse 2s ease-in-out infinite;
+}
+
+@keyframes rr-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+select.rr-is-required-empty,
+.rr-side-toggle.rr-is-required-empty {
+  border-color: var(--rr-critical) !important;
+  box-shadow: 0 0 0 2px rgba(196, 88, 72, 0.1);
+}
+
+
+/* =============================================================================
+   15. PREVIEW-PANE
+   ============================================================================= */
+.rr-preview-title {
+  font-family: var(--rr-font-sans);
+  font-size: var(--rr-fs-md);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rr-accent);
+  margin: 0;
+}
+
+.rr-preview-title-rule {
+  height: 1px;
+  background: var(--rr-rule);
+  margin: var(--rr-space-sm) 0 28px;
+}
+
+.rr-preview-section { margin-bottom: 26px; }
+
+.rr-preview-section h4 {
+  font-size: 10px;
+  color: var(--rr-ink-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 var(--rr-space-sm);
+  font-weight: 600;
+}
+
+.rr-preview-content {
+  font-family: var(--rr-font-serif);
+  font-size: var(--rr-fs-base);
+  line-height: 1.7;
+  color: var(--rr-ink);
+  white-space: pre-wrap;
+}
+
+.rr-preview-editable {
+  font-family: var(--rr-font-serif);
+  font-size: var(--rr-fs-base);
+  line-height: 1.7;
+  min-height: 90px;
+  background: var(--rr-bg);
+}
+
+
+/* =============================================================================
+   16. BUTTONS & ACTIONS
+   ============================================================================= */
+.rr-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.rr-btn,
+button {
+  background: var(--rr-accent);
+  color: #fff;
+  padding: 10px 18px;
+  font-size: var(--rr-fs-md);
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: all 0.15s;
+  box-shadow: var(--rr-shadow-sm);
+  font-family: inherit;
+}
+
+.rr-btn:hover,
+button:hover {
+  background: var(--rr-accent-light);
+  transform: translateY(-1px);
+  box-shadow: var(--rr-shadow-md);
+}
+
+.rr-btn-secondary,
+button.rr-btn-secondary {
+  background: var(--rr-bg);
+  color: var(--rr-ink-soft);
+  border: 1px solid var(--rr-field-border);
+  box-shadow: none;
+}
+
+.rr-btn-secondary:hover,
+button.rr-btn-secondary:hover {
+  background: var(--rr-accent-pale);
+  color: var(--rr-accent);
+  border-color: var(--rr-accent);
+  transform: none;
+}
+
+
+/* =============================================================================
+   17. EXPORT-AREA
+   ============================================================================= */
+.rr-export-area {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background: #1e2a36;
+  color: #a8c4dd;
+  border-radius: var(--rr-radius);
+  font-family: var(--rr-font-mono);
+  font-size: var(--rr-fs-xs);
+  white-space: pre;
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+
+.rr-export-area.rr-is-visible { display: block; }
+
+
+/* =============================================================================
+   18. CODESYSTEM-LEGENDE
+   ============================================================================= */
+.rr-codesystem-legend {
+  margin-top: var(--rr-space-sm);
+  font-size: 10px;
+  color: var(--rr-ink-muted);
+  letter-spacing: 0.04em;
+  font-family: var(--rr-font-mono);
+}
+
+.rr-codesystem-legend .rr-badge-mini {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: var(--rr-radius-xs);
+  margin-right: 4px;
+  font-weight: 600;
+}
+
+.rr-codesystem-legend .rr-is-verified {
+  background: #e8f5ec;
+  color: #2d6a4f;
+  border: 1px solid #2d6a4f;
+}
+
+.rr-codesystem-legend .rr-is-local {
+  background: #fdf4e3;
+  color: #8b6914;
+  border: 1px solid #c4a558;
+}
+
+.rr-codesystem-legend .rr-is-needs {
+  background: #fbe9e7;
+  color: #9c2c1a;
+  border: 1px solid #c45848;
+}
+
+
+/* =============================================================================
+   19. UTILITIES (sparsam einsetzen)
+   ============================================================================= */
+.rr-u-hidden  { display: none !important; }
+.rr-u-mt-sm   { margin-top: var(--rr-space-sm) !important; }
+.rr-u-mt-md   { margin-top: var(--rr-space-md) !important; }
+.rr-u-mt-lg   { margin-top: var(--rr-space-lg) !important; }
+.rr-u-text-warn { color: var(--rr-warn) !important; }
+.rr-u-text-critical { color: var(--rr-critical) !important; }
+
+
+/* =============================================================================
+   20. PRINT
+   ============================================================================= */
+@media print {
+  body { background: #fff; }
+  .rr-app { display: block; max-width: none; }
+  .rr-input-pane,
+  .rr-mode-switch,
+  .rr-actions,
+  .rr-export-area,
+  .rr-helper-info,
+  .rr-codesystem-legend { display: none !important; }
+  .rr-preview-pane {
+    position: static;
+    height: auto;
+    padding: 0;
+    background: #fff;
+    overflow: visible;
+  }
+  .rr-preview-section { page-break-inside: avoid; }
+  .rr-preview-editable {
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
 }
 
 </style>
+
 </head>
 <body>
 
-<div class="app">
+<div class="rr-app">
 
 <!-- ========================== INPUT PANE ========================== -->
-<section class="input-pane">
+<section class="rr-input-pane">
 
-  <h1 class="doc-title">Planungsröntgen Knie vor TEP</h1>
-  <div class="doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.3.1 · RadLex-codiert · HJK Wien</div>
-  <div class="title-rule"></div>
+  <h1 class="rr-doc-title">Planungsröntgen Knie vor TEP</h1>
+  <div class="rr-doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.4 · RadLex-codiert · HJK Wien</div>
+  <div class="rr-title-rule"></div>
 
-  <!-- MODE SWITCHER -->
-  <div class="mode-switch">
+  <div class="rr-mode-switch">
     <input type="radio" name="mode" id="mode-manual" value="manual" checked>
     <label for="mode-manual">Manuell</label>
     <input type="radio" name="mode" id="mode-lama" value="lama">
@@ -421,68 +783,68 @@ select.required-empty,
     <label for="mode-hybrid">Hybrid (Validierung)</label>
   </div>
 
-  <div class="helper-info" id="modeHelper">
+  <div class="rr-helper-info" id="modeHelper">
     <strong>Modus Manuell:</strong> Alle Felder werden manuell befüllt. Für Fallback und Testzwecke.
   </div>
 
-  <!-- ====================== SEITE ====================== -->
-  <div class="h2-wrap">
-    <h2>Seite <span class="rl-badge">RID5824/5825</span> <span class="req-indicator" id="req_seite" title="Pflichtfeld"></span></h2>
-    <div class="h2-rule"></div>
+  <!-- SEITE -->
+  <div class="rr-h2-wrap">
+    <h2>Seite <span class="rr-rl-badge">RID5824/5825</span> <span class="rr-req-indicator" id="req_seite" title="Pflichtfeld"></span></h2>
+    <div class="rr-h2-rule"></div>
   </div>
-  <div class="side-toggle" id="side_toggle">
+  <div class="rr-side-toggle" id="side_toggle">
     <input type="radio" name="seite" id="seite-none" value="" checked>
-    <label for="seite-none" class="side-empty-option">– bitte wählen –</label>
+    <label for="seite-none" class="rr-side-empty-option">– bitte wählen –</label>
     <input type="radio" name="seite" id="seite-re" value="re." data-radlex="RID5825" data-en="right">
     <label for="seite-re">re.</label>
     <input type="radio" name="seite" id="seite-li" value="li." data-radlex="RID5824" data-en="left">
     <label for="seite-li">li.</label>
   </div>
 
-  <!-- ====================== TECHNIK ====================== -->
-  <div class="h2-wrap">
-    <h2>Technik <span class="rl-badge">RID10363</span></h2>
-    <div class="h2-rule"></div>
-    <div class="h2-sub">Standardprojektionen und optionale Aufnahmen</div>
+  <!-- TECHNIK -->
+  <div class="rr-h2-wrap">
+    <h2>Technik <span class="rr-rl-badge">RID10363</span></h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Standardprojektionen und optionale Aufnahmen</div>
   </div>
-  <div class="row">
+  <div class="rr-row">
     <label>
-      <span class="lbl"><span>a.p. stehend</span></span>
-      <select id="proj_ap" data-radlex-field="ap-projection">
+      <span class="rr-lbl"><span>a.p. stehend</span></span>
+      <select id="proj_ap">
         <option value="ja" data-radlex="RID10395" data-en="anteroposterior projection" selected>ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>seitlich</span></span>
+      <span class="rr-lbl"><span>seitlich</span></span>
       <select id="proj_lat">
         <option value="ja" data-radlex="RID10412" data-en="lateral projection" selected>ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Patella tangential</span></span>
+      <span class="rr-lbl"><span>Patella tangential</span></span>
       <select id="proj_pat">
         <option value="ja" data-radlex-status="local" data-en="patella tangential view" selected>ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Ganzbein-Standaufnahme</span></span>
+      <span class="rr-lbl"><span>Ganzbein-Standaufnahme</span></span>
       <select id="proj_lla">
         <option value="ja" data-radlex-status="local" data-en="long leg standing radiograph" selected>ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Rosenberg-Aufnahme</span></span>
+      <span class="rr-lbl"><span>Rosenberg-Aufnahme</span></span>
       <select id="proj_rb">
         <option value="nein" data-radlex-status="needs-mapping" selected>nein</option>
         <option value="ja" data-radlex-status="local" data-en="Rosenberg view (PA 45° flexion)">ja</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Kalibrationskugel</span></span>
+      <span class="rr-lbl"><span>Kalibrationskugel</span></span>
       <select id="proj_kugel">
         <option value="ja" data-radlex-status="local" data-en="calibration sphere" selected>ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
@@ -490,61 +852,60 @@ select.required-empty,
     </label>
   </div>
 
-  <!-- ====================== ACHSENVERMESSUNG ====================== -->
-  <div class="h2-wrap">
-    <h2>Achsenvermessung <span class="rl-badge">RID11052</span></h2>
-    <div class="h2-rule"></div>
-    <div class="h2-sub">Werte aus LAMA-DICOM-SR; in Hybrid- und Manuell-Modus selbst einzutragen</div>
+  <!-- ACHSENVERMESSUNG -->
+  <div class="rr-h2-wrap">
+    <h2>Achsenvermessung <span class="rr-rl-badge">RID11052</span></h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Werte aus LAMA-DICOM-SR; in Hybrid- und Manuell-Modus selbst einzutragen</div>
   </div>
-  <div class="row three">
+  <div class="rr-row rr-row-three">
     <label>
-      <span class="lbl"><span>HKA <span class="rl-badge">LOINC LP410789-0</span></span><span class="ai-badge">KI</span></span>
+      <span class="rr-lbl"><span>HKA <span class="rr-rl-badge">LOINC LP410789-0</span></span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="hka" step="0.1" placeholder="z. B. 174.2">
-      <div class="field-note">Hip-knee-ankle angle, °</div>
+      <div class="rr-field-note">Hip-knee-ankle angle, °</div>
     </label>
     <label>
-      <span class="lbl"><span>MAD</span><span class="ai-badge">KI</span></span>
+      <span class="rr-lbl"><span>MAD</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="mad" step="0.1" placeholder="z. B. -12.4">
-      <div class="field-note">Mechanical axis deviation, mm (− = medial)</div>
+      <div class="rr-field-note">Mechanical axis deviation, mm (− = medial)</div>
     </label>
     <label>
-      <span class="lbl"><span>LLD <span class="rl-badge">LOINC LP35279-5</span></span><span class="ai-badge">KI</span></span>
+      <span class="rr-lbl"><span>LLD <span class="rr-rl-badge">LOINC LP35279-5</span></span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="lld" step="0.1" placeholder="z. B. -3.0">
-      <div class="field-note">Beinlängendifferenz, mm (− = Untersuchungsseite kürzer)</div>
+      <div class="rr-field-note">Beinlängendifferenz, mm (− = Untersuchungsseite kürzer)</div>
     </label>
     <label>
-      <span class="lbl"><span>mLDFA</span><span class="ai-badge">KI</span></span>
+      <span class="rr-lbl"><span>mLDFA</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="mldfa" step="0.1" placeholder="z. B. 88.5">
-      <div class="field-note">Mech. lateraler distaler Femurwinkel, °</div>
+      <div class="rr-field-note">Mech. lateraler distaler Femurwinkel, °</div>
     </label>
     <label>
-      <span class="lbl"><span>mMPTA</span><span class="ai-badge">KI</span></span>
+      <span class="rr-lbl"><span>mMPTA</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="mmpta" step="0.1" placeholder="z. B. 84.1">
-      <div class="field-note">Mech. medialer proximaler Tibiawinkel, °</div>
+      <div class="rr-field-note">Mech. medialer proximaler Tibiawinkel, °</div>
     </label>
     <label>
-      <span class="lbl"><span>JLCA</span><span class="ai-badge">KI</span></span>
+      <span class="rr-lbl"><span>JLCA</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="jlca" step="0.1" placeholder="z. B. 3.8">
-      <div class="field-note">Joint line convergence angle, °</div>
+      <div class="rr-field-note">Joint line convergence angle, °</div>
     </label>
   </div>
 
-  <!-- CPAK -->
-  <div class="cpak-box">
-    <div class="cpak-result" id="cpak_result">–</div>
-    <div class="cpak-detail" id="cpak_detail">aHKA und JLO benötigen mLDFA + mMPTA</div>
+  <div class="rr-result-box">
+    <div class="rr-result-value" id="cpak_result">–</div>
+    <div class="rr-result-detail" id="cpak_detail">aHKA und JLO benötigen mLDFA + mMPTA</div>
   </div>
 
-  <!-- ====================== ARTHROSE / KL ====================== -->
-  <div class="h2-wrap">
-    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rl-badge">LOINC LP410785-8</span> <span class="req-indicator" title="Pflichtfeld"></span></h2>
-    <div class="h2-rule"></div>
-    <div class="h2-sub">Kompartiment-spezifisch (KL 1957). Werte 0–4. Pflichtfelder.</div>
+  <!-- KL -->
+  <div class="rr-h2-wrap">
+    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rr-rl-badge">LOINC LP410785-8</span> <span class="rr-req-indicator" title="Pflichtfeld"></span></h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Kompartiment-spezifisch (KL 1957). Werte 0–4. Pflichtfelder.</div>
   </div>
-  <div class="row three">
+  <div class="rr-row rr-row-three">
     <label>
-      <span class="lbl"><span>Medial <span class="req-indicator" id="req_kl_med"></span></span></span>
-      <select id="kl_med" data-radlex-field="osteoarthritis-grade-medial" class="required-empty">
+      <span class="rr-lbl"><span>Medial <span class="rr-req-indicator" id="req_kl_med"></span></span></span>
+      <select id="kl_med" class="rr-is-required-empty">
         <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
@@ -554,8 +915,8 @@ select.required-empty,
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Lateral <span class="req-indicator" id="req_kl_lat"></span></span></span>
-      <select id="kl_lat" data-radlex-field="osteoarthritis-grade-lateral" class="required-empty">
+      <span class="rr-lbl"><span>Lateral <span class="rr-req-indicator" id="req_kl_lat"></span></span></span>
+      <select id="kl_lat" class="rr-is-required-empty">
         <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
@@ -565,8 +926,8 @@ select.required-empty,
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Patellofemoral <span class="req-indicator" id="req_kl_pf"></span></span></span>
-      <select id="kl_pf" data-radlex-field="osteoarthritis-grade-pf" class="required-empty">
+      <span class="rr-lbl"><span>Patellofemoral <span class="rr-req-indicator" id="req_kl_pf"></span></span></span>
+      <select id="kl_pf" class="rr-is-required-empty">
         <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
@@ -576,20 +937,19 @@ select.required-empty,
       </select>
     </label>
   </div>
-  <div class="kl-summary">
-    <div class="kl-item">Medial<strong id="kl_sum_med">–</strong></div>
-    <div class="kl-item">Lateral<strong id="kl_sum_lat">–</strong></div>
-    <div class="kl-item">PF<strong id="kl_sum_pf">–</strong></div>
+  <div class="rr-grade-summary">
+    <div class="rr-grade-item">Medial<strong id="kl_sum_med">–</strong></div>
+    <div class="rr-grade-item">Lateral<strong id="kl_sum_lat">–</strong></div>
+    <div class="rr-grade-item">PF<strong id="kl_sum_pf">–</strong></div>
   </div>
 
-  <!-- ====================== PF-STATUS / OPTIONAL ====================== -->
   <details>
     <summary>Patellofemoraler Status (optional)</summary>
     <div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl"><span>Insall-Salvati-Index</span></span>
-          <select id="ps_is" data-radlex-field="patella-height-insall-salvati">
+          <span class="rr-lbl"><span>Insall-Salvati-Index</span></span>
+          <select id="ps_is">
             <option value="" data-radlex-status="needs-mapping">–</option>
             <option value="normal" data-radlex-status="local" data-en="patella normal height (Insall-Salvati)">normal</option>
             <option value="patella alta" data-radlex-status="local" data-en="patella alta">Patella alta</option>
@@ -597,8 +957,8 @@ select.required-empty,
           </select>
         </label>
         <label>
-          <span class="lbl"><span>Caton-Deschamps</span></span>
-          <select id="ps_cd" data-radlex-field="patella-height-caton-deschamps">
+          <span class="rr-lbl"><span>Caton-Deschamps</span></span>
+          <select id="ps_cd">
             <option value="" data-radlex-status="needs-mapping">–</option>
             <option value="normal" data-radlex-status="local" data-en="patella normal height (Caton-Deschamps)">normal</option>
             <option value="patella alta" data-radlex-status="local" data-en="patella alta">Patella alta</option>
@@ -606,8 +966,8 @@ select.required-empty,
           </select>
         </label>
         <label>
-          <span class="lbl"><span>Patella-Tilt</span></span>
-          <select id="ps_tilt" data-radlex-field="patella-tilt">
+          <span class="rr-lbl"><span>Patella-Tilt</span></span>
+          <select id="ps_tilt">
             <option value="" data-radlex-status="needs-mapping">–</option>
             <option value="normal" data-radlex-status="local" data-en="normal patellar tilt">normal</option>
             <option value="lateralisiert" data-radlex-status="local" data-en="lateral patellar tilt">lateralisiert</option>
@@ -615,8 +975,8 @@ select.required-empty,
           </select>
         </label>
         <label>
-          <span class="lbl"><span>Trochleadysplasie (Dejour)</span></span>
-          <select id="ps_dejour" data-radlex-field="trochlear-dysplasia-dejour">
+          <span class="rr-lbl"><span>Trochleadysplasie (Dejour)</span></span>
+          <select id="ps_dejour">
             <option value="" data-radlex-status="needs-mapping">–</option>
             <option value="keine" data-radlex-status="local" data-en="no trochlear dysplasia">keine</option>
             <option value="Dejour A" data-radlex-status="local" data-en="Dejour type A trochlear dysplasia">Typ A</option>
@@ -629,42 +989,41 @@ select.required-empty,
     </div>
   </details>
 
-  <!-- ====================== TIBIALER SLOPE ====================== -->
   <details>
     <summary>Tibialer Slope (optional)</summary>
     <div>
       <label>
-        <span class="lbl"><span>Tibialer Slope (sagittal)</span></span>
+        <span class="rr-lbl"><span>Tibialer Slope (sagittal)</span></span>
         <input type="number" id="slope" step="0.1" placeholder="z. B. 7.0">
-        <div class="field-note">Posteriorer tibialer Slope, °</div>
+        <div class="rr-field-note">Posteriorer tibialer Slope, °</div>
       </label>
     </div>
   </details>
 
-  <!-- ====================== ZUSATZBEFUNDE ====================== -->
-  <div class="h2-wrap">
+  <!-- ZUSATZBEFUNDE -->
+  <div class="rr-h2-wrap">
     <h2>Zusatzbefunde</h2>
-    <div class="h2-rule"></div>
+    <div class="rr-h2-rule"></div>
   </div>
-  <div class="row">
-    <label><input type="checkbox" id="add_osteophyten" data-radlex="RID4757" data-en="osteophyte"> Osteophyten <span class="rl-badge">RID4757</span></label>
+  <div class="rr-row">
+    <label><input type="checkbox" id="add_osteophyten" data-radlex="RID4757" data-en="osteophyte"> Osteophyten <span class="rr-rl-badge">RID4757</span></label>
     <label><input type="checkbox" id="add_zysten" data-radlex-status="local" data-en="subchondral cyst"> Subchondrale Zysten</label>
     <label><input type="checkbox" id="add_sklerose" data-radlex-status="local" data-en="subchondral sclerosis"> Subchondrale Sklerose</label>
     <label><input type="checkbox" id="add_freikorper" data-radlex-status="local" data-en="intraarticular loose body"> Freikörper</label>
-    <label><input type="checkbox" id="add_erguss" data-radlex="RID34769" data-en="joint effusion"> Gelenkserguss <span class="rl-badge">RID34769</span></label>
+    <label><input type="checkbox" id="add_erguss" data-radlex="RID34769" data-en="joint effusion"> Gelenkserguss <span class="rr-rl-badge">RID34769</span></label>
     <label><input type="checkbox" id="add_baker" data-radlex-status="local" data-en="Baker cyst"> Baker-Zyste</label>
     <label><input type="checkbox" id="add_verkalk" data-radlex-status="local" data-en="soft tissue calcification"> Weichteilverkalkungen</label>
     <label><input type="checkbox" id="add_chondrocalc" data-radlex-status="local" data-en="chondrocalcinosis"> Chondrokalzinose</label>
   </div>
 
-  <!-- ====================== KNOCHENSTRUKTUR ====================== -->
-  <div class="h2-wrap">
+  <!-- KNOCHENSTRUKTUR -->
+  <div class="rr-h2-wrap">
     <h2>Knochenstruktur</h2>
-    <div class="h2-rule"></div>
+    <div class="rr-h2-rule"></div>
   </div>
   <label>
-    <span class="lbl"><span>Qualitative Beurteilung</span></span>
-    <select id="bone_q" data-radlex-field="bone-quality">
+    <span class="rr-lbl"><span>Qualitative Beurteilung</span></span>
+    <select id="bone_q">
       <option value="" data-radlex-status="needs-mapping" selected>–</option>
       <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate bone density">altersentsprechend</option>
       <option value="osteopen" data-radlex-status="local" data-en="osteopenic bone density">osteopen</option>
@@ -672,27 +1031,26 @@ select.required-empty,
     </select>
   </label>
 
-  <!-- ====================== INDIKATION ====================== -->
-  <div class="h2-wrap">
+  <!-- INDIKATION -->
+  <div class="rr-h2-wrap">
     <h2>Klinische Angabe</h2>
-    <div class="h2-rule"></div>
+    <div class="rr-h2-rule"></div>
   </div>
   <label>
     <textarea id="indikation" placeholder="Indikation, Beschwerden, geplantes OP-Datum"></textarea>
   </label>
 
-  <!-- ====================== VORUNTERSUCHUNG ====================== -->
   <details>
     <summary>Voruntersuchung</summary>
     <div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl"><span>Datum VU</span></span>
+          <span class="rr-lbl"><span>Datum VU</span></span>
           <input type="text" id="vu_date" placeholder="z. B. 03/2024">
         </label>
         <label>
-          <span class="lbl"><span>Verlauf</span></span>
-          <select id="vu_trend" data-radlex-field="comparison-to-prior">
+          <span class="rr-lbl"><span>Verlauf</span></span>
+          <select id="vu_trend">
             <option value="" data-radlex-status="needs-mapping">–</option>
             <option value="stabil" data-radlex="RID39157" data-en="stable">weitgehend stabil</option>
             <option value="progredient" data-radlex="RID36043" data-en="progression of disease">Befundprogredienz</option>
@@ -703,62 +1061,61 @@ select.required-empty,
     </div>
   </details>
 
-  <!-- ====================== FREITEXT ====================== -->
-  <div class="h2-wrap">
+  <div class="rr-h2-wrap">
     <h2>Freitext-Ergänzung</h2>
-    <div class="h2-rule"></div>
+    <div class="rr-h2-rule"></div>
   </div>
-  <div class="row full">
+  <div class="rr-row rr-row-full">
     <label>
       <textarea id="freetext" placeholder="Optional: ergänzende Beobachtungen, atypische Befunde, Hinweise für die OP-Planung"></textarea>
     </label>
   </div>
 
-  <div class="codesystem-legend">
-    <span class="badge-mini verified">verified</span> RadLex-RID aus RSNA-Ontologie verifiziert
-    <span class="badge-mini local">local</span> Lokales CodeSystem, RadLex-Mapping ausstehend
-    <span class="badge-mini needs">needs-mapping</span> Negation/Leerwert – kein eigenständiges Konzept
+  <div class="rr-codesystem-legend">
+    <span class="rr-badge-mini rr-is-verified">verified</span> RadLex-RID aus RSNA-Ontologie verifiziert
+    <span class="rr-badge-mini rr-is-local">local</span> Lokales CodeSystem, RadLex-Mapping ausstehend
+    <span class="rr-badge-mini rr-is-needs">needs-mapping</span> Negation/Leerwert – kein eigenständiges Konzept
   </div>
 
 </section>
 
 <!-- ========================== PREVIEW PANE ========================== -->
-<aside class="preview-pane">
-  <h2 class="preview-title">Befund-Vorschau</h2>
-  <div class="preview-title-rule"></div>
+<aside class="rr-preview-pane">
+  <h2 class="rr-preview-title">Befund-Vorschau</h2>
+  <div class="rr-preview-title-rule"></div>
 
-  <div class="preview-section">
+  <div class="rr-preview-section">
     <h4>Technik</h4>
-    <div class="content" id="prev_technik">–</div>
+    <div class="rr-preview-content" id="prev_technik">–</div>
   </div>
-  <div class="preview-section">
+  <div class="rr-preview-section">
     <h4>Klinische Angabe</h4>
-    <div class="content" id="prev_klinik">–</div>
+    <div class="rr-preview-content" id="prev_klinik">–</div>
   </div>
-  <div class="preview-section">
+  <div class="rr-preview-section">
     <h4>Befund</h4>
-    <div class="content" id="prev_befund">–</div>
+    <div class="rr-preview-content" id="prev_befund">–</div>
   </div>
-  <div class="preview-section">
-    <h4>Beurteilung <span style="font-size:9px;color:var(--ink-muted);letter-spacing:0.1em;margin-left:4px">EDITIERBAR · ENDOCERT-KONFORM</span></h4>
-    <textarea id="prev_beurteilung"></textarea>
+  <div class="rr-preview-section">
+    <h4>Beurteilung <span style="font-size:9px;color:var(--rr-ink-muted);letter-spacing:0.1em;margin-left:4px">EDITIERBAR · ENDOCERT-KONFORM</span></h4>
+    <textarea id="prev_beurteilung" class="rr-preview-editable"></textarea>
   </div>
 
-  <div class="actions">
+  <div class="rr-actions">
     <button onclick="copyAll()">Befund kopieren</button>
-    <button class="secondary" onclick="showExport('fhir')">FHIR-Export</button>
-    <button class="secondary" onclick="showExport('json')">JSON</button>
-    <button class="secondary" onclick="resetForm()">Zurücksetzen</button>
+    <button class="rr-btn-secondary" onclick="showExport('fhir')">FHIR-Export</button>
+    <button class="rr-btn-secondary" onclick="showExport('json')">JSON</button>
+    <button class="rr-btn-secondary" onclick="resetForm()">Zurücksetzen</button>
   </div>
-  <div class="export-area" id="exportArea"></div>
+  <div class="rr-export-area" id="exportArea"></div>
 </aside>
 
 </div>
 
 <script>
-// ===========================================================================
+// =============================================================================
 // MOCK LAMA DATA
-// ===========================================================================
+// =============================================================================
 const MOCK_LAMA = {
   hka: 174.2, mad: -12.4, lld: -3.0,
   mldfa: 88.5, mmpta: 84.1, jlca: 3.8
@@ -778,18 +1135,18 @@ document.querySelectorAll('input[name="mode"]').forEach(r => {
     aiFields.forEach(id => {
       const inp = document.getElementById(id);
       const label = inp.closest('label');
-      const badge = label.querySelector('.ai-badge');
-      const note = label.querySelector('.field-note');
-      inp.classList.remove('ai-filled');
-      badge.style.display = 'none';
+      const badge = label.querySelector('.rr-ai-badge');
+      const note = label.querySelector('.rr-field-note');
+      inp.classList.remove('rr-is-ai-filled');
+      badge.classList.remove('rr-is-active');
       if (note.dataset.original) note.innerHTML = note.dataset.original;
       if (mode === 'lama') {
         inp.value = MOCK_LAMA[id];
-        inp.classList.add('ai-filled');
-        badge.style.display = 'inline-block';
+        inp.classList.add('rr-is-ai-filled');
+        badge.classList.add('rr-is-active');
       } else if (mode === 'hybrid') {
-        inp.classList.add('ai-filled');
-        badge.style.display = 'inline-block';
+        inp.classList.add('rr-is-ai-filled');
+        badge.classList.add('rr-is-active');
         if (!note.dataset.original) note.dataset.original = note.innerHTML;
         note.innerHTML = `KI-Vorschlag: <strong>${MOCK_LAMA[id]}</strong> – Wert eintragen zum Validieren`;
       } else {
@@ -800,9 +1157,9 @@ document.querySelectorAll('input[name="mode"]').forEach(r => {
   });
 });
 
-// ===========================================================================
+// =============================================================================
 // CPAK
-// ===========================================================================
+// =============================================================================
 function calculateCPAK() {
   const mldfa = parseFloat(document.getElementById('mldfa').value);
   const mmpta = parseFloat(document.getElementById('mmpta').value);
@@ -830,17 +1187,20 @@ function calculateCPAK() {
   };
   const type = cpakMap[`${aHKAcat}_${JLOcat}`];
   box.textContent = `Typ ${type}`;
-  detail.innerHTML = `aHKA <strong style="color:var(--accent)">${aHKA.toFixed(1)}°</strong> ${aHKAtxt} <br>JLO <strong style="color:var(--accent)">${JLO.toFixed(1)}°</strong> ${JLOtxt}`;
+  detail.innerHTML = `aHKA <strong style="color:var(--rr-accent)">${aHKA.toFixed(1)}°</strong> ${aHKAtxt} <br>JLO <strong style="color:var(--rr-accent)">${JLO.toFixed(1)}°</strong> ${JLOtxt}`;
   return { type, aHKA: aHKA.toFixed(1), JLO: JLO.toFixed(1), aHKAcat, JLOcat };
 }
 
-// ===========================================================================
-// TEXT GENERATION
-// ===========================================================================
+// =============================================================================
+// HELPERS
+// =============================================================================
 function gv(id) { return document.getElementById(id).value; }
 function gn(id) { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? null : v; }
 function gc(id) { return document.getElementById(id).checked; }
 
+// =============================================================================
+// TEXT GENERATION
+// =============================================================================
 function generateTechnik() {
   const seiteEl = document.querySelector('input[name="seite"]:checked');
   if (!seiteEl || !seiteEl.value) {
@@ -876,7 +1236,6 @@ function generateBefund() {
   const mldfa = gn('mldfa'), mmpta = gn('mmpta'), jlca = gn('jlca');
   const cpak = calculateCPAK();
 
-  // Achsenvermessung mit EndoCert-konformer Formulierung (Tragachsenwinkel)
   const achseTeile = [];
   if (hka !== null) {
     let achsenrichtung = '';
@@ -897,7 +1256,6 @@ function generateBefund() {
     lines.push(`CPAK-Phänotyp Typ ${cpak.type} (aHKA ${cpak.aHKA}° ${cpak.aHKAcat}, JLO ${cpak.JLO}° ${cpak.JLOcat}).`);
   }
 
-  // KL
   const klM = gv('kl_med'), klL = gv('kl_lat'), klPF = gv('kl_pf');
   document.getElementById('kl_sum_med').textContent = klM || '–';
   document.getElementById('kl_sum_lat').textContent = klL || '–';
@@ -910,7 +1268,6 @@ function generateBefund() {
     lines.push(`Arthrosegrade nach Kellgren-Lawrence (KL): ${klParts.join(', ')}.`);
   }
 
-  // PF-Status
   const pfParts = [];
   if (gv('ps_is')) pfParts.push(`Insall-Salvati: ${gv('ps_is')}`);
   if (gv('ps_cd')) pfParts.push(`Caton-Deschamps: ${gv('ps_cd')}`);
@@ -918,11 +1275,9 @@ function generateBefund() {
   if (gv('ps_dejour')) pfParts.push(`Trochleadysplasie: ${gv('ps_dejour')}`);
   if (pfParts.length > 0) lines.push(pfParts.join('; ') + '.');
 
-  // Slope
   const slope = gn('slope');
   if (slope !== null) lines.push(`Tibialer Slope ${slope.toFixed(1)}° (sagittal).`);
 
-  // Zusatzbefunde
   const zb = [];
   if (gc('add_osteophyten')) zb.push('osteophytäre Randanbauten');
   if (gc('add_zysten')) zb.push('subchondrale Zysten');
@@ -934,17 +1289,14 @@ function generateBefund() {
   if (gc('add_chondrocalc')) zb.push('Chondrokalzinose');
   if (zb.length > 0) lines.push(`Begleitbefunde: ${zb.join(', ')}.`);
 
-  // Knochenstruktur
   const bone = gv('bone_q');
   if (bone) lines.push(`Knochenstruktur ${bone}.`);
 
-  // VU
   const vuDate = gv('vu_date'), vuTrend = gv('vu_trend');
   if (vuDate || vuTrend) {
     lines.push(`Im Vergleich zur Voruntersuchung${vuDate ? ` (${vuDate})` : ''}${vuTrend ? `: ${vuTrend}` : ''}.`);
   }
 
-  // Freitext
   const ft = gv('freetext');
   if (ft) lines.push(ft);
 
@@ -959,11 +1311,9 @@ function generateBeurteilung() {
   const cpak = calculateCPAK();
   const klM = gv('kl_med'), klL = gv('kl_lat'), klPF = gv('kl_pf');
 
-  // Mindestanforderung: mindestens ein KL-Wert muss gesetzt sein, sonst keine Auto-Beurteilung
   if (!klM && !klL && !klPF) return '';
 
   const parts = [];
-  // Hauptdiagnose
   const klMax = Math.max(parseInt(klM)||0, parseInt(klL)||0, parseInt(klPF)||0);
   if (klMax >= 3) {
     const kompartimente = [];
@@ -977,7 +1327,6 @@ function generateBeurteilung() {
     parts.push(`Keine bzw. allenfalls fragliche radiologische Arthrosezeichen ${seite}.`);
   }
 
-  // Achse
   if (hka !== null) {
     if (hka < 178) parts.push(`Varus-Beinachse (Tragachsenwinkel ${hka.toFixed(1)}°).`);
     else if (hka > 182) parts.push(`Valgus-Beinachse (Tragachsenwinkel ${hka.toFixed(1)}°).`);
@@ -994,41 +1343,38 @@ function generateBeurteilung() {
   return parts.join(' ');
 }
 
-// ===========================================================================
+// =============================================================================
 // PFLICHTFELD-VALIDIERUNG (visuell)
-// ===========================================================================
+// =============================================================================
 function updateRequiredIndicators() {
-  // Seite
   const seiteEl = document.querySelector('input[name="seite"]:checked');
   const seiteOk = seiteEl && seiteEl.value;
   const reqSeite = document.getElementById('req_seite');
   const sideToggle = document.getElementById('side_toggle');
   if (seiteOk) {
     reqSeite.style.display = 'none';
-    sideToggle.classList.remove('required-empty');
+    sideToggle.classList.remove('rr-is-required-empty');
   } else {
     reqSeite.style.display = 'inline-block';
-    sideToggle.classList.add('required-empty');
+    sideToggle.classList.add('rr-is-required-empty');
   }
 
-  // KL-Selects
   ['kl_med','kl_lat','kl_pf'].forEach(id => {
     const sel = document.getElementById(id);
-    const reqId = 'req_' + id;
-    const reqEl = document.getElementById(reqId);
+    const reqEl = document.getElementById('req_' + id);
     if (sel.value === '') {
-      sel.classList.add('required-empty');
+      sel.classList.add('rr-is-required-empty');
       if (reqEl) reqEl.style.display = 'inline-block';
     } else {
-      sel.classList.remove('required-empty');
+      sel.classList.remove('rr-is-required-empty');
       if (reqEl) reqEl.style.display = 'none';
     }
   });
 }
 
-// ===========================================================================
+// =============================================================================
 // PREVIEW UPDATE
-// ===========================================================================
+// =============================================================================
 function updatePreview() {
   updateRequiredIndicators();
   document.getElementById('prev_technik').textContent = generateTechnik();
@@ -1042,9 +1388,9 @@ document.addEventListener('input', updatePreview);
 document.addEventListener('change', updatePreview);
 document.getElementById('prev_beurteilung').addEventListener('input', e => e.target.dataset.touched = '1');
 
-// ===========================================================================
+// =============================================================================
 // COPY / RESET / EXPORT
-// ===========================================================================
+// =============================================================================
 function copyAll() {
   const t = ['TECHNIK', document.getElementById('prev_technik').textContent,
              '', 'KLINISCHE ANGABE', document.getElementById('prev_klinik').textContent,
@@ -1058,9 +1404,6 @@ function resetForm() {
   location.reload();
 }
 
-// ---------------------------------------------------------------------------
-// FHIR EXPORT mit RadLex-Coding
-// ---------------------------------------------------------------------------
 function getCodingFromSelectedOption(selectId) {
   const sel = document.getElementById(selectId);
   if (!sel) return null;
@@ -1070,19 +1413,8 @@ function getCodingFromSelectedOption(selectId) {
   const en = opt.getAttribute('data-en');
   const status = opt.getAttribute('data-radlex-status');
   const coding = [];
-  if (rid) {
-    coding.push({
-      system: 'http://radlex.org',
-      code: rid,
-      display: en || opt.text
-    });
-  } else if (status === 'local') {
-    coding.push({
-      system: 'http://hjk.local/CodeSystem/vinzenz-radiologie',
-      code: opt.value.toLowerCase().replace(/\s+/g,'-'),
-      display: en || opt.text
-    });
-  }
+  if (rid) coding.push({ system: 'http://radlex.org', code: rid, display: en || opt.text });
+  else if (status === 'local') coding.push({ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: opt.value.toLowerCase().replace(/\s+/g,'-'), display: en || opt.text });
   return { coding, text: opt.text };
 }
 
@@ -1094,7 +1426,7 @@ function getCodingFromCheckbox(checkboxId) {
   const status = cb.getAttribute('data-radlex-status');
   const coding = [];
   if (rid) coding.push({ system: 'http://radlex.org', code: rid, display: en });
-  else if (status === 'local') coding.push({ system: 'http://hjk.local/CodeSystem/vinzenz-radiologie', code: checkboxId, display: en });
+  else if (status === 'local') coding.push({ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: checkboxId, display: en });
   return coding;
 }
 
@@ -1103,13 +1435,13 @@ function showExport(format) {
   const seite = document.querySelector('input[name="seite"]:checked');
   if (!seite || !seite.value) {
     area.textContent = '// Export nicht möglich: Bitte zuerst Seite (re. / li.) wählen.';
-    area.classList.add('show');
+    area.classList.add('rr-is-visible');
     return;
   }
   const cpak = calculateCPAK();
   const data = {
     metadata: {
-      template: 'HJK-MRRT-KNIE-PRAETEP', version: '1.3.1',
+      template: 'HJK-MRRT-KNIE-PRAETEP', version: '1.4',
       seite: seite.value,
       seite_radlex: { code: seite.getAttribute('data-radlex'), system: 'http://radlex.org', display: seite.getAttribute('data-en') },
       datum: new Date().toISOString(),
@@ -1159,7 +1491,6 @@ function showExport(format) {
     area.textContent = JSON.stringify(data, null, 2);
   } else if (format === 'fhir') {
     const obs = [];
-    // bodySite mit RadLex (Knee = RID2472)
     const bodySite = {
       coding: [
         { system: 'http://radlex.org', code: 'RID2472', display: 'knee' },
@@ -1168,15 +1499,14 @@ function showExport(format) {
       text: `Knie ${seite.value}`
     };
 
-    // Quantitative Observations (LOINC primär)
     const quantMap = [
       { id:'hka', code:'LP410789-0', sys:'http://loinc.org', display:'Hip-knee-ankle angle', val:gn('hka'), unit:'deg' },
-      { id:'mad', code:'MAD', sys:'http://hjk.local/CodeSystem/vinzenz-radiologie', display:'Mechanical axis deviation', val:gn('mad'), unit:'mm' },
-      { id:'mldfa', code:'mLDFA', sys:'http://hjk.local/CodeSystem/vinzenz-radiologie', display:'Mechanical lateral distal femoral angle', val:gn('mldfa'), unit:'deg' },
-      { id:'mmpta', code:'mMPTA', sys:'http://hjk.local/CodeSystem/vinzenz-radiologie', display:'Mechanical medial proximal tibial angle', val:gn('mmpta'), unit:'deg' },
-      { id:'jlca', code:'JLCA', sys:'http://hjk.local/CodeSystem/vinzenz-radiologie', display:'Joint line convergence angle', val:gn('jlca'), unit:'deg' },
+      { id:'mad', code:'MAD', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Mechanical axis deviation', val:gn('mad'), unit:'mm' },
+      { id:'mldfa', code:'mLDFA', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Mechanical lateral distal femoral angle', val:gn('mldfa'), unit:'deg' },
+      { id:'mmpta', code:'mMPTA', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Mechanical medial proximal tibial angle', val:gn('mmpta'), unit:'deg' },
+      { id:'jlca', code:'JLCA', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Joint line convergence angle', val:gn('jlca'), unit:'deg' },
       { id:'lld', code:'LP35279-5', sys:'http://loinc.org', display:'Leg length discrepancy', val:gn('lld'), unit:'mm' },
-      { id:'slope', code:'tibial-slope', sys:'http://hjk.local/CodeSystem/vinzenz-radiologie', display:'Posterior tibial slope', val:gn('slope'), unit:'deg' }
+      { id:'slope', code:'tibial-slope', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Posterior tibial slope', val:gn('slope'), unit:'deg' }
     ];
     quantMap.forEach(o => {
       if (o.val !== null && o.val !== undefined) {
@@ -1189,7 +1519,6 @@ function showExport(format) {
       }
     });
 
-    // KL-Grade als ordinale Observations mit RadLex-Codierung
     [['kl_med','medial'],['kl_lat','lateral'],['kl_pf','patellofemoral']].forEach(([id,kompart]) => {
       const v = parseInt(gv(id));
       if (!isNaN(v)) {
@@ -1200,7 +1529,7 @@ function showExport(format) {
           { system:'http://loinc.org', code:'LP410785-8', display:`Kellgren-Lawrence ${kompart}` }
         ];
         if (rid) coding.push({ system:'http://radlex.org', code:rid, display:opt.getAttribute('data-en') });
-        else coding.push({ system:'http://hjk.local/CodeSystem/vinzenz-radiologie', code:`kl-${kompart}-grade-${v}`, display:opt.getAttribute('data-en') });
+        else coding.push({ system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:`kl-${kompart}-grade-${v}`, display:opt.getAttribute('data-en') });
         obs.push({
           resourceType:'Observation', status:'final',
           code:{ coding },
@@ -1211,11 +1540,10 @@ function showExport(format) {
       }
     });
 
-    // CPAK als String-Observation
     if (cpak) {
       obs.push({
         resourceType:'Observation', status:'final',
-        code:{ coding:[{ system:'http://hjk.local/CodeSystem/vinzenz-radiologie', code:'CPAK', display:'Coronal Plane Alignment of the Knee phenotype (MacDessi 2021)' }] },
+        code:{ coding:[{ system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:'CPAK', display:'Coronal Plane Alignment of the Knee phenotype (MacDessi 2021)' }] },
         bodySite: bodySite,
         valueString:`Type ${cpak.type}`,
         component:[
@@ -1225,21 +1553,19 @@ function showExport(format) {
       });
     }
 
-    // Categorical / qualitative Observations mit RadLex
     const categoricalSelects = ['ps_is','ps_cd','ps_tilt','ps_dejour','bone_q','vu_trend'];
     categoricalSelects.forEach(id => {
       const c = getCodingFromSelectedOption(id);
       if (c && c.coding.length > 0) {
         obs.push({
           resourceType:'Observation', status:'final',
-          code:{ coding:[{ system:'http://hjk.local/CodeSystem/vinzenz-radiologie', code:id, display:id }] },
+          code:{ coding:[{ system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:id, display:id }] },
           bodySite: bodySite,
           valueCodeableConcept:{ coding:c.coding, text:c.text }
         });
       }
     });
 
-    // Zusatzbefunde (Checkboxen) – nur positive Findings
     const zusatz = ['add_osteophyten','add_zysten','add_sklerose','add_freikorper','add_erguss','add_baker','add_verkalk','add_chondrocalc'];
     zusatz.forEach(id => {
       const c = getCodingFromCheckbox(id);
@@ -1275,7 +1601,7 @@ function showExport(format) {
     };
     area.textContent = JSON.stringify(bundle, null, 2);
   }
-  area.classList.add('show');
+  area.classList.add('rr-is-visible');
 }
 
 updatePreview();
