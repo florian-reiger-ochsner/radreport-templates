@@ -3,7 +3,7 @@
 Strukturierte Befundvorlagen für die deutschsprachige Radiologie nach IHE MRRT.
 
 **Autor:** Florian Reiger-Ochsner, Facharzt für Radiologie, Wien
-**Stand:** Mai 2026
+**Stand:** Juni 2026
 
 Fokus: muskuloskelettale Radiologie, Rheumatologie-Imaging, internistische Radiologie. Anschlussfähig an KIS-/PACS-Systeme, KI-Tools (DICOM SR) und Forschungs-/Data-Mining-Workflows (FHIR).
 
@@ -31,7 +31,7 @@ Fokus: muskuloskelettale Radiologie, Rheumatologie-Imaging, internistische Radio
 
 | Modalität | Region | Status | Demo |
 |---|---|---|---|
-| Röntgen | Knie prä-TEP | v1.2 | [Demo](./demo/knie-prae-tep/) |
+| Röntgen | Knie prä-TEP | v1.4 | [Demo](./demo/knie-prae-tep/) |
 
 Weitere Vorlagen folgen sukzessive.
 
