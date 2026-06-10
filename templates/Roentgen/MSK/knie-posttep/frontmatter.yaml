@@ -1,0 +1,67 @@
+id: HJK-MRRT-KNIE-POSTTEP
+version: 1.1
+status: pilot
+modalitaet: Roentgen
+region: Knie
+indikation: Postoperative Beurteilung nach Knie-Totalendoprothese
+sprache: de
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+geprueft: 2026-06-08
+naechste-pruefung: 2026-12-08
+klassifikationen:
+  - name: Ewald-Zonen (Knee Society Roentgenographic Evaluation)
+    quelle: "Ewald FC. Arthroplasty 1989"
+  - name: Vancouver-Klassifikation (periprothetische Fraktur)
+    quelle: "Duncan CP, Masri BA. AAOS Instructional Course 1995"
+referenzen:
+  - "Ewald FC. The Knee Society total knee arthroplasty roentgenographic evaluation. Arthroplasty 1989;4(3):265-272"
+  - "Duncan CP, Masri BA. Fractures of the femur after hip replacement. AAOS 1995"
+  - "MacDessi SJ et al. Bone Joint J 2021;103-B(3):329-337"
+  - "ESC Guidelines on Acute PE 2019 (fuer RHB-Klassifikation)"
+ki-tools:
+  - name: LAMA (IB Lab)
+    status: produktiv-lizenziert
+    output: DICOM SR
+  - name: KOALA (IB Lab)
+    status: testphase
+    output: DICOM SR
+standorte:
+  - Herz-Jesu-Krankenhaus Wien (HJK)
+loinc-codes:
+  - code: "24650-4"
+    description: Knee X-ray AP and Lateral
+  - code: LP410789-0
+    description: Hip-knee-ankle angle postoperative
+endocert:
+  - pflicht: true
+    beschreibung: Intraoperatives/unmittelbar postoperatives Roentgen nach KTEP-Implantation
+projektionen:
+  - ap-stehend-oder-liegend
+  - seitlich
+  - patella-axial-optional
+  - ganzbein-optional
+kontexte:
+  - intraoperativ-endocert
+  - frueh-postoperativ
+  - verlaufskontrolle
+  - revisionsverdacht
+implantat-presets:
+  - name: Persona PS
+    hersteller: Zimmer Biomet
+    fixation: zementiert-bds
+  - name: Persona CR
+    hersteller: Zimmer Biomet
+    fixation: zementiert-bds
+  - name: NexGen PS
+    hersteller: Zimmer Biomet
+    fixation: zementiert-bds
+  - name: NexGen CR
+    hersteller: Zimmer Biomet
+    fixation: zementiert-bds
+output:
+  - fliesstext
+  - json
+  - fhir-bundle
+radlex-coverage: vollstaendig
