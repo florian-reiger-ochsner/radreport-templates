@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
+<head>
+<meta charset="UTF-8">
+<title>CT-LUNGENEMBOLIE – Live-Demo</title>
+
+<meta name="dcterms.title"       content="CT Lungenarterien (CTPA) – Lungenembolie"/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage CT Pulmonalisangiographie (CTPA). Basierend auf DRG-Template 041807.2.1806120000 (CC BY 4.0). Adaptiert: HJK-Design-System, RadLex-Kodierung, automatischer RV/LV-Ratio-Kalkulator mit Risikostratifizierung, FHIR-Export."/>
+<meta name="dcterms.language"    content="de"/>
+<meta name="dcterms.identifier"  content="HJK-MRRT-CT-LUNGENEMBOLIE-v1.0"/>
+<meta name="dcterms.source"      content="DRG AK Befundung AG Thoraxdiagnostik, Template 041807.2.1806120000, CC BY 4.0, https://github.com/DRGagit/ak_befundung"/>
+<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
+<meta name="dcterms.date"        content="2026-05-20"/>
+<meta name="dcterms.rights"      content="Basierend auf DRG-Template CC BY 4.0. Adaption und Erweiterung: HJK Wien."/>
+<meta name="rrt:specialty"       content="Radiology"/>
+<meta name="rrt:subspecialty"    content="Chest Radiology; Vascular Radiology"/>
+<meta name="rrt:modality"        content="CT"/>
+<meta name="rrt:bodyregion"      content="Chest"/>
+
+
+
+
+<!-- Core-Stylesheet (Single Source of Truth) -->
+<!-- MRRT-Build: node shared/scripts/inline-css.js macht daraus template.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* radreport-core.css v1.0.0 – inlined */
+:root{--rr-bg:#ffffff;--rr-bg-alt:#f7f8fa;--rr-bg-card:#ffffff;--rr-ink:#2c3e50;--rr-ink-soft:#5a6c7d;--rr-ink-muted:#8b97a3;--rr-ink-faint:#b8c2cc;--rr-accent:#2c5f8d;--rr-accent-light:#4a86b8;--rr-accent-pale:#e8f0f7;--rr-rule:#e6eaef;--rr-rule-soft:#f0f3f6;--rr-field-bg:#ffffff;--rr-field-border:#d8dee5;--rr-ai-tint:#f4f9fd;--rr-ai-border:#2c5f8d;--rr-radlex-tint:#f5f1f7;--rr-radlex-ink:#7a4e96;--rr-warn:#c47f2a;--rr-critical:#c45848;--rr-success:#2d7a4f;--rr-font-sans:"Source Sans 3","Segoe UI",-apple-system,sans-serif;--rr-font-serif:"Source Serif 4",Georgia,serif;--rr-font-mono:"SF Mono","Menlo","JetBrains Mono",monospace;--rr-fs-xs:11px;--rr-fs-sm:12px;--rr-fs-base:15px;--rr-fs-md:13px;--rr-fs-lg:14px;--rr-fs-xl:20px;--rr-fs-2xl:28px;--rr-fs-3xl:32px;--rr-space-xs:0.25rem;--rr-space-sm:0.5rem;--rr-space-md:1rem;--rr-space-lg:1.5rem;--rr-space-xl:2rem;--rr-space-2xl:3.5rem;--rr-max-width:1600px;--rr-radius:6px;--rr-radius-sm:4px;--rr-radius-xs:3px;--rr-shadow-sm:0 1px 2px rgba(44,62,80,0.04);--rr-shadow-md:0 2px 8px rgba(44,62,80,0.06);}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:var(--rr-fs-base);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;}
+.rr-app{display:grid;grid-template-columns:minmax(480px,1fr) minmax(440px,540px);gap:0;min-height:100vh;max-width:var(--rr-max-width);margin:0 auto;background:var(--rr-bg);}
+@media(max-width:1100px){.rr-app{grid-template-columns:1fr;}}
+.rr-input-pane{padding:var(--rr-space-2xl) 64px 100px;background:var(--rr-bg);border-right:1px solid var(--rr-rule);}
+.rr-preview-pane{padding:var(--rr-space-2xl) var(--rr-space-2xl) 100px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto;}
+.rr-doc-title{font-family:var(--rr-font-sans);font-weight:600;font-size:var(--rr-fs-3xl);line-height:1.25;margin:0 0 6px;letter-spacing:-0.02em;color:var(--rr-ink);}
+.rr-doc-sub{font-size:var(--rr-fs-md);color:var(--rr-ink-muted);letter-spacing:0.04em;text-transform:uppercase;}
+.rr-title-rule{width:48px;height:2px;background:var(--rr-accent);margin:var(--rr-space-lg) 0 40px;}
+.rr-h2-wrap{margin:36px 0 var(--rr-space-md);}.rr-h2-wrap h2,.rr-h2{font-family:var(--rr-font-sans);font-size:var(--rr-fs-md);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--rr-accent);margin:0 0 4px;}
+.rr-h2-rule{height:1px;background:var(--rr-rule);margin:var(--rr-space-sm) 0 0;}.rr-h2-sub{font-size:var(--rr-fs-sm);color:var(--rr-ink-muted);font-style:italic;margin-top:6px;}
+.rr-helper-info{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);padding:10px 14px;font-size:var(--rr-fs-md);color:var(--rr-ink-soft);margin-bottom:var(--rr-space-sm);border-radius:0 var(--rr-radius-sm) var(--rr-radius-sm) 0;}
+.rr-side-toggle{display:inline-flex;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;}.rr-side-toggle input[type="radio"]{display:none;}.rr-side-toggle label{padding:8px 18px;cursor:pointer;font-size:var(--rr-fs-lg);font-weight:500;background:var(--rr-bg);color:var(--rr-ink-soft);transition:all 0.15s;}.rr-side-toggle input[type="radio"]:checked+label{background:var(--rr-accent);color:#fff;}
+.rr-row{display:grid;gap:var(--rr-space-md) 20px;grid-template-columns:1fr 1fr;margin-top:14px;}.rr-row-three{grid-template-columns:1fr 1fr 1fr;}.rr-row-full{grid-template-columns:1fr;}
+@media(max-width:760px){.rr-row,.rr-row-three{grid-template-columns:1fr;}}
+label{display:block;font-size:var(--rr-fs-md);}
+.rr-lbl{display:flex;align-items:center;justify-content:space-between;font-size:var(--rr-fs-xs);color:var(--rr-ink-muted);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:6px;}.rr-lbl>span:first-child{display:flex;align-items:center;gap:6px;}
+input[type="text"],input[type="number"],input[type="date"],select,textarea{width:100%;padding:10px 12px;font-size:var(--rr-fs-lg);border:1px solid var(--rr-field-border);background:var(--rr-field-bg);border-radius:var(--rr-radius-sm);color:var(--rr-ink);font-family:inherit;transition:border 0.15s,box-shadow 0.15s;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale);}
+textarea{min-height:80px;resize:vertical;line-height:1.5;}
+.rr-field-note{font-size:var(--rr-fs-xs);color:var(--rr-ink-muted);margin-top:var(--rr-space-xs);line-height:1.4;}
+.rr-rl-badge{background:var(--rr-radlex-tint);color:var(--rr-radlex-ink);border:1px solid var(--rr-radlex-ink);font-size:9px;letter-spacing:0.06em;padding:1px 4px;border-radius:var(--rr-radius-xs);text-transform:uppercase;font-weight:600;font-family:var(--rr-font-mono);}
+.rr-req-indicator{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--rr-critical);margin-left:6px;vertical-align:middle;animation:rr-pulse 2s ease-in-out infinite;}
+@keyframes rr-pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+details{border:1px solid var(--rr-rule);border-radius:var(--rr-radius);margin-top:12px;background:var(--rr-bg);}
+details summary{cursor:pointer;padding:12px var(--rr-space-md);font-size:var(--rr-fs-md);font-weight:600;color:var(--rr-ink-soft);letter-spacing:0.06em;text-transform:uppercase;list-style:none;}
+details summary::-webkit-details-marker{display:none;}details summary::before{content:"▸ ";color:var(--rr-accent);margin-right:6px;}details[open] summary::before{content:"▾ ";}
+details>div{padding:0 var(--rr-space-md) var(--rr-space-md);}
+.rr-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.rr-btn,button{background:var(--rr-accent);color:#fff;padding:10px 18px;font-size:var(--rr-fs-md);font-weight:600;border:none;border-radius:5px;cursor:pointer;letter-spacing:0.01em;transition:all 0.15s;box-shadow:var(--rr-shadow-sm);font-family:inherit;}
+.rr-btn:hover,button:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md);}
+.rr-btn-secondary,button.rr-btn-secondary{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border);box-shadow:none;}
+.rr-btn-secondary:hover,button.rr-btn-secondary:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent);transform:none;}
+.rr-export-area{display:none;margin-top:20px;padding:20px;background:#1e2a36;color:#a8c4dd;border-radius:var(--rr-radius);font-family:var(--rr-font-mono);font-size:var(--rr-fs-xs);white-space:pre;overflow-x:auto;max-height:400px;overflow-y:auto;line-height:1.5;}
+.rr-export-area.rr-is-visible{display:block;}
+.rr-preview-title{font-family:var(--rr-font-sans);font-size:var(--rr-fs-md);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--rr-accent);margin:0;}
+.rr-preview-title-rule{height:1px;background:var(--rr-rule);margin:var(--rr-space-sm) 0 28px;}
+.rr-preview-section{margin-bottom:26px;}.rr-preview-section h4{font-size:10px;color:var(--rr-ink-muted);letter-spacing:0.14em;text-transform:uppercase;margin:0 0 var(--rr-space-sm);font-weight:600;}
+.rr-preview-content{font-family:var(--rr-font-serif);font-size:var(--rr-fs-base);line-height:1.7;color:var(--rr-ink);white-space:pre-wrap;}
+.rr-codesystem-legend{margin-top:var(--rr-space-sm);font-size:10px;color:var(--rr-ink-muted);letter-spacing:0.04em;font-family:var(--rr-font-mono);}
+.rr-codesystem-legend .rr-badge-mini{display:inline-block;padding:1px 5px;border-radius:var(--rr-radius-xs);margin-right:4px;font-weight:600;}
+.rr-codesystem-legend .rr-is-verified{background:#e8f5ec;color:#2d6a4f;border:1px solid #2d6a4f;}
+.rr-codesystem-legend .rr-is-local{background:#fdf4e3;color:#8b6914;border:1px solid #c4a558;}
+.rr-u-hidden{display:none!important;}
+@media print{body{background:#fff;}.rr-app{display:block;max-width:none;}.rr-input-pane,.rr-mode-switch,.rr-actions,.rr-export-area,.rr-helper-info,.rr-codesystem-legend{display:none!important;}.rr-preview-pane{position:static;height:auto;padding:0;background:#fff;overflow:visible;}}
+</style>
+
+<style>
+/* =================================================================
+   TEMPLATE-SPEZIFISCHES CSS – NUR WAS CORE NICHT ABDECKT
+   Konvention: rr-ctlungenembolie-* Präfix
+   ================================================================= */
+
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.app{display:grid;grid-template-columns:minmax(520px,1fr) minmax(400px,500px);min-height:100vh;max-width:1580px;margin:0 auto;background:var(--rr-bg)}
+@media(max-width:1080px){.app{grid-template-columns:1fr}}
+.input-pane{padding:48px 56px 120px;background:var(--rr-bg);border-right:1px solid var(--rr-rule)}
+.preview-pane{padding:48px 48px 120px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto}
+
+.doc-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:28px;color:var(--rr-ink);letter-spacing:-0.02em;line-height:1.2}
+.doc-meta{margin-top:5px;font-size:11.5px;color:var(--rr-ink-muted);letter-spacing:.04em;text-transform:uppercase}
+.drg-credit{display:inline-flex;align-items:center;gap:6px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:5px 11px;font-size:11px;color:var(--rr-ink-muted);margin-top:8px}
+.title-rule{height:3px;background:linear-gradient(90deg,var(--rr-accent) 0%,var(--rr-accent-pale) 100%);border-radius:2px;margin:14px 0 26px}
+
+.sh{display:flex;align-items:baseline;gap:12px;margin:26px 0 10px}
+.sh h2{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--rr-accent)}
+.sh-line{flex:1;height:1px;background:var(--rr-rule)}
+.sh-sub{font-size:12px;color:var(--rr-ink-muted);margin:-5px 0 11px}
+
+.row{margin-bottom:11px}
+.row label{display:flex;flex-direction:column;gap:4px}
+.lbl{font-size:12px;font-weight:500;color:var(--rr-ink-soft);letter-spacing:.02em}
+.unit{font-size:11px;color:var(--rr-ink-muted);margin-left:3px;font-weight:400}
+.field-note{font-size:11px;color:var(--rr-ink-muted);margin-top:2px;font-style:italic}
+select,textarea,input[type=text],input[type=number]{width:100%;background:#fff;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);padding:8px 11px;font-family:"Source Sans 3",sans-serif;font-size:13.5px;color:var(--rr-ink);transition:border-color .15s,box-shadow .15s;appearance:none;-webkit-appearance:none}
+select:focus,textarea:focus,input:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%238b97a3' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
+textarea{resize:vertical;min-height:54px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+
+.rl{display:inline-block;font-size:10px;font-weight:600;color:var(--rr-accent);background:var(--rr-accent-pale);border-radius:3px;padding:1px 5px;margin-left:5px;letter-spacing:.02em;vertical-align:middle}
+.hint{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-ink-soft);margin:4px 0 12px}
+.hint strong{color:var(--rr-accent)}
+.hint-alert{background:#fdf0ef;border-left:3px solid var(--rr-critical);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-critical);margin:4px 0 12px}
+.hint-alert strong{color:var(--rr-critical)}
+
+/* ── Lokalisation Checkboxen ── */
+.lok-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:14px 16px;margin-bottom:12px}
+.lok-col-head{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--rr-ink-muted);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--rr-rule)}
+.cb-group{display:flex;flex-direction:column;gap:5px}
+.cb-item{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--rr-ink-soft)}
+.cb-item input{width:14px;height:14px;accent-color:var(--rr-accent);cursor:pointer;flex-shrink:0}
+.cb-item.checked{color:var(--rr-accent);font-weight:500}
+
+/* ── Lokalisation Ebene ── */
+.lok-ebene{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
+.lok-ebene input[type=checkbox]{display:none}
+.lok-ebene label{padding:5px 13px;border-radius:18px;border:1px solid var(--rr-field-border);font-size:12.5px;color:var(--rr-ink-soft);cursor:pointer;transition:all .15s;user-select:none}
+.lok-ebene input:checked+label{background:var(--rr-accent);color:#fff;border-color:var(--rr-accent);font-weight:500}
+.lok-ebene label:hover{border-color:var(--rr-accent-light);color:var(--rr-accent)}
+
+/* ── RV/LV Kalkulator ── */
+.rvlv-card{background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:16px 18px;margin-bottom:14px}
+.rvlv-inputs{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;align-items:end;margin-bottom:14px}
+.rvlv-result{display:flex;align-items:center;gap:16px;padding:12px 16px;border-radius:var(--rr-radius);background:var(--rr-bg);border:1px solid var(--rr-rule);transition:all .3s}
+.rvlv-result.high{background:#fdf0ef;border-color:var(--rr-critical)}
+.rvlv-result.low{background:#ecf7f2;border-color:var(--rr-success)}
+.rvlv-ratio{font-size:32px;font-weight:700;font-family:"Source Sans 3",sans-serif;line-height:1;min-width:70px;color:var(--rr-ink)}
+.rvlv-result.high .rvlv-ratio{color:var(--rr-critical)}
+.rvlv-result.low .rvlv-ratio{color:var(--rr-success)}
+.rvlv-detail{font-size:12.5px;color:var(--rr-ink-soft);line-height:1.5}
+.rvlv-risk{font-size:13px;font-weight:600}
+
+/* ── LE-Nachweis Toggle ── */
+.le-toggle{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;max-width:320px;margin-bottom:12px}
+.le-toggle input{display:none}
+.le-toggle label{flex:1;padding:10px 12px;text-align:center;font-size:13px;color:var(--rr-ink-muted);cursor:pointer;transition:all .15s;border-right:1px solid var(--rr-field-border)}
+.le-toggle label:last-of-type{border-right:none}
+.le-toggle input#le_ja:checked+label{background:var(--rr-critical);color:#fff;font-weight:600}
+.le-toggle input#le_nein:checked+label{background:var(--rr-success);color:#fff;font-weight:600}
+.le-toggle input#le_fraglich:checked+label{background:var(--rr-warn);color:#fff;font-weight:600}
+
+/* Collapsible */
+details{margin-bottom:8px}
+details>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:9px 13px;background:var(--rr-bg-alt);border-radius:var(--rr-radius);border:1px solid var(--rr-rule);font-size:13px;font-weight:500;color:var(--rr-ink-soft);user-select:none;transition:all .15s}
+details>summary:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent-light)}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▶";font-size:9px;color:var(--rr-ink-faint);transition:transform .15s}
+details[open]>summary::before{transform:rotate(90deg)}
+details>.db{padding:14px 13px 8px;border:1px solid var(--rr-rule);border-top:none;border-radius:0 0 var(--rr-radius) var(--rr-radius);background:var(--rr-bg)}
+
+.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"Source Sans 3",sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-p{background:var(--rr-accent);color:#fff;box-shadow:var(--rr-shadow-sm)}
+.btn-p:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md)}
+.btn-s{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border)}
+.btn-s:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent)}
+.btn-d{background:#fef2f2;color:#c0392b;border:1px solid #f5c6c6}
+
+/* Preview */
+.prev-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rr-ink-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.prev-lbl::after{content:"";flex:1;height:1px;background:var(--rr-rule)}
+.rcard{background:var(--rr-bg);border:1px solid var(--rr-rule);border-radius:10px;padding:22px 24px;box-shadow:var(--rr-shadow-sm)}
+.rcard-header{border-bottom:2px solid var(--rr-accent);padding-bottom:11px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.rcard-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:16px;color:var(--accent-deep);letter-spacing:-.01em}
+.rcard-sub{font-size:11.5px;color:var(--rr-ink-muted);margin-top:3px}
+.le-pill{display:none;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:700;flex-shrink:0}
+.le-pill.ja{display:inline-block;background:#fdf0ef;color:var(--rr-critical);border:1px solid var(--rr-critical)}
+.le-pill.nein{display:inline-block;background:#ecf7f2;color:var(--rr-success);border:1px solid var(--rr-success)}
+.le-pill.fraglich{display:inline-block;background:#fdf6ec;color:var(--rr-warn);border:1px solid var(--rr-warn)}
+.rsec{margin-bottom:13px}
+.rsec-lbl{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--rr-accent);margin-bottom:4px}
+.rtext{font-family:"Source Serif 4","Georgia",serif;font-size:13px;line-height:1.72;color:var(--rr-ink);white-space:pre-wrap;min-height:16px}
+.rtext:empty::before{content:"—";color:var(--rr-ink-faint);font-style:italic;font-family:"Source Sans 3",sans-serif}
+.stamp{margin-top:14px;padding-top:11px;border-top:1px solid var(--rr-rule);font-size:11px;color:var(--rr-ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:11px;font-size:12px;font-weight:600;margin-top:12px}
+.badge.ok{background:#ecf7f2;color:var(--rr-success)}
+.badge.warn{background:#fdf6ec;color:var(--rr-warn)}
+.badge.alert{background:#fdf0ef;color:var(--rr-critical)}
+
+.ebox{display:none;margin-top:14px;background:#1a2535;color:#93b8d4;border-radius:var(--rr-radius);padding:16px 18px;font-family:"SF Mono","Menlo",monospace;font-size:11px;white-space:pre;overflow:auto;max-height:340px;line-height:1.55}
+.ebox.show{display:block}
+
+</style>
+</head>
+<body>
+<div class="rr-app">
+<section class="rr-input-pane">
+
+<h1 class="rr-doc-title">CT Lungenarterien</h1>
+<div class="rr-doc-sub">CTPA · Lungenembolie · RadLex-kodiert · v1.0 · HJK Wien · 2026-05-20</div>
+<div class="drg-credit">📄 Basierend auf DRG AK Befundung 041807.2.1806120000 · CC BY 4.0 · AG Thoraxdiagnostik</div>
+<div class="rr-title-rule"></div>
+
+<!-- TECHNIK -->
+<div class="sh"><h2>Technik &amp; klinische Angaben</h2><div class="sh-line"></div></div>
+
+<div class="grid2">
+  <div class="row">
+    <label>
+      <span class="lbl">KM-Menge <span class="unit">ml</span></span>
+      <input type="number" id="km_menge" placeholder="z.B. 70" oninput="update()"
+        data-radlex="RID49850" data-en="contrast medium volume">
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">KM-Fluss / Bolus-Qualität <span class="rr-rl-badge">RadLex</span></span>
+      <select id="bolus" onchange="update()"
+        data-radlex="RID49851" data-en="bolus quality">
+        <option value="adäquate Kontrastierung der Lungenarterien" data-radlex="RID49851-ok" data-en="adequate contrast">Adäquat</option>
+        <option value="eingeschränkte Kontrastierung der Lungenarterien (suboptimaler Bolus)" data-radlex="RID49851-sub" data-en="suboptimal bolus">Suboptimal</option>
+        <option value="diagnostisch unzureichende Kontrastierung" data-radlex="RID49851-insuf" data-en="inadequate contrast">Unzureichend</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="row">
+    <label><span class="lbl">D-Dimer <span class="unit">mg/l FEU</span></span>
+      <input type="number" id="ddimer" step="0.01" placeholder="–" oninput="update()"
+        data-loinc="48065-7" data-en="D-dimer">
+    </label>
+  </div>
+  <div class="row">
+    <label><span class="lbl">Klinische Fragestellung</span>
+      <input type="text" id="fragestellung" placeholder="z.B. Lungenembolie?" oninput="update()">
+    </label>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="row">
+    <label><span class="lbl">Vergleichsuntersuchung</span>
+      <select id="vgl_ja" onchange="document.getElementById('vgl_dat_row').style.display=this.value==='yes'?'':'none';update()">
+        <option value="">Keine</option><option value="yes">Vorliegend</option>
+      </select>
+    </label>
+  </div>
+  <div class="row" id="vgl_dat_row" style="display:none">
+    <label><span class="lbl">Datum Vergleich</span>
+      <input type="text" id="vgl_dat" placeholder="MM/JJJJ" oninput="update()">
+    </label>
+  </div>
+</div>
+
+<!-- LE-NACHWEIS -->
+<div class="sh"><h2>Lungenembolie</h2><div class="sh-line"></div></div>
+
+<div class="le-toggle">
+  <input type="radio" name="le_nachweis" id="le_ja" value="ja">
+  <label for="le_ja">⚠ Ja – LE nachweisbar</label>
+  <input type="radio" name="le_nachweis" id="le_nein" value="nein" checked>
+  <label for="le_nein">✓ Nein – keine LE</label>
+  <input type="radio" name="le_nachweis" id="le_fraglich" value="fraglich">
+  <label for="le_fraglich">? Fraglich</label>
+</div>
+
+<div id="le-detail-section" style="display:none">
+
+  <div class="hint-alert"><strong>LE positiv:</strong> Klinische Korrelation und unmittelbare Information empfohlen. Rechtsherzbelastung dokumentieren.</div>
+
+  <!-- LOKALISATION EBENE -->
+  <div class="sh" style="margin-top:4px"><h2 style="font-size:11px">Lokalisation – Ebene <span class="rr-rl-badge">RadLex</span></h2><div class="sh-line"></div></div>
+  <div class="lok-ebene">
+    <input type="checkbox" id="lok_zentral" data-radlex="RID5352-cen" data-en="central pulmonary embolism" onchange="update()">
+    <label for="lok_zentral">Zentral</label>
+    <input type="checkbox" id="lok_lobär" data-radlex="RID5352-lob" data-en="lobar pulmonary embolism" onchange="update()">
+    <label for="lok_lobär">Lobär</label>
+    <input type="checkbox" id="lok_segmental" data-radlex="RID5352-seg" data-en="segmental pulmonary embolism" onchange="update()">
+    <label for="lok_segmental">Segmental</label>
+    <input type="checkbox" id="lok_subsegmental" data-radlex="RID5352-sub" data-en="subsegmental pulmonary embolism" onchange="update()">
+    <label for="lok_subsegmental">Subsegmental</label>
+  </div>
+
+  <!-- LOKALISATION ANATOMISCH -->
+  <div class="lok-grid">
+    <div>
+      <div class="lok-col-head">Rechts</div>
+      <div class="cb-group">
+        <label class="cb-item"><input type="checkbox" id="loc_trpulm_re" onchange="update()"><span>Truncus pulmonalis / A. pulmonalis re.</span></label>
+        <label class="cb-item"><input type="checkbox" id="loc_ol_re" onchange="update()"><span>Oberlappen re.</span></label>
+        <label class="cb-item"><input type="checkbox" id="loc_ml_re" onchange="update()"><span>Mittellappen re.</span></label>
+        <label class="cb-item"><input type="checkbox" id="loc_ul_re" onchange="update()"><span>Unterlappen re.</span></label>
+      </div>
+    </div>
+    <div>
+      <div class="lok-col-head">Links</div>
+      <div class="cb-group">
+        <label class="cb-item"><input type="checkbox" id="loc_trpulm_li" onchange="update()"><span>A. pulmonalis li.</span></label>
+        <label class="cb-item"><input type="checkbox" id="loc_ol_li" onchange="update()"><span>Oberlappen / Lingula li.</span></label>
+        <label class="cb-item"><input type="checkbox" id="loc_ul_li" onchange="update()"><span>Unterlappen li.</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÄLTERE EMBOLIEN -->
+  <div class="row">
+    <span class="lbl">Zeichen älterer Embolien</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:5px">
+      <label class="cb-item"><input type="checkbox" id="alt_dil" onchange="update()"><span>Dilatierte Bronchialarterien</span></label>
+      <label class="cb-item"><input type="checkbox" id="alt_wand" onchange="update()"><span>Wandständige Thromben</span></label>
+      <label class="cb-item"><input type="checkbox" id="alt_webs" onchange="update()"><span>Webs / Bands</span></label>
+    </div>
+  </div>
+</div>
+
+<!-- RECHTSHERZBELASTUNG -->
+<div class="sh"><h2>Rechtsherzbelastung</h2><div class="sh-line"></div></div>
+<div class="sh-sub">RV/LV-Ratio ≥ 1,0 = erhöhtes Risiko (ESC 2019). Durchmesser axial auf Herzhöhe messen.</div>
+
+<div class="rvlv-card">
+  <div class="rvlv-inputs">
+    <div class="row" style="margin:0">
+      <label>
+        <span class="lbl">RV-Ø <span class="unit">mm</span></span>
+        <input type="number" id="rv_dia" step="0.1" placeholder="–"
+          data-radlex="RID5069" data-en="right ventricular diameter"
+          data-loinc="79900-0" oninput="calcRVLV();update()">
+      </label>
+    </div>
+    <div class="row" style="margin:0">
+      <label>
+        <span class="lbl">LV-Ø <span class="unit">mm</span></span>
+        <input type="number" id="lv_dia" step="0.1" placeholder="–"
+          data-radlex="RID5073" data-en="left ventricular diameter"
+          data-loinc="79901-8" oninput="calcRVLV();update()">
+      </label>
+    </div>
+    <div class="row" style="margin:0">
+      <label>
+        <span class="lbl">Tr. pulmonalis-Ø <span class="unit">mm</span></span>
+        <input type="number" id="trpulm_dia" step="0.1" placeholder="Norm ≤ 29 mm"
+          data-radlex="RID5074" data-en="pulmonary trunk diameter" oninput="update()">
+      </label>
+    </div>
+    <div class="row" style="margin:0">
+      <label>
+        <span class="lbl">IVS-Shift <span class="rr-rl-badge">RadLex</span></span>
+        <select id="ivs_shift" onchange="update()"
+          data-radlex="RID5075" data-en="interventricular septum shift">
+          <option value="kein IVS-Shift" data-radlex="RID5075-neg">Kein</option>
+          <option value="IVS-Shift nachweisbar" data-radlex="RID5075-pos">Vorhanden</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="rvlv-result" id="rvlv-result">
+    <div class="rvlv-ratio" id="rvlv-val">–</div>
+    <div>
+      <div class="rvlv-risk" id="rvlv-risk">RV/LV-Ratio – Werte eingeben</div>
+      <div class="rvlv-detail" id="rvlv-detail">RV- und LV-Durchmesser eingeben</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="row">
+    <label>
+      <span class="lbl">Rechtsherzbelastung (qualitativ) <span class="rr-rl-badge">RadLex</span></span>
+      <select id="rhb_qual" onchange="update()"
+        data-radlex="RID5076" data-en="right heart strain">
+        <option value="keine Rechtsherzbelastungszeichen" data-radlex="RID5076-neg" data-en="no right heart strain">Keine</option>
+        <option value="leichte Rechtsherzbelastung" data-radlex="RID5076-mild" data-en="mild right heart strain">Leichte RHB</option>
+        <option value="deutliche Rechtsherzbelastung" data-radlex="RID5076-sev" data-en="significant right heart strain">Deutliche RHB</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">KM-Rückstau <span class="rr-rl-badge">RadLex</span></span>
+      <select id="km_stau" onchange="update()"
+        data-radlex="RID5077" data-en="contrast reflux">
+        <option value="kein KM-Rückstau" data-radlex="RID5077-neg">Kein</option>
+        <option value="KM-Rückstau in die V. cava inferior" data-radlex="RID5077-vci">In die VCI</option>
+        <option value="KM-Rückstau in die Lebervenen" data-radlex="RID5077-lv">In Lebervenen</option>
+        <option value="KM-Rückstau in VCI und Lebervenen" data-radlex="RID5077-bds">VCI + Lebervenen</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<!-- LUNGENARTERIEN -->
+<div class="sh"><h2>Pulmonalarterien &amp; Lunge</h2><div class="sh-line"></div></div>
+
+<div class="row">
+  <label>
+    <span class="lbl">Truncus pulmonalis <span class="rr-rl-badge">RadLex</span></span>
+    <select id="trpulm_bef" onchange="update()"
+      data-radlex="RID1508" data-en="pulmonary trunk">
+      <option value="normal weit" data-radlex="RID1508-norm">Normal weit (≤ 29 mm)</option>
+      <option value="leicht dilatiert (30–35 mm)" data-radlex="RID5078" data-en="mildly dilated pulmonary trunk">Leicht dilatiert (30–35 mm)</option>
+      <option value="deutlich dilatiert (> 35 mm)" data-radlex="RID5079" data-en="markedly dilated pulmonary trunk">Deutlich dilatiert (&gt; 35 mm)</option>
+    </select>
+  </label>
+</div>
+
+<!-- WEITERE THORAX-BEFUNDE (kollabierbar) -->
+<details open>
+  <summary>Weitere Thorax-Befunde</summary>
+  <div class="db">
+    <div class="grid2">
+      <div class="row">
+        <label>
+          <span class="lbl">Pleura <span class="rr-rl-badge">RadLex</span></span>
+          <select id="pleura" onchange="update()"
+            data-radlex="RID1362" data-en="pleura">
+            <option value="unauffällig" data-radlex="RID1362-norm">Unauffällig</option>
+            <option value="Pleuraerguss re." data-radlex="RID4872">Pleuraerguss re.</option>
+            <option value="Pleuraerguss li." data-radlex="RID4872-li">Pleuraerguss li.</option>
+            <option value="Pleuraerguss bds." data-radlex="RID4872-bds">Pleuraerguss bds.</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Lungenparenchym <span class="rr-rl-badge">RadLex</span></span>
+          <select id="parenchym" onchange="update()"
+            data-radlex="RID1326" data-en="lung parenchyma">
+            <option value="unauffällig" data-radlex="RID1326-norm">Unauffällig</option>
+            <option value="Infarktpneumonie" data-radlex="RID5085" data-en="pulmonary infarct">Infarktpneumonie</option>
+            <option value="Hampton's Hump" data-radlex="RID5086" data-en="Hampton hump">Hampton's Hump</option>
+            <option value="Konsolidierung / Infiltrat" data-radlex="RID4803">Konsolidierung / Infiltrat</option>
+            <option value="Milchglastrübung" data-radlex="RID4800">Milchglastrübung (GGO)</option>
+            <option value="Emphysem" data-radlex="RID4799">Emphysem</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Zentrale Atemwege <span class="rr-rl-badge">RadLex</span></span>
+          <select id="atemwege" onchange="update()"
+            data-radlex="RID1329" data-en="central airways">
+            <option value="unauffällig" data-radlex="RID1329-norm">Unauffällig</option>
+            <option value="Wandverdickung" data-radlex="RID5088">Wandverdickung</option>
+            <option value="Kompression" data-radlex="RID5089">Kompression</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Lymphknoten mediastinal <span class="rr-rl-badge">RadLex</span></span>
+          <select id="lymph" onchange="update()"
+            data-radlex="RID1503" data-en="mediastinal lymph nodes">
+            <option value="unauffällig" data-radlex="RID1503-norm">Unauffällig</option>
+            <option value="vergrößert" data-radlex="RID5080">Vergrößert</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Herz &amp; übrige Gefäße</span>
+          <select id="herz_gefaesse" onchange="update()"
+            data-radlex="RID1317" data-en="heart vessels">
+            <option value="unauffällig" data-radlex="RID1317-norm">Unauffällig</option>
+            <option value="Perikarderguss" data-radlex="RID5081">Perikarderguss</option>
+            <option value="Aortensklerose" data-radlex="RID5082">Aortensklerose</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Oberbauch (soweit abgebildet)</span>
+          <select id="oberbauch" onchange="update()"
+            data-radlex="RID1240" data-en="upper abdomen">
+            <option value="unauffällig" data-radlex="RID1240-norm">Unauffällig</option>
+            <option value="mit Zufallsbefund – Details Freitext">Mit Zufallsbefund</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Knochen (soweit abgebildet) <span class="rr-rl-badge">RadLex</span></span>
+          <select id="knochen" onchange="update()"
+            data-radlex="RID13573" data-en="osseous structures">
+            <option value="unauffällig" data-radlex="RID13573-norm">Unauffällig</option>
+            <option value="degenerativ" data-radlex="RID5222">Degenerativ</option>
+            <option value="ossäre Destruktion / Metastase V.a." data-radlex="RID5223">Destruktion / Metastase</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <label><span class="lbl">Sonstige Befunde / Zufallsbefunde</span>
+        <textarea id="sonstiges" rows="2" placeholder="Zufallsbefunde, Nebenbefunde…" oninput="update()"></textarea>
+      </label>
+    </div>
+  </div>
+</details>
+
+<!-- BEURTEILUNG -->
+<div class="sh"><h2>Beurteilung</h2><div class="sh-line"></div></div>
+<div class="row">
+  <label><span class="lbl">Beurteilung</span>
+    <textarea id="beurt" rows="5"
+      placeholder="z.B.: CTPA mit Nachweis einer fulminanten zentralen Lungenembolie bds. mit deutlicher Rechtsherzbelastung (RV/LV-Ratio 1,3, IVS-Shift). Sofortige klinische Korrelation empfohlen."
+      oninput="update()"></textarea>
+  </label>
+</div>
+<div id="vorschlag-box" style="margin-bottom:10px"></div>
+
+<div class="rr-actions">
+  <button class="rr-btn" onclick="copyReport()">📋 Befundtext kopieren</button>
+  <button class="rr-btn-secondary" onclick="toggleFhir()">{ } FHIR-Export</button>
+  <button class="btn-d" onclick="resetAll()">↺ Zurücksetzen</button>
+</div>
+<div class="rr-export-area" id="fhir-box"></div>
+
+</section>
+
+<!-- PREVIEW -->
+<aside class="rr-preview-pane">
+<div class="rr-preview-title">Befund-Vorschau (Live)</div>
+<div class="rcard">
+  <div class="rcard-header">
+    <div>
+      <div class="rcard-title">CT Lungenarterien (CTPA)</div>
+      <div class="rcard-sub" id="prev-sub">Lungenembolie-Ausschluss</div>
+    </div>
+    <div class="le-pill" id="le-pill"></div>
+  </div>
+  <div class="rsec"><div class="rsec-lbl">Technik</div><div class="rtext" id="prev-technik"></div></div>
+  <div class="rsec"><div class="rsec-lbl">Befund</div><div class="rtext" id="prev-befund"></div></div>
+  <div class="rsec"><div class="rsec-lbl">Beurteilung</div><div class="rtext" id="prev-beurt"></div></div>
+  <div class="stamp">
+    <span>HJK-MRRT-CT-LUNGENEMBOLIE-v1.0 · Quelle: DRG CC BY 4.0</span>
+    <span id="prev-date"></span>
+  </div>
+</div>
+<div id="status-badge" class="badge warn">● Befund ausfüllen</div>
+</aside>
+</div>
+
+<script>
+const gv = id => document.getElementById(id)?.value?.trim() ?? '';
+const gn = id => { const v=parseFloat(document.getElementById(id)?.value); return isNaN(v)?null:v; };
+const gc = id => !!document.getElementById(id)?.checked;
+const getLe = () => document.querySelector('input[name=le_nachweis]:checked')?.value || 'nein';
+
+/* ══════════════════════════════════════════════
+   RV/LV KALKULATOR
+   ══════════════════════════════════════════════ */
+function calcRVLV(){
+  const rv = gn('rv_dia'), lv = gn('lv_dia');
+  const resDiv  = document.getElementById('rvlv-result');
+  const valEl   = document.getElementById('rvlv-val');
+  const riskEl  = document.getElementById('rvlv-risk');
+  const detEl   = document.getElementById('rvlv-detail');
+
+  if(rv===null || lv===null || lv===0){
+    valEl.textContent = '–';
+    riskEl.textContent = 'RV/LV-Ratio – Werte eingeben';
+    detEl.textContent = 'RV- und LV-Durchmesser eingeben';
+    resDiv.className = 'rvlv-result';
+    return;
+  }
+
+  const ratio = rv / lv;
+  valEl.textContent = ratio.toFixed(2);
+
+  if(ratio >= 1.0){
+    resDiv.className = 'rvlv-result high';
+    riskEl.innerHTML = '<span style="color:var(--rr-critical)">⚠ Erhöhtes Risiko – RV/LV ≥ 1,0</span>';
+    detEl.textContent = `RV ${rv} mm / LV ${lv} mm → Rechtsherzbelastung wahrscheinlich (ESC 2019)`;
+  } else {
+    resDiv.className = 'rvlv-result low';
+    riskEl.innerHTML = '<span style="color:var(--rr-success)">✓ Niedriges Risiko – RV/LV < 1,0</span>';
+    detEl.textContent = `RV ${rv} mm / LV ${lv} mm → Kein Hinweis auf relevante Rechtsherzbelastung`;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('prev-date').textContent =
+    new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
+
+  document.querySelectorAll('input[name=le_nachweis]').forEach(r => r.addEventListener('change', () => {
+    const le = getLe();
+    document.getElementById('le-detail-section').style.display = le === 'ja' ? '' : 'none';
+    updateLePill(le);
+    update();
+  }));
+
+  updateLePill('nein');
+  update();
+});
+
+function updateLePill(le){
+  const pill = document.getElementById('le-pill');
+  pill.className = `le-pill ${le}`;
+  pill.textContent = le==='ja'?'⚠ LE positiv':le==='nein'?'✓ LE negativ':'? LE fraglich';
+}
+
+/* ══════════════════════════════════════════════
+   TEXT BUILDERS
+   ══════════════════════════════════════════════ */
+function buildTechnik(){
+  const km   = gv('km_menge');
+  const bol  = gv('bolus');
+  const dd   = gv('ddimer');
+  const frag = gv('fragestellung');
+  let t = 'CT Pulmonalisangiographie (CTPA)';
+  if(km) t += `, KM ${km} ml i.v.`;
+  t += '. ';
+  if(bol) t += `Kontrastierung: ${bol}. `;
+  if(dd)  t += `D-Dimer: ${dd} mg/l FEU. `;
+  if(frag) t += `Fragestellung: ${frag}.`;
+  if(gv('vgl_ja')==='yes'){
+    const d = gv('vgl_dat');
+    t += ` Vergleichsuntersuchung${d?' vom '+d:''} liegt vor.`;
+  }
+  return t.trim();
+}
+
+function buildBefund(){
+  const lines = [];
+  const le = getLe();
+
+  // LE-Nachweis
+  if(le === 'nein'){
+    lines.push('Lungenembolie: Kein Hinweis auf Lungenembolie. Die Lungenarterien bis in die Subsegmentarterien regelrecht kontrastiert und frei durchströmbar.');
+  } else if(le === 'fraglich'){
+    lines.push('Lungenembolie: Fraglich – suboptimale Kontrastierung / nicht sicher abgrenzbare Füllungsdefekte. Klinische Korrelation empfohlen.');
+  } else {
+    // Ebene
+    const ebenen = [];
+    if(gc('lok_zentral'))     ebenen.push('zentral');
+    if(gc('lok_lobär'))       ebenen.push('lobär');
+    if(gc('lok_segmental'))   ebenen.push('segmental');
+    if(gc('lok_subsegmental'))ebenen.push('subsegmental');
+    let leText = `Lungenembolie: Nachweis einer Lungenembolie`;
+    if(ebenen.length) leText += ` (${ebenen.join(', ')})`;
+    leText += '.';
+    lines.push(leText);
+
+    // Anatomisch
+    const beteiligte = [];
+    if(gc('loc_trpulm_re')) beteiligte.push('Truncus/A. pulmonalis re.');
+    if(gc('loc_ol_re'))     beteiligte.push('Oberlappen re.');
+    if(gc('loc_ml_re'))     beteiligte.push('Mittellappen re.');
+    if(gc('loc_ul_re'))     beteiligte.push('Unterlappen re.');
+    if(gc('loc_trpulm_li')) beteiligte.push('A. pulmonalis li.');
+    if(gc('loc_ol_li'))     beteiligte.push('Oberlappen/Lingula li.');
+    if(gc('loc_ul_li'))     beteiligte.push('Unterlappen li.');
+    if(beteiligte.length) lines.push(`Beteiligte Abschnitte: ${beteiligte.join(', ')}.`);
+
+    // Ältere Embolien
+    const alt = [];
+    if(gc('alt_dil'))  alt.push('dilatierte Bronchialarterien');
+    if(gc('alt_wand')) alt.push('wandständige Thromben');
+    if(gc('alt_webs')) alt.push('Webs/Bands');
+    if(alt.length) lines.push(`Zeichen älterer Embolien: ${alt.join(', ')}.`);
+  }
+
+  // Rechtsherzbelastung
+  const rv = gn('rv_dia'), lv = gn('lv_dia');
+  const rhb  = gv('rhb_qual');
+  const ivs  = gv('ivs_shift');
+  const stau = gv('km_stau');
+  const trpD = gn('trpulm_dia');
+  const trpB = gv('trpulm_bef');
+
+  let rhbLine = `Rechtsherzbelastung: ${rhb}.`;
+  if(rv !== null && lv !== null && lv > 0){
+    const ratio = (rv/lv).toFixed(2);
+    rhbLine += ` RV/LV-Ratio: ${ratio} (RV ${rv} mm, LV ${lv} mm).`;
+  }
+  if(trpD !== null) rhbLine += ` Truncus pulmonalis ${trpD} mm (${trpB}).`;
+  rhbLine += ` ${ivs}. ${stau}.`;
+  lines.push(rhbLine);
+
+  // Weitere Thorax-Befunde
+  const pleura  = gv('pleura'),    paren   = gv('parenchym');
+  const atemw   = gv('atemwege'),  lymph   = gv('lymph');
+  const hgef    = gv('herz_gefaesse'), ob = gv('oberbauch');
+  const kn      = gv('knochen'),   sonst   = gv('sonstiges');
+  lines.push(`Pleura: ${pleura}. Lungenparenchym: ${paren}. Zentrale Atemwege: ${atemw}. Lymphknoten mediastinal: ${lymph}. Herz und übrige Gefäße: ${hgef}. Oberbauch: ${ob}. Knochen: ${kn}.`);
+  if(sonst) lines.push(`Sonstiges: ${sonst}`);
+
+  return lines.join('\n');
+}
+
+function buildVorschlag(){
+  const le = getLe();
+  if(le === 'nein') return 'CTPA: Kein Hinweis auf Lungenembolie. Keine Rechtsherzbelastungszeichen.';
+  if(le === 'fraglich') return 'CTPA: Fraglicher Befund – klinische Korrelation und ggf. weiterführende Diagnostik empfohlen.';
+
+  const ebenen = [];
+  if(gc('lok_zentral'))     ebenen.push('zentral');
+  if(gc('lok_lobär'))       ebenen.push('lobär');
+  if(gc('lok_segmental'))   ebenen.push('segmental');
+  if(gc('lok_subsegmental'))ebenen.push('subsegmental');
+
+  const rv = gn('rv_dia'), lv = gn('lv_dia');
+  const rhb = gv('rhb_qual');
+  const ivs = gv('ivs_shift');
+
+  let v = `CTPA: Nachweis einer Lungenembolie`;
+  if(ebenen.length) v += ` (${ebenen.join(', ')})`;
+  v += `. ${rhb}.`;
+  if(rv !== null && lv !== null && lv > 0) v += ` RV/LV-Ratio ${(rv/lv).toFixed(2)}.`;
+  if(ivs !== 'kein IVS-Shift') v += ` ${ivs}.`;
+  v += ' Klinische Korrelation empfohlen.';
+  return v;
+}
+
+/* ══════════════════════════════════════════════
+   UPDATE
+   ══════════════════════════════════════════════ */
+function update(){
+  document.getElementById('prev-technik').textContent = buildTechnik();
+  document.getElementById('prev-befund').textContent  = buildBefund();
+  document.getElementById('prev-beurt').textContent   = gv('beurt') || '—';
+  const le = getLe();
+  document.getElementById('prev-sub').textContent =
+    le==='ja'?'LE positiv':le==='fraglich'?'LE fraglich':'LE ausgeschlossen';
+
+  const vbox = document.getElementById('vorschlag-box');
+  if(!gv('beurt')){
+    const v = buildVorschlag();
+    vbox.innerHTML = `<div class="rr-helper-info" style="cursor:pointer" onclick="document.getElementById('beurt').value=${JSON.stringify(v)};update()" title="Klicken zum Übernehmen"><strong>Vorschlag (klicken):</strong><br>${v}</div>`;
+  } else {
+    vbox.innerHTML = '';
+  }
+
+  const badge = document.getElementById('status-badge');
+  const hasBeurt = gv('beurt').length > 5;
+  if(le==='ja' && !hasBeurt){ badge.className='badge alert'; badge.textContent='⚠ LE positiv – Beurteilung fehlt'; }
+  else if(!hasBeurt){ badge.className='badge warn'; badge.textContent='● Beurteilung fehlt'; }
+  else if(le==='ja'){ badge.className='badge alert'; badge.textContent='⚠ LE positiv dokumentiert'; }
+  else { badge.className='badge ok'; badge.textContent='✓ Vollständig'; }
+}
+
+/* ══════════════════════════════════════════════
+   FHIR
+   ══════════════════════════════════════════════ */
+function buildFhir(){
+  const now = new Date().toISOString();
+  const le  = getLe();
+  const rv  = gn('rv_dia'), lv = gn('lv_dia');
+  const obsArr = [];
+
+  // LE-Observation
+  const leRid = le==='ja'?'RID5352':le==='nein'?'RID5352-neg':'RID5352-frag';
+  const leEn  = le==='ja'?'pulmonary embolism':le==='nein'?'no pulmonary embolism':'indeterminate for pulmonary embolism';
+  obsArr.push({fullUrl:'urn:uuid:pe-obs', resource:{
+    resourceType:'Observation', status:'final', id:'pe-obs',
+    code:{coding:[
+      {system:'http://radlex.org', code:leRid, display:leEn},
+      {system:'http://snomed.info/sct', code:'59282003', display:'Pulmonary embolism'},
+    ]},
+    valueString: le==='ja'?'Lungenembolie nachgewiesen':le==='nein'?'Keine Lungenembolie':'Fraglich',
+    interpretation: le==='ja'?[{coding:[{system:'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',code:'A',display:'Abnormal'}]}]:undefined,
+  }});
+
+  // RV/LV
+  if(rv!==null && lv!==null && lv>0){
+    const ratio = parseFloat((rv/lv).toFixed(2));
+    obsArr.push({fullUrl:'urn:uuid:rvlv-obs', resource:{
+      resourceType:'Observation', status:'final', id:'rvlv-obs',
+      code:{coding:[
+        {system:'http://radlex.org', code:'RID5076', display:'RV/LV ratio'},
+        {system:'http://loinc.org',  code:'79900-0', display:'Right ventricular internal diameter'},
+      ]},
+      valueQuantity:{value:ratio, unit:'ratio'},
+      interpretation: ratio>=1.0 ? [{coding:[{system:'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',code:'H',display:'High'}]}] : undefined,
+      component:[
+        {code:{coding:[{system:'http://radlex.org',code:'RID5069',display:'right ventricular diameter'}]}, valueQuantity:{value:rv,unit:'mm'}},
+        {code:{coding:[{system:'http://radlex.org',code:'RID5073',display:'left ventricular diameter'}]},  valueQuantity:{value:lv,unit:'mm'}},
+      ],
+    }});
+  }
+
+  const dr = {
+    resourceType:'DiagnosticReport', status:'final', id:'ctpa-report',
+    code:{coding:[
+      {system:'http://loinc.org',    code:'24634-8', display:'CT Pulmonary Angiography'},
+      {system:'http://radlex.org',   code:'RID10361',display:'CT pulmonary angiography'},
+    ]},
+    effectiveDateTime:now,
+    identifier:[
+      {value:'HJK-MRRT-CT-LUNGENEMBOLIE-v1.0'},
+      {system:'http://drg.de', value:'DRG-041807.2.1806120000-CC-BY-4.0'},
+    ],
+    conclusion:gv('beurt'),
+    result:obsArr.map(o=>({reference:o.fullUrl})),
+    presentedForm:[{contentType:'text/plain',title:'CT Lungenarterien CTPA',
+      data:btoa(unescape(encodeURIComponent(
+        'TECHNIK\n'+buildTechnik()+'\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+gv('beurt')
+      )))
+    }],
+  };
+
+  return JSON.stringify({
+    resourceType:'Bundle',type:'document',timestamp:now,
+    meta:{tag:[{system:'http://radlex.org/fhir',code:'radlex-coded'},{system:'http://drg.de',code:'drg-cc-by-4.0'}]},
+    entry:[{fullUrl:'urn:uuid:ctpa-report',resource:dr},...obsArr],
+  },null,2);
+}
+
+function toggleFhir(){
+  const box=document.getElementById('fhir-box');
+  if(box.classList.contains('show')){ box.classList.remove('show'); return; }
+  box.textContent = buildFhir();
+  box.classList.add('show');
+}
+
+function copyReport(){
+  const t=`CT LUNGENARTERIEN (CTPA)\n${new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'})}\n\nTECHNIK\n${buildTechnik()}\n\nBEFUND\n${buildBefund()}\n\nBEURTEILUNG\n${gv('beurt')}`;
+  navigator.clipboard.writeText(t).then(()=>{
+    const btn=event.target;btn.textContent='✓ Kopiert!';
+    setTimeout(()=>{btn.textContent='📋 Befundtext kopieren';},2000);
+  }).catch(()=>{
+    const el=document.createElement('textarea');el.value=t;
+    document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);
+  });
+}
+
+function resetAll(){
+  if(!confirm('Alle Eingaben zurücksetzen?')) return;
+  document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
+  document.querySelectorAll('textarea,input[type=text],input[type=number]').forEach(i=>i.value='');
+  document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
+  document.getElementById('le_nein').checked=true;
+  document.getElementById('le-detail-section').style.display='none';
+  document.getElementById('vgl_dat_row').style.display='none';
+  document.getElementById('fhir-box').classList.remove('show');
+  calcRVLV();
+  updateLePill('nein');
+  update();
+}
+</script>
+</body>
+</html>
