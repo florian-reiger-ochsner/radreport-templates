@@ -1,0 +1,50 @@
+id: HJK-MRRT-CT-ABDBECKEN
+version: 1.0
+status: pilot
+modalitaet: CT
+region: Abdomen-Becken
+indikation: CT Abdomen und Becken - Onkologie/RECIST, Akutes Abdomen, Allgemein
+sprache: de
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+geprueft: 2026-06-08
+naechste-pruefung: 2026-12-08
+klassifikationen:
+  - name: RECIST 1.1
+    quelle: "Eisenhauer EA et al. Eur J Cancer 2009;45(2):228-247"
+  - name: Notfall-Checkliste (8 Punkte)
+    quelle: intern
+referenzen:
+  - "Eisenhauer EA et al. New response evaluation criteria in solid tumours: RECIST 1.1. Eur J Cancer 2009;45(2):228-247"
+ki-tools: []
+standorte:
+  - Herz-Jesu-Krankenhaus Wien (HJK)
+loinc-codes:
+  - code: "30652-8"
+    description: CT Abdomen and Pelvis
+kontexte:
+  - onkologisches-staging-recist
+  - akutes-abdomen-notfall
+  - allgemein
+km-phasen:
+  - nativ
+  - arteriell
+  - portal-venoes
+  - spaetphase
+organe:
+  - leber
+  - gallenwege-gallenblase
+  - pankreas
+  - milz
+  - nieren-nebennieren
+  - gi-trakt
+  - gefaesse
+  - lymphknoten
+  - peritoneum
+  - becken
+  - skelett-weichteile
+output:
+  - fliesstext
+  - fhir-bundle
+radlex-coverage: vollstaendig
