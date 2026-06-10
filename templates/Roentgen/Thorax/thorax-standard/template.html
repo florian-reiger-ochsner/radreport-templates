@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
+<head>
+<meta charset="UTF-8">
+<title>Röntgen Thorax – Live-Demo</title>
+
+<!-- IHE MRRT METADATA -->
+<meta name="dcterms.title"       content="Röntgen Thorax (p.a. ± lateral)"/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage Röntgen Thorax. RadLex-terminiert (RID-Codes). Multi-Parenchym-Befundung. Multi-Device-Stack. Fleischner-konform. FHIR-Export mit RadLex-Kodierung."/>
+<meta name="dcterms.language"    content="de"/>
+<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
+<meta name="dcterms.date"        content="2026-05-20"/>
+<meta name="dcterms.identifier"  content="HJK-MRRT-ROE-THORAX-v1.3"/>
+<meta name="rrt:specialty"       content="Radiology"/>
+<meta name="rrt:subspecialty"    content="Chest Radiology"/>
+<meta name="rrt:modality"        content="DX"/>
+<meta name="rrt:bodyregion"      content="Chest"/>
+
+<!-- Google Fonts (für externe Demo / GitHub Pages) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<!-- radreport-core.css v1.0.0 – inlined for GitHub Pages demo -->
+<style>
+/* radreport-core.css v1.0.0 – inlined for GitHub Pages demo */
+:root{
+  --rr-bg:#ffffff;--rr-bg-alt:#f7f8fa;--rr-bg-card:#ffffff;
+  --rr-ink:#2c3e50;--rr-ink-soft:#5a6c7d;--rr-ink-muted:#8b97a3;--rr-ink-faint:#b8c2cc;
+  --rr-accent:#2c5f8d;--rr-accent-light:#4a86b8;--rr-accent-pale:#e8f0f7;
+  --rr-rule:#e6eaef;--rr-rule-soft:#f0f3f6;--rr-field-bg:#ffffff;--rr-field-border:#d8dee5;
+  --rr-ai-tint:#f4f9fd;--rr-ai-border:#2c5f8d;
+  --rr-radlex-tint:#f5f1f7;--rr-radlex-ink:#7a4e96;
+  --rr-warn:#c47f2a;--rr-critical:#c45848;--rr-success:#2d7a4f;
+  --rr-font-sans:"Source Sans 3","Segoe UI",-apple-system,sans-serif;
+  --rr-font-serif:"Source Serif 4",Georgia,serif;
+  --rr-font-mono:"SF Mono","Menlo","JetBrains Mono",monospace;
+  --rr-fs-xs:11px;--rr-fs-sm:12px;--rr-fs-base:15px;--rr-fs-md:13px;--rr-fs-lg:14px;
+  --rr-fs-xl:20px;--rr-fs-2xl:28px;--rr-fs-3xl:32px;
+  --rr-space-xs:0.25rem;--rr-space-sm:0.5rem;--rr-space-md:1rem;--rr-space-lg:1.5rem;
+  --rr-space-xl:2rem;--rr-space-2xl:3.5rem;
+  --rr-max-width:1600px;--rr-radius:6px;--rr-radius-sm:4px;--rr-radius-xs:3px;
+  --rr-shadow-sm:0 1px 2px rgba(44,62,80,0.04);--rr-shadow-md:0 2px 8px rgba(44,62,80,0.06);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:var(--rr-fs-base);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;}
+.rr-app{display:grid;grid-template-columns:minmax(480px,1fr) minmax(440px,540px);gap:0;min-height:100vh;max-width:var(--rr-max-width);margin:0 auto;background:var(--rr-bg);}
+@media(max-width:1100px){.rr-app{grid-template-columns:1fr;}}
+.rr-input-pane{padding:var(--rr-space-2xl) 64px 100px;background:var(--rr-bg);border-right:1px solid var(--rr-rule);}
+.rr-preview-pane{padding:var(--rr-space-2xl) var(--rr-space-2xl) 100px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto;}
+.rr-doc-title{font-family:var(--rr-font-sans);font-weight:600;font-size:var(--rr-fs-3xl);line-height:1.25;margin:0 0 6px;letter-spacing:-0.02em;color:var(--rr-ink);}
+.rr-doc-sub{font-size:var(--rr-fs-md);color:var(--rr-ink-muted);letter-spacing:0.04em;text-transform:uppercase;}
+.rr-title-rule{width:48px;height:2px;background:var(--rr-accent);margin:var(--rr-space-lg) 0 40px;}
+.rr-h2-wrap{margin:36px 0 var(--rr-space-md);}
+.rr-h2-wrap h2,.rr-h2{font-family:var(--rr-font-sans);font-size:var(--rr-fs-md);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--rr-accent);margin:0 0 4px;}
+.rr-h2-rule{height:1px;background:var(--rr-rule);margin:var(--rr-space-sm) 0 0;}
+.rr-h2-sub{font-size:var(--rr-fs-sm);color:var(--rr-ink-muted);font-style:italic;margin-top:6px;}
+.rr-mode-switch{display:flex;gap:0;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:3px;margin:0 0 12px;}
+.rr-mode-switch input[type="radio"]{display:none;}
+.rr-mode-switch label{flex:1;text-align:center;padding:8px 12px;cursor:pointer;font-size:var(--rr-fs-sm);font-weight:500;color:var(--rr-ink-soft);border-radius:var(--rr-radius-sm);transition:all 0.15s;letter-spacing:0.02em;}
+.rr-mode-switch input[type="radio"]:checked+label{background:var(--rr-bg);color:var(--rr-accent);box-shadow:var(--rr-shadow-sm);font-weight:600;}
+.rr-helper-info{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);padding:10px 14px;font-size:var(--rr-fs-md);color:var(--rr-ink-soft);margin-bottom:var(--rr-space-sm);border-radius:0 var(--rr-radius-sm) var(--rr-radius-sm) 0;}
+.rr-side-toggle{display:inline-flex;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;}
+.rr-side-toggle input[type="radio"]{display:none;}
+.rr-side-toggle label{padding:8px 18px;cursor:pointer;font-size:var(--rr-fs-lg);font-weight:500;background:var(--rr-bg);color:var(--rr-ink-soft);transition:all 0.15s;}
+.rr-side-toggle input[type="radio"]:checked+label{background:var(--rr-accent);color:#fff;}
+.rr-row{display:grid;gap:var(--rr-space-md) 20px;grid-template-columns:1fr 1fr;margin-top:14px;}
+.rr-row-three{grid-template-columns:1fr 1fr 1fr;}
+.rr-row-full{grid-template-columns:1fr;}
+@media(max-width:760px){.rr-row,.rr-row-three{grid-template-columns:1fr;}}
+label{display:block;font-size:var(--rr-fs-md);}
+.rr-lbl{display:flex;align-items:center;justify-content:space-between;font-size:var(--rr-fs-xs);color:var(--rr-ink-muted);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:6px;}
+.rr-lbl>span:first-child{display:flex;align-items:center;gap:6px;}
+input[type="text"],input[type="number"],input[type="date"],select,textarea{width:100%;padding:10px 12px;font-size:var(--rr-fs-lg);border:1px solid var(--rr-field-border);background:var(--rr-field-bg);border-radius:var(--rr-radius-sm);color:var(--rr-ink);font-family:inherit;transition:border 0.15s,box-shadow 0.15s;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale);}
+textarea{min-height:80px;resize:vertical;line-height:1.5;}
+.rr-field-note{font-size:var(--rr-fs-xs);color:var(--rr-ink-muted);margin-top:var(--rr-space-xs);line-height:1.4;}
+.rr-rl-badge{background:var(--rr-radlex-tint);color:var(--rr-radlex-ink);border:1px solid var(--rr-radlex-ink);font-size:9px;letter-spacing:0.06em;padding:1px 4px;border-radius:var(--rr-radius-xs);text-transform:uppercase;font-weight:600;font-family:var(--rr-font-mono);}
+.rr-req-indicator{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--rr-critical);margin-left:6px;vertical-align:middle;animation:rr-pulse 2s ease-in-out infinite;}
+@keyframes rr-pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+details{border:1px solid var(--rr-rule);border-radius:var(--rr-radius);margin-top:12px;background:var(--rr-bg);}
+details summary{cursor:pointer;padding:12px var(--rr-space-md);font-size:var(--rr-fs-md);font-weight:600;color:var(--rr-ink-soft);letter-spacing:0.06em;text-transform:uppercase;list-style:none;}
+details summary::-webkit-details-marker{display:none;}
+details summary::before{content:"▸ ";color:var(--rr-accent);margin-right:6px;}
+details[open] summary::before{content:"▾ ";}
+details>div{padding:0 var(--rr-space-md) var(--rr-space-md);}
+.rr-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.rr-btn,button{background:var(--rr-accent);color:#fff;padding:10px 18px;font-size:var(--rr-fs-md);font-weight:600;border:none;border-radius:5px;cursor:pointer;letter-spacing:0.01em;transition:all 0.15s;box-shadow:var(--rr-shadow-sm);font-family:inherit;}
+.rr-btn:hover,button:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md);}
+.rr-btn-secondary,button.rr-btn-secondary{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border);box-shadow:none;}
+.rr-btn-secondary:hover,button.rr-btn-secondary:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent);transform:none;}
+.rr-export-area{display:none;margin-top:20px;padding:20px;background:#1e2a36;color:#a8c4dd;border-radius:var(--rr-radius);font-family:var(--rr-font-mono);font-size:var(--rr-fs-xs);white-space:pre;overflow-x:auto;max-height:400px;overflow-y:auto;line-height:1.5;}
+.rr-export-area.rr-is-visible{display:block;}
+.rr-preview-title{font-family:var(--rr-font-sans);font-size:var(--rr-fs-md);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--rr-accent);margin:0;}
+.rr-preview-title-rule{height:1px;background:var(--rr-rule);margin:var(--rr-space-sm) 0 28px;}
+.rr-preview-section{margin-bottom:26px;}
+.rr-preview-section h4{font-size:10px;color:var(--rr-ink-muted);letter-spacing:0.14em;text-transform:uppercase;margin:0 0 var(--rr-space-sm);font-weight:600;}
+.rr-preview-content{font-family:var(--rr-font-serif);font-size:var(--rr-fs-base);line-height:1.7;color:var(--rr-ink);white-space:pre-wrap;}
+.rr-codesystem-legend{margin-top:var(--rr-space-sm);font-size:10px;color:var(--rr-ink-muted);letter-spacing:0.04em;font-family:var(--rr-font-mono);}
+.rr-codesystem-legend .rr-badge-mini{display:inline-block;padding:1px 5px;border-radius:var(--rr-radius-xs);margin-right:4px;font-weight:600;}
+.rr-codesystem-legend .rr-is-verified{background:#e8f5ec;color:#2d6a4f;border:1px solid #2d6a4f;}
+.rr-codesystem-legend .rr-is-local{background:#fdf4e3;color:#8b6914;border:1px solid #c4a558;}
+.rr-u-hidden{display:none!important;}
+@media print{body{background:#fff;}.rr-app{display:block;max-width:none;}.rr-input-pane,.rr-mode-switch,.rr-actions,.rr-export-area,.rr-helper-info,.rr-codesystem-legend{display:none!important;}.rr-preview-pane{position:static;height:auto;padding:0;background:#fff;overflow:visible;}}
+</style>
+
+<style>
+/* =============================================================================
+   TEMPLATE-SPEZIFISCHES CSS – NUR WAS CORE NICHT ABDECKT
+   Konvention: rr-thorax-* Präfix für alle lokalen Klassen
+   ============================================================================= */
+
+/* ── Projektions-Checkboxes (Inline-Chips) ── */
+.rr-thorax-proj-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.rr-thorax-proj-chips input[type="checkbox"] { display: none; }
+.rr-thorax-proj-chips label {
+  padding: 5px 13px;
+  border-radius: 18px;
+  border: 1px solid var(--rr-field-border);
+  font-size: var(--rr-fs-md);
+  color: var(--rr-ink-soft);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.rr-thorax-proj-chips input:checked + label {
+  background: var(--rr-accent);
+  color: #fff;
+  border-color: var(--rr-accent);
+  font-weight: 500;
+}
+.rr-thorax-proj-chips label:hover {
+  border-color: var(--rr-accent-light);
+  color: var(--rr-accent);
+}
+
+/* ── Normal/Pathologisch Toggle (Radio-Chips) ── */
+.rr-thorax-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.rr-thorax-toggle input[type="radio"] { display: none; }
+.rr-thorax-toggle label {
+  padding: 5px 13px;
+  border-radius: 18px;
+  border: 1px solid var(--rr-field-border);
+  font-size: var(--rr-fs-md);
+  color: var(--rr-ink-soft);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.rr-thorax-toggle input:checked + label {
+  background: var(--rr-accent);
+  color: #fff;
+  border-color: var(--rr-accent);
+  font-weight: 500;
+}
+.rr-thorax-toggle label:hover {
+  border-color: var(--rr-accent-light);
+  color: var(--rr-accent);
+}
+
+/* ── Multi-Parenchym Stack ── */
+#par-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.par-item {
+  background: var(--rr-bg-alt);
+  border: 1px solid var(--rr-rule);
+  border-radius: var(--rr-radius);
+  padding: 12px 14px;
+  position: relative;
+}
+.par-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.par-item-num {
+  font-size: var(--rr-fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rr-accent);
+}
+.par-del {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--rr-ink-faint);
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+  box-shadow: none;
+  transform: none;
+}
+.par-del:hover { color: var(--rr-critical); transform: none; box-shadow: none; }
+#par-add {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  background: var(--rr-bg);
+  border: 1px dashed var(--rr-field-border);
+  border-radius: var(--rr-radius);
+  font-size: var(--rr-fs-md);
+  color: var(--rr-ink-muted);
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.15s;
+  font-family: var(--rr-font-sans);
+  box-shadow: none;
+}
+#par-add:hover {
+  border-color: var(--rr-accent);
+  color: var(--rr-accent);
+  background: var(--rr-accent-pale);
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Multi-Device Stack ── */
+#dev-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.dev-item {
+  background: var(--rr-bg-alt);
+  border: 1px solid var(--rr-rule);
+  border-radius: var(--rr-radius);
+  padding: 12px 14px;
+  position: relative;
+}
+.dev-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.dev-item-num {
+  font-size: var(--rr-fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rr-accent);
+}
+.dev-del {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--rr-ink-faint);
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+  box-shadow: none;
+  transform: none;
+}
+.dev-del:hover { color: var(--rr-critical); transform: none; box-shadow: none; }
+#dev-add {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  background: var(--rr-bg);
+  border: 1px dashed var(--rr-field-border);
+  border-radius: var(--rr-radius);
+  font-size: var(--rr-fs-md);
+  color: var(--rr-ink-muted);
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.15s;
+  font-family: var(--rr-font-sans);
+  box-shadow: none;
+}
+#dev-add:hover {
+  border-color: var(--rr-accent);
+  color: var(--rr-accent);
+  background: var(--rr-accent-pale);
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Pleura Subselect-Zeilen ── */
+#pl_erguss_row,
+#pl_ptx_row { display: none; }
+
+/* ── Beurteilung Freitext-Zeile ── */
+#beurt_ft_row { display: none; }
+
+/* ── Preview-Card ── */
+.rr-thorax-preview-card {
+  background: var(--rr-bg);
+  border: 1px solid var(--rr-rule);
+  border-radius: var(--rr-radius);
+  padding: 26px 28px;
+  box-shadow: var(--rr-shadow-sm);
+}
+.rr-thorax-preview-header {
+  border-bottom: 2px solid var(--rr-accent);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+.rr-thorax-preview-title {
+  font-family: var(--rr-font-sans);
+  font-weight: 600;
+  font-size: var(--rr-fs-xl);
+  color: var(--rr-accent);
+  letter-spacing: -0.01em;
+}
+.rr-thorax-preview-sub {
+  font-size: var(--rr-fs-sm);
+  color: var(--rr-ink-muted);
+  margin-top: 3px;
+}
+.rr-thorax-stamp {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rr-rule);
+  font-size: var(--rr-fs-xs);
+  color: var(--rr-ink-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* ── Status-Badge ── */
+.rr-thorax-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 11px;
+  font-size: var(--rr-fs-sm);
+  font-weight: 600;
+  margin-top: 14px;
+}
+.rr-thorax-badge.ok  { background: #ecf7f2; color: var(--rr-success); }
+.rr-thorax-badge.warn { background: #fdf6ec; color: var(--rr-warn); }
+
+/* ── Section heading mit horizontaler Linie ── */
+.rr-thorax-sh {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 32px 0 12px;
+}
+.rr-thorax-sh-line { flex: 1; height: 1px; background: var(--rr-rule); }
+
+/* ── grid2 / grid3 (lokal, Core hat rr-row) ── */
+.rr-thorax-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rr-thorax-g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+</style>
+</head>
+<body>
+<div class="rr-app">
+
+<!-- ══════════════════════════ INPUT PANE ══════════════════════════ -->
+<section class="rr-input-pane">
+
+  <h1 class="rr-doc-title">Röntgen Thorax</h1>
+  <p class="rr-doc-sub">MRRT · RadLex-kodiert · p.a. ± lateral · v1.3 · HJK Wien · 2026-05-20</p>
+  <div class="rr-title-rule"></div>
+
+  <!-- ══ TECHNIK ══ -->
+  <div class="rr-thorax-sh">
+    <div class="rr-h2-wrap" style="margin:0"><h2 class="rr-h2">Technik &amp; Indikation</h2></div>
+    <div class="rr-thorax-sh-line"></div>
+  </div>
+
+  <div class="rr-row rr-row-full">
+    <div>
+      <div class="rr-lbl"><span>Projektionen<span class="rr-req-indicator"></span></span></div>
+      <div class="rr-thorax-proj-chips">
+        <input type="checkbox" id="p_pa" checked onchange="update()">
+        <label for="p_pa">p.a.</label>
+        <input type="checkbox" id="p_lat" onchange="update()">
+        <label for="p_lat">lateral li.</label>
+        <input type="checkbox" id="p_ap" onchange="update()">
+        <label for="p_ap">a.p. (Liegend)</label>
+        <input type="checkbox" id="p_ex" onchange="update()">
+        <label for="p_ex">Exspiration</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="rr-thorax-g2" style="margin-top:14px">
+    <div>
+      <div class="rr-lbl"><span>Aufnahmequalität</span></div>
+      <select id="qual" onchange="update()"
+        data-radlex="RID13882" data-en="image quality">
+        <option value="gut, diagnostisch ausreichend">gut, diagnostisch ausreichend</option>
+        <option value="eingeschränkt (Liegendaufnahme)">eingeschränkt – Liegendaufnahme</option>
+        <option value="eingeschränkt (Rotation)">eingeschränkt – Rotation</option>
+        <option value="eingeschränkt (Inspiration mangelhaft)">eingeschränkt – Inspiration mangelhaft</option>
+        <option value="eingeschränkt (Unterbelichtung)">eingeschränkt – Unterbelichtung</option>
+        <option value="eingeschränkt (Überbelichtung)">eingeschränkt – Überbelichtung</option>
+      </select>
+    </div>
+    <div>
+      <div class="rr-lbl"><span>Klinische Fragestellung</span></div>
+      <select id="frage" onchange="update(); document.getElementById('frage_ft_row').style.display=this.value==='__ft__'?'':'none'">
+        <option value="">– bitte wählen –</option>
+        <option value="Verlaufskontrolle">Verlaufskontrolle</option>
+        <option value="V.a. Pneumonie">V.a. Pneumonie / Fieber</option>
+        <option value="Dyspnoe">Dyspnoe / Luftnot</option>
+        <option value="V.a. Pneumothorax">V.a. Pneumothorax</option>
+        <option value="V.a. Pleuraerguss">V.a. Pleuraerguss</option>
+        <option value="Präoperative Abklärung">Präoperative Abklärung</option>
+        <option value="Tumorstaging / Verlaufskontrolle Malignom">Tumorstaging / Verlaufskontrolle</option>
+        <option value="Trachea/Mediastinum">Trachea / Mediastinum</option>
+        <option value="__ft__">Sonstige (Freitext)</option>
+      </select>
+    </div>
+  </div>
+  <div id="frage_ft_row" style="display:none; margin-top:10px">
+    <div class="rr-lbl"><span>Fragestellung Freitext</span></div>
+    <input type="text" id="frage_ft" oninput="update()" placeholder="Fragestellung…">
+  </div>
+
+  <!-- ══ LUNGE / PARENCHYM ══ -->
+  <div class="rr-thorax-sh">
+    <div class="rr-h2-wrap" style="margin:0"><h2 class="rr-h2">Lunge &amp; Parenchym</h2></div>
+    <div class="rr-thorax-sh-line"></div>
+  </div>
+
+  <div class="rr-helper-info">
+    <strong>Mehrere Befunde möglich</strong> – z.B. Emphysem + Rundherd gleichzeitig. Jeden Befund separat hinzufügen.
+    Fleischner-Terminologie. <span class="rr-rl-badge">RadLex</span>-Codes fließen in FHIR-Export.
+  </div>
+
+  <div>
+    <div class="rr-lbl"><span>Parenchym gesamt</span></div>
+    <div class="rr-thorax-toggle" style="margin-top:6px">
+      <input type="radio" name="par_ges" id="par_norm" value="norm" checked>
+      <label for="par_norm">Unauffällig</label>
+      <input type="radio" name="par_ges" id="par_path" value="path">
+      <label for="par_path">Pathologisch</label>
+    </div>
+  </div>
+
+  <div id="par-section" style="display:none; margin-top:12px">
+    <div id="par-list"></div>
+    <button type="button" id="par-add" onclick="addParItem()">＋ Weiteren Parenchymbefund hinzufügen</button>
+  </div>
+
+  <!-- ══ PLEURA ══ -->
+  <div class="rr-thorax-sh">
+    <div class="rr-h2-wrap" style="margin:0"><h2 class="rr-h2">Pleura</h2></div>
+    <div class="rr-thorax-sh-line"></div>
+  </div>
+
+  <div>
+    <div class="rr-lbl"><span>Pleurabefund</span></div>
+    <div class="rr-thorax-toggle" style="margin-top:6px">
+      <input type="radio" name="pl_ges" id="pl_norm" value="norm" checked>
+      <label for="pl_norm">Unauffällig</label>
+      <input type="radio" name="pl_ges" id="pl_path" value="path">
+      <label for="pl_path">Pathologisch</label>
+    </div>
+  </div>
+
+  <div id="pl-section" style="display:none; margin-top:12px">
+    <div class="rr-thorax-g2">
+      <div>
+        <div class="rr-lbl"><span>Befundtyp <span class="rr-rl-badge">RadLex</span></span></div>
+        <select id="pl_typ" onchange="update();
+          document.getElementById('pl_erguss_row').style.display=this.value==='RID4872'?'':'none';
+          document.getElementById('pl_ptx_row').style.display=this.value==='RID5352'?'':'none'">
+          <option value="">–</option>
+          <option value="RID4872"  data-de="Pleuraerguss"                   data-en="pleural effusion">Pleuraerguss</option>
+          <option value="RID5352"  data-de="Pneumothorax"                   data-en="pneumothorax">Pneumothorax</option>
+          <option value="RID5355"  data-de="Pleuraschwarte/Pleuraverdickung" data-en="pleural thickening">Pleuraschwarte / -verdickung</option>
+          <option value="RID5356"  data-de="Pleurakalk"                     data-en="pleural calcification">Pleurakalk</option>
+          <option value="RID34948" data-de="Pleuratumor/pleurale Raumforderung" data-en="pleural mass">Pleuratumor / Raumforderung</option>
+        </select>
+      </div>
+      <div>
+        <div class="rr-lbl"><span>Seite</span></div>
+        <select id="pl_seite" onchange="update()">
+          <option value="">–</option>
+          <option>re.</option><option>li.</option><option>bds.</option>
+        </select>
+      </div>
+    </div>
+    <div id="pl_erguss_row" style="margin-top:8px">
+      <div class="rr-lbl"><span>Erguss – Ausmaß</span></div>
+      <select id="pl_erg_grad" onchange="update()">
+        <option value="">–</option>
+        <option value="kleiner">klein (Randwinkelverlegung)</option>
+        <option value="mittelgroßer">mittelgroß (bis Skapulaspitze)</option>
+        <option value="großer">groß (bis Hilushöhe und höher)</option>
+        <option value="massiver">massiv (mit Mediastinalverlagerung)</option>
+      </select>
+    </div>
+    <div id="pl_ptx_row" style="margin-top:8px">
+      <div class="rr-lbl"><span>Pneumothorax – Ausmaß</span></div>
+      <select id="pl_ptx_grad" onchange="update()">
+        <option value="">–</option>
+        <option value="kleiner (Mantelluft, &lt; 2 cm)">klein – Mantelluft &lt; 2 cm</option>
+        <option value="mittelgroßer">mittelgroß</option>
+        <option value="großer (kompletter Kollaps)">groß – kompletter Kollaps</option>
+        <option value="Spannungspneumothorax (!)">Spannungspneumothorax (!)</option>
+      </select>
+    </div>
+    <div style="margin-top:8px">
+      <div class="rr-lbl"><span>Ergänzung Pleura</span></div>
+      <textarea id="pl_ft" placeholder="z.B. echoreich, mit Kammern, Fibrin…" oninput="update()"></textarea>
+    </div>
+  </div>
+
+  <!-- ══ HERZ / MEDIASTINUM ══ -->
+  <div class="rr-thorax-sh">
+    <div class="rr-h2-wrap" style="margin:0"><h2 class="rr-h2">Herz &amp; Mediastinum</h2></div>
+    <div class="rr-thorax-sh-line"></div>
+  </div>
+
+  <div class="rr-thorax-g2">
+    <div>
+      <div class="rr-lbl"><span>Herzgröße (CTR) <span class="rr-rl-badge">RadLex</span></span></div>
+      <select id="herz_gr" onchange="update()">
+        <option value="normal groß (CTR ≤ 0,5)" data-radlex="RID1786-neg" data-en="heart size normal">Normal (CTR ≤ 0,5)</option>
+        <option value="grenzwertig (CTR 0,5–0,55)" data-radlex="RID1786-border" data-en="borderline cardiomegaly">Grenzwertig (0,50–0,55)</option>
+        <option value="vergrößert (CTR > 0,55)" data-radlex="RID1786" data-en="cardiomegaly">Vergrößert (CTR &gt; 0,55)</option>
+      </select>
+    </div>
+    <div>
+      <div class="rr-lbl"><span>Herzkonfiguration</span></div>
+      <select id="herz_kfg" onchange="update()">
+        <option value="regelrecht konfiguriert"    data-radlex="RID1786-norm">Regelrecht</option>
+        <option value="linksbetont konfiguriert"   data-radlex="RID5069" data-en="left heart enlargement">Linksbetont</option>
+        <option value="rechtsbetont konfiguriert"  data-radlex="RID5070" data-en="right heart enlargement">Rechtsbetont</option>
+        <option value="mit globaler Kardiomegalie" data-radlex="RID1786" data-en="cardiomegaly">Global vergrößert</option>
+        <option value="in Mitralform"              data-radlex="RID5072" data-en="mitral configuration">Mitralform</option>
+        <option value="in Aortenform"              data-radlex="RID5073" data-en="aortic configuration">Aortenform</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="margin-top:10px">
+    <div class="rr-lbl"><span>Mediastinum <span class="rr-rl-badge">RadLex</span></span></div>
+    <select id="medi" onchange="update()">
+      <option value="unauffällig, nicht verbreitert, keine Raumforderung" data-radlex="RID1243-norm">Unauffällig</option>
+      <option value="verbreitert"                  data-radlex="RID34952" data-en="mediastinal widening">Verbreitert</option>
+      <option value="Raumforderung mediastinal"    data-radlex="RID4961"  data-en="mediastinal mass">Raumforderung mediastinal</option>
+      <option value="Trachealdeviation"            data-radlex="RID5347"  data-en="tracheal deviation">Trachealdeviation</option>
+      <option value="Mediastinalshift kontralateral" data-radlex="RID34952-shift">Mediastinalshift kontralateral</option>
+    </select>
+  </div>
+
+  <div class="rr-thorax-g2" style="margin-top:10px">
+    <div>
+      <div class="rr-lbl"><span>Hilus re. <span class="rr-rl-badge">RadLex</span></span></div>
+      <select id="hil_re" onchange="update()">
+        <option value="regelrecht"             data-radlex="RID1503-norm">Regelrecht</option>
+        <option value="vergrößert"             data-radlex="RID5080" data-en="hilar enlargement">Vergrößert</option>
+        <option value="verschwommen konturiert" data-radlex="RID5081">Verschwommene Kontur</option>
+        <option value="verschattet"            data-radlex="RID5082">Verschattet</option>
+      </select>
+    </div>
+    <div>
+      <div class="rr-lbl"><span>Hilus li. <span class="rr-rl-badge">RadLex</span></span></div>
+      <select id="hil_li" onchange="update()">
+        <option value="regelrecht"             data-radlex="RID1503-norm">Regelrecht</option>
+        <option value="vergrößert"             data-radlex="RID5080">Vergrößert</option>
+        <option value="verschwommen konturiert" data-radlex="RID5081">Verschwommene Kontur</option>
+        <option value="verschattet"            data-radlex="RID5082">Verschattet</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="margin-top:10px">
+    <div class="rr-lbl"><span>Aorta</span></div>
+    <select id="aorta" onchange="update()">
+      <option value="unauffällig"                                          data-radlex="RID480-norm">Unauffällig</option>
+      <option value="elongiert, wandverkalkt"                              data-radlex="RID5090">Elongiert, wandverkalkt</option>
+      <option value="dilatiert"                                            data-radlex="RID5091" data-en="aortic dilatation">Dilatiert</option>
+      <option value="mit Konturunschärfe / Mediastinalverbreiterung"       data-radlex="RID5092">Konturunschärfe / Mediastinalverbreiterung</option>
+    </select>
+  </div>
+
+  <!-- ══ ZWERCHFELL ══ -->
+  <div class="rr-thorax-sh">
+    <div class="rr-h2-wrap" style="margin:0"><h2 class="rr-h2">Zwerchfell &amp; Sinus</h2></div>
+    <div class="rr-thorax-sh-line"></div>
+  </div>
+
+  <div>
+    <div class="rr-lbl"><span>Zwerchfell <span class="rr-rl-badge">RadLex</span></span></div>
+    <select id="zwf" onchange="update()">
+      <option value="bds. regelrecht gestellt, Sinus phrenicocostales frei" data-radlex="RID1303-norm" data-en="diaphragm normal">Regelrecht bds., Sinus frei</option>
+      <option value="re. Zwerchfell-Hochstand"                              data-radlex="RID5310"      data-en="elevated right hemidiaphragm">Re. Hochstand</option>
+      <option value="li. Zwerchfell-Hochstand"                              data-radlex="RID5310-li"   data-en="elevated left hemidiaphragm">Li. Hochstand</option>
+      <option value="bds. Hochstand"                                        data-radlex="RID5310-bds">Bds. Hochstand</option>
+      <option value="Verlegung des re. Sinus phrenicocostalis"              data-radlex="RID5312"      data-en="costophrenic angle blunting right">Sinus verlegt re.</option>
+      <option value="Verlegung des li. Sinus phrenicocostalis"              data-radlex="RID5312-li"   data-en="costophrenic angle blunting left">Sinus verlegt li.</option>
+      <option value="Verlegung der Sinus phrenicocostales bds."             data-radlex="RID5312-bds">Sinus verlegt bds.</option>
+    </select>
+  </div>
+
+  <!-- ══ SKELETT / WEICHTEILE ══ -->
+  <div class="rr-thorax-sh">
+    <div class="rr-h2-wrap" style="margin:0"><h2 class="rr-h2">Skelett &amp; Weichteile</h2></div>
+    <div class="rr-thorax-sh-line"></div>
+  </div>
+
+  <div class="rr-thorax-g2">
+    <div>
+      <div class="rr-lbl"><span>Knochen <span class="rr-rl-badge">RadLex</span></span></div>
+      <select id="skel" onchange="update()">
+        <option value="unauffällig, kein Hinweis auf Fraktur oder ossäre Destruktion" data-radlex="RID13573-norm" data-en="osseous structures unremarkable">Unauffällig</option>
+        <option value="degenerative Veränderungen der Wirbelsäule"                    data-radlex="RID5222">Degenerativ WS</option>
+        <option value="Rippenfraktur"                                                 data-radlex="RID5232" data-en="rib fracture">Rippenfraktur</option>
+        <option value="Sternumfraktur"                                                data-radlex="RID5233">Sternumfraktur</option>
+        <option value="ossäre Destruktion / V.a. ossäre Metastase"                   data-radlex="RID5238" data-en="osseous destruction">Ossäre Destruktion / V.a. Metastase</option>
+        <option value="Kyphoskoliose"                                                 data-radlex="RID5241" data-en="kyphoscoliosis">Kyphoskoliose</option>
+        <option value="St.p. Sternotomie"                                             data-radlex="RID49557">St.p. Sternotomie</option>
+      </select>
+    </div>
+    <div>
+      <div class="rr-lbl"><span>Weichteile Thoraxwand</span></div>
+      <select id="wt" onchange="update()">
+        <option value="unauffällig"                                             data-radlex="RID5200-norm">Unauffällig</option>
+        <option value="Weichteilemphysem"                                       data-radlex="RID5204" data-en="subcutaneous emphysema">Weichteilemphysem</option>
+        <option value="Weichteilverdichtung / Raumforderung Thoraxwand"         data-radlex="RID5206">Weichteilverdichtung / RF</option>
+        <option value="St.p. Mastektomie re."                                   data-radlex="RID49560">St.p. Mastektomie re.</option>
+        <option value="St.p. Mastektomie li."                                   data-radlex="RID49560-li">St.p. Mastektomie li.</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ══ DEVICES ══ -->
+  <details style="margin-top:24px">
+    <summary>Devices / Fremdmaterial <span style="font-size:11px;color:var(--rr-ink-faint);margin-left:6px;text-transform:none;font-weight:400">(aufklappen – mehrere Einträge möglich)</span></summary>
+    <div>
+      <div class="rr-helper-info" style="margin-top:12px">
+        Jedes Device einzeln hinzufügen – auch mehrere gleichartige (z.B. zwei Drainagen). <span class="rr-rl-badge">RadLex</span> pro Device-Typ.
+      </div>
+      <div id="dev-list"></div>
+      <button type="button" id="dev-add" onclick="addDevItem()">＋ Device hinzufügen</button>
+    </div>
+  </details>
+
+  <!-- ══ VERGLEICH ══ -->
+  <details>
+    <summary>Vergleichsaufnahme <span style="font-size:11px;color:var(--rr-ink-faint);margin-left:6px;text-transform:none;font-weight:400">(optional)</span></summary>
+    <div>
+      <div class="rr-thorax-g2" style="margin-top:12px">
+        <div>
+          <div class="rr-lbl"><span>Vergleich vorhanden</span></div>
+          <select id="vgl_ja" onchange="update()">
+            <option value="">Nein</option>
+            <option value="yes">Ja</option>
+          </select>
+        </div>
+        <div>
+          <div class="rr-lbl"><span>Datum Voraufnahme</span></div>
+          <input type="text" id="vgl_datum" placeholder="z.B. 05/2026" oninput="update()">
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="rr-lbl"><span>Verlaufsbeurteilung</span></div>
+        <select id="vgl_verlauf" onchange="update()" data-radlex="RID49820" data-en="interval change">
+          <option value="">–</option>
+          <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel.">Kein wesentlicher Wandel</option>
+          <option value="Im Vergleich zur Voruntersuchung Progredienz der beschriebenen Befunde.">Progredienz</option>
+          <option value="Im Vergleich zur Voruntersuchung Regredienz / Befundbesserung.">Regredienz / Besserung</option>
+          <option value="Im Vergleich zur Voruntersuchung neu aufgetretener Befund.">Neu aufgetretener Befund</option>
+        </select>
+      </div>
+    </div>
+  </details>
+
+  <!-- ══ BEURTEILUNG ══ -->
+  <div class="rr-thorax-sh" style="margin-top:28px">
+    <div class="rr-h2-wrap" style="margin:0"><h2 class="rr-h2">Beurteilung</h2></div>
+    <div class="rr-thorax-sh-line"></div>
+  </div>
+
+  <div class="rr-helper-info">
+    Automatisch aus Feldern generiert. Im Freitext-Modus überschreibbar.
+  </div>
+
+  <div>
+    <div class="rr-lbl"><span>Modus</span></div>
+    <div class="rr-thorax-toggle" style="margin-top:6px">
+      <input type="radio" name="bmod" id="bmod_auto" value="auto" checked>
+      <label for="bmod_auto">Automatisch</label>
+      <input type="radio" name="bmod" id="bmod_ft" value="ft">
+      <label for="bmod_ft">Freitext</label>
+    </div>
+  </div>
+  <div id="beurt_ft_row" style="margin-top:10px">
+    <div class="rr-lbl"><span>Beurteilung Freitext</span></div>
+    <textarea id="beurt_ft" placeholder="Freitext…" oninput="update()"></textarea>
+  </div>
+
+  <!-- ══ AKTIONEN ══ -->
+  <div class="rr-actions">
+    <button class="rr-btn" onclick="copyReport()">📋 Befundtext kopieren</button>
+    <button class="rr-btn-secondary" onclick="toggleFhir()">{ } FHIR-Export</button>
+    <button class="rr-btn-secondary" style="color:#c0392b;border-color:#f5c6c6" onclick="resetAll()">↺ Zurücksetzen</button>
+  </div>
+  <div class="rr-export-area" id="fhir-box"></div>
+
+  <!-- Codesystem-Legende -->
+  <div class="rr-codesystem-legend" style="margin-top:16px">
+    <span class="rr-badge-mini rr-is-verified">RadLex</span> RID-Codes auf allen Dropdowns ·
+    <span class="rr-badge-mini rr-is-verified">LOINC</span> 24627-2 im FHIR DiagnosticReport ·
+    <span class="rr-badge-mini rr-is-local">FHIR</span> Bundle v1.2 – system: http://radlex.org
+  </div>
+
+</section>
+
+<!-- ══════════════════════════ PREVIEW PANE ══════════════════════════ -->
+<aside class="rr-preview-pane">
+
+  <p class="rr-preview-title">Befund-Vorschau (Live)</p>
+  <div class="rr-preview-title-rule"></div>
+
+  <div class="rr-thorax-preview-card">
+    <div class="rr-thorax-preview-header">
+      <div class="rr-thorax-preview-title">Röntgen Thorax</div>
+      <div class="rr-thorax-preview-sub" id="prev-sub">–</div>
+    </div>
+
+    <div class="rr-preview-section">
+      <h4>Technik</h4>
+      <div class="rr-preview-content" id="prev-technik"></div>
+    </div>
+
+    <div class="rr-preview-section">
+      <h4>Befund</h4>
+      <div class="rr-preview-content" id="prev-befund"></div>
+    </div>
+
+    <div class="rr-preview-section">
+      <h4>Beurteilung</h4>
+      <div class="rr-preview-content" id="prev-beurt"></div>
+    </div>
+
+    <div class="rr-thorax-stamp">
+      <span>HJK-MRRT-ROE-THORAX-v1.3</span>
+      <span id="prev-date"></span>
+    </div>
+  </div>
+
+  <div id="status-badge" class="rr-thorax-badge warn">● Unvollständig</div>
+
+</aside>
+
+</div><!-- .rr-app -->
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   RADLEX CATALOGUE  –  alle Parenchym-Optionen
+   ════════════════════════════════════════════════════════════ */
+const PAR_OPTIONS = [
+  {rid:'RID4800',  de:'Milchglastrübung (Ground-Glass-Opacity)',       en:'ground-glass opacity',       group:'Fleischner'},
+  {rid:'RID5177',  de:'Retikuläres Muster',                             en:'reticular pattern',          group:'Fleischner'},
+  {rid:'RID5178',  de:'Retikulonoduläres Muster',                       en:'reticulonodular pattern',    group:'Fleischner'},
+  {rid:'RID4803',  de:'Konsolidierung',                                  en:'consolidation',              group:'Fleischner'},
+  {rid:'RID5179',  de:'Crazy-Paving-Muster',                            en:'crazy paving pattern',       group:'Fleischner'},
+  {rid:'RID5180',  de:'Honigwabenmuster',                                en:'honeycombing',               group:'Fleischner'},
+  {rid:'RID4941',  de:'Solitärer Rundherd',                              en:'solitary pulmonary nodule',  group:'Nodulär'},
+  {rid:'RID5231',  de:'Multiple Rundherde',                              en:'multiple pulmonary nodules', group:'Nodulär'},
+  {rid:'RID5055',  de:'Mikronoduli',                                     en:'micronodules',               group:'Nodulär'},
+  {rid:'RID5234',  de:'Kaverne / Herdschatten mit Kaverne',              en:'cavitary lesion',            group:'Nodulär'},
+  {rid:'RID5235',  de:'Hilusnahe Raumforderung',                         en:'hilar mass',                 group:'Nodulär'},
+  {rid:'RID28530', de:'Flächige Transparenzminderung / Infiltrat',       en:'opacity',                    group:'Flächig'},
+  {rid:'RID4804',  de:'Lobuläre Verschattung / Segmentale Infiltration', en:'lobular consolidation',      group:'Flächig'},
+  {rid:'RID28493', de:'Atelektase',                                       en:'atelectasis',                group:'Flächig'},
+  {rid:'RID5056',  de:'Pulmonale Stauungszeichen',                        en:'pulmonary vascular congestion', group:'Flächig'},
+  {rid:'RID4799',  de:'Lungenemphysem',                                   en:'pulmonary emphysema',        group:'Überblähung'},
+  {rid:'RID5050',  de:'Überblähung / Air Trapping',                       en:'air trapping',               group:'Überblähung'},
+];
+
+/* ════════════════════════════════════════════════════════════
+   DEVICE-KATALOG
+   ════════════════════════════════════════════════════════════ */
+const DEV_TYPES = [
+  {val:'ZVK re. Subklavia',             ph:'V. cava superior – Mitte',                          rid:'RID49600', en:'central venous catheter',         grp:'Vaskulär'},
+  {val:'ZVK li. Subklavia',             ph:'V. cava superior – Mitte',                          rid:'RID49600', en:'central venous catheter',         grp:'Vaskulär'},
+  {val:'ZVK re. Jugularis',             ph:'V. cava superior – Mitte',                          rid:'RID49600', en:'central venous catheter',         grp:'Vaskulär'},
+  {val:'ZVK li. Jugularis',             ph:'V. cava superior – Mitte',                          rid:'RID49600', en:'central venous catheter',         grp:'Vaskulär'},
+  {val:'Port-Katheter re.',              ph:'V. cava superior / RA-Übergang',                    rid:'RID49601', en:'port catheter',                   grp:'Vaskulär'},
+  {val:'Port-Katheter li.',              ph:'V. cava superior / RA-Übergang',                    rid:'RID49601', en:'port catheter',                   grp:'Vaskulär'},
+  {val:'Dialysekatheter',               ph:'V. cava superior – Lage',                           rid:'RID49602', en:'dialysis catheter',               grp:'Vaskulär'},
+  {val:'PICC-Line',                     ph:'V. cava superior – Mitte',                          rid:'RID49603', en:'PICC line',                       grp:'Vaskulär'},
+  {val:'Arterienkatheter',              ph:'A. radialis / A. femoralis',                        rid:'RID49604', en:'arterial catheter',               grp:'Vaskulär'},
+  {val:'IABP',                          ph:'Deszend. Aorta, ca. 2 cm unterh. A. subclavia li.', rid:'RID49605', en:'intra-aortic balloon pump',        grp:'Vaskulär'},
+  {val:'Impella / VAD',                 ph:'LV-Spitze / Auslass Aortenwurzel',                  rid:'RID49606', en:'ventricular assist device',        grp:'Vaskulär'},
+  {val:'Schrittmacher (SM)',            ph:'Elektroden: re. Ventrikel / Vorhof',                rid:'RID49610', en:'cardiac pacemaker',               grp:'Kardial'},
+  {val:'ICD',                           ph:'Elektrodenlage re. Ventrikel',                      rid:'RID49611', en:'implantable cardioverter defibrillator', grp:'Kardial'},
+  {val:'CRT-D (biventrikulärer SM)',    ph:'Elektroden: re. Ventrikel / Vorhof / KS',           rid:'RID49612', en:'cardiac resynchronization therapy', grp:'Kardial'},
+  {val:'Loop-Recorder (ILR)',           ph:'subkutan li. Thoraxwand',                           rid:'RID49613', en:'implantable loop recorder',        grp:'Kardial'},
+  {val:'Endotrachealtubus (ETT)',        ph:'Karina-Abstand ca. 4–5 cm',                        rid:'RID49620', en:'endotracheal tube',                grp:'Atemweg'},
+  {val:'Tracheostoma-Kanüle',           ph:'Trachea – Lage, Karina-Abstand',                   rid:'RID49621', en:'tracheostomy tube',                grp:'Atemweg'},
+  {val:'Magensonde (MS)',               ph:'Magenkorpus',                                       rid:'RID49630', en:'nasogastric tube',                 grp:'Sonden'},
+  {val:'Jejunalsonde',                  ph:'Jejunum – Lage',                                    rid:'RID49631', en:'jejunal tube',                     grp:'Sonden'},
+  {val:'Ernährungssonde (PEG)',         ph:'Magenkorpus / Jejunum',                             rid:'RID49632', en:'PEG tube',                         grp:'Sonden'},
+  {val:'Thoraxdrainage re.',            ph:'Pleuraspalt re. – apikal / basal / dorsal',         rid:'RID49640', en:'chest tube right',                 grp:'Drainage'},
+  {val:'Thoraxdrainage li.',            ph:'Pleuraspalt li. – apikal / basal / dorsal',         rid:'RID49640', en:'chest tube left',                  grp:'Drainage'},
+  {val:'Perikarddrainagen',             ph:'Perikardspalt – Lage',                              rid:'RID49641', en:'pericardial drain',                grp:'Drainage'},
+  {val:'Sonstige / Fremdmaterial',      ph:'Beschreibung und Lage',                             rid:'RID49699', en:'foreign body / device',            grp:'Sonstige'},
+];
+
+let parCount = 0;
+let devCount = 0;
+
+/* ────────────────────────────────────────────────────────────
+   PAR-ITEM RENDER
+   ──────────────────────────────────────────────────────────── */
+function addParItem(){
+  parCount++;
+  const id = parCount;
+  const groups = [...new Set(PAR_OPTIONS.map(o => o.group))];
+  let optHtml = '<option value="">– bitte wählen –</option>';
+  groups.forEach(g => {
+    optHtml += `<optgroup label="${g}">`;
+    PAR_OPTIONS.filter(o => o.group === g).forEach(o => {
+      optHtml += `<option value="${o.rid}" data-de="${o.de}" data-en="${o.en}">${o.de}</option>`;
+    });
+    optHtml += '</optgroup>';
+  });
+  const seiteOpts = ['','re.','li.','bds.'].map(s => `<option value="${s}">${s||'–'}</option>`).join('');
+  const lokOpts   = ['','Oberlappen','Mittellappen / Lingula','Unterlappen','perihilär','basal','diffus']
+                      .map(l => `<option value="${l}">${l||'–'}</option>`).join('');
+
+  const div = document.createElement('div');
+  div.className = 'par-item';
+  div.id = `par-item-${id}`;
+  div.innerHTML = `
+    <div class="par-item-head">
+      <span class="par-item-num">Befund ${id}</span>
+      <button type="button" class="par-del" onclick="delParItem(${id})">✕</button>
+    </div>
+    <div class="rr-lbl" style="margin-bottom:6px"><span>Befundtyp <span class="rr-rl-badge">RadLex</span></span></div>
+    <select id="par-typ-${id}" onchange="update()">${optHtml}</select>
+    <div class="rr-thorax-g2" style="margin-top:8px">
+      <div>
+        <div class="rr-lbl" style="margin-bottom:4px"><span>Seite</span></div>
+        <select id="par-seite-${id}" onchange="update()">${seiteOpts}</select>
+      </div>
+      <div>
+        <div class="rr-lbl" style="margin-bottom:4px"><span>Lokalisation</span></div>
+        <select id="par-lok-${id}" onchange="update()">${lokOpts}</select>
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <div class="rr-lbl" style="margin-bottom:4px"><span>Ergänzung / Größe</span></div>
+      <input type="text" id="par-ft-${id}" placeholder="z.B. 8 mm, scharf begrenzt, subpleural…" oninput="update()">
+    </div>`;
+
+  document.getElementById('par-list').appendChild(div);
+  update();
+}
+
+function delParItem(id){
+  document.getElementById(`par-item-${id}`)?.remove();
+  update();
+}
+
+function getParItems(){
+  const items = [];
+  document.querySelectorAll('.par-item').forEach(el => {
+    const id = el.id.replace('par-item-','');
+    const typEl = document.getElementById(`par-typ-${id}`);
+    const selOpt = typEl?.options[typEl.selectedIndex];
+    items.push({
+      rid:   typEl?.value || '',
+      de:    selOpt?.dataset.de || typEl?.value || '',
+      en:    selOpt?.dataset.en || '',
+      seite: document.getElementById(`par-seite-${id}`)?.value || '',
+      lok:   document.getElementById(`par-lok-${id}`)?.value || '',
+      ft:    document.getElementById(`par-ft-${id}`)?.value?.trim() || '',
+    });
+  });
+  return items.filter(i => i.rid);
+}
+
+/* ────────────────────────────────────────────────────────────
+   DEV-ITEM RENDER
+   ──────────────────────────────────────────────────────────── */
+function addDevItem(){
+  devCount++;
+  const id = devCount;
+  const groups = [...new Set(DEV_TYPES.map(d => d.grp))];
+  let optHtml = '<option value="">– Device wählen –</option>';
+  groups.forEach(g => {
+    optHtml += `<optgroup label="${g}">`;
+    DEV_TYPES.filter(d => d.grp === g).forEach(d => {
+      optHtml += `<option value="${d.val}" data-ph="${d.ph}" data-rid="${d.rid}" data-en="${d.en}">${d.val}</option>`;
+    });
+    optHtml += '</optgroup>';
+  });
+
+  const div = document.createElement('div');
+  div.className = 'dev-item';
+  div.id = `dev-item-${id}`;
+  div.innerHTML = `
+    <div class="dev-item-head">
+      <span class="dev-item-num">Device ${id}</span>
+      <button type="button" class="dev-del" onclick="delDevItem(${id})">✕</button>
+    </div>
+    <div class="rr-lbl" style="margin-bottom:6px"><span>Device-Typ <span class="rr-rl-badge">RadLex</span></span></div>
+    <select id="dev-typ-${id}" onchange="devTypChange(${id});update()">${optHtml}</select>
+    <div style="margin-top:8px">
+      <div class="rr-lbl" style="margin-bottom:4px"><span>Lage / Spitze</span></div>
+      <input type="text" id="dev-lage-${id}" placeholder="Lage beschreiben…" oninput="update()">
+    </div>
+    <div style="margin-top:8px">
+      <div class="rr-lbl" style="margin-bottom:4px"><span>Beurteilung</span></div>
+      <select id="dev-burt-${id}" onchange="update()">
+        <option value="regelrecht platziert, Lage korrekt">Regelrecht – Lage korrekt</option>
+        <option value="Lage kontrollbedürftig">Kontrollbedürftig</option>
+        <option value="Fehllage – Korrektur empfohlen">Fehllage – Korrektur empfohlen</option>
+        <option value="Fehllage – dringliche Korrektur">Fehllage – dringlich (!)</option>
+      </select>
+    </div>
+    <div style="margin-top:8px">
+      <div class="rr-lbl" style="margin-bottom:4px"><span>Ergänzung</span></div>
+      <input type="text" id="dev-ft-${id}" placeholder="z.B. Karina-Abstand 5 cm…" oninput="update()">
+    </div>`;
+
+  document.getElementById('dev-list').appendChild(div);
+  update();
+}
+
+function devTypChange(id){
+  const sel = document.getElementById(`dev-typ-${id}`);
+  const opt = sel?.options[sel.selectedIndex];
+  if(!opt?.dataset.ph) return;
+  const lageEl = document.getElementById(`dev-lage-${id}`);
+  if(lageEl && !lageEl.value) lageEl.placeholder = opt.dataset.ph;
+}
+
+function delDevItem(id){
+  document.getElementById(`dev-item-${id}`)?.remove();
+  update();
+}
+
+function getDevItems(){
+  const items = [];
+  document.querySelectorAll('.dev-item').forEach(el => {
+    const id = el.id.replace('dev-item-','');
+    const typEl  = document.getElementById(`dev-typ-${id}`);
+    const selOpt = typEl?.options[typEl.selectedIndex];
+    items.push({
+      typ:  typEl?.value || '',
+      rid:  selOpt?.dataset?.rid || '',
+      en:   selOpt?.dataset?.en  || '',
+      lage: document.getElementById(`dev-lage-${id}`)?.value?.trim() || '',
+      burt: document.getElementById(`dev-burt-${id}`)?.value || 'regelrecht platziert, Lage korrekt',
+      ft:   document.getElementById(`dev-ft-${id}`)?.value?.trim() || '',
+    });
+  });
+  return items.filter(i => i.typ);
+}
+
+/* ────────────────────────────────────────────────────────────
+   HELPERS
+   ──────────────────────────────────────────────────────────── */
+const gv = id => document.getElementById(id)?.value?.trim() ?? '';
+const gc = id => !!document.getElementById(id)?.checked;
+
+/* ────────────────────────────────────────────────────────────
+   TEXT BUILDERS
+   ──────────────────────────────────────────────────────────── */
+function buildTechnik(){
+  const projs = [];
+  if(gc('p_pa'))  projs.push('p.a.');
+  if(gc('p_lat')) projs.push('seitlich (li.)');
+  if(gc('p_ap'))  projs.push('a.p. (Liegendaufnahme)');
+  if(gc('p_ex'))  projs.push('Exspirations-Aufnahme');
+  const q = gv('qual') || 'gut, diagnostisch ausreichend';
+  const f = gv('frage') === '__ft__' ? gv('frage_ft') : gv('frage');
+  let t = `Röntgen Thorax, ${projs.join(' + ') || 'p.a.'}. Aufnahmequalität ${q}.`;
+  if(f) t += ` Fragestellung: ${f}.`;
+  return t;
+}
+
+function buildBefund(){
+  const lines = [];
+
+  // Lunge
+  if(document.getElementById('par_norm')?.checked){
+    lines.push('Lunge: Seitengleich belüftet und entfaltet. Keine pathologische Transparenzminderung, keine Herdschatten, kein Hinweis auf Infiltrat.');
+  } else {
+    const items = getParItems();
+    if(!items.length){
+      lines.push('Lunge: Pathologischer Befund – bitte Typ wählen.');
+    } else {
+      const parts = items.map(i => {
+        let s = i.de;
+        if(i.seite && i.lok) s += ` ${i.seite} (${i.lok})`;
+        else if(i.seite) s += ` ${i.seite}`;
+        else if(i.lok)   s += ` (${i.lok})`;
+        if(i.ft) s += `, ${i.ft}`;
+        return s;
+      });
+      lines.push('Lunge: ' + parts.join('; ') + '.');
+    }
+  }
+
+  // Pleura
+  if(document.getElementById('pl_norm')?.checked){
+    lines.push('Pleura: Kein Pleuraerguss. Kein Pneumothorax. Sinus phrenicocostales bds. frei.');
+  } else {
+    const typEl  = document.getElementById('pl_typ');
+    const typOpt = typEl?.options[typEl.selectedIndex];
+    const typDe  = typOpt?.dataset.de || '';
+    const seite  = gv('pl_seite');
+    let pl = 'Pleura:';
+    if(typEl?.value === 'RID4872'){
+      const grad = gv('pl_erg_grad');
+      pl += ` ${seite?seite+' ':''}${grad||''} ${typDe}.`;
+    } else if(typEl?.value === 'RID5352'){
+      const grad = gv('pl_ptx_grad');
+      pl += ` ${seite?seite+' ':''}${typDe}${grad?' – '+grad:''}.`;
+    } else {
+      pl += ` ${typDe}${seite?' '+seite:''}.`;
+    }
+    const ft = gv('pl_ft');
+    if(ft) pl += ' ' + ft + '.';
+    lines.push(pl.trim());
+  }
+
+  // Herz / Mediastinum
+  const hGr = gv('herz_gr'), hKfg = gv('herz_kfg');
+  const med = gv('medi'), hRe = gv('hil_re'), hLi = gv('hil_li'), ao = gv('aorta');
+  let hm = `Herz und Mediastinum: Herz ${hGr}`;
+  if(hKfg !== 'regelrecht konfiguriert') hm += `, ${hKfg}`;
+  hm += '.';
+  if(med !== 'unauffällig, nicht verbreitert, keine Raumforderung') hm += ` Mediastinum: ${med}.`;
+  else hm += ' Mediastinum nicht verbreitert.';
+  hm += ` Hili: re. ${hRe}, li. ${hLi}. Aorta ${ao}.`;
+  lines.push(hm);
+
+  // Zwerchfell
+  lines.push(`Zwerchfell: ${gv('zwf')}.`);
+
+  // Skelett
+  const skel = gv('skel'), wt = gv('wt');
+  let sk = `Skelett: ${skel}.`;
+  if(wt !== 'unauffällig') sk += ` Weichteile: ${wt}.`;
+  lines.push(sk);
+
+  // Devices
+  const devItems = getDevItems();
+  if(devItems.length){
+    const devTxt = devItems.map(i => {
+      let s = i.typ;
+      if(i.lage) s += ` (${i.lage})`;
+      s += ` – ${i.burt}`;
+      if(i.ft)   s += `, ${i.ft}`;
+      return s;
+    }).join('; ');
+    lines.push('Devices: ' + devTxt + '.');
+  }
+
+  // Vergleich
+  if(gv('vgl_ja') === 'yes'){
+    const dat  = gv('vgl_datum'), verl = gv('vgl_verlauf');
+    let vgl = 'Vergleich:';
+    if(dat)  vgl += ` Voruntersuchung vom ${dat} liegt vor.`;
+    if(verl) vgl += ` ${verl}`;
+    lines.push(vgl);
+  }
+
+  return lines.join('\n');
+}
+
+function buildBeurteilung(){
+  if(document.getElementById('bmod_ft')?.checked) return gv('beurt_ft');
+
+  const parts = [];
+  const parNorm = document.getElementById('par_norm')?.checked;
+  const plNorm  = document.getElementById('pl_norm')?.checked;
+  const hGr  = gv('herz_gr');
+  const med  = gv('medi');
+
+  if(parNorm && plNorm &&
+     hGr === 'normal groß (CTR ≤ 0,5)' &&
+     med === 'unauffällig, nicht verbreitert, keine Raumforderung'){
+    parts.push('Röntgen Thorax ohne pathologischen Befund.');
+  } else {
+    if(!parNorm){
+      getParItems().forEach(i => {
+        let s = i.de;
+        if(i.seite) s += ` ${i.seite}`;
+        if(i.lok)   s += ` (${i.lok})`;
+        parts.push(s + '.');
+      });
+    }
+    if(!plNorm){
+      const typEl = document.getElementById('pl_typ');
+      const typDe = typEl?.options[typEl.selectedIndex]?.dataset?.de || '';
+      const seite = gv('pl_seite');
+      if(typDe) parts.push(`${typDe}${seite?' '+seite:''}.`);
+    }
+    if(hGr !== 'normal groß (CTR ≤ 0,5)') parts.push(`Herzgröße: ${hGr}.`);
+    if(med !== 'unauffällig, nicht verbreitert, keine Raumforderung') parts.push(`Mediastinum: ${med}.`);
+  }
+
+  const verl = gv('vgl_verlauf');
+  if(gv('vgl_ja') === 'yes' && verl) parts.push(verl);
+
+  return parts.join(' ') || '—';
+}
+
+/* ────────────────────────────────────────────────────────────
+   MAIN UPDATE
+   ──────────────────────────────────────────────────────────── */
+function update(){
+  document.getElementById('prev-technik').textContent = buildTechnik();
+  document.getElementById('prev-befund').textContent  = buildBefund();
+  document.getElementById('prev-beurt').textContent   = buildBeurteilung();
+
+  const f = gv('frage') === '__ft__' ? gv('frage_ft') : gv('frage');
+  const projs = [];
+  if(gc('p_pa'))  projs.push('p.a.');
+  if(gc('p_lat')) projs.push('lateral');
+  if(gc('p_ap'))  projs.push('a.p.');
+  if(gc('p_ex'))  projs.push('Exsp.');
+  document.getElementById('prev-sub').textContent =
+    (projs.join(' + ') || 'p.a.') + (f ? ' · ' + f : '');
+
+  const ok = buildBefund().length > 20 && buildBeurteilung().length > 2;
+  const b  = document.getElementById('status-badge');
+  b.className = 'rr-thorax-badge ' + (ok ? 'ok' : 'warn');
+  b.textContent = ok ? '✓ Vollständig' : '● Unvollständig';
+}
+
+/* ────────────────────────────────────────────────────────────
+   INIT
+   ──────────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('prev-date').textContent =
+    new Date().toLocaleDateString('de-AT', {day:'2-digit', month:'2-digit', year:'numeric'});
+
+  document.querySelectorAll('input[name=par_ges]').forEach(r => r.addEventListener('change', () => {
+    const path = document.getElementById('par_path').checked;
+    document.getElementById('par-section').style.display = path ? '' : 'none';
+    if(path && !document.querySelector('.par-item')) addParItem();
+    update();
+  }));
+
+  document.querySelectorAll('input[name=pl_ges]').forEach(r => r.addEventListener('change', () => {
+    document.getElementById('pl-section').style.display =
+      document.getElementById('pl_path').checked ? '' : 'none';
+    update();
+  }));
+
+  document.querySelectorAll('input[name=bmod]').forEach(r => r.addEventListener('change', () => {
+    document.getElementById('beurt_ft_row').style.display =
+      document.getElementById('bmod_ft').checked ? '' : 'none';
+    update();
+  }));
+
+  update();
+});
+
+/* ────────────────────────────────────────────────────────────
+   FHIR EXPORT
+   ──────────────────────────────────────────────────────────── */
+function buildFhir(){
+  const now = new Date().toISOString();
+  const technik = document.getElementById('prev-technik').textContent;
+  const befund  = document.getElementById('prev-befund').textContent;
+  const beurt   = document.getElementById('prev-beurt').textContent;
+  const obsEntries = [];
+
+  // Parenchym-Observations
+  if(!document.getElementById('par_norm')?.checked){
+    getParItems().forEach((item, idx) => {
+      if(!item.rid) return;
+      obsEntries.push({fullUrl:`urn:uuid:par-obs-${idx+1}`, resource:{
+        resourceType:'Observation', status:'final', id:`par-obs-${idx+1}`,
+        code:{coding:[{system:'http://radlex.org', code:item.rid, display:item.en}]},
+        bodySite: item.seite ? {text:item.seite} : undefined,
+        valueString: [item.de, item.seite, item.lok, item.ft].filter(Boolean).join(', '),
+      }});
+    });
+  }
+
+  // Pleura
+  if(!document.getElementById('pl_norm')?.checked){
+    const typEl = document.getElementById('pl_typ');
+    const rid   = typEl?.value;
+    const en    = typEl?.options[typEl.selectedIndex]?.dataset?.en || '';
+    if(rid){
+      obsEntries.push({fullUrl:'urn:uuid:pleura-obs', resource:{
+        resourceType:'Observation', status:'final', id:'pleura-obs',
+        code:{coding:[{system:'http://radlex.org', code:rid, display:en}]},
+        valueString:[gv('pl_seite')].filter(Boolean).join(', '),
+      }});
+    }
+  }
+
+  // Herz, Zwerchfell
+  const zwfEl  = document.getElementById('zwf');
+  const zwfRid = zwfEl?.options[zwfEl.selectedIndex]?.dataset?.radlex || '';
+  const zwfEn  = zwfEl?.options[zwfEl.selectedIndex]?.dataset?.en || '';
+  if(zwfRid){
+    obsEntries.push({fullUrl:'urn:uuid:diaphragm-obs', resource:{
+      resourceType:'Observation', status:'final', id:'diaphragm-obs',
+      code:{coding:[{system:'http://radlex.org', code:zwfRid, display:zwfEn}]},
+      valueString: gv('zwf'),
+    }});
+  }
+
+  // Devices
+  getDevItems().forEach((dev, idx) => {
+    if(!dev.rid) return;
+    obsEntries.push({fullUrl:`urn:uuid:dev-obs-${idx+1}`, resource:{
+      resourceType:'Observation', status:'final', id:`dev-obs-${idx+1}`,
+      code:{coding:[{system:'http://radlex.org', code:dev.rid, display:dev.en}]},
+      valueString:[dev.typ, dev.lage?'Lage: '+dev.lage:null, dev.burt, dev.ft||null].filter(Boolean).join(' – '),
+    }});
+  });
+
+  const bundle = {
+    resourceType:'Bundle', type:'document', timestamp:now,
+    meta:{tag:[{system:'http://radlex.org/fhir', code:'radlex-coded'}]},
+    entry:[
+      {fullUrl:'urn:uuid:thorax-report', resource:{
+        resourceType:'DiagnosticReport', status:'final', id:'thorax-report',
+        code:{coding:[{system:'http://loinc.org', code:'24627-2', display:'Chest X-ray 2 views'}]},
+        effectiveDateTime:now,
+        identifier:[{value:'HJK-MRRT-ROE-THORAX-v1.3'}],
+        conclusion:beurt,
+        result:obsEntries.map(e=>({reference:e.fullUrl})),
+        presentedForm:[{contentType:'text/plain', title:'Röntgen Thorax',
+          data:btoa(unescape(encodeURIComponent('TECHNIK\n'+technik+'\n\nBEFUND\n'+befund+'\n\nBEURTEILUNG\n'+beurt)))
+        }],
+      }},
+      ...obsEntries,
+    ]
+  };
+  return JSON.stringify(bundle, null, 2);
+}
+
+function toggleFhir(){
+  const box = document.getElementById('fhir-box');
+  if(box.classList.contains('rr-is-visible')){ box.classList.remove('rr-is-visible'); return; }
+  box.textContent = buildFhir();
+  box.classList.add('rr-is-visible');
+}
+
+/* ────────────────────────────────────────────────────────────
+   COPY & RESET
+   ──────────────────────────────────────────────────────────── */
+function copyReport(){
+  const t = `RÖNTGEN THORAX\n${new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'})}\n\nTECHNIK\n${document.getElementById('prev-technik').textContent}\n\nBEFUND\n${document.getElementById('prev-befund').textContent}\n\nBEURTEILUNG\n${document.getElementById('prev-beurt').textContent}`;
+  navigator.clipboard.writeText(t).then(() => {
+    const btn = event.target; btn.textContent = '✓ Kopiert!';
+    setTimeout(() => { btn.textContent = '📋 Befundtext kopieren'; }, 2000);
+  }).catch(() => {
+    const el = document.createElement('textarea'); el.value = t;
+    document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+  });
+}
+
+function resetAll(){
+  if(!confirm('Alle Eingaben zurücksetzen?')) return;
+  document.querySelectorAll('.par-item').forEach(e => e.remove());
+  document.querySelectorAll('.dev-item').forEach(e => e.remove());
+  parCount = 0; devCount = 0;
+  document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+  document.querySelectorAll('textarea, input[type=text], input[type=number]').forEach(i => i.value = '');
+  document.querySelectorAll('input[type=checkbox]').forEach(c => c.checked = false);
+  document.getElementById('p_pa').checked     = true;
+  document.getElementById('par_norm').checked = true;
+  document.getElementById('pl_norm').checked  = true;
+  document.getElementById('bmod_auto').checked = true;
+  document.getElementById('par-section').style.display   = 'none';
+  document.getElementById('pl-section').style.display    = 'none';
+  document.getElementById('beurt_ft_row').style.display  = 'none';
+  document.getElementById('pl_erguss_row').style.display = 'none';
+  document.getElementById('pl_ptx_row').style.display    = 'none';
+  document.getElementById('fhir-box').classList.remove('rr-is-visible');
+  update();
+}
+</script>
+</body>
+</html>
