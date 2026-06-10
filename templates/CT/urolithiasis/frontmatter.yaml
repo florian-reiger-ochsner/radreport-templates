@@ -1,0 +1,37 @@
+id: HJK-MRRT-CT-UROLITHIASIS
+version: 1.0
+status: pilot
+modalitaet: CT
+region: Abdomen-Becken
+indikation: CT Urolithiasis (Steinsuche, nativ)
+sprache: de
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+geprueft: 2026-06-08
+naechste-pruefung: 2026-12-08
+quelle:
+  - "DRG AK Befundung, Template 041807.2.2203092150, CC BY 4.0"
+  - "https://github.com/DRGagit/ak_befundung"
+klassifikationen: []
+referenzen:
+  - "DRG AK Befundung. CT Urolithiasis Template 041807.2.2203092150. CC BY 4.0"
+  - "Türk C et al. EAU Guidelines on Urolithiasis 2022"
+ki-tools: []
+standorte:
+  - Herz-Jesu-Krankenhaus Wien (HJK)
+loinc-codes:
+  - code: "24634-8"
+    description: CT KUB
+protokolle:
+  - nativ-niedrigdosis
+  - nativ-standarddosis
+  - dual-energy-dect
+multi-features:
+  - multi-stein-stack
+  - dect-substanzbestimmung
+output:
+  - fliesstext
+  - fhir-bundle
+radlex-coverage: vollstaendig
+lizenz-hinweis: "Basierend auf DRG-Template CC BY 4.0. Quellennennung in dcterms.source."
