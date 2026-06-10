@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
+<head>
+<meta charset="UTF-8">
+<title>KNIE-POSTTEP – Live-Demo</title>
+<meta name="dcterms.title"       content="Röntgen Knie postoperativ / intraoperativ nach Knie-Totalendoprothese"/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage Röntgen Knie post-KTEP. Stufe 1. Vier Kontexte: Intraoperativ/EndoCert, Früh-postoperativ, Verlaufskontrolle, Revisionsverdacht. RadLex-kodiert. LAMA/KOALA-Integration vorbereitet."/>
+<meta name="dcterms.language"    content="de"/>
+<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
+<meta name="dcterms.date"        content="2026-05-20"/>
+<meta name="dcterms.identifier"  content="HJK-MRRT-KNIE-POSTTEP-v1.1"/>
+<meta name="rrt:specialty"       content="Radiology"/>
+<meta name="rrt:subspecialty"    content="Musculoskeletal Radiology"/>
+<meta name="rrt:modality"        content="DX"/>
+<meta name="rrt:bodyregion"      content="Knee"/>
+
+
+
+
+<!-- Core-Stylesheet (Single Source of Truth) -->
+<!-- MRRT-Build: node shared/scripts/inline-css.js macht daraus template.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* radreport-core.css v1.0.0 – inlined */
+:root{--rr-bg:#ffffff;--rr-bg-alt:#f7f8fa;--rr-bg-card:#ffffff;--rr-ink:#2c3e50;--rr-ink-soft:#5a6c7d;--rr-ink-muted:#8b97a3;--rr-ink-faint:#b8c2cc;--rr-accent:#2c5f8d;--rr-accent-light:#4a86b8;--rr-accent-pale:#e8f0f7;--rr-rule:#e6eaef;--rr-rule-soft:#f0f3f6;--rr-field-bg:#ffffff;--rr-field-border:#d8dee5;--rr-ai-tint:#f4f9fd;--rr-ai-border:#2c5f8d;--rr-radlex-tint:#f5f1f7;--rr-radlex-ink:#7a4e96;--rr-warn:#c47f2a;--rr-critical:#c45848;--rr-success:#2d7a4f;--rr-font-sans:"Source Sans 3","Segoe UI",-apple-system,sans-serif;--rr-font-serif:"Source Serif 4",Georgia,serif;--rr-font-mono:"SF Mono","Menlo","JetBrains Mono",monospace;--rr-fs-xs:11px;--rr-fs-sm:12px;--rr-fs-base:15px;--rr-fs-md:13px;--rr-fs-lg:14px;--rr-fs-xl:20px;--rr-fs-2xl:28px;--rr-fs-3xl:32px;--rr-space-xs:0.25rem;--rr-space-sm:0.5rem;--rr-space-md:1rem;--rr-space-lg:1.5rem;--rr-space-xl:2rem;--rr-space-2xl:3.5rem;--rr-max-width:1600px;--rr-radius:6px;--rr-radius-sm:4px;--rr-radius-xs:3px;--rr-shadow-sm:0 1px 2px rgba(44,62,80,0.04);--rr-shadow-md:0 2px 8px rgba(44,62,80,0.06);}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:var(--rr-fs-base);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;}
+.rr-app{display:grid;grid-template-columns:minmax(480px,1fr) minmax(440px,540px);gap:0;min-height:100vh;max-width:var(--rr-max-width);margin:0 auto;background:var(--rr-bg);}
+@media(max-width:1100px){.rr-app{grid-template-columns:1fr;}}
+.rr-input-pane{padding:var(--rr-space-2xl) 64px 100px;background:var(--rr-bg);border-right:1px solid var(--rr-rule);}
+.rr-preview-pane{padding:var(--rr-space-2xl) var(--rr-space-2xl) 100px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto;}
+.rr-doc-title{font-family:var(--rr-font-sans);font-weight:600;font-size:var(--rr-fs-3xl);line-height:1.25;margin:0 0 6px;letter-spacing:-0.02em;color:var(--rr-ink);}
+.rr-doc-sub{font-size:var(--rr-fs-md);color:var(--rr-ink-muted);letter-spacing:0.04em;text-transform:uppercase;}
+.rr-title-rule{width:48px;height:2px;background:var(--rr-accent);margin:var(--rr-space-lg) 0 40px;}
+.rr-h2-wrap{margin:36px 0 var(--rr-space-md);}.rr-h2-wrap h2,.rr-h2{font-family:var(--rr-font-sans);font-size:var(--rr-fs-md);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--rr-accent);margin:0 0 4px;}
+.rr-h2-rule{height:1px;background:var(--rr-rule);margin:var(--rr-space-sm) 0 0;}.rr-h2-sub{font-size:var(--rr-fs-sm);color:var(--rr-ink-muted);font-style:italic;margin-top:6px;}
+.rr-helper-info{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);padding:10px 14px;font-size:var(--rr-fs-md);color:var(--rr-ink-soft);margin-bottom:var(--rr-space-sm);border-radius:0 var(--rr-radius-sm) var(--rr-radius-sm) 0;}
+.rr-side-toggle{display:inline-flex;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;}.rr-side-toggle input[type="radio"]{display:none;}.rr-side-toggle label{padding:8px 18px;cursor:pointer;font-size:var(--rr-fs-lg);font-weight:500;background:var(--rr-bg);color:var(--rr-ink-soft);transition:all 0.15s;}.rr-side-toggle input[type="radio"]:checked+label{background:var(--rr-accent);color:#fff;}
+.rr-row{display:grid;gap:var(--rr-space-md) 20px;grid-template-columns:1fr 1fr;margin-top:14px;}.rr-row-three{grid-template-columns:1fr 1fr 1fr;}.rr-row-full{grid-template-columns:1fr;}
+@media(max-width:760px){.rr-row,.rr-row-three{grid-template-columns:1fr;}}
+label{display:block;font-size:var(--rr-fs-md);}
+.rr-lbl{display:flex;align-items:center;justify-content:space-between;font-size:var(--rr-fs-xs);color:var(--rr-ink-muted);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:6px;}.rr-lbl>span:first-child{display:flex;align-items:center;gap:6px;}
+input[type="text"],input[type="number"],input[type="date"],select,textarea{width:100%;padding:10px 12px;font-size:var(--rr-fs-lg);border:1px solid var(--rr-field-border);background:var(--rr-field-bg);border-radius:var(--rr-radius-sm);color:var(--rr-ink);font-family:inherit;transition:border 0.15s,box-shadow 0.15s;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale);}
+textarea{min-height:80px;resize:vertical;line-height:1.5;}
+.rr-field-note{font-size:var(--rr-fs-xs);color:var(--rr-ink-muted);margin-top:var(--rr-space-xs);line-height:1.4;}
+.rr-rl-badge{background:var(--rr-radlex-tint);color:var(--rr-radlex-ink);border:1px solid var(--rr-radlex-ink);font-size:9px;letter-spacing:0.06em;padding:1px 4px;border-radius:var(--rr-radius-xs);text-transform:uppercase;font-weight:600;font-family:var(--rr-font-mono);}
+.rr-req-indicator{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--rr-critical);margin-left:6px;vertical-align:middle;animation:rr-pulse 2s ease-in-out infinite;}
+@keyframes rr-pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+details{border:1px solid var(--rr-rule);border-radius:var(--rr-radius);margin-top:12px;background:var(--rr-bg);}
+details summary{cursor:pointer;padding:12px var(--rr-space-md);font-size:var(--rr-fs-md);font-weight:600;color:var(--rr-ink-soft);letter-spacing:0.06em;text-transform:uppercase;list-style:none;}
+details summary::-webkit-details-marker{display:none;}details summary::before{content:"▸ ";color:var(--rr-accent);margin-right:6px;}details[open] summary::before{content:"▾ ";}
+details>div{padding:0 var(--rr-space-md) var(--rr-space-md);}
+.rr-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.rr-btn,button{background:var(--rr-accent);color:#fff;padding:10px 18px;font-size:var(--rr-fs-md);font-weight:600;border:none;border-radius:5px;cursor:pointer;letter-spacing:0.01em;transition:all 0.15s;box-shadow:var(--rr-shadow-sm);font-family:inherit;}
+.rr-btn:hover,button:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md);}
+.rr-btn-secondary,button.rr-btn-secondary{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border);box-shadow:none;}
+.rr-btn-secondary:hover,button.rr-btn-secondary:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent);transform:none;}
+.rr-export-area{display:none;margin-top:20px;padding:20px;background:#1e2a36;color:#a8c4dd;border-radius:var(--rr-radius);font-family:var(--rr-font-mono);font-size:var(--rr-fs-xs);white-space:pre;overflow-x:auto;max-height:400px;overflow-y:auto;line-height:1.5;}
+.rr-export-area.rr-is-visible{display:block;}
+.rr-preview-title{font-family:var(--rr-font-sans);font-size:var(--rr-fs-md);font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--rr-accent);margin:0;}
+.rr-preview-title-rule{height:1px;background:var(--rr-rule);margin:var(--rr-space-sm) 0 28px;}
+.rr-preview-section{margin-bottom:26px;}.rr-preview-section h4{font-size:10px;color:var(--rr-ink-muted);letter-spacing:0.14em;text-transform:uppercase;margin:0 0 var(--rr-space-sm);font-weight:600;}
+.rr-preview-content{font-family:var(--rr-font-serif);font-size:var(--rr-fs-base);line-height:1.7;color:var(--rr-ink);white-space:pre-wrap;}
+.rr-codesystem-legend{margin-top:var(--rr-space-sm);font-size:10px;color:var(--rr-ink-muted);letter-spacing:0.04em;font-family:var(--rr-font-mono);}
+.rr-codesystem-legend .rr-badge-mini{display:inline-block;padding:1px 5px;border-radius:var(--rr-radius-xs);margin-right:4px;font-weight:600;}
+.rr-codesystem-legend .rr-is-verified{background:#e8f5ec;color:#2d6a4f;border:1px solid #2d6a4f;}
+.rr-codesystem-legend .rr-is-local{background:#fdf4e3;color:#8b6914;border:1px solid #c4a558;}
+.rr-u-hidden{display:none!important;}
+@media print{body{background:#fff;}.rr-app{display:block;max-width:none;}.rr-input-pane,.rr-mode-switch,.rr-actions,.rr-export-area,.rr-helper-info,.rr-codesystem-legend{display:none!important;}.rr-preview-pane{position:static;height:auto;padding:0;background:#fff;overflow:visible;}}
+</style>
+
+<style>
+/* =================================================================
+   TEMPLATE-SPEZIFISCHES CSS – NUR WAS CORE NICHT ABDECKT
+   Konvention: rr-knieposttep-* Präfix
+   ================================================================= */
+
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.app{display:grid;grid-template-columns:minmax(540px,1fr) minmax(420px,520px);min-height:100vh;max-width:1640px;margin:0 auto;background:var(--rr-bg)}
+@media(max-width:1120px){.app{grid-template-columns:1fr}}
+.input-pane{padding:50px 58px 120px;background:var(--rr-bg);border-right:1px solid var(--rr-rule)}
+.preview-pane{padding:50px 50px 120px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto}
+
+/* ── Header ── */
+.doc-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:28px;color:var(--rr-ink);letter-spacing:-0.02em;line-height:1.2}
+.doc-meta{margin-top:6px;font-size:11.5px;color:var(--rr-ink-muted);letter-spacing:.04em;text-transform:uppercase}
+.title-rule{height:3px;background:linear-gradient(90deg,var(--rr-accent) 0%,var(--rr-accent-pale) 100%);border-radius:2px;margin:16px 0 28px}
+
+/* ── Kontext-Modus ── */
+.ctx-sw{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;margin-bottom:12px}
+.ctx-sw input{display:none}
+.ctx-sw label{flex:1;padding:9px 10px;text-align:center;font-size:12.5px;color:var(--rr-ink-muted);cursor:pointer;transition:all .15s;border-right:1px solid var(--rr-field-border);line-height:1.3}
+.ctx-sw label:last-of-type{border-right:none}
+.ctx-sw input:checked+label{background:var(--rr-accent);color:#fff;font-weight:600}
+.ctx-sw label:hover{background:var(--rr-accent-pale);color:var(--rr-accent)}
+
+/* ── Section ── */
+.sh{display:flex;align-items:baseline;gap:12px;margin:28px 0 11px}
+.sh h2{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--rr-accent)}
+.sh-line{flex:1;height:1px;background:var(--rr-rule)}
+.sh-sub{font-size:12px;color:var(--rr-ink-muted);margin:-6px 0 12px}
+
+/* ── Fields ── */
+.row{margin-bottom:12px}
+.row label{display:flex;flex-direction:column;gap:4px}
+.lbl{font-size:12px;font-weight:500;color:var(--rr-ink-soft);letter-spacing:.02em}
+.unit{font-size:11px;color:var(--rr-ink-muted);margin-left:3px;font-weight:400}
+.field-note{font-size:11px;color:var(--rr-ink-muted);margin-top:2px;font-style:italic}
+select,textarea,input[type=text],input[type=number]{width:100%;background:#fff;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);padding:8px 11px;font-family:"Source Sans 3",sans-serif;font-size:13.5px;color:var(--rr-ink);transition:border-color .15s,box-shadow .15s;appearance:none;-webkit-appearance:none}
+select:focus,textarea:focus,input:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%238b97a3' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
+textarea{resize:vertical;min-height:56px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+
+/* ── Side toggle ── */
+.side-tg{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;max-width:130px;margin-bottom:8px}
+.side-tg input{display:none}
+.side-tg label{flex:1;padding:8px 16px;text-align:center;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;border-right:1px solid var(--rr-field-border)}
+.side-tg label:last-of-type{border-right:none}
+.side-tg input:checked+label{background:var(--rr-accent);color:#fff}
+.side-tg label:hover{background:var(--rr-accent-pale);color:var(--rr-accent)}
+
+/* ── Hint ── */
+.hint{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-ink-soft);margin:4px 0 12px}
+.hint strong{color:var(--rr-accent)}
+
+/* ── RadLex / AI badges ── */
+.rl{display:inline-block;font-size:10px;font-weight:600;color:var(--rr-accent);background:var(--rr-accent-pale);border-radius:3px;padding:1px 5px;margin-left:5px;letter-spacing:.02em;vertical-align:middle}
+.ai-badge{display:inline-block;font-size:10px;font-weight:700;background:var(--rr-accent);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;letter-spacing:.02em;vertical-align:middle}
+.ai-field input,.ai-field select{background:var(--rr-ai-tint);border-color:var(--rr-accent)}
+
+/* ── Winkel-Grid ── */
+.winkel-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:16px 16px 10px;margin-bottom:14px}
+.winkel-block{}
+.winkel-title{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--rr-ink-muted);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--rr-rule)}
+
+/* ── Komplikations-Flags ── */
+.flag-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.flag-item{display:flex;align-items:flex-start;gap:8px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:9px 11px;cursor:pointer;transition:all .15s}
+.flag-item:hover{border-color:var(--rr-accent-light);background:var(--rr-accent-pale)}
+.flag-item input[type=checkbox]{width:15px;height:15px;margin-top:2px;flex-shrink:0;accent-color:var(--rr-accent);cursor:pointer}
+.flag-item.active{border-color:var(--rr-critical);background:#fdf0ef}
+.flag-item .flag-lbl{font-size:12.5px;color:var(--rr-ink-soft);line-height:1.4}
+.flag-item .flag-lbl strong{display:block;font-size:13px;color:var(--rr-ink);font-weight:600}
+
+/* ── Zonen-Tabelle (Ewald, vereinfacht) ── */
+.ewald-wrap{overflow-x:auto;margin:8px 0 14px}
+.ewald-tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.ewald-tbl th{text-align:center;padding:7px 8px;background:var(--rr-accent);color:#fff;font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--accent-deep)}
+.ewald-tbl th.side{background:var(--accent-deep)}
+.ewald-tbl td{padding:5px 6px;border:1px solid var(--rr-rule);vertical-align:middle;text-align:center}
+.ewald-tbl td.zone-lbl{font-size:11px;font-weight:600;color:var(--rr-ink-muted);text-align:left;background:var(--rr-bg-alt);white-space:nowrap}
+.ewald-tbl select{border:none;background:transparent;padding:2px 4px;font-size:12px;color:var(--rr-ink);width:100%;min-width:90px}
+.ewald-tbl select:focus{background:var(--rr-accent-pale);border-radius:3px}
+
+/* ── Collapsible ── */
+details{margin-bottom:8px}
+details>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:9px 13px;background:var(--rr-bg-alt);border-radius:var(--rr-radius);border:1px solid var(--rr-rule);font-size:13px;font-weight:500;color:var(--rr-ink-soft);user-select:none;transition:all .15s}
+details>summary:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent-light)}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▶";font-size:9px;color:var(--rr-ink-faint);transition:transform .15s}
+details[open]>summary::before{transform:rotate(90deg)}
+details>.db{padding:14px 13px 8px;border:1px solid var(--rr-rule);border-top:none;border-radius:0 0 var(--rr-radius) var(--rr-radius);background:var(--rr-bg)}
+
+/* ── Buttons ── */
+.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"Source Sans 3",sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-p{background:var(--rr-accent);color:#fff;box-shadow:var(--rr-shadow-sm)}
+.btn-p:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md)}
+.btn-s{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border)}
+.btn-s:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent)}
+.btn-d{background:#fef2f2;color:#c0392b;border:1px solid #f5c6c6}
+.btn-d:hover{background:#fde8e8}
+
+/* ── Preview ── */
+.prev-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rr-ink-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.prev-lbl::after{content:"";flex:1;height:1px;background:var(--rr-rule)}
+.rcard{background:var(--rr-bg);border:1px solid var(--rr-rule);border-radius:10px;padding:24px 26px;box-shadow:var(--rr-shadow-sm)}
+.rcard-header{border-bottom:2px solid var(--rr-accent);padding-bottom:12px;margin-bottom:16px}
+.rcard-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:16px;color:var(--accent-deep);letter-spacing:-.01em}
+.rcard-sub{font-size:12px;color:var(--rr-ink-muted);margin-top:3px}
+.rsec{margin-bottom:14px}
+.rsec-lbl{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--rr-accent);margin-bottom:4px}
+.rtext{font-family:"Source Serif 4","Georgia",serif;font-size:13.5px;line-height:1.72;color:var(--rr-ink);white-space:pre-wrap;min-height:18px}
+.rtext:empty::before{content:"—";color:var(--rr-ink-faint);font-style:italic;font-family:"Source Sans 3",sans-serif}
+
+/* ── Komplikations-Ampel im Preview ── */
+.ampel{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.ampel-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:10px;font-size:11.5px;font-weight:600}
+.ampel-tag.ok{background:#ecf7f2;color:var(--rr-success)}
+.ampel-tag.warn{background:#fdf6ec;color:var(--rr-warn)}
+.ampel-tag.alert{background:#fdf0ef;color:var(--rr-critical)}
+
+.stamp{margin-top:16px;padding-top:12px;border-top:1px solid var(--rr-rule);font-size:11px;color:var(--rr-ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:11px;font-size:12px;font-weight:600;margin-top:12px}
+.badge.ok{background:#ecf7f2;color:var(--rr-success)}
+.badge.warn{background:#fdf6ec;color:var(--rr-warn)}
+.badge.alert{background:#fdf0ef;color:var(--rr-critical)}
+
+/* ── Export ── */
+.ebox{display:none;margin-top:14px;background:#1a2535;color:#93b8d4;border-radius:var(--rr-radius);padding:16px 18px;font-family:"SF Mono","Menlo",monospace;font-size:11px;white-space:pre;overflow:auto;max-height:340px;line-height:1.55}
+.ebox.show{display:block}
+
+/* ── Checkboxes ── */
+.cg{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.ci{display:flex;align-items:center;gap:6px;cursor:pointer}
+.ci input{width:14px;height:14px;accent-color:var(--rr-accent);cursor:pointer}
+.ci span{font-size:13px;color:var(--rr-ink-soft)}
+
+/* ── Implantat-Presets ── */
+.preset-bar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.preset-btn{
+  display:flex;flex-direction:column;align-items:flex-start;
+  padding:8px 13px;border:1.5px solid var(--rr-field-border);
+  border-radius:var(--rr-radius);background:var(--rr-bg);
+  cursor:pointer;transition:all .15s;text-align:left;
+  font-family:"Source Sans 3",sans-serif;
+}
+.preset-btn:hover{border-color:var(--rr-accent);background:var(--rr-accent-pale)}
+.preset-btn.active{border-color:var(--rr-accent);background:var(--rr-accent-pale)}
+.preset-btn .pb-name{font-size:13px;font-weight:600;color:var(--rr-ink);line-height:1.3}
+.preset-btn .pb-detail{font-size:11px;color:var(--rr-ink-muted);margin-top:2px;line-height:1.3}
+.preset-edit-hint{font-size:11px;color:var(--rr-ink-faint);margin-top:6px;font-style:italic}
+.endocert-badge{display:inline-flex;align-items:center;gap:7px;background:var(--endocert-pale);border:1px solid var(--endocert);border-radius:var(--rr-radius);padding:6px 12px;font-size:12px;font-weight:600;color:var(--endocert);margin-bottom:14px}
+.hint-endocert{background:var(--endocert-pale);border-left:3px solid var(--endocert);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--endocert);margin:4px 0 12px}
+.hint-endocert strong{color:var(--endocert)}
+.ec-pill{display:none;align-items:center;gap:4px;background:var(--endocert-pale);border:1px solid var(--endocert);border-radius:10px;padding:2px 9px;font-size:11px;font-weight:600;color:var(--endocert);white-space:nowrap;flex-shrink:0}
+.ec-pill.show{display:inline-flex}
+
+/* ── EndoCert Checkliste ── */
+.ec-checklist{display:flex;flex-direction:column;gap:6px;margin:6px 0 14px}
+.ec-cl-item{display:flex;align-items:flex-start;gap:10px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:10px 13px;transition:all .15s}
+.ec-cl-item.ok{border-color:var(--rr-success);background:#ecf7f2}
+.ec-cl-item.nok{border-color:var(--rr-critical);background:#fdf0ef}
+.ec-cl-inner{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:4px;overflow:hidden;flex-shrink:0;margin-top:1px}
+.ec-cl-inner label{padding:3px 9px;font-size:12px;font-weight:600;cursor:pointer;transition:all .12s;border-right:1px solid var(--rr-field-border);color:var(--rr-ink-muted)}
+.ec-cl-inner label:last-of-type{border-right:none}
+.ec-cl-inner input[type=radio]{display:none}
+.ec-cl-inner input[type=radio]:checked+label.ec-ok{background:var(--rr-success);color:#fff;border-color:var(--rr-success)}
+.ec-cl-inner input[type=radio]:checked+label.ec-nok{background:var(--rr-critical);color:#fff;border-color:var(--rr-critical)}
+.ec-cl-inner input[type=radio]:checked+label.ec-na{background:var(--rr-ink-muted);color:#fff;border-color:var(--rr-ink-muted)}
+.ec-cl-text{flex:1}
+.ec-cl-text strong{display:block;font-size:13px;color:var(--rr-ink);font-weight:600;margin-bottom:1px}
+.ec-cl-text span{font-size:11.5px;color:var(--rr-ink-muted);line-height:1.4}
+
+/* ── EndoCert Preview ── */
+.ec-check-prev{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.ec-check-row{display:flex;align-items:center;gap:7px;font-size:12.5px;font-family:"Source Sans 3",sans-serif}
+.ec-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.ec-dot.ok{background:var(--rr-success)}.ec-dot.nok{background:var(--rr-critical)}
+.ec-dot.na{background:var(--rr-ink-faint)}.ec-dot.offen{background:transparent;border:1.5px dashed var(--rr-ink-muted)}
+.badge.ec{background:var(--endocert-pale);color:var(--endocert)}
+
+</style>
+</head>
+<body>
+<div class="rr-app">
+
+<!-- ══════════════════════════ INPUT PANE ══════════════════════════ -->
+<section class="rr-input-pane">
+
+<h1 class="rr-doc-title">Röntgen Knie post-KTEP</h1>
+<div class="rr-doc-sub">MRRT · RadLex-kodiert · Intraop / Früh-postop / Verlauf / Revision · v1.1 · HJK Wien</div>
+<div class="rr-title-rule"></div>
+
+<!-- KONTEXT-MODUS -->
+<div class="ctx-sw">
+  <input type="radio" name="ctx" id="ctx_intraop" value="intraop">
+  <label for="ctx_intraop">Intraoperativ<br><span style="font-size:10.5px;font-weight:400">EndoCert-Pflicht</span></label>
+  <input type="radio" name="ctx" id="ctx_frueh" value="frueh" checked>
+  <label for="ctx_frueh">Früh-postoperativ<br><span style="font-size:10.5px;font-weight:400">0–6 Wochen</span></label>
+  <input type="radio" name="ctx" id="ctx_verlauf" value="verlauf">
+  <label for="ctx_verlauf">Verlaufskontrolle<br><span style="font-size:10.5px;font-weight:400">6 Wo – 2 Jahre</span></label>
+  <input type="radio" name="ctx" id="ctx_revision" value="revision">
+  <label for="ctx_revision">Revisionsverdacht<br><span style="font-size:10.5px;font-weight:400">Loosening / Infektion</span></label>
+</div>
+<div class="rr-helper-info" id="ctx-hint">
+  <strong>Früh-postoperativ:</strong> Implantat-Position, Komplikationsausschluss, Vergleich mit intraoperativem Röntgen.
+</div>
+
+<!-- SEITE -->
+<div class="sh"><h2>Seite</h2><div class="sh-line"></div></div>
+<div class="side-tg">
+  <input type="radio" name="seite" id="s_re" value="re." checked>
+  <label for="s_re">re.</label>
+  <input type="radio" name="seite" id="s_li" value="li.">
+  <label for="s_li">li.</label>
+</div>
+
+<!-- TECHNIK -->
+<div class="sh"><h2>Technik &amp; Projektionen</h2><div class="sh-line"></div></div>
+<div class="grid2">
+  <div class="row">
+    <label>
+      <span class="lbl">a.p. stehend / liegend</span>
+      <select id="pr_ap" onchange="update()"
+        data-radlex="RID10395" data-en="anteroposterior projection">
+        <option value="a.p. stehend">a.p. stehend</option>
+        <option value="a.p. liegend">a.p. liegend</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Seitlich</span>
+      <select id="pr_lat" onchange="update()"
+        data-radlex="RID10396" data-en="lateral projection">
+        <option value="ja">Ja</option>
+        <option value="nein">Nein</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Patella axial</span>
+      <select id="pr_pat" onchange="update()"
+        data-radlex="RID13430" data-en="skyline view patella">
+        <option value="nein">Nein</option>
+        <option value="ja">Ja</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Ganzbein-Standaufnahme</span>
+      <select id="pr_lla" onchange="update()"
+        data-radlex="RID28657" data-en="full length lower limb radiograph">
+        <option value="nein">Nein</option>
+        <option value="ja (einseitig, kalibriert)">Ja – kalibriert</option>
+      </select>
+    </label>
+  </div>
+</div>
+<div class="row">
+  <label>
+    <span class="lbl">Aufnahmequalität</span>
+    <select id="qual" onchange="update()"
+      data-radlex="RID13882" data-en="image quality">
+      <option value="gut, diagnostisch ausreichend">gut, diagnostisch ausreichend</option>
+      <option value="eingeschränkt (Lagerungsartefakte, Liegendaufnahme)">eingeschränkt – Lagerungsartefakte / Liegend</option>
+      <option value="eingeschränkt (Überlagerung Verbandsmaterial)">eingeschränkt – Überlagerung Verbandsmaterial</option>
+      <option value="eingeschränkt (Rotation)">eingeschränkt – Rotation</option>
+    </select>
+  </label>
+</div>
+
+<!-- IMPLANTAT-IDENTIFIKATION -->
+<div class="sh"><h2>Implantat-Identifikation</h2><div class="sh-line"></div></div>
+<div class="rr-helper-info"><strong>Hinweis:</strong> Implantat-Daten idealerweise aus Operationsbericht / Implantatpass übernehmen. Schnellwahl unten vorbereitet – Presets nach Rücksprache mit Böhler befüllen.</div>
+
+<!-- PRESET-SCHNELLWAHL -->
+<div class="sh" style="margin-top:0;margin-bottom:8px">
+  <h2 style="font-size:11px">Schnellwahl Implantat-Preset</h2>
+  <div class="sh-line"></div>
+</div>
+<div class="preset-bar" id="preset-bar">
+  <!-- Gerendert via JS aus PRESETS-Array -->
+</div>
+<div class="preset-edit-hint" id="preset-edit-hint">▸ Weitere Systeme ergänzen: PRESETS-Array im Script. Patellaersatz-Varianten oder Schlitten bei Bedarf hinzufügen.</div>
+
+<!-- INTRAOP-SEKTION (nur bei ctx=intraop sichtbar) -->
+<div id="intraop-section" style="display:none">
+  <div class="endocert-badge">✓ EndoCert-Pflichtdokumentation – Knie-TEP-Implantation</div>
+  <div class="hint-endocert"><strong>EndoCert:</strong> Röntgen unmittelbar nach Implantation (liegend a.p. + seitlich). Befund muss Implantatposition, Zementierung und Ausschluss unmittelbarer Komplikationen dokumentieren. Befundung retrospektiv durch Radiologen, Output via RIS/PACS.</div>
+
+  <div class="grid2" style="margin-bottom:10px">
+    <div class="row">
+      <label><span class="lbl">Zeitpunkt der Aufnahme</span>
+        <select id="io_zeitpunkt" onchange="update()"
+          data-radlex="RID49900" data-en="intraoperative radiograph timing">
+          <option value="unmittelbar intraoperativ" data-radlex="RID49900-intra" data-en="intraoperative">Intraoperativ (im OP-Saal)</option>
+          <option value="unmittelbar postoperativ (OP-Saal)" data-radlex="RID49900-postop" data-en="immediately postoperative">Unmittelbar postoperativ – OP-Saal</option>
+          <option value="früh postoperativ (Aufwachraum)" data-radlex="RID49900-pacu" data-en="immediate postoperative recovery">Aufwachraum</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label><span class="lbl">Operateur</span>
+        <input type="text" id="io_operateur" placeholder="Name / Kürzel" oninput="update()">
+      </label>
+    </div>
+  </div>
+
+  <div class="sh"><h2>EndoCert-Kerncheckliste</h2><div class="sh-line"></div></div>
+  <div class="sh-sub">Alle Punkte müssen bewertet werden. Nicht-erfüllte Punkte erscheinen rot in Vorschau und Befundtext.</div>
+  <div class="ec-checklist" id="ec-checklist"></div>
+</div>
+
+<div class="grid2">
+  <div class="row">
+    <label>
+      <span class="lbl">Prothesentyp <span class="rr-rl-badge">RadLex</span></span>
+      <select id="imp_typ" onchange="update()"
+        data-radlex="RID49700" data-en="knee arthroplasty type">
+        <option value="bikondyläre KTEP" data-radlex="RID49701" data-en="total knee arthroplasty bicondylar">Bikondylär (KTEP)</option>
+        <option value="unikondyläre Schlittenprothese medial" data-radlex="RID49702" data-en="unicompartmental knee arthroplasty medial">Schlittenprothese medial</option>
+        <option value="unikondyläre Schlittenprothese lateral" data-radlex="RID49703" data-en="unicompartmental knee arthroplasty lateral">Schlittenprothese lateral</option>
+        <option value="Scharnierprothese (gekoppelt)" data-radlex="RID49704" data-en="constrained hinge knee arthroplasty">Scharnierprothese (gekoppelt)</option>
+        <option value="Revisionsimplantat" data-radlex="RID49705" data-en="revision knee arthroplasty">Revisionsimplantat</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Constraint-Level <span class="rr-rl-badge">RadLex</span></span>
+      <select id="imp_const" onchange="update()"
+        data-radlex="RID49706" data-en="knee implant constraint">
+        <option value="CR (Kreuzband-erhaltend)" data-radlex="RID49707" data-en="cruciate retaining">CR – Kreuzband-erhaltend</option>
+        <option value="PS (Posterior-stabilisiert)" data-radlex="RID49708" data-en="posterior stabilized">PS – Posterior-stabilisiert</option>
+        <option value="CCK (kondylär-gekoppelt)" data-radlex="RID49709" data-en="condylar constrained">CCK – kondylär-gekoppelt</option>
+        <option value="VVC (gekoppelt)" data-radlex="RID49710" data-en="varus-valgus constrained">VVC – Varus/Valgus-Constrained</option>
+        <option value="Scharnier (fully constrained)" data-radlex="RID49711" data-en="fully constrained hinge">Scharnier – fully constrained</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="row">
+    <label>
+      <span class="lbl">Hersteller</span>
+      <select id="imp_hersteller" onchange="update()">
+        <option value="">– wählen –</option>
+        <option value="Zimmer Biomet">Zimmer Biomet</option>
+        <option value="DePuy Synthes (J&amp;J)">DePuy Synthes (J&amp;J)</option>
+        <option value="Smith &amp; Nephew">Smith &amp; Nephew</option>
+        <option value="Stryker">Stryker</option>
+        <option value="Aesculap (B. Braun)">Aesculap (B. Braun)</option>
+        <option value="Mathys">Mathys</option>
+        <option value="Lima Corporate">Lima Corporate</option>
+        <option value="Waldemar Link">Waldemar Link</option>
+        <option value="Sonstige">Sonstige</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Modell (Freitext)</span>
+      <input type="text" id="imp_modell" placeholder="z.B. Persona, Attune, Legion…" oninput="update()">
+    </label>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="row">
+    <label>
+      <span class="lbl">Fixation Femur <span class="rr-rl-badge">RadLex</span></span>
+      <select id="imp_fix_fem" onchange="update()"
+        data-radlex="RID49712" data-en="femoral component fixation">
+        <option value="zementiert" data-radlex="RID49713" data-en="cemented femoral component">Zementiert</option>
+        <option value="zementfrei" data-radlex="RID49714" data-en="cementless femoral component">Zementfrei</option>
+        <option value="hybrid (Femur zementfrei)" data-radlex="RID49715" data-en="hybrid fixation">Hybrid</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Fixation Tibia <span class="rr-rl-badge">RadLex</span></span>
+      <select id="imp_fix_tib" onchange="update()"
+        data-radlex="RID49716" data-en="tibial component fixation">
+        <option value="zementiert" data-radlex="RID49713" data-en="cemented tibial component">Zementiert</option>
+        <option value="zementfrei" data-radlex="RID49714" data-en="cementless tibial component">Zementfrei</option>
+        <option value="hybrid (Tibia zementiert)" data-radlex="RID49715" data-en="hybrid fixation">Hybrid</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <label>
+    <span class="lbl">Patellaersatz <span class="rr-rl-badge">RadLex</span></span>
+    <select id="imp_patella" onchange="update()"
+      data-radlex="RID49718" data-en="patellar resurfacing">
+      <option value="kein Patellaersatz" data-radlex="RID49719" data-en="no patellar resurfacing">Kein Patellaersatz</option>
+      <option value="Patellaersatz" data-radlex="RID49720" data-en="patellar component">Patellaersatz</option>
+    </select>
+  </label>
+</div>
+
+<!-- OP-DATUM / VU -->
+<div class="sh"><h2>Zeitbezug</h2><div class="sh-line"></div></div>
+<div class="grid2">
+  <div class="row">
+    <label>
+      <span class="lbl">OP-Datum</span>
+      <input type="text" id="op_datum" placeholder="TT.MM.JJJJ" oninput="update()">
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Postoperativer Tag / Woche</span>
+      <input type="text" id="pop_tag" placeholder="z.B. POD 2 / Woche 6" oninput="update()">
+    </label>
+  </div>
+</div>
+
+<div class="row" id="vu_row">
+  <label>
+    <span class="lbl">Vergleichsaufnahme</span>
+    <select id="vu_ja" onchange="update()">
+      <option value="">Keine</option>
+      <option value="intraoperativ">Intraoperatives Röntgen</option>
+      <option value="frueh_postop">Früh-postoperatives Röntgen (Datum unten)</option>
+      <option value="verlauf">Verlaufsaufnahme (Datum unten)</option>
+    </select>
+  </label>
+</div>
+<div class="row" id="vu_datum_row" style="display:none">
+  <label>
+    <span class="lbl">Datum Vergleichsaufnahme</span>
+    <input type="text" id="vu_datum" placeholder="MM/JJJJ" oninput="update()">
+  </label>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     KOMPONENTENSTELLUNG
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="sh"><h2>Komponentenstellung</h2><div class="sh-line"></div></div>
+
+<!-- Quantitative Winkelfelder: ausgeblendet intraoperativ -->
+<div id="komp-section">
+<div class="sh-sub">Zielwerte: coronar ± 3° von mechanischer Achse; sagittal hersteller­spezifisch. KI-Felder via LAMA (Ganzbein).</div>
+
+<div class="winkel-grid">
+  <!-- FEMUR -->
+  <div class="winkel-block">
+    <div class="winkel-title">Femurkomponente</div>
+    <div class="row">
+      <label>
+        <span class="lbl">Coronare Stellung <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
+        <div class="ai-field">
+          <input type="number" id="fem_cor" step="0.1" placeholder="Ziel: 90 ± 3° zu mech. Achse"
+            data-radlex="RID49730" data-en="femoral component coronal alignment"
+            data-loinc="LP410789-0" oninput="update()">
+        </div>
+        <div class="field-note">Varus &lt; 87° / Valgus &gt; 93°</div>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <span class="lbl">Coronares Alignment <span class="rr-rl-badge">RadLex</span></span>
+        <select id="fem_cor_q" onchange="update()"
+          data-radlex="RID49731" data-en="femoral component coronal alignment assessment">
+          <option value="regelrecht" data-radlex="RID49731-norm" data-en="neutral femoral alignment">Regelrecht (neutral)</option>
+          <option value="leichter Varus (< 5°)" data-radlex="RID49732" data-en="mild femoral varus">Leichter Varus (&lt; 5°)</option>
+          <option value="relevanter Varus (≥ 5°)" data-radlex="RID49733" data-en="significant femoral varus">Relevanter Varus (≥ 5°)</option>
+          <option value="leichter Valgus (< 5°)" data-radlex="RID49734" data-en="mild femoral valgus">Leichter Valgus (&lt; 5°)</option>
+          <option value="relevanter Valgus (≥ 5°)" data-radlex="RID49735" data-en="significant femoral valgus">Relevanter Valgus (≥ 5°)</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <span class="lbl">Sagittale Stellung <span class="rr-rl-badge">RadLex</span></span>
+        <select id="fem_sag" onchange="update()"
+          data-radlex="RID49736" data-en="femoral component sagittal alignment">
+          <option value="regelrecht positioniert" data-radlex="RID49736-norm" data-en="neutral femoral sagittal position">Regelrecht</option>
+          <option value="in leichter Flexionsstellung" data-radlex="RID49737" data-en="femoral flexion">Leichte Flexionsstellung</option>
+          <option value="in relevanter Flexionsstellung" data-radlex="RID49738" data-en="significant femoral flexion">Relevante Flexionsstellung</option>
+          <option value="in Extensionsstellung" data-radlex="RID49739" data-en="femoral extension">Extensionsstellung</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <span class="lbl">Anteriores Notching <span class="rr-rl-badge">RadLex</span></span>
+        <select id="fem_notch" onchange="update()"
+          data-radlex="RID49740" data-en="anterior femoral notching">
+          <option value="kein anteriores Notching" data-radlex="RID49740-neg" data-en="no anterior notching">Kein Notching</option>
+          <option value="leichtes anteriores Notching" data-radlex="RID49741" data-en="mild anterior notching">Leichtes Notching</option>
+          <option value="relevantes anteriores Notching" data-radlex="RID49742" data-en="significant anterior notching">Relevantes Notching</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <!-- TIBIA -->
+  <div class="winkel-block">
+    <div class="winkel-title">Tibiakomponente</div>
+    <div class="row">
+      <label>
+        <span class="lbl">Coronare Stellung <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
+        <div class="ai-field">
+          <input type="number" id="tib_cor" step="0.1" placeholder="Ziel: 90 ± 3° zur Tibiaachse"
+            data-radlex="RID49750" data-en="tibial component coronal alignment" oninput="update()">
+        </div>
+        <div class="field-note">Varus &lt; 87° / Valgus &gt; 93°</div>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <span class="lbl">Coronares Alignment <span class="rr-rl-badge">RadLex</span></span>
+        <select id="tib_cor_q" onchange="update()"
+          data-radlex="RID49751" data-en="tibial component coronal alignment assessment">
+          <option value="regelrecht" data-radlex="RID49751-norm" data-en="neutral tibial alignment">Regelrecht (neutral)</option>
+          <option value="leichter Varus (< 5°)" data-radlex="RID49752" data-en="mild tibial varus">Leichter Varus (&lt; 5°)</option>
+          <option value="relevanter Varus (≥ 5°)" data-radlex="RID49753" data-en="significant tibial varus">Relevanter Varus (≥ 5°)</option>
+          <option value="leichter Valgus (< 5°)" data-radlex="RID49754" data-en="mild tibial valgus">Leichter Valgus (&lt; 5°)</option>
+          <option value="relevanter Valgus (≥ 5°)" data-radlex="RID49755" data-en="significant tibial valgus">Relevanter Valgus (≥ 5°)</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <span class="lbl">Tibialer Slope Komponente <span class="rr-rl-badge">RadLex</span></span>
+        <select id="tib_slope" onchange="update()"
+          data-radlex="RID49756" data-en="tibial component posterior slope">
+          <option value="regelrecht" data-radlex="RID49756-norm" data-en="normal tibial slope">Regelrecht (0–7°)</option>
+          <option value="erhöht (> 7°)" data-radlex="RID49757" data-en="increased tibial slope">Erhöht (&gt; 7°)</option>
+          <option value="erniedrigt / kein Slope" data-radlex="RID49758" data-en="reduced tibial slope">Erniedrigt / kein Slope</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <span class="lbl">Tibia-Stiel/-Plateau-Position</span>
+        <select id="tib_pos" onchange="update()"
+          data-radlex="RID49759" data-en="tibial component position">
+          <option value="zentral, regelrecht" data-radlex="RID49759-norm" data-en="central tibial position">Zentral, regelrecht</option>
+          <option value="leicht medial versetzt" data-radlex="RID49760" data-en="medial tibial offset">Leicht medial versetzt</option>
+          <option value="leicht lateral versetzt" data-radlex="RID49761" data-en="lateral tibial offset">Leicht lateral versetzt</option>
+          <option value="Überhang medial" data-radlex="RID49762" data-en="medial tibial overhang">Überhang medial</option>
+          <option value="Überhang lateral" data-radlex="RID49763" data-en="lateral tibial overhang">Überhang lateral</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- GESAMTACHSE -->
+<div class="row">
+  <label>
+    <span class="lbl">Postoperative Gesamtachse (HKA) <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
+    <div class="ai-field">
+      <input type="number" id="hka_post" step="0.1" placeholder="Ziel: 180 ± 3° (mechanisch neutral)"
+        data-radlex="RID49504" data-en="hip-knee-ankle angle postoperative"
+        data-loinc="LP410789-0" oninput="update()">
+    </div>
+    <div class="field-note">Prä-op CPAK als Referenz; Ziel je nach geplanter Alignment-Strategie (kinematic vs. mechanical)</div>
+  </label>
+</div>
+</div><!-- #komp-section -->
+
+<!-- Gesamtalignment: in allen Kontexten sichtbar, Wording passt sich an -->
+<div id="align-intraop-hint" style="display:none">
+  <div class="rr-helper-info" style="margin-bottom:8px"><strong>Intraoperativ:</strong> Quantitative Winkelmessung nicht seriös beurteilbar (Liegendaufnahme, keine Kalibrierung). Nur qualitative Gesamteinschätzung dokumentieren.</div>
+</div>
+
+<div class="row">
+  <label>
+    <span class="lbl">Postoperatives Alignment <span class="rr-rl-badge">RadLex</span></span>
+    <select id="align_ges" onchange="update()"
+      data-radlex="RID49770" data-en="postoperative knee alignment">
+      <option value="regelrechte postoperative Achsverhältnisse" data-radlex="RID49770-norm" data-en="neutral postoperative alignment">Regelrecht – mechanisch neutral</option>
+      <option value="leichtes Varusalignment" data-radlex="RID49771" data-en="mild varus alignment postoperative">Leichtes Varusalignment</option>
+      <option value="relevantes Varusalignment" data-radlex="RID49772" data-en="significant varus alignment postoperative">Relevantes Varusalignment</option>
+      <option value="leichtes Valgusalignment" data-radlex="RID49773" data-en="mild valgus alignment postoperative">Leichtes Valgusalignment</option>
+      <option value="relevantes Valgusalignment" data-radlex="RID49774" data-en="significant valgus alignment postoperative">Relevantes Valgusalignment</option>
+    </select>
+  </label>
+</div>
+
+<!-- PATELLA (optional) -->
+<details>
+  <summary>Patella &amp; Streckapparat <span style="font-size:11px;color:var(--rr-ink-faint);margin-left:6px">(optional)</span></summary>
+  <div class="db">
+    <div class="grid2">
+      <div class="row">
+        <label>
+          <span class="lbl">Patellahöhe post-op <span class="rr-rl-badge">RadLex</span></span>
+          <select id="pat_hoehe" onchange="update()"
+            data-radlex="RID49520" data-en="patellar height postoperative">
+            <option value="">–</option>
+            <option value="regelrecht (IS-Index 0,8–1,2)" data-radlex="RID49520-norm" data-en="normal patellar height">Regelrecht</option>
+            <option value="Patella alta (IS-Index > 1,2)" data-radlex="RID49521" data-en="patella alta">Patella alta</option>
+            <option value="Patella baja / infera (IS-Index < 0,8)" data-radlex="RID49522" data-en="patella baja">Patella baja / infera</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Patellazentrierung <span class="rr-rl-badge">RadLex</span></span>
+          <select id="pat_zentr" onchange="update()"
+            data-radlex="RID49780" data-en="patellar tracking">
+            <option value="">–</option>
+            <option value="regelrecht zentriert" data-radlex="RID49780-norm" data-en="normal patellar tracking">Regelrecht zentriert</option>
+            <option value="lateraler Tilt / Subluxation" data-radlex="RID49781" data-en="lateral patellar tilt">Lateraler Tilt / Subluxation</option>
+            <option value="medialer Tilt" data-radlex="RID49782" data-en="medial patellar tilt">Medialer Tilt</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <label>
+        <span class="lbl">Patellakomponente (falls vorhanden)</span>
+        <select id="pat_komp" onchange="update()"
+          data-radlex="RID49783" data-en="patellar component assessment">
+          <option value="">Kein Patellaersatz / nicht beurteilbar</option>
+          <option value="Patellakomponente regelrecht verankert und zentriert" data-radlex="RID49783-norm">Regelrecht verankert und zentriert</option>
+          <option value="Patellakomponente – Subluxationstendenz" data-radlex="RID49784">Subluxationstendenz</option>
+          <option value="Patellakomponente – Lockerungszeichen" data-radlex="RID49785">Lockerungszeichen</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</details>
+
+<div id="peri-section">
+<!-- ═══════════════════════════════════════════════════════════════
+     PERIPROTHETISCHE ZONEN (vereinfacht Ewald / Knee Society)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="sh"><h2>Periprothetische Beurteilung</h2><div class="sh-line"></div></div>
+<div class="sh-sub">Lysesaum / Osteolyse nach Ewald-Zonen (Knee Society Roentgenographic Evaluation). Vereinfacht für Stufe 1.</div>
+
+<div class="rr-helper-info">
+  <strong>Lysesaum-Definition:</strong> Radioluzenter Saum ≥ 2 mm an der Implantat-Knochen-Grenzfläche gilt als signifikant. Bei zementierten Implantaten: Saum zwischen Zement und Knochen bzw. Zement und Metall.
+</div>
+
+<div class="ewald-wrap">
+  <table class="ewald-tbl">
+    <thead>
+      <tr>
+        <th class="side" style="width:110px">Zone</th>
+        <th>Lysesaum</th>
+        <th>Osteolyse</th>
+        <th>Verlauf</th>
+      </tr>
+    </thead>
+    <tbody id="ewald-tbody">
+      <!-- Femur -->
+      <tr><td class="zone-lbl" colspan="4" style="background:var(--rr-accent-pale);color:var(--accent-deep);font-size:11px;padding:5px 8px;letter-spacing:.04em">FEMURKOMPONENTE (anterior → posterior)</td></tr>
+      <!-- F1-F7 generiert via JS -->
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <label>
+    <span class="lbl">Gesamtbeurteilung periprothetisch <span class="rr-rl-badge">RadLex</span></span>
+    <select id="peri_ges" onchange="update()"
+      data-radlex="RID49790" data-en="periprosthetic assessment">
+      <option value="kein signifikanter Lysesaum, keine Osteolyse" data-radlex="RID49790-norm" data-en="no periprosthetic lucency">Unauffällig – kein Lysesaum, keine Osteolyse</option>
+      <option value="marginaler Lysesaum (< 2 mm), klinisch nicht signifikant" data-radlex="RID49791" data-en="minor periprosthetic lucency">Marginaler Saum (&lt; 2 mm), klinisch nicht signifikant</option>
+      <option value="signifikanter Lysesaum (≥ 2 mm)" data-radlex="RID49792" data-en="significant periprosthetic lucency">Signifikanter Saum (≥ 2 mm) – Verlaufskontrolle</option>
+      <option value="progrediente Osteolyse" data-radlex="RID49793" data-en="progressive osteolysis">Progrediente Osteolyse – Revisionsverdacht</option>
+    </select>
+  </label>
+</div>
+</div><!-- #peri-section -->
+
+<!-- ZEMENT (kollabierbar) -->
+<details id="zement-section">
+  <summary>Zementmantel-Beurteilung <span style="font-size:11px;color:var(--rr-ink-faint);margin-left:6px">(nur bei zementierten Implantaten)</span></summary>
+  <div class="db">
+    <div class="grid2">
+      <div class="row">
+        <label>
+          <span class="lbl">Zementmantel Femur <span class="rr-rl-badge">RadLex</span></span>
+          <select id="zem_fem" onchange="update()"
+            data-radlex="RID49800" data-en="femoral cement mantle">
+            <option value="">–</option>
+            <option value="vollständiger Zementmantel Femur" data-radlex="RID49800-norm">Vollständig, regelrecht</option>
+            <option value="Zementmantel Femur mit Defekten" data-radlex="RID49801">Defekte im Zementmantel</option>
+            <option value="inkompletter Zementmantel Femur" data-radlex="RID49802">Inkompletter Mantel</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>
+          <span class="lbl">Zementmantel Tibia <span class="rr-rl-badge">RadLex</span></span>
+          <select id="zem_tib" onchange="update()"
+            data-radlex="RID49803" data-en="tibial cement mantle">
+            <option value="">–</option>
+            <option value="vollständiger Zementmantel Tibia" data-radlex="RID49803-norm">Vollständig, regelrecht</option>
+            <option value="Zementmantel Tibia mit Defekten" data-radlex="RID49804">Defekte im Zementmantel</option>
+            <option value="inkompletter Zementmantel Tibia" data-radlex="RID49805">Inkompletter Mantel</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     KOMPLIKATIONS-FLAGS  (intern – fließen NICHT in Befundtext)
+     ═══════════════════════════════════════════════════════════════ -->
+<details>
+  <summary>Komplikations-Flags <span style="font-size:11px;color:var(--rr-ink-faint);margin-left:6px">– interne Orientierung, kein Fließtext-Output</span></summary>
+  <div class="db">
+    <div class="rr-helper-info" style="margin-bottom:10px"><strong>Hinweis:</strong> Flags erscheinen in der Live-Vorschau als Ampel-Tags, fließen aber <em>nicht</em> in den kopierten Befundtext. Für Syngo-Copy/Paste vollständig transparent.</div>
+    <div class="flag-grid" id="flag-grid"></div>
+  </div>
+</details>
+
+<!-- OSSÄRE STRUKTUREN -->
+<div class="sh"><h2>Ossäre Strukturen &amp; Weichteile</h2><div class="sh-line"></div></div>
+<div class="grid2">
+  <div id="bone-section">
+  <div class="row">
+    <label>
+      <span class="lbl">Knochenstruktur / -qualität <span class="rr-rl-badge">RadLex</span></span>
+      <select id="bone_q" onchange="update()"
+        data-radlex="RID13573" data-en="bone quality">
+        <option value="regelrechte Knochenstruktur" data-radlex="RID13573-norm" data-en="normal bone">Regelrecht</option>
+        <option value="osteopenische Knochenstruktur" data-radlex="RID5222" data-en="osteopenia">Ostopenie</option>
+        <option value="osteoporotische Knochenstruktur" data-radlex="RID5223" data-en="osteoporosis">Osteoporose</option>
+      </select>
+    </label>
+  </div>
+  </div>
+  <div class="row">
+    <label>
+      <span class="lbl">Gelenkerguss <span class="rr-rl-badge">RadLex</span></span>
+      <select id="erguss" onchange="update()"
+        data-radlex="RID4872" data-en="joint effusion">
+        <option value="kein wesentlicher Gelenkerguss" data-radlex="RID4872-neg" data-en="no joint effusion">Kein wesentlicher Erguss</option>
+        <option value="leichter Gelenkerguss" data-radlex="RID4872-mild" data-en="mild joint effusion">Leichter Erguss</option>
+        <option value="mäßiger Gelenkerguss" data-radlex="RID4872-mod" data-en="moderate joint effusion">Mäßiger Erguss</option>
+        <option value="ausgeprägter Gelenkerguss" data-radlex="RID4872-sev" data-en="large joint effusion">Ausgeprägter Erguss</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <label>
+    <span class="lbl">Heterotope Ossifikationen <span class="rr-rl-badge">RadLex</span></span>
+    <select id="hto" onchange="update()"
+      data-radlex="RID5060" data-en="heterotopic ossification">
+      <option value="keine heterotopen Ossifikationen" data-radlex="RID5060-neg" data-en="no heterotopic ossification">Keine</option>
+      <option value="geringe heterotope Ossifikationen periartikulär" data-radlex="RID5060-mild" data-en="mild heterotopic ossification">Gering – Brooker I–II</option>
+      <option value="ausgeprägte heterotope Ossifikationen (Brooker III–IV)" data-radlex="RID5060-sev" data-en="significant heterotopic ossification">Ausgeprägt – Brooker III–IV</option>
+    </select>
+  </label>
+</div>
+
+<!-- VERLAUFSBEURTEILUNG (kontextuell) -->
+<div id="verlauf-section" style="display:none">
+  <div class="sh"><h2>Verlaufsbeurteilung</h2><div class="sh-line"></div></div>
+  <div class="row">
+    <label>
+      <span class="lbl">Verlauf im Vergleich</span>
+      <select id="verlauf_q" onchange="update()"
+        data-radlex="RID49820" data-en="interval change">
+        <option value="">–</option>
+        <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel." data-radlex="RID49820-stable" data-en="no significant interval change">Kein wesentlicher Wandel</option>
+        <option value="Im Vergleich zur Voruntersuchung regelrechte postoperative Progression." data-radlex="RID49821" data-en="expected postoperative interval change">Regelrechte postoperative Progression</option>
+        <option value="Im Vergleich zur Voruntersuchung neu aufgetretener / progredienter Befund." data-radlex="RID49822" data-en="new or progressive finding">Neu / progredient – klinische Korrelation empfohlen</option>
+        <option value="Im Vergleich zur Voruntersuchung Progredienz der Lysesäume / Osteolyse." data-radlex="RID49823" data-en="progressive osteolysis on follow-up">Progredienz Lysesaum / Osteolyse</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<!-- FREITEXT -->
+<div class="sh"><h2>Ergänzungen</h2><div class="sh-line"></div></div>
+<div class="row">
+  <label>
+    <span class="lbl">Freitext Zusatzbefunde</span>
+    <textarea id="freetext" rows="3" placeholder="Zusätzliche Befunde, Besonderheiten…" oninput="update()"></textarea>
+  </label>
+</div>
+
+<!-- BEURTEILUNG -->
+<div class="sh"><h2>Beurteilung</h2><div class="sh-line"></div></div>
+<div class="rr-helper-info"><strong>Hinweis:</strong> Beurteilung immer Freitext – Synthese des Radiologen. Komplikations-Flags fließen automatisch als Vorschlag ein.</div>
+<div class="row">
+  <label>
+    <span class="lbl">Beurteilung</span>
+    <textarea id="beurt" rows="6"
+      placeholder="z.B.: Röntgen Knie re. postoperativ nach bikondylärer KTEP (PS, Zimmer Biomet Persona), POD 2. Implantat regelrecht positioniert, koronares Alignment Femur und Tibia neutral. Postoperative Gesamtachse mechanisch neutral. Kein signifikanter periprothetischer Lysesaum. Kein Hinweis auf Früh-Komplikation."
+      oninput="update()"></textarea>
+  </label>
+</div>
+<div id="beurt-vorschlag" style="margin-bottom:10px"></div>
+
+<!-- BUTTONS -->
+<div class="rr-actions">
+  <button class="rr-btn" onclick="copyReport()">📋 Befundtext kopieren</button>
+  <button class="rr-btn-secondary" onclick="toggleExport('fhir')">{ } FHIR-Export</button>
+  <button class="rr-btn-secondary" onclick="toggleExport('json')">[ ] JSON-Export</button>
+  <button class="btn-d" onclick="resetAll()">↺ Zurücksetzen</button>
+</div>
+<div class="rr-export-area" id="export-box"></div>
+
+</section>
+
+<!-- ══════════════════════════ PREVIEW PANE ══════════════════════════ -->
+<aside class="rr-preview-pane">
+<div class="rr-preview-title">Befund-Vorschau (Live)</div>
+<div class="rcard">
+  <div class="rcard-header" style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+    <div>
+      <div class="rcard-title">Röntgen Knie post-KTEP</div>
+      <div class="rcard-sub" id="prev-sub">–</div>
+    </div>
+    <div class="ec-pill" id="ec-pill">✓ EndoCert</div>
+  </div>
+  <div class="rsec"><div class="rsec-lbl">Technik</div><div class="rtext" id="prev-technik"></div></div>
+  <div class="rsec"><div class="rsec-lbl">Implantat</div><div class="rtext" id="prev-implantat"></div></div>
+  <div class="rsec" id="ec-prev-section" style="display:none">
+    <div class="rsec-lbl">EndoCert-Checkliste</div>
+    <div class="ec-check-prev" id="prev-ec-checklist"></div>
+  </div>
+  <div class="rsec"><div class="rsec-lbl">Befund</div><div class="rtext" id="prev-befund"></div></div>
+  <div class="rsec">
+    <div class="rsec-lbl" style="color:var(--rr-ink-muted)">Komplikations-Flags (intern – kein Befundtext-Output)</div>
+    <div class="ampel" id="prev-ampel"></div>
+  </div>
+  <div class="rsec"><div class="rsec-lbl">Beurteilung</div><div class="rtext" id="prev-beurt"></div></div>
+  <div class="stamp">
+    <span>HJK-MRRT-KNIE-POSTTEP-v1.1</span>
+    <span id="prev-date"></span>
+  </div>
+</div>
+<div id="status-badge" class="badge warn">● Implantat-Typ ausfüllen</div>
+</aside>
+
+</div><!-- .app -->
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   ██  IMPLANTAT-PRESETS  –  HIER ANPASSEN  ██
+   ════════════════════════════════════════════════════════════
+   Nach Rücksprache mit Chr. Böhler (Orthopädie I, HJK):
+   Einträge editieren, ergänzen oder entfernen.
+
+   Felder:
+     label       Kurzname auf dem Button (max. ~20 Zeichen)
+     detail      Zweite Zeile auf dem Button (Constraint + Fixation)
+     typ         Wert für #imp_typ – muss mit Option-value übereinstimmen
+     const_      Wert für #imp_const
+     hersteller  Wert für #imp_hersteller
+     modell      Wert für #imp_modell (Freitext)
+     fix_fem     "zementiert" | "zementfrei" | "hybrid (Femur zementfrei)"
+     fix_tib     "zementiert" | "zementfrei" | "hybrid (Tibia zementiert)"
+     patella     "kein Patellaersatz" | "Patellaersatz"
+   ════════════════════════════════════════════════════════════ */
+const PRESETS = [
+  {
+    label:      'Persona PS',
+    detail:     'Zimmer Biomet · PS · zementiert bds.',
+    typ:        'bikondyläre KTEP',
+    const_:     'PS (Posterior-stabilisiert)',
+    hersteller: 'Zimmer Biomet',
+    modell:     'Persona PS',
+    fix_fem:    'zementiert',
+    fix_tib:    'zementiert',
+    patella:    'kein Patellaersatz',
+  },
+  {
+    label:      'Persona CR',
+    detail:     'Zimmer Biomet · CR · zementiert bds.',
+    typ:        'bikondyläre KTEP',
+    const_:     'CR (Kreuzband-erhaltend)',
+    hersteller: 'Zimmer Biomet',
+    modell:     'Persona CR',
+    fix_fem:    'zementiert',
+    fix_tib:    'zementiert',
+    patella:    'kein Patellaersatz',
+  },
+  {
+    label:      'NexGen PS',
+    detail:     'Zimmer Biomet · PS · zementiert bds.',
+    typ:        'bikondyläre KTEP',
+    const_:     'PS (Posterior-stabilisiert)',
+    hersteller: 'Zimmer Biomet',
+    modell:     'NexGen LPS',
+    fix_fem:    'zementiert',
+    fix_tib:    'zementiert',
+    patella:    'kein Patellaersatz',
+  },
+  {
+    label:      'NexGen CR',
+    detail:     'Zimmer Biomet · CR · zementiert bds.',
+    typ:        'bikondyläre KTEP',
+    const_:     'CR (Kreuzband-erhaltend)',
+    hersteller: 'Zimmer Biomet',
+    modell:     'NexGen CR-Flex',
+    fix_fem:    'zementiert',
+    fix_tib:    'zementiert',
+    patella:    'kein Patellaersatz',
+  },
+];
+/* ════════════════════════════════════════════════════════════
+   ENDE PRESETS-KONFIGURATION
+   ════════════════════════════════════════════════════════════ */
+
+let activePreset = null;
+
+function renderPresets(){
+  const bar = document.getElementById('preset-bar');
+  if(!bar) return;
+  bar.innerHTML = '';
+  PRESETS.forEach((p, idx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'preset-btn';
+    btn.id = `preset-btn-${idx}`;
+    btn.innerHTML = `<span class="pb-name">${p.label}</span><span class="pb-detail">${p.detail}</span>`;
+    btn.addEventListener('click', () => applyPreset(idx));
+    bar.appendChild(btn);
+  });
+}
+
+function applyPreset(idx){
+  const p = PRESETS[idx];
+  if(!p) return;
+
+  // Felder setzen
+  setSelectByValue('imp_typ',      p.typ);
+  setSelectByValue('imp_const',    p.const_);
+  setSelectByValue('imp_hersteller', p.hersteller);
+  setSelectByValue('imp_fix_fem',  p.fix_fem);
+  setSelectByValue('imp_fix_tib',  p.fix_tib);
+  setSelectByValue('imp_patella',  p.patella);
+  const modEl = document.getElementById('imp_modell');
+  if(modEl) modEl.value = p.modell;
+
+  // Aktiv-State der Buttons
+  document.querySelectorAll('.preset-btn').forEach((b,i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  activePreset = idx;
+  update();
+}
+
+function setSelectByValue(id, val){
+  const el = document.getElementById(id);
+  if(!el || !val) return;
+  for(let i=0; i<el.options.length; i++){
+    if(el.options[i].value === val){ el.selectedIndex = i; return; }
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   KOMPLIKATIONS-FLAGS  –  Definition
+   ════════════════════════════════════════════════════════════ */
+const FLAGS = [
+  {id:'fl_fraktur',   label:'Periprothetische Fraktur',    note:'Vancouver-Klassifikation empfohlen', rid:'RID49830', en:'periprosthetic fracture',      sev:'alert'},
+  {id:'fl_luxation',  label:'Luxation / Subluxation',      note:'Sofortige Klinik-Info',               rid:'RID49831', en:'prosthesis dislocation',       sev:'alert'},
+  {id:'fl_loosening', label:'Lockerungszeichen',           note:'Signifikanter Lysesaum / Migration',  rid:'RID49832', en:'prosthetic loosening',          sev:'warn'},
+  {id:'fl_infekt',    label:'V.a. periprothetische Infektion', note:'Osteolyse + klinische Korrelation', rid:'RID49833', en:'periprosthetic infection',    sev:'alert'},
+  {id:'fl_malalign',  label:'Relevantes Malalignment',    note:'Korrektur prüfen',                    rid:'RID49834', en:'prosthetic malalignment',       sev:'warn'},
+  {id:'fl_notching',  label:'Relevantes Notching',        note:'Frakturrisiko suprakondylär erhöht',  rid:'RID49835', en:'anterior femoral notching',     sev:'warn'},
+  {id:'fl_ptx_alta',  label:'Patella baja / infera',      note:'Streckapparat prüfen',                rid:'RID49836', en:'patella baja postoperative',    sev:'warn'},
+  {id:'fl_hto',       label:'Ausgeprägte HTO',            note:'Brooker III–IV',                      rid:'RID49837', en:'significant heterotopic ossification', sev:'warn'},
+];
+
+/* ════════════════════════════════════════════════════════════
+   EWALD-ZONEN  –  Definition (vereinfacht Stufe 1)
+   ════════════════════════════════════════════════════════════ */
+const EWALD_ZONES = [
+  // Femur a.p.
+  {id:'ew_f1', grp:'Femur (a.p.)',  label:'F1 – lat. Femur'},
+  {id:'ew_f2', grp:'Femur (a.p.)',  label:'F2 – Femur zentral'},
+  {id:'ew_f3', grp:'Femur (a.p.)',  label:'F3 – med. Femur'},
+  // Femur lateral
+  {id:'ew_f4', grp:'Femur (seitl.)',label:'F4 – ant. Femur'},
+  {id:'ew_f5', grp:'Femur (seitl.)',label:'F5 – post. Femur'},
+  // Tibia a.p.
+  {id:'ew_t1', grp:'Tibia (a.p.)',  label:'T1 – lat. Tibia'},
+  {id:'ew_t2', grp:'Tibia (a.p.)',  label:'T2 – Tibia zentral'},
+  {id:'ew_t3', grp:'Tibia (a.p.)',  label:'T3 – med. Tibia'},
+  // Tibia lateral
+  {id:'ew_t4', grp:'Tibia (seitl.)',label:'T4 – ant. Tibia'},
+  {id:'ew_t5', grp:'Tibia (seitl.)',label:'T5 – post. Tibia'},
+];
+
+const LYSESAUM_OPTS = [
+  {v:'',    t:'–'},
+  {v:'neg', t:'keiner'},
+  {v:'1',   t:'< 1 mm'},
+  {v:'2',   t:'1–2 mm'},
+  {v:'3',   t:'> 2 mm ⚠'},
+];
+const OSTEOLYSE_OPTS = [
+  {v:'',    t:'–'},
+  {v:'neg', t:'keine'},
+  {v:'fokal',t:'fokal'},
+  {v:'ausgedehnt',t:'ausgedehnt ⚠'},
+];
+const VERLAUF_OPTS = [
+  {v:'', t:'–'},
+  {v:'stabil', t:'stabil'},
+  {v:'neu', t:'neu ⚠'},
+  {v:'progredient', t:'progredient ⚠'},
+  {v:'rückläufig', t:'rückläufig'},
+];
+
+/* ════════════════════════════════════════════════════════════
+   ENDOCERT-CHECKLISTE  –  Definition
+   ════════════════════════════════════════════════════════════ */
+const EC_CHECKLIST = [
+  {id:'ec_pos',   label:'Implantat korrekt positioniert',       note:'Regelrechte Verankerung Femur + Tibia, kein offensichtliches Malalignment', rid:'RID49770', en:'implant position satisfactory'},
+  {id:'ec_zem',   label:'Zementierung vollständig',             note:'Vollständiger Mantel, kein relevanter Defekt, keine bedenkliche Extrusion',  rid:'RID49800', en:'cement mantle complete'},
+  {id:'ec_frak',  label:'Keine periprothetische Fraktur',       note:'Kein Frakturhinweis im abgebildeten Bereich',                               rid:'RID49830', en:'no periprosthetic fracture'},
+  {id:'ec_lux',   label:'Kein Hinweis auf Luxation',            note:'Kongruente Gelenkstellung, kein Implantat-Dislokationszeichen',              rid:'RID49831', en:'no dislocation'},
+  {id:'ec_align', label:'Alignment ohne dringlichen Korrekturbedarf', note:'Coronares + sagittales Alignment beider Komponenten akzeptabel',       rid:'RID49771', en:'alignment acceptable'},
+  {id:'ec_pat',   label:'Patella zentriert (falls Patellaersatz)', note:'Tracking ok, kein Tilt, kein Überhang; n.a. ohne Patellaersatz',         rid:'RID49780', en:'patellar tracking satisfactory'},
+];
+
+function renderEcChecklist(){
+  const wrap = document.getElementById('ec-checklist');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  EC_CHECKLIST.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'ec-cl-item';
+    div.id = `ec-wrap-${c.id}`;
+    div.innerHTML = `
+      <div class="ec-cl-inner">
+        <input type="radio" name="${c.id}" id="${c.id}_ok" value="ok">
+        <label for="${c.id}_ok" class="ec-ok">✓ Ja</label>
+        <input type="radio" name="${c.id}" id="${c.id}_nok" value="nok">
+        <label for="${c.id}_nok" class="ec-nok">✗ Nein</label>
+        <input type="radio" name="${c.id}" id="${c.id}_na" value="na">
+        <label for="${c.id}_na" class="ec-na">n.a.</label>
+      </div>
+      <div class="ec-cl-text">
+        <strong>${c.label}</strong>
+        <span>${c.note}</span>
+      </div>`;
+    wrap.appendChild(div);
+    div.querySelectorAll('input[type=radio]').forEach(r => r.addEventListener('change', () => {
+      const v = document.querySelector(`input[name=${c.id}]:checked`)?.value || '';
+      const w = document.getElementById(`ec-wrap-${c.id}`);
+      w.classList.remove('ok','nok');
+      if(v==='ok')  w.classList.add('ok');
+      if(v==='nok') w.classList.add('nok');
+      update();
+    }));
+  });
+}
+
+function getEcVal(id){ return document.querySelector(`input[name=${id}]:checked`)?.value || ''; }
+function getEcNok(){ return EC_CHECKLIST.filter(c => getEcVal(c.id) === 'nok'); }
+function getEcOffen(){ return EC_CHECKLIST.filter(c => getEcVal(c.id) === ''); }
+
+/* ════════════════════════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('prev-date').textContent =
+    new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
+
+  renderFlags();
+  renderEwald();
+  renderEcChecklist();
+  renderPresets();
+
+  // Kontext-Switch
+  document.querySelectorAll('input[name=ctx]').forEach(r => r.addEventListener('change', () => {
+    updateCtxHint();
+    update();
+  }));
+
+  // Seite
+  document.querySelectorAll('input[name=seite]').forEach(r => r.addEventListener('change', update));
+
+  // VU-Datum nur anzeigen wenn VU gewählt
+  document.getElementById('vu_ja').addEventListener('change', function(){
+    document.getElementById('vu_datum_row').style.display = this.value ? '' : 'none';
+    update();
+  });
+
+  // Preset-Button deaktivieren bei manueller Änderung eines Implantat-Feldes
+  ['imp_typ','imp_const','imp_hersteller','imp_fix_fem','imp_fix_tib','imp_patella'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', () => {
+      activePreset = null;
+      document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+    });
+  });
+  document.getElementById('imp_modell')?.addEventListener('input', () => {
+    activePreset = null;
+    document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  });
+
+  updateCtxHint();
+  update();
+});
+
+function getCtx(){ return document.querySelector('input[name=ctx]:checked')?.value || 'frueh'; }
+function getSeite(){ return document.querySelector('input[name=seite]:checked')?.value || 're.'; }
+
+function updateCtxHint(){
+  const ctx = getCtx();
+  const hints = {
+    intraop:'<strong>Intraoperativ / unmittelbar postoperativ (EndoCert):</strong> Liegend a.p. + seitlich. Retrospektive Befundung durch Radiologen via RIS/PACS. EndoCert-Checkliste vollständig ausfüllen.',
+    frueh:'<strong>Früh-postoperativ (0–6 Wo):</strong> Implantat-Position, Komplikationsausschluss, Vergleich mit intraoperativem Röntgen.',
+    verlauf:'<strong>Verlaufskontrolle (6 Wo – 2 Jahre):</strong> Osseointegration, Achsstabilität, periprothetische Lysesäume im Verlauf.',
+    revision:'<strong>Revisionsverdacht:</strong> Loosening, periprothetische Infektion, Malalignment – klinische Korrelation essenziell.',
+  };
+  document.getElementById('ctx-hint').innerHTML = hints[ctx];
+  // intraop-Sektion ein/aus
+  document.getElementById('intraop-section').style.display = ctx==='intraop' ? '' : 'none';
+  // Periprothetische Beurteilung (Ewald/Osteolyse) – nicht relevant intraoperativ
+  document.getElementById('peri-section').style.display = ctx==='intraop' ? 'none' : '';
+  // Knochenstruktur – präoperatives Wissen, intraoperativ nicht relevant
+  document.getElementById('bone-section').style.display = ctx==='intraop' ? 'none' : '';
+  // Quantitative Komponentenstellung – intraoperativ nicht beurteilbar
+  document.getElementById('komp-section').style.display = ctx==='intraop' ? 'none' : '';
+  document.getElementById('align-intraop-hint').style.display = ctx==='intraop' ? '' : 'none';
+  // Verlaufs-Sektion nur bei verlauf + revision
+  document.getElementById('verlauf-section').style.display = (ctx==='verlauf'||ctx==='revision') ? '' : 'none';
+  // EndoCert-Pill in Preview
+  document.getElementById('ec-pill').classList.toggle('show', ctx==='intraop');
+  document.getElementById('ec-prev-section').style.display = ctx==='intraop' ? '' : 'none';
+}
+
+/* ── Flag Grid ── */
+function renderFlags(){
+  const grid = document.getElementById('flag-grid');
+  grid.innerHTML = '';
+  FLAGS.forEach(f => {
+    const div = document.createElement('label');
+    div.className = 'flag-item';
+    div.id = `flag-wrap-${f.id}`;
+    div.innerHTML = `<input type="checkbox" id="${f.id}" onchange="updateFlagStyle('${f.id}');update()">
+      <div class="flag-lbl"><strong>${f.label}</strong>${f.note}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+function updateFlagStyle(id){
+  const cb = document.getElementById(id);
+  const wrap = document.getElementById(`flag-wrap-${id}`);
+  wrap.classList.toggle('active', cb.checked);
+}
+
+function getActiveFlags(){
+  return FLAGS.filter(f => document.getElementById(f.id)?.checked);
+}
+
+/* ── Ewald Table ── */
+function renderEwald(){
+  const tbody = document.getElementById('ewald-tbody');
+  let lastGrp = '';
+  EWALD_ZONES.forEach(z => {
+    if(z.grp !== lastGrp){
+      lastGrp = z.grp;
+      const hdr = document.createElement('tr');
+      hdr.innerHTML = `<td class="zone-lbl" colspan="4" style="background:var(--rr-bg-alt);color:var(--rr-ink-muted);font-size:10.5px;padding:4px 8px;letter-spacing:.04em">${z.grp}</td>`;
+      tbody.appendChild(hdr);
+    }
+    const lyseOpts = LYSESAUM_OPTS.map(o=>`<option value="${o.v}">${o.t}</option>`).join('');
+    const ostyOpts = OSTEOLYSE_OPTS.map(o=>`<option value="${o.v}">${o.t}</option>`).join('');
+    const verlOpts = VERLAUF_OPTS.map(o=>`<option value="${o.v}">${o.t}</option>`).join('');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="zone-lbl">${z.label}</td>
+      <td><select id="${z.id}_lyse" onchange="update()">${lyseOpts}</select></td>
+      <td><select id="${z.id}_ost" onchange="update()">${ostyOpts}</select></td>
+      <td><select id="${z.id}_verl" onchange="update()">${verlOpts}</select></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ════════════════════════════════════════════════════════════
+   TEXT BUILDERS
+   ════════════════════════════════════════════════════════════ */
+const gv = id => document.getElementById(id)?.value?.trim() ?? '';
+const gn = id => { const v=parseFloat(document.getElementById(id)?.value); return isNaN(v)?null:v; };
+const gc = id => !!document.getElementById(id)?.checked;
+
+function buildTechnik(){
+  const ctx = getCtx();
+  const ap  = gv('pr_ap');
+  const lat = gv('pr_lat')==='ja' ? ', seitlich' : '';
+  const pat = gv('pr_pat')==='ja' ? ', Patella axial' : '';
+  const lla = gv('pr_lla')!=='nein' ? ', Ganzbein-Standaufnahme (kalibriert)' : '';
+  const q   = gv('qual');
+  const op  = gv('op_datum');
+  const pop = gv('pop_tag');
+
+  if(ctx==='intraop'){
+    const zt  = gv('io_zeitpunkt') || 'unmittelbar intraoperativ';
+    const ope = gv('io_operateur');
+    let t = `Röntgen Knie ${getSeite()}, ${zt}, liegend a.p. + seitlich. Aufnahmequalität ${q}.`;
+    if(op) t += ` OP-Datum: ${op}.`;
+    if(ope) t += ` Operateur: ${ope}.`;
+    return t;
+  }
+
+  let t = `Röntgen Knie ${getSeite()}${ap ? ' ('+ap+')' : ''}${lat}${pat}${lla}. Aufnahmequalität ${q}.`;
+  if(op || pop) t += ` OP-Datum: ${op||'–'}${pop ? ', '+pop : ''}.`;
+  const vu = gv('vu_ja');
+  if(vu){
+    const vuDat = gv('vu_datum');
+    t += ` Vergleich: ${vu==='intraoperativ'?'intraoperatives Röntgen':vu+(vuDat?' vom '+vuDat:'')}.`;
+  }
+  return t;
+}
+
+function buildImplantat(){
+  const typ   = gv('imp_typ');
+  const con   = gv('imp_const');
+  const her   = gv('imp_hersteller');
+  const mod   = gv('imp_modell');
+  const fixF  = gv('imp_fix_fem');
+  const fixT  = gv('imp_fix_tib');
+  const pat   = gv('imp_patella');
+  let s = `${typ}`;
+  if(con) s += `, ${con}`;
+  if(her || mod) s += ` (${[her,mod].filter(Boolean).join(', ')})`;
+  s += `. Fixation: Femur ${fixF}, Tibia ${fixT}. ${pat}.`;
+  return s;
+}
+
+function buildBefund(){
+  const lines = [];
+  const ctx = getCtx();
+
+  // EndoCert-Checkliste (nur intraop)
+  if(ctx === 'intraop'){
+    const clItems = EC_CHECKLIST.map(c => {
+      const v = getEcVal(c.id);
+      const sym = v==='ok'?'✓':v==='nok'?'✗':v==='na'?'(n.a.)':'○';
+      return `${sym} ${c.label}`;
+    });
+    lines.push('EndoCert-Checkliste:\n' + clItems.join('\n'));
+  }
+
+  // Komponentenstellung
+  const femCorQ = gv('fem_cor_q');
+  const femSag  = gv('fem_sag');
+  const femNotch= gv('fem_notch');
+  const tibCorQ = gv('tib_cor_q');
+  const tibSlope= gv('tib_slope');
+  const tibPos  = gv('tib_pos');
+  const alignGes= gv('align_ges');
+  const hkaPost = gn('hka_post');
+  const femCor  = gn('fem_cor');
+  const tibCor  = gn('tib_cor');
+
+  let komp = 'Komponentenstellung:';
+  komp += ` Femurkomponente coronar ${femCorQ}${femCor!==null?' ('+femCor.toFixed(1)+'°)':''}, ${femSag}.`;
+  komp += ` ${femNotch}.`;
+  komp += ` Tibiakomponente coronar ${tibCorQ}${tibCor!==null?' ('+tibCor.toFixed(1)+'°)':''}, tibialer Slope ${tibSlope}, Position ${tibPos}.`;
+  lines.push(komp);
+
+  const hka_txt = hkaPost !== null ? ` (HKA ${hkaPost.toFixed(1)}°)` : '';
+  lines.push(`Postoperative Gesamtachse: ${alignGes}${hka_txt}.`);
+
+  // Periprothetisch
+  const periGes = gv('peri_ges');
+  lines.push(`Periprothetische Beurteilung: ${periGes}.`);
+
+  // Ewald – auffällige Zonen
+  const ewald_auff = [];
+  EWALD_ZONES.forEach(z => {
+    const lyse = document.getElementById(`${z.id}_lyse`)?.value;
+    const ost  = document.getElementById(`${z.id}_ost`)?.value;
+    const verl = document.getElementById(`${z.id}_verl`)?.value;
+    if(lyse==='3'||lyse==='2'||ost==='fokal'||ost==='ausgedehnt'||verl==='progredient'||verl==='neu'){
+      let s = z.label;
+      if(lyse && lyse!=='neg') s += `: Lysesaum ${LYSESAUM_OPTS.find(o=>o.v===lyse)?.t||lyse}`;
+      if(ost && ost!=='neg') s += `, Osteolyse ${ost}`;
+      if(verl && verl!=='stabil') s += `, ${verl}`;
+      ewald_auff.push(s);
+    }
+  });
+  if(ewald_auff.length) lines.push('Auffällige Zonen: ' + ewald_auff.join('; ') + '.');
+
+  // Zement
+  const zemFem = gv('zem_fem'), zemTib = gv('zem_tib');
+  if(zemFem || zemTib){
+    const z = [zemFem, zemTib].filter(Boolean);
+    lines.push('Zementmantel: ' + z.join('; ') + '.');
+  }
+
+  // Patella
+  const patH = gv('pat_hoehe'), patZ = gv('pat_zentr'), patK = gv('pat_komp');
+  if(patH||patZ||patK){
+    const p = [patH,patZ,patK].filter(Boolean);
+    lines.push('Patella: ' + p.join(', ') + '.');
+  }
+
+  // Ossär / Weichteile
+  const bq   = gv('bone_q');
+  const erg  = gv('erguss');
+  const hto  = gv('hto');
+  lines.push(`Ossäre Strukturen: ${bq}. ${erg}. ${hto}.`);
+
+  // Verlauf
+  const verlQ = gv('verlauf_q');
+  if(verlQ) lines.push(verlQ);
+
+  // Freitext
+  const ft = gv('freetext');
+  if(ft) lines.push(ft);
+
+  return lines.join('\n');
+}
+
+/* ── Update Ampel ── */
+function updateAmpel(){
+  const flags = getActiveFlags();
+  const ampel = document.getElementById('prev-ampel');
+  ampel.innerHTML = '';
+  if(!flags.length){
+    ampel.innerHTML = '<span class="ampel-tag ok">✓ Keine Komplikations-Flags</span>';
+    return;
+  }
+  flags.forEach(f => {
+    const tag = document.createElement('span');
+    tag.className = `ampel-tag ${f.sev}`;
+    tag.textContent = (f.sev==='alert'?'⚠ ':'● ') + f.label;
+    ampel.appendChild(tag);
+  });
+}
+
+/* ── Beurteilungs-Vorschlag ── */
+function buildBeurtVorschlag(){
+  const flags = getActiveFlags();
+  const ctx   = getCtx();
+  const s     = getSeite();
+  const typ   = gv('imp_typ');
+  const her   = gv('imp_hersteller');
+  const mod   = gv('imp_modell');
+  const con   = gv('imp_const');
+  const pop   = gv('pop_tag');
+  const align = gv('align_ges');
+  const peri  = gv('peri_ges');
+
+  if(ctx === 'intraop'){
+    const zt   = gv('io_zeitpunkt') || 'intraoperativ';
+    const fixF = gv('imp_fix_fem');
+    const nok  = getEcNok();
+    let v = `Röntgen Knie ${s} ${zt} nach ${typ}`;
+    if(con) v += ` (${con}`;
+    if(her||mod) v += `, ${[her,mod].filter(Boolean).join(', ')}`;
+    if(con||her||mod) v += ')';
+    v += `, ${fixF}. ${align}.`;
+    if(nok.length){
+      v += ` EndoCert-Punkte nicht erfüllt: ${nok.map(c=>c.label).join(', ')}.`;
+    } else {
+      v += ' Alle EndoCert-Kernpunkte erfüllt.';
+    }
+    v += ' Kein Hinweis auf unmittelbare Komplikation.';
+    return v;
+  }
+
+  let v = `Röntgen Knie ${s} postoperativ nach ${typ}`;
+  if(con) v += ` (${con}`;
+  if(her||mod) v += `, ${[her,mod].filter(Boolean).join(', ')}`;
+  if(con||her||mod) v += ')';
+  if(pop) v += `, ${pop}`;
+  v += `. ${align}. ${peri}.`;
+  v += ' Kein Hinweis auf ' + (ctx==='frueh'?'Früh-Komplikation.':'Implantat-Komplikation.');
+  return v;
+}
+
+/* ── Main Update ── */
+function update(){
+  const ctx = getCtx();
+  const ctxLabel = ctx==='intraop'?'Intraoperativ (EndoCert)':ctx==='frueh'?'Früh-postop':ctx==='verlauf'?'Verlauf':'Revisionsverdacht';
+  document.getElementById('prev-sub').textContent = `Knie ${getSeite()} · ${ctxLabel}`;
+  document.getElementById('prev-technik').textContent   = buildTechnik();
+  document.getElementById('prev-implantat').textContent = buildImplantat();
+  document.getElementById('prev-befund').textContent    = buildBefund();
+  document.getElementById('prev-beurt').textContent     = gv('beurt') || '—';
+  updateAmpel();
+
+  // EndoCert-Checkliste Preview aktualisieren
+  if(ctx === 'intraop'){
+    const prev = document.getElementById('prev-ec-checklist');
+    prev.innerHTML = '';
+    EC_CHECKLIST.forEach(c => {
+      const v = getEcVal(c.id);
+      const row = document.createElement('div');
+      row.className = 'ec-check-row';
+      const dot = document.createElement('div');
+      dot.className = `ec-dot ${v==='ok'?'ok':v==='nok'?'nok':v==='na'?'na':'offen'}`;
+      const txt = document.createElement('span');
+      const prefix = v==='ok'?'✓ ':v==='nok'?'✗ Nicht erfüllt: ':v==='na'?'n.a.: ':'○ Offen: ';
+      txt.textContent = prefix + c.label;
+      txt.style.color = v==='nok'?'var(--rr-critical)':v==='ok'?'var(--rr-success)':'var(--rr-ink-soft)';
+      row.appendChild(dot); row.appendChild(txt); prev.appendChild(row);
+    });
+  }
+
+  // Vorschlag-Box
+  const vorschlag = buildBeurtVorschlag();
+  const vbox = document.getElementById('beurt-vorschlag');
+  if(!gv('beurt')){
+    vbox.innerHTML = `<div class="rr-helper-info" style="cursor:pointer" onclick="document.getElementById('beurt').value=${JSON.stringify(vorschlag)};update()" title="Klicken um zu übernehmen">
+      <strong>Vorschlag (klicken zum Übernehmen):</strong><br>${vorschlag}</div>`;
+  } else {
+    vbox.innerHTML = '';
+  }
+
+  // Status-Badge
+  const hasImp   = gv('imp_typ') !== '';
+  const hasBeurt = gv('beurt').length > 10;
+  const flags    = getActiveFlags();
+  const badge    = document.getElementById('status-badge');
+
+  if(ctx === 'intraop'){
+    const nok   = getEcNok();
+    const offen = getEcOffen();
+    const alertF = flags.filter(f=>f.sev==='alert');
+    if(alertF.length){ badge.className='badge alert'; badge.textContent='⚠ Komplikations-Flag aktiv'; }
+    else if(nok.length){ badge.className='badge alert'; badge.textContent=`✗ ${nok.length} EndoCert-Punkt(e) nicht erfüllt`; }
+    else if(offen.length){ badge.className='badge warn'; badge.textContent=`● ${offen.length} EndoCert-Punkt(e) offen`; }
+    else if(!hasBeurt){ badge.className='badge warn'; badge.textContent='● Beurteilung fehlt'; }
+    else { badge.className='badge ec'; badge.textContent='✓ EndoCert-konform – vollständig'; }
+    return;
+  }
+
+  if(!hasImp){ badge.className='badge warn'; badge.textContent='● Implantat-Typ ausfüllen'; }
+  else if(!hasBeurt){ badge.className='badge warn'; badge.textContent='● Beurteilung fehlt'; }
+  else if(flags.some(f=>f.sev==='alert')){ badge.className='badge alert'; badge.textContent='⚠ Komplikations-Flag aktiv'; }
+  else if(flags.length){ badge.className='badge warn'; badge.textContent='● Flag-Befund vorhanden'; }
+  else { badge.className='badge ok'; badge.textContent='✓ Vollständig'; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   EXPORTS
+   ════════════════════════════════════════════════════════════ */
+function buildFhir(){
+  const now = new Date().toISOString();
+  const obsArr = [];
+  let idx = 0;
+
+  const addObs = (id, rid, en, val, loinc, unit) => {
+    if(val===null||val===undefined||val==='') return;
+    idx++;
+    const coding = [];
+    if(rid)   coding.push({system:'http://radlex.org',  code:rid,   display:en});
+    if(loinc) coding.push({system:'http://loinc.org',   code:loinc, display:en});
+    const obs = {resourceType:'Observation', status:'final', id:`obs-${idx}`,
+      code:{coding},
+      valueQuantity: typeof val==='number' ? {value:val,unit:unit||''} : undefined,
+      valueString:   typeof val==='string' ? val : undefined,
+    };
+    obsArr.push({fullUrl:`urn:uuid:obs-${idx}`, resource:obs});
+  };
+
+  // Implantat
+  const impTypEl = document.getElementById('imp_typ');
+  const impTypOpt = impTypEl?.options[impTypEl.selectedIndex];
+  addObs('imp_typ', impTypOpt?.dataset?.radlex||'RID49700', impTypOpt?.dataset?.en||'knee arthroplasty type', gv('imp_typ'), null, null);
+
+  const impConEl = document.getElementById('imp_const');
+  const impConOpt = impConEl?.options[impConEl.selectedIndex];
+  addObs('imp_const', impConOpt?.dataset?.radlex||'RID49706', impConOpt?.dataset?.en||'constraint', gv('imp_const'), null, null);
+
+  // Winkel
+  addObs('fem_cor',  'RID49730', 'femoral component coronal alignment', gn('fem_cor'),  null, '°');
+  addObs('tib_cor',  'RID49750', 'tibial component coronal alignment',  gn('tib_cor'),  null, '°');
+  addObs('hka_post', 'RID49504', 'hip-knee-ankle angle postoperative',  gn('hka_post'), 'LP410789-0', '°');
+
+  // Alignment
+  const alignEl = document.getElementById('align_ges');
+  const alignOpt = alignEl?.options[alignEl.selectedIndex];
+  addObs('align_ges', alignOpt?.dataset?.radlex||'RID49770', alignOpt?.dataset?.en||'postoperative alignment', gv('align_ges'), null, null);
+
+  // Periprothetisch
+  const periEl = document.getElementById('peri_ges');
+  const periOpt = periEl?.options[periEl.selectedIndex];
+  addObs('peri_ges', periOpt?.dataset?.radlex||'RID49790', periOpt?.dataset?.en||'periprosthetic assessment', gv('peri_ges'), null, null);
+
+  // Flags
+  getActiveFlags().forEach(f => {
+    idx++;
+    obsArr.push({fullUrl:`urn:uuid:obs-${idx}`, resource:{
+      resourceType:'Observation', status:'final', id:`obs-${idx}`,
+      code:{coding:[{system:'http://radlex.org', code:f.rid, display:f.en}]},
+      valueString:`KOMPLIKATIONS-FLAG: ${f.label}`,
+      interpretation:[{coding:[{system:'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',code:'A',display:'Abnormal'}]}],
+    }});
+  });
+
+  const dr = {
+    resourceType:'DiagnosticReport', status:'final', id:'knee-posttep-report',
+    code:{coding:[{system:'http://loinc.org',code:'24650-4',display:'Knee X-ray AP and Lateral'}]},
+    effectiveDateTime:now,
+    identifier:[{value:'HJK-MRRT-KNIE-POSTTEP-v1.0'}],
+    conclusion: gv('beurt'),
+    result: obsArr.map(o=>({reference:o.fullUrl})),
+    presentedForm:[{contentType:'text/plain',title:'Röntgen Knie post-KTEP',
+      data:btoa(unescape(encodeURIComponent(
+        'TECHNIK\n'+buildTechnik()+'\n\nIMPLANTAT\n'+buildImplantat()+
+        '\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+gv('beurt')
+      )))
+    }],
+  };
+
+  return JSON.stringify({
+    resourceType:'Bundle',type:'document',timestamp:now,
+    meta:{tag:[{system:'http://radlex.org/fhir',code:'radlex-coded'}]},
+    entry:[{fullUrl:'urn:uuid:knee-posttep-report',resource:dr},...obsArr],
+  },null,2);
+}
+
+function buildJson(){
+  return JSON.stringify({
+    id:'HJK-MRRT-KNIE-POSTTEP-v1.0',
+    timestamp:new Date().toISOString(),
+    kontext:getCtx(), seite:getSeite(),
+    implantat:{typ:gv('imp_typ'),constraint:gv('imp_const'),hersteller:gv('imp_hersteller'),modell:gv('imp_modell'),fixation:{femur:gv('imp_fix_fem'),tibia:gv('imp_fix_tib')},patellaersatz:gv('imp_patella')},
+    op_datum:gv('op_datum'), pop_tag:gv('pop_tag'),
+    komponentenstellung:{femur:{coronar_grad:gn('fem_cor'),coronar_q:gv('fem_cor_q'),sagittal:gv('fem_sag'),notching:gv('fem_notch')},tibia:{coronar_grad:gn('tib_cor'),coronar_q:gv('tib_cor_q'),slope:gv('tib_slope'),position:gv('tib_pos')},hka_post:gn('hka_post'),alignment_gesamt:gv('align_ges')},
+    periprothetisch:{gesamtbeurteilung:gv('peri_ges'),ewald_zonen:EWALD_ZONES.reduce((acc,z)=>{acc[z.id]={lyse:document.getElementById(z.id+'_lyse')?.value,ost:document.getElementById(z.id+'_ost')?.value,verlauf:document.getElementById(z.id+'_verl')?.value};return acc;},{})},
+    komplikations_flags:getActiveFlags().map(f=>({id:f.id,label:f.label,rid:f.rid,severity:f.sev})),
+    weichteile:{erguss:gv('erguss'),hto:gv('hto'),knochenstruktur:gv('bone_q')},
+    beurteilung:gv('beurt'),
+    fliesstext:{technik:buildTechnik(),implantat:buildImplantat(),befund:buildBefund(),beurteilung:gv('beurt')},
+  },null,2);
+}
+
+let lastExport='';
+function toggleExport(type){
+  const box=document.getElementById('export-box');
+  const content=type==='fhir'?buildFhir():buildJson();
+  if(box.classList.contains('show')&&lastExport===type){box.classList.remove('show');lastExport='';return;}
+  box.textContent=content; box.classList.add('show'); lastExport=type;
+}
+
+function copyReport(){
+  const t=`RÖNTGEN KNIE POST-KTEP\n${new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'})}\n\nTECHNIK\n${buildTechnik()}\n\nIMPLANTAT\n${buildImplantat()}\n\nBEFUND\n${buildBefund()}\n\nBEURTEILUNG\n${gv('beurt')}`;
+  navigator.clipboard.writeText(t).then(()=>{
+    const btn=event.target; btn.textContent='✓ Kopiert!';
+    setTimeout(()=>{btn.textContent='📋 Befundtext kopieren';},2000);
+  }).catch(()=>{
+    const el=document.createElement('textarea');el.value=t;
+    document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);
+  });
+}
+
+function resetAll(){
+  if(!confirm('Alle Eingaben zurücksetzen?')) return;
+  document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
+  document.querySelectorAll('textarea,input[type=text],input[type=number]').forEach(i=>i.value='');
+  document.querySelectorAll('input[type=checkbox]').forEach(c=>{c.checked=false;});
+  // EC-Checkliste zurücksetzen
+  EC_CHECKLIST.forEach(c=>{
+    document.querySelectorAll(`input[name=${c.id}]`).forEach(r=>r.checked=false);
+    const w=document.getElementById(`ec-wrap-${c.id}`);
+    if(w) w.classList.remove('ok','nok');
+  });
+  FLAGS.forEach(f=>document.getElementById(`flag-wrap-${f.id}`)?.classList.remove('active'));
+  // Preset-Buttons zurücksetzen
+  activePreset = null;
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s_re').checked=true;
+  document.getElementById('ctx_frueh').checked=true;
+  document.getElementById('vu_datum_row').style.display='none';
+  document.getElementById('export-box').classList.remove('show');
+  updateCtxHint();
+  update();
+}
+</script>
+</body>
+</html>
