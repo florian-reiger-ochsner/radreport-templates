@@ -1,810 +1,874 @@
 <!DOCTYPE html>
-<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
+<html lang="de"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8">
-<title>KNIE-PRAETEP – Live-Demo</title>
-<meta name="dcterms.title"       content="Röntgen Knie präoperativ vor Totalendoprothese"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage Planungsröntgen Knie vor TEP. Primärarthrose. CPAK-Berechnung (MacDessi 2021), Kellgren-Lawrence, LAMA-Integration via DICOM SR. RadLex-kodiert v1.3."/>
-<meta name="dcterms.language"    content="de"/>
-<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date"        content="2026-05-20"/>
-<meta name="dcterms.identifier"  content="HJK-MRRT-KNIE-PRAETEP-v1.3"/>
-<meta name="rrt:specialty"       content="Radiology"/>
-<meta name="rrt:subspecialty"    content="Musculoskeletal Radiology"/>
-<meta name="rrt:modality"        content="DX"/>
-<meta name="rrt:bodyregion"      content="Knee"/>
+<title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.4)</title>
 
+<!-- ===================== MRRT METADATA ===================== -->
+<meta name="dcterms.title" content="Röntgen Knie präoperativ vor Totalendoprothese"/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). Inklusive CPAK-Berechnung und FHIR-Export. RadLex/LOINC/SNOMED-codiert. Verwendet radreport-core.css als Shared Stylesheet."/>
+<meta name="dcterms.language" content="de"/>
+<meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
+<meta name="dcterms.date" content="2026-05-23"/>
+<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.4"/>
+<meta name="rrt:specialty" content="Radiology"/>
+<meta name="rrt:subspecialty" content="Musculoskeletal Radiology"/>
+<meta name="rrt:modality" content="DX"/>
+<meta name="rrt:bodyregion" content="Knee"/>
+<meta name="rrt:bodyregion.code" content="RID2472"/>
+<meta name="rrt:bodyregion.codesystem" content="http://radlex.org"/>
+<meta name="rrt:bodyregion.codesystem.version" content="4.1"/>
 
-<!-- Core-Stylesheet (Single Source of Truth) -->
-<!-- MRRT-Build: node shared/scripts/inline-css.js macht daraus template.html -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../shared/styles/radreport-core.css">
 
-<style>
-/* =================================================================
-   TEMPLATE-SPEZIFISCHES CSS – NUR WAS CORE NICHT ABDECKT
-   Konvention: rr-kniepraetep-* Präfix
-   ================================================================= */
-
-
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.app{display:grid;grid-template-columns:minmax(520px,1fr) minmax(420px,520px);min-height:100vh;max-width:1640px;margin:0 auto;background:var(--rr-bg)}
-@media(max-width:1100px){.app{grid-template-columns:1fr}}
-.input-pane{padding:50px 58px 120px;background:var(--rr-bg);border-right:1px solid var(--rr-rule)}
-.preview-pane{padding:50px 50px 120px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto}
-
-.doc-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:29px;color:var(--rr-ink);letter-spacing:-0.02em;line-height:1.2}
-.doc-meta{margin-top:6px;font-size:11.5px;color:var(--rr-ink-muted);letter-spacing:.04em;text-transform:uppercase}
-.title-rule{height:3px;background:linear-gradient(90deg,var(--rr-accent) 0%,var(--rr-accent-pale) 100%);border-radius:2px;margin:16px 0 30px}
-
-.sh{display:flex;align-items:baseline;gap:12px;margin:30px 0 12px}
-.sh h2{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--rr-accent)}
-.sh-line{flex:1;height:1px;background:var(--rr-rule)}
-.sh-sub{font-size:12px;color:var(--rr-ink-muted);margin:-6px 0 12px}
-
-.row{margin-bottom:12px}
-.row label{display:flex;flex-direction:column;gap:4px}
-.lbl{font-size:12px;font-weight:500;color:var(--rr-ink-soft);letter-spacing:.02em}
-.lbl .req{color:var(--rr-accent);margin-left:1px}
-.unit{font-size:11px;color:var(--rr-ink-muted);margin-left:4px;font-weight:400}
-.field-note{font-size:11px;color:var(--rr-ink-muted);margin-top:2px}
-select,textarea,input[type=text],input[type=number]{width:100%;background:#fff;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);padding:8px 11px;font-family:"Source Sans 3",sans-serif;font-size:13.5px;color:var(--rr-ink);transition:border-color .15s,box-shadow .15s;appearance:none;-webkit-appearance:none}
-select:focus,textarea:focus,input:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale)}
-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%238b97a3' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
-textarea{resize:vertical;min-height:56px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-
-/* Mode switch */
-.mode-sw{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;margin-bottom:14px}
-.mode-sw input{display:none}
-.mode-sw label{flex:1;padding:8px 12px;text-align:center;font-size:12.5px;color:var(--rr-ink-muted);cursor:pointer;transition:all .15s;border-right:1px solid var(--rr-field-border)}
-.mode-sw label:last-of-type{border-right:none}
-.mode-sw input:checked+label{background:var(--rr-accent);color:#fff;font-weight:500}
-.mode-sw label:hover:not(.mode-sw input:checked+label){background:var(--rr-accent-pale);color:var(--rr-accent)}
-
-/* Side toggle */
-.side-tg{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;max-width:140px;margin-bottom:4px}
-.side-tg input{display:none}
-.side-tg label{flex:1;padding:8px 16px;text-align:center;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s;border-right:1px solid var(--rr-field-border)}
-.side-tg label:last-of-type{border-right:none}
-.side-tg input:checked+label{background:var(--rr-accent);color:#fff}
-.side-tg label:hover{background:var(--rr-accent-pale);color:var(--rr-accent)}
-
-/* Checkboxes */
-.cg{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
-.ci{display:flex;align-items:center;gap:6px;cursor:pointer}
-.ci input{width:14px;height:14px;accent-color:var(--rr-accent);cursor:pointer}
-.ci span{font-size:13px;color:var(--rr-ink-soft)}
-
-/* AI field */
-.ai-field{position:relative}
-.ai-field input,.ai-field select{background:var(--rr-ai-tint);border-color:var(--rr-ai-border)}
-.ai-badge{display:inline-block;font-size:10px;font-weight:700;background:var(--rr-accent);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;letter-spacing:.02em;vertical-align:middle}
-
-/* RadLex badge */
-.rl{display:inline-block;font-size:10px;font-weight:600;color:var(--rr-accent);background:var(--rr-accent-pale);border-radius:3px;padding:1px 5px;margin-left:5px;letter-spacing:.02em;vertical-align:middle}
-
-/* Mode helper */
-.mode-info{background:var(--rr-ai-tint);border-left:3px solid var(--rr-accent);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-ink-soft);margin-bottom:16px}
-.mode-info strong{color:var(--rr-accent)}
-
-/* CPAK box */
-.cpak-box{display:flex;align-items:center;gap:16px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:14px 18px;margin-top:8px}
-.cpak-val{font-size:32px;font-weight:700;color:var(--rr-accent);font-family:"Source Sans 3",sans-serif;line-height:1;min-width:60px}
-.cpak-lbl{font-size:11px;color:var(--rr-ink-muted);text-transform:uppercase;letter-spacing:.06em}
-.cpak-detail{font-size:12.5px;color:var(--rr-ink-soft)}
-
-/* KL summary */
-.kl-sum{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;background:var(--rr-bg-alt);border-radius:var(--rr-radius);padding:14px 18px;margin-top:8px}
-.kl-item{font-size:11px;color:var(--rr-ink-muted);text-transform:uppercase;letter-spacing:.05em}
-.kl-item strong{display:block;font-size:22px;font-weight:700;color:var(--rr-accent);margin-top:2px;letter-spacing:0;text-transform:none}
-
-/* Collapsible */
-details{margin-bottom:8px}
-details>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:9px 13px;background:var(--rr-bg-alt);border-radius:var(--rr-radius);border:1px solid var(--rr-rule);font-size:13px;font-weight:500;color:var(--rr-ink-soft);user-select:none;transition:all .15s}
-details>summary:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent-light)}
-details>summary::-webkit-details-marker{display:none}
-details>summary::before{content:"▶";font-size:9px;color:var(--rr-ink-faint);transition:transform .15s}
-details[open]>summary::before{transform:rotate(90deg)}
-details>.db{padding:14px 13px 8px;border:1px solid var(--rr-rule);border-top:none;border-radius:0 0 var(--rr-radius) var(--rr-radius);background:var(--rr-bg)}
-
-/* Buttons */
-.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
-button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"Source Sans 3",sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn-p{background:var(--rr-accent);color:#fff;box-shadow:var(--rr-shadow-sm)}
-.btn-p:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md)}
-.btn-s{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border)}
-.btn-s:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent)}
-.btn-d{background:#fef2f2;color:#c0392b;border:1px solid #f5c6c6}
-.btn-d:hover{background:#fde8e8}
-
-/* Preview */
-.prev-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rr-ink-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.prev-lbl::after{content:"";flex:1;height:1px;background:var(--rr-rule)}
-.rcard{background:var(--rr-bg);border:1px solid var(--rr-rule);border-radius:10px;padding:24px 26px;box-shadow:var(--rr-shadow-sm)}
-.rcard-header{border-bottom:2px solid var(--rr-accent);padding-bottom:12px;margin-bottom:16px}
-.rcard-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:16px;color:var(--accent-deep);letter-spacing:-.01em}
-.rcard-sub{font-size:12px;color:var(--rr-ink-muted);margin-top:3px}
-.rsec{margin-bottom:14px}
-.rsec-lbl{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--rr-accent);margin-bottom:4px}
-.rtext{font-family:"Source Serif 4","Georgia",serif;font-size:13.5px;line-height:1.72;color:var(--rr-ink);white-space:pre-wrap;min-height:18px}
-.rtext:empty::before{content:"—";color:var(--rr-ink-faint);font-style:italic;font-family:"Source Sans 3",sans-serif}
-.stamp{margin-top:16px;padding-top:12px;border-top:1px solid var(--rr-rule);font-size:11px;color:var(--rr-ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:11px;font-size:12px;font-weight:600;margin-top:12px}
-.badge.ok{background:#ecf7f2;color:var(--rr-success)}
-.badge.warn{background:#fdf6ec;color:var(--rr-warn)}
-
-/* Export */
-.ebox{display:none;margin-top:14px;background:#1a2535;color:#93b8d4;border-radius:var(--rr-radius);padding:16px 18px;font-family:"SF Mono","Menlo",monospace;font-size:11px;white-space:pre;overflow:auto;max-height:340px;line-height:1.55}
-.ebox.show{display:block}
-
-/* Hint */
-.hint{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-ink-soft);margin:4px 0 12px}
-.hint strong{color:var(--rr-accent)}
-
-</style>
 </head>
 <body>
+
 <div class="rr-app">
 
-<!-- ══════════════════ INPUT PANE ══════════════════ -->
+<!-- ========================== INPUT PANE ========================== -->
 <section class="rr-input-pane">
 
-<h1 class="rr-doc-title">Planungsröntgen Knie vor TEP</h1>
-<div class="rr-doc-sub">MRRT · RadLex-kodiert · Primärarthrose · CPAK · v1.3 · HJK Wien · 2026-05-20</div>
-<div class="rr-title-rule"></div>
+  <h1 class="rr-doc-title">Planungsröntgen Knie vor TEP</h1>
+  <div class="rr-doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.4 · RadLex-codiert · HJK Wien</div>
+  <div class="rr-title-rule"></div>
 
-<!-- MODUS -->
-<div class="mode-sw">
-  <input type="radio" name="mode" id="m_man" value="manual" checked>
-  <label for="m_man">Manuell</label>
-  <input type="radio" name="mode" id="m_lama" value="lama">
-  <label for="m_lama">LAMA vorbefüllt</label>
-  <input type="radio" name="mode" id="m_hyb" value="hybrid">
-  <label for="m_hyb">Hybrid (Validierung)</label>
-</div>
-<div class="rr-helper-info" id="mode-info">
-  <strong>Modus Manuell:</strong> Alle Felder werden manuell befüllt. Für Fallback und Testzwecke.
-</div>
+  <div class="rr-mode-switch">
+    <input type="radio" name="mode" id="mode-manual" value="manual" checked>
+    <label for="mode-manual">Manuell</label>
+    <input type="radio" name="mode" id="mode-lama" value="lama">
+    <label for="mode-lama">LAMA vorbefüllt</label>
+    <input type="radio" name="mode" id="mode-hybrid" value="hybrid">
+    <label for="mode-hybrid">Hybrid (Validierung)</label>
+  </div>
 
-<!-- SEITE -->
-<div class="sh"><h2>Seite</h2><div class="sh-line"></div></div>
-<div class="side-tg">
-  <input type="radio" name="seite" id="s_re" value="re." checked>
-  <label for="s_re">re.</label>
-  <input type="radio" name="seite" id="s_li" value="li.">
-  <label for="s_li">li.</label>
-</div>
+  <div class="rr-helper-info" id="modeHelper">
+    <strong>Modus Manuell:</strong> Alle Felder werden manuell befüllt. Für Fallback und Testzwecke.
+  </div>
 
-<!-- TECHNIK -->
-<div class="sh"><h2>Technik</h2><div class="sh-line"></div></div>
-<div class="sh-sub">Standardprojektionen und optionale Aufnahmen</div>
-<div class="grid2">
-  <div class="row">
-    <label><span class="lbl">a.p. stehend</span>
-      <select id="pr_ap" onchange="update()">
-        <option value="ja" data-radlex="RID10395" data-en="anteroposterior projection standing">Ja</option>
-        <option value="nein">Nein</option>
+  <!-- SEITE -->
+  <div class="rr-h2-wrap">
+    <h2>Seite <span class="rr-rl-badge">RID5824/5825</span> <span class="rr-req-indicator" id="req_seite" title="Pflichtfeld"></span></h2>
+    <div class="rr-h2-rule"></div>
+  </div>
+  <div class="rr-side-toggle" id="side_toggle">
+    <input type="radio" name="seite" id="seite-none" value="" checked>
+    <label for="seite-none" class="rr-side-empty-option">– bitte wählen –</label>
+    <input type="radio" name="seite" id="seite-re" value="re." data-radlex="RID5825" data-en="right">
+    <label for="seite-re">re.</label>
+    <input type="radio" name="seite" id="seite-li" value="li." data-radlex="RID5824" data-en="left">
+    <label for="seite-li">li.</label>
+  </div>
+
+  <!-- TECHNIK -->
+  <div class="rr-h2-wrap">
+    <h2>Technik <span class="rr-rl-badge">RID10363</span></h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Standardprojektionen und optionale Aufnahmen</div>
+  </div>
+  <div class="rr-row">
+    <label>
+      <span class="rr-lbl"><span>a.p. stehend</span></span>
+      <select id="proj_ap">
+        <option value="ja" data-radlex="RID10395" data-en="anteroposterior projection" selected>ja</option>
+        <option value="nein" data-radlex-status="needs-mapping">nein</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>seitlich</span></span>
+      <select id="proj_lat">
+        <option value="ja" data-radlex="RID10412" data-en="lateral projection" selected>ja</option>
+        <option value="nein" data-radlex-status="needs-mapping">nein</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>Patella tangential</span></span>
+      <select id="proj_pat">
+        <option value="ja" data-radlex-status="local" data-en="patella tangential view" selected>ja</option>
+        <option value="nein" data-radlex-status="needs-mapping">nein</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>Ganzbein-Standaufnahme</span></span>
+      <select id="proj_lla">
+        <option value="ja" data-radlex-status="local" data-en="long leg standing radiograph" selected>ja</option>
+        <option value="nein" data-radlex-status="needs-mapping">nein</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>Rosenberg-Aufnahme</span></span>
+      <select id="proj_rb">
+        <option value="nein" data-radlex-status="needs-mapping" selected>nein</option>
+        <option value="ja" data-radlex-status="local" data-en="Rosenberg view (PA 45° flexion)">ja</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>Kalibrationskugel</span></span>
+      <select id="proj_kugel">
+        <option value="ja" data-radlex-status="local" data-en="calibration sphere" selected>ja</option>
+        <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
   </div>
-  <div class="row">
-    <label><span class="lbl">Seitlich</span>
-      <select id="pr_lat" onchange="update()">
-        <option value="ja" data-radlex="RID10396" data-en="lateral projection">Ja</option>
-        <option value="nein">Nein</option>
+
+  <!-- ACHSENVERMESSUNG -->
+  <div class="rr-h2-wrap">
+    <h2>Achsenvermessung <span class="rr-rl-badge">RID11052</span></h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Werte aus LAMA-DICOM-SR; in Hybrid- und Manuell-Modus selbst einzutragen</div>
+  </div>
+  <div class="rr-row rr-row-three">
+    <label>
+      <span class="rr-lbl"><span>HKA <span class="rr-rl-badge">LOINC LP410789-0</span></span><span class="rr-ai-badge">KI</span></span>
+      <input type="number" id="hka" step="0.1" placeholder="z. B. 174.2">
+      <div class="rr-field-note">Hip-knee-ankle angle, °</div>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>MAD</span><span class="rr-ai-badge">KI</span></span>
+      <input type="number" id="mad" step="0.1" placeholder="z. B. -12.4">
+      <div class="rr-field-note">Mechanical axis deviation, mm (− = medial)</div>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>LLD <span class="rr-rl-badge">LOINC LP35279-5</span></span><span class="rr-ai-badge">KI</span></span>
+      <input type="number" id="lld" step="0.1" placeholder="z. B. -3.0">
+      <div class="rr-field-note">Beinlängendifferenz, mm (− = Untersuchungsseite kürzer)</div>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>mLDFA</span><span class="rr-ai-badge">KI</span></span>
+      <input type="number" id="mldfa" step="0.1" placeholder="z. B. 88.5">
+      <div class="rr-field-note">Mech. lateraler distaler Femurwinkel, °</div>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>mMPTA</span><span class="rr-ai-badge">KI</span></span>
+      <input type="number" id="mmpta" step="0.1" placeholder="z. B. 84.1">
+      <div class="rr-field-note">Mech. medialer proximaler Tibiawinkel, °</div>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>JLCA</span><span class="rr-ai-badge">KI</span></span>
+      <input type="number" id="jlca" step="0.1" placeholder="z. B. 3.8">
+      <div class="rr-field-note">Joint line convergence angle, °</div>
+    </label>
+  </div>
+
+  <div class="rr-result-box">
+    <div class="rr-result-value" id="cpak_result">–</div>
+    <div class="rr-result-detail" id="cpak_detail">aHKA und JLO benötigen mLDFA + mMPTA</div>
+  </div>
+
+  <!-- KL -->
+  <div class="rr-h2-wrap">
+    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rr-rl-badge">LOINC LP410785-8</span> <span class="rr-req-indicator" title="Pflichtfeld"></span></h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Kompartiment-spezifisch (KL 1957). Werte 0–4. Pflichtfelder.</div>
+  </div>
+  <div class="rr-row rr-row-three">
+    <label>
+      <span class="rr-lbl"><span>Medial <span class="rr-req-indicator" id="req_kl_med"></span></span></span>
+      <select id="kl_med" class="rr-is-required-empty">
+        <option value="" data-radlex-status="needs-mapping" selected>–</option>
+        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
+        <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
+        <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
+        <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
+        <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)">4 – schwer</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>Lateral <span class="rr-req-indicator" id="req_kl_lat"></span></span></span>
+      <select id="kl_lat" class="rr-is-required-empty">
+        <option value="" data-radlex-status="needs-mapping" selected>–</option>
+        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
+        <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
+        <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
+        <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
+        <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)">4 – schwer</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>Patellofemoral <span class="rr-req-indicator" id="req_kl_pf"></span></span></span>
+      <select id="kl_pf" class="rr-is-required-empty">
+        <option value="" data-radlex-status="needs-mapping" selected>–</option>
+        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
+        <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
+        <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
+        <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
+        <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)">4 – schwer</option>
       </select>
     </label>
   </div>
-  <div class="row">
-    <label><span class="lbl">Patella tangential</span>
-      <select id="pr_pat" onchange="update()">
-        <option value="nein">Nein</option>
-        <option value="ja" data-radlex="RID13430" data-en="skyline view patella">Ja</option>
-      </select>
-    </label>
+  <div class="rr-grade-summary">
+    <div class="rr-grade-item">Medial<strong id="kl_sum_med">–</strong></div>
+    <div class="rr-grade-item">Lateral<strong id="kl_sum_lat">–</strong></div>
+    <div class="rr-grade-item">PF<strong id="kl_sum_pf">–</strong></div>
   </div>
-  <div class="row">
-    <label><span class="lbl">Rosenberg</span>
-      <select id="pr_rb" onchange="update()">
-        <option value="nein">Nein</option>
-        <option value="ja" data-radlex="RID28656" data-en="Rosenberg view">Ja</option>
-      </select>
-    </label>
-  </div>
-</div>
-<div class="grid2">
-  <div class="row">
-    <label><span class="lbl">Ganzbein-Standaufnahme</span>
-      <select id="pr_lla" onchange="update()">
-        <option value="ja" data-radlex="RID28657" data-en="full length lower limb radiograph">Ja (einseitig)</option>
-        <option value="nein">Nein</option>
-      </select>
-    </label>
-  </div>
-  <div class="row">
-    <label><span class="lbl">Kalibrationskugel</span>
-      <select id="pr_kugel" onchange="update()">
-        <option value="ja">Ja (HJK-Standard)</option>
-        <option value="nein">Nein</option>
-      </select>
-    </label>
-  </div>
-</div>
 
-<!-- ACHSENVERMESSUNG -->
-<div class="sh"><h2>Achsenvermessung</h2><div class="sh-line"></div></div>
-<div class="sh-sub">LOMA/LAMA-Felder (RadLex + LOINC kodiert)</div>
+  <details>
+    <summary>Patellofemoraler Status (optional)</summary>
+    <div>
+      <div class="rr-row">
+        <label>
+          <span class="rr-lbl"><span>Insall-Salvati-Index</span></span>
+          <select id="ps_is">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="normal" data-radlex-status="local" data-en="patella normal height (Insall-Salvati)">normal</option>
+            <option value="patella alta" data-radlex-status="local" data-en="patella alta">Patella alta</option>
+            <option value="patella baja" data-radlex-status="local" data-en="patella baja">Patella baja</option>
+          </select>
+        </label>
+        <label>
+          <span class="rr-lbl"><span>Caton-Deschamps</span></span>
+          <select id="ps_cd">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="normal" data-radlex-status="local" data-en="patella normal height (Caton-Deschamps)">normal</option>
+            <option value="patella alta" data-radlex-status="local" data-en="patella alta">Patella alta</option>
+            <option value="patella baja" data-radlex-status="local" data-en="patella baja">Patella baja</option>
+          </select>
+        </label>
+        <label>
+          <span class="rr-lbl"><span>Patella-Tilt</span></span>
+          <select id="ps_tilt">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="normal" data-radlex-status="local" data-en="normal patellar tilt">normal</option>
+            <option value="lateralisiert" data-radlex-status="local" data-en="lateral patellar tilt">lateralisiert</option>
+            <option value="medialisiert" data-radlex-status="local" data-en="medial patellar tilt">medialisiert</option>
+          </select>
+        </label>
+        <label>
+          <span class="rr-lbl"><span>Trochleadysplasie (Dejour)</span></span>
+          <select id="ps_dejour">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="keine" data-radlex-status="local" data-en="no trochlear dysplasia">keine</option>
+            <option value="Dejour A" data-radlex-status="local" data-en="Dejour type A trochlear dysplasia">Typ A</option>
+            <option value="Dejour B" data-radlex-status="local" data-en="Dejour type B trochlear dysplasia">Typ B</option>
+            <option value="Dejour C" data-radlex-status="local" data-en="Dejour type C trochlear dysplasia">Typ C</option>
+            <option value="Dejour D" data-radlex-status="local" data-en="Dejour type D trochlear dysplasia">Typ D</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </details>
 
-<div class="rr-helper-info">
-  <strong>RadLex + LOINC:</strong> Messwerte sind mit LOINC-Codes für den FHIR-Export annotiert. KI-Felder (LAMA) sind blau hinterlegt.
-</div>
+  <details>
+    <summary>Tibialer Slope (optional)</summary>
+    <div>
+      <label>
+        <span class="rr-lbl"><span>Tibialer Slope (sagittal)</span></span>
+        <input type="number" id="slope" step="0.1" placeholder="z. B. 7.0">
+        <div class="rr-field-note">Posteriorer tibialer Slope, °</div>
+      </label>
+    </div>
+  </details>
 
-<div class="grid3">
-  <div class="row">
-    <label>
-      <span class="lbl">HKA <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
-      <div class="ai-field"><input type="number" id="hka" step="0.1" placeholder="Norm 180°"
-        data-loinc="LP410789-0" data-loinc-display="Hip-knee-ankle angle"
-        data-radlex="RID49504" data-radlex-en="hip-knee-ankle angle" oninput="calcCPAK();update()"></div>
-      <div class="field-note">Hip-Knee-Ankle-Winkel</div>
-    </label>
+  <!-- ZUSATZBEFUNDE -->
+  <div class="rr-h2-wrap">
+    <h2>Zusatzbefunde</h2>
+    <div class="rr-h2-rule"></div>
   </div>
-  <div class="row">
-    <label>
-      <span class="lbl">MAD <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">mm</span></span>
-      <div class="ai-field"><input type="number" id="mad" step="0.1" placeholder="Norm 0 mm"
-        data-radlex="RID49505" data-radlex-en="mechanical axis deviation" oninput="update()"></div>
-      <div class="field-note">Mechanical Axis Deviation</div>
-    </label>
+  <div class="rr-row">
+    <label><input type="checkbox" id="add_osteophyten" data-radlex="RID4757" data-en="osteophyte"> Osteophyten <span class="rr-rl-badge">RID4757</span></label>
+    <label><input type="checkbox" id="add_zysten" data-radlex-status="local" data-en="subchondral cyst"> Subchondrale Zysten</label>
+    <label><input type="checkbox" id="add_sklerose" data-radlex-status="local" data-en="subchondral sclerosis"> Subchondrale Sklerose</label>
+    <label><input type="checkbox" id="add_freikorper" data-radlex-status="local" data-en="intraarticular loose body"> Freikörper</label>
+    <label><input type="checkbox" id="add_erguss" data-radlex="RID34769" data-en="joint effusion"> Gelenkserguss <span class="rr-rl-badge">RID34769</span></label>
+    <label><input type="checkbox" id="add_baker" data-radlex-status="local" data-en="Baker cyst"> Baker-Zyste</label>
+    <label><input type="checkbox" id="add_verkalk" data-radlex-status="local" data-en="soft tissue calcification"> Weichteilverkalkungen</label>
+    <label><input type="checkbox" id="add_chondrocalc" data-radlex-status="local" data-en="chondrocalcinosis"> Chondrokalzinose</label>
   </div>
-  <div class="row">
-    <label>
-      <span class="lbl">LLD <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">mm</span></span>
-      <div class="ai-field"><input type="number" id="lld" step="0.1" placeholder="–"
-        data-loinc="LP35279-5" data-loinc-display="Leg length discrepancy"
-        data-radlex="RID49506" data-radlex-en="leg length discrepancy" oninput="update()"></div>
-      <div class="field-note">Beinlängendifferenz</div>
-    </label>
-  </div>
-  <div class="row">
-    <label>
-      <span class="lbl">mLDFA <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
-      <div class="ai-field"><input type="number" id="mldfa" step="0.1" placeholder="Norm 88°"
-        data-radlex="RID49507" data-radlex-en="mechanical lateral distal femoral angle" oninput="calcCPAK();update()"></div>
-      <div class="field-note">lat. dist. Femurwinkel</div>
-    </label>
-  </div>
-  <div class="row">
-    <label>
-      <span class="lbl">mMPTA <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
-      <div class="ai-field"><input type="number" id="mmpta" step="0.1" placeholder="Norm 87°"
-        data-radlex="RID49508" data-radlex-en="mechanical medial proximal tibial angle" oninput="calcCPAK();update()"></div>
-      <div class="field-note">med. prox. Tibiawinkel</div>
-    </label>
-  </div>
-  <div class="row">
-    <label>
-      <span class="lbl">JLCA <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
-      <div class="ai-field"><input type="number" id="jlca" step="0.1" placeholder="Norm &lt;2°"
-        data-radlex="RID49509" data-radlex-en="joint line convergence angle" oninput="update()"></div>
-      <div class="field-note">Joint Line Convergence Angle</div>
-    </label>
-  </div>
-</div>
 
-<!-- CPAK -->
-<div class="cpak-box">
-  <div>
-    <div class="cpak-lbl">CPAK-Phänotyp</div>
-    <div class="cpak-val" id="cpak-val">–</div>
+  <!-- KNOCHENSTRUKTUR -->
+  <div class="rr-h2-wrap">
+    <h2>Knochenstruktur</h2>
+    <div class="rr-h2-rule"></div>
   </div>
-  <div class="cpak-detail" id="cpak-detail">aHKA und JLO werden aus mLDFA + mMPTA berechnet</div>
-</div>
-
-<!-- ARTHROSEGRAD KL -->
-<div class="sh"><h2>Arthrosegrad – Kellgren-Lawrence</h2><div class="sh-line"></div></div>
-<div class="sh-sub">Kellgren JH, Lawrence JS. Ann Rheum Dis 1957;16:494–502</div>
-
-<div class="grid3">
-  <div class="row">
-    <label>
-      <span class="lbl">Medial <span class="rr-rl-badge">RadLex</span></span>
-      <select id="kl_med" onchange="updateKL();update()"
-        data-loinc="LP410785-8" data-loinc-display="Kellgren-Lawrence score"
-        data-radlex="RID49516" data-radlex-en="Kellgren-Lawrence grade medial compartment">
-        <option value="0" data-rl-grade="0">0 – keine Arthrose</option>
-        <option value="1" data-rl-grade="1">I – fraglich</option>
-        <option value="2" data-rl-grade="2">II – mild</option>
-        <option value="3" data-rl-grade="3">III – mäßig</option>
-        <option value="4" data-rl-grade="4">IV – schwer</option>
-      </select>
-    </label>
-  </div>
-  <div class="row">
-    <label>
-      <span class="lbl">Lateral <span class="rr-rl-badge">RadLex</span></span>
-      <select id="kl_lat" onchange="updateKL();update()"
-        data-radlex="RID49517" data-radlex-en="Kellgren-Lawrence grade lateral compartment">
-        <option value="0">0 – keine Arthrose</option>
-        <option value="1">I – fraglich</option>
-        <option value="2">II – mild</option>
-        <option value="3">III – mäßig</option>
-        <option value="4">IV – schwer</option>
-      </select>
-    </label>
-  </div>
-  <div class="row">
-    <label>
-      <span class="lbl">PF <span class="rr-rl-badge">RadLex</span></span>
-      <select id="kl_pf" onchange="updateKL();update()"
-        data-radlex="RID49518" data-radlex-en="Kellgren-Lawrence grade patellofemoral compartment">
-        <option value="0">0 – keine Arthrose</option>
-        <option value="1">I – fraglich</option>
-        <option value="2">II – mild</option>
-        <option value="3">III – mäßig</option>
-        <option value="4">IV – schwer</option>
-      </select>
-    </label>
-  </div>
-</div>
-
-<div class="kl-sum" id="kl-sum">
-  <div class="kl-item">Medial<strong id="kl-sum-m">0</strong></div>
-  <div class="kl-item">Lateral<strong id="kl-sum-l">0</strong></div>
-  <div class="kl-item">PF<strong id="kl-sum-p">0</strong></div>
-</div>
-
-<!-- ZUSATZBEFUNDE -->
-<div class="sh"><h2>Zusatzbefunde</h2><div class="sh-line"></div></div>
-<div class="cg">
-  <label class="ci"><input type="checkbox" id="z_oph" data-radlex="RID5172" data-radlex-en="osteophyte" onchange="update()"><span>Osteophyten</span></label>
-  <label class="ci"><input type="checkbox" id="z_zy" data-radlex="RID5173" data-radlex-en="subchondral cyst" onchange="update()"><span>Subchondrale Zysten</span></label>
-  <label class="ci"><input type="checkbox" id="z_sk" data-radlex="RID5174" data-radlex-en="subchondral sclerosis" onchange="update()"><span>Subchondrale Sklerose</span></label>
-  <label class="ci"><input type="checkbox" id="z_fk" data-radlex="RID5175" data-radlex-en="loose body" onchange="update()"><span>Freie Gelenkkörper</span></label>
-  <label class="ci"><input type="checkbox" id="z_erg" data-radlex="RID4872" data-radlex-en="joint effusion" onchange="update()"><span>Gelenkerguss</span></label>
-  <label class="ci"><input type="checkbox" id="z_bak" data-radlex="RID5176" data-radlex-en="Baker cyst" onchange="update()"><span>Baker-Zyste</span></label>
-  <label class="ci"><input type="checkbox" id="z_vk" data-radlex="RID5060" data-radlex-en="soft tissue calcification" onchange="update()"><span>Weichteilverkalkungen</span></label>
-  <label class="ci"><input type="checkbox" id="z_cc" data-radlex="RID5061" data-radlex-en="chondrocalcinosis" onchange="update()"><span>Chondrokalzinose</span></label>
-</div>
-
-<!-- KNOCHEN -->
-<div class="sh"><h2>Knochenstruktur &amp; allgemeine Ossifikation</h2><div class="sh-line"></div></div>
-<div class="row">
   <label>
-    <span class="lbl">Knochenmorphologie <span class="rr-rl-badge">RadLex</span></span>
-    <select id="bone_q" onchange="update()">
-      <option value="regelrechte Knochenstruktur und Knochendichte" data-radlex="RID13573-norm" data-en="normal bone density and structure">Regelrecht</option>
-      <option value="osteopenische Knochenstruktur" data-radlex="RID5222" data-en="osteopenia">Osteopenie</option>
-      <option value="osteoporotische Knochenstruktur" data-radlex="RID5223" data-en="osteoporosis">Osteoporose</option>
-      <option value="fokale ossäre Destruktion / V.a. ossäre Läsion" data-radlex="RID5238" data-en="osseous lesion">Ossäre Läsion / Destruktion</option>
+    <span class="rr-lbl"><span>Qualitative Beurteilung</span></span>
+    <select id="bone_q">
+      <option value="" data-radlex-status="needs-mapping" selected>–</option>
+      <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate bone density">altersentsprechend</option>
+      <option value="osteopen" data-radlex-status="local" data-en="osteopenic bone density">osteopen</option>
+      <option value="osteoporotisch" data-radlex="RID3406" data-en="osteoporosis">osteoporotisch</option>
     </select>
   </label>
-</div>
 
-<!-- OPTIONALE SEKTIONEN -->
-<details>
-  <summary>Patellofemoral-Status (optional)</summary>
-  <div class="db">
-    <div class="grid2">
-      <div class="row">
-        <label><span class="lbl">Insall-Salvati <span class="rr-rl-badge">RadLex</span></span>
-          <select id="ps_is" onchange="update()" data-radlex="RID49520" data-radlex-en="Insall-Salvati ratio">
-            <option value="">–</option>
-            <option value="regelrecht (IS-Index 0,8–1,2)" data-en="normal Insall-Salvati">Regelrecht (0,8–1,2)</option>
-            <option value="Patella alta (IS-Index > 1,2)" data-radlex="RID49521" data-en="patella alta">Patella alta (&gt; 1,2)</option>
-            <option value="Patella baja (IS-Index < 0,8)" data-radlex="RID49522" data-en="patella baja">Patella baja (&lt; 0,8)</option>
-          </select>
-        </label>
-      </div>
-      <div class="row">
-        <label><span class="lbl">Caton-Deschamps</span>
-          <select id="ps_cd" onchange="update()">
-            <option value="">–</option>
-            <option value="regelrecht (CD-Index 0,6–1,3)">Regelrecht (0,6–1,3)</option>
-            <option value="Patella alta (CD > 1,3)">Patella alta (&gt; 1,3)</option>
-            <option value="Patella baja (CD < 0,6)">Patella baja (&lt; 0,6)</option>
-          </select>
-        </label>
-      </div>
-      <div class="row">
-        <label><span class="lbl">Patella-Tilt</span>
-          <select id="ps_tilt" onchange="update()">
-            <option value="">–</option>
-            <option value="kein wesentlicher Patellatilt" data-radlex="RID49524-norm">Regelrecht</option>
-            <option value="lateraler Patellatilt" data-radlex="RID49524" data-en="patellar tilt">Lateraler Tilt</option>
-            <option value="medialer Patellatilt">Medialer Tilt</option>
-          </select>
-        </label>
-      </div>
-      <div class="row">
-        <label><span class="lbl">Trochleadysplasie (Dejour)</span>
-          <select id="ps_dej" onchange="update()" data-radlex="RID49525" data-radlex-en="trochlear dysplasia Dejour">
-            <option value="">–</option>
-            <option value="keine Trochleadysplasie">Keine</option>
-            <option value="Trochleadysplasie Typ A (Dejour)">Typ A</option>
-            <option value="Trochleadysplasie Typ B (Dejour)">Typ B</option>
-            <option value="Trochleadysplasie Typ C (Dejour)">Typ C</option>
-            <option value="Trochleadysplasie Typ D (Dejour)">Typ D</option>
-          </select>
-        </label>
-      </div>
-    </div>
+  <!-- INDIKATION -->
+  <div class="rr-h2-wrap">
+    <h2>Klinische Angabe</h2>
+    <div class="rr-h2-rule"></div>
   </div>
-</details>
-
-<details>
-  <summary>Tibialer Slope (optional)</summary>
-  <div class="db">
-    <div class="row">
-      <label><span class="lbl">Tibialer Slope <span class="rr-rl-badge">RadLex</span><span class="unit">°</span></span>
-        <input type="number" id="slope" step="0.1" placeholder="Norm 5–10°"
-          data-radlex="RID49526" data-radlex-en="tibial slope" oninput="update()">
-        <div class="field-note">Posterior tibial slope (seitliche Aufnahme)</div>
-      </label>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary>Vergleichsaufnahme (optional)</summary>
-  <div class="db">
-    <div class="grid2">
-      <div class="row">
-        <label><span class="lbl">VU vorhanden</span>
-          <select id="vu_ja" onchange="update()"><option value="">Nein</option><option value="yes">Ja</option></select>
-        </label>
-      </div>
-      <div class="row">
-        <label><span class="lbl">Datum VU</span>
-          <input type="text" id="vu_dat" placeholder="z.B. 03/2024" oninput="update()">
-        </label>
-      </div>
-    </div>
-    <div class="row">
-      <label><span class="lbl">Verlaufstendenz</span>
-        <select id="vu_trend" onchange="update()">
-          <option value="">–</option>
-          <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel.">Kein wesentlicher Wandel</option>
-          <option value="Im Vergleich zur Voruntersuchung Progredienz der Arthrosezeichen.">Progredienz</option>
-        </select>
-      </label>
-    </div>
-  </div>
-</details>
-
-<!-- FREITEXT -->
-<div class="sh"><h2>Ergänzungen</h2><div class="sh-line"></div></div>
-<div class="row">
-  <label><span class="lbl">Freitext Zusatzbefunde</span>
-    <textarea id="freetext" rows="3" placeholder="Zusätzliche Befunde, Besonderheiten..." oninput="update()"></textarea>
-  </label>
-</div>
-
-<!-- BEURTEILUNG -->
-<div class="sh"><h2>Beurteilung</h2><div class="sh-line"></div></div>
-<div class="row">
   <label>
-    <span class="lbl">Beurteilung (immer Freitext – Synthese des Radiologen)</span>
-    <textarea id="beurt" rows="5"
-      placeholder="z.B.: Fortgeschrittene primäre Gonarthrose re., Kellgren-Lawrence IV medial, III lateral. CPAK-Typ V (neutrale Achse, neutraler Apex). Präoperative Achsenverhältnisse für die operative Planung wie beschrieben. Klinische Konsequenz durch den Zuweiser."
-      oninput="update()"></textarea>
+    <textarea id="indikation" placeholder="Indikation, Beschwerden, geplantes OP-Datum"></textarea>
   </label>
-</div>
 
-<!-- BUTTONS -->
-<div class="rr-actions">
-  <button class="rr-btn" onclick="copyReport()">📋 Befundtext kopieren</button>
-  <button class="rr-btn-secondary" onclick="toggleExport('fhir')">{ } FHIR-Export</button>
-  <button class="rr-btn-secondary" onclick="toggleExport('json')">[ ] JSON-Export</button>
-  <button class="btn-d" onclick="resetAll()">↺ Zurücksetzen</button>
-</div>
-<div class="rr-export-area" id="export-box"></div>
+  <details>
+    <summary>Voruntersuchung</summary>
+    <div>
+      <div class="rr-row">
+        <label>
+          <span class="rr-lbl"><span>Datum VU</span></span>
+          <input type="text" id="vu_date" placeholder="z. B. 03/2024">
+        </label>
+        <label>
+          <span class="rr-lbl"><span>Verlauf</span></span>
+          <select id="vu_trend">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="stabil" data-radlex="RID39157" data-en="stable">weitgehend stabil</option>
+            <option value="progredient" data-radlex="RID36043" data-en="progression of disease">Befundprogredienz</option>
+            <option value="regredient" data-radlex="RID36044" data-en="regression of disease">Befundregredienz</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </details>
+
+  <div class="rr-h2-wrap">
+    <h2>Freitext-Ergänzung</h2>
+    <div class="rr-h2-rule"></div>
+  </div>
+  <div class="rr-row rr-row-full">
+    <label>
+      <textarea id="freetext" placeholder="Optional: ergänzende Beobachtungen, atypische Befunde, Hinweise für die OP-Planung"></textarea>
+    </label>
+  </div>
+
+  <div class="rr-codesystem-legend">
+    <span class="rr-badge-mini rr-is-verified">verified</span> RadLex-RID aus RSNA-Ontologie verifiziert
+    <span class="rr-badge-mini rr-is-local">local</span> Lokales CodeSystem, RadLex-Mapping ausstehend
+    <span class="rr-badge-mini rr-is-needs">needs-mapping</span> Negation/Leerwert – kein eigenständiges Konzept
+  </div>
 
 </section>
 
-<!-- ══════════════════ PREVIEW PANE ══════════════════ -->
+<!-- ========================== PREVIEW PANE ========================== -->
 <aside class="rr-preview-pane">
-<div class="rr-preview-title">Befund-Vorschau (Live)</div>
-<div class="rcard">
-  <div class="rcard-header">
-    <div class="rcard-title">Planungsröntgen Knie vor TEP</div>
-    <div class="rcard-sub" id="prev-sub">–</div>
+  <h2 class="rr-preview-title">Befund-Vorschau</h2>
+  <div class="rr-preview-title-rule"></div>
+
+  <div class="rr-preview-section">
+    <h4>Technik</h4>
+    <div class="rr-preview-content" id="prev_technik">–</div>
   </div>
-  <div class="rsec"><div class="rsec-lbl">Technik</div><div class="rtext" id="prev-technik"></div></div>
-  <div class="rsec"><div class="rsec-lbl">Klinische Angabe</div><div class="rtext" id="prev-klinik"></div></div>
-  <div class="rsec"><div class="rsec-lbl">Befund</div><div class="rtext" id="prev-befund"></div></div>
-  <div class="rsec"><div class="rsec-lbl">Beurteilung</div><div class="rtext" id="prev-beurt"></div></div>
-  <div class="stamp">
-    <span>HJK-MRRT-KNIE-PRAETEP-v1.3</span>
-    <span id="prev-date"></span>
+  <div class="rr-preview-section">
+    <h4>Klinische Angabe</h4>
+    <div class="rr-preview-content" id="prev_klinik">–</div>
   </div>
-</div>
-<div id="status-badge" class="badge warn">● Unvollständig</div>
+  <div class="rr-preview-section">
+    <h4>Befund</h4>
+    <div class="rr-preview-content" id="prev_befund">–</div>
+  </div>
+  <div class="rr-preview-section">
+    <h4>Beurteilung <span style="font-size:9px;color:var(--rr-ink-muted);letter-spacing:0.1em;margin-left:4px">EDITIERBAR · ENDOCERT-KONFORM</span></h4>
+    <textarea id="prev_beurteilung" class="rr-preview-editable"></textarea>
+  </div>
+
+  <div class="rr-actions">
+    <button onclick="copyAll()">Befund kopieren</button>
+    <button class="rr-btn-secondary" onclick="showExport('fhir')">FHIR-Export</button>
+    <button class="rr-btn-secondary" onclick="showExport('json')">JSON</button>
+    <button class="rr-btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+  </div>
+  <div class="rr-export-area" id="exportArea"></div>
 </aside>
 
 </div>
+
 <script>
-const gv = id => document.getElementById(id)?.value?.trim() ?? '';
-const gn = id => { const v=parseFloat(document.getElementById(id)?.value); return isNaN(v)?null:v; };
-const gc = id => !!document.getElementById(id)?.checked;
-
-/* ── CPAK ── */
-function calcCPAK(){
-  const mLDFA = gn('mldfa'), mMPTA = gn('mmpta');
-  const box = document.getElementById('cpak-val');
-  const det = document.getElementById('cpak-detail');
-  if(mLDFA === null || mMPTA === null){ box.textContent='–'; det.textContent='aHKA und JLO werden aus mLDFA + mMPTA berechnet'; return null; }
-  const aHKA = (90 - mLDFA) + (90 - mMPTA);
-  const JLO  = mLDFA + mMPTA;
-  let aHKAcat, JLOcat, aHKAtxt, JLOtxt;
-  if(aHKA < -3){ aHKAcat='varus';   aHKAtxt='Varus'; }
-  else if(aHKA > 3){ aHKAcat='valgus'; aHKAtxt='Valgus'; }
-  else { aHKAcat='neutral'; aHKAtxt='neutral'; }
-  if(JLO < 177){ JLOcat='apex-distal';   JLOtxt='Apex distal'; }
-  else if(JLO > 183){ JLOcat='apex-prox'; JLOtxt='Apex proximal'; }
-  else { JLOcat='neutral'; JLOtxt='neutral'; }
-  const map={
-    'varus_apex-distal':'I','neutral_apex-distal':'II','valgus_apex-distal':'III',
-    'varus_neutral':'IV','neutral_neutral':'V','valgus_neutral':'VI',
-    'varus_apex-prox':'VII','neutral_apex-prox':'VIII','valgus_apex-prox':'IX'
-  };
-  const t = map[`${aHKAcat}_${JLOcat}`];
-  box.textContent = `Typ ${t}`;
-  det.innerHTML = `aHKA <strong style="color:var(--rr-accent)">${aHKA.toFixed(1)}°</strong> ${aHKAtxt} &nbsp;·&nbsp; JLO <strong style="color:var(--rr-accent)">${JLO.toFixed(1)}°</strong> ${JLOtxt}`;
-  return {type:t, aHKA:aHKA.toFixed(1), JLO:JLO.toFixed(1), aHKAcat, JLOcat};
-}
-
-function updateKL(){
-  document.getElementById('kl-sum-m').textContent = gv('kl_med');
-  document.getElementById('kl-sum-l').textContent = gv('kl_lat');
-  document.getElementById('kl-sum-p').textContent = gv('kl_pf');
-}
-
-/* ── BUILDERS ── */
-function getSeite(){ return document.querySelector('input[name=seite]:checked')?.value || 're.'; }
-function getMode() { return document.querySelector('input[name=mode]:checked')?.value || 'manual'; }
-
-const PROJS = {
-  pr_ap:  'a.p. stehend',
-  pr_lat: 'seitlich',
-  pr_pat: 'Patella tangential',
-  pr_rb:  'Rosenberg (PA 45° flex)',
-  pr_lla: 'Ganzbein-Standaufnahme einseitig',
+// =============================================================================
+// MOCK LAMA DATA
+// =============================================================================
+const MOCK_LAMA = {
+  hka: 174.2, mad: -12.4, lld: -3.0,
+  mldfa: 88.5, mmpta: 84.1, jlca: 3.8
 };
 
-function buildTechnik(){
-  const s = getSeite();
-  const mode = getMode();
-  const ps = Object.entries(PROJS).filter(([id])=>gv(id)==='ja').map(([,l])=>l);
-  const kugel = gv('pr_kugel')==='ja' ? ' Kalibrationskugel mitabgebildet, Längenmessungen kalibriert.' : '';
-  let t = `Planungsröntgen Knie ${s}, Projektionen: ${ps.join(', ') || '–'}.${kugel}`;
-  if(mode==='lama')   t += ' Messwerte aus IB Lab LAMA via DICOM SR automatisch übernommen.';
-  if(mode==='hybrid') t += ' Messwerte aus IB Lab LAMA via DICOM SR, manuell validiert.';
-  return t;
-}
+const modeHelpers = {
+  manual: "<strong>Modus Manuell:</strong> Alle Felder werden manuell befüllt. Für Fallback und Testzwecke.",
+  lama: "<strong>Modus LAMA vorbefüllt:</strong> Achsenwerte aus DICOM SR übernommen, vom Radiologen zu validieren.",
+  hybrid: "<strong>Modus Hybrid:</strong> KI-Werte sichtbar, Eingabe ins Feld validiert / korrigiert. KI-Vorschlag steht unter dem Feld."
+};
 
-function buildKlinik(){
-  return `Präoperative Planung vor Knie-Totalendoprothese ${getSeite()} bei Primärarthrose.`;
-}
-
-function buildBefund(){
-  const s = getSeite();
-  const hka=gn('hka'), mad=gn('mad'), lld=gn('lld');
-  const mldfa=gn('mldfa'), mmpta=gn('mmpta'), jlca=gn('jlca'), slope=gn('slope');
-  const cpak = calcCPAK();
-  const lines = [];
-
-  // Achse
-  const achse=[];
-  if(hka!==null){
-    let dir = hka < 178 ? ' (Varus)' : hka > 182 ? ' (Valgus)' : ' (neutrale Achse)';
-    achse.push(`HKA ${hka.toFixed(1)}°${dir}`);
-  }
-  if(mad!==null) achse.push(`MAD ${mad > 0 ? '+' : ''}${mad.toFixed(1)} mm`);
-  if(lld!==null) achse.push(`Beinlängendifferenz ${lld.toFixed(1)} mm`);
-  if(mldfa!==null) achse.push(`mLDFA ${mldfa.toFixed(1)}°`);
-  if(mmpta!==null) achse.push(`mMPTA ${mmpta.toFixed(1)}°`);
-  if(jlca!==null)  achse.push(`JLCA ${jlca.toFixed(1)}°`);
-  if(achse.length) lines.push('Achsenvermessung: ' + achse.join(', ') + '.');
-
-  // CPAK
-  if(cpak) lines.push(`CPAK-Phänotyp (MacDessi 2021): Typ ${cpak.type} (aHKA ${cpak.aHKA}°, JLO ${cpak.JLO}°).`);
-
-  // KL
-  const klm=parseInt(gv('kl_med')), kll=parseInt(gv('kl_lat')), klp=parseInt(gv('kl_pf'));
-  lines.push(`Gonarthrose nach Kellgren-Lawrence: mediales Kompartiment Grad ${klm}, laterales Kompartiment Grad ${kll}, patellofemorales Kompartiment Grad ${klp}.`);
-
-  // Zusatzbefunde
-  const zusatz=[];
-  if(gc('z_oph')) zusatz.push('Osteophyten');
-  if(gc('z_zy'))  zusatz.push('subchondrale Zysten');
-  if(gc('z_sk'))  zusatz.push('subchondrale Sklerose');
-  if(gc('z_fk'))  zusatz.push('freie Gelenkkörper');
-  if(gc('z_erg')) zusatz.push('Gelenkerguss');
-  if(gc('z_bak')) zusatz.push('Baker-Zyste');
-  if(gc('z_vk'))  zusatz.push('Weichteilverkalkungen');
-  if(gc('z_cc'))  zusatz.push('Chondrokalzinose');
-  if(zusatz.length) lines.push('Zusatzbefunde: ' + zusatz.join(', ') + '.');
-
-  // Knochen
-  const bq = gv('bone_q');
-  if(bq) lines.push(`Knochenstruktur: ${bq}.`);
-
-  // PF
-  const is=gv('ps_is'), cd=gv('ps_cd'), tilt=gv('ps_tilt'), dej=gv('ps_dej');
-  const pf=[];
-  if(is)   pf.push(is);
-  if(cd)   pf.push(cd);
-  if(tilt) pf.push(tilt);
-  if(dej)  pf.push(dej);
-  if(pf.length) lines.push('Patellofemoral: ' + pf.join(', ') + '.');
-
-  // Slope
-  if(slope!==null) lines.push(`Tibialer Slope: ${slope.toFixed(1)}°.`);
-
-  // Freitext
-  const ft = gv('freetext');
-  if(ft) lines.push(ft);
-
-  // Vergleich
-  if(gv('vu_ja')==='yes'){
-    const dat=gv('vu_dat'), trend=gv('vu_trend');
-    let vgl = 'Vergleich:';
-    if(dat)   vgl += ` Voruntersuchung vom ${dat} liegt vor.`;
-    if(trend) vgl += ` ${trend}`;
-    lines.push(vgl);
-  }
-
-  return lines.join('\n');
-}
-
-/* ── MAIN UPDATE ── */
-function update(){
-  const s = getSeite();
-  document.getElementById('prev-sub').textContent = `Knie ${s} · ${getMode() === 'lama' ? 'LAMA' : getMode() === 'hybrid' ? 'Hybrid' : 'Manuell'}`;
-  document.getElementById('prev-technik').textContent = buildTechnik();
-  document.getElementById('prev-klinik').textContent  = buildKlinik();
-  document.getElementById('prev-befund').textContent  = buildBefund();
-  document.getElementById('prev-beurt').textContent   = gv('beurt') || '—';
-
-  const ok = buildBefund().length > 20 && gv('beurt').length > 5;
-  const b = document.getElementById('status-badge');
-  b.className = 'badge ' + (ok ? 'ok' : 'warn');
-  b.textContent = ok ? '✓ Vollständig' : '● Beurteilung fehlt';
-}
-
-/* ── FHIR ── */
-function buildFhir(){
-  const now = new Date().toISOString();
-  const cpak = calcCPAK();
-  const obsArr = [];
-
-  const addObs = (id, val, display, rid, en, loinc, unit) => {
-    if(val===null||val===undefined||val==='') return;
-    const coding = [];
-    if(loinc) coding.push({system:'http://loinc.org', code:loinc, display});
-    if(rid)   coding.push({system:'http://radlex.org', code:rid, display:en||display});
-    obsArr.push({resourceType:'Observation', status:'final', id,
-      code:{coding},
-      valueQuantity: typeof val==='number' ? {value:val, unit:unit||'°'} : undefined,
-      valueString:   typeof val==='string' ? val : undefined,
+document.querySelectorAll('input[name="mode"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    document.getElementById('modeHelper').innerHTML = modeHelpers[mode];
+    const aiFields = ['hka','mad','lld','mldfa','mmpta','jlca'];
+    aiFields.forEach(id => {
+      const inp = document.getElementById(id);
+      const label = inp.closest('label');
+      const badge = label.querySelector('.rr-ai-badge');
+      const note = label.querySelector('.rr-field-note');
+      inp.classList.remove('rr-is-ai-filled');
+      badge.classList.remove('rr-is-active');
+      if (note.dataset.original) note.innerHTML = note.dataset.original;
+      if (mode === 'lama') {
+        inp.value = MOCK_LAMA[id];
+        inp.classList.add('rr-is-ai-filled');
+        badge.classList.add('rr-is-active');
+      } else if (mode === 'hybrid') {
+        inp.classList.add('rr-is-ai-filled');
+        badge.classList.add('rr-is-active');
+        if (!note.dataset.original) note.dataset.original = note.innerHTML;
+        note.innerHTML = `KI-Vorschlag: <strong>${MOCK_LAMA[id]}</strong> – Wert eintragen zum Validieren`;
+      } else {
+        inp.value = '';
+      }
     });
+    updatePreview();
+  });
+});
+
+// =============================================================================
+// CPAK
+// =============================================================================
+function calculateCPAK() {
+  const mldfa = parseFloat(document.getElementById('mldfa').value);
+  const mmpta = parseFloat(document.getElementById('mmpta').value);
+  const box = document.getElementById('cpak_result');
+  const detail = document.getElementById('cpak_detail');
+  if (isNaN(mldfa) || isNaN(mmpta)) {
+    box.textContent = '–';
+    detail.textContent = 'aHKA und JLO benötigen mLDFA + mMPTA';
+    return null;
+  }
+  const aHKA = mmpta - mldfa;
+  const JLO = mmpta + mldfa;
+  let aHKAcat, aHKAtxt;
+  if (aHKA < -2) { aHKAcat = 'varus'; aHKAtxt = 'Varus'; }
+  else if (aHKA > 2) { aHKAcat = 'valgus'; aHKAtxt = 'Valgus'; }
+  else { aHKAcat = 'neutral'; aHKAtxt = 'Neutral'; }
+  let JLOcat, JLOtxt;
+  if (JLO < 177) { JLOcat = 'apex-distal'; JLOtxt = 'apex distal'; }
+  else if (JLO > 183) { JLOcat = 'apex-proximal'; JLOtxt = 'apex proximal'; }
+  else { JLOcat = 'neutral'; JLOtxt = 'neutral'; }
+  const cpakMap = {
+    'varus_apex-distal':'I','neutral_apex-distal':'II','valgus_apex-distal':'III',
+    'varus_neutral':'IV','neutral_neutral':'V','valgus_neutral':'VI',
+    'varus_apex-proximal':'VII','neutral_apex-proximal':'VIII','valgus_apex-proximal':'IX'
   };
-
-  addObs('obs-hka',   gn('hka'),   'Hip-knee-ankle angle',                     'RID49504','hip-knee-ankle angle','LP410789-0','°');
-  addObs('obs-mad',   gn('mad'),   'Mechanical axis deviation',                 'RID49505','mechanical axis deviation',null,'mm');
-  addObs('obs-lld',   gn('lld'),   'Leg length discrepancy',                    'RID49506','leg length discrepancy','LP35279-5','mm');
-  addObs('obs-mldfa', gn('mldfa'), 'Mechanical lateral distal femoral angle',   'RID49507','mLDFA',null,'°');
-  addObs('obs-mmpta', gn('mmpta'), 'Mechanical medial proximal tibial angle',   'RID49508','mMPTA',null,'°');
-  addObs('obs-jlca',  gn('jlca'),  'Joint line convergence angle',              'RID49509','JLCA', null,'°');
-  addObs('obs-klm',   parseInt(gv('kl_med')), 'Kellgren-Lawrence medial',       'RID49516','KL grade medial','LP410785-8','{score}');
-  addObs('obs-kll',   parseInt(gv('kl_lat')), 'Kellgren-Lawrence lateral',      'RID49517','KL grade lateral',null,'{score}');
-  addObs('obs-klp',   parseInt(gv('kl_pf')),  'Kellgren-Lawrence patellofemoral','RID49518','KL grade patellofemoral',null,'{score}');
-  if(cpak) addObs('obs-cpak', null, 'CPAK phenotype MacDessi 2021', 'RID49519','CPAK phenotype', null, null);
-  if(cpak && obsArr.find(o=>o.id==='obs-cpak')) obsArr.find(o=>o.id==='obs-cpak').valueString = `Type ${cpak.type} (aHKA ${cpak.aHKA}°, JLO ${cpak.JLO}°)`;
-  if(gn('slope')!==null) addObs('obs-slope', gn('slope'), 'Tibial slope', 'RID49526','tibial slope',null,'°');
-
-  const dr = {
-    resourceType:'DiagnosticReport', status:'final', id:'knee-report',
-    code:{coding:[{system:'http://loinc.org', code:'24650-4', display:'Knee X-ray AP and Lateral'}]},
-    effectiveDateTime: now,
-    identifier:[{value:'HJK-MRRT-KNIE-PRAETEP-v1.3'}],
-    conclusion: gv('beurt'),
-    result: obsArr.map(o=>({reference:`urn:uuid:${o.id}`})),
-    presentedForm:[{contentType:'text/plain',title:'Planungsröntgen Knie vor TEP',
-      data:btoa(unescape(encodeURIComponent(
-        'TECHNIK\n'+buildTechnik()+'\n\nKLINISCHE ANGABE\n'+buildKlinik()+
-        '\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+gv('beurt')
-      )))
-    }],
-  };
-
-  return JSON.stringify({
-    resourceType:'Bundle', type:'document', timestamp:now,
-    meta:{tag:[{system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:'radlex-coded'}]},
-    entry:[
-      {fullUrl:'urn:uuid:knee-report', resource:dr},
-      ...obsArr.map(o=>({fullUrl:`urn:uuid:${o.id}`, resource:o})),
-    ]
-  }, null, 2);
+  const type = cpakMap[`${aHKAcat}_${JLOcat}`];
+  box.textContent = `Typ ${type}`;
+  detail.innerHTML = `aHKA <strong style="color:var(--rr-accent)">${aHKA.toFixed(1)}°</strong> ${aHKAtxt} <br>JLO <strong style="color:var(--rr-accent)">${JLO.toFixed(1)}°</strong> ${JLOtxt}`;
+  return { type, aHKA: aHKA.toFixed(1), JLO: JLO.toFixed(1), aHKAcat, JLOcat };
 }
 
-function buildJson(){
-  return JSON.stringify({
-    id:'HJK-MRRT-KNIE-PRAETEP-v1.3',
-    timestamp: new Date().toISOString(),
-    seite: getSeite(), modus: getMode(),
-    achsenvermessung:{HKA:gn('hka'),MAD:gn('mad'),LLD:gn('lld'),mLDFA:gn('mldfa'),mMPTA:gn('mmpta'),JLCA:gn('jlca')},
-    cpak: calcCPAK(),
-    kellgren_lawrence:{medial:parseInt(gv('kl_med')),lateral:parseInt(gv('kl_lat')),patellofemoral:parseInt(gv('kl_pf'))},
-    zusatzbefunde:{osteophyten:gc('z_oph'),zysten:gc('z_zy'),sklerose:gc('z_sk'),freikoerper:gc('z_fk'),erguss:gc('z_erg'),baker:gc('z_bak'),verkalkungen:gc('z_vk'),chondrokalzinose:gc('z_cc')},
-    knochenstruktur:gv('bone_q'),
-    patellofemoral:{insall_salvati:gv('ps_is'),caton_deschamps:gv('ps_cd'),tilt:gv('ps_tilt'),dejour:gv('ps_dej')},
-    slope:gn('slope'),
-    freitext:gv('freetext'),
-    beurteilung:gv('beurt'),
-    fliesstext:{technik:buildTechnik(),klinik:buildKlinik(),befund:buildBefund(),beurteilung:gv('beurt')},
-  }, null, 2);
+// =============================================================================
+// HELPERS
+// =============================================================================
+function gv(id) { return document.getElementById(id).value; }
+function gn(id) { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? null : v; }
+function gc(id) { return document.getElementById(id).checked; }
+
+// =============================================================================
+// TEXT GENERATION
+// =============================================================================
+function generateTechnik() {
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  if (!seiteEl || !seiteEl.value) {
+    return '⚠️ Bitte zuerst Seite (re. / li.) wählen.';
+  }
+  const proj = [];
+  if (gv('proj_ap') === 'ja') proj.push('a.p. stehend');
+  if (gv('proj_lat') === 'ja') proj.push('seitlich');
+  if (gv('proj_pat') === 'ja') proj.push('Patella tangential');
+  if (gv('proj_lla') === 'ja') proj.push('Ganzbein-Standaufnahme der Untersuchungsseite');
+  if (gv('proj_rb') === 'ja') proj.push('Rosenberg-Aufnahme');
+  const seite = seiteEl.value;
+  const kugel = gv('proj_kugel') === 'ja'
+    ? ' Kalibrationskugel mitabgebildet, Längenmessungen entsprechend kalibriert.'
+    : '';
+  return `Planungsröntgen Knie ${seite} in folgenden Projektionen: ${proj.join(', ') || '–'}.${kugel}`;
 }
 
-let lastExport = '';
-function toggleExport(type){
-  const box = document.getElementById('export-box');
-  const content = type==='fhir' ? buildFhir() : buildJson();
-  if(box.classList.contains('show') && lastExport===type){ box.classList.remove('show'); lastExport=''; return; }
-  box.textContent = content;
-  box.classList.add('show');
-  lastExport = type;
+function generateKlinik() {
+  const ind = gv('indikation').trim();
+  if (!ind) return '–';
+  return ind.endsWith('.') ? ind : ind + '.';
 }
 
-function copyReport(){
-  const t = `PLANUNGSRÖNTGEN KNIE VOR TEP\n${new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'})}\n\nTECHNIK\n${buildTechnik()}\n\nKLINISCHE ANGABE\n${buildKlinik()}\n\nBEFUND\n${buildBefund()}\n\nBEURTEILUNG\n${gv('beurt')}`;
-  navigator.clipboard.writeText(t).then(()=>{
-    const btn=event.target; btn.textContent='✓ Kopiert!';
-    setTimeout(()=>{btn.textContent='📋 Befundtext kopieren';}, 2000);
-  }).catch(()=>{
-    const el=document.createElement('textarea'); el.value=t;
-    document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+function generateBefund() {
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  if (!seiteEl || !seiteEl.value) {
+    return '⚠️ Befund kann erst nach Auswahl der Seite generiert werden.';
+  }
+  const seite = seiteEl.value;
+  const lines = [];
+  const hka = gn('hka'), mad = gn('mad'), lld = gn('lld');
+  const mldfa = gn('mldfa'), mmpta = gn('mmpta'), jlca = gn('jlca');
+  const cpak = calculateCPAK();
+
+  const achseTeile = [];
+  if (hka !== null) {
+    let achsenrichtung = '';
+    if (hka < 178) achsenrichtung = ' (Varus)';
+    else if (hka > 182) achsenrichtung = ' (Valgus)';
+    else achsenrichtung = ' (neutrale Achse)';
+    achseTeile.push(`Tragachsenwinkel (HKA) ${hka.toFixed(1)}°${achsenrichtung}`);
+  }
+  if (mad !== null) achseTeile.push(`MAD ${mad > 0 ? '+' : ''}${mad.toFixed(1)} mm`);
+  if (mldfa !== null) achseTeile.push(`mLDFA ${mldfa.toFixed(1)}°`);
+  if (mmpta !== null) achseTeile.push(`mMPTA ${mmpta.toFixed(1)}°`);
+  if (jlca !== null) achseTeile.push(`JLCA ${jlca.toFixed(1)}°`);
+  if (lld !== null) achseTeile.push(`Beinlängendifferenz ${lld > 0 ? '+' : ''}${lld.toFixed(1)} mm`);
+  if (achseTeile.length > 0) {
+    lines.push(`Achsenvermessung Bein ${seite}: ${achseTeile.join(', ')}.`);
+  }
+  if (cpak) {
+    lines.push(`CPAK-Phänotyp Typ ${cpak.type} (aHKA ${cpak.aHKA}° ${cpak.aHKAcat}, JLO ${cpak.JLO}° ${cpak.JLOcat}).`);
+  }
+
+  const klM = gv('kl_med'), klL = gv('kl_lat'), klPF = gv('kl_pf');
+  document.getElementById('kl_sum_med').textContent = klM || '–';
+  document.getElementById('kl_sum_lat').textContent = klL || '–';
+  document.getElementById('kl_sum_pf').textContent = klPF || '–';
+  const klParts = [];
+  if (klM) klParts.push(`medial KL ${klM}`);
+  if (klL) klParts.push(`lateral KL ${klL}`);
+  if (klPF) klParts.push(`patellofemoral KL ${klPF}`);
+  if (klParts.length > 0) {
+    lines.push(`Arthrosegrade nach Kellgren-Lawrence (KL): ${klParts.join(', ')}.`);
+  }
+
+  const pfParts = [];
+  if (gv('ps_is')) pfParts.push(`Insall-Salvati: ${gv('ps_is')}`);
+  if (gv('ps_cd')) pfParts.push(`Caton-Deschamps: ${gv('ps_cd')}`);
+  if (gv('ps_tilt')) pfParts.push(`Patella-Tilt: ${gv('ps_tilt')}`);
+  if (gv('ps_dejour')) pfParts.push(`Trochleadysplasie: ${gv('ps_dejour')}`);
+  if (pfParts.length > 0) lines.push(pfParts.join('; ') + '.');
+
+  const slope = gn('slope');
+  if (slope !== null) lines.push(`Tibialer Slope ${slope.toFixed(1)}° (sagittal).`);
+
+  const zb = [];
+  if (gc('add_osteophyten')) zb.push('osteophytäre Randanbauten');
+  if (gc('add_zysten')) zb.push('subchondrale Zysten');
+  if (gc('add_sklerose')) zb.push('subchondrale Sklerose');
+  if (gc('add_freikorper')) zb.push('intraartikuläre Freikörper');
+  if (gc('add_erguss')) zb.push('Gelenkserguss');
+  if (gc('add_baker')) zb.push('Baker-Zyste');
+  if (gc('add_verkalk')) zb.push('Weichteilverkalkungen');
+  if (gc('add_chondrocalc')) zb.push('Chondrokalzinose');
+  if (zb.length > 0) lines.push(`Begleitbefunde: ${zb.join(', ')}.`);
+
+  const bone = gv('bone_q');
+  if (bone) lines.push(`Knochenstruktur ${bone}.`);
+
+  const vuDate = gv('vu_date'), vuTrend = gv('vu_trend');
+  if (vuDate || vuTrend) {
+    lines.push(`Im Vergleich zur Voruntersuchung${vuDate ? ` (${vuDate})` : ''}${vuTrend ? `: ${vuTrend}` : ''}.`);
+  }
+
+  const ft = gv('freetext');
+  if (ft) lines.push(ft);
+
+  return lines.join(' ');
+}
+
+function generateBeurteilung() {
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  if (!seiteEl || !seiteEl.value) return '';
+  const seite = seiteEl.value;
+  const hka = gn('hka');
+  const cpak = calculateCPAK();
+  const klM = gv('kl_med'), klL = gv('kl_lat'), klPF = gv('kl_pf');
+
+  if (!klM && !klL && !klPF) return '';
+
+  const parts = [];
+  const klMax = Math.max(parseInt(klM)||0, parseInt(klL)||0, parseInt(klPF)||0);
+  if (klMax >= 3) {
+    const kompartimente = [];
+    if (parseInt(klM) >= 3) kompartimente.push('medial');
+    if (parseInt(klL) >= 3) kompartimente.push('lateral');
+    if (parseInt(klPF) >= 3) kompartimente.push('patellofemoral');
+    parts.push(`Fortgeschrittene Gonarthrose ${seite}, ${kompartimente.join('-')}-betont (KL ${klMax}).`);
+  } else if (klMax === 2) {
+    parts.push(`Mäßige Gonarthrose ${seite} (KL 2).`);
+  } else if (klMax <= 1) {
+    parts.push(`Keine bzw. allenfalls fragliche radiologische Arthrosezeichen ${seite}.`);
+  }
+
+  if (hka !== null) {
+    if (hka < 178) parts.push(`Varus-Beinachse (Tragachsenwinkel ${hka.toFixed(1)}°).`);
+    else if (hka > 182) parts.push(`Valgus-Beinachse (Tragachsenwinkel ${hka.toFixed(1)}°).`);
+    else parts.push(`Neutrale Beinachse (Tragachsenwinkel ${hka.toFixed(1)}°).`);
+  }
+
+  if (cpak) parts.push(`CPAK-Phänotyp Typ ${cpak.type}.`);
+
+  if (klMax >= 3) {
+    parts.push('Befunde mit dem klinischen Bild einer Primärgonarthrose vereinbar; TEP-Indikation aus radiologischer Sicht gegeben.');
+  }
+  parts.push('Die präoperative Achsenvermessung ist EndoCert-konform dokumentiert (kalibrierter Tragachsenwinkel; Vorabdokumentation für postoperative Verlaufskontrolle).');
+
+  return parts.join(' ');
+}
+
+// =============================================================================
+// PFLICHTFELD-VALIDIERUNG (visuell)
+// =============================================================================
+function updateRequiredIndicators() {
+  const seiteEl = document.querySelector('input[name="seite"]:checked');
+  const seiteOk = seiteEl && seiteEl.value;
+  const reqSeite = document.getElementById('req_seite');
+  const sideToggle = document.getElementById('side_toggle');
+  if (seiteOk) {
+    reqSeite.style.display = 'none';
+    sideToggle.classList.remove('rr-is-required-empty');
+  } else {
+    reqSeite.style.display = 'inline-block';
+    sideToggle.classList.add('rr-is-required-empty');
+  }
+
+  ['kl_med','kl_lat','kl_pf'].forEach(id => {
+    const sel = document.getElementById(id);
+    const reqEl = document.getElementById('req_' + id);
+    if (sel.value === '') {
+      sel.classList.add('rr-is-required-empty');
+      if (reqEl) reqEl.style.display = 'inline-block';
+    } else {
+      sel.classList.remove('rr-is-required-empty');
+      if (reqEl) reqEl.style.display = 'none';
+    }
   });
 }
 
-function resetAll(){
-  if(!confirm('Alle Eingaben zurücksetzen?')) return;
-  document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
-  document.querySelectorAll('textarea,input[type=text],input[type=number]').forEach(i=>i.value='');
-  document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
-  document.getElementById('s_re').checked=true;
-  document.getElementById('m_man').checked=true;
-  document.getElementById('export-box').classList.remove('show');
-  calcCPAK(); updateKL(); update();
+// =============================================================================
+// PREVIEW UPDATE
+// =============================================================================
+function updatePreview() {
+  updateRequiredIndicators();
+  document.getElementById('prev_technik').textContent = generateTechnik();
+  document.getElementById('prev_klinik').textContent = generateKlinik();
+  document.getElementById('prev_befund').textContent = generateBefund();
+  const beur = document.getElementById('prev_beurteilung');
+  if (!beur.dataset.touched) beur.value = generateBeurteilung();
 }
 
-/* ── INIT ── */
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('prev-date').textContent =
-    new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
+document.addEventListener('input', updatePreview);
+document.addEventListener('change', updatePreview);
+document.getElementById('prev_beurteilung').addEventListener('input', e => e.target.dataset.touched = '1');
 
-  document.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener('change', ()=>{
-    const m = document.querySelector('input[name=mode]:checked').value;
-    const msgs = {
-      manual:'<strong>Modus Manuell:</strong> Alle Felder werden manuell befüllt. Für Fallback und Testzwecke.',
-      lama:'<strong>Modus LAMA vorbefüllt:</strong> Messwerte aus IB Lab LAMA (DICOM SR) automatisch übernommen. Validierung durch Radiologen erforderlich.',
-      hybrid:'<strong>Modus Hybrid:</strong> LAMA-Vorschlag sichtbar. Manuelle Eingabe = bewusstes Validieren.'
+// =============================================================================
+// COPY / RESET / EXPORT
+// =============================================================================
+function copyAll() {
+  const t = ['TECHNIK', document.getElementById('prev_technik').textContent,
+             '', 'KLINISCHE ANGABE', document.getElementById('prev_klinik').textContent,
+             '', 'BEFUND', document.getElementById('prev_befund').textContent,
+             '', 'BEURTEILUNG', document.getElementById('prev_beurteilung').value].join('\n');
+  navigator.clipboard.writeText(t).then(() => alert('Befund in Zwischenablage kopiert.'));
+}
+
+function resetForm() {
+  if (!confirm('Wirklich alles zurücksetzen?')) return;
+  location.reload();
+}
+
+function getCodingFromSelectedOption(selectId) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return null;
+  const opt = sel.options[sel.selectedIndex];
+  if (!opt || !opt.value) return null;
+  const rid = opt.getAttribute('data-radlex');
+  const en = opt.getAttribute('data-en');
+  const status = opt.getAttribute('data-radlex-status');
+  const coding = [];
+  if (rid) coding.push({ system: 'http://radlex.org', code: rid, display: en || opt.text });
+  else if (status === 'local') coding.push({ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: opt.value.toLowerCase().replace(/\s+/g,'-'), display: en || opt.text });
+  return { coding, text: opt.text };
+}
+
+function getCodingFromCheckbox(checkboxId) {
+  const cb = document.getElementById(checkboxId);
+  if (!cb || !cb.checked) return null;
+  const rid = cb.getAttribute('data-radlex');
+  const en = cb.getAttribute('data-en');
+  const status = cb.getAttribute('data-radlex-status');
+  const coding = [];
+  if (rid) coding.push({ system: 'http://radlex.org', code: rid, display: en });
+  else if (status === 'local') coding.push({ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: checkboxId, display: en });
+  return coding;
+}
+
+function showExport(format) {
+  const area = document.getElementById('exportArea');
+  const seite = document.querySelector('input[name="seite"]:checked');
+  if (!seite || !seite.value) {
+    area.textContent = '// Export nicht möglich: Bitte zuerst Seite (re. / li.) wählen.';
+    area.classList.add('rr-is-visible');
+    return;
+  }
+  const cpak = calculateCPAK();
+  const data = {
+    metadata: {
+      template: 'HJK-MRRT-KNIE-PRAETEP', version: '1.4',
+      seite: seite.value,
+      seite_radlex: { code: seite.getAttribute('data-radlex'), system: 'http://radlex.org', display: seite.getAttribute('data-en') },
+      datum: new Date().toISOString(),
+      modus: document.querySelector('input[name="mode"]:checked').value
+    },
+    technik: {
+      ap_stehend: gv('proj_ap'), seitlich: gv('proj_lat'),
+      patella_tangential: gv('proj_pat'), ganzbein_einseitig: gv('proj_lla'),
+      rosenberg: gv('proj_rb'), kalibrationskugel: gv('proj_kugel')
+    },
+    klinische_angabe: gv('indikation'),
+    achsenvermessung: {
+      HKA: gn('hka'), MAD: gn('mad'), LLD: gn('lld'),
+      mLDFA: gn('mldfa'), mMPTA: gn('mmpta'), JLCA: gn('jlca'),
+      datenquelle: document.querySelector('input[name="mode"]:checked').value === 'manual'
+        ? 'manuell' : 'IB-Lab-LAMA via DICOM-SR'
+    },
+    cpak: cpak,
+    kellgren_lawrence: {
+      medial: parseInt(gv('kl_med'))||null,
+      lateral: parseInt(gv('kl_lat'))||null,
+      patellofemoral: parseInt(gv('kl_pf'))||null
+    },
+    patellofemoral: {
+      insall_salvati: gv('ps_is'), caton_deschamps: gv('ps_cd'),
+      tilt: gv('ps_tilt'), dejour: gv('ps_dejour')
+    },
+    slope: gn('slope'),
+    zusatzbefunde: {
+      osteophyten: gc('add_osteophyten'), zysten: gc('add_zysten'),
+      sklerose: gc('add_sklerose'), freikoerper: gc('add_freikorper'),
+      erguss: gc('add_erguss'), baker: gc('add_baker'),
+      verkalkungen: gc('add_verkalk'), chondrokalzinose: gc('add_chondrocalc')
+    },
+    knochenstruktur: gv('bone_q'),
+    voruntersuchung: { datum: gv('vu_date'), trend: gv('vu_trend') },
+    freitext: gv('freetext'),
+    fliesstext: {
+      technik: document.getElementById('prev_technik').textContent,
+      klinik: document.getElementById('prev_klinik').textContent,
+      befund: document.getElementById('prev_befund').textContent,
+      beurteilung: document.getElementById('prev_beurteilung').value
+    }
+  };
+
+  if (format === 'json') {
+    area.textContent = JSON.stringify(data, null, 2);
+  } else if (format === 'fhir') {
+    const obs = [];
+    const bodySite = {
+      coding: [
+        { system: 'http://radlex.org', code: 'RID2472', display: 'knee' },
+        { system: 'http://radlex.org', code: seite.getAttribute('data-radlex'), display: seite.getAttribute('data-en') }
+      ],
+      text: `Knie ${seite.value}`
     };
-    document.getElementById('mode-info').innerHTML = msgs[m];
-    update();
-  }));
-  document.querySelectorAll('input[name=seite]').forEach(r=>r.addEventListener('change',update));
-  calcCPAK(); updateKL(); update();
-});
+
+    const quantMap = [
+      { id:'hka', code:'LP410789-0', sys:'http://loinc.org', display:'Hip-knee-ankle angle', val:gn('hka'), unit:'deg' },
+      { id:'mad', code:'MAD', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Mechanical axis deviation', val:gn('mad'), unit:'mm' },
+      { id:'mldfa', code:'mLDFA', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Mechanical lateral distal femoral angle', val:gn('mldfa'), unit:'deg' },
+      { id:'mmpta', code:'mMPTA', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Mechanical medial proximal tibial angle', val:gn('mmpta'), unit:'deg' },
+      { id:'jlca', code:'JLCA', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Joint line convergence angle', val:gn('jlca'), unit:'deg' },
+      { id:'lld', code:'LP35279-5', sys:'http://loinc.org', display:'Leg length discrepancy', val:gn('lld'), unit:'mm' },
+      { id:'slope', code:'tibial-slope', sys:'http://hjk.wien/fhir/CodeSystem/radiology-templates', display:'Posterior tibial slope', val:gn('slope'), unit:'deg' }
+    ];
+    quantMap.forEach(o => {
+      if (o.val !== null && o.val !== undefined) {
+        obs.push({
+          resourceType:'Observation', status:'final',
+          code:{ coding:[{ system:o.sys, code:o.code, display:o.display }] },
+          bodySite: bodySite,
+          valueQuantity:{ value:o.val, unit:o.unit, system:'http://unitsofmeasure.org', code:o.unit }
+        });
+      }
+    });
+
+    [['kl_med','medial'],['kl_lat','lateral'],['kl_pf','patellofemoral']].forEach(([id,kompart]) => {
+      const v = parseInt(gv(id));
+      if (!isNaN(v)) {
+        const sel = document.getElementById(id);
+        const opt = sel.options[sel.selectedIndex];
+        const rid = opt.getAttribute('data-radlex');
+        const coding = [
+          { system:'http://loinc.org', code:'LP410785-8', display:`Kellgren-Lawrence ${kompart}` }
+        ];
+        if (rid) coding.push({ system:'http://radlex.org', code:rid, display:opt.getAttribute('data-en') });
+        else coding.push({ system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:`kl-${kompart}-grade-${v}`, display:opt.getAttribute('data-en') });
+        obs.push({
+          resourceType:'Observation', status:'final',
+          code:{ coding },
+          bodySite: bodySite,
+          valueInteger: v,
+          interpretation:[{ text:opt.text }]
+        });
+      }
+    });
+
+    if (cpak) {
+      obs.push({
+        resourceType:'Observation', status:'final',
+        code:{ coding:[{ system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:'CPAK', display:'Coronal Plane Alignment of the Knee phenotype (MacDessi 2021)' }] },
+        bodySite: bodySite,
+        valueString:`Type ${cpak.type}`,
+        component:[
+          { code:{ text:'aHKA' }, valueQuantity:{ value:parseFloat(cpak.aHKA), unit:'deg' } },
+          { code:{ text:'JLO' }, valueQuantity:{ value:parseFloat(cpak.JLO), unit:'deg' } }
+        ]
+      });
+    }
+
+    const categoricalSelects = ['ps_is','ps_cd','ps_tilt','ps_dejour','bone_q','vu_trend'];
+    categoricalSelects.forEach(id => {
+      const c = getCodingFromSelectedOption(id);
+      if (c && c.coding.length > 0) {
+        obs.push({
+          resourceType:'Observation', status:'final',
+          code:{ coding:[{ system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:id, display:id }] },
+          bodySite: bodySite,
+          valueCodeableConcept:{ coding:c.coding, text:c.text }
+        });
+      }
+    });
+
+    const zusatz = ['add_osteophyten','add_zysten','add_sklerose','add_freikorper','add_erguss','add_baker','add_verkalk','add_chondrocalc'];
+    zusatz.forEach(id => {
+      const c = getCodingFromCheckbox(id);
+      if (c) {
+        obs.push({
+          resourceType:'Observation', status:'final',
+          code:{ coding:c },
+          bodySite: bodySite,
+          valueBoolean: true
+        });
+      }
+    });
+
+    const bundle = {
+      resourceType:'Bundle', type:'collection',
+      meta:{ profile:['http://hjk.local/StructureDefinition/KneePreTEPReport'] },
+      entry:[
+        {
+          resource:{
+            resourceType:'DiagnosticReport', status:'final',
+            category:[{ coding:[{ system:'http://loinc.org', code:'LP29684-5', display:'Radiology' }] }],
+            code:{ coding:[
+              { system:'http://loinc.org', code:'36572-4', display:'Knee X-ray, preoperative' },
+              { system:'http://radlex.org', code:'RPID218', display:'Knee X-ray' }
+            ] },
+            bodySite: bodySite,
+            conclusion: data.fliesstext.beurteilung,
+            presentedForm:[{ contentType:'text/plain', data:btoa(unescape(encodeURIComponent(Object.values(data.fliesstext).join('\n\n')))) }]
+          }
+        },
+        ...obs.map(o => ({ resource:o }))
+      ]
+    };
+    area.textContent = JSON.stringify(bundle, null, 2);
+  }
+  area.classList.add('rr-is-visible');
+}
+
+updatePreview();
 </script>
 </body>
 </html>
