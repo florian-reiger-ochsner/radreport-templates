@@ -1,65 +1,63 @@
 # Röntgen Knie präoperativ vor TEP
 
-**ID:** RR-MRRT-KNIE-PRAETEP
-**Version:** 1.3.1
+**ID:** HJK-MRRT-KNIE-PRAETEP
+**Version:** 1.3
 **Status:** Pilot
-**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/knie-prae-tep/)
+**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-praetep/)
 
 ## Zweck
 
-Strukturierte Befundvorlage für das **Planungsröntgen Knie vor TEP** bei Primärarthrose. Integriert automatische Achsen- und Längenvermessung über IB Lab LAMA via DICOM SR.
+Strukturierte Befundvorlage für das **Planungsröntgen Knie vor TEP** bei Primärarthrose. Automatische CPAK-Berechnung (MacDessi 2021) aus aHKA und JLO. KI-Integration via IB Lab LAMA (DICOM SR).
 
 ## Projektionen
 
 - Knie a.p. stehend
 - Knie seitlich
-- Patella tangential
-- Ganzbein-Standaufnahme (einseitig)
-- Rosenberg-Aufnahme (PA 45° Flex) optional
-- **Kalibrationskugel obligat** für millimetergenaue Längenmessung
+- Patella tangential (optional)
+- Ganzbein-Standaufnahme einseitig (Kalibrationskugel obligat)
+- Rosenberg-Aufnahme PA 45° (optional)
 
 ## Klassifikationen / Messungen
 
-| Was | Klassifikation / Maß |
+| Maß / Klassifikation | Quelle |
 |---|---|
-| Beinachse | HKA, MAD, mLDFA, mMPTA, JLCA, BLD |
-| Achsenphänotyp | CPAK (MacDessi 2021) automatisch berechnet aus aHKA + JLO |
-| Arthrosegrad | Kellgren-Lawrence (medial / lateral / patellofemoral) |
-| Patella-Höhe (optional) | Insall-Salvati, Caton-Deschamps |
-| Patella-Tilt (optional) | qualitativ |
-| Trochleadysplasie (optional) | Dejour |
-| Tibialer Slope (optional) | sagittal |
+| HKA, MAD, LLD, mLDFA, mMPTA, JLCA | LAMA via DICOM SR |
+| CPAK-Phänotyp (Typ I–IX) | MacDessi SJ et al. Bone Joint J 2021 |
+| Kellgren-Lawrence (medial / lateral / PF) | Kellgren & Lawrence 1957 |
+| Insall-Salvati, Caton-Deschamps (optional) | – |
+| Dejour-Klassifikation (optional) | – |
+| Tibialer Slope (optional) | – |
 
 ## KI-Integration
 
-- **IB Lab LAMA** (produktiv lizenziert) → DICOM SR für HKA, MAD, LLD, mLDFA, mMPTA, JLCA
+- **IB Lab LAMA** (produktiv lizenziert) → DICOM SR: HKA, MAD, LLD, mLDFA, mMPTA, JLCA
 - **IB Lab KOALA** (Testphase) → KL-Grading (geplant)
 
-Drei Modi im Template:
-
-- **Manuell** – Fallback, alle Felder selbst eingeben
-- **LAMA vorbefüllt** – Werte aus DICOM SR übernommen, Radiologe validiert
-- **Hybrid** – KI-Vorschlag sichtbar, manuelle Eintragung = bewusstes Validieren
-
-## Indikation
-
-Nur Primärarthrose. Revisionsplanung ist ein **separates Template** (in Entwicklung).
+**Modi:** Manuell · LAMA vorbefüllt · Hybrid (Validierung)
 
 ## Output
 
-- **Fließtext** für Copy/Paste ins PACS
-- **JSON** strukturiert (Backup, KI-Training)
-- **FHIR Bundle** (DiagnosticReport + Observations mit LOINC)
+- Fließtext (Copy/Paste Syngo/Carbon)
+- JSON strukturiert
+- FHIR Bundle R4 (LOINC-kodiert)
 
-  ## Dokumentation
-- [Messleitfaden](./docs/messleitfaden.html) – Anleitung zu allen Messungen und Klassifikationen
+## Architektur
+
+```
+knie-praetep/
+├── template.source.html   # Authored source – externer CSS-Link
+├── template.html          # MRRT/Carbon-Build (inline CSS)
+├── frontmatter.yaml
+├── README.md
+├── CHANGELOG.md
+└── RADLEX-MAPPING.md
+```
 
 ## Quellen
 
-- MacDessi SJ et al. Coronal Plane Alignment of the Knee (CPAK) classification. Bone Joint J 2021;103-B(3):329-337
-- Paley D. Principles of Deformity Correction. Springer 2002
-- Kellgren JH, Lawrence JS. Radiological assessment of osteo-arthrosis. Ann Rheum Dis 1957;16:494-502
-- IB Lab GmbH. LAMA Conformance Statement (DICOM SR)
+- MacDessi SJ et al. CPAK classification. Bone Joint J 2021;103-B(3):329-337
+- Kellgren JH, Lawrence JS. Ann Rheum Dis 1957;16:494-502
+- IB Lab GmbH. LAMA Conformance Statement
 
 ## Versionshistorie
 
