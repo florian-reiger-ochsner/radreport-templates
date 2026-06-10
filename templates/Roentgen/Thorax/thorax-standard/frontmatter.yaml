@@ -1,0 +1,36 @@
+id: HJK-MRRT-ROE-THORAX
+version: 1.3
+status: pilot
+modalitaet: Roentgen
+region: Thorax
+indikation: Standardbefundung Roentgen-Thorax pa und lateral
+sprache: de
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+geprueft: 2026-06-08
+naechste-pruefung: 2026-12-08
+klassifikationen: []
+referenzen:
+  - "Fleischner Society: MacMahon H et al. Radiology 2017;284(1):228-243"
+  - "Hansell DM et al. Fleischner Society: Glossary of Terms. Radiology 2008;246(3):697-722"
+ki-tools: []
+standorte:
+  - Herz-Jesu-Krankenhaus Wien (HJK)
+loinc-codes:
+  - code: "24627-2"
+    description: Chest X-ray 2 views
+projektionen:
+  - pa
+  - lateral-links
+  - ap-liegend
+  - exspiration
+modi:
+  - standard
+output:
+  - fliesstext
+  - fhir-bundle
+multi-features:
+  - multi-parenchym-stack
+  - multi-device-stack
+radlex-coverage: vollstaendig
