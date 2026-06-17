@@ -1,0 +1,119 @@
+id: HJK-MRRT-CT-LEBER-LIRADS
+version: 1.2
+status: pilot
+paper-konform: true
+drg-kompatibel: true
+modalitaet: CT
+region: Leber
+organsystem: Abdominell
+indikation: HCC-Bildgebung bei Risikopatient (LI-RADS v2018) + LTx-Evaluation (§16 TPG)
+sprache: de
+lizenz: CC-BY-4.0
+autoren:
+  - florian-reiger-ochsner
+reviewer-geplant:
+  - wolfgang-schima
+  - helmut-kopf
+  - edith-eisenhuber
+  - daniel-pinto-dos-santos
+geprueft: 2026-05-19
+naechste-pruefung: 2026-11-19
+klassifikationen:
+  - name: LI-RADS CT/MRI
+    version: v2018
+    quelle: ACR LI-RADS Steering Committee 2018
+  - name: Mailand-Kriterien
+    quelle: Mazzaferro V et al. NEJM 1996
+  - name: §16 TPG-Richtlinie
+    quelle: Bundesärztekammer
+referenzen:
+  - "Schima W, Kopf H, Eisenhuber E. LI-RADS leicht gemacht. Fortschr Röntgenstr 2023; 195: 486-494. DOI 10.1055/a-1990-5924"
+  - "Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template gen_ltx_hcc.html (041807.5.1706140000), Deutsche Röntgengesellschaft 2017, CC BY 4.0"
+  - "American College of Radiology. CT/MRI LI-RADS v2018 Core, 2018"
+  - "Chernyak V et al. Radiology 2018; 289: 816-830"
+  - "Van der Pol CB et al. Radiology 2022; 302: 326-335"
+  - "Ringe KI et al. Strukturierte Befundung in der Radiologie. Rofo 2021"
+coding-systems:
+  - RadLex
+  - LOINC
+  - ACR-LI-RADS
+  - SNOMED-CT
+radlex-mapping:
+  segment-of-liver: RID29237
+  diameter: RID13432
+  arterial-phase-hyperenhancement: RID43355
+  portal-venous-phase-hypoenhancement: RID43353
+  pseudocapsule-liver: RID39477
+  growth: RID35936
+  cirrhosis: RID3822
+  hepatocellular-carcinoma: RID4271
+  chronic-hepatitis-b: RID28572
+  vascular-invasion: RID3987
+ki-tools: []
+standorte:
+  - HJK
+  - Karner
+loinc-codes:
+  - code: 24571-9
+    description: CT Abdomen
+  - code: LP202113-1
+    description: LI-RADS Category
+risikopopulation:
+  - leberzirrhose-ausser-gefaesserkrankungen
+  - chronische-hbv
+  - aktuelles-hcc
+  - z-n-hcc-behandlung
+ausschluesse:
+  - budd-chiari
+  - hereditaere-haemorrhagische-teleangiektasie
+  - chronische-kardiale-stauung
+  - kongenitale-lebervenenerkrankungen
+  - paediatrie-unter-18-jahre
+algorithmus-schritte:
+  - schritt-1-hauptkriterien
+  - schritt-2-hilfskriterien
+  - schritt-3-tie-breaking
+  - schritt-4-final-check
+mailand-logik:
+  - solitaer-≤50mm-ok
+  - bis-3-knoten-alle-≤30mm-ok
+  - keine-extrahepatische-manifestation
+  - keine-makrovaskulaere-invasion
+  - portiert-aus-drg-calcMilan-funktion
+modi:
+  - manuell
+  - gefuehrt-made-easy
+  - direkt
+  - ltx-evaluation
+laesionen-max-strukturiert: 3
+modalitaeten-geplant:
+  - CT-v1.2-aktuell
+  - MRT-extrazellulaer-v2.0
+  - MRT-hepatobiliaer-v2.0
+nicht-implementiert:
+  - CEUS-LI-RADS
+  - Pediatric-LI-RADS
+output:
+  - fliesstext
+  - json-mit-algorithmus-trace-radlex-und-ltx
+  - fhir-bundle
+folgearbeit-geplant:
+  titel-arbeitsweise: "Vereinheitlichung von LI-RADS-Made-Easy (Schima 2023) und DRG-LTx-Methodik (Pinto dos Santos 2017) in einem MRRT-konformen, RadLex-annotierten Open-Source-Template"
+  potenzielle-koautoren:
+    - wolfgang-schima
+    - helmut-kopf
+    - edith-eisenhuber
+    - daniel-pinto-dos-santos
+    - michaela-reiger-ochsner
+  forschungsfragen:
+    - inter-reader-variabilitaet
+    - vollstaendigkeitsraten
+    - befundungszeiten
+    - ki-trainingsdatensatz-mit-radlex
+    - wizard-validierung-junior-readers
+    - mailand-li-rads-konkordanz
+  potenzielle-zielzeitschriften:
+    - rofo
+    - european-radiology
+    - insights-into-imaging
+    - journal-of-digital-imaging
