@@ -1091,11 +1091,11 @@ function buildBeurteilung(){
   const parNorm = document.getElementById('par_norm')?.checked;
   const plNorm  = document.getElementById('pl_norm')?.checked;
   const hGr  = gv('herz_gr');
-  const med  = gv('medi');
+  const med  = [document.getElementById('md_norm')?.checked?'Unauffällig':null, document.getElementById('md_verb')?.checked?'Verbreitert':null, document.getElementById('md_rf')?.checked?'Raumforderung mediastinal':null, document.getElementById('md_trach')?.checked?'Trachealdeviation':null, document.getElementById('md_shift')?.checked?'Mediastinalshift kontralateral':null].filter(Boolean).join(', ') || 'unauffällig';
 
   if(parNorm && plNorm &&
      hGr === 'normal groß (CTR ≤ 0,5)' &&
-     med === 'unauffällig, nicht verbreitert, keine Raumforderung'){
+     med === 'unauffällig'){
     parts.push('Röntgen Thorax ohne pathologischen Befund.');
   } else {
     if(!parNorm){
@@ -1114,7 +1114,7 @@ function buildBeurteilung(){
     if(plParts2.length) parts.push(plParts2.join(', ')+(seite2?' '+seite2:'')+'.') ;
     }
     if(hGr !== 'normal groß (CTR ≤ 0,5)') parts.push(`Herzgröße: ${hGr}.`);
-    if(med !== 'unauffällig, nicht verbreitert, keine Raumforderung') parts.push(`Mediastinum: ${med}.`);
+    if(med !== 'unauffällig') parts.push(`Mediastinum: ${med}.`);
   }
 
   const verl = gv('vgl_verlauf');
