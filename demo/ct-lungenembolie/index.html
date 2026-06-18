@@ -410,12 +410,17 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
       <div class="row">
         <label>
           <span class="lbl">Herz &amp; übrige Gefäße</span>
-          <select id="herz_gefaesse" onchange="update()"
-            data-radlex="RID1317" data-en="heart vessels">
-            <option value="unauffällig" data-radlex="RID1317-norm">Unauffällig</option>
-            <option value="Perikarderguss" data-radlex="RID5081">Perikarderguss</option>
-            <option value="Aortensklerose" data-radlex="RID5082">Aortensklerose</option>
-          </select>
+          <div class="cg" id="herz_gefaesse_wrap">
+            <label class="ci"><input type="checkbox" id="hg_unauf" onchange="update()"
+              data-radlex="RID1317-norm" data-en="heart vessels unremarkable">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="hg_peri" onchange="update()"
+              data-radlex="RID5081" data-en="pericardial effusion">
+              <span>Perikarderguss</span></label>
+            <label class="ci"><input type="checkbox" id="hg_ao" onchange="update()"
+              data-radlex="RID5082" data-en="aortic sclerosis">
+              <span>Aortensklerose</span></label>
+          </div>
         </label>
       </div>
       <div class="row">
@@ -632,7 +637,7 @@ function buildBefund(){
   // Weitere Thorax-Befunde
   const pleura  = gv('pleura'),    paren   = gv('parenchym');
   const atemw   = gv('atemwege'),  lymph   = gv('lymph');
-  const hgef    = gv('herz_gefaesse'), ob = gv('oberbauch');
+  const hgef    = [document.getElementById('hg_unauf')?.checked?'Herz und übrige Gefäße unauffällig':null, document.getElementById('hg_peri')?.checked?'Perikarderguss':null, document.getElementById('hg_ao')?.checked?'Aortensklerose':null].filter(Boolean).join(', ') ||'–'; const ob = gv('oberbauch');
   const kn      = gv('knochen'),   sonst   = gv('sonstiges');
   lines.push(`Pleura: ${pleura}. Lungenparenchym: ${paren}. Zentrale Atemwege: ${atemw}. Lymphknoten mediastinal: ${lymph}. Herz und übrige Gefäße: ${hgef}. Oberbauch: ${ob}. Knochen: ${kn}.`);
   if(sonst) lines.push(`Sonstiges: ${sonst}`);
