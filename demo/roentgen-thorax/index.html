@@ -1012,25 +1012,31 @@ function buildBefund(){
   if(!document.getElementById('pl_erguss')?.checked && !document.getElementById('pl_ptx')?.checked && !document.getElementById('pl_schwarte')?.checked && !document.getElementById('pl_kalk')?.checked && !document.getElementById('pl_tumor')?.checked){
     lines.push('Pleura: Kein Pleuraerguss. Kein Pneumothorax. Sinus phrenicocostales bds. frei.');
   } else {
-    const typDe = ['pl_erguss','pl_ptx','pl_schwarte','pl_kalk','pl_tumor'].filter(id=>document.getElementById(id)?.checked).map(id=>document.getElementById(id)?.nextElementSibling?.textContent||'').join(', ');
-    const seite  = gv('pl_seite');
-    let pl = 'Pleura:';
-    if(typEl?.value === 'RID4872'){
+    const seite = gv('pl_seite');
+    const plParts = [];
+    if(document.getElementById('pl_erguss')?.checked){
       const grad = gv('pl_erg_grad');
-      pl += ` ${seite?seite+' ':''}${grad||''} ${typDe}.`;
-    } else if(typEl?.value === 'RID5352'){
-      const grad = gv('pl_ptx_grad');
-      pl += ` ${seite?seite+' ':''}${typDe}${grad?' – '+grad:''}.`;
-    } else {
-      pl += ` ${typDe}${seite?' '+seite:''}.`;
+      plParts.push(`${grad?grad+' ':''}Pleuraerguss${seite?' '+seite:''}`);
     }
+    if(document.getElementById('pl_ptx')?.checked){
+      const grad = gv('pl_ptx_grad');
+      plParts.push(`Pneumothorax${seite?' '+seite:''}${grad?' – '+grad:''}`);
+    }
+    if(document.getElementById('pl_schwarte')?.checked)
+      plParts.push(`Pleuraschwarte/-verdickung${seite?' '+seite:''}`);
+    if(document.getElementById('pl_kalk')?.checked)
+      plParts.push(`Pleurakalk${seite?' '+seite:''}`);
+    if(document.getElementById('pl_tumor')?.checked)
+      plParts.push(`Pleuratumor/Raumforderung${seite?' '+seite:''}`);
+    let pl = 'Pleura: ' + plParts.join('; ') + '.';
     const ft = gv('pl_ft');
     if(ft) pl += ' ' + ft + '.';
     lines.push(pl.trim());
   }
 
   // Herz / Mediastinum
-  const hGr = gv('herz_gr'), hKfg = gv('herz_kfg');
+  const hGr = gv('herz_gr');
+  const hKfg = ['hkfg_norm','hkfg_links','hkfg_rechts','hkfg_glob','hkfg_mitral','hkfg_aorten'].reduce((a,id)=>{const el=document.getElementById(id);if(el?.checked)a.push(el.nextElementSibling?.textContent?.trim()||'');return a;},[]).join(', ')||'regelrecht konfiguriert';
   const med = [document.getElementById('md_norm')?.checked?'Unauffällig':null, document.getElementById('md_verb')?.checked?'Verbreitert':null, document.getElementById('md_rf')?.checked?'Raumforderung mediastinal':null, document.getElementById('md_trach')?.checked?'Trachealdeviation':null, document.getElementById('md_shift')?.checked?'Mediastinalshift kontralateral':null].filter(Boolean).join(', ') || "unauffällig";
   const hRe = [document.getElementById('hre_norm')?.checked?'Regelrecht':null, document.getElementById('hre_vergr')?.checked?'Vergrößert':null, document.getElementById('hre_unsch')?.checked?'Verschwommene Kontur':null, document.getElementById('hre_versch')?.checked?'Verschattet':null].filter(Boolean).join(', ') || "regelrecht";
   const hLi = [document.getElementById('hli_norm')?.checked?'Regelrecht':null, document.getElementById('hli_vergr')?.checked?'Vergrößert':null, document.getElementById('hli_unsch')?.checked?'Verschwommene Kontur':null, document.getElementById('hli_versch')?.checked?'Verschattet':null].filter(Boolean).join(', ') || "regelrecht";
@@ -1101,10 +1107,11 @@ function buildBeurteilung(){
       });
     }
     if(!plNorm){
-      const typEl = document.getElementById('pl_typ');
-      const typDe = typEl?.options[typEl.selectedIndex]?.dataset?.de || '';
-      const seite = gv('pl_seite');
-      if(typDe) parts.push(`${typDe}${seite?' '+seite:''}.`);
+      const plParts2 = ['pl_erguss','pl_ptx','pl_schwarte','pl_kalk','pl_tumor']
+      .filter(id=>document.getElementById(id)?.checked)
+      .map(id=>document.getElementById(id)?.nextElementSibling?.textContent?.trim()||'');
+    const seite2 = gv('pl_seite');
+    if(plParts2.length) parts.push(plParts2.join(', ')+(seite2?' '+seite2:'')+'.') ;
     }
     if(hGr !== 'normal groß (CTR ≤ 0,5)') parts.push(`Herzgröße: ${hGr}.`);
     if(med !== 'unauffällig, nicht verbreitert, keine Raumforderung') parts.push(`Mediastinum: ${med}.`);
@@ -1193,9 +1200,12 @@ function buildFhir(){
 
   // Pleura
   if(!document.getElementById('pl_norm')?.checked){
-    const typEl = document.getElementById('pl_typ');
-    const rid   = typEl?.value;
-    const en    = typEl?.options[typEl.selectedIndex]?.dataset?.en || '';
+    const rid = document.getElementById('pl_erguss')?.checked?'RID4872'
+        :document.getElementById('pl_ptx')?.checked?'RID5352'
+        :document.getElementById('pl_schwarte')?.checked?'RID5355'
+        :document.getElementById('pl_kalk')?.checked?'RID5356'
+        :document.getElementById('pl_tumor')?.checked?'RID34948':null;
+    const en = rid?'pleural finding':'';
     if(rid){
       obsEntries.push({fullUrl:'urn:uuid:pleura-obs', resource:{
         resourceType:'Observation', status:'final', id:'pleura-obs',
