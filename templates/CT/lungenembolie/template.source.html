@@ -372,15 +372,26 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
       <div class="row">
         <label>
           <span class="lbl">Lungenparenchym <span class="rr-rl-badge">RadLex</span></span>
-          <select id="parenchym" onchange="update()"
-            data-radlex="RID1326" data-en="lung parenchyma">
-            <option value="unauffällig" data-radlex="RID1326-norm">Unauffällig</option>
-            <option value="Infarktpneumonie" data-radlex="RID5085" data-en="pulmonary infarct">Infarktpneumonie</option>
-            <option value="Hampton's Hump" data-radlex="RID5086" data-en="Hampton hump">Hampton's Hump</option>
-            <option value="Konsolidierung / Infiltrat" data-radlex="RID4803">Konsolidierung / Infiltrat</option>
-            <option value="Milchglastrübung" data-radlex="RID4800">Milchglastrübung (GGO)</option>
-            <option value="Emphysem" data-radlex="RID4799">Emphysem</option>
-          </select>
+          <div class="cg" id="par_wrap">
+            <label class="ci"><input type="checkbox" id="par_norm" onchange="update()"
+              data-radlex="RID1326-norm" data-en="lung parenchyma normal">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="par_infarkt" onchange="update()"
+              data-radlex="RID5085" data-en="pulmonary infarct">
+              <span>Infarktpneumonie</span></label>
+            <label class="ci"><input type="checkbox" id="par_hampton" onchange="update()"
+              data-radlex="RID5086" data-en="Hampton hump">
+              <span>Hamptons Hump</span></label>
+            <label class="ci"><input type="checkbox" id="par_konsol" onchange="update()"
+              data-radlex="RID4803" data-en="consolidation">
+              <span>Konsolidierung/Infiltrat</span></label>
+            <label class="ci"><input type="checkbox" id="par_ggo" onchange="update()"
+              data-radlex="RID4800" data-en="ground-glass opacity">
+              <span>Milchglastrübung (GGO)</span></label>
+            <label class="ci"><input type="checkbox" id="par_emph" onchange="update()"
+              data-radlex="RID4799" data-en="pulmonary emphysema">
+              <span>Emphysem</span></label>
+          </div>
         </label>
       </div>
       <div class="row">
@@ -433,12 +444,17 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
       <div class="row">
         <label>
           <span class="lbl">Knochen (soweit abgebildet) <span class="rr-rl-badge">RadLex</span></span>
-          <select id="knochen" onchange="update()"
-            data-radlex="RID13573" data-en="osseous structures">
-            <option value="unauffällig" data-radlex="RID13573-norm">Unauffällig</option>
-            <option value="degenerativ" data-radlex="RID5222">Degenerativ</option>
-            <option value="ossäre Destruktion / Metastase V.a." data-radlex="RID5223">Destruktion / Metastase</option>
-          </select>
+          <div class="cg" id="kno_wrap">
+            <label class="ci"><input type="checkbox" id="kno_norm" onchange="update()"
+              data-radlex="RID13573-norm" data-en="osseous structures unremarkable">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="kno_deg" onchange="update()"
+              data-radlex="RID5222" data-en="degenerative changes">
+              <span>Degenerativ</span></label>
+            <label class="ci"><input type="checkbox" id="kno_dest" onchange="update()"
+              data-radlex="RID5223" data-en="osseous destruction">
+              <span>Destruktion/Metastase</span></label>
+          </div>
         </label>
       </div>
     </div>
@@ -635,7 +651,7 @@ function buildBefund(){
   const pleura  = gv('pleura'),    paren   = gv('parenchym');
   const atemw   = gv('atemwege'),  lymph   = gv('lymph');
   const hgef    = [document.getElementById('hg_unauf')?.checked?'Herz und übrige Gefäße unauffällig':null, document.getElementById('hg_peri')?.checked?'Perikarderguss':null, document.getElementById('hg_ao')?.checked?'Aortensklerose':null].filter(Boolean).join(', ') ||'–'; const ob = gv('oberbauch');
-  const kn      = gv('knochen'),   sonst   = gv('sonstiges');
+  const kn = [document.getElementById('kno_norm')?.checked?'Unauffällig':null, document.getElementById('kno_deg')?.checked?'Degenerativ':null, document.getElementById('kno_dest')?.checked?'Destruktion/Metastase':null].filter(Boolean).join(', ') || "unauffällig"; const sonst = gv('sonstiges');
   lines.push(`Pleura: ${pleura}. Lungenparenchym: ${paren}. Zentrale Atemwege: ${atemw}. Lymphknoten mediastinal: ${lymph}. Herz und übrige Gefäße: ${hgef}. Oberbauch: ${ob}. Knochen: ${kn}.`);
   if(sonst) lines.push(`Sonstiges: ${sonst}`);
 
