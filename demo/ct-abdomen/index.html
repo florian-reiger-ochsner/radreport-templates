@@ -53,7 +53,7 @@ html,body{background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-f
 .ctx-sw label:last-of-type{border-right:none}
 .ctx-sw input:checked+label{background:var(--rr-accent);color:#fff;font-weight:600}
 .ctx-sw label:hover{background:var(--rr-accent-pale);color:var(--rr-accent)}
-.ctx-sw input#ctx_notfall:checked+label{background:var(--notfall)}
+.ctx-sw input#ctx_notfall:checked+label{background:var(--notfall);color:#fff;font-weight:600}
 
 /* ── Section ── */
 .sh{display:flex;align-items:baseline;gap:12px;margin:26px 0 10px}
@@ -184,12 +184,12 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
 
 <!-- KONTEXT-MODUS -->
 <div class="ctx-sw">
-  <input type="radio" name="ctx" id="ctx_onko" value="onko" checked>
-  <label for="ctx_onko">Onkologisches Staging<br><span style="font-size:10.5px;font-weight:400">RECIST / Verlauf</span></label>
+  <input type="radio" name="ctx" id="ctx_allg" value="allg" checked>
+  <label for="ctx_allg">Allgemein<br><span style="font-size:10.5px;font-weight:400">Unklarer Befund</span></label>
   <input type="radio" name="ctx" id="ctx_notfall" value="notfall">
   <label for="ctx_notfall">Akutes Abdomen<br><span style="font-size:10.5px;font-weight:400">Notfall / Akut</span></label>
-  <input type="radio" name="ctx" id="ctx_allg" value="allg">
-  <label for="ctx_allg">Allgemein<br><span style="font-size:10.5px;font-weight:400">Unklarer Befund</span></label>
+  <input type="radio" name="ctx" id="ctx_onko" value="onko">
+  <label for="ctx_onko">Onkologisches Staging<br><span style="font-size:10.5px;font-weight:400">RECIST / Verlauf</span></label>
 </div>
 <div class="rr-helper-info" id="ctx-hint"></div>
 
@@ -1569,7 +1569,7 @@ function resetAll(){
   document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
   document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
   document.getElementById('ph_pv').checked = true;
-  document.getElementById('ctx_onko').checked = true;
+  document.getElementById('ctx_allg').checked = true;
   document.getElementById('recist-tbody').innerHTML = '';
   recistCount = 0;
   document.getElementById('recist-sum').textContent = '– mm';
