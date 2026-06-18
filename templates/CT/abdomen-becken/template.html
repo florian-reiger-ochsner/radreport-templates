@@ -1233,7 +1233,19 @@ function buildBefund(){
   organLines.push(gi);
 
   // Gefässe
-  const ga = gv('gef_aorta'), gp = gv('gef_pfortader'), gft = gv('gef_ft');
+  const ga = [
+    document.getElementById('gef_ao_norm')?.checked ? 'Aorta abdominalis unauffällig' : null,
+    document.getElementById('gef_ao_elon')?.checked ? 'elongiert, wandverkalkt' : null,
+    document.getElementById('gef_ao_baa')?.checked  ? 'Bauchaortenaneurysma (BAA)' : null,
+    document.getElementById('gef_ao_diss')?.checked ? 'Aortendissektion V.a.' : null,
+  ].filter(Boolean).join(', ') || '–';
+  const gp = [
+    document.getElementById('gef_pf_norm')?.checked  ? 'Pfortader unauffällig' : null,
+    document.getElementById('gef_pf_throm')?.checked ? 'Pfortaderthrombose' : null,
+    document.getElementById('gef_pf_htn')?.checked   ? 'portale Hypertension' : null,
+    document.getElementById('gef_pf_budd')?.checked  ? 'Budd-Chiari V.a.' : null,
+  ].filter(Boolean).join(', ') || '–';
+  const gft = gv('gef_ft');
   let gef = `Gefäße: Aorta abdominalis ${ga}. ${gp}.`;
   if(gft) gef += ` ${gft}.`;
   organLines.push(gef);
