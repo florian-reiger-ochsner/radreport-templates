@@ -353,17 +353,7 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
 <!-- LUNGENARTERIEN -->
 <div class="sh"><h2>Pulmonalarterien &amp; Lunge</h2><div class="sh-line"></div></div>
 
-<div class="row">
-  <label>
-    <span class="lbl">Truncus pulmonalis <span class="rr-rl-badge">RadLex</span></span>
-    <select id="trpulm_bef" onchange="update()"
-      data-radlex="RID1508" data-en="pulmonary trunk">
-      <option value="normal weit" data-radlex="RID1508-norm">Normal weit (≤ 29 mm)</option>
-      <option value="leicht dilatiert (30–35 mm)" data-radlex="RID5078" data-en="mildly dilated pulmonary trunk">Leicht dilatiert (30–35 mm)</option>
-      <option value="deutlich dilatiert (> 35 mm)" data-radlex="RID5079" data-en="markedly dilated pulmonary trunk">Deutlich dilatiert (&gt; 35 mm)</option>
-    </select>
-  </label>
-</div>
+
 
 <!-- WEITERE THORAX-BEFUNDE (kollabierbar) -->
 <details open>
@@ -626,18 +616,16 @@ function buildBefund(){
 
   // Rechtsherzbelastung
   const rv = gn('rv_dia'), lv = gn('lv_dia');
-  const rhb  = gv('rhb_qual');
-  const ivs  = gv('ivs_shift');
+    const ivs  = gv('ivs_shift');
   const stau = gv('km_stau');
   const trpD = gn('trpulm_dia');
-  const trpB = gv('trpulm_bef');
-
-  let rhbLine = `Rechtsherzbelastung: ${rhb}.`;
+  
+  let rhbLine = `Rechtsherzbelastung:`;
   if(rv !== null && lv !== null && lv > 0){
     const ratio = (rv/lv).toFixed(2);
     rhbLine += ` RV/LV-Ratio: ${ratio} (RV ${rv} mm, LV ${lv} mm).`;
   }
-  if(trpD !== null) rhbLine += ` Truncus pulmonalis ${trpD} mm (${trpB}).`;
+  if(trpD !== null) rhbLine += ` Truncus pulmonalis-Ø ${trpD} mm.`;
   rhbLine += ` ${ivs}. ${stau}.`;
   lines.push(rhbLine);
 
@@ -664,8 +652,7 @@ function buildVorschlag(){
   if(gc('lok_subsegmental'))ebenen.push('subsegmental');
 
   const rv = gn('rv_dia'), lv = gn('lv_dia');
-  const rhb = gv('rhb_qual');
-  const ivs = gv('ivs_shift');
+    const ivs = gv('ivs_shift');
 
   let v = `CTPA: Nachweis einer Lungenembolie`;
   if(ebenen.length) v += ` (${ebenen.join(', ')})`;
