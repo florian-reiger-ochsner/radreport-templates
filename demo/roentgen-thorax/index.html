@@ -392,16 +392,23 @@
     <div class="rr-thorax-g2">
       <div>
         <div class="rr-lbl"><span>Befundtyp <span class="rr-rl-badge">RadLex</span></span></div>
-        <select id="pl_typ" onchange="update();
-          document.getElementById('pl_erguss_row').style.display=this.value==='RID4872'?'':'none';
-          document.getElementById('pl_ptx_row').style.display=this.value==='RID5352'?'':'none'">
-          <option value="">–</option>
-          <option value="RID4872"  data-de="Pleuraerguss"                   data-en="pleural effusion">Pleuraerguss</option>
-          <option value="RID5352"  data-de="Pneumothorax"                   data-en="pneumothorax">Pneumothorax</option>
-          <option value="RID5355"  data-de="Pleuraschwarte/Pleuraverdickung" data-en="pleural thickening">Pleuraschwarte / -verdickung</option>
-          <option value="RID5356"  data-de="Pleurakalk"                     data-en="pleural calcification">Pleurakalk</option>
-          <option value="RID34948" data-de="Pleuratumor/pleurale Raumforderung" data-en="pleural mass">Pleuratumor / Raumforderung</option>
-        </select>
+        <div class="cg" id="pl_wrap">
+            <label class="ci"><input type="checkbox" id="pl_erguss" onchange="update(); document.getElementById('pl_erguss_row').style.display=document.getElementById('pl_erguss')?.checked?'':'none'; document.getElementById('pl_ptx_row').style.display=document.getElementById('pl_ptx')?.checked?'':'none'"
+              data-radlex="RID4872" data-en="pleural effusion">
+              <span>Pleuraerguss</span></label>
+            <label class="ci"><input type="checkbox" id="pl_ptx" onchange="update(); document.getElementById('pl_erguss_row').style.display=document.getElementById('pl_erguss')?.checked?'':'none'; document.getElementById('pl_ptx_row').style.display=document.getElementById('pl_ptx')?.checked?'':'none'"
+              data-radlex="RID5352" data-en="pneumothorax">
+              <span>Pneumothorax</span></label>
+            <label class="ci"><input type="checkbox" id="pl_schwarte" onchange="update(); document.getElementById('pl_erguss_row').style.display=document.getElementById('pl_erguss')?.checked?'':'none'; document.getElementById('pl_ptx_row').style.display=document.getElementById('pl_ptx')?.checked?'':'none'"
+              data-radlex="RID5355" data-en="pleural thickening">
+              <span>Pleuraschwarte/-verdickung</span></label>
+            <label class="ci"><input type="checkbox" id="pl_kalk" onchange="update(); document.getElementById('pl_erguss_row').style.display=document.getElementById('pl_erguss')?.checked?'':'none'; document.getElementById('pl_ptx_row').style.display=document.getElementById('pl_ptx')?.checked?'':'none'"
+              data-radlex="RID5356" data-en="pleural calcification">
+              <span>Pleurakalk</span></label>
+            <label class="ci"><input type="checkbox" id="pl_tumor" onchange="update(); document.getElementById('pl_erguss_row').style.display=document.getElementById('pl_erguss')?.checked?'':'none'; document.getElementById('pl_ptx_row').style.display=document.getElementById('pl_ptx')?.checked?'':'none'"
+              data-radlex="RID34948" data-en="pleural mass">
+              <span>Pleuratumor/Raumforderung</span></label>
+          </div>
       </div>
       <div>
         <div class="rr-lbl"><span>Seite</span></div>
@@ -454,57 +461,103 @@
     </div>
     <div>
       <div class="rr-lbl"><span>Herzkonfiguration</span></div>
-      <select id="herz_kfg" onchange="update()">
-        <option value="regelrecht konfiguriert"    data-radlex="RID1786-norm">Regelrecht</option>
-        <option value="linksbetont konfiguriert"   data-radlex="RID5069" data-en="left heart enlargement">Linksbetont</option>
-        <option value="rechtsbetont konfiguriert"  data-radlex="RID5070" data-en="right heart enlargement">Rechtsbetont</option>
-        <option value="mit globaler Kardiomegalie" data-radlex="RID1786" data-en="cardiomegaly">Global vergrößert</option>
-        <option value="in Mitralform"              data-radlex="RID5072" data-en="mitral configuration">Mitralform</option>
-        <option value="in Aortenform"              data-radlex="RID5073" data-en="aortic configuration">Aortenform</option>
-      </select>
+      <div class="cg" id="hkfg_wrap">
+            <label class="ci"><input type="checkbox" id="hkfg_norm" onchange="update()"
+              data-radlex="RID1786-norm" data-en="heart configuration normal">
+              <span>Regelrecht</span></label>
+            <label class="ci"><input type="checkbox" id="hkfg_links" onchange="update()"
+              data-radlex="RID5069" data-en="left heart enlargement">
+              <span>Linksbetont</span></label>
+            <label class="ci"><input type="checkbox" id="hkfg_rechts" onchange="update()"
+              data-radlex="RID5070" data-en="right heart enlargement">
+              <span>Rechtsbetont</span></label>
+            <label class="ci"><input type="checkbox" id="hkfg_glob" onchange="update()"
+              data-radlex="RID1786" data-en="cardiomegaly">
+              <span>Global vergrößert</span></label>
+            <label class="ci"><input type="checkbox" id="hkfg_mitral" onchange="update()"
+              data-radlex="RID5072" data-en="mitral configuration">
+              <span>Mitralform</span></label>
+            <label class="ci"><input type="checkbox" id="hkfg_aorten" onchange="update()"
+              data-radlex="RID5073" data-en="aortic configuration">
+              <span>Aortenform</span></label>
+          </div>
     </div>
   </div>
 
   <div style="margin-top:10px">
     <div class="rr-lbl"><span>Mediastinum <span class="rr-rl-badge">RadLex</span></span></div>
-    <select id="medi" onchange="update()">
-      <option value="unauffällig, nicht verbreitert, keine Raumforderung" data-radlex="RID1243-norm">Unauffällig</option>
-      <option value="verbreitert"                  data-radlex="RID34952" data-en="mediastinal widening">Verbreitert</option>
-      <option value="Raumforderung mediastinal"    data-radlex="RID4961"  data-en="mediastinal mass">Raumforderung mediastinal</option>
-      <option value="Trachealdeviation"            data-radlex="RID5347"  data-en="tracheal deviation">Trachealdeviation</option>
-      <option value="Mediastinalshift kontralateral" data-radlex="RID34952-shift">Mediastinalshift kontralateral</option>
-    </select>
+    <div class="cg" id="md_wrap">
+            <label class="ci"><input type="checkbox" id="md_norm" onchange="update()"
+              data-radlex="RID1243-norm" data-en="mediastinum unremarkable">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="md_verb" onchange="update()"
+              data-radlex="RID34952" data-en="mediastinal widening">
+              <span>Verbreitert</span></label>
+            <label class="ci"><input type="checkbox" id="md_rf" onchange="update()"
+              data-radlex="RID4961" data-en="mediastinal mass">
+              <span>Raumforderung mediastinal</span></label>
+            <label class="ci"><input type="checkbox" id="md_trach" onchange="update()"
+              data-radlex="RID5347" data-en="tracheal deviation">
+              <span>Trachealdeviation</span></label>
+            <label class="ci"><input type="checkbox" id="md_shift" onchange="update()"
+              data-radlex="RID34952" data-en="mediastinal shift">
+              <span>Mediastinalshift kontralateral</span></label>
+          </div>
   </div>
 
   <div class="rr-thorax-g2" style="margin-top:10px">
     <div>
       <div class="rr-lbl"><span>Hilus re. <span class="rr-rl-badge">RadLex</span></span></div>
-      <select id="hil_re" onchange="update()">
-        <option value="regelrecht"             data-radlex="RID1503-norm">Regelrecht</option>
-        <option value="vergrößert"             data-radlex="RID5080" data-en="hilar enlargement">Vergrößert</option>
-        <option value="verschwommen konturiert" data-radlex="RID5081">Verschwommene Kontur</option>
-        <option value="verschattet"            data-radlex="RID5082">Verschattet</option>
-      </select>
+      <div class="cg" id="hre_wrap">
+            <label class="ci"><input type="checkbox" id="hre_norm" onchange="update()"
+              data-radlex="RID1503-norm" data-en="hilum right unremarkable">
+              <span>Regelrecht</span></label>
+            <label class="ci"><input type="checkbox" id="hre_vergr" onchange="update()"
+              data-radlex="RID5080" data-en="hilar enlargement right">
+              <span>Vergrößert</span></label>
+            <label class="ci"><input type="checkbox" id="hre_unsch" onchange="update()"
+              data-radlex="RID5081" data-en="hilar obscuration right">
+              <span>Verschwommene Kontur</span></label>
+            <label class="ci"><input type="checkbox" id="hre_versch" onchange="update()"
+              data-radlex="RID5082" data-en="hilar opacity right">
+              <span>Verschattet</span></label>
+          </div>
     </div>
     <div>
       <div class="rr-lbl"><span>Hilus li. <span class="rr-rl-badge">RadLex</span></span></div>
-      <select id="hil_li" onchange="update()">
-        <option value="regelrecht"             data-radlex="RID1503-norm">Regelrecht</option>
-        <option value="vergrößert"             data-radlex="RID5080">Vergrößert</option>
-        <option value="verschwommen konturiert" data-radlex="RID5081">Verschwommene Kontur</option>
-        <option value="verschattet"            data-radlex="RID5082">Verschattet</option>
-      </select>
+      <div class="cg" id="hli_wrap">
+            <label class="ci"><input type="checkbox" id="hli_norm" onchange="update()"
+              data-radlex="RID1503-norm" data-en="hilum left unremarkable">
+              <span>Regelrecht</span></label>
+            <label class="ci"><input type="checkbox" id="hli_vergr" onchange="update()"
+              data-radlex="RID5080" data-en="hilar enlargement left">
+              <span>Vergrößert</span></label>
+            <label class="ci"><input type="checkbox" id="hli_unsch" onchange="update()"
+              data-radlex="RID5081" data-en="hilar obscuration left">
+              <span>Verschwommene Kontur</span></label>
+            <label class="ci"><input type="checkbox" id="hli_versch" onchange="update()"
+              data-radlex="RID5082" data-en="hilar opacity left">
+              <span>Verschattet</span></label>
+          </div>
     </div>
   </div>
 
   <div style="margin-top:10px">
     <div class="rr-lbl"><span>Aorta</span></div>
-    <select id="aorta" onchange="update()">
-      <option value="unauffällig"                                          data-radlex="RID480-norm">Unauffällig</option>
-      <option value="elongiert, wandverkalkt"                              data-radlex="RID5090">Elongiert, wandverkalkt</option>
-      <option value="dilatiert"                                            data-radlex="RID5091" data-en="aortic dilatation">Dilatiert</option>
-      <option value="mit Konturunschärfe / Mediastinalverbreiterung"       data-radlex="RID5092">Konturunschärfe / Mediastinalverbreiterung</option>
-    </select>
+    <div class="cg" id="ao_wrap">
+            <label class="ci"><input type="checkbox" id="ao_norm" onchange="update()"
+              data-radlex="RID480-norm" data-en="aorta unremarkable">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="ao_elon" onchange="update()"
+              data-radlex="RID5090" data-en="aortic calcification">
+              <span>Elongiert, wandverkalkt</span></label>
+            <label class="ci"><input type="checkbox" id="ao_dil" onchange="update()"
+              data-radlex="RID5091" data-en="aortic dilatation">
+              <span>Dilatiert</span></label>
+            <label class="ci"><input type="checkbox" id="ao_kontur" onchange="update()"
+              data-radlex="RID5092" data-en="aortic contour abnormality">
+              <span>Konturunschärfe/Mediastinalverbreiterung</span></label>
+          </div>
   </div>
 
   <!-- ══ ZWERCHFELL ══ -->
@@ -535,25 +588,49 @@
   <div class="rr-thorax-g2">
     <div>
       <div class="rr-lbl"><span>Knochen <span class="rr-rl-badge">RadLex</span></span></div>
-      <select id="skel" onchange="update()">
-        <option value="unauffällig, kein Hinweis auf Fraktur oder ossäre Destruktion" data-radlex="RID13573-norm" data-en="osseous structures unremarkable">Unauffällig</option>
-        <option value="degenerative Veränderungen der Wirbelsäule"                    data-radlex="RID5222">Degenerativ WS</option>
-        <option value="Rippenfraktur"                                                 data-radlex="RID5232" data-en="rib fracture">Rippenfraktur</option>
-        <option value="Sternumfraktur"                                                data-radlex="RID5233">Sternumfraktur</option>
-        <option value="ossäre Destruktion / V.a. ossäre Metastase"                   data-radlex="RID5238" data-en="osseous destruction">Ossäre Destruktion / V.a. Metastase</option>
-        <option value="Kyphoskoliose"                                                 data-radlex="RID5241" data-en="kyphoscoliosis">Kyphoskoliose</option>
-        <option value="St.p. Sternotomie"                                             data-radlex="RID49557">St.p. Sternotomie</option>
-      </select>
+      <div class="cg" id="sk_wrap">
+            <label class="ci"><input type="checkbox" id="sk_norm" onchange="update()"
+              data-radlex="RID13573-norm" data-en="osseous structures unremarkable">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="sk_deg" onchange="update()"
+              data-radlex="RID5222" data-en="degenerative changes spine">
+              <span>Degenerativ WS</span></label>
+            <label class="ci"><input type="checkbox" id="sk_rip" onchange="update()"
+              data-radlex="RID5232" data-en="rib fracture">
+              <span>Rippenfraktur</span></label>
+            <label class="ci"><input type="checkbox" id="sk_stern" onchange="update()"
+              data-radlex="RID5233" data-en="sternal fracture">
+              <span>Sternumfraktur</span></label>
+            <label class="ci"><input type="checkbox" id="sk_dest" onchange="update()"
+              data-radlex="RID5238" data-en="osseous destruction">
+              <span>Ossäre Destruktion/V.a. Metastase</span></label>
+            <label class="ci"><input type="checkbox" id="sk_kyph" onchange="update()"
+              data-radlex="RID5241" data-en="kyphoscoliosis">
+              <span>Kyphoskoliose</span></label>
+            <label class="ci"><input type="checkbox" id="sk_stern_op" onchange="update()"
+              data-radlex="RID49557" data-en="status post sternotomy">
+              <span>St.p. Sternotomie</span></label>
+          </div>
     </div>
     <div>
       <div class="rr-lbl"><span>Weichteile Thoraxwand</span></div>
-      <select id="wt" onchange="update()">
-        <option value="unauffällig"                                             data-radlex="RID5200-norm">Unauffällig</option>
-        <option value="Weichteilemphysem"                                       data-radlex="RID5204" data-en="subcutaneous emphysema">Weichteilemphysem</option>
-        <option value="Weichteilverdichtung / Raumforderung Thoraxwand"         data-radlex="RID5206">Weichteilverdichtung / RF</option>
-        <option value="St.p. Mastektomie re."                                   data-radlex="RID49560">St.p. Mastektomie re.</option>
-        <option value="St.p. Mastektomie li."                                   data-radlex="RID49560-li">St.p. Mastektomie li.</option>
-      </select>
+      <div class="cg" id="wt_wrap">
+            <label class="ci"><input type="checkbox" id="wt_norm" onchange="update()"
+              data-radlex="RID5200-norm" data-en="soft tissues unremarkable">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="wt_emph" onchange="update()"
+              data-radlex="RID5204" data-en="subcutaneous emphysema">
+              <span>Weichteilemphysem</span></label>
+            <label class="ci"><input type="checkbox" id="wt_rf" onchange="update()"
+              data-radlex="RID5206" data-en="soft tissue mass">
+              <span>Weichteilverdichtung/RF</span></label>
+            <label class="ci"><input type="checkbox" id="wt_mast_re" onchange="update()"
+              data-radlex="RID49560" data-en="status post mastectomy right">
+              <span>St.p. Mastektomie re.</span></label>
+            <label class="ci"><input type="checkbox" id="wt_mast_li" onchange="update()"
+              data-radlex="RID49560" data-en="status post mastectomy left">
+              <span>St.p. Mastektomie li.</span></label>
+          </div>
     </div>
   </div>
 
@@ -932,12 +1009,10 @@ function buildBefund(){
   }
 
   // Pleura
-  if(document.getElementById('pl_norm')?.checked){
+  if(!document.getElementById('pl_erguss')?.checked && !document.getElementById('pl_ptx')?.checked && !document.getElementById('pl_schwarte')?.checked && !document.getElementById('pl_kalk')?.checked && !document.getElementById('pl_tumor')?.checked){
     lines.push('Pleura: Kein Pleuraerguss. Kein Pneumothorax. Sinus phrenicocostales bds. frei.');
   } else {
-    const typEl  = document.getElementById('pl_typ');
-    const typOpt = typEl?.options[typEl.selectedIndex];
-    const typDe  = typOpt?.dataset.de || '';
+    const typDe = ['pl_erguss','pl_ptx','pl_schwarte','pl_kalk','pl_tumor'].filter(id=>document.getElementById(id)?.checked).map(id=>document.getElementById(id)?.nextElementSibling?.textContent||'').join(', ');
     const seite  = gv('pl_seite');
     let pl = 'Pleura:';
     if(typEl?.value === 'RID4872'){
@@ -956,7 +1031,10 @@ function buildBefund(){
 
   // Herz / Mediastinum
   const hGr = gv('herz_gr'), hKfg = gv('herz_kfg');
-  const med = gv('medi'), hRe = gv('hil_re'), hLi = gv('hil_li'), ao = gv('aorta');
+  const med = [document.getElementById('md_norm')?.checked?'Unauffällig':null, document.getElementById('md_verb')?.checked?'Verbreitert':null, document.getElementById('md_rf')?.checked?'Raumforderung mediastinal':null, document.getElementById('md_trach')?.checked?'Trachealdeviation':null, document.getElementById('md_shift')?.checked?'Mediastinalshift kontralateral':null].filter(Boolean).join(', ') || "unauffällig";
+  const hRe = [document.getElementById('hre_norm')?.checked?'Regelrecht':null, document.getElementById('hre_vergr')?.checked?'Vergrößert':null, document.getElementById('hre_unsch')?.checked?'Verschwommene Kontur':null, document.getElementById('hre_versch')?.checked?'Verschattet':null].filter(Boolean).join(', ') || "regelrecht";
+  const hLi = [document.getElementById('hli_norm')?.checked?'Regelrecht':null, document.getElementById('hli_vergr')?.checked?'Vergrößert':null, document.getElementById('hli_unsch')?.checked?'Verschwommene Kontur':null, document.getElementById('hli_versch')?.checked?'Verschattet':null].filter(Boolean).join(', ') || "regelrecht";
+  const ao = [document.getElementById('ao_norm')?.checked?'Unauffällig':null, document.getElementById('ao_elon')?.checked?'Elongiert, wandverkalkt':null, document.getElementById('ao_dil')?.checked?'Dilatiert':null, document.getElementById('ao_kontur')?.checked?'Konturunschärfe/Mediastinalverbreiterung':null].filter(Boolean).join(', ') || "unauffällig";
   let hm = `Herz und Mediastinum: Herz ${hGr}`;
   if(hKfg !== 'regelrecht konfiguriert') hm += `, ${hKfg}`;
   hm += '.';
@@ -969,7 +1047,8 @@ function buildBefund(){
   lines.push(`Zwerchfell: ${gv('zwf')}.`);
 
   // Skelett
-  const skel = gv('skel'), wt = gv('wt');
+  const skel = [document.getElementById('sk_norm')?.checked?'Unauffällig':null, document.getElementById('sk_deg')?.checked?'Degenerativ WS':null, document.getElementById('sk_rip')?.checked?'Rippenfraktur':null, document.getElementById('sk_stern')?.checked?'Sternumfraktur':null, document.getElementById('sk_dest')?.checked?'Ossäre Destruktion/V.a. Metastase':null, document.getElementById('sk_kyph')?.checked?'Kyphoskoliose':null, document.getElementById('sk_stern_op')?.checked?'St.p. Sternotomie':null].filter(Boolean).join(', ') || '–', 'unauffällig');
+  const wt = [document.getElementById('wt_norm')?.checked?'Unauffällig':null, document.getElementById('wt_emph')?.checked?'Weichteilemphysem':null, document.getElementById('wt_rf')?.checked?'Weichteilverdichtung/RF':null, document.getElementById('wt_mast_re')?.checked?'St.p. Mastektomie re.':null, document.getElementById('wt_mast_li')?.checked?'St.p. Mastektomie li.':null].filter(Boolean).join(', ') || '–', 'unauffällig');
   let sk = `Skelett: ${skel}.`;
   if(wt !== 'unauffällig') sk += ` Weichteile: ${wt}.`;
   lines.push(sk);
