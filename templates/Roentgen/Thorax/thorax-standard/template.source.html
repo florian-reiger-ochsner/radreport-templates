@@ -1052,8 +1052,8 @@ function buildBefund(){
   lines.push(`Zwerchfell: ${gv('zwf')}.`);
 
   // Skelett
-  const skel = [document.getElementById('sk_norm')?.checked?'Unauffällig':null, document.getElementById('sk_deg')?.checked?'Degenerativ WS':null, document.getElementById('sk_rip')?.checked?'Rippenfraktur':null, document.getElementById('sk_stern')?.checked?'Sternumfraktur':null, document.getElementById('sk_dest')?.checked?'Ossäre Destruktion/V.a. Metastase':null, document.getElementById('sk_kyph')?.checked?'Kyphoskoliose':null, document.getElementById('sk_stern_op')?.checked?'St.p. Sternotomie':null].filter(Boolean).join(', ') || '–', 'unauffällig');
-  const wt = [document.getElementById('wt_norm')?.checked?'Unauffällig':null, document.getElementById('wt_emph')?.checked?'Weichteilemphysem':null, document.getElementById('wt_rf')?.checked?'Weichteilverdichtung/RF':null, document.getElementById('wt_mast_re')?.checked?'St.p. Mastektomie re.':null, document.getElementById('wt_mast_li')?.checked?'St.p. Mastektomie li.':null].filter(Boolean).join(', ') || '–', 'unauffällig');
+  const skel = [document.getElementById('sk_norm')?.checked?'Unauffällig':null, document.getElementById('sk_deg')?.checked?'Degenerativ WS':null, document.getElementById('sk_rip')?.checked?'Rippenfraktur':null, document.getElementById('sk_stern')?.checked?'Sternumfraktur':null, document.getElementById('sk_dest')?.checked?'Ossäre Destruktion/V.a. Metastase':null, document.getElementById('sk_kyph')?.checked?'Kyphoskoliose':null, document.getElementById('sk_stern_op')?.checked?'St.p. Sternotomie':null].filter(Boolean).join(', ') || 'unauffällig';
+  const wt = [document.getElementById('wt_norm')?.checked?'Unauffällig':null, document.getElementById('wt_emph')?.checked?'Weichteilemphysem':null, document.getElementById('wt_rf')?.checked?'Weichteilverdichtung/RF':null, document.getElementById('wt_mast_re')?.checked?'St.p. Mastektomie re.':null, document.getElementById('wt_mast_li')?.checked?'St.p. Mastektomie li.':null].filter(Boolean).join(', ') || 'unauffällig';
   let sk = `Skelett: ${skel}.`;
   if(wt !== 'unauffällig') sk += ` Weichteile: ${wt}.`;
   lines.push(sk);
