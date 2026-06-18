@@ -355,13 +355,19 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
       <div class="row">
         <label>
           <span class="lbl">Basaler Thorax <span class="rr-rl-badge">RadLex</span></span>
-          <select id="thorax" onchange="update()"
-            data-radlex="RID1327" data-en="basal thorax">
-            <option value="unauffällig" data-radlex="RID1327-norm">Unauffällig</option>
-            <option value="Pleuraerguss" data-radlex="RID4872">Pleuraerguss</option>
-            <option value="basale Atelektase" data-radlex="RID28493">Basale Atelektase</option>
-            <option value="mit sonstigem Befund">Mit sonstigem Befund</option>
-          </select>
+          <div class="cg" id="bth_wrap">
+            <label class="ci"><input type="checkbox" id="bth_norm" onchange="update()"
+              data-radlex="RID1327-norm" data-en="basal thorax unremarkable">
+              <span>Unauffällig</span></label>
+            <label class="ci"><input type="checkbox" id="bth_erguss" onchange="update()"
+              data-radlex="RID4872" data-en="pleural effusion">
+              <span>Pleuraerguss</span></label>
+            <label class="ci"><input type="checkbox" id="bth_atel" onchange="update()"
+              data-radlex="RID28493" data-en="basal atelectasis">
+              <span>Basale Atelektase</span></label>
+            <label class="ci"><input type="checkbox" id="bth_sonst" onchange="update()">
+              <span>Sonstiger Befund</span></label>
+          </div>
         </label>
       </div>
     </div>
