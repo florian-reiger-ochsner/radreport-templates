@@ -1539,12 +1539,20 @@ button.secondary:hover{
   <div class="row">
     <label>
       <span class="lbl"><span>Lebermorphologie</span></span>
-      <select id="bg_morph">
-        <option value="regelrecht">regelrecht</option>
-        <option value="zirrhotisch">zirrhotisch konfiguriert</option>
-        <option value="steatose">Steatose</option>
-        <option value="haemochromatose">Hinweis auf Hämochromatose</option>
-      </select>
+      <div class="cg" id="bgm_wrap">
+            <label class="ci"><input type="checkbox" id="bgm_norm" onchange="update()"
+              data-radlex="RID1240-norm" data-en="liver morphology normal">
+              <span>Regelrecht</span></label>
+            <label class="ci"><input type="checkbox" id="bgm_zirr" onchange="update()"
+              data-radlex="RID5098" data-en="cirrhosis">
+              <span>Zirrhotisch konfiguriert</span></label>
+            <label class="ci"><input type="checkbox" id="bgm_steat" onchange="update()"
+              data-radlex="RID5097" data-en="hepatic steatosis">
+              <span>Steatose</span></label>
+            <label class="ci"><input type="checkbox" id="bgm_haemo" onchange="update()"
+              data-radlex="RID5099" data-en="hemochromatosis">
+              <span>Hinweis auf Hämochromatose</span></label>
+          </div>
     </label>
     <label>
       <span class="lbl"><span>Portale Hypertension</span></span>
