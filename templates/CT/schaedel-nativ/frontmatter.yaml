@@ -1,0 +1,41 @@
+id: HJK-MRRT-CT-SCHAEDEL-NATIV
+version: 1.0
+status: pilot
+modalitaet: CT
+region: Schädel (Head)
+indikation: CT Schädel nativ (CCT) – Notfall-Massentemplate
+sprache: de
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+geprueft: 2026-06-19
+naechste-pruefung: 2026-12-19
+quelle:
+  - "DRG AK Befundung, Template 041807.2.2104072101 (ct_stroke_nativ), CC BY 4.0"
+  - "https://github.com/DRGagit/ak_befundung"
+klassifikationen:
+  - "ASPECTS (optional)"
+  - "Fazekas (Mikroangiopathie)"
+referenzen:
+  - "DRG AK Befundung. CT Stroke nativ, Template 041807.2.2104072101. CC BY 4.0"
+  - "Barber PA et al. ASPECTS. Lancet 2000;355:1670-1674"
+  - "Fazekas F et al. AJNR 1987;8:421-426"
+ki-tools: []          # bewusst leer – Voice-/KI-Anbindung erst nach Demoserver-Test (siehe README)
+standorte:
+  - Herz-Jesu-Krankenhaus Wien (HJK)
+loinc-codes:
+  - code: "30799-1"
+    description: CT Head
+protokolle:
+  - nativ-axial
+  - nativ-axial-reformat
+  - nativ-duennschicht-knochen
+designprinzipien:
+  - additives-normalbefund-modell      # kein klinischer Default; Attestierung via Makro
+  - voice-ready                         # lineares Layout, data-voice-Tokens, flache Struktur
+  - klickoekonomie-invertiert           # Normalbefund = 1 Akt, Pathologie = nur was vorhanden
+output:
+  - fliesstext
+  - fhir-bundle
+radlex-coverage: provisorisch           # neuro-RIDs ungeprüft – Verifikationspass ausstehend, s. RADLEX-MAPPING.md
+lizenz-hinweis: "Basierend auf DRG-Template CC BY 4.0. Quellennennung in dcterms.source."
