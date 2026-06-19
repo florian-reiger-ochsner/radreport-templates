@@ -54,7 +54,8 @@ nicht als proprietäre Dokumente. Der Befund wird vom Endprodukt zum FHIR-Observ
 │       ├── abdomen-becken/         # CT Abdomen + Becken v1.0
 │       ├── urolithiasis/           # CT Urolithiasis v1.0 (DRG CC BY 4.0)
 │       ├── lungenembolie/          # CT Lungenarterien/CTPA v1.0 (DRG CC BY 4.0)
-│       └── lirads-leber/           # CT/MRT Leber LI-RADS v1.2
+│       ├── lirads-leber/           # CT/MRT Leber LI-RADS v1.2
+│       └── schaedel-nativ/         # CT Schädel nativ v1.0
 ├── demo/                           # GitHub Pages Live-Demos
 │   ├── knie-prae-tep/
 │   ├── knie-posttep/
@@ -62,7 +63,8 @@ nicht als proprietäre Dokumente. Der Befund wird vom Endprodukt zum FHIR-Observ
 │   ├── ct-abdomen/
 │   ├── ct-urolithiasis/
 │   ├── ct-lungenembolie/
-│   └── ct-lirads-leber/
+│   ├── ct-lirads-leber/
+│   └── ct-schaedel-nativ/
 └── docs/                           # Architektur, Style Guide
 ```
 
@@ -79,6 +81,7 @@ nicht als proprietäre Dokumente. Der Befund wird vom Endprodukt zum FHIR-Observ
 | CT Urolithiasis | HJK-MRRT-CT-UROLITHIASIS | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/) |
 | CT Lungenarterien (CTPA) | HJK-MRRT-CT-LUNGENEMBOLIE | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/) |
 | CT/MRT Leber LI-RADS | HJK-MRRT-CT-LEBER-LIRADS | v1.2 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/) |
+| CT Schädel nativ | HJK-MRRT-CT-SCHAEDEL-NATIV | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/) |
 
 ---
 
@@ -129,6 +132,7 @@ template-name/
 - [x] CT Urolithiasis
 - [x] CT Lungenarterien
 - [x] CT/MRT Leber LI-RADS
+- [x] CT Schädel nativ
 
 **Phase 2 (geplant):**
 - [ ] MRT Knie allgemein
