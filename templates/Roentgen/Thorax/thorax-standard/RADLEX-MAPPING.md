@@ -115,3 +115,20 @@ Status-Legende:
 ---
 
 *Generiert: 2026-06-08 · Template HJK-MRRT-ROE-THORAX-v1.3*
+
+---
+
+## v2.0 – Region-Anker-Codes (Tri-State-Attestierung)
+
+Mit dem additiven Modell trägt jede Region einen RadLex-Anker, der bei `o. B.` als attestierter Negativbefund (FHIR `interpretation = NEG`) kodiert wird. Diese Anker sind **noch zu verifizieren** (🟡):
+
+| Region | RadLex-Term (en) | RID | Status |
+|---|---|---|---|
+| Lunge / Parenchym | lung | RID1301 | 🟡 |
+| Pleura | pleura | RID5350 | 🟡 |
+| Herz / Mediastinum | heart and mediastinum | RID1385 | 🟡 |
+| Zwerchfell / Sinus | diaphragm | RID1303 | 🟡 |
+| Skelett / Weichteile | osseous structures and soft tissue | RID13573 | 🟡 |
+| DiagnosticReport (RadLex-Sekundärcode) | chest radiograph | RID10211 | 🟡 |
+
+Die Finding-Level-Codes (Parenchym, Pleura, Devices, Herz/Mediastinum-Detail) sind unverändert aus v1.3 übernommen.
