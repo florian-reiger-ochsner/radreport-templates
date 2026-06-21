@@ -5,6 +5,26 @@ Format: [Semantic Versioning](https://semver.org/lang/de/)
 
 ---
 
+## [2.0] – 2026-06-20
+
+### Geändert (Breaking – Architekturwechsel)
+- **Additives Attestierungsmodell statt Default-Normal.** Die fünf Domänen (Lunge, Pleura, Herz/Mediastinum, Zwerchfell, Skelett/Weichteile) sind jetzt Tri-State-Regionen: — (unbeurteilt) · o. B. (attestiert) · Befund. Angleichung an das Muster von `CT/schaedel-nativ`.
+- **Stille `|| "unauffällig"`-Defaults entfernt.** Eine nicht angefasste Region erzeugt keinen Satz mehr und keine positive Normalaussage. Ein normaler Befund entsteht nur noch durch bewusste Attestierung.
+- **Verification Floor im FHIR-Export sichtbar:** jede Observation trägt `interpretation` NEG (attestierter Negativbefund) bzw. POS (Befund); o. B.-Regionen werden als ärztlich attestierte Negativbefunde kodiert statt weggelassen.
+- Bundle-Meta-Tag auf `http://hjk.wien/fhir/CodeSystem/radiology-templates` vereinheitlicht.
+
+### Neu
+- **1-Klick-Normalbefund-Makro** („✓ Normalbefund attestieren") – setzt alle offenen Regionen in einem bewussten Akt auf o. B.; bereits gesetzte Befunde bleiben unangetastet.
+- **Voice-ready:** `data-voice`-Sprechform auf allen Feldern und Region-Status (28 Tokens; v1.3 hatte 0).
+- **Voice-Hints (HUD):** zuschaltbare Chips, die die Sprechbefehle pro Feld einblenden – ohne vom Bild wegschauen zu müssen.
+- Kritischer-Befund-Logik: Pneumothorax, ossäre Destruktion und Device-Fehllage „dringlich" lösen Notfall-Akzent + Status-Badge aus.
+- Devices und Vergleich als opt-in-Blöcke außerhalb der Normalbefund-Attestierung (kein „Kein Fremdmaterial"-Rauschen am ambulanten Bild).
+
+### Erhalten
+- 17 Parenchym-Optionen (Fleischner), 24-Device-Katalog, alle RID-Codes, LOINC 24627-2, Multi-Stacks, Auto-/Freitext-Beurteilung.
+
+---
+
 ## [1.3] – 2026-06-08
 
 ### Geändert
