@@ -1,7 +1,7 @@
 # Röntgen Thorax
 
 **ID:** HJK-MRRT-ROE-THORAX
-**Version:** 1.3
+**Version:** 2.0
 **Status:** Pilot
 **Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/)
 
@@ -10,6 +10,14 @@
 Strukturierte Befundvorlage für den **Röntgen-Thorax (p.a. ± lateral)** im klinischen Alltag. Organ-systematische Befundung mit vollständiger RadLex-Terminierung, Multi-Parenchym-Stack (mehrere Lungenbefunde gleichzeitig, Fleischner-konform) und dynamischem Device-Stack (beliebig viele Fremdkörper/Katheter).
 
 Primär entwickelt für HJK Wien, konzipiert für Vinzenz-Gruppe.
+
+## Befundungsmodell (v2.0 – additive Attestierung)
+
+Ab v2.0 folgt das Template demselben additiven Modell wie `CT/schaedel-nativ`: kein Feld ist normal vorbelegt. Die fünf Domänen sind **Tri-State-Regionen** — `—` (unbeurteilt) · `o. B.` (attestiert) · `Befund` (Detail). Eine unbeurteilte Region erzeugt keinen Satz; eine positive Normalaussage entsteht nur durch bewusste Attestierung, nicht durch Auslassen.
+
+- **1-Klick-Normalbefund:** „✓ Normalbefund attestieren" setzt alle offenen Regionen auf o. B. — schnell wie ein Diktat des Normalfalls, aber als Attestierung. Bereits gesetzte Befunde bleiben unangetastet.
+- **Verification Floor:** Der FHIR-Export kodiert o. B. als `interpretation = NEG` (ärztlich attestierter Negativbefund) und Befunde als `POS`. Stille Default-Normalbefunde gibt es nicht mehr.
+- **Voice-ready + HUD:** `data-voice` auf allen Feldern; der Button „🎙 Voice-Hints" blendet die Sprechbefehle pro Feld ein, ohne vom Bild wegschauen zu müssen.
 
 ## Projektionen
 
