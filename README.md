@@ -154,8 +154,18 @@ Beiträge willkommen – bevorzugt via Issue oder Pull Request.
 
 ## Lizenz
 
-[MIT](./LICENSE)
+Dual-License – die Lizenz richtet sich nach dem Asset-Typ:
 
-DRG-basierte Templates (CT Urolithiasis, CT Lungenarterien) zusätzlich unter
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) –
-Quelle: DRG AK Befundung, https://github.com/DRGagit/ak_befundung
+| Bestandteil | Lizenz |
+| --- | --- |
+| Software (`shared/scripts/`, Build-/Utility-Skripte, `*.js`) | [MIT](LICENSE-MIT) |
+| Template- und Doku-Inhalt (`*.html`, `*.source.html`, `*.css`, `*.yaml`, `*.md`, RadLex/LOINC-Mappings) | [CC BY 4.0](LICENSE-CC-BY-4.0) |
+
+Bei kombinierten Dateien (HTML-Template mit Inline-JavaScript) gilt CC BY 4.0
+für die Datei als Ganzes; der MIT-Grant gilt zusätzlich für die eingebetteten
+Software-Anteile. Details: [LICENSE](LICENSE).
+
+DRG-basierte Templates (CT Urolithiasis, CT Lungenarterien) enthalten Material,
+das ursprünglich von der Deutschen Röntgengesellschaft unter CC BY 4.0
+lizenziert wurde – Attribution in den jeweiligen Template-READMEs.
+Quelle: <https://github.com/DRGagit/ak_befundung>
