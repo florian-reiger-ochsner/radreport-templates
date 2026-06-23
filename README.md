@@ -143,14 +143,14 @@ template-name/
 
 ---
 
-## Mitmachen
+## Standards & Pflege
 
-Beiträge willkommen – bevorzugt via Issue oder Pull Request.
+Template-Aufbau und Konventionen folgen dem internen Style Guide.
 
-- Workflow: [CONTRIBUTING.md](./CONTRIBUTING.md)
 - Style Guide: [docs/style-guide/](./docs/style-guide/)
 
 ---
+
 
 ## Lizenz
 
