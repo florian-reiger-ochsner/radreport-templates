@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-  <!-- Build: 2026-06-26T07:08:35.896Z | radreport-core.css inlined for MRRT-conformance -->
+  <!-- Build: 2026-06-26T07:27:06.582Z | radreport-core.css inlined for MRRT-conformance -->
 <meta charset="UTF-8">
 <title>RÖNTGEN THORAX – Live-Demo</title>
 
@@ -958,7 +958,7 @@ button.act{padding:9px 18px;border:none;border-radius:6px;font-family:inherit;fo
   <button class="act btn-d" onclick="resetAll()">↺ Zurücksetzen</button>
 </div>
 <div class="ebox" id="fhir-box"></div>
-<div class="legend"><span class="rl">RadLex</span> RID-Codes auf allen Optionen · <span class="rl">LOINC</span> 24627-2 im DiagnosticReport · <span class="rl">FHIR</span> R4 – NEG/POS-Interpretation als Verification Floor</div>
+<div class="legend"><span class="rl">RadLex</span> RID-Codes auf allen Optionen · <span class="rl">LOINC</span> 36643-5 im DiagnosticReport · <span class="rl">FHIR</span> R4 – NEG/POS-Interpretation als Verification Floor</div>
 
 </section>
 
@@ -1438,7 +1438,7 @@ function buildFhir(){
   getDevItems().forEach((d,k)=>{ let txt=d.typ+(d.lage?' ('+d.lage+')':'')+' – '+d.burt+(d.ft?', '+d.ft:''); push(d.rid, d.en, txt, false, `dev-${k+1}`); });
   const dr={
     resourceType:'DiagnosticReport', status:'final', id:'thorax-report',
-    code:{coding:[{system:'http://loinc.org', code:'24627-2', display:'Chest X-ray 2 views'},{system:'http://radlex.org', code:'RID10211', display:'chest radiograph'}]},
+    code:{coding:[{system:'http://loinc.org', code:'36643-5', display:'XR Chest 2 Views'},{system:'http://radlex.org', code:'RID10211', display:'chest radiograph'}]},
     effectiveDateTime:now, identifier:[{value:'HJK-MRRT-ROE-THORAX-v2.1'}],
     conclusion:buildBeurteilung(), result:obsArr.map(o=>({reference:o.fullUrl})),
     presentedForm:[{contentType:'text/plain', title:'Röntgen Thorax', data:btoa(unescape(encodeURIComponent('TECHNIK\n'+buildTechnik()+'\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+buildBeurteilung())))}],
