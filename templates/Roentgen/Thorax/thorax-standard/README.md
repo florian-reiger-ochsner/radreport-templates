@@ -1,7 +1,7 @@
 # Röntgen Thorax
 
 **ID:** HJK-MRRT-ROE-THORAX
-**Version:** 2.0
+**Version:** 2.1
 **Status:** Pilot
 **Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/)
 
