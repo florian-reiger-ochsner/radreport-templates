@@ -19,8 +19,8 @@ ki-tools: []
 standorte:
   - Herz-Jesu-Krankenhaus Wien (HJK)
 loinc-codes:
-  - code: "24627-2"
-    description: Chest X-ray 2 views
+  - code: "36643-5"
+    description: XR Chest 2 Views
 projektionen:
   - pa
   - lateral-links
