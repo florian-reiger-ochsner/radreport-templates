@@ -108,7 +108,7 @@ Status-Legende:
 
 | Ressource | Code | System |
 |---|---|---|
-| DiagnosticReport | 24627-2 | http://loinc.org |
+| DiagnosticReport | 36643-5 | http://loinc.org |
 | Observations (alle) | RID* | http://radlex.org |
 | Bundle meta tag | radlex-coded | http://radlex.org/fhir |
 
