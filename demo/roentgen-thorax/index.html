@@ -220,8 +220,18 @@ button.act{padding:9px 18px;border:none;border-radius:6px;font-family:inherit;fo
   <button class="act btn-s" onclick="toggleFhir()">{ } FHIR-Export</button>
   <button class="act btn-d" onclick="resetAll()">↺ Zurücksetzen</button>
 </div>
+<div class="loinc-ovr" style="margin:10px 0;font-size:12px">
+  <label style="display:flex;flex-direction:column;gap:4px">
+    <span style="color:var(--rr-ink-muted)">Untersuchungstyp · LOINC <em style="font-style:normal;color:var(--rr-ink-soft)">— i. d. R. vom RIS/Auftrag gesetzt (RT/Gerät); hier manueller Override für den Standalone-Export</em></span>
+    <select id="loinc_override" onchange="const b=document.getElementById('fhir-box'); if(b.classList.contains('show')) b.textContent=buildFhir();">
+      <option value="36643-5|XR Chest 2 Views">36643-5 · XR Chest 2 Views — Default (p.a. ± seitlich)</option>
+      <option value="42272-5|XR Chest PA and Lateral">42272-5 · XR Chest PA and Lateral</option>
+      <option value="24647-0|XR Chest PA and Lateral upright">24647-0 · XR Chest PA and Lateral upright (stehend)</option>
+      <option value="24648-8|XR Chest PA upright">24648-8 · XR Chest PA upright — Single View (p.a. stehend)</option>
+    </select></label>
+</div>
 <div class="ebox" id="fhir-box"></div>
-<div class="legend"><span class="rl">RadLex</span> RID-Codes auf allen Optionen · <span class="rl">LOINC</span> 36643-5 im DiagnosticReport · <span class="rl">FHIR</span> R4 – NEG/POS-Interpretation als Verification Floor</div>
+<div class="legend"><span class="rl">RadLex</span> RID-Codes auf allen Optionen · <span class="rl">LOINC</span> 36643-5 (Default, Override möglich) im DiagnosticReport · <span class="rl">FHIR</span> R4 – NEG/POS-Interpretation als Verification Floor</div>
 
 </section>
 
@@ -699,9 +709,10 @@ function buildFhir(){
     } else { push(r.radlex, r.en, r.build('bef'), false, r.key); }
   });
   getDevItems().forEach((d,k)=>{ let txt=d.typ+(d.lage?' ('+d.lage+')':'')+' – '+d.burt+(d.ft?', '+d.ft:''); push(d.rid, d.en, txt, false, `dev-${k+1}`); });
+  const lo=(gv('loinc_override')||'36643-5|XR Chest 2 Views').split('|');
   const dr={
     resourceType:'DiagnosticReport', status:'final', id:'thorax-report',
-    code:{coding:[{system:'http://loinc.org', code:'36643-5', display:'XR Chest 2 Views'},{system:'http://radlex.org', code:'RID10211', display:'chest radiograph'}]},
+    code:{coding:[{system:'http://loinc.org', code:lo[0], display:lo[1]},{system:'http://radlex.org', code:'RID10211', display:'chest radiograph'}]},
     effectiveDateTime:now, identifier:[{value:'HJK-MRRT-ROE-THORAX-v2.1'}],
     conclusion:buildBeurteilung(), result:obsArr.map(o=>({reference:o.fullUrl})),
     presentedForm:[{contentType:'text/plain', title:'Röntgen Thorax', data:btoa(unescape(encodeURIComponent('TECHNIK\n'+buildTechnik()+'\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+buildBeurteilung())))}],
