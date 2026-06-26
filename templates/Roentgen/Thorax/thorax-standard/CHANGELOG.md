@@ -18,6 +18,9 @@ Format: [Semantic Versioning](https://semver.org/lang/de/)
 - **Pulmonalvenöse Stauung dem Herz/Mediastinum zugeordnet** (vorher Parenchym-Option im Lungen-Stack). Jetzt graduierbar (gering / mittelgradig / hochgradig, je mit radiologischem Korrelat: Umverteilung / interstitielles / alveoläres Ödem). Entspricht dem Diktatfluss „Herz vergrößert, mittelgradige Stauungszeichen". RadLex `RID5056` bleibt; im FHIR-Export als eigene kodierte Observation am Herz.
 - **Befundungs-/Ausgabereihenfolge** umgestellt auf Zwerchfell → Pleura → Herz/Mediastinum → Lunge → Skelett, zentral über die `ORDER`-Liste steuerbar. Gilt für Eingabe-UI und Befundtext gleichermaßen.
 
+### Behoben
+- **LOINC-Code des DiagnosticReport korrigiert:** `24627-2` war fälschlich „CT Chest" (CT Thorax) — falsch für eine konventionelle Röntgenaufnahme; das `display` lautete bereits korrekt „2 views". Ersetzt durch `36643-5` „XR Chest 2 Views" (offizieller LOINC Long Common Name). Projektionsneutral (p.a.+seitlich), kompatibel mit dem geplanten Projektions-Schalter. Angepasst in FHIR-Code, Legende, README, frontmatter und RADLEX-MAPPING.
+
 ### Hinweis
 - Rippen- und Sternumfraktur waren bereits seit v1.x vorhanden; neu ist ausschließlich die Wirbelkörper-/Sinterungsfraktur.
 
