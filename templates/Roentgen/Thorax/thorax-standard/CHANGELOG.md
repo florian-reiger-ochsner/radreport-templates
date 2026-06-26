@@ -5,6 +5,20 @@ Format: [Semantic Versioning](https://semver.org/lang/de/)
 
 ---
 
+## [2.1] – 2026-06-25
+
+### Neu (additiv, nicht-breaking)
+- **Pleuraerguss seitengetrennt graduierbar.** Statt einer einzelnen Ausmaß-Angabe jetzt zwei Selects (rechts / links), jeweils klein / mittelgroß / groß / massiv. Damit sind **beidseitige, unterschiedlich ausgeprägte Ergüsse** abbildbar (z. B. „großer Pleuraerguss rechts und kleiner Pleuraerguss links"). Eine Seite leer = einseitig. Befundtext und FHIR-Export komponieren die Seiten zusammen.
+- **Pneumothorax ebenfalls seitengetrennt** (rechts / links), gleiche Logik wie Erguss; beidseitiger Pneumothorax abbildbar, „Spannungspneumothorax" je Seite wählbar.
+- **Gemeinsamer „Seite"-Schalter aufgeräumt.** Da Erguss und Pneumothorax ihre Seite jetzt selbst tragen, erscheint der allgemeine Seiten-Selektor nur noch, wenn Schwarte / Kalk / Tumor aktiv ist (und ist entsprechend beschriftet). Kein redundantes Seitenfeld mehr im Erguss-/Pneu-Kontext.
+- **Wirbelkörperfraktur / Sinterung** als Knochen-Option ergänzt (`sk_wk`). Schließt die Lücke zwischen „degenerative WS" und den bereits vorhandenen Rippen-/Sternumfrakturen; relevant für osteoporotische Sinterung am Thoraxbild. RadLex `RID34669` 🟡 (zu verifizieren).
+- **Freitext-Ergänzung je Region (generisch).** Jede Region (Lunge, Pleura, Herz/Mediastinum, Zwerchfell, Skelett) hat jetzt automatisch ein „Ergänzung (Freitext)"-Feld — für Details, die die strukturierten Felder nicht fassen (z. B. welche/wieviele Wirbelkörper eingebrochen, Höhenminderung). Wird an den Regionssatz angehängt und fließt in den FHIR-`presentedForm`-Narrativtext. Skelett hat einen kontextspezifischen Platzhalter. Das bisherige Pleura-Einzelfeld (`pl_ft`) ist in diese generische Lösung überführt (keine Funktionseinbuße). Devices behalten ihre per-Eintrag-Ergänzung.
+
+### Hinweis
+- Rippen- und Sternumfraktur waren bereits seit v1.x vorhanden; neu ist ausschließlich die Wirbelkörper-/Sinterungsfraktur.
+
+---
+
 ## [2.0] – 2026-06-20
 
 ### Geändert (Breaking – Architekturwechsel)
