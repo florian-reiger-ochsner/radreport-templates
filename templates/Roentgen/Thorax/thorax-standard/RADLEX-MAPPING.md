@@ -132,3 +132,14 @@ Mit dem additiven Modell trägt jede Region einen RadLex-Anker, der bei `o. B.` 
 | DiagnosticReport (RadLex-Sekundärcode) | chest radiograph | RID10211 | 🟡 |
 
 Die Finding-Level-Codes (Parenchym, Pleura, Devices, Herz/Mediastinum-Detail) sind unverändert aus v1.3 übernommen.
+
+---
+
+## v2.1 – ergänzte Codes
+
+| Feld | Term (en) | RID | Status |
+|---|---|---|---|
+| `pl_erg_re` / `pl_erg_li` | pleural effusion (seitengetrennt graduiert) | RID4872 | ✅ (Code wie pl_erguss; nur Graduierung je Seite ergänzt) |
+| `sk_wk` | vertebral compression fracture | RID34669 | 🟡 zu verifizieren |
+
+Hinweis: `RID34669` für die Wirbelkörper-/Sinterungsfraktur ist noch gegen den RadLex-Browser zu prüfen.
