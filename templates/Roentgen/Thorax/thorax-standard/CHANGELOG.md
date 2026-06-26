@@ -14,6 +14,10 @@ Format: [Semantic Versioning](https://semver.org/lang/de/)
 - **Wirbelkörperfraktur / Sinterung** als Knochen-Option ergänzt (`sk_wk`). Schließt die Lücke zwischen „degenerative WS" und den bereits vorhandenen Rippen-/Sternumfrakturen; relevant für osteoporotische Sinterung am Thoraxbild. RadLex `RID34669` 🟡 (zu verifizieren).
 - **Freitext-Ergänzung je Region (generisch).** Jede Region (Lunge, Pleura, Herz/Mediastinum, Zwerchfell, Skelett) hat jetzt automatisch ein „Ergänzung (Freitext)"-Feld — für Details, die die strukturierten Felder nicht fassen (z. B. welche/wieviele Wirbelkörper eingebrochen, Höhenminderung). Wird an den Regionssatz angehängt und fließt in den FHIR-`presentedForm`-Narrativtext. Skelett hat einen kontextspezifischen Platzhalter. Das bisherige Pleura-Einzelfeld (`pl_ft`) ist in diese generische Lösung überführt (keine Funktionseinbuße). Devices behalten ihre per-Eintrag-Ergänzung.
 
+### Geändert
+- **Pulmonalvenöse Stauung dem Herz/Mediastinum zugeordnet** (vorher Parenchym-Option im Lungen-Stack). Jetzt graduierbar (gering / mittelgradig / hochgradig, je mit radiologischem Korrelat: Umverteilung / interstitielles / alveoläres Ödem). Entspricht dem Diktatfluss „Herz vergrößert, mittelgradige Stauungszeichen". RadLex `RID5056` bleibt; im FHIR-Export als eigene kodierte Observation am Herz.
+- **Befundungs-/Ausgabereihenfolge** umgestellt auf Zwerchfell → Pleura → Herz/Mediastinum → Lunge → Skelett, zentral über die `ORDER`-Liste steuerbar. Gilt für Eingabe-UI und Befundtext gleichermaßen.
+
 ### Hinweis
 - Rippen- und Sternumfraktur waren bereits seit v1.x vorhanden; neu ist ausschließlich die Wirbelkörper-/Sinterungsfraktur.
 
