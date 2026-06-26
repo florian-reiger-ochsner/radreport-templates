@@ -1,5 +1,5 @@
 id: HJK-MRRT-ROE-THORAX
-version: 2.0
+version: 2.1
 status: pilot
 modalitaet: Roentgen
 region: Thorax
@@ -8,7 +8,7 @@ sprache: de
 autoren:
   - florian-reiger-ochsner
 reviewer: []
-geprueft: 2026-06-20
+geprueft: 2026-06-25
 naechste-pruefung: 2026-12-20
 klassifikationen:
   - Fleischner (Thorax-Glossar)
