@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-  <!-- Build: 2026-06-26T05:55:39.773Z | radreport-core.css inlined for MRRT-conformance -->
+  <!-- Build: 2026-06-26T07:08:35.896Z | radreport-core.css inlined for MRRT-conformance -->
 <meta charset="UTF-8">
 <title>RÖNTGEN THORAX – Live-Demo</title>
 
@@ -991,7 +991,6 @@ const PAR_OPTIONS = [
   {rid:'RID28530', de:'Flächige Transparenzminderung / Infiltrat',       en:'opacity',                       group:'Flächig'},
   {rid:'RID4804',  de:'Lobuläre Verschattung / Segmentale Infiltration', en:'lobular consolidation',         group:'Flächig'},
   {rid:'RID28493', de:'Atelektase',                                       en:'atelectasis',                   group:'Flächig'},
-  {rid:'RID5056',  de:'Pulmonale Stauungszeichen',                        en:'pulmonary vascular congestion', group:'Flächig'},
   {rid:'RID4799',  de:'Lungenemphysem',                                   en:'pulmonary emphysema',           group:'Überblähung'},
   {rid:'RID5050',  de:'Überblähung / Air Trapping',                       en:'air trapping',                  group:'Überblähung'},
 ];
@@ -1162,7 +1161,14 @@ const REGIONS = [
           <label class="ci"><input type="checkbox" id="ao_elon" onchange="update()" data-radlex="RID5090" data-en="aortic calcification"><span>Elongiert/wandverkalkt</span></label>
           <label class="ci"><input type="checkbox" id="ao_dil" onchange="update()" data-radlex="RID5091" data-en="aortic dilatation"><span>Dilatiert</span></label>
         </div>
-      </div>`,
+      </div>
+      <div class="row" style="margin-top:8px"><label><span class="lbl">Pulmonalvenöse Stauung <span class="rr-rl-badge">RadLex</span></span>
+        <select id="herz_stau" onchange="update()" data-radlex="RID5056" data-en="pulmonary vascular congestion" data-voice="stauungszeichen">
+          <option value="">keine</option>
+          <option value="geringe">geringe Stauungszeichen (Gefäßumverteilung)</option>
+          <option value="mittelgradige">mittelgradige Stauungszeichen (interstitielles Ödem)</option>
+          <option value="hochgradige">hochgradige Stauungszeichen (alveoläres Ödem)</option>
+        </select></label></div>`,
     build(st){
       if(st==='ob') return this.neg;
       const gr=gv('herz_gr');
@@ -1175,6 +1181,7 @@ const REGIONS = [
       s+= med ? ` Mediastinum: ${med}.` : ' Mediastinum nicht verbreitert.';
       if(hil) s+=` Hilus${hs?' '+hs:''}: ${hil}.`; else s+=' Hili bds. regelrecht.';
       if(ao) s+=` Aorta ${ao}.`;
+      const stau=gv('herz_stau'); if(stau) s+=` ${stau.charAt(0).toUpperCase()+stau.slice(1)} pulmonalvenöse Stauungszeichen.`;
       return s;
     }
   },
@@ -1228,9 +1235,13 @@ const REGIONS = [
   },
 ];
 
+// Befundungs-/Ausgabe-Reihenfolge (Reihenfolge = Befundungsreihenfolge). Hier zentral steuerbar.
+const ORDER = ['zwerchfell','pleura','herzmediastinum','lunge','skelett'];
+const oREG = ORDER.map(k=>REGIONS.find(r=>r.key===k)).filter(Boolean);
+
 function renderRegions(){
   const wrap=document.getElementById('regions');
-  wrap.innerHTML = REGIONS.map(r=>`
+  wrap.innerHTML = oREG.map(r=>`
     <div class="region" id="rg-${r.key}">
       <div class="region-head">
         <div class="region-name">${r.name} <span class="rr-rl-badge">RadLex</span></div>
@@ -1352,7 +1363,7 @@ function buildTechnik(){
 }
 function buildBefund(){
   const lines=[];
-  REGIONS.forEach(r=>{ const st=regStatus(r.key); if(st==='') return; let line=r.build(st); const ft=gv('ft_'+r.key); if(ft) line+=' '+ft+(/[.!?]$/.test(ft)?'':'.'); lines.push(line); });
+  oREG.forEach(r=>{ const st=regStatus(r.key); if(st==='') return; let line=r.build(st); const ft=gv('ft_'+r.key); if(ft) line+=' '+ft+(/[.!?]$/.test(ft)?'':'.'); lines.push(line); });
   const dev=getDevItems();
   if(dev.length){ const t=dev.map(i=>{ let s=i.typ; if(i.lage) s+=` (${i.lage})`; s+=` – ${i.burt}`; if(i.ft) s+=`, ${i.ft}`; return s; }).join('; '); lines.push('Devices: '+t+'.'); }
   if(gv('vgl_ja')==='yes'){ const d=gv('vgl_datum'), v=gv('vgl_verlauf'); let s='Vergleich:'; if(d) s+=` Voruntersuchung vom ${d} liegt vor.`; if(v) s+=` ${v}`; if(s!=='Vergleich:') lines.push(s); }
@@ -1360,7 +1371,7 @@ function buildBefund(){
 }
 function buildBeurteilung(){
   if(gc('bmod_ft')) return gv('beurt_ft');
-  const pos=REGIONS.filter(r=>regStatus(r.key)==='bef'); const parts=[];
+  const pos=oREG.filter(r=>regStatus(r.key)==='bef'); const parts=[];
   pos.forEach(r=>{
     if(r.key==='lunge'){ getParItems().forEach(i=>{ let s=i.de; if(i.seite) s+=` ${i.seite}`; if(i.lok) s+=` (${i.lok})`; parts.push(s+'.'); }); }
     else if(r.key==='pleura'){ const seite=gv('pl_seite'), p=[];
@@ -1369,6 +1380,7 @@ function buildBeurteilung(){
       if(gc('pl_schwarte')) p.push('Pleuraschwarte'); if(gc('pl_tumor')) p.push('Pleuratumor');
       if(p.length) parts.push(p.join(', ')+(seite?' '+seite:'')+'.'); }
     else if(r.key==='herzmediastinum'){ const gr=gv('herz_gr'); if(gr && gr.indexOf('normal')===-1) parts.push(`Herzgröße: ${gr}.`);
+      const stau=gv('herz_stau'); if(stau) parts.push(`${stau.charAt(0).toUpperCase()+stau.slice(1)} pulmonalvenöse Stauungszeichen.`);
       const med=[gc('md_verb')?'Mediastinalverbreiterung':null,gc('md_rf')?'mediastinale Raumforderung':null].filter(Boolean).join(', ');
       if(med) parts.push(med.charAt(0).toUpperCase()+med.slice(1)+'.'); }
     else if(r.key==='skelett'){ if(gc('sk_dest')) parts.push('Ossäre Destruktion / V.a. Metastase.'); if(gc('sk_wk')) parts.push('Wirbelkörperfraktur / Sinterung.'); if(gc('sk_rip')) parts.push('Rippenfraktur.'); }
@@ -1407,7 +1419,7 @@ function buildFhir(){
       note:[{text:isNeg?'Ärztlich attestierter Negativbefund (o.B.).':'Befund.'}],
     }});
   };
-  REGIONS.forEach(r=>{
+  oREG.forEach(r=>{
     const st=regStatus(r.key); if(st==='') return;
     if(st==='ob'){ push(r.radlex, r.en, r.neg, true, r.key); return; }
     if(r.key==='lunge'){
@@ -1418,6 +1430,9 @@ function buildFhir(){
       const seite=gv('pl_seite'); const map=[['pl_erguss','RID4872','pleural effusion'],['pl_ptx','RID5352','pneumothorax'],['pl_schwarte','RID5355','pleural thickening'],['pl_kalk','RID5356','pleural calcification'],['pl_tumor','RID34948','pleural mass']];
       let any=false; map.forEach(([id,rid,en],k)=>{ if(gc(id)){ any=true; let txt=en+(seite?' '+seite:''); if(id==='pl_erguss'){ const re=gv('pl_erg_re'),li=gv('pl_erg_li'); txt='Pleuraerguss'+(re?' rechts '+re:'')+(li?' links '+li:''); } if(id==='pl_ptx'){ const re=gv('pl_ptx_re'),li=gv('pl_ptx_li'); txt='Pneumothorax'+(re?' rechts '+re:'')+(li?' links '+li:''); } push(rid, en, txt, false, `pleura-${k+1}`); } });
       if(!any) push(r.radlex, r.en, r.build('bef'), false, r.key);
+    } else if(r.key==='herzmediastinum'){
+      push(r.radlex, r.en, r.build('bef'), false, r.key);
+      const stau=gv('herz_stau'); if(stau) push('RID5056','pulmonary vascular congestion', stau+' pulmonalvenöse Stauungszeichen', false, 'herz-stau');
     } else { push(r.radlex, r.en, r.build('bef'), false, r.key); }
   });
   getDevItems().forEach((d,k)=>{ let txt=d.typ+(d.lage?' ('+d.lage+')':'')+' – '+d.burt+(d.ft?', '+d.ft:''); push(d.rid, d.en, txt, false, `dev-${k+1}`); });
