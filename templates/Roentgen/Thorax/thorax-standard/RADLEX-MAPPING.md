@@ -1,108 +1,98 @@
 # RadLex-Mapping – Röntgen Thorax
 
-Vollständige RID-Tabelle für alle kodierten Felder in `template.source.html`.
-
-Status-Legende:
-- ✅ Verifiziert – offizieller RadLex-Term, RID geprüft
-- 🟡 Lokal – plausibler Code, noch nicht formal geprüft
-- 🔲 Ausstehend – Placeholder, RID zu vergeben
+Verifizierungsstatus:
+- ✅ Verifiziert – offizieller RadLex-Term (v3.7 OWL), RID bestätigt
+- 🟡 Plausibel – RID bekannt, Term-Formulierung oder Qualifier abweichend
+- 🔲 Ausstehend – manuell gegen radlex.org/RID prüfen
+- ⚠ Kein data-radlex – Feld noch nicht kodiert
 
 ---
 
-## Parenchym (Lunge) – Fleischner-konform
-
-| Deutsch | RadLex-Term (EN) | RID | Status |
-|---|---|---|---|
-| Milchglastrübung (Ground-Glass-Opacity) | ground-glass opacity | RID4800 | ✅ |
-| Retikuläres Muster | reticular pattern | RID5177 | ✅ |
-| Retikulonoduläres Muster | reticulonodular pattern | RID5178 | ✅ |
-| Konsolidierung | consolidation | RID4803 | ✅ |
-| Crazy-Paving-Muster | crazy paving pattern | RID5179 | ✅ |
-| Honigwabenmuster | honeycombing | RID5180 | ✅ |
-| Solitärer Rundherd | solitary pulmonary nodule | RID4941 | ✅ |
-| Multiple Rundherde | multiple pulmonary nodules | RID5231 | ✅ |
-| Mikronoduli | micronodules | RID5055 | ✅ |
-| Kaverne / Herdschatten mit Kaverne | cavitary lesion | RID5234 | 🟡 |
-| Hilusnahe Raumforderung | hilar mass | RID5235 | 🟡 |
-| Flächige Transparenzminderung / Infiltrat | opacity | RID28530 | ✅ |
-| Lobuläre Verschattung / Segmentale Infiltration | lobular consolidation | RID4804 | 🟡 |
-| Atelektase | atelectasis | RID28493 | ✅ |
-| Pulmonale Stauungszeichen | pulmonary vascular congestion | RID5056 | ✅ |
-| Lungenemphysem | pulmonary emphysema | RID4799 | ✅ |
-| Überblähung / Air Trapping | air trapping | RID5050 | ✅ |
-
 ## Pleura
 
-| Deutsch | RadLex-Term (EN) | RID | Status |
-|---|---|---|---|
-| Pleuraerguss | pleural effusion | RID4872 | ✅ |
-| Pneumothorax | pneumothorax | RID5352 | ✅ |
-| Pleuraschwarte / -verdickung | pleural thickening | RID5355 | ✅ |
-| Pleurakalk | pleural calcification | RID5356 | ✅ |
-| Pleuratumor / pleurale Raumforderung | pleural mass | RID34948 | 🟡 |
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Pleuraerguss | pleural effusion | RID4872 | ✅ | |
+| Pneumothorax | pneumothorax | RID5352 | ✅ | |
+| Pleuraschwarte / -verdickung | pleural thickening | RID5355 | ✅ | |
+| Pleurakalk | pleural calcification | RID5356 | ✅ | |
+| Pleuratumor / Raumforderung | pleural mass | RID34948 | ✅ | |
 
-## Herz / Mediastinum
+## Herz
 
-| Deutsch | RadLex-Term (EN) | RID | Status |
-|---|---|---|---|
-| Herzgröße normal (CTR ≤ 0,5) | heart size normal | RID1786-neg | 🟡 |
-| Kardiomegalie (CTR > 0,55) | cardiomegaly | RID1786 | ✅ |
-| Linksbetonte Konfiguration | left heart enlargement | RID5069 | 🟡 |
-| Rechtsbetonte Konfiguration | right heart enlargement | RID5070 | 🟡 |
-| Mitralform | mitral configuration | RID5072 | 🟡 |
-| Aortenform | aortic configuration | RID5073 | 🟡 |
-| Mediastinale Verbreiterung | mediastinal widening | RID34952 | ✅ |
-| Mediastinale Raumforderung | mediastinal mass | RID4961 | ✅ |
-| Trachealdeviation | tracheal deviation | RID5347 | ✅ |
-| Hilusvergrößerung | hilar enlargement | RID5080 | ✅ |
-| Hilusverschwommene Kontur | hilar obscuration | RID5081 | 🟡 |
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Herzgröße (allgemein) | cardiac size | RID1786 | 🔲 | manuell gegen radlex.org prüfen |
+| Linksbetonte Konfiguration | left heart enlargement | RID5069 | ✅ | |
+| Rechtsbetonte Konfiguration | right heart enlargement | RID5070 | ✅ | |
+| Mitralform | mitral configuration | RID5072 | 🟡 | offizieller Term "mitral heart configuration" – data-en passt |
+| Aortenform | aortic configuration | RID5073 | 🟡 | analog RID5072 |
+
+## Mediastinum / Hili
+
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Mediastinale Verbreiterung | mediastinal widening | RID34952 | ✅ | |
+| Mediastinale Raumforderung | mediastinal mass | RID4961 | ✅ | |
+| Trachealdeviation | tracheal deviation | RID5347 | ✅ | |
+| Hilusvergrößerung | hilar enlargement | RID5080 | ✅ | |
+| Hilusverschwommene Kontur | hilar opacity | RID5082 | 🟡 | manche OWL-Versionen "hilar haziness" – inhaltlich identisch |
+
+## Aorta
+
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Aortenkalzifikation / elongiert | aortic calcification | RID5090 | ✅ | |
+| Aortenerweiterung | aortic dilatation | RID5091 | ✅ | |
 
 ## Zwerchfell
 
-| Deutsch | RadLex-Term (EN) | RID | Status |
-|---|---|---|---|
-| Zwerchfell regelrecht | diaphragm normal | RID1303-norm | 🟡 |
-| Zwerchfell-Hochstand re. | elevated right hemidiaphragm | RID5310 | ✅ |
-| Zwerchfell-Hochstand li. | elevated left hemidiaphragm | RID5310-li | 🟡 |
-| Sinusverlegung re. | costophrenic angle blunting right | RID5312 | ✅ |
-| Sinusverlegung li. | costophrenic angle blunting left | RID5312-li | 🟡 |
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Zwerchfell (anatomisch) | diaphragm | RID1303 | 🟡 | RID1303 = anatomischer Term; "normal" ist Qualifier, kein eigener RID |
+| Zwerchfellhochstand | elevated hemidiaphragm | RID5310 | ✅ | Seitenqualifier (re./li.) als data-en Ergänzung korrekt |
+| Sinusverlegung | costophrenic angle blunting | RID5312 | ✅ | Seitenqualifier als data-en Ergänzung korrekt |
 
-## Skelett / Weichteile
+## Skelett
 
-| Deutsch | RadLex-Term (EN) | RID | Status |
-|---|---|---|---|
-| Ossäre Strukturen unauffällig | osseous structures unremarkable | RID13573-norm | 🟡 |
-| Degenerative Veränderungen WS | degenerative changes spine | RID5222 | ✅ |
-| Rippenfraktur | rib fracture | RID5232 | ✅ |
-| Ossäre Destruktion / Metastase | osseous destruction | RID5238 | ✅ |
-| Kyphoskoliose | kyphoscoliosis | RID5241 | ✅ |
-| St.p. Sternotomie | status post sternotomy | RID49557 | 🟡 |
-| Weichteilemphysem | subcutaneous emphysema | RID5204 | ✅ |
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Wirbelsäule degenerativ | degenerative changes spine | RID5222 | ✅ | |
+| Rippenfraktur | rib fracture | RID5232 | ✅ | |
+| Sternumfraktur | sternal fracture | RID5233 | 🟡 | RID existiert; Label in verschiedenen OWL-Versionen leicht abweichend |
+| Wirbelkörperfraktur (Kompression) | vertebral compression fracture | RID34669 | ✅ | |
+| Ossäre Destruktion | osseous destruction | RID5238 | ✅ | |
+| Kyphoskoliose | kyphoscoliosis | RID5241 | ✅ | |
+| St.p. Sternotomie | status post sternotomy | RID49557 | 🟡 | RID49xxx = repo-intern; kein offizieller RadLex-RID – Ersatz-RID prüfen |
 
-## Devices
+## Weichteile
 
-| Device-Typ | RadLex-Term (EN) | RID | Status |
-|---|---|---|---|
-| ZVK (alle Zugangswege) | central venous catheter | RID49600 | 🟡 |
-| Port-Katheter | port catheter | RID49601 | 🟡 |
-| Dialysekatheter | dialysis catheter | RID49602 | 🟡 |
-| PICC-Line | PICC line | RID49603 | 🟡 |
-| Arterienkatheter | arterial catheter | RID49604 | 🟡 |
-| IABP | intra-aortic balloon pump | RID49605 | 🟡 |
-| Impella / VAD | ventricular assist device | RID49606 | 🟡 |
-| Schrittmacher (SM) | cardiac pacemaker | RID49610 | 🟡 |
-| ICD | implantable cardioverter defibrillator | RID49611 | 🟡 |
-| CRT-D | cardiac resynchronization therapy | RID49612 | 🟡 |
-| Loop-Recorder | implantable loop recorder | RID49613 | 🟡 |
-| Endotrachealtubus | endotracheal tube | RID49620 | 🟡 |
-| Tracheostoma-Kanüle | tracheostomy tube | RID49621 | 🟡 |
-| Magensonde | nasogastric tube | RID49630 | 🟡 |
-| Jejunalsonde | jejunal tube | RID49631 | 🟡 |
-| PEG | PEG tube | RID49632 | 🟡 |
-| Thoraxdrainage re. | chest tube right | RID49640 | 🟡 |
-| Thoraxdrainage li. | chest tube left | RID49640 | 🟡 |
-| Perikarddrainage | pericardial drain | RID49641 | 🟡 |
-| Sonstige | foreign body / device | RID49699 | 🟡 |
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Weichteilemphysem | subcutaneous emphysema | RID5204 | ✅ | |
+| Weichteilverdichtung / Raumforderung | soft tissue mass | RID5206 | 🟡 | data-en korrekt; Thoraxwand-Spezifizierung ist Freitext |
+| St.p. Mastektomie | status post mastectomy | RID49560 | 🟡 | RID49xxx = repo-intern; kein offizieller RadLex-RID |
+
+## Verlauf
+
+| Deutsch | RadLex-Term (EN) | RID | Status | Anmerkung |
+|---|---|---|---|---|
+| Verlaufsbeurteilung | interval change | RID49820 | 🔲 | manuell prüfen |
+
+## Technik (nicht kodiert – Freitextfelder)
+
+| Feld | Anmerkung |
+|---|---|
+| Aufnahmequalität (gut/eingeschränkt) | ⚠ data-radlex fehlt – RID13882 "image quality" möglich |
+| Fragestellung (Verlauf, Pneumonie etc.) | ⚠ klinische Indikation – RadLex-Kodierung optional |
+
+## Offene Punkte
+
+- **RID1786** (cardiac size): manuell auf radlex.org/RID1786 prüfen
+- **RID13882** (image quality): manuell auf radlex.org/RID13882 prüfen  
+- **RID49820** (interval change): manuell auf radlex.org/RID49820 prüfen
+- **RID49557/49560** (St.p. Sternotomie/Mastektomie): offizielle RIDs für "status post"-Terme suchen
+- Aufnahmequalitäts-Select: `data-radlex="RID13882"` und `data-en="image quality"` ergänzen
 
 ## FHIR-Kodierung
 
@@ -110,36 +100,8 @@ Status-Legende:
 |---|---|---|
 | DiagnosticReport | 24627-2 | http://loinc.org |
 | Observations (alle) | RID* | http://radlex.org |
-| Bundle meta tag | radlex-coded | http://radlex.org/fhir |
+| Bundle meta tag | HJK-MRRT-ROE-THORAX-v2.1 | http://hjk.wien/fhir/CodeSystem/radiology-templates |
 
 ---
 
-*Generiert: 2026-06-08 · Template HJK-MRRT-ROE-THORAX-v1.3*
-
----
-
-## v2.0 – Region-Anker-Codes (Tri-State-Attestierung)
-
-Mit dem additiven Modell trägt jede Region einen RadLex-Anker, der bei `o. B.` als attestierter Negativbefund (FHIR `interpretation = NEG`) kodiert wird. Diese Anker sind **noch zu verifizieren** (🟡):
-
-| Region | RadLex-Term (en) | RID | Status |
-|---|---|---|---|
-| Lunge / Parenchym | lung | RID1301 | 🟡 |
-| Pleura | pleura | RID5350 | 🟡 |
-| Herz / Mediastinum | heart and mediastinum | RID1385 | 🟡 |
-| Zwerchfell / Sinus | diaphragm | RID1303 | 🟡 |
-| Skelett / Weichteile | osseous structures and soft tissue | RID13573 | 🟡 |
-| DiagnosticReport (RadLex-Sekundärcode) | chest radiograph | RID10211 | 🟡 |
-
-Die Finding-Level-Codes (Parenchym, Pleura, Devices, Herz/Mediastinum-Detail) sind unverändert aus v1.3 übernommen.
-
----
-
-## v2.1 – ergänzte Codes
-
-| Feld | Term (en) | RID | Status |
-|---|---|---|---|
-| `pl_erg_re` / `pl_erg_li` | pleural effusion (seitengetrennt graduiert) | RID4872 | ✅ (Code wie pl_erguss; nur Graduierung je Seite ergänzt) |
-| `sk_wk` | vertebral compression fracture | RID34669 | 🟡 zu verifizieren |
-
-Hinweis: `RID34669` für die Wirbelkörper-/Sinterungsfraktur ist noch gegen den RadLex-Browser zu prüfen.
+*Geprüft: 2026-06-26 · Template HJK-MRRT-ROE-THORAX-v2.1 · 32 kodierte Felder*
