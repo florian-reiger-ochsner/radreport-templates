@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
+  <!-- Build: 2026-06-26T05:55:39.773Z | radreport-core.css inlined for MRRT-conformance -->
 <meta charset="UTF-8">
 <title>RÖNTGEN THORAX – Live-Demo</title>
 
@@ -8,7 +9,7 @@
 <meta name="dcterms.title"       content="Röntgen Thorax (p.a. ± lateral)"/>
 <meta name="dcterms.description" content="Strukturierte Befundvorlage Röntgen-Thorax (Massentemplate). Additives Normalbefund-Modell (Attestierung statt Default): fünf Tri-State-Regionen, 1-Klick-Normalbefund-Makro, Multi-Parenchym-Stack (Fleischner), Device-Stack (24 Typen), RadLex-Kodierung, FHIR-Export mit NEG/POS-Verification-Floor, Voice-ready inkl. zuschaltbarer Voice-Hints (HUD)."/>
 <meta name="dcterms.language"    content="de"/>
-<meta name="dcterms.identifier"  content="HJK-MRRT-ROE-THORAX-v2.0"/>
+<meta name="dcterms.identifier"  content="HJK-MRRT-ROE-THORAX-v2.1"/>
 <meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
 <meta name="dcterms.date"        content="2026-06-20"/>
 <meta name="dcterms.rights"      content="HJK Wien. Fleischner-Terminologie nach MacMahon 2017 / Hansell 2008."/>
@@ -21,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-/* radreport-core.css v1.0.0 – inlined */
+/* Inlined from radreport-core.css – do not edit here, edit source */
 /* =============================================================================
    RADREPORT – CORE STYLESHEET
    =============================================================================
@@ -862,7 +863,7 @@ button.act{padding:9px 18px;border:none;border-radius:6px;font-family:inherit;fo
 <section class="rr-input-pane">
 
 <h1 class="rr-doc-title">Röntgen Thorax</h1>
-<div class="rr-doc-sub">MRRT · RadLex-kodiert · p.a. ± lateral · additives Attestierungsmodell · Voice-ready · v2.0 · HJK Wien · 2026-06-20</div>
+<div class="rr-doc-sub">MRRT · RadLex-kodiert · p.a. ± lateral · additives Attestierungsmodell · Voice-ready · v2.1 · HJK Wien · 2026-06-20</div>
 <div class="rr-title-rule"></div>
 
 <div class="macro-bar">
@@ -968,7 +969,7 @@ button.act{padding:9px 18px;border:none;border-radius:6px;font-family:inherit;fo
   <div class="rsec"><div class="rsec-lbl">Technik</div><div class="rtext" id="prev-technik"></div></div>
   <div class="rsec"><div class="rsec-lbl">Befund</div><div class="rtext" id="prev-befund"></div></div>
   <div class="rsec"><div class="rsec-lbl">Beurteilung</div><div class="rtext" id="prev-beurt"></div></div>
-  <div class="stamp"><span>HJK-MRRT-ROE-THORAX-v2.0</span><span id="prev-date"></span></div>
+  <div class="stamp"><span>HJK-MRRT-ROE-THORAX-v2.1</span><span id="prev-date"></span></div>
 </div>
 <div id="status-badge" class="badge warn">● Befund ausfüllen</div>
 </aside>
@@ -1046,43 +1047,77 @@ const REGIONS = [
     critWhen(){ return gc('pl_ptx'); },
     neg:'Pleura: Kein Pleuraerguss. Kein Pneumothorax. Sinus phrenicocostales bds. frei.',
     detail:`
-      <div class="grid2">
-        <div class="row"><span class="lbl">Befundtyp <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg">
-            <label class="ci"><input type="checkbox" id="pl_erguss" onchange="plToggle();update()" data-radlex="RID4872" data-en="pleural effusion"><span>Erguss</span></label>
-            <label class="ci"><input type="checkbox" id="pl_ptx" onchange="plToggle();update()" data-radlex="RID5352" data-en="pneumothorax"><span>Pneumothorax</span></label>
-            <label class="ci"><input type="checkbox" id="pl_schwarte" onchange="update()" data-radlex="RID5355" data-en="pleural thickening"><span>Schwarte/Verdickung</span></label>
-            <label class="ci"><input type="checkbox" id="pl_kalk" onchange="update()" data-radlex="RID5356" data-en="pleural calcification"><span>Pleurakalk</span></label>
-            <label class="ci"><input type="checkbox" id="pl_tumor" onchange="update()" data-radlex="RID34948" data-en="pleural mass"><span>Pleuratumor/RF</span></label>
-          </div>
+      <div class="row"><span class="lbl">Befundtyp <span class="rr-rl-badge">RadLex</span></span>
+        <div class="cg">
+          <label class="ci"><input type="checkbox" id="pl_erguss" onchange="plToggle();update()" data-radlex="RID4872" data-en="pleural effusion"><span>Erguss</span></label>
+          <label class="ci"><input type="checkbox" id="pl_ptx" onchange="plToggle();update()" data-radlex="RID5352" data-en="pneumothorax"><span>Pneumothorax</span></label>
+          <label class="ci"><input type="checkbox" id="pl_schwarte" onchange="plToggle();update()" data-radlex="RID5355" data-en="pleural thickening"><span>Schwarte/Verdickung</span></label>
+          <label class="ci"><input type="checkbox" id="pl_kalk" onchange="plToggle();update()" data-radlex="RID5356" data-en="pleural calcification"><span>Pleurakalk</span></label>
+          <label class="ci"><input type="checkbox" id="pl_tumor" onchange="plToggle();update()" data-radlex="RID34948" data-en="pleural mass"><span>Pleuratumor/RF</span></label>
         </div>
-        <div class="row"><label><span class="lbl">Seite</span><select id="pl_seite" onchange="update()" data-voice="seite pleura">${SEITE_SHORT}</select></label></div>
       </div>
-      <div class="row" id="pl_erguss_row" style="display:none"><label><span class="lbl">Erguss – Ausmaß</span>
-        <select id="pl_erg_grad" onchange="update()" data-voice="ergussgröße">
-          <option value="">–</option><option value="kleiner">klein (Randwinkelverlegung)</option>
-          <option value="mittelgroßer">mittelgroß (bis Skapulaspitze)</option>
-          <option value="großer">groß (bis Hilushöhe und höher)</option>
-          <option value="massiver">massiv (mit Mediastinalverlagerung)</option>
-        </select></label></div>
-      <div class="row" id="pl_ptx_row" style="display:none"><label><span class="lbl">Pneumothorax – Ausmaß</span>
-        <select id="pl_ptx_grad" onchange="update()" data-voice="pneugröße">
-          <option value="">–</option><option value="kleiner (Mantelluft, &lt; 2 cm)">klein – Mantelluft &lt; 2 cm</option>
-          <option value="mittelgroßer">mittelgroß</option><option value="großer (kompletter Kollaps)">groß – kompletter Kollaps</option>
-          <option value="Spannungspneumothorax (!)">Spannungspneumothorax (!)</option>
-        </select></label></div>
-      <div class="row"><label><span class="lbl">Ergänzung Pleura (Freitext)</span>
-        <input type="text" id="pl_ft" placeholder="z.B. gekammert, Fibrin…" oninput="update()" data-voice="zusatz pleura"></label></div>`,
+      <div class="row" id="pl_seite_row" style="display:none"><label><span class="lbl">Seite (Schwarte / Kalk / Tumor)</span><select id="pl_seite" onchange="update()" data-voice="seite pleura">${SEITE_SHORT}</select></label></div>
+      <div class="row" id="pl_erguss_row" style="display:none">
+        <span class="lbl">Pleuraerguss – Ausmaß je Seite <span class="rr-rl-badge">RadLex</span></span>
+        <div class="grid2">
+          <label><span class="lbl">rechts</span>
+            <select id="pl_erg_re" onchange="update()" data-voice="erguss rechts">
+              <option value="">– / keiner –</option><option value="kleiner">klein (Randwinkelverlegung)</option>
+              <option value="mittelgroßer">mittelgroß (bis Skapulaspitze)</option>
+              <option value="großer">groß (bis Hilushöhe und höher)</option>
+              <option value="massiver">massiv (mit Mediastinalverlagerung)</option>
+            </select></label>
+          <label><span class="lbl">links</span>
+            <select id="pl_erg_li" onchange="update()" data-voice="erguss links">
+              <option value="">– / keiner –</option><option value="kleiner">klein (Randwinkelverlegung)</option>
+              <option value="mittelgroßer">mittelgroß (bis Skapulaspitze)</option>
+              <option value="großer">groß (bis Hilushöhe und höher)</option>
+              <option value="massiver">massiv (mit Mediastinalverlagerung)</option>
+            </select></label>
+        </div>
+        <div class="field-note">Nur eine Seite ausfüllen = einseitig. Beide Seiten = unterschiedlich ausgeprägter beidseitiger Erguss.</div>
+      </div>
+      <div class="row" id="pl_ptx_row" style="display:none">
+        <span class="lbl">Pneumothorax – Ausmaß je Seite <span class="rr-rl-badge">RadLex</span></span>
+        <div class="grid2">
+          <label><span class="lbl">rechts</span>
+            <select id="pl_ptx_re" onchange="update()" data-voice="pneu rechts">
+              <option value="">– / keiner –</option><option value="kleiner (Mantelluft, &lt; 2 cm)">klein – Mantelluft &lt; 2 cm</option>
+              <option value="mittelgroßer">mittelgroß</option><option value="großer (kompletter Kollaps)">groß – kompletter Kollaps</option>
+              <option value="Spannungspneumothorax (!)">Spannungspneumothorax (!)</option>
+            </select></label>
+          <label><span class="lbl">links</span>
+            <select id="pl_ptx_li" onchange="update()" data-voice="pneu links">
+              <option value="">– / keiner –</option><option value="kleiner (Mantelluft, &lt; 2 cm)">klein – Mantelluft &lt; 2 cm</option>
+              <option value="mittelgroßer">mittelgroß</option><option value="großer (kompletter Kollaps)">groß – kompletter Kollaps</option>
+              <option value="Spannungspneumothorax (!)">Spannungspneumothorax (!)</option>
+            </select></label>
+        </div>
+        <div class="field-note">Nur eine Seite ausfüllen = einseitig. Beide Seiten = beidseitiger Pneumothorax. „Spannungspneumothorax" löst den Notfall-Hinweis aus.</div>
+      </div>`,
     build(st){
       if(st==='ob') return this.neg;
       const seite=gv('pl_seite'), p=[];
-      if(gc('pl_erguss')){ const g=gv('pl_erg_grad'); p.push(`${g?g+' ':''}Pleuraerguss${seite?' '+seite:''}`); }
-      if(gc('pl_ptx')){ const g=gv('pl_ptx_grad'); p.push(`Pneumothorax${seite?' '+seite:''}${g?' – '+g:''}`); }
+      if(gc('pl_erguss')){
+        const re=gv('pl_erg_re'), li=gv('pl_erg_li');
+        if(re && li) p.push(`${re} Pleuraerguss rechts und ${li} Pleuraerguss links`);
+        else if(re) p.push(`${re} Pleuraerguss rechts`);
+        else if(li) p.push(`${li} Pleuraerguss links`);
+        else p.push(`Pleuraerguss${seite?' '+seite:''}`);
+      }
+      if(gc('pl_ptx')){
+        const re=gv('pl_ptx_re'), li=gv('pl_ptx_li');
+        const fmt=(s,g)=>`Pneumothorax ${s}${g?' – '+g:''}`;
+        if(re && li) p.push(`${fmt('rechts',re)} und ${fmt('links',li)}`);
+        else if(re) p.push(fmt('rechts',re));
+        else if(li) p.push(fmt('links',li));
+        else p.push('Pneumothorax');
+      }
       if(gc('pl_schwarte')) p.push(`Pleuraschwarte/-verdickung${seite?' '+seite:''}`);
       if(gc('pl_kalk')) p.push(`Pleurakalk${seite?' '+seite:''}`);
       if(gc('pl_tumor')) p.push(`Pleuratumor/Raumforderung${seite?' '+seite:''}`);
       if(!p.length) return 'Pleura: Pathologischer Befund – bitte Typ wählen.';
-      let s='Pleura: '+p.join('; ')+'.'; const ft=gv('pl_ft'); if(ft) s+=' '+ft+'.'; return s;
+      let s='Pleura: '+p.join('; ')+'.'; return s;
     }
   },
   {
@@ -1161,12 +1196,14 @@ const REGIONS = [
   },
   {
     key:'skelett', name:'Skelett / Weichteile', radlex:'RID13573', en:'osseous structures and soft tissue', crit:false,
+    ftHint:'z. B. BWK7 und BWK12 mit ca. 30 % Höhenminderung; 2 Wirbelkörper betroffen',
     critWhen(){ return gc('sk_dest'); },
     neg:'Skelett und Weichteile: Miterfasstes Skelett und Weichteile der Thoraxwand unauffällig.',
     detail:`
       <div class="row"><span class="lbl">Knochen <span class="rr-rl-badge">RadLex</span></span>
         <div class="cg">
           <label class="ci"><input type="checkbox" id="sk_deg" onchange="update()" data-radlex="RID5222" data-en="degenerative changes spine"><span>Degenerativ WS</span></label>
+          <label class="ci"><input type="checkbox" id="sk_wk" onchange="update()" data-radlex="RID34669" data-en="vertebral compression fracture"><span>Wirbelkörperfraktur / Sinterung</span></label>
           <label class="ci"><input type="checkbox" id="sk_rip" onchange="update()" data-radlex="RID5232" data-en="rib fracture"><span>Rippenfraktur</span></label>
           <label class="ci"><input type="checkbox" id="sk_stern" onchange="update()" data-radlex="RID5233" data-en="sternal fracture"><span>Sternumfraktur</span></label>
           <label class="ci"><input type="checkbox" id="sk_dest" onchange="update()" data-radlex="RID5238" data-en="osseous destruction"><span>Ossäre Destruktion / V.a. Metastase</span></label>
@@ -1184,7 +1221,7 @@ const REGIONS = [
       </div>`,
     build(st){
       if(st==='ob') return this.neg;
-      const sk=[gc('sk_deg')?'degenerative WS-Veränderungen':null,gc('sk_rip')?'Rippenfraktur':null,gc('sk_stern')?'Sternumfraktur':null,gc('sk_dest')?'ossäre Destruktion / V.a. Metastase':null,gc('sk_kyph')?'Kyphoskoliose':null,gc('sk_stern_op')?'St.p. Sternotomie':null].filter(Boolean).join(', ')||'unauffällig';
+      const sk=[gc('sk_deg')?'degenerative WS-Veränderungen':null,gc('sk_wk')?'Wirbelkörperfraktur/Sinterung':null,gc('sk_rip')?'Rippenfraktur':null,gc('sk_stern')?'Sternumfraktur':null,gc('sk_dest')?'ossäre Destruktion / V.a. Metastase':null,gc('sk_kyph')?'Kyphoskoliose':null,gc('sk_stern_op')?'St.p. Sternotomie':null].filter(Boolean).join(', ')||'unauffällig';
       const wt=[gc('wt_emph')?'Weichteilemphysem':null,gc('wt_rf')?'Weichteilverdichtung/RF':null,gc('wt_mast_re')?'St.p. Mastektomie re.':null,gc('wt_mast_li')?'St.p. Mastektomie li.':null].filter(Boolean).join(', ');
       let s=`Skelett: ${sk}.`; if(wt) s+=` Weichteile: ${wt}.`; return s;
     }
@@ -1207,7 +1244,10 @@ function renderRegions(){
           <label for="st_${r.key}_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="region-detail" id="rd-${r.key}">${r.detail}</div>
+      <div class="region-detail" id="rd-${r.key}">${r.detail}
+        <div class="row"><label><span class="lbl">Ergänzung (Freitext)</span>
+          <input type="text" id="ft_${r.key}" oninput="update()" data-voice="zusatz ${r.key}" placeholder="${r.ftHint||'freie Ergänzung…'}"></label></div>
+      </div>
     </div>`).join('');
 }
 function regStatus(key){ return document.querySelector(`input[name=st_${key}]:checked`)?.value ?? ''; }
@@ -1221,6 +1261,7 @@ function onStatus(key){
 function plToggle(){
   const e=document.getElementById('pl_erguss_row'); if(e) e.style.display=gc('pl_erguss')?'':'none';
   const p=document.getElementById('pl_ptx_row');    if(p) p.style.display=gc('pl_ptx')?'':'none';
+  const sr=document.getElementById('pl_seite_row'); if(sr) sr.style.display=(gc('pl_schwarte')||gc('pl_kalk')||gc('pl_tumor'))?'':'none';
 }
 function setNormalbefund(){
   REGIONS.forEach(r=>{ if(regStatus(r.key)===''){ document.getElementById(`st_${r.key}_ob`).checked=true; onStatus(r.key); } });
@@ -1311,7 +1352,7 @@ function buildTechnik(){
 }
 function buildBefund(){
   const lines=[];
-  REGIONS.forEach(r=>{ const st=regStatus(r.key); if(st==='') return; lines.push(r.build(st)); });
+  REGIONS.forEach(r=>{ const st=regStatus(r.key); if(st==='') return; let line=r.build(st); const ft=gv('ft_'+r.key); if(ft) line+=' '+ft+(/[.!?]$/.test(ft)?'':'.'); lines.push(line); });
   const dev=getDevItems();
   if(dev.length){ const t=dev.map(i=>{ let s=i.typ; if(i.lage) s+=` (${i.lage})`; s+=` – ${i.burt}`; if(i.ft) s+=`, ${i.ft}`; return s; }).join('; '); lines.push('Devices: '+t+'.'); }
   if(gv('vgl_ja')==='yes'){ const d=gv('vgl_datum'), v=gv('vgl_verlauf'); let s='Vergleich:'; if(d) s+=` Voruntersuchung vom ${d} liegt vor.`; if(v) s+=` ${v}`; if(s!=='Vergleich:') lines.push(s); }
@@ -1330,7 +1371,7 @@ function buildBeurteilung(){
     else if(r.key==='herzmediastinum'){ const gr=gv('herz_gr'); if(gr && gr.indexOf('normal')===-1) parts.push(`Herzgröße: ${gr}.`);
       const med=[gc('md_verb')?'Mediastinalverbreiterung':null,gc('md_rf')?'mediastinale Raumforderung':null].filter(Boolean).join(', ');
       if(med) parts.push(med.charAt(0).toUpperCase()+med.slice(1)+'.'); }
-    else if(r.key==='skelett'){ if(gc('sk_dest')) parts.push('Ossäre Destruktion / V.a. Metastase.'); if(gc('sk_rip')) parts.push('Rippenfraktur.'); }
+    else if(r.key==='skelett'){ if(gc('sk_dest')) parts.push('Ossäre Destruktion / V.a. Metastase.'); if(gc('sk_wk')) parts.push('Wirbelkörperfraktur / Sinterung.'); if(gc('sk_rip')) parts.push('Rippenfraktur.'); }
   });
   if(devCrit()) parts.unshift('Device-Fehllage – dringliche Korrektur erforderlich.');
   if(!parts.length){ if(nUnassessed()===0) return 'Röntgen Thorax ohne pathologischen Befund.'; return ''; }
@@ -1375,7 +1416,7 @@ function buildFhir(){
       items.forEach((i,k)=>{ let txt=i.de; if(i.seite)txt+=' '+i.seite; if(i.lok)txt+=' ('+i.lok+')'; if(i.ft)txt+=', '+i.ft; push(i.rid, i.en, txt, false, `lunge-${k+1}`); });
     } else if(r.key==='pleura'){
       const seite=gv('pl_seite'); const map=[['pl_erguss','RID4872','pleural effusion'],['pl_ptx','RID5352','pneumothorax'],['pl_schwarte','RID5355','pleural thickening'],['pl_kalk','RID5356','pleural calcification'],['pl_tumor','RID34948','pleural mass']];
-      let any=false; map.forEach(([id,rid,en],k)=>{ if(gc(id)){ any=true; push(rid, en, en+(seite?' '+seite:''), false, `pleura-${k+1}`); } });
+      let any=false; map.forEach(([id,rid,en],k)=>{ if(gc(id)){ any=true; let txt=en+(seite?' '+seite:''); if(id==='pl_erguss'){ const re=gv('pl_erg_re'),li=gv('pl_erg_li'); txt='Pleuraerguss'+(re?' rechts '+re:'')+(li?' links '+li:''); } if(id==='pl_ptx'){ const re=gv('pl_ptx_re'),li=gv('pl_ptx_li'); txt='Pneumothorax'+(re?' rechts '+re:'')+(li?' links '+li:''); } push(rid, en, txt, false, `pleura-${k+1}`); } });
       if(!any) push(r.radlex, r.en, r.build('bef'), false, r.key);
     } else { push(r.radlex, r.en, r.build('bef'), false, r.key); }
   });
@@ -1383,7 +1424,7 @@ function buildFhir(){
   const dr={
     resourceType:'DiagnosticReport', status:'final', id:'thorax-report',
     code:{coding:[{system:'http://loinc.org', code:'24627-2', display:'Chest X-ray 2 views'},{system:'http://radlex.org', code:'RID10211', display:'chest radiograph'}]},
-    effectiveDateTime:now, identifier:[{value:'HJK-MRRT-ROE-THORAX-v2.0'}],
+    effectiveDateTime:now, identifier:[{value:'HJK-MRRT-ROE-THORAX-v2.1'}],
     conclusion:buildBeurteilung(), result:obsArr.map(o=>({reference:o.fullUrl})),
     presentedForm:[{contentType:'text/plain', title:'Röntgen Thorax', data:btoa(unescape(encodeURIComponent('TECHNIK\n'+buildTechnik()+'\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+buildBeurteilung())))}],
   };
