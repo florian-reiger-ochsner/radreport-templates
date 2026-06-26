@@ -76,7 +76,7 @@ nicht als proprietäre Dokumente. Der Befund wird vom Endprodukt zum FHIR-Observ
 |---|---|---|---|
 | Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.4 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
 | Röntgen Knie post-KTEP | HJK-MRRT-KNIE-POSTTEP | v1.1 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/) |
-| Röntgen Thorax | HJK-MRRT-ROE-THORAX | v2.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/) |
+| Röntgen Thorax | HJK-MRRT-ROE-THORAX | v2.1 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/) |
 | CT Abdomen + Becken | HJK-MRRT-CT-ABDBECKEN | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-abdomen/) |
 | CT Urolithiasis | HJK-MRRT-CT-UROLITHIASIS | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/) |
 | CT Lungenarterien (CTPA) | HJK-MRRT-CT-LUNGENEMBOLIE | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/) |
