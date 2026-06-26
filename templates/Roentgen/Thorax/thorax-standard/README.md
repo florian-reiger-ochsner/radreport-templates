@@ -68,7 +68,7 @@ Jeder Device-Typ mit RadLex-Code, vorausgefülltem Lage-Placeholder und 4-stufig
 ## Output
 
 - **Fließtext** – Copy/Paste in Syngo / Carbon
-- **FHIR Bundle R4** – DiagnosticReport (LOINC 36643-5) + Observations pro Parenchym-Befund, Pleura, Zwerchfell, Device; RadLex-kodiert
+- **FHIR Bundle R4** – DiagnosticReport (LOINC 36643-5 als Default; Untersuchungstyp wird i. d. R. vom RIS/Auftrag gesetzt, manueller Override im Template) + Observations pro Parenchym-Befund, Pleura, Zwerchfell, Device; RadLex-kodiert
 
 ## Architektur
 
