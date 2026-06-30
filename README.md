@@ -12,18 +12,6 @@ HTML5 · RadLex · FHIR R4 · Vendor-neutral
 
 ---
 
-## Ziel
-
-Strukturierte, standard-konforme Befundtemplates als persistierende Datenpunkte –
-
-
-- **MRRT-konform**
-- **RadLex-terminiert** – jede `<option>` mit `data-radlex` (RID) und `data-en`
-- **FHIR R4 Export** – DiagnosticReport + Observations, LOINC-kodiert
-- **Hersteller-neutral** – ELGA/EHDS-anschlussfähig
-
----
-
 ## Technologie
 
 | Ebene | Standard |
