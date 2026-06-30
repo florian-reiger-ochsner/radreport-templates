@@ -12,6 +12,12 @@ HTML5 · RadLex · FHIR R4 · Vendor-neutral
 
 ---
 
+## Ziele
+
+Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung in einem kodierten, FHIR-fähigen Datensatz zusammenlaufen. 
+
+---
+
 ## Technologie
 
 | Ebene | Standard |
