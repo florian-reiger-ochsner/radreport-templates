@@ -103,24 +103,6 @@ template-name/
 
 ---
 
-## Roadmap
-
-**Phase 1 (laufend):**
-- [x] Röntgen Knie prä-TEP
-- [x] Röntgen Knie post-KTEP (inkl. EndoCert-Modus)
-- [x] Röntgen Thorax
-- [x] CT Abdomen + Becken
-- [x] CT Urolithiasis
-- [x] CT Lungenarterien
-- [x] CT/MRT Leber LI-RADS
-- [x] CT Schädel nativ
-
-**Phase 2 (geplant):**
-- [ ] MRT Knie allgemein
-- [ ] MRT LWS
-- [ ] MRT Sakroiliakalgelenke (ASAS/Rheuma)
-
----
 
 ## Standards & Pflege
 
