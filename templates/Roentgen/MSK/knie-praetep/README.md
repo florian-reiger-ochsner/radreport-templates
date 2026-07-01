@@ -1,155 +1,70 @@
-# Radreport – Shared Stylesheet
+# Röntgen Knie präoperativ vor TEP
 
-**Datei:** `radreport-core.css`
-**Version:** 1.0.0
-**Stand:** 2026-05-23
-**Maintainer:** Florian Reiger-Ochsner (HJK)
+**ID:** HJK-MRRT-KNIE-PRAETEP
+**Version:** 1.4
+**Status:** Pilot
+**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/)
 
----
+## Zweck
 
-## Worum es geht
+Strukturierte Befundvorlage für die **präoperative Planung einer Knie-TEP bei Primärarthrose**. Erfasst Beinachse, Arthrosegrad und patellofemoralen Status standardisiert und liefert daraus einen CPAK-Phänotyp sowie einen klickbaren Beurteilungsvorschlag. RadLex/LOINC-kodiert mit FHIR-R4-Export.
 
-Single Source of Truth für visuelle Eigenschaften aller Befundvorlagen. Statt CSS in jedem Template inline zu duplizieren, liegt es zentral hier und wird je nach Kontext entweder per `<link>` referenziert oder per Build inline injiziert.
+## Modi
 
-## Architektur
-
-Hybrid-Ansatz wegen IHE MRRT-Constraint:
-
-| Datei-Typ | CSS-Einbindung |
+| Modus | Beschreibung |
 |---|---|
-| MRRT-Template (Import in Carbon) | inline `<style>` via Build |
-| GitHub Pages Demo, Messleitfäden, Doku | externes `<link>` |
+| Manuell | Vollständig manuelle Eingabe aller Messwerte und Klassifikationen |
+| LAMA-vorbefüllt | Achsenmessungen aus LAMA (IB Lab, DICOM SR) übernommen |
+| Hybrid-Validierung | KI-vorbefüllte Felder visuell markiert, manuelle Freigabe |
 
-### Repo-Struktur
+## Sektionen
 
-```
-radreport-templates/
-├── shared/
-│   ├── styles/
-│   │   ├── radreport-core.css     ← Single Source of Truth
-│   │   └── README.md            ← dieses File
-│   └── scripts/
-│       └── inline-css.js        ← Build-Skript
-├── templates/
-│   └── Roentgen/MSK/knie-praetep/
-│       ├── template.source.html ← Quelle mit <link>
-│       └── template.html        ← Build-Output mit inline CSS
-└── demo/
-    └── knie-prae-tep/
-        └── index.html           ← nutzt externes CSS direkt
-```
-
-## Verwendung
-
-### A) In Demos, Messleitfäden, GitHub Pages – externes CSS
-
-```html
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../shared/styles/radreport-core.css">
-</head>
-```
-
-Pfad-Tiefe nach Bedarf anpassen (`../../` von `demo/knie-prae-tep/`, `../../../../` von `templates/Roentgen/MSK/knie-praetep/`).
-
-### B) In MRRT-Templates – inline CSS via Build
-
-1. Quelldatei heißt `template.source.html` und enthält den `<link>` auf `radreport-core.css`
-2. Build:
-   ```bash
-   node shared/scripts/inline-css.js templates/Roentgen/MSK/knie-praetep/template.source.html
-   ```
-3. Erzeugt: `template.html` mit injiziertem `<style>`-Block
-
-### Build-Workflow
-
-Quelle → Build → Commit, beide Dateien committen:
-
-```bash
-# Nach Änderungen an template.source.html ODER radreport-core.css:
-node shared/scripts/inline-css.js templates/Roentgen/MSK/knie-praetep/template.source.html
-git add templates/Roentgen/MSK/knie-praetep/template.source.html
-git add templates/Roentgen/MSK/knie-praetep/template.html
-git commit -m "chore(ktep): rebuild MRRT after stylesheet update"
-```
-
-Optional automatisierbar per GitHub Action (siehe weiter unten).
-
-## Naming-Conventions
-
-Alle Klassen und CSS-Variablen tragen das `rr-` Prefix. Verhindert Kollisionen mit Carbon-internem CSS bei späterer Integration.
-
-| Pattern | Zweck |
+| Sektion | Inhalt |
 |---|---|
-| `:root { --rr-* }` | Design-Tokens (Farben, Spacing, Fonts) |
-| `.rr-*` | Komponenten-Klassen (`.rr-app`, `.rr-input-pane`, `.rr-result-box`) |
-| `.rr-is-*` | Status-Modifier (`.rr-is-active`, `.rr-is-required-empty`) |
-| `.rr-u-*` | Utility-Klassen, sparsam einzusetzen (`.rr-u-mt-lg`) |
+| Technik | Projektionen: AP stehend, seitlich, Patella tangential (opt.), Ganzbein einseitig kalibriert, Rosenberg (opt.) |
+| Achsenvermessung | HKA, MAD, LLD, mLDFA, mMPTA, JLCA |
+| Arthrosegrad – Kellgren-Lawrence | KL medial / lateral / patellofemoral als 3-Spalten-Grid |
+| Patellofemoraler Status (optional) | Insall-Salvati, Caton-Deschamps, Patella alta/baja, Patellatilt, Trochleadysplasie (Dejour) – kollabierbar |
+| Tibialer Slope (optional) | kollabierbar |
+| Zusatzbefunde | Osteophyten, subchondrale Zysten/Sklerose, freie Gelenkkörper, Erguss, Baker-Zyste, Chondrokalzinose |
+| Knochenstruktur | – |
+| Klinische Angabe / Voruntersuchung / Freitext | Kontext und Ergänzungen |
 
-## Generische Komponenten
+## Klassifikationen
 
-Bewusst über das KTEP-Template hinaus gedacht – nutzbar für künftige Templates:
+- **Kellgren-Lawrence** (Ann Rheum Dis 1957) – pro Kompartiment medial / lateral / patellofemoral
+- **CPAK** (MacDessi 2021) – aHKA + JLO → Phänotyp I–IX, live berechnet
 
-| Klasse | Anwendung |
-|---|---|
-| `.rr-result-box` | CPAK · LI-RADS-Kategorie · RECIST-Response · RAMRIS-Score |
-| `.rr-grade-summary` | KL (3 Spalten) · Lung-RADS (4 Lappen) · RAMRIS (6 Knochen) · BI-RADS (2 Quadranten) – automatisch via `auto-fit` |
-| `.rr-side-toggle` | re./li., apikal/basal, Quadranten, jede paarweise Auswahl |
-| `.rr-mode-switch` | Manuell/KI/Hybrid bei allen KI-integrierten Templates |
-| `.rr-rl-badge` | RadLex- bzw. LOINC-Code-Marker in Sektions-Headern |
-| `.rr-req-indicator` | Pflichtfeld-Marker bei kritischen diagnostischen Klassifikationen |
+## KI-Tools
 
-## Design-Tokens (Auszug)
+| Tool | Status | Output |
+|---|---|---|
+| LAMA (IB Lab) | DICOM SR |
+| KOALA (IB Lab) | DICOM SR |
 
-```css
---rr-accent:       #2c5f8d;   /* HJK Clinical Light Theme primary */
---rr-bg-alt:       #f7f8fa;   /* Preview-Pane Hintergrund */
---rr-font-sans:    "Source Sans 3", system-ui;
---rr-font-serif:   "Source Serif 4", Georgia;
---rr-radius:       6px;
---rr-space-md:     1rem;
-```
+## Kodierung
 
-Vollständige Liste siehe Sektion 1 in `radreport-core.css`.
+RadLex auf allen diskreten Befunden, LOINC auf Achsenmessungen und Report-Typ. Details und Verifikationsstatus siehe [RADLEX-MAPPING.md](./RADLEX-MAPPING.md).
 
-## Optional: Automatisierter Build per GitHub Action
+| Ressource | Code | System |
+|---|---|---|
+| DiagnosticReport | 24650-4 | http://loinc.org |
+| Observations | RID* | http://radlex.org |
+| Achsenmessungen | LP* | http://loinc.org |
 
-`.github/workflows/build-templates.yml`:
+## Output
 
-```yaml
-name: Build MRRT Templates
-on:
-  push:
-    paths:
-      - 'templates/**/*.source.html'
-      - 'shared/styles/radreport-core.css'
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - name: Build all templates
-        run: |
-          find templates -name "*.source.html" -exec node shared/scripts/inline-css.js {} \;
-      - name: Commit built templates
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add templates/**/*.html
-          git diff --staged --quiet || git commit -m "build: regenerate MRRT templates"
-          git push
-```
+- Fließtext (Syngo/Carbon kompatibel, keine Flags im Text)
+- JSON strukturiert
+- FHIR Bundle R4 (DiagnosticReport + Observations, doppelte Kodierung LOINC + RadLex)
 
-Empfehlung: erst manuell builden, später automatisieren wenn der Workflow stabil läuft.
+## Quellen
 
-## Versionierung des Stylesheets
+- Kellgren JH, Lawrence JS. Ann Rheum Dis 1957;16:494-502
+- MacDessi SJ et al. Bone Joint J 2021;103-B(3):329-337
+- Paley D. Principles of Deformity Correction. Springer 2002
+- IB Lab GmbH. LAMA Conformance Statement (DICOM SR)
 
-Bei Änderungen an `radreport-core.css`:
-- Token-Änderung (Farbe, Spacing) → Patch (1.0.0 → 1.0.1), alle Templates rebuilden
-- Neue Komponente hinzugefügt → Minor (1.0.0 → 1.1.0), Templates können bei nächster Gelegenheit aktualisieren
-- Breaking Change (Klassen-Rename) → Major (1.0.0 → 2.0.0), alle Templates müssen migriert werden
+## Versionshistorie
 
-Version steht im Datei-Header. Bei Major-Bumps: Migrations-Tabelle in CHANGELOG dokumentieren.
+Siehe [CHANGELOG.md](./CHANGELOG.md)
