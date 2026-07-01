@@ -1,72 +1,28 @@
 #!/usr/bin/env node
 /**
- * inline-css.js – Injiziert radreport-core.css inline in MRRT-Templates
+ * inline-css.js – ABGEKÜNDIGT / RETIRED (A-Struktur-Umstellung, 2026-07)
  *
- * Usage:
- *   node shared/scripts/inline-css.js <source-html>
+ * Dieses Skript ist gegenstandslos. Es diente der alten B-Struktur, in der das
+ * kanonische Artefakt ein gebautes, self-contained template.html mit INLINE-CSS
+ * war (erzeugt aus template.source.html).
  *
- * Beispiel:
- *   node shared/scripts/inline-css.js templates/Roentgen/MSK/knie-praetep/template.source.html
+ * Ab der A-Struktur gilt:
+ *   - KANONISCH = template.html: nacktes deklaratives MRRT, rr-*-Klassen nur als
+ *     Struktur-Hooks, KEIN CSS, KEIN <script>. Es gibt kein template.source.html
+ *     und kein Inline-CSS mehr, also nichts zu "inlinen".
+ *   - ABGELEITET = demo/<id>/index.html: wird aus dem kanonischen template.html
+ *     via shared/scripts/build-demo.js erzeugt (Core-Link im <head>).
  *
- * Erzeugt: templates/Roentgen/MSK/knie-praetep/template.html
+ * Ersatz:  node shared/scripts/build-demo.js <template.html> <demo/index.html>
  *
- * Hintergrund:
- *   IHE MRRT verlangt self-contained HTML-Dateien. Die Quelldatei
- *   (.source.html) referenziert radreport-core.css per <link>; dieses Skript
- *   ersetzt den Link durch einen <style>-Block mit dem inlined CSS.
- *   Damit ist das produktive Template (.html) MRRT-konform und Carbon-import-fähig.
+ * Diese Datei bleibt vorerst als Wegweiser bestehen und bricht bewusst ab,
+ * damit alte Aufrufe nicht stillschweigend Falsches tun.
  */
 
-const fs = require('fs');
-const path = require('path');
+'use strict';
 
-const sourcePath = process.argv[2];
-if (!sourcePath) {
-  console.error('Fehler: Quelldatei angeben.');
-  console.error('Usage: node inline-css.js <source-html>');
-  process.exit(1);
-}
-
-// CSS-Pfad relativ zu diesem Skript: ../styles/radreport-core.css
-const cssPath = path.join(__dirname, '..', 'styles', 'radreport-core.css');
-const outPath = sourcePath.replace(/\.source\.html$/, '.html');
-
-if (sourcePath === outPath) {
-  console.error('Fehler: Quelldatei muss auf .source.html enden.');
-  process.exit(1);
-}
-
-if (!fs.existsSync(sourcePath)) {
-  console.error(`Fehler: Quelldatei nicht gefunden: ${sourcePath}`);
-  process.exit(1);
-}
-
-if (!fs.existsSync(cssPath)) {
-  console.error(`Fehler: Stylesheet nicht gefunden: ${cssPath}`);
-  process.exit(1);
-}
-
-const html = fs.readFileSync(sourcePath, 'utf8');
-const css = fs.readFileSync(cssPath, 'utf8');
-
-// Ersetze <link ... radreport-core.css"> durch <style>...</style>
-const linkRegex = /<link\s+rel=["']stylesheet["']\s+href=["'][^"']*radreport-core\.css["']\s*\/?>/i;
-
-if (!linkRegex.test(html)) {
-  console.error('Fehler: Kein <link> auf radreport-core.css in Quelldatei gefunden.');
-  process.exit(1);
-}
-
-const output = html.replace(
-  linkRegex,
-  `<style>\n/* Inlined from radreport-core.css – do not edit here, edit source */\n${css}\n</style>`
-);
-
-// MRRT-Banner mit Build-Datum hinzufügen
-const buildBanner = `<!-- Build: ${new Date().toISOString()} | radreport-core.css inlined for MRRT-conformance -->`;
-const finalOutput = output.replace(/<head>/, `<head>\n  ${buildBanner}`);
-
-fs.writeFileSync(outPath, finalOutput);
-
-const kb = (finalOutput.length / 1024).toFixed(1);
-console.log(`✓ ${path.basename(outPath)} (${kb} KB) – build successful`);
+console.error('inline-css.js ist abgekündigt (A-Struktur-Umstellung).');
+console.error('Das kanonische template.html trägt kein CSS mehr – es gibt nichts zu inlinen.');
+console.error('Verwende stattdessen die Demo-Ableitung:');
+console.error('  node shared/scripts/build-demo.js <template.html> <demo/index.html> [demo-js]');
+process.exit(1);
