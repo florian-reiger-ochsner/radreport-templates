@@ -12,9 +12,7 @@ authors:
     family-names: Reiger-Ochsner
     orcid: "https://orcid.org/0009-0007-0619-9478"
     affiliation: "Herz-Jesu-Krankenhaus Wien, Abteilung für Radiologie"
-license:
-  - MIT
-  - CC-BY-4.0
+license: CC-BY-4.0
 repository-code: "https://github.com/florian-reiger-ochsner/radreport-templates"
 url: "https://github.com/florian-reiger-ochsner/radreport-templates"
 version: "1.0.0"

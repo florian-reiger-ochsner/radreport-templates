@@ -1,7 +1,7 @@
 # Röntgen Knie präoperativ vor TEP
 
 **ID:** HJK-MRRT-KNIE-PRAETEP
-**Version:** 1.3
+**Version:** 1.4
 **Status:** Pilot
 **Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/)
 

@@ -3,31 +3,28 @@
 **MRRT-konforme strukturierte Befundvorlagen für die deutschsprachige Radiologie**
 HTML5 · RadLex · FHIR R4 · Vendor-neutral
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21075538.svg)](https://doi.org/10.5281/zenodo.21075538)
+[![License: CC BY 4.0](https://img.shields.io/badge/Content-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: MIT](https://img.shields.io/badge/Code-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 **Autor:** Florian Reiger-Ochsner, Facharzt für Radiologie, Stv. Vorstand Radiologie, Herz-Jesu-Krankenhaus Wien
 **Stand:** Juni 2026
 
 ---
 
-## Ziel
+## Ziele
 
-Strukturierte, standards-konforme Befundvorlagen als wiederverwendbare Datenpunkte –
-nicht als proprietäre Dokumente. Der Befund wird vom Endprodukt zum FHIR-Observation.
-
-- **MRRT-konform** (IHE Integrating the Healthcare Enterprise)
-- **RadLex-terminiert** – jede `<option>` mit `data-radlex` (RID) und `data-en`
-- **FHIR R4 Export** – DiagnosticReport + Observations, LOINC-kodiert
-- **Vendor-neutral** – Carbon-ready, Syngo-kompatibel (Copy/Paste), ELGA/EHDS-anschlussfähig
-- **Checkbox-basiert** – Mehrfachauswahl wo klinisch sinnvoll, keine klinischen Voreinstellungen
+Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung in einem kodierten, FHIR-fähigen Datensatz zusammenlaufen. 
 
 ---
 
-## Technologie-Stack
+## Technologie
 
 | Ebene | Standard |
 |---|---|
 | Template-Format | IHE MRRT (HTML5) |
 | Terminologie | RadLex · LOINC · SNOMED CT · Fleischner 2017 · LI-RADS v2018 |
-| KI-Tool-Input | DICOM SR (LAMA, KOALA – IB Lab) |
+| KI-Tool-Input | DICOM SR |
 | Export | FHIR R4 DiagnosticReport + Observations |
 | FHIR-URI | `http://hjk.wien/fhir/CodeSystem/radiology-templates` |
 | CSS | `shared/styles/radreport-core.css` (Single Source of Truth) |
@@ -49,7 +46,7 @@ nicht als proprietäre Dokumente. Der Befund wird vom Endprodukt zum FHIR-Observ
 │   │   │   ├── knie-praetep/       # Röntgen Knie prä-TEP v1.4
 │   │   │   └── knie-posttep/       # Röntgen Knie post-KTEP v1.1
 │   │   └── Thorax/
-│   │       └── thorax-standard/    # Röntgen Thorax v1.3
+│   │       └── thorax-standard/    # Röntgen Thorax v2.1
 │   └── CT/
 │       ├── abdomen-becken/         # CT Abdomen + Becken v1.0
 │       ├── urolithiasis/           # CT Urolithiasis v1.0 (DRG CC BY 4.0)
@@ -112,36 +109,6 @@ template-name/
 
 ---
 
-## KI-Integration
-
-| Tool | Hersteller | Status | Output |
-|---|---|---|---|
-| LAMA | IB Lab | Produktiv lizenziert | DICOM SR (Achsenmessungen Knie) |
-| KOALA | IB Lab | Testlizenz | DICOM SR (KL-Grading, geplant) |
-| HIPPO, FLAMINGO, SQUIRREL | IB Lab | Testlizenz | – |
-
----
-
-## Roadmap
-
-**Phase 1 (laufend):**
-- [x] Röntgen Knie prä-TEP
-- [x] Röntgen Knie post-KTEP (inkl. EndoCert-Modus)
-- [x] Röntgen Thorax
-- [x] CT Abdomen + Becken
-- [x] CT Urolithiasis
-- [x] CT Lungenarterien
-- [x] CT/MRT Leber LI-RADS
-- [x] CT Schädel nativ
-
-**Phase 2 (geplant):**
-- [ ] MRT Knie allgemein
-- [ ] MRT LWS
-- [ ] MRT Sakroiliakalgelenke (ASAS/Rheuma)
-- [ ] CT Thorax Fleischner/Lung-RADS
-- [ ] MyKnee CT (CPAK, Torsion, Slope)
-
----
 
 ## Standards & Pflege
 
@@ -150,6 +117,16 @@ Template-Aufbau und Konventionen folgen dem internen Style Guide.
 - Style Guide: [docs/style-guide/](./docs/style-guide/)
 
 ---
+
+## Zitieren
+
+Bei Verwendung bitte zitieren:
+
+> Reiger-Ochsner, F. (2026). *radreport-templates: Standards-based structured
+> radiology reporting templates (MRRT/RadLex/LOINC/FHIR)*. Zenodo.
+> https://doi.org/10.5281/zenodo.21075538
+
+Maschinenlesbare Zitationsmetadaten: [`CITATION.cff`](CITATION.cff)
 
 
 ## Lizenz
@@ -165,7 +142,7 @@ Bei kombinierten Dateien (HTML-Template mit Inline-JavaScript) gilt CC BY 4.0
 für die Datei als Ganzes; der MIT-Grant gilt zusätzlich für die eingebetteten
 Software-Anteile. Details: [LICENSE](LICENSE).
 
-DRG-basierte Templates (CT Urolithiasis, CT Lungenarterien) enthalten Material,
+DRG-basierte Templates (CT Urolithiasis, CT Lungenarterien, CT/MRT Leber LI-RADS v1.2) enthalten Material,
 das ursprünglich von der Deutschen Röntgengesellschaft unter CC BY 4.0
 lizenziert wurde – Attribution in den jeweiligen Template-READMEs.
 Quelle: <https://github.com/DRGagit/ak_befundung>
