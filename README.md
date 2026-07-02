@@ -71,7 +71,7 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 
 | Template | ID | Version | Demo |
 |---|---|---|---|
-| Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.4 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
+| Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.5 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
 | Röntgen Knie post-KTEP | HJK-MRRT-KNIE-POSTTEP | v1.1 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/) |
 | Röntgen Thorax | HJK-MRRT-ROE-THORAX | v2.1 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/) |
 | CT Abdomen + Becken | HJK-MRRT-CT-ABDBECKEN | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-abdomen/) |
