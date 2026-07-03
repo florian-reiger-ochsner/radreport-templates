@@ -14,8 +14,35 @@ naechste-pruefung: 2027-01-01
 klassifikationen:
   - name: Kellgren-Lawrence
     quelle: "Kellgren JH, Lawrence JS. Ann Rheum Dis 1957;16:494-502"
-  - name: CPAK
-    quelle: "MacDessi SJ et al. Bone Joint J 2021;103-B(3):329-337"
+# CPAK ist kein Template-Output/-Messgröße, sondern nachgelagerte Ableitung aus
+# den Primär-Eingängen mMPTA/mLDFA (siehe README). Daher hier nicht als
+# Template-Klassifikation gelistet; Quelle MacDessi 2021 bleibt unter referenzen.
+messgroessen:
+  - id: mmpta
+    name: mMPTA (mechanical medial proximal tibial angle)
+    einheit: grad
+    cpak-eingang: true
+  - id: mldfa
+    name: mLDFA (mechanical lateral distal femoral angle)
+    einheit: grad
+    cpak-eingang: true
+  - id: hka
+    name: HKA (hip-knee-ankle angle)
+    einheit: grad
+    loinc: LP410789-0
+  - id: mad
+    name: MAD (mechanical axis deviation)
+    einheit: mm
+  - id: lld
+    name: LLD (leg length discrepancy)
+    einheit: mm
+    loinc: LP35279-5
+  - id: jlca
+    name: JLCA (joint line convergence angle)
+    einheit: grad
+  - id: slope
+    name: Tibialer Slope (posterior tibial slope)
+    einheit: grad
 referenzen:
   - "MacDessi SJ et al. Bone Joint J 2021;103-B(3):329-337"
   - "Paley D. Principles of Deformity Correction. Springer 2002"
@@ -48,7 +75,6 @@ projektionen:
 modi:
   - manuell
   - lama-vorbefuellt
-  - hybrid-validierung
 output:
   - fliesstext
   - json

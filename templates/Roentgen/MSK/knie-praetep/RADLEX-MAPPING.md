@@ -2,16 +2,28 @@
 
 Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
-## Achsenmessungen
+## Quantitative Messfelder (`<input type="number">`)
 
-| Feld | RadLex-Term | RID | LOINC | Status |
-|---|---|---|---|---|
-| HKA | hip-knee-ankle angle | RID49504 | LP410789-0 | 🟡 |
-| MAD | mechanical axis deviation | RID49505 | – | 🟡 |
-| LLD | leg length discrepancy | RID49506 | LP35279-5 | 🟡 |
-| mLDFA | mechanical lateral distal femoral angle | RID49507 | – | 🟡 |
-| mMPTA | mechanical medial proximal tibial angle | RID49508 | – | 🟡 |
-| JLCA | joint line convergence angle | RID49509 | – | 🟡 |
+Binding sitzt am **input-Element**: `data-en` immer; `data-loinc` wo ein Code
+belegt ist; sonst `data-radlex-status="local"`. **Kein RID geraten** – für die
+fünf local-Felder ist das RadLex/LOINC-Mapping ausstehend (lokales CodeSystem,
+FHIR-Export über den lokalen CodeSystem-URI). Die local-RIDs unten sind
+lokale Platzhalter-Codes, **nicht** registry-verifiziert.
+
+| Feld (id) | `data-en` (Element) | Binding am input | LOINC | RID (lokal) | Status | Hinweis |
+|---|---|---|---|---|---|---|
+| mMPTA (`mmpta`) | mechanical medial proximal tibial angle | `data-radlex-status="local"` | – | RID49508 | 🟡 | **CPAK-Eingang** |
+| mLDFA (`mldfa`) | mechanical lateral distal femoral angle | `data-radlex-status="local"` | – | RID49507 | 🟡 | **CPAK-Eingang** |
+| HKA (`hka`) | hip-knee-ankle angle | `data-loinc="LP410789-0"` | LP410789-0 | RID49504 | 🟡 | LOINC-Part belegt |
+| LLD (`lld`) | leg length discrepancy | `data-loinc="LP35279-5"` | LP35279-5 | RID49506 | 🟡 | LOINC-Part belegt |
+| MAD (`mad`) | mechanical axis deviation | `data-radlex-status="local"` | – | RID49505 | 🟡 | lokal, ausstehend |
+| JLCA (`jlca`) | joint line convergence angle | `data-radlex-status="local"` | – | RID49509 | 🟡 | lokal, ausstehend |
+| Tibialer Slope (`slope`) | posterior tibial slope | `data-radlex-status="local"` | – | RID49526 | 🟡 | lokal, ausstehend |
+
+> **Offener Folgeschritt:** Für die fünf local-Felder (mMPTA, mLDFA, MAD, JLCA,
+> Slope) RadLex-RID bzw. LOINC gegen die Registry registry-verbatim verifizieren;
+> erst dann von `local` auf `verified` (✅) heben. Bis dahin ist `local`
+> ausreichend für Rechner-Eingang (CPAK) und FHIR-Export.
 
 ## Klassifikationen
 
@@ -31,7 +43,9 @@ Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 | Patella baja | patella baja | RID49522 | 🟡 |
 | Patellatilt | patellar tilt | RID49524 | 🟡 |
 | Trochleadysplasie (Dejour) | trochlear dysplasia Dejour | RID49525 | 🟡 |
-| Tibialer Slope | tibial slope | RID49526 | 🟡 |
+
+> Tibialer Slope (`slope`) ist ein quantitatives Messfeld → siehe Tabelle
+> „Quantitative Messfelder" oben.
 
 ## Zusatzbefunde
 

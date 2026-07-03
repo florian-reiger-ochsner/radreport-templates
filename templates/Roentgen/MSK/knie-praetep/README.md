@@ -10,13 +10,20 @@
 
 Strukturierte Befundvorlage für die **präoperative Planung einer Knie-TEP bei Primärarthrose**. Erfasst Beinachse, Arthrosegrad und patellofemoralen Status standardisiert und liefert daraus einen CPAK-Phänotyp sowie einen klickbaren Beurteilungsvorschlag. RadLex/LOINC-kodiert mit FHIR-R4-Export.
 
-## Modi
+## Vorbefüllung und Feldstatus
 
-| Modus | Beschreibung |
+Es gibt **keine globalen Betriebsarten**. Die Vorbefüllung ist eine **einmalige
+Aktion** (Achsenmessungen aus LAMA, IB Lab, DICOM SR werden übernommen), kein
+dauerhafter Modus. Jedes Feld trägt anschließend einen **feldgranularen Status**:
+
+| Feldstatus | Bedeutung |
 |---|---|
-| Manuell | Vollständig manuelle Eingabe aller Messwerte und Klassifikationen |
-| LAMA-vorbefüllt | Achsenmessungen aus LAMA (IB Lab, DICOM SR) übernommen |
-| Hybrid-Validierung | KI-vorbefüllte Felder visuell markiert, manuelle Freigabe |
+| unbestätigt | vorbefüllter Wert, noch nicht befundend bestätigt |
+| aktiv bestätigt | Wert vom Befundenden übernommen |
+| korrigiert | vorbefüllter Wert manuell überschrieben |
+
+Manuelle Eingabe ohne Vorbefüllung ist jederzeit möglich; ein leeres Feld ist
+schlicht unbefüllt.
 
 ## Sektionen
 
@@ -34,7 +41,9 @@ Strukturierte Befundvorlage für die **präoperative Planung einer Knie-TEP bei 
 ## Klassifikationen
 
 - **Kellgren-Lawrence** (Ann Rheum Dis 1957) – pro Kompartiment medial / lateral / patellofemoral
-- **CPAK** (MacDessi 2021) – aHKA + JLO → Phänotyp I–IX, live berechnet
+- **CPAK** (MacDessi 2021) – nachgelagerte / Demo-Funktion, **kein Template-Live-Feature**.
+  Ableitung aus den Primär-Eingängen mMPTA/mLDFA (im Template): `aHKA = mMPTA − mLDFA`,
+  `JLO = mMPTA + mLDFA` → Phänotyp I–IX
 
 ## KI-Tools
 

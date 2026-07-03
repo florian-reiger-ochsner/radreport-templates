@@ -8,7 +8,7 @@
 
 <!-- ===================== MRRT METADATA ===================== -->
 <meta name="dcterms.title" content="Röntgen Knie präoperativ vor Totalendoprothese"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). Inklusive CPAK-Berechnung und FHIR-Export. RadLex/LOINC/SNOMED-codiert."/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). RadLex/LOINC-codiert, mit FHIR-R4-Export. CPAK-Phänotypisierung erfolgt nachgelagert (nicht im kanonischen Template)."/>
 <meta name="dcterms.language" content="de"/>
 <meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
 <meta name="dcterms.date" content="2026-05-23"/>
@@ -111,37 +111,43 @@
   <div class="rr-h2-wrap">
     <h2>Achsenvermessung <span class="rr-rl-badge">RID11052</span></h2>
     <div class="rr-h2-rule"></div>
-    <div class="rr-h2-sub">Werte aus LAMA-DICOM-SR; in Hybrid- und Manuell-Modus selbst einzutragen</div>
+    <div class="rr-h2-sub">Werte aus LAMA-DICOM-SR übernommen oder manuell eingetragen</div>
   </div>
   <div class="rr-row rr-row-three" id="row_achsen">
     <label>
       <span class="rr-lbl"><span>HKA <span class="rr-rl-badge">LOINC LP410789-0</span></span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="hka" step="0.1" placeholder="z. B. 174.2">
+      <input type="number" id="hka" data-en="hip-knee-ankle angle"
+             data-loinc="LP410789-0" step="0.1" placeholder="z. B. 174.2">
       <div class="rr-field-note">Hip-knee-ankle angle, °</div>
     </label>
     <label>
       <span class="rr-lbl"><span>MAD</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="mad" step="0.1" placeholder="z. B. -12.4">
+      <input type="number" id="mad" data-en="mechanical axis deviation"
+             data-radlex-status="local" step="0.1" placeholder="z. B. -12.4">
       <div class="rr-field-note">Mechanical axis deviation, mm (− = medial)</div>
     </label>
     <label>
       <span class="rr-lbl"><span>LLD <span class="rr-rl-badge">LOINC LP35279-5</span></span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="lld" step="0.1" placeholder="z. B. -3.0">
+      <input type="number" id="lld" data-en="leg length discrepancy"
+             data-loinc="LP35279-5" step="0.1" placeholder="z. B. -3.0">
       <div class="rr-field-note">Beinlängendifferenz, mm (− = Untersuchungsseite kürzer)</div>
     </label>
     <label>
       <span class="rr-lbl"><span>mLDFA</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="mldfa" step="0.1" placeholder="z. B. 88.5">
+      <input type="number" id="mldfa" data-en="mechanical lateral distal femoral angle"
+             data-radlex-status="local" step="0.1" placeholder="z. B. 88.5">
       <div class="rr-field-note">Mech. lateraler distaler Femurwinkel, °</div>
     </label>
     <label>
       <span class="rr-lbl"><span>mMPTA</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="mmpta" step="0.1" placeholder="z. B. 84.1">
+      <input type="number" id="mmpta" data-en="mechanical medial proximal tibial angle"
+             data-radlex-status="local" step="0.1" placeholder="z. B. 84.1">
       <div class="rr-field-note">Mech. medialer proximaler Tibiawinkel, °</div>
     </label>
     <label>
       <span class="rr-lbl"><span>JLCA</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="jlca" step="0.1" placeholder="z. B. 3.8">
+      <input type="number" id="jlca" data-en="joint line convergence angle"
+             data-radlex-status="local" step="0.1" placeholder="z. B. 3.8">
       <div class="rr-field-note">Joint line convergence angle, °</div>
     </label>
   </div>
@@ -239,7 +245,8 @@
     <div>
       <label>
         <span class="rr-lbl"><span>Tibialer Slope (sagittal)</span></span>
-        <input type="number" id="slope" step="0.1" placeholder="z. B. 7.0">
+        <input type="number" id="slope" data-en="posterior tibial slope"
+               data-radlex-status="local" step="0.1" placeholder="z. B. 7.0">
         <div class="rr-field-note">Posteriorer tibialer Slope, °</div>
       </label>
     </div>

@@ -66,6 +66,12 @@ Zwei Gesichter je Template, klar getrennt:
   `data-radlex` (RID-Code) **und** `data-en` (englischer RadLex-Term). Keine
   Ausnahmen, auch nicht bei Updates bestehender Templates. Die Kodierung sitzt im
   kanonischen `template.html`; die Demo erbt sie unverändert.
+- **Quantitative Messfelder** (`<input type="number">`) tragen die Kodierung am
+  **input-Element** selbst — Rechner und FHIR-Export dürfen sich nicht auf die
+  lokale HTML-`id` verlassen. Regel, konsistent mit der select-Disziplin:
+  `data-en` (englischer RadLex-Term) **immer**; `data-loinc="<LOINC-Part>"` wo
+  ein Code belegt ist; sonst `data-radlex-status="local"`. **Kein RID raten** —
+  ein local-Feld bleibt `local`, bis der Code registry-verbatim belegt ist.
 - **FHIR-Export:** Alle Observations werden mit `system: 'http://radlex.org'`
   kodiert. LOINC nur dort, wo es der korrekte Code-Raum ist (z. B. Report-Typ,
   Messwerte).
