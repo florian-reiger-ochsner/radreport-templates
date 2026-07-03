@@ -22,7 +22,7 @@
 <meta name="rrt:bodyregion.codesystem.version" content="4.1"/>
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-01T20:00:13.108Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-02T04:12:20.088Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,31 +31,27 @@
 </head>
 <body>
 
+<!--
+  KANONISCH / A-Struktur: nacktes deklaratives MRRT.
+  Enthält ausschließlich das kodierte Eingabeformular (rr-*-Struktur-Hooks).
+  Kein CSS, kein JS. Viewer-Chrome (Modus-Switch, Live-Vorschau, CPAK-/KL-
+  Anzeigeboxen, Export-Buttons, Validierungs-Marker) gehört NICHT hierher –
+  es wird in der Demo von demo/knie-prae-tep/demo.js zur Laufzeit erzeugt.
+  Die ids row_achsen / row_kl / side_toggle sind Andock-Anker für demo.js.
+-->
+
 <div class="rr-app">
 
-<!-- ========================== INPUT PANE ========================== -->
+<!-- ========================== INPUT PANE (Formular) ========================== -->
 <section class="rr-input-pane">
 
   <h1 class="rr-doc-title">Planungsröntgen Knie vor TEP</h1>
   <div class="rr-doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.5 · RadLex-codiert · HJK Wien</div>
   <div class="rr-title-rule"></div>
 
-  <div class="rr-mode-switch">
-    <input type="radio" name="mode" id="mode-manual" value="manual" checked>
-    <label for="mode-manual">Manuell</label>
-    <input type="radio" name="mode" id="mode-lama" value="lama">
-    <label for="mode-lama">LAMA vorbefüllt</label>
-    <input type="radio" name="mode" id="mode-hybrid" value="hybrid">
-    <label for="mode-hybrid">Hybrid (Validierung)</label>
-  </div>
-
-  <div class="rr-helper-info" id="modeHelper">
-    <strong>Modus Manuell:</strong> Alle Felder werden manuell befüllt. Für Fallback und Testzwecke.
-  </div>
-
   <!-- SEITE -->
   <div class="rr-h2-wrap">
-    <h2>Seite <span class="rr-rl-badge">RID5824/5825</span> <span class="rr-req-indicator" id="req_seite" title="Pflichtfeld"></span></h2>
+    <h2>Seite <span class="rr-rl-badge">RID5824/5825</span></h2>
     <div class="rr-h2-rule"></div>
   </div>
   <div class="rr-side-toggle" id="side_toggle">
@@ -124,7 +120,7 @@
     <div class="rr-h2-rule"></div>
     <div class="rr-h2-sub">Werte aus LAMA-DICOM-SR; in Hybrid- und Manuell-Modus selbst einzutragen</div>
   </div>
-  <div class="rr-row rr-row-three">
+  <div class="rr-row rr-row-three" id="row_achsen">
     <label>
       <span class="rr-lbl"><span>HKA <span class="rr-rl-badge">LOINC LP410789-0</span></span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="hka" step="0.1" placeholder="z. B. 174.2">
@@ -157,21 +153,16 @@
     </label>
   </div>
 
-  <div class="rr-result-box">
-    <div class="rr-result-value" id="cpak_result">–</div>
-    <div class="rr-result-detail" id="cpak_detail">aHKA und JLO benötigen mLDFA + mMPTA</div>
-  </div>
-
   <!-- KL -->
   <div class="rr-h2-wrap">
-    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rr-rl-badge">LOINC LP410785-8</span> <span class="rr-req-indicator" title="Pflichtfeld"></span></h2>
+    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rr-rl-badge">LOINC LP410785-8</span></h2>
     <div class="rr-h2-rule"></div>
     <div class="rr-h2-sub">Kompartiment-spezifisch (KL 1957). Werte 0–4. Pflichtfelder.</div>
   </div>
-  <div class="rr-row rr-row-three">
+  <div class="rr-row rr-row-three" id="row_kl">
     <label>
-      <span class="rr-lbl"><span>Medial <span class="rr-req-indicator" id="req_kl_med"></span></span></span>
-      <select id="kl_med" class="rr-is-required-empty">
+      <span class="rr-lbl"><span>Medial</span></span>
+      <select id="kl_med">
         <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
@@ -181,8 +172,8 @@
       </select>
     </label>
     <label>
-      <span class="rr-lbl"><span>Lateral <span class="rr-req-indicator" id="req_kl_lat"></span></span></span>
-      <select id="kl_lat" class="rr-is-required-empty">
+      <span class="rr-lbl"><span>Lateral</span></span>
+      <select id="kl_lat">
         <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
@@ -192,8 +183,8 @@
       </select>
     </label>
     <label>
-      <span class="rr-lbl"><span>Patellofemoral <span class="rr-req-indicator" id="req_kl_pf"></span></span></span>
-      <select id="kl_pf" class="rr-is-required-empty">
+      <span class="rr-lbl"><span>Patellofemoral</span></span>
+      <select id="kl_pf">
         <option value="" data-radlex-status="needs-mapping" selected>–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
@@ -202,11 +193,6 @@
         <option value="4" data-radlex-status="local" data-en="severe osteoarthritis (KL 4)">4 – schwer</option>
       </select>
     </label>
-  </div>
-  <div class="rr-grade-summary">
-    <div class="rr-grade-item">Medial<strong id="kl_sum_med">–</strong></div>
-    <div class="rr-grade-item">Lateral<strong id="kl_sum_lat">–</strong></div>
-    <div class="rr-grade-item">PF<strong id="kl_sum_pf">–</strong></div>
   </div>
 
   <details>
@@ -344,37 +330,6 @@
   </div>
 
 </section>
-
-<!-- ========================== PREVIEW PANE ========================== -->
-<aside class="rr-preview-pane">
-  <h2 class="rr-preview-title">Befund-Vorschau</h2>
-  <div class="rr-preview-title-rule"></div>
-
-  <div class="rr-preview-section">
-    <h4>Technik</h4>
-    <div class="rr-preview-content" id="prev_technik">–</div>
-  </div>
-  <div class="rr-preview-section">
-    <h4>Klinische Angabe</h4>
-    <div class="rr-preview-content" id="prev_klinik">–</div>
-  </div>
-  <div class="rr-preview-section">
-    <h4>Befund</h4>
-    <div class="rr-preview-content" id="prev_befund">–</div>
-  </div>
-  <div class="rr-preview-section">
-    <h4>Beurteilung <span class="rr-preview-flag">EDITIERBAR · ENDOCERT-KONFORM</span></h4>
-    <textarea id="prev_beurteilung" class="rr-preview-editable"></textarea>
-  </div>
-
-  <div class="rr-actions">
-    <button id="btn_copy" type="button">Befund kopieren</button>
-    <button id="btn_fhir" type="button" class="rr-btn-secondary">FHIR-Export</button>
-    <button id="btn_json" type="button" class="rr-btn-secondary">JSON</button>
-    <button id="btn_reset" type="button" class="rr-btn-secondary">Zurücksetzen</button>
-  </div>
-  <div class="rr-export-area" id="exportArea"></div>
-</aside>
 
 </div>
 

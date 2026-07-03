@@ -3,16 +3,22 @@
 ## [1.5] – 2026-07-01
 ### Geändert (Architektur, keine klinische Inhaltsänderung)
 - Migration auf **A-Struktur**: `template.html` ist jetzt kanonisch und **nackt** –
-  deklaratives MRRT mit `rr-*`-Struktur-Hooks, **ohne** Stylesheet-Link, `<style>`
-  oder `<script>`. Es ist das Plattform-/Import-Gesicht und die Quelle der Wahrheit.
-- Interaktivität (Modus-Umschaltung, CPAK, Live-Vorschau, JSON/FHIR-Export) nach
-  `demo/knie-prae-tep/demo.js` ausgelagert; Buttons per `addEventListener` verdrahtet
-  (kein Inline-`onclick` mehr im Template).
-- `demo/knie-prae-tep/index.html` wird nun aus `template.html` via
+  deklaratives MRRT mit `rr-*`-Struktur-Hooks, **ohne** Stylesheet-/Font-Link,
+  `<style>` oder `<script>`. Plattform-/Import-Gesicht und Quelle der Wahrheit.
+- **Kanonisch = nur das kodierte Eingabeformular.** Viewer-Chrome aus dem Template
+  entfernt (Modus-Schalter, Helfertext, CPAK-Ergebnisbox, KL-Summary-Grid,
+  Vorschau-Pane, Export-Buttons, Pflichtfeld-Marker) — ohne JS war das tote UI.
+- Sämtliches Chrome + Interaktivität (Modus-Umschaltung, CPAK, Live-Vorschau,
+  Validierung, JSON/FHIR-Export) in `demo/knie-prae-tep/demo.js`; das Chrome wird
+  dort zur Laufzeit an `id`-Anker (`row_achsen`, `row_kl`, `side_toggle`) injiziert,
+  Buttons per `addEventListener` verdrahtet (kein Inline-`onclick`).
+- `demo/knie-prae-tep/index.html` wird aus `template.html` via
   `shared/scripts/build-demo.js` abgeleitet (Core-Link + Fonts + Demo-JS injiziert).
-- `template.source.html` abgekündigt (entfällt; der Inline-CSS-Build via
-  `inline-css.js` ist gegenstandslos).
+- `template.source.html` abgekündigt (entfällt; Inline-CSS-Build via
+  `inline-css.js` gegenstandslos).
 - RadLex/LOINC-Kodierung unverändert (byte-identisch zur Vorversion verifiziert).
+- Demo im Headless-DOM getestet: Chrome baut fehlerfrei auf, CPAK/Vorschau/FHIR
+  funktionieren.
 
 ## [1.3] – 2026-06-08
 ### Geändert

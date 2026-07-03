@@ -20,12 +20,23 @@ Zwei Gesichter je Template, klar getrennt:
   - Enthält: deklaratives MRRT (`<select>`/`<input type=number>`/`<input
     type=text>`), **volle Kodierung** (`data-radlex` RID **und** `data-en`, LOINC
     auf Messwerten) sowie die MRRT-Metadaten (`rrt:*`, `dcterms.*`).
+  - **Nur das kodierte Eingabeformular.** Viewer-Chrome gehört NICHT ins
+    kanonische File — konkret: Live-Vorschau/Preview-Pane, Modus-/Workflow-
+    Schalter, berechnete Anzeige-Boxen (CPAK, Score-Summaries), Export-/Aktions-
+    Buttons und JS-getriebene Validierungs-Marker. Solche Elemente wären ohne
+    Skript tote UI. Sie werden in der Demo von `demo.js` zur Laufzeit erzeugt.
+    Für Andockpunkte dürfen im Formular deklarative `id`-Anker stehen
+    (z. B. `row_achsen`, `row_kl`).
 
 - **ABGELEITET = `demo/<demo-id>/index.html` — das Zitier-/Schaufenster-Gesicht.**
   Sekundär. **Nie** Quelle der Wahrheit.
   - = das kanonische File **plus** externem Core-Link im `<head>`
     (`<link rel="stylesheet" href="../../shared/styles/radreport-core.css">`),
-    plus optional Demo-JS für Vorschau/Interaktivität.
+    plus Demo-JS (`demo.js`) für Vorschau/Interaktivität. Das Demo-JS **baut das
+    Viewer-Chrome zur Laufzeit** (Preview-Pane, Modus-Schalter, berechnete
+    Boxen, Buttons, Validierung) und verdrahtet es — es steckt nicht im
+    kanonischen Formular. Buttons werden per `addEventListener` verdrahtet, nicht
+    per Inline-`onclick`.
   - Self-contained lauffähig, GitHub-Pages-tauglich.
   - **Pro Template** (nicht nur für Vorzeige-Templates).
   - Wird **gebaut**, nicht von Hand gepflegt: erzeugt aus dem kanonischen

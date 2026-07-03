@@ -111,15 +111,24 @@ node --check /tmp/check.js
 Aus dem Ausgangs-HTML zwei Fassungen ableiten:
 
 **Kanonisch `template.html`** (Quelle der Wahrheit):
-- Alle `<style>`-Blöcke, Stylesheet-`<link>`s und `<script>`-Blöcke **entfernen**.
+- Alle `<style>`-Blöcke, Stylesheet-`<link>`s und `<script>`-Blöcke **entfernen**
+  (auch Font-`<link>`s — die injiziert `build-demo.js` in die Demo).
 - Struktur + `.rr-*`-Hooks + Formularfelder + Kodierung + MRRT-Metadaten
   **behalten**.
+- **Nur das kodierte Eingabeformular behalten.** Viewer-Chrome **entfernen** und
+  in `demo.js` verschieben: Live-Vorschau/Preview-Pane, Modus-/Workflow-Schalter,
+  berechnete Anzeige-Boxen (CPAK, Score-Summaries), Export-/Aktions-Buttons,
+  JS-getriebene Validierungs-Marker sowie hartkodierte Zustandsklassen
+  (z. B. `rr-is-required-empty`). Inline-`onclick` raus — Buttons in `demo.js`
+  per `addEventListener` verdrahten. Für Andockpunkte dürfen deklarative
+  `id`-Anker im Formular bleiben (z. B. `row_achsen`, `row_kl`, `side_toggle`).
 - Ergebnis muss den Lean-Check von `build-demo.js` bestehen (kein
   `<link rel=stylesheet>`, kein `<style>`, kein `<script>`).
 
-**Demo** wird nicht von Hand geschrieben, sondern in Schritt 4 abgeleitet.
-Falls das Ausgangs-HTML Vorschau-/Interaktivitäts-JS mitbringt, dieses in eine
-separate `demo/<demo-id>/demo.js` auslagern (optional) und beim Build einbinden.
+**Demo** wird nicht von Hand geschrieben, sondern in Schritt 4 abgeleitet. Das
+gesamte Viewer-Chrome und die Interaktivität leben in `demo/<demo-id>/demo.js`:
+Chrome-Markup zur Laufzeit per `insertAdjacentHTML` an die `id`-Anker einfügen,
+dann verdrahten. `node --check` auf `demo.js`.
 
 ---
 
