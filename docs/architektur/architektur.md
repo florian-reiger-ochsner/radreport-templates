@@ -44,7 +44,7 @@
 | Thorax-Glossar | Fleischner 2008/2018 | Etablierter Thorax-Standard |
 | CDEs | RSNA RadElement | Standardisierte Datenfelder |
 | KI-Tool-Input | DICOM SR | IB Lab Suite, andere |
-| Export | FHIR (DiagnosticReport + Observations) | KIS-/Forschungs-Anbindung |
+| Export (Zielformat) | FHIR (DiagnosticReport + Observations) | KIS-/Forschungs-Anbindung, plattformseitig |
 
 ## Vorlagen-Struktur
 

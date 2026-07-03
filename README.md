@@ -25,7 +25,7 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 | Template-Format | IHE MRRT (HTML5) |
 | Terminologie | RadLex · LOINC · SNOMED CT · Fleischner 2017 · LI-RADS v2018 |
 | KI-Tool-Input | DICOM SR |
-| Export | FHIR R4 DiagnosticReport + Observations |
+| Export (Zielformat) | FHIR R4: DiagnosticReport + Observations (+ Provenance), plattformseitig |
 | FHIR-URI | `http://hjk.wien/fhir/CodeSystem/radiology-templates` |
 | CSS | `shared/styles/radreport-core.css` (Single Source of Truth) |
 

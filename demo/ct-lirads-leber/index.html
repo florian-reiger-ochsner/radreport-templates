@@ -1031,11 +1031,12 @@ button.secondary:hover{
 
   <div class="actions">
     <button class="btn-primary" onclick="copyAll()">Befund kopieren</button>
-    <button class="secondary" onclick="showExport('fhir')">FHIR-Export</button>
+    <button class="secondary" onclick="showExport('fhir')">FHIR-Mapping (Demo)</button>
     <button class="secondary" onclick="showExport('json')">JSON</button>
     <button class="secondary" onclick="resetForm()">Zurücksetzen</button>
   </div>
   <div class="export-area" id="exportArea"></div>
+<p class="rr-demo-note" style="font-size:11px;color:var(--rr-ink-muted);margin-top:6px;max-width:64ch;line-height:1.45">Demo-Mapping, kein produktiver Export: zeigt, welches Feld auf welche FHIR-Observation und welchen Code abgebildet wird. Die tatsächliche FHIR-Erzeugung erfolgt plattformseitig.</p>
 </aside>
 
 </div>

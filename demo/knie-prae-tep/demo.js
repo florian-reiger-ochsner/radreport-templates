@@ -2,10 +2,71 @@
 // Demo-Interaktivität für "Planungsröntgen Knie vor TEP" (v1.5)
 //
 // ABGELEITET / Demo-Schicht: Dieses Skript gehört NICHT ins kanonische
-// template.html (das ist nacktes, JS-freies MRRT). Es liefert Vorschau,
-// CPAK-Berechnung, Modus-Umschaltung und den FHIR/JSON-Export für die
-// GitHub-Pages-Demo und wird via build-demo.js in demo/index.html eingebunden.
+// template.html (das ist nacktes, JS-freies, form-only MRRT). Es baut das
+// Viewer-Chrome (Modus-Switch, Live-Vorschau, CPAK-/KL-Anzeigeboxen,
+// Export-Buttons, Validierungs-Marker) zur Laufzeit auf und liefert die
+// gesamte Interaktivität für die GitHub-Pages-Demo. Eingebunden via
+// build-demo.js in demo/index.html.
 // =============================================================================
+
+// =============================================================================
+// DEMO-CHROME AUFBAUEN (Canonical ist form-only; Anker-ids: row_achsen,
+// row_kl, side_toggle, .rr-app, .rr-input-pane, .rr-title-rule)
+// =============================================================================
+(function buildChrome() {
+  const app = document.querySelector('.rr-app');
+  const pane = document.querySelector('.rr-input-pane');
+
+  // Modus-Switch + Helfertext direkt nach der Titel-Linie
+  pane.querySelector('.rr-title-rule').insertAdjacentHTML('afterend', `
+    <div class="rr-mode-switch">
+      <input type="radio" name="mode" id="mode-manual" value="manual" checked>
+      <label for="mode-manual">Manuell</label>
+      <input type="radio" name="mode" id="mode-lama" value="lama">
+      <label for="mode-lama">LAMA vorbefüllt</label>
+      <input type="radio" name="mode" id="mode-hybrid" value="hybrid">
+      <label for="mode-hybrid">Hybrid (Validierung)</label>
+    </div>
+    <div class="rr-helper-info" id="modeHelper"><strong>Modus Manuell:</strong> Alle Felder werden manuell befüllt. Für Fallback und Testzwecke.</div>
+  `);
+
+  // CPAK-Ergebnisbox nach der Achsen-Zeile
+  document.getElementById('row_achsen').insertAdjacentHTML('afterend', `
+    <div class="rr-result-box">
+      <div class="rr-result-value" id="cpak_result">–</div>
+      <div class="rr-result-detail" id="cpak_detail">aHKA und JLO benötigen mLDFA + mMPTA</div>
+    </div>
+  `);
+
+  // Kellgren-Lawrence-Zusammenfassung nach der KL-Zeile
+  document.getElementById('row_kl').insertAdjacentHTML('afterend', `
+    <div class="rr-grade-summary">
+      <div class="rr-grade-item">Medial<strong id="kl_sum_med">–</strong></div>
+      <div class="rr-grade-item">Lateral<strong id="kl_sum_lat">–</strong></div>
+      <div class="rr-grade-item">PF<strong id="kl_sum_pf">–</strong></div>
+    </div>
+  `);
+
+  // Vorschau-Pane + Aktions-Buttons als zweite Spalte
+  app.insertAdjacentHTML('beforeend', `
+    <aside class="rr-preview-pane">
+      <h2 class="rr-preview-title">Befund-Vorschau</h2>
+      <div class="rr-preview-title-rule"></div>
+      <div class="rr-preview-section"><h4>Technik</h4><div class="rr-preview-content" id="prev_technik">–</div></div>
+      <div class="rr-preview-section"><h4>Klinische Angabe</h4><div class="rr-preview-content" id="prev_klinik">–</div></div>
+      <div class="rr-preview-section"><h4>Befund</h4><div class="rr-preview-content" id="prev_befund">–</div></div>
+      <div class="rr-preview-section"><h4>Beurteilung <span style="font-size:9px;color:var(--rr-ink-muted);letter-spacing:0.1em;margin-left:4px">EDITIERBAR · ENDOCERT-KONFORM</span></h4><textarea id="prev_beurteilung" class="rr-preview-editable"></textarea></div>
+      <div class="rr-actions">
+        <button id="btn_copy" type="button">Befund kopieren</button>
+        <button id="btn_fhir" type="button" class="rr-btn-secondary">FHIR-Mapping (Demo)</button>
+        <button id="btn_json" type="button" class="rr-btn-secondary">JSON</button>
+        <button id="btn_reset" type="button" class="rr-btn-secondary">Zurücksetzen</button>
+      </div>
+      <div class="rr-export-area" id="exportArea"></div>
+      <p class="rr-demo-note" style="font-size:11px;color:var(--rr-ink-muted);margin-top:6px;max-width:64ch;line-height:1.45">Demo-Mapping, kein produktiver Export: zeigt, welches Feld auf welche FHIR-Observation und welchen Code abgebildet wird. Die tatsächliche FHIR-Erzeugung erfolgt plattformseitig.</p>
+    </aside>
+  `);
+})();
 
 // =============================================================================
 // MOCK LAMA DATA
@@ -238,31 +299,16 @@ function generateBeurteilung() {
 }
 
 // =============================================================================
-// PFLICHTFELD-VALIDIERUNG (visuell)
+// PFLICHTFELD-VALIDIERUNG (visuell, nur Demo)
 // =============================================================================
 function updateRequiredIndicators() {
   const seiteEl = document.querySelector('input[name="seite"]:checked');
   const seiteOk = seiteEl && seiteEl.value;
-  const reqSeite = document.getElementById('req_seite');
-  const sideToggle = document.getElementById('side_toggle');
-  if (seiteOk) {
-    reqSeite.style.display = 'none';
-    sideToggle.classList.remove('rr-is-required-empty');
-  } else {
-    reqSeite.style.display = 'inline-block';
-    sideToggle.classList.add('rr-is-required-empty');
-  }
+  document.getElementById('side_toggle').classList.toggle('rr-is-required-empty', !seiteOk);
 
   ['kl_med','kl_lat','kl_pf'].forEach(id => {
     const sel = document.getElementById(id);
-    const reqEl = document.getElementById('req_' + id);
-    if (sel.value === '') {
-      sel.classList.add('rr-is-required-empty');
-      if (reqEl) reqEl.style.display = 'inline-block';
-    } else {
-      sel.classList.remove('rr-is-required-empty');
-      if (reqEl) reqEl.style.display = 'none';
-    }
+    sel.classList.toggle('rr-is-required-empty', sel.value === '');
   });
 }
 
