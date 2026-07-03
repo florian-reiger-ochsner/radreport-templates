@@ -5,6 +5,37 @@ Format: [Semantic Versioning](https://semver.org/lang/de/)
 
 ---
 
+## [2.1.1] – 2026-07-03
+
+### Geändert (Architektur, keine klinische Inhaltsänderung)
+- **Migration auf A-Struktur.** `template.html` ist jetzt kanonisch und **nackt** –
+  deklaratives, form-only MRRT mit `rr-tx-*`-Struktur-Hooks und **voller
+  RadLex-Kodierung** (`data-radlex` RID + `data-en`) auf allen Optionen/Checkboxen,
+  **ohne** Stylesheet-/Font-Link, `<style>` oder `<script>`. Es ist das
+  Plattform-/Import-Gesicht und die Quelle der Wahrheit. Besteht den Lean-Check
+  von `build-demo.js`.
+- **Kodierung statt JS-Arrays.** Die zuvor per JavaScript generierten Formularteile
+  (5 Tri-State-Regionen, Parenchym-Stack mit 16 Fleischner-Codes, Device-Stack mit
+  24 Typen) sind als statisches deklaratives MRRT ausgeschrieben; die RadLex-Codes
+  liegen jetzt im Markup, nicht mehr nur in `PAR_OPTIONS`/`DEV_TYPES`/`REGIONS`.
+- **Chrome + Interaktivität nach `demo/roentgen-thorax/demo.js`.** Viewer-Chrome
+  (Normalbefund-/Voice-Makro, Stack-Add/Delete, Aktions-Buttons, LOINC-Override,
+  FHIR-Mapping-Box, Legende, Live-Vorschau, Status-Badge), das template-spezifische
+  `rr-tx-*`-Stylesheet sowie die Tri-State-Show/Hide-Logik werden zur Laufzeit
+  aufgebaut und per `addEventListener`/Delegation verdrahtet (kein Inline-`onclick`).
+  Die Stacks klonen die kanonische Erst-Instanz; das FHIR-Mapping liest die Codes
+  aus dem DOM (keine Code-Duplizierung).
+- **`demo/roentgen-thorax/index.html`** wird aus `template.html` via
+  `shared/scripts/build-demo.js` abgeleitet (Core-Link + Fonts + Demo-JS injiziert).
+- **`template.source.html` entfällt** (abgekündigte B-Struktur; Inline-CSS-Build via
+  `inline-css.js` gegenstandslos).
+- RadLex-Kodierung inhaltlich unverändert: alle 72 Form-Konzept-Codes byte-stabil
+  aus der Vorversion übernommen (Set-Diff gegen `template.source.html` verifiziert;
+  einzige Nicht-Übernahmen `RID0`/`RID10211` sind FHIR-Report-Level in `demo.js`).
+- Demo im Headless-DOM getestet: Chrome baut fehlerfrei auf; Tri-State, Stacks
+  (Add/Delete), Normalbefund-Makro, Live-Vorschau, FHIR-Mapping und Reset
+  funktionieren.
+
 ## [2.1] – 2026-06-25
 
 ### Neu (additiv, nicht-breaking)
