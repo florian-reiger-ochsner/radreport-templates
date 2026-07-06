@@ -1,0 +1,47 @@
+id: HJK-MRRT-ROE-THORAX-LIEGEND
+version: 1.0
+status: pilot
+modalitaet: Roentgen
+region: Thorax
+indikation: Thorax a.p. liegend / Bettaufnahme (ICU / portable chest) - Lage- und Device-Kontrolle fuehrend
+sprache: de
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+geprueft: 2026-07-06
+naechste-pruefung: 2027-01-06
+klassifikationen:
+  - Fleischner (Thorax-Glossar)
+referenzen:
+  - "Fleischner Society: MacMahon H et al. Radiology 2017;284(1):228-243"
+  - "Hansell DM et al. Fleischner Society: Glossary of Terms. Radiology 2008;246(3):697-722"
+ki-tools: []
+standorte:
+  - Herz-Jesu-Krankenhaus Wien (HJK)
+loinc-codes:
+  - code: "36589-0"
+    description: Portable XR Chest AP single view
+projektionen:
+  - ap-liegend
+  - ap-halb-aufrecht
+  - mobil-bettaufnahme
+modell: additiv-attestierung
+modi:
+  - tri-state-region
+  - normalbefund-makro
+  - device-kontrolle-fuehrend
+output:
+  - fliesstext
+  - fhir-bundle
+multi-features:
+  - device-stack-fuehrend
+  - multi-parenchym-stack
+  - liegend-zeichen-vokabular
+  - keine-ctr-wertung
+  - stauung-leitbefund
+  - voice-tokens
+  - voice-hints-hud
+  - fhir-neg-pos-interpretation
+radlex-coverage: vollstaendig
+verwandt:
+  - HJK-MRRT-ROE-THORAX  # Thorax p.a. +/- lateral (aufrecht, Massentemplate)

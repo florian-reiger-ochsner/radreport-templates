@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
+<head>
+<meta charset="UTF-8">
+<title>Röntgen Thorax a.p. liegend / Intensiv (ICU / portable chest) – Strukturierte Befundvorlage (v1.0)</title>
+
+<!-- ===================== IHE MRRT METADATA ===================== -->
+<meta name="dcterms.title"       content="Röntgen Thorax a.p. liegend / Intensiv"/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die a.p.-Liegend-/Bettaufnahme des Thorax (ICU / portable chest). Führender Lage-/Device-Kontroll-Block, an die Liegend-Projektion angepasstes Zeichen-Vokabular (Pleuraerguss/Pneumothorax in Rückenlage, keine CTR-Wertung, pulmonale Stauung/Ödem als Leitbefund). Additives Attestierungsmodell (Tri-State-Regionen, 1-Klick-Normalbefund-Makro), Device-Stack, Multi-Parenchym-Stack (Fleischner), RadLex-Kodierung, vorbereitet für FHIR-basierte Weiterverarbeitung (Zielformat, plattformseitig) mit NEG/POS-Verification-Floor, Voice-ready."/>
+<meta name="dcterms.language"    content="de"/>
+<meta name="dcterms.identifier"  content="HJK-MRRT-ROE-THORAX-LIEGEND-v1.0"/>
+<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
+<meta name="dcterms.date"        content="2026-07-06"/>
+<meta name="dcterms.rights"      content="HJK Wien. Fleischner-Terminologie nach MacMahon 2017 / Hansell 2008. Liegend-Zeichen nach gängiger ICU-/Thorax-Röntgenliteratur."/>
+<meta name="rrt:specialty"       content="Radiology"/>
+<meta name="rrt:subspecialty"    content="Thoracic / Critical Care Radiology"/>
+<meta name="rrt:modality"        content="XR"/>
+<meta name="rrt:bodyregion"      content="Chest"/>
+
+</head>
+<body>
+
+<!--
+  KANONISCH / A-Struktur: nacktes deklaratives MRRT.
+  Enthält ausschließlich das kodierte Eingabeformular (rr-*-/rr-tx-*-Struktur-Hooks),
+  volle RadLex-Kodierung (data-radlex RID + data-en) auf allen Optionen/Checkboxen.
+  Kein CSS, kein JS. Viewer-Chrome (Normalbefund-/Voice-Makro, Live-Vorschau,
+  Aktions-Buttons, LOINC-Override, FHIR-Mapping-Box, Legende, Status-Badge) sowie
+  die Stack-Add/Remove-Interaktion und die Tri-State-Show/Hide-Logik gehören NICHT
+  hierher – sie werden in der Demo von demo/roentgen-thorax-liegend/demo.js zur
+  Laufzeit erzeugt und verdrahtet. Die ids (regions-Container, dev-list, par-list,
+  fhir-box, status-badge …) sind Andock-Anker für demo.js.
+
+  Besonderheit dieses Templates (ICU / portable chest): Der Lage-/Device-Kontroll-
+  Block ist FÜHREND (erste Region), da der Liegendbefund primär eine Lage-/Device-
+  Kontrolle ist. Das Zeichen-Vokabular ist auf die a.p.-Rückenlage abgestimmt
+  (keine CTR-Wertung, Liegend-Zeichen für Erguss/Pneumothorax, Stauung als Leitbefund).
+-->
+
+<div class="rr-app">
+<section class="rr-input-pane">
+
+<h1 class="rr-doc-title">Röntgen Thorax – a.p. liegend / Intensiv</h1>
+<div class="rr-doc-sub">MRRT · RadLex-kodiert · a.p. liegend (ICU / portable chest) · Lage-/Device-Kontrolle führend · additives Attestierungsmodell · Voice-ready · v1.0 · HJK Wien · 2026-07-06</div>
+<div class="rr-title-rule"></div>
+
+<!-- ===================== TECHNIK & INDIKATION ===================== -->
+<div class="rr-tx-sh"><h2>Technik &amp; Indikation</h2><div class="rr-tx-sh-line"></div></div>
+<div class="rr-tx-row">
+  <span class="rr-tx-lbl">Projektion / Aufnahmemodus</span>
+  <div class="rr-tx-proj-chips">
+    <input type="checkbox" id="p_ap" data-voice="projektion ap liegend" checked><label for="p_ap">a.p. liegend</label>
+    <input type="checkbox" id="p_halb" data-voice="halb aufrecht"><label for="p_halb">a.p. halb aufrecht</label>
+    <input type="checkbox" id="p_mobil" data-voice="mobile bettaufnahme"><label for="p_mobil">mobil (Bettaufnahme)</label>
+    <input type="checkbox" id="p_insp" data-voice="inspiration eingeschränkt"><label for="p_insp">Inspiration eingeschränkt</label>
+  </div>
+</div>
+<div class="rr-tx-grid2" style="margin-top:8px">
+  <div class="rr-tx-row"><label><span class="rr-tx-lbl">Aufnahmequalität <span class="rr-rl-badge">RadLex</span></span>
+    <select id="qual" data-radlex="RID13882" data-en="image quality" data-voice="aufnahmequalität">
+      <option value="für Liegendaufnahme diagnostisch ausreichend">für Liegendaufnahme diagnostisch ausreichend</option>
+      <option value="eingeschränkt (Liegend-/a.p.-Projektion)">eingeschränkt – Liegend-/a.p.-Projektion</option>
+      <option value="eingeschränkt (Rotation)">eingeschränkt – Rotation</option>
+      <option value="eingeschränkt (Inspiration mangelhaft)">eingeschränkt – Inspiration mangelhaft</option>
+      <option value="eingeschränkt (Überlagerung durch Fremdmaterial)">eingeschränkt – Überlagerung durch Fremdmaterial</option>
+      <option value="eingeschränkt (Unterbelichtung)">eingeschränkt – Unterbelichtung</option>
+      <option value="eingeschränkt (Überbelichtung)">eingeschränkt – Überbelichtung</option>
+    </select></label></div>
+  <div class="rr-tx-row"><label><span class="rr-tx-lbl">Klinische Fragestellung</span>
+    <select id="frage" data-voice="fragestellung">
+      <option value="">– bitte wählen –</option>
+      <option value="Lagekontrolle nach ZVK-/Katheteranlage">Lagekontrolle nach ZVK-/Katheteranlage</option>
+      <option value="Tubuslagekontrolle">Tubuslagekontrolle (ETT)</option>
+      <option value="Kontrolle nach Thoraxdrainage">Kontrolle nach Thoraxdrainage</option>
+      <option value="Kontrolle nach Sondenanlage">Kontrolle nach Magen-/Ernährungssonde</option>
+      <option value="V.a. Pneumothorax">V.a. Pneumothorax (nach Punktion/Intervention)</option>
+      <option value="Stauung / Lungenödem">Stauung / Lungenödem</option>
+      <option value="V.a. Infiltrat / Pneumonie">V.a. Infiltrat / Pneumonie (Beatmung)</option>
+      <option value="Pleuraerguss / Ergusskontrolle">Pleuraerguss / Ergusskontrolle</option>
+      <option value="Verlaufskontrolle Intensivstation">Verlaufskontrolle Intensivstation</option>
+      <option value="__ft__">Sonstige (Freitext)</option>
+    </select></label></div>
+</div>
+<div class="rr-tx-row" id="frage_ft_row" style="display:none"><label><span class="rr-tx-lbl">Fragestellung Freitext</span>
+  <input type="text" id="frage_ft" placeholder="Fragestellung…"></label></div>
+
+<!-- ===================== BEFUND (Tri-State-Regionen) ===================== -->
+<div class="rr-tx-sh"><h2>Befund</h2><div class="rr-tx-sh-line"></div></div>
+<div class="rr-tx-sh-sub">Reihenfolge = Befundungsreihenfolge (Lage-/Device-Kontrolle führend). Jede Region: — (unbeurteilt) · o.&nbsp;B. (attestiert) · Befund (Detail). Unbeurteilte Regionen erzeugen keinen Satz.</div>
+
+<div id="regions">
+
+  <!-- Region: Lage- / Device-Kontrolle (FÜHREND, mit Device-Stack) -->
+  <div class="rr-tx-region" id="rg-devices" data-en="support and monitoring devices" data-radlex-status="local">
+    <div class="rr-tx-region-head">
+      <div class="rr-tx-region-name">Lage- / Device-Kontrolle <span class="rr-rl-badge">RadLex</span></div>
+      <div class="rr-tx-tri">
+        <input class="rr-tx-t-unset-in" type="radio" name="st_devices" id="st_devices_unset" value="" checked>
+        <label class="rr-tx-t-unset" for="st_devices_unset" title="unbeurteilt">—</label>
+        <input class="rr-tx-t-ob-in" type="radio" name="st_devices" id="st_devices_ob" value="ob" data-voice="kein fremdmaterial">
+        <label for="st_devices_ob" title="o.B. – keine Fremdmaterialien attestiert">o.&nbsp;B.</label>
+        <input class="rr-tx-t-bef-in" type="radio" name="st_devices" id="st_devices_bef" value="bef" data-voice="device befund">
+        <label for="st_devices_bef" title="Befund – Device(s) beschreiben">Befund</label>
+      </div>
+    </div>
+    <div class="rr-tx-region-detail" id="rd-devices">
+      <div class="rr-tx-hint"><strong>Führender Block bei Liegend-/Intensivaufnahme.</strong> Jedes Device einzeln hinzufügen – auch mehrere gleichartige. <span class="rr-rl-badge">RadLex</span> pro Device-Typ. Fehllage „dringlich" löst Notfall-Hinweis aus.</div>
+      <!-- Device-Stack: kanonisch eine kodierte Instanz; weitere Einträge fügt die Demo zur Laufzeit hinzu (Klon). -->
+      <div id="dev-list">
+        <div class="rr-tx-stack-item rr-tx-dev-item" id="dev-item-1">
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Device-Typ <span class="rr-rl-badge">RadLex</span></span>
+            <select id="dev-typ-1" data-voice="device typ">
+              <option value="">– Device wählen –</option>
+              <optgroup label="Atemweg">
+                <option value="Endotrachealtubus (ETT)" data-ph="Karina-Abstand ca. 4–5 cm" data-rid="RID49620" data-radlex="RID49620" data-en="endotracheal tube">Endotrachealtubus (ETT)</option>
+                <option value="Tracheostoma-Kanüle" data-ph="Trachea – Lage, Karina-Abstand" data-rid="RID49621" data-radlex="RID49621" data-en="tracheostomy tube">Tracheostoma-Kanüle</option>
+              </optgroup>
+              <optgroup label="Sonden">
+                <option value="Magensonde (MS)" data-ph="Magenkorpus – Spitze unterhalb Zwerchfell" data-rid="RID49630" data-radlex="RID49630" data-en="nasogastric tube">Magensonde (MS)</option>
+                <option value="Jejunalsonde" data-ph="Jejunum – Lage" data-rid="RID49631" data-radlex="RID49631" data-en="jejunal tube">Jejunalsonde</option>
+                <option value="Ernährungssonde (PEG)" data-ph="Magenkorpus / Jejunum" data-rid="RID49632" data-radlex="RID49632" data-en="PEG tube">Ernährungssonde (PEG)</option>
+              </optgroup>
+              <optgroup label="Vaskulär">
+                <option value="ZVK re. Subklavia" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID49600" data-en="central venous catheter">ZVK re. Subklavia</option>
+                <option value="ZVK li. Subklavia" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID49600" data-en="central venous catheter">ZVK li. Subklavia</option>
+                <option value="ZVK re. Jugularis" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID49600" data-en="central venous catheter">ZVK re. Jugularis</option>
+                <option value="ZVK li. Jugularis" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID49600" data-en="central venous catheter">ZVK li. Jugularis</option>
+                <option value="Port-Katheter re." data-ph="V. cava superior / RA-Übergang" data-rid="RID49601" data-radlex="RID49601" data-en="port catheter">Port-Katheter re.</option>
+                <option value="Port-Katheter li." data-ph="V. cava superior / RA-Übergang" data-rid="RID49601" data-radlex="RID49601" data-en="port catheter">Port-Katheter li.</option>
+                <option value="Dialysekatheter" data-ph="V. cava superior – Lage" data-rid="RID49602" data-radlex="RID49602" data-en="dialysis catheter">Dialysekatheter</option>
+                <option value="PICC-Line" data-ph="V. cava superior – Mitte" data-rid="RID49603" data-radlex="RID49603" data-en="PICC line">PICC-Line</option>
+                <option value="Arterienkatheter" data-ph="A. radialis / A. femoralis" data-rid="RID49604" data-radlex="RID49604" data-en="arterial catheter">Arterienkatheter</option>
+                <option value="IABP" data-ph="Deszend. Aorta, ca. 2 cm unterh. A. subclavia li." data-rid="RID49605" data-radlex="RID49605" data-en="intra-aortic balloon pump">IABP</option>
+                <option value="Impella / VAD" data-ph="LV-Spitze / Auslass Aortenwurzel" data-rid="RID49606" data-radlex="RID49606" data-en="ventricular assist device">Impella / VAD</option>
+              </optgroup>
+              <optgroup label="Kardial">
+                <option value="Schrittmacher (SM)" data-ph="Elektroden: re. Ventrikel / Vorhof" data-rid="RID49610" data-radlex="RID49610" data-en="cardiac pacemaker">Schrittmacher (SM)</option>
+                <option value="ICD" data-ph="Elektrodenlage re. Ventrikel" data-rid="RID49611" data-radlex="RID49611" data-en="implantable cardioverter defibrillator">ICD</option>
+                <option value="CRT-D (biventrikulärer SM)" data-ph="Elektroden: re. Ventrikel / Vorhof / KS" data-rid="RID49612" data-radlex="RID49612" data-en="cardiac resynchronization therapy">CRT-D (biventrikulärer SM)</option>
+                <option value="Loop-Recorder (ILR)" data-ph="subkutan li. Thoraxwand" data-rid="RID49613" data-radlex="RID49613" data-en="implantable loop recorder">Loop-Recorder (ILR)</option>
+              </optgroup>
+              <optgroup label="Drainage">
+                <option value="Thoraxdrainage re." data-ph="Pleuraspalt re. – apikal / basal / dorsal" data-rid="RID49640" data-radlex="RID49640" data-en="chest tube right">Thoraxdrainage re.</option>
+                <option value="Thoraxdrainage li." data-ph="Pleuraspalt li. – apikal / basal / dorsal" data-rid="RID49640" data-radlex="RID49640" data-en="chest tube left">Thoraxdrainage li.</option>
+                <option value="Perikarddrainage" data-ph="Perikardspalt – Lage" data-rid="RID49641" data-radlex="RID49641" data-en="pericardial drain">Perikarddrainage</option>
+              </optgroup>
+              <optgroup label="Sonstige">
+                <option value="Sonstige / Fremdmaterial" data-ph="Beschreibung und Lage" data-rid="RID49699" data-radlex="RID49699" data-en="foreign body / device">Sonstige / Fremdmaterial</option>
+              </optgroup>
+            </select></label></div>
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Lage / Spitze</span><input type="text" id="dev-lage-1" placeholder="Lage beschreiben…" data-voice="device lage"></label></div>
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Beurteilung</span>
+            <select id="dev-burt-1" data-voice="device beurteilung">
+              <option value="regelrecht platziert, Lage korrekt">Regelrecht – Lage korrekt</option>
+              <option value="Lage kontrollbedürftig">Kontrollbedürftig</option>
+              <option value="Fehllage – Korrektur empfohlen">Fehllage – Korrektur empfohlen</option>
+              <option value="Fehllage – dringliche Korrektur">Fehllage – dringlich (!)</option>
+            </select></label></div>
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung</span><input type="text" id="dev-ft-1" placeholder="z.B. Karina-Abstand 5 cm…" data-voice="zusatz device"></label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Region: Lunge / Parenchym & Stauung (mit Parenchym-Stack) -->
+  <div class="rr-tx-region" id="rg-lunge" data-radlex="RID1301" data-en="lung">
+    <div class="rr-tx-region-head">
+      <div class="rr-tx-region-name">Lunge / Parenchym &amp; Stauung <span class="rr-rl-badge">RadLex</span></div>
+      <div class="rr-tx-tri">
+        <input class="rr-tx-t-unset-in" type="radio" name="st_lunge" id="st_lunge_unset" value="" checked>
+        <label class="rr-tx-t-unset" for="st_lunge_unset" title="unbeurteilt">—</label>
+        <input class="rr-tx-t-ob-in" type="radio" name="st_lunge" id="st_lunge_ob" value="ob" data-voice="lunge unauffällig">
+        <label for="st_lunge_ob" title="o.B. – attestiert">o.&nbsp;B.</label>
+        <input class="rr-tx-t-bef-in" type="radio" name="st_lunge" id="st_lunge_bef" value="bef" data-voice="lunge befund">
+        <label for="st_lunge_bef" title="Befund – Detail">Befund</label>
+      </div>
+    </div>
+    <div class="rr-tx-region-detail" id="rd-lunge">
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Pulmonale Stauung / Lungenödem <span class="rr-rl-badge">RadLex</span></span>
+        <select id="lunge_stau" data-radlex="RID5056" data-en="pulmonary vascular congestion" data-voice="stauungszeichen">
+          <option value="">keine</option>
+          <option value="geringe">geringe Stauung (Gefäßumverteilung / Cephalisation)</option>
+          <option value="mittelgradige">mittelgradige Stauung (interstitielles Ödem, Kerley-B, peribronchiales Cuffing)</option>
+          <option value="hochgradige">hochgradige Stauung (alveoläres Ödem, perihiläre „bat-wing"-Verschattung)</option>
+        </select></label></div>
+      <div class="rr-tx-hint"><strong>Mehrere Befunde möglich</strong> – z.&nbsp;B. Stauung + Infiltrat. Fleischner-Terminologie, RadLex pro Eintrag. Parenchymbefunde nur bei Bedarf.</div>
+      <!-- Parenchym-Stack: kanonisch eine kodierte Instanz; weitere Einträge fügt die Demo zur Laufzeit hinzu (Klon). -->
+      <div id="par-list">
+        <div class="rr-tx-stack-item rr-tx-par-item" id="par-item-1">
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Befundtyp <span class="rr-rl-badge">RadLex</span></span>
+            <select id="par-typ-1" data-voice="parenchymbefund">
+              <option value="">– bitte wählen –</option>
+              <optgroup label="Infiltrat / Verschattung">
+                <option value="RID4803" data-radlex="RID4803" data-de="Konsolidierung" data-en="consolidation">Konsolidierung</option>
+                <option value="RID28530" data-radlex="RID28530" data-de="Flächige Transparenzminderung / Infiltrat" data-en="opacity">Flächige Transparenzminderung / Infiltrat</option>
+                <option value="RID4804" data-radlex="RID4804" data-de="Lobuläre / segmentale Verschattung" data-en="lobular consolidation">Lobuläre / segmentale Verschattung</option>
+                <option value="RID28530b" data-radlex="RID28530" data-de="Diffuse bilaterale Transparenzminderung (z. B. ARDS-Muster)" data-en="opacity">Diffuse bilaterale Verschattung (ARDS-Muster)</option>
+                <option value="RID4800" data-radlex="RID4800" data-de="Milchglastrübung (Ground-Glass-Opacity)" data-en="ground-glass opacity">Milchglastrübung (Ground-Glass-Opacity)</option>
+              </optgroup>
+              <optgroup label="Belüftung">
+                <option value="RID28493" data-radlex="RID28493" data-de="Atelektase" data-en="atelectasis">Atelektase</option>
+                <option value="RID28493d" data-radlex="RID28493" data-de="Dys-/Plattenatelektase (Minderbelüftung basal)" data-en="atelectasis">Dys-/Plattenatelektase (basal)</option>
+                <option value="RID4799" data-radlex="RID4799" data-de="Lungenemphysem" data-en="pulmonary emphysema">Lungenemphysem</option>
+                <option value="RID5050" data-radlex="RID5050" data-de="Überblähung / Air Trapping" data-en="air trapping">Überblähung / Air Trapping</option>
+              </optgroup>
+              <optgroup label="Nodulär">
+                <option value="RID4941" data-radlex="RID4941" data-de="Solitärer Rundherd" data-en="solitary pulmonary nodule">Solitärer Rundherd</option>
+                <option value="RID5231" data-radlex="RID5231" data-de="Multiple Rundherde" data-en="multiple pulmonary nodules">Multiple Rundherde</option>
+                <option value="RID5234" data-radlex="RID5234" data-de="Kaverne / Herdschatten mit Kaverne" data-en="cavitary lesion">Kaverne / Herdschatten mit Kaverne</option>
+              </optgroup>
+            </select></label></div>
+          <div class="rr-tx-grid2">
+            <div class="rr-tx-row"><label><span class="rr-tx-lbl">Seite</span><select id="par-seite-1" data-voice="seite parenchym"><option value="">–</option><option value="re.">re.</option><option value="li.">li.</option><option value="bds.">bds.</option></select></label></div>
+            <div class="rr-tx-row"><label><span class="rr-tx-lbl">Lokalisation</span><select id="par-lok-1" data-voice="lokalisation parenchym"><option value="">–</option><option value="Oberfeld">Oberfeld</option><option value="Mittelfeld">Mittelfeld</option><option value="Unterfeld">Unterfeld</option><option value="perihilär">perihilär</option><option value="basal">basal</option><option value="diffus">diffus</option></select></label></div>
+          </div>
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung / Größe</span><input type="text" id="par-ft-1" placeholder="z.B. 8 mm, retrokardial, silhouettiert Zwerchfell…" data-voice="zusatz parenchym"></label></div>
+        </div>
+      </div>
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
+        <input type="text" id="ft_lunge" data-voice="zusatz lunge" placeholder="freie Ergänzung…"></label></div>
+    </div>
+  </div>
+
+  <!-- Region: Pleura (Liegend-Zeichen) -->
+  <div class="rr-tx-region" id="rg-pleura" data-radlex="RID5350" data-en="pleura">
+    <div class="rr-tx-region-head">
+      <div class="rr-tx-region-name">Pleura <span class="rr-rl-badge">RadLex</span></div>
+      <div class="rr-tx-tri">
+        <input class="rr-tx-t-unset-in" type="radio" name="st_pleura" id="st_pleura_unset" value="" checked>
+        <label class="rr-tx-t-unset" for="st_pleura_unset" title="unbeurteilt">—</label>
+        <input class="rr-tx-t-ob-in" type="radio" name="st_pleura" id="st_pleura_ob" value="ob" data-voice="pleura unauffällig">
+        <label for="st_pleura_ob" title="o.B. – attestiert">o.&nbsp;B.</label>
+        <input class="rr-tx-t-bef-in" type="radio" name="st_pleura" id="st_pleura_bef" value="bef" data-voice="pleura befund">
+        <label for="st_pleura_bef" title="Befund – Detail">Befund</label>
+      </div>
+    </div>
+    <div class="rr-tx-region-detail" id="rd-pleura">
+      <div class="rr-tx-hint">Liegend-Zeichen: Erguss zeigt sich als flächige Verschleierung/Transparenzminderung (kein Meniskus), Pneumothorax basal/anteromedial (tief-anteriorer Randwinkel, „deep sulcus sign"). Kodierung: Erguss = RID4872, Pneumothorax = RID5352.</div>
+      <div class="rr-tx-row"><span class="rr-tx-lbl">Befundtyp <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-tx-cg">
+          <label class="rr-tx-ci"><input type="checkbox" id="pl_erguss" data-radlex="RID4872" data-en="pleural effusion"><span>Erguss</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="pl_ptx" data-radlex="RID5352" data-en="pneumothorax"><span>Pneumothorax</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="pl_schwarte" data-radlex="RID5355" data-en="pleural thickening"><span>Schwarte/Verdickung</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="pl_kalk" data-radlex="RID5356" data-en="pleural calcification"><span>Pleurakalk</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="pl_tumor" data-radlex="RID34948" data-en="pleural mass"><span>Pleuratumor/RF</span></label>
+        </div>
+      </div>
+      <div class="rr-tx-row" id="pl_seite_row" style="display:none"><label><span class="rr-tx-lbl">Seite (Schwarte / Kalk / Tumor)</span><select id="pl_seite" data-voice="seite pleura"><option value="">–</option><option value="re.">re.</option><option value="li.">li.</option><option value="bds.">bds.</option></select></label></div>
+      <div class="rr-tx-row" id="pl_erguss_row" style="display:none">
+        <span class="rr-tx-lbl">Pleuraerguss – Ausmaß je Seite (Liegend-Zeichen) <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-tx-grid2">
+          <label><span class="rr-tx-lbl">rechts</span>
+            <select id="pl_erg_re" data-voice="erguss rechts">
+              <option value="">– / keiner –</option>
+              <option value="geringer">gering (diffuse Verschleierung, homogene Transparenzminderung)</option>
+              <option value="mäßiger">mäßig (Verschleierung + apikale Kappe)</option>
+              <option value="ausgeprägter">ausgeprägt (Verschattung des Hemithorax, laterale Randlinie)</option>
+            </select></label>
+          <label><span class="rr-tx-lbl">links</span>
+            <select id="pl_erg_li" data-voice="erguss links">
+              <option value="">– / keiner –</option>
+              <option value="geringer">gering (diffuse Verschleierung, homogene Transparenzminderung)</option>
+              <option value="mäßiger">mäßig (Verschleierung + apikale Kappe)</option>
+              <option value="ausgeprägter">ausgeprägt (Verschattung des Hemithorax, laterale Randlinie)</option>
+            </select></label>
+        </div>
+        <div class="rr-tx-field-note">In Rückenlage läuft der Erguss dorsal aus → flächige Verschleierung ohne Meniskus. Nur eine Seite = einseitig; beide Seiten = beidseitig.</div>
+      </div>
+      <div class="rr-tx-row" id="pl_ptx_row" style="display:none">
+        <span class="rr-tx-lbl">Pneumothorax – Ausmaß je Seite (Liegend-Zeichen) <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-tx-grid2">
+          <label><span class="rr-tx-lbl">rechts</span>
+            <select id="pl_ptx_re" data-voice="pneu rechts">
+              <option value="">– / keiner –</option>
+              <option value="geringer (tief-anteriorer Randwinkel, deep sulcus sign)">gering – tief-anteriorer Randwinkel (deep sulcus sign)</option>
+              <option value="mäßiger (scharfe Herz-/Zwerchfellkontur, basal/anteromedial)">mäßig – scharfe Herz-/Zwerchfellkontur, basal/anteromedial</option>
+              <option value="ausgeprägter (kompletter Kollaps)">ausgeprägt – kompletter Kollaps</option>
+              <option value="Spannungspneumothorax (!)">Spannungspneumothorax (!)</option>
+            </select></label>
+          <label><span class="rr-tx-lbl">links</span>
+            <select id="pl_ptx_li" data-voice="pneu links">
+              <option value="">– / keiner –</option>
+              <option value="geringer (tief-anteriorer Randwinkel, deep sulcus sign)">gering – tief-anteriorer Randwinkel (deep sulcus sign)</option>
+              <option value="mäßiger (scharfe Herz-/Zwerchfellkontur, basal/anteromedial)">mäßig – scharfe Herz-/Zwerchfellkontur, basal/anteromedial</option>
+              <option value="ausgeprägter (kompletter Kollaps)">ausgeprägt – kompletter Kollaps</option>
+              <option value="Spannungspneumothorax (!)">Spannungspneumothorax (!)</option>
+            </select></label>
+        </div>
+        <div class="rr-tx-field-note">In Rückenlage sammelt sich Luft basal/anteromedial. „Spannungspneumothorax" löst den Notfall-Hinweis aus.</div>
+      </div>
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
+        <input type="text" id="ft_pleura" data-voice="zusatz pleura" placeholder="freie Ergänzung…"></label></div>
+    </div>
+  </div>
+
+  <!-- Region: Herz / Mediastinum (Liegend – keine CTR-Wertung) -->
+  <div class="rr-tx-region" id="rg-herzmediastinum" data-radlex="RID1385" data-en="heart and mediastinum">
+    <div class="rr-tx-region-head">
+      <div class="rr-tx-region-name">Herz / Mediastinum <span class="rr-rl-badge">RadLex</span></div>
+      <div class="rr-tx-tri">
+        <input class="rr-tx-t-unset-in" type="radio" name="st_herzmediastinum" id="st_herzmediastinum_unset" value="" checked>
+        <label class="rr-tx-t-unset" for="st_herzmediastinum_unset" title="unbeurteilt">—</label>
+        <input class="rr-tx-t-ob-in" type="radio" name="st_herzmediastinum" id="st_herzmediastinum_ob" value="ob" data-voice="herzmediastinum unauffällig">
+        <label for="st_herzmediastinum_ob" title="o.B. – attestiert">o.&nbsp;B.</label>
+        <input class="rr-tx-t-bef-in" type="radio" name="st_herzmediastinum" id="st_herzmediastinum_bef" value="bef" data-voice="herzmediastinum befund">
+        <label for="st_herzmediastinum_bef" title="Befund – Detail">Befund</label>
+      </div>
+    </div>
+    <div class="rr-tx-region-detail" id="rd-herzmediastinum">
+      <div class="rr-tx-hint">In a.p.-Rückenlage ist die Herzgröße projektionsbedingt vergrößert und <strong>nicht als CTR verwertbar</strong> – nur orientierende Aussage.</div>
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Herzsilhouette (orientierend) <span class="rr-rl-badge">RadLex</span></span>
+        <select id="herz_gr" data-radlex="RID1786" data-en="cardiac size" data-voice="herzsilhouette">
+          <option value="bei a.p.-Liegendaufnahme nicht sicher vergrößert" data-en="cardiac size not assessable supine">Nicht sicher vergrößert (liegend)</option>
+          <option value="orientierend verbreitert (Cave: projektionsbedingt)" data-en="cardiomegaly">Orientierend verbreitert (Cave: projektionsbedingt)</option>
+        </select></label></div>
+      <div class="rr-tx-row" style="margin-top:8px"><span class="rr-tx-lbl">Gefäßstiel / venöse Zeichen</span>
+        <div class="rr-tx-cg">
+          <label class="rr-tx-ci"><input type="checkbox" id="gefstiel" data-en="vascular pedicle width" data-radlex-status="local"><span>Gefäßstiel verbreitert</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="vcs_stau" data-radlex="RID5056" data-en="pulmonary vascular congestion"><span>Obere Einflussstauung/-umverteilung</span></label>
+        </div>
+      </div>
+      <div class="rr-tx-row" style="margin-top:8px"><span class="rr-tx-lbl">Mediastinum <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-tx-cg">
+          <label class="rr-tx-ci"><input type="checkbox" id="md_verb" data-radlex="RID34952" data-en="mediastinal widening"><span>Verbreitert (Cave: liegend)</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="md_rf" data-radlex="RID4961" data-en="mediastinal mass"><span>Raumforderung</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="md_trach" data-radlex="RID5347" data-en="tracheal deviation"><span>Trachealdeviation</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="md_shift" data-radlex="RID34952" data-en="mediastinal shift"><span>Shift kontralateral</span></label>
+        </div>
+      </div>
+      <div class="rr-tx-grid2" style="margin-top:8px">
+        <div class="rr-tx-row"><span class="rr-tx-lbl">Hili <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-tx-cg">
+            <label class="rr-tx-ci"><input type="checkbox" id="hil_vergr" data-radlex="RID5080" data-en="hilar enlargement"><span>Vergrößert</span></label>
+            <label class="rr-tx-ci"><input type="checkbox" id="hil_versch" data-radlex="RID5082" data-en="hilar opacity"><span>Verschattet (Stauung)</span></label>
+          </div>
+        </div>
+        <div class="rr-tx-row"><label><span class="rr-tx-lbl">Hilus-Seite</span><select id="hil_seite" data-voice="seite hilus"><option value="">–</option><option value="re.">re.</option><option value="li.">li.</option><option value="bds.">bds.</option></select></label></div>
+      </div>
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
+        <input type="text" id="ft_herzmediastinum" data-voice="zusatz herzmediastinum" placeholder="freie Ergänzung…"></label></div>
+    </div>
+  </div>
+
+  <!-- Region: Skelett / Weichteile -->
+  <div class="rr-tx-region" id="rg-skelett" data-radlex="RID13573" data-en="osseous structures and soft tissue">
+    <div class="rr-tx-region-head">
+      <div class="rr-tx-region-name">Skelett / Weichteile <span class="rr-rl-badge">RadLex</span></div>
+      <div class="rr-tx-tri">
+        <input class="rr-tx-t-unset-in" type="radio" name="st_skelett" id="st_skelett_unset" value="" checked>
+        <label class="rr-tx-t-unset" for="st_skelett_unset" title="unbeurteilt">—</label>
+        <input class="rr-tx-t-ob-in" type="radio" name="st_skelett" id="st_skelett_ob" value="ob" data-voice="skelett unauffällig">
+        <label for="st_skelett_ob" title="o.B. – attestiert">o.&nbsp;B.</label>
+        <input class="rr-tx-t-bef-in" type="radio" name="st_skelett" id="st_skelett_bef" value="bef" data-voice="skelett befund">
+        <label for="st_skelett_bef" title="Befund – Detail">Befund</label>
+      </div>
+    </div>
+    <div class="rr-tx-region-detail" id="rd-skelett">
+      <div class="rr-tx-row"><span class="rr-tx-lbl">Knochen <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-tx-cg">
+          <label class="rr-tx-ci"><input type="checkbox" id="sk_deg" data-radlex="RID5222" data-en="degenerative changes spine"><span>Degenerativ WS</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="sk_wk" data-radlex="RID34669" data-en="vertebral compression fracture"><span>Wirbelkörperfraktur / Sinterung</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="sk_rip" data-radlex="RID5232" data-en="rib fracture"><span>Rippenfraktur</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="sk_stern" data-radlex="RID5233" data-en="sternal fracture"><span>Sternumfraktur</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="sk_dest" data-radlex="RID5238" data-en="osseous destruction"><span>Ossäre Destruktion / V.a. Metastase</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="sk_kyph" data-radlex="RID5241" data-en="kyphoscoliosis"><span>Kyphoskoliose</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="sk_stern_op" data-radlex="RID49557" data-en="status post sternotomy"><span>St.p. Sternotomie</span></label>
+        </div>
+      </div>
+      <div class="rr-tx-row" style="margin-top:8px"><span class="rr-tx-lbl">Weichteile Thoraxwand</span>
+        <div class="rr-tx-cg">
+          <label class="rr-tx-ci"><input type="checkbox" id="wt_emph" data-radlex="RID5204" data-en="subcutaneous emphysema"><span>Weichteilemphysem</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="wt_rf" data-radlex="RID5206" data-en="soft tissue mass"><span>Weichteilverdichtung/RF</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="wt_mast_re" data-radlex="RID49560" data-en="status post mastectomy right"><span>St.p. Mastektomie re.</span></label>
+          <label class="rr-tx-ci"><input type="checkbox" id="wt_mast_li" data-radlex="RID49560" data-en="status post mastectomy left"><span>St.p. Mastektomie li.</span></label>
+        </div>
+      </div>
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
+        <input type="text" id="ft_skelett" data-voice="zusatz skelett" placeholder="z. B. Rippenserienfraktur 5.–7. Rippe re."></label></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== VERGLEICHSAUFNAHME ===================== -->
+<details id="vgl-details">
+  <summary>Vergleichsaufnahme <span style="font-weight:400;color:var(--rr-ink-faint);font-size:11px">(optional)</span></summary>
+  <div>
+    <div class="rr-tx-grid2" style="margin-top:12px">
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Vergleich vorhanden</span>
+        <select id="vgl_ja" data-voice="vergleich vorhanden"><option value="">Nein</option><option value="yes">Ja</option></select></label></div>
+      <div class="rr-tx-row"><label><span class="rr-tx-lbl">Datum Voraufnahme</span>
+        <input type="text" id="vgl_datum" placeholder="z.B. 05.07.2026"></label></div>
+    </div>
+    <div class="rr-tx-row"><label><span class="rr-tx-lbl">Verlaufsbeurteilung <span class="rr-rl-badge">RadLex</span></span>
+      <select id="vgl_verlauf" data-radlex="RID49820" data-en="interval change" data-voice="verlauf">
+        <option value="">–</option>
+        <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel.">Kein wesentlicher Wandel</option>
+        <option value="Im Vergleich zur Voruntersuchung Progredienz der beschriebenen Befunde.">Progredienz</option>
+        <option value="Im Vergleich zur Voruntersuchung Regredienz / Befundbesserung.">Regredienz / Besserung</option>
+        <option value="Im Vergleich zur Voruntersuchung neu aufgetretener Befund.">Neu aufgetretener Befund</option>
+      </select></label></div>
+  </div>
+</details>
+
+<!-- ===================== BEURTEILUNG ===================== -->
+<div class="rr-tx-sh"><h2>Beurteilung</h2><div class="rr-tx-sh-line"></div></div>
+<div class="rr-tx-row"><span class="rr-tx-lbl">Modus</span>
+  <div class="rr-tx-bmod">
+    <input type="radio" name="bmod" id="bmod_auto" value="auto" checked><label for="bmod_auto">Automatisch</label>
+    <input type="radio" name="bmod" id="bmod_ft" value="ft"><label for="bmod_ft">Freitext</label>
+  </div>
+</div>
+<div class="rr-tx-row" id="beurt_ft_row" style="display:none"><label><span class="rr-tx-lbl">Beurteilung Freitext</span>
+  <textarea id="beurt_ft" rows="4" placeholder="Freitext…" data-voice="beurteilung"></textarea></label></div>
+
+</section>
+</div>
+
+</body>
+</html>
