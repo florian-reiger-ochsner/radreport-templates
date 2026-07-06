@@ -3,8 +3,14 @@
 **ID:** HJK-MRRT-KNIE-PRAETEP
 **Version:** 1.5
 **Status:** Pilot
-**Struktur:** A – kanonisches `template.html` (nackt, JS-frei) + abgeleitete Demo via `build-demo.js`
-**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/)
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/knie-prae-tep/index.html`](../../../../demo/knie-prae-tep/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck
 

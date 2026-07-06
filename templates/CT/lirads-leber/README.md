@@ -2,9 +2,16 @@
 
 **ID:** HJK-MRRT-CT-LEBER-LIRADS
 **Version:** 1.3
-**Struktur:** A (kanonisch nacktes `template.html` + abgeleitete Demo)
 **Status:** Pilot, didaktisch nach Schima/Kopf/Eisenhuber RöFo 2023
 **Lizenz:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/ct-lirads-leber/index.html`](../../../demo/ct-lirads-leber/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck
 

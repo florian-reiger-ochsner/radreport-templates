@@ -3,7 +3,14 @@
 **ID:** HJK-MRRT-ROE-THORAX
 **Version:** 2.2
 **Status:** Pilot
-**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/)
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/roentgen-thorax/index.html`](../../../../demo/roentgen-thorax/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck
 
@@ -74,21 +81,29 @@ Jeder Device-Typ mit RadLex-Code, vorausgefülltem Lage-Placeholder und 4-stufig
 - **Fließtext** – Copy/Paste in Syngo / Carbon
 - **FHIR Bundle R4** – DiagnosticReport (LOINC 36643-5 als Default; Untersuchungstyp wird i. d. R. vom RIS/Auftrag gesetzt, manueller Override im Template) + Observations pro Parenchym-Befund, Pleura, Zwerchfell, Device; RadLex-kodiert
 
-## Architektur
+## Architektur (A-Struktur)
 
 ```
 thorax-standard/
-├── template.source.html   # Authored source – externer CSS-Link
-├── template.html          # MRRT/Carbon-Build – CSS inline (via inline-css.js)
+├── template.html          # KANONISCH – nacktes MRRT, rr-*-Hooks, voll kodiert, JS-/CSS-frei
 ├── frontmatter.yaml       # Maschinenlesbare Template-Metadaten
 ├── README.md              # Diese Datei
 ├── CHANGELOG.md           # Versionshistorie
 └── RADLEX-MAPPING.md      # Vollständige RID-Tabelle
+
+demo/roentgen-thorax/
+└── index.html             # ABGELEITET via shared/scripts/build-demo.js – NICHT von Hand editieren
 ```
 
-`template.source.html` verwendet `../../shared/styles/radreport-core.css` als externen Link.
-Der Build-Schritt (`node shared/scripts/inline-css.js`) erzeugt die self-contained `template.html`
-für MRRT-konforme Systeme (Syngo Carbon).
+Kanonisch ist das nackte `template.html` (Quelle der Wahrheit); die Demo wird
+daraus abgeleitet. Inhaltliche Änderung immer im kanonischen `template.html`,
+danach neu ableiten:
+
+```bash
+node shared/scripts/build-demo.js \
+  templates/Roentgen/Thorax/thorax-standard/template.html \
+  demo/roentgen-thorax/index.html
+```
 
 ## Quellen
 

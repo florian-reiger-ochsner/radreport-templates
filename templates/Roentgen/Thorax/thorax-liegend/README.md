@@ -3,7 +3,14 @@
 **ID:** HJK-MRRT-ROE-THORAX-LIEGEND
 **Version:** 1.0
 **Status:** Pilot
-**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax-liegend/)
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax-liegend/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/roentgen-thorax-liegend/index.html`](../../../../demo/roentgen-thorax-liegend/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck
 

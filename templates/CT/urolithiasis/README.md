@@ -4,7 +4,14 @@
 **Version:** 1.0
 **Status:** Pilot
 **Quelle:** DRG AK Befundung 041807.2.2203092150 (CC BY 4.0), adaptiert
-**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/)
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/ct-urolithiasis/index.html`](../../../demo/ct-urolithiasis/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck
 

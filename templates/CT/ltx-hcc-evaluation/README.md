@@ -6,8 +6,15 @@ und **Mailand-Kriterien**.
 
 - **ID:** `HJK-MRRT-LTX-HCC-EVAL`
 - **Version:** 1.0 (Status: pilot)
-- **Struktur:** A (kanonisch nacktes `template.html` + abgeleitete Demo)
 - **Lizenz:** CC BY 4.0
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-ltx-hcc-evaluation/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/ct-ltx-hcc-evaluation/index.html`](../../../demo/ct-ltx-hcc-evaluation/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck &amp; Abgrenzung
 

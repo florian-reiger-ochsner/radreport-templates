@@ -4,7 +4,14 @@
 **Version:** 1.0
 **Status:** Pilot
 **Quelle:** DRG AK Befundung AG Thoraxdiagnostik 041807.2.1806120000 (CC BY 4.0), adaptiert
-**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/)
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/ct-lungenembolie/index.html`](../../../demo/ct-lungenembolie/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck
 

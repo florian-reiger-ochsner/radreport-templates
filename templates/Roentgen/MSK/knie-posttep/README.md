@@ -3,7 +3,14 @@
 **ID:** HJK-MRRT-KNIE-POSTTEP
 **Version:** 1.1
 **Status:** Pilot
-**Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/)
+
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/knie-posttep/index.html`](../../../../demo/knie-posttep/index.html) — Quelltext der Demo im Repo.
 
 ## Zweck
 

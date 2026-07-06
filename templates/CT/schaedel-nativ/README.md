@@ -4,6 +4,14 @@ Strukturierte Befundvorlage für die native Schädel-CT. Notfall-Massentemplate 
 
 **ID:** `HJK-MRRT-CT-SCHAEDEL-NATIV-v1.0` · **Status:** Pilot · **Modalität:** CT · **Region:** Schädel
 
+## Auf einen Blick
+
+Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
+
+- 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
+- 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
+- 📁 [`demo/ct-schaedel-nativ/index.html`](../../../demo/ct-schaedel-nativ/index.html) — Quelltext der Demo im Repo.
+
 ---
 
 ## Öffentliche Basis
@@ -86,15 +94,19 @@ Kritische Regionen lösen bei „Befund" den `--notfall`-Akzent und ein Alert-Ba
 
 ---
 
-## Build
+## Build (A-Struktur)
+
+Kanonisch ist das nackte `template.html` (Quelle der Wahrheit). Die Demo wird
+daraus abgeleitet — inhaltliche Änderung immer im kanonischen `template.html`,
+danach neu ableiten:
 
 ```bash
-node shared/scripts/inline-css.js templates/CT/schaedel-nativ/template.source.html
-# → templates/CT/schaedel-nativ/template.html  (MRRT-konform, CSS inlined)
-cp templates/CT/schaedel-nativ/template.html demo/ct-schaedel-nativ/index.html
+node shared/scripts/build-demo.js \
+  templates/CT/schaedel-nativ/template.html \
+  demo/ct-schaedel-nativ/index.html
 ```
 
-**Demo:** `florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/`
+Live-Demo: <https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/>
 
 ---
 
