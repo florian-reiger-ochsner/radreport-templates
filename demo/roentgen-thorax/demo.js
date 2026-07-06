@@ -241,11 +241,12 @@ let parTemplateHTML = '', devTemplateHTML = '', parCount = 1, devCount = 1;
     </div>
   `);
 
-  // Stack-Kopf (Nummer + Löschen) in die statischen Erst-Items einsetzen
-  document.getElementById('par-item-1').insertAdjacentHTML('afterbegin',
-    '<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Parenchymbefund 1</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>');
-  document.getElementById('dev-item-1').insertAdjacentHTML('afterbegin',
-    '<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Device 1</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>');
+  // Stack-Kopf (Nummer + Löschen) in ALLE statischen Items einsetzen
+  // (kanonisch liegen je 2 Slots vor; weitere fügt die Demo zur Laufzeit hinzu).
+  document.querySelectorAll('.rr-tx-par-item').forEach((el, i) => el.insertAdjacentHTML('afterbegin',
+    `<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Parenchymbefund ${i + 1}</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>`));
+  document.querySelectorAll('.rr-tx-dev-item').forEach((el, i) => el.insertAdjacentHTML('afterbegin',
+    `<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Device ${i + 1}</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>`));
 
   // Add-Buttons (Chrome) nach den Stack-Listen
   document.getElementById('par-list').insertAdjacentHTML('afterend',
@@ -253,9 +254,22 @@ let parTemplateHTML = '', devTemplateHTML = '', parCount = 1, devCount = 1;
   document.getElementById('dev-list').insertAdjacentHTML('afterend',
     '<button type="button" class="rr-tx-add-btn" id="btn-add-dev">＋ Device hinzufügen</button>');
 
-  // Pristine-Vorlagen der Stack-Items festhalten (mit Stack-Kopf, ohne Voice-Chips)
+  // Pristine-Vorlagen aus dem Erst-Item festhalten (mit Stack-Kopf, ohne Voice-Chips)
   parTemplateHTML = document.getElementById('par-item-1').outerHTML;
   devTemplateHTML = document.getElementById('dev-item-1').outerHTML;
+  // Zähler auf die tatsächlich vorhandene Slot-Zahl setzen -> nächster Add kollisionsfrei
+  parCount = document.querySelectorAll('.rr-tx-par-item').length;
+  devCount = document.querySelectorAll('.rr-tx-dev-item').length;
+
+  // Beurteilungs-Modus-Schalter (Workflow-Chrome) – im kanonischen Template nicht vorhanden,
+  // hier zur Laufzeit vor die Freitext-Zeile injiziert.
+  document.getElementById('beurt_ft_row').insertAdjacentHTML('beforebegin',
+    `<div class="rr-tx-row"><span class="rr-tx-lbl">Modus</span>
+      <div class="rr-tx-bmod">
+        <input type="radio" name="bmod" id="bmod_auto" value="auto" checked><label for="bmod_auto">Automatisch</label>
+        <input type="radio" name="bmod" id="bmod_ft" value="ft"><label for="bmod_ft">Freitext</label>
+      </div>
+    </div>`);
 
   // Aktions-Zeile + LOINC-Override + FHIR-Box + Legende ans Ende des Eingabe-Panes
   pane.insertAdjacentHTML('beforeend', `
