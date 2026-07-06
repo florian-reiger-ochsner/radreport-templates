@@ -2,15 +2,15 @@
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8">
-<title>Röntgen Thorax (p.a. ± lateral) – Strukturierte Befundvorlage (v2.1)</title>
+<title>Röntgen Thorax (p.a. ± lateral) – Strukturierte Befundvorlage (v2.2)</title>
 
 <!-- ===================== IHE MRRT METADATA ===================== -->
 <meta name="dcterms.title"       content="Röntgen Thorax (p.a. ± lateral)"/>
 <meta name="dcterms.description" content="Strukturierte Befundvorlage Röntgen-Thorax (Massentemplate). Additives Normalbefund-Modell (Attestierung statt Default): fünf Tri-State-Regionen, 1-Klick-Normalbefund-Makro, Multi-Parenchym-Stack (Fleischner), Device-Stack (24 Typen), RadLex-Kodierung, vorbereitet für FHIR-basierte Weiterverarbeitung (Zielformat, plattformseitig) mit NEG/POS-Verification-Floor, Voice-ready."/>
 <meta name="dcterms.language"    content="de"/>
-<meta name="dcterms.identifier"  content="HJK-MRRT-ROE-THORAX-v2.1"/>
+<meta name="dcterms.identifier"  content="HJK-MRRT-ROE-THORAX-v2.2"/>
 <meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date"        content="2026-06-20"/>
+<meta name="dcterms.date"        content="2026-07-06"/>
 <meta name="dcterms.rights"      content="HJK Wien. Fleischner-Terminologie nach MacMahon 2017 / Hansell 2008."/>
 <meta name="rrt:specialty"       content="Radiology"/>
 <meta name="rrt:subspecialty"    content="Thoracic Radiology"/>
@@ -36,7 +36,7 @@
 <section class="rr-input-pane">
 
 <h1 class="rr-doc-title">Röntgen Thorax</h1>
-<div class="rr-doc-sub">MRRT · RadLex-kodiert · p.a. ± lateral · additives Attestierungsmodell · Voice-ready · v2.1 · HJK Wien · 2026-06-20</div>
+<div class="rr-doc-sub">MRRT · RadLex-kodiert · p.a. ± lateral · additives Attestierungsmodell · Voice-ready · v2.2 · HJK Wien · 2026-07-06</div>
 <div class="rr-title-rule"></div>
 
 <!-- ===================== TECHNIK & INDIKATION ===================== -->
@@ -46,7 +46,6 @@
   <div class="rr-tx-proj-chips">
     <input type="checkbox" id="p_pa" data-voice="projektion pa"><label for="p_pa">p.a.</label>
     <input type="checkbox" id="p_lat" data-voice="projektion lateral"><label for="p_lat">lateral li.</label>
-    <input type="checkbox" id="p_ap" data-voice="projektion ap liegend"><label for="p_ap">a.p. (liegend)</label>
     <input type="checkbox" id="p_ex" data-voice="projektion exspiration"><label for="p_ex">Exspiration</label>
   </div>
 </div>
@@ -54,7 +53,6 @@
   <div class="rr-tx-row"><label><span class="rr-tx-lbl">Aufnahmequalität <span class="rr-rl-badge">RadLex</span></span>
     <select id="qual" data-radlex="RID13882" data-en="image quality" data-voice="aufnahmequalität">
       <option value="gut, diagnostisch ausreichend">gut, diagnostisch ausreichend</option>
-      <option value="eingeschränkt (Liegendaufnahme)">eingeschränkt – Liegendaufnahme</option>
       <option value="eingeschränkt (Rotation)">eingeschränkt – Rotation</option>
       <option value="eingeschränkt (Inspiration mangelhaft)">eingeschränkt – Inspiration mangelhaft</option>
       <option value="eingeschränkt (Unterbelichtung)">eingeschränkt – Unterbelichtung</option>

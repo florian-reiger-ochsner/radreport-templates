@@ -1,5 +1,5 @@
 // =============================================================================
-// Demo-Interaktivität für "Röntgen Thorax (p.a. ± lateral)" (v2.1)
+// Demo-Interaktivität für "Röntgen Thorax (p.a. ± lateral)" (v2.2)
 //
 // ABGELEITET / Demo-Schicht: Dieses Skript gehört NICHT ins kanonische
 // template.html (das ist nacktes, JS-freies, form-only MRRT mit voller
@@ -288,7 +288,7 @@ let parTemplateHTML = '', devTemplateHTML = '', parCount = 1, devCount = 1;
         <div class="rr-tx-rsec"><div class="rr-tx-rsec-lbl">Technik</div><div class="rr-tx-rtext" id="prev-technik"></div></div>
         <div class="rr-tx-rsec"><div class="rr-tx-rsec-lbl">Befund</div><div class="rr-tx-rtext" id="prev-befund"></div></div>
         <div class="rr-tx-rsec"><div class="rr-tx-rsec-lbl">Beurteilung</div><div class="rr-tx-rtext" id="prev-beurt"></div></div>
-        <div class="rr-tx-stamp"><span>HJK-MRRT-ROE-THORAX-v2.1</span><span id="prev-date"></span></div>
+        <div class="rr-tx-stamp"><span>HJK-MRRT-ROE-THORAX-v2.2</span><span id="prev-date"></span></div>
       </div>
       <div id="status-badge" class="rr-tx-badge rr-tx-warn">● Befund ausfüllen</div>
     </aside>
@@ -389,7 +389,7 @@ function toggleVoice() { document.body.classList.toggle('rr-tx-voice-on'); }
 function buildTechnik() {
   const projs = [];
   if (gc('p_pa')) projs.push('p.a.'); if (gc('p_lat')) projs.push('seitlich (li.)');
-  if (gc('p_ap')) projs.push('a.p. (Liegendaufnahme)'); if (gc('p_ex')) projs.push('Exspirations-Aufnahme');
+  if (gc('p_ex')) projs.push('Exspirations-Aufnahme');
   const q = gv('qual') || 'gut, diagnostisch ausreichend';
   const f = gv('frage') === '__ft__' ? gv('frage_ft') : gv('frage');
   let t = `Röntgen Thorax, ${projs.join(' + ') || 'p.a.'}. Aufnahmequalität ${q}.`;
@@ -436,7 +436,7 @@ function update() {
   document.getElementById('prev-befund').textContent = buildBefund();
   document.getElementById('prev-beurt').textContent = buildBeurteilung();
   const f = gv('frage') === '__ft__' ? gv('frage_ft') : gv('frage'); const projs = [];
-  if (gc('p_pa')) projs.push('p.a.'); if (gc('p_lat')) projs.push('lateral'); if (gc('p_ap')) projs.push('a.p.'); if (gc('p_ex')) projs.push('Exsp.');
+  if (gc('p_pa')) projs.push('p.a.'); if (gc('p_lat')) projs.push('lateral'); if (gc('p_ex')) projs.push('Exsp.');
   document.getElementById('prev-sub').textContent = (projs.join(' + ') || 'p.a.') + (f ? ' · ' + f : '');
   const badge = document.getElementById('status-badge'), open = nUnassessed();
   if (hasCrit()) { badge.className = 'rr-tx-badge rr-tx-crit'; badge.textContent = '⚠ Kritischer Befund – ' + (open ? open + ' Region(en) noch offen' : 'alle Regionen beurteilt'); }
@@ -489,7 +489,7 @@ function buildFhir() {
   const dr = {
     resourceType: 'DiagnosticReport', status: 'final', id: 'thorax-report',
     code: { coding: [{ system: 'http://loinc.org', code: lo[0], display: lo[1] }, { system: 'http://radlex.org', code: 'RID10211', display: 'chest radiograph' }] },
-    effectiveDateTime: now, identifier: [{ value: 'HJK-MRRT-ROE-THORAX-v2.1' }],
+    effectiveDateTime: now, identifier: [{ value: 'HJK-MRRT-ROE-THORAX-v2.2' }],
     conclusion: buildBeurteilung(), result: obsArr.map(o => ({ reference: o.fullUrl })),
     presentedForm: [{ contentType: 'text/plain', title: 'Röntgen Thorax', data: btoa(unescape(encodeURIComponent('TECHNIK\n' + buildTechnik() + '\n\nBEFUND\n' + buildBefund() + '\n\nBEURTEILUNG\n' + buildBeurteilung()))) }],
   };

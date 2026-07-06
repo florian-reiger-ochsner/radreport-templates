@@ -1,7 +1,7 @@
 # Röntgen Thorax
 
 **ID:** HJK-MRRT-ROE-THORAX
-**Version:** 2.1
+**Version:** 2.2
 **Status:** Pilot
 **Demo:** [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/)
 
@@ -23,8 +23,12 @@ Ab v2.0 folgt das Template demselben additiven Modell wie `CT/schaedel-nativ`: k
 
 - p.a. stehend
 - Seitlich (li.)
-- a.p. liegend
 - Exspirations-Aufnahme
+
+> **Aufrechte Aufnahmen.** Die a.p.-Liegend-/Bettaufnahme (ICU / portable chest)
+> wurde mit v2.2 in ein eigenes Template ausgelagert:
+> [`thorax-liegend`](../thorax-liegend/) (HJK-MRRT-ROE-THORAX-LIEGEND) – dort mit
+> führender Lage-/Device-Kontrolle und an die Rückenlage angepasstem Zeichen-Vokabular.
 
 ## Befund-Domänen
 

@@ -1,5 +1,5 @@
 id: HJK-MRRT-ROE-THORAX
-version: 2.1
+version: 2.2
 status: pilot
 modalitaet: Roentgen
 region: Thorax
@@ -24,8 +24,9 @@ loinc-codes:
 projektionen:
   - pa
   - lateral-links
-  - ap-liegend
   - exspiration
+verwandt:
+  - HJK-MRRT-ROE-THORAX-LIEGEND  # a.p. liegend / Intensiv (ICU / portable chest)
 modell: additiv-attestierung
 modi:
   - tri-state-region

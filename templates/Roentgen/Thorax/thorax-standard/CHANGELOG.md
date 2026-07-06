@@ -5,6 +5,30 @@ Format: [Semantic Versioning](https://semver.org/lang/de/)
 
 ---
 
+## [2.2] – 2026-07-06
+
+### Geändert – Aufspaltung: Liegend-Befund ausgelagert
+
+Die a.p.-Liegend-/Bettaufnahme (ICU / portable chest) wird ab dieser Version als
+eigenständiges Template geführt: **`thorax-liegend`** (HJK-MRRT-ROE-THORAX-LIEGEND).
+Begründung: Der Liegendbefund ist primär eine Lage-/Device-Kontrolle und braucht
+ein an die Rückenlage angepasstes Zeichen-Vokabular (Erguss/Pneumothorax, keine
+CTR) – ein Template für beide Nutzungen wäre für beide unübersichtlich.
+
+`thorax-standard` ist damit **rein aufrecht** (p.a. ± lateral, Exspiration):
+
+- **Entfernt:** Projektions-Chip „a.p. (liegend)" (`p_ap`) aus Technik.
+- **Entfernt:** Aufnahmequalitäts-Option „eingeschränkt – Liegendaufnahme".
+- **Demo-JS bereinigt:** `p_ap`-Verzweigungen in `buildTechnik()` und `update()`
+  entfernt; Demo neu abgeleitet.
+- **Metadaten:** `frontmatter.yaml` ohne `ap-liegend`, Querverweis (`verwandt`)
+  auf das Liegend-Template ergänzt; README-Projektionen aktualisiert.
+
+Keine Änderung an den geteilten Anatomie-Domänen, Feld-IDs oder deren Kodierung –
+Round-Trip-Fähigkeit unberührt.
+
+---
+
 ## [2.1.1] – 2026-07-03
 
 ### Geändert (Architektur, keine klinische Inhaltsänderung)
