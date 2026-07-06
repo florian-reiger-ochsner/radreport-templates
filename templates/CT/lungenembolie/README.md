@@ -11,7 +11,10 @@ Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
 
 - 📄 **[`template.html`](./template.html)** — kanonisch, Quelle der Wahrheit (nacktes MRRT, voll kodiert). **Inhaltliche Änderungen hier.**
 - 🖥 **[Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/)** — gerendertes Schaufenster (GitHub Pages), abgeleitet aus `template.html`. **Gebaut, nicht von Hand editieren.**
-- 📁 [`demo/ct-lungenembolie/index.html`](../../../demo/ct-lungenembolie/index.html) — Quelltext der Demo im Repo.
+- 📁 [`demo/ct-lungenembolie/index.html`](../../../demo/ct-lungenembolie/index.html) — Quelltext der Demo im Repo (via `build-demo.js` erzeugt).
+- ⚙️ [`demo/ct-lungenembolie/demo.js`](../../../demo/ct-lungenembolie/demo.js) — Demo-Schicht: baut das Viewer-Chrome (RV/LV-Box, LE-Pill, Live-Vorschau, Buttons, FHIR-Export) zur Laufzeit auf.
+
+**Neu bauen:** `node shared/scripts/build-demo.js templates/CT/lungenembolie/template.html demo/ct-lungenembolie/index.html demo.js`
 
 ## Zweck
 
