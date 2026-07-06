@@ -1,55 +1,72 @@
-# RadLex-Mapping – CT/MRT Leber LI-RADS
+# RadLex-Mapping – CT Leber LI-RADS v2018
 
 Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
-## LI-RADS Kategorien
+> **Wichtiger Hinweis (v1.3):** Bei der A-Migration wurde festgestellt, dass die
+> RadLex-RIDs des abgelösten Inline-Templates **in sich widersprüchlich** belegt
+> waren – derselbe RID stand für unterschiedliche Konzepte (Beispiele unten).
+> Gemäß CLAUDE.md §2 („kein RID raten") und §5 (Display-Diff, `24627-2`-Bug)
+> werden nur **registry-korroborierte** RIDs behauptet. Alle strittigen/
+> unbestätigten Konzepte sind im Template als `data-radlex-status="local"`
+> geführt, mit Kandidat-RID hier dokumentiert. Ein dedizierter
+> Registry-Verifikationspass (RadLex/BioPortal) steht aus.
 
-| Kategorie | RadLex-Term | RID | Status |
-|---|---|---|---|
-| LR-1 (definitiv benigne) | LI-RADS category 1 | RID39477 | ✅ |
-| LR-2 (wahrscheinlich benigne) | LI-RADS category 2 | RID39478 | ✅ |
-| LR-3 (intermediate) | LI-RADS category 3 | RID39479 | ✅ |
-| LR-4 (wahrscheinlich HCC) | LI-RADS category 4 | RID39480 | ✅ |
-| LR-5 (definitiv HCC) | LI-RADS category 5 | RID39481 | ✅ |
-| LR-M (malignom, nicht HCC-spezifisch) | LI-RADS category M | RID43353 | ✅ |
-| LR-TIV (Tumorzapfen in Vene) | LI-RADS category TIV | RID43354 | ✅ |
-| LR-TR (behandelte Läsion) | LI-RADS treated observation | RID45538 | 🟡 |
-| LR-NC (nicht klassifizierbar) | LI-RADS non-categorizable | RID45539 | 🟡 |
+## Registry-korroboriert kodiert (✅)
 
-## Läsions-Charakteristika (Hauptkriterien)
-
-| Merkmal | RadLex-Term | RID | LOINC | Status |
+| Feld | RadLex-Term | RID | LOINC | Status |
 |---|---|---|---|---|
-| LI-RADS Kategorie | LI-RADS category | RID39477 | LP202113-1 | ✅ |
-| Läsionsgröße | lesion size | RID13432 | 21889-1 | ✅ |
+| Läsionsgröße / Durchmesser | lesion size | RID13432 | 21889-1 | ✅ |
 | Lokalisation / Segment | hepatic segment | RID29237 | – | ✅ |
-| APHE (arterielle Hypervaskularisierung) | arterial phase hyperenhancement | RID3822 | – | ✅ |
-| Wash-out | wash-out appearance | RID3987 | – | ✅ |
-| Enhancing capsule | enhancing capsule | RID4271 | – | ✅ |
-| Schwellenwachstum | threshold growth | RID35936 | – | ✅ |
+| Verlauf – stabil | stable | RID39157 | – | ✅ |
+| Verlauf – Progredienz | progression of disease | RID36043 | – | ✅ |
+| Verlauf – Regredienz | regression of disease | RID36044 | – | ✅ |
 
-## Hilfskriterien (Ancillary Features)
+## Local – Kandidaten ausstehend zur Verifikation (🔲)
 
-| Merkmal | RadLex-Term | RID | Status |
+### Hauptkriterien
+| Feld | data-en | Kandidat-RID (unbestätigt) | Status |
 |---|---|---|---|
-| Korona-Enhancement | corona enhancement | RID28572 | 🟡 |
-| Mosaikmuster | mosaic architecture | RID29896 | 🟡 |
+| Nonrim APHE | nonrim arterial phase hyperenhancement | RID43355 | 🔲 local |
+| Nonperipherer Wash-Out | nonperipheral washout | RID43353 (widersprüchlich, s. u.) | 🔲 local |
+| Anreichernde Kapsel | enhancing capsule | RID39477 (widersprüchlich, s. u.) | 🔲 local |
+| Schwellenwachstum | threshold growth | RID35936 | 🔲 local |
 
-## Lebervenen / Pfortader
+### Sonderkategorien, Hilfskriterien, LR-TR, TIV-Subtyp
+Alle als `data-radlex-status="local"` mit `data-en` geführt (kein belastbarer
+RID im Quelltemplate). Betrifft u. a. TIV, LR-M-Merkmale, sämtliche Ancillary
+Features (`af_*`), LR-TR-Subkategorien. Kandidaten sind hier bewusst nicht
+geraten.
 
-| Befund | RadLex-Term | RID | Status |
+### Risikopopulation / Hintergrundleber
+| Feld | data-en | Kandidat-RID (unbestätigt) | Status |
 |---|---|---|---|
-| Tumorzapfen Pfortader | portal vein tumor thrombus | RID43353 | ✅ |
-| Lebervenen-Invasion | hepatic vein invasion | RID45540 | 🟡 |
+| Leberzirrhose (Risiko) | cirrhosis | RID3822 (widersprüchlich, s. u.) | 🔲 local |
+| Chronische HBV | chronic hepatitis B | RID28572 | 🔲 local |
+| HCC (Risiko/aktuell) | hepatocellular carcinoma | RID4271 (widersprüchlich, s. u.) | 🔲 local |
+
+## Dokumentierte RID-Widersprüche im Quelltemplate (nicht übernommen)
+
+| RID | belegt für … | zugleich belegt für … |
+|---|---|---|
+| RID43353 | Wash-Out (Formular) | „LR-M category" + „Pfortader-Tumorzapfen" (Mapping) |
+| RID3822 | Leberzirrhose (Formular) | „APHE" (Mapping) |
+| RID4271 | HCC (Formular) | „Enhancing capsule" (Mapping) |
+| RID39477 | Kapsel (Formular) | „LR-1 category" + „LI-RADS Kategorie" (Mapping) |
 
 ## FHIR-Kodierung
 
 | Ressource | Code | System |
 |---|---|---|
-| DiagnosticReport | 24571-9 (CT Abdomen) | http://loinc.org |
-| DiagnosticReport Kategorie | LP29684-5 (Radiology) | http://loinc.org |
-| LI-RADS Observation | LP202113-1 | http://loinc.org |
-| Bundle meta tag | HJK-MRRT-CT-LEBER-LIRADS-v1.2 | http://hjk.wien/fhir/CodeSystem/radiology-templates |
+| Läsionsgröße Observation | RID13432 / 21889-1 | http://radlex.org / http://loinc.org |
+| Segment Observation | RID29237 | http://radlex.org |
+| LI-RADS Kategorie (berechnet) | LP202113-1 | http://loinc.org |
+| Bundle meta tag | HJK-MRRT-CT-LEBER-LIRADS-v1.3 | http://hjk.wien/fhir/CodeSystem/radiology-templates |
+
+## Offene Punkte
+
+- Registry-Verifikation der Kandidat-RIDs (RadLex 4.3 / BioPortal), danach
+  `local` → `verified` und `data-radlex` setzen.
+- Widersprüche oben auflösen: pro Konzept genau einen registry-verbatim RID.
 
 ## Normative Referenz
 
@@ -58,4 +75,4 @@ ACR LI-RADS v2018 CT/MRI Core.
 
 ---
 
-*Generiert: 2026-06-16 · Template HJK-MRRT-CT-LEBER-LIRADS-v1.2*
+*Aktualisiert: 2026-07-06 · Template HJK-MRRT-CT-LEBER-LIRADS-v1.3*

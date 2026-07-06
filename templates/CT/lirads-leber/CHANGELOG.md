@@ -1,4 +1,40 @@
-# Changelog: CT Leber LI-RADS v2018 + DRG-LTx
+# Changelog: CT Leber LI-RADS v2018
+
+## v1.3 – 2026-07-06
+
+### Umstellung auf A-Struktur (lean kanonisch + abgeleitete Demo)
+
+Das Template wurde von der B-Struktur (Inline-CSS/JS, 3156 Zeilen) auf die
+A-Struktur migriert. Das kanonische `template.html` ist jetzt **nacktes,
+kodiertes MRRT** (426 Zeilen, kein CSS/JS/style-link, Lean-Guard grün).
+
+- Gesamtes Viewer-Chrome nach `demo/ct-lirads-leber/demo.js` verlagert:
+  Mode-Switch (Manuell/Geführt/Direkt), Läsions-Tabs, LR-Kategorie-Box,
+  4-Schritte-Berechnungsanzeige, Live-Vorschau, Export.
+- LR-Algorithmus (`calculateLR`) **verbatim** portiert; per jsdom-Test gegen
+  bekannte Fälle geprüft (LR-5/LR-3/LR-M-Override/AF-Downgrade, show-if,
+  Multiplikation, Direkt-Modus – 11/11 grün).
+- Läsionsblock **einmal** kanonisch deklariert (`data-lesion="1"`); `demo.js`
+  multipliziert auf 3 Tabs. Buttons (LR-TR, Final-Check) → deklarative `<select>`.
+- `template.source.html` (B-Artefakt) entfernt.
+
+### Abspaltung: LTx-Evaluation → eigenes Template
+
+Der vierte Modus „LTx-Evaluation" (§16-TPG/Mailand) wurde in das eigenständige
+Paket **`HJK-MRRT-LTX-HCC-EVAL`** ausgelagert (`templates/CT/ltx-hcc-evaluation/`).
+Grund: Modus-Switch nicht A-konform, eigenes Feldset, separate DRG-Quelle.
+Dieses Template ist damit **LI-RADS-fokussiert**; alle LTx-/Mailand-Felder,
+-Berechnung und -Metadaten sind hier entfernt.
+
+### Kodierung sauber neu bewertet
+
+- Nur **registry-korroborierte** RIDs behauptet: Größe (RID13432/LOINC 21889-1),
+  Segment (RID29237), Verlaufstrend (RID39157/36043/36044).
+- Die widersprüchlich belegten LI-RADS-RIDs des Vorgängers (RID43353, RID3822,
+  RID4271, RID39477 – jeweils für mehrere Konzepte vergeben) wurden **nicht**
+  übernommen; betroffene Felder sind `data-radlex-status="local"` mit Kandidat
+  im MAPPING. Vermeidet den `24627-2`-Bug (CLAUDE.md §5).
+- Jede `<option>` trägt Kodierung (RID / local / needs-mapping).
 
 ## v1.2 – 2026-05-19
 

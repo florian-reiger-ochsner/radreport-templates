@@ -4,3153 +4,423 @@
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8">
-<title>CT Leber – LI-RADS v2018 – Strukturierte Befundvorlage</title>
+<title>CT Leber – LI-RADS v2018 – Strukturierte Befundvorlage (v1.3)</title>
 
-<!-- MRRT METADATA -->
-<meta name="dcterms.title" content="CT Leber bei HCC-Risikopatient – LI-RADS v2018 + DRG-LTx-Kompatibilität"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage für die CT-Bildgebung der Leber bei Patienten mit erhöhtem HCC-Risiko. Vereint LI-RADS v2018 (nach Schima/Kopf/Eisenhuber RöFo 2023) mit der DRG-LTx-Evaluation-Methodik (Pinto dos Santos et al. 2017, §16-TPG-Richtlinie). Vier Modi (Manuell / Geführt / Direkt / LTx-Evaluation). RadLex-, LOINC-, ACR-LI-RADS-Codes."/>
+<!-- ===================== MRRT METADATA ===================== -->
+<meta name="dcterms.title" content="CT Leber bei HCC-Risikopatient – LI-RADS v2018"/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die CT-Bildgebung der Leber bei Patienten mit erhöhtem HCC-Risiko nach LI-RADS v2018 (didaktische Aufbereitung nach Schima/Kopf/Eisenhuber RöFo 2023). Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular, ohne CSS/JS. Mode-Switch, geführter Wizard, 4-Schritte-Algorithmus, LR-Kategorie-Berechnung, LR-TR und Vorschau werden in der Demo von demo.js zur Laufzeit erzeugt. Die §16-TPG/LTx-Evaluation wurde in ein eigenständiges Template ausgelagert (HJK-MRRT-LTX-HCC-EVAL)."/>
 <meta name="dcterms.language" content="de"/>
 <meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date" content="2026-05-19"/>
-<meta name="dcterms.identifier" content="HJK-MRRT-CT-LEBER-LIRADS-v1.2"/>
-<meta name="dcterms.rights" content="Creative Commons Attribution 4.0 International (CC BY 4.0). Bezugnahme: DRG-Template gen_ltx_hcc.html (CC BY 4.0)."/>
+<meta name="dcterms.date" content="2026-07-06"/>
+<meta name="dcterms.identifier" content="HJK-MRRT-CT-LEBER-LIRADS-v1.3"/>
+<meta name="dcterms.rights" content="Creative Commons Attribution 4.0 International (CC BY 4.0)."/>
 <meta name="dcterms.license" content="https://creativecommons.org/licenses/by/4.0/"/>
 <meta name="rrt:specialty" content="Radiology"/>
 <meta name="rrt:subspecialty" content="Abdominal Radiology"/>
 <meta name="rrt:modality" content="CT"/>
 <meta name="rrt:bodyregion" content="Liver"/>
-<meta name="rrt:coding-systems" content="RadLex, LOINC, ACR-LI-RADS, SNOMED-CT (partial)"/><style>
-/* radreport-core.css v1.0.0 – inlined */
-/* =============================================================================
-   RADREPORT – CORE STYLESHEET
-   =============================================================================
-   Single Source of Truth für visuelle Eigenschaften aller Radreport-Templates.
-   IHE MRRT-kompatibel (über Build-Inlining in MRRT-Output).
+<meta name="rrt:coding-systems" content="RadLex, LOINC (partial), ACR-LI-RADS, local"/>
 
-   Version:   1.0.0
-   Datum:     2026-05-23
-   Autor:     F. Reiger-Ochsner, HJK Wien
-
-   Verwendung:
-   - Externe Einbindung (Demos, Messleitfäden, GitHub Pages):   - MRRT-Build (template.source.html → template.html):
-     node shared/scripts/inline-css.js <source-html>
-
-   Naming-Convention:
-   - Tokens:          :root { --rr-* }
-   - Komponenten:     .rr-*
-   - Status-Modifier: .rr-is-* (z.B. .rr-is-active, .rr-is-required-empty)
-   - Utility:         .rr-u-* (z.B. .rr-u-mt-lg)
-
-   Sektionen:
-   1.  Design-Tokens
-   2.  Reset & Base
-   3.  Layout (App-Grid, Panes)
-   4.  Typografie (Titel, Headings)
-   5.  Mode-Switch
-   6.  Helper-Info-Box
-   7.  Side-Toggle (re./li./bds.)
-   8.  Form-Grid (Rows)
-   9.  Labels & Inputs
-   10. AI-States & RadLex-Badges
-   11. Details/Collapsibles
-   12. Grade-Summary (KL, RAMRIS, Lung-RADS, generisch)
-   13. Result-Box (CPAK, generische Berechnungs-Outputs)
-   14. Pflichtfeld-Validierung
-   15. Preview-Pane
-   16. Buttons & Actions
-   17. Export-Area
-   18. CodeSystem-Legende
-   19. Utilities
-   20. Print
-   ============================================================================= */
-
-
-/* =============================================================================
-   1. DESIGN-TOKENS
-   ============================================================================= */
-:root {
-  /* Farben – HJK Clinical Light Theme */
-  --rr-bg:           #ffffff;
-  --rr-bg-alt:       #f7f8fa;
-  --rr-bg-card:      #ffffff;
-  --rr-ink:          #2c3e50;
-  --rr-ink-soft:     #5a6c7d;
-  --rr-ink-muted:    #8b97a3;
-  --rr-ink-faint:    #b8c2cc;
-  --rr-accent:       #2c5f8d;
-  --rr-accent-light: #4a86b8;
-  --rr-accent-pale:  #e8f0f7;
-  --rr-rule:         #e6eaef;
-  --rr-rule-soft:    #f0f3f6;
-  --rr-field-bg:     #ffffff;
-  --rr-field-border: #d8dee5;
-  --rr-ai-tint:      #f4f9fd;
-  --rr-ai-border:    #2c5f8d;
-  --rr-radlex-tint:  #f5f1f7;
-  --rr-radlex-ink:   #7a4e96;
-  --rr-warn:         #c47f2a;
-  --rr-critical:     #c45848;
-  --rr-success:      #2d7a4f;
-
-  /* Typografie */
-  --rr-font-sans:  "Source Sans 3", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-  --rr-font-serif: "Source Serif 4", Georgia, serif;
-  --rr-font-mono:  "SF Mono", "Menlo", "JetBrains Mono", monospace;
-
-  /* Font-Size Scale */
-  --rr-fs-xs:   11px;
-  --rr-fs-sm:   12px;
-  --rr-fs-base: 15px;
-  --rr-fs-md:   13px;
-  --rr-fs-lg:   14px;
-  --rr-fs-xl:   20px;
-  --rr-fs-2xl:  28px;
-  --rr-fs-3xl:  32px;
-
-  /* Spacing (8px-Skala) */
-  --rr-space-xs:  0.25rem;  /* 4px */
-  --rr-space-sm:  0.5rem;   /* 8px */
-  --rr-space-md:  1rem;     /* 16px */
-  --rr-space-lg:  1.5rem;   /* 24px */
-  --rr-space-xl:  2rem;     /* 32px */
-  --rr-space-2xl: 3.5rem;   /* 56px */
-
-  /* Layout */
-  --rr-max-width: 1600px;
-  --rr-radius:    6px;
-  --rr-radius-sm: 4px;
-  --rr-radius-xs: 3px;
-
-  /* Shadows */
-  --rr-shadow-sm: 0 1px 2px rgba(44, 62, 80, 0.04);
-  --rr-shadow-md: 0 2px 8px rgba(44, 62, 80, 0.06);
-
-  /* Breakpoints (für Doku, nicht im CSS verwendbar) */
-  --rr-bp-md: 760px;
-  --rr-bp-lg: 1100px;
-}
-
-
-/* =============================================================================
-   2. RESET & BASE
-   ============================================================================= */
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--rr-bg-alt);
-  color: var(--rr-ink);
-  font-family: var(--rr-font-sans);
-  font-size: var(--rr-fs-base);
-  line-height: 1.6;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-}
-
-
-/* =============================================================================
-   3. LAYOUT
-   ============================================================================= */
-.rr-app {
-  display: grid;
-  grid-template-columns: minmax(480px, 1fr) minmax(440px, 540px);
-  gap: 0;
-  min-height: 100vh;
-  max-width: var(--rr-max-width);
-  margin: 0 auto;
-  background: var(--rr-bg);
-}
-
-@media (max-width: 1100px) {
-  .rr-app { grid-template-columns: 1fr; }
-}
-
-.rr-input-pane {
-  padding: var(--rr-space-2xl) 64px 100px;
-  background: var(--rr-bg);
-  border-right: 1px solid var(--rr-rule);
-}
-
-.rr-preview-pane {
-  padding: var(--rr-space-2xl) var(--rr-space-2xl) 100px;
-  background: var(--rr-bg-alt);
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-
-/* =============================================================================
-   4. TYPOGRAFIE
-   ============================================================================= */
-.rr-doc-title {
-  font-family: var(--rr-font-sans);
-  font-weight: 600;
-  font-size: var(--rr-fs-3xl);
-  line-height: 1.25;
-  margin: 0 0 6px;
-  letter-spacing: -0.02em;
-  color: var(--rr-ink);
-}
-
-.rr-doc-sub {
-  font-size: var(--rr-fs-md);
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.rr-title-rule {
-  width: 48px;
-  height: 2px;
-  background: var(--rr-accent);
-  margin: var(--rr-space-lg) 0 40px;
-}
-
-.rr-h2-wrap { margin: 36px 0 var(--rr-space-md); }
-
-.rr-h2-wrap h2,
-.rr-h2 {
-  font-family: var(--rr-font-sans);
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--rr-accent);
-  margin: 0 0 4px;
-}
-
-.rr-h2-rule {
-  height: 1px;
-  background: var(--rr-rule);
-  margin: var(--rr-space-sm) 0 0;
-}
-
-.rr-h2-sub {
-  font-size: var(--rr-fs-sm);
-  color: var(--rr-ink-muted);
-  font-style: italic;
-  margin-top: 6px;
-}
-
-
-/* =============================================================================
-   5. MODE-SWITCH
-   ============================================================================= */
-.rr-mode-switch {
-  display: flex;
-  gap: 0;
-  background: var(--rr-bg-alt);
-  border: 1px solid var(--rr-rule);
-  border-radius: var(--rr-radius);
-  padding: 3px;
-  margin: 0 0 12px;
-}
-
-.rr-mode-switch input[type="radio"] { display: none; }
-
-.rr-mode-switch label {
-  flex: 1;
-  text-align: center;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: var(--rr-fs-sm);
-  font-weight: 500;
-  color: var(--rr-ink-soft);
-  border-radius: var(--rr-radius-sm);
-  transition: all 0.15s;
-  letter-spacing: 0.02em;
-}
-
-.rr-mode-switch input[type="radio"]:checked + label {
-  background: var(--rr-bg);
-  color: var(--rr-accent);
-  box-shadow: var(--rr-shadow-sm);
-  font-weight: 600;
-}
-
-
-/* =============================================================================
-   6. HELPER-INFO-BOX
-   ============================================================================= */
-.rr-helper-info {
-  background: var(--rr-accent-pale);
-  border-left: 3px solid var(--rr-accent);
-  padding: 10px 14px;
-  font-size: var(--rr-fs-md);
-  color: var(--rr-ink-soft);
-  margin-bottom: var(--rr-space-sm);
-  border-radius: 0 var(--rr-radius-sm) var(--rr-radius-sm) 0;
-}
-
-
-/* =============================================================================
-   7. SIDE-TOGGLE
-   ============================================================================= */
-.rr-side-toggle {
-  display: inline-flex;
-  border: 1px solid var(--rr-field-border);
-  border-radius: var(--rr-radius);
-  overflow: hidden;
-}
-
-.rr-side-toggle input[type="radio"] { display: none; }
-
-.rr-side-toggle label {
-  padding: 8px 18px;
-  cursor: pointer;
-  font-size: var(--rr-fs-lg);
-  font-weight: 500;
-  background: var(--rr-bg);
-  color: var(--rr-ink-soft);
-  transition: all 0.15s;
-}
-
-.rr-side-toggle input[type="radio"]:checked + label {
-  background: var(--rr-accent);
-  color: #fff;
-}
-
-.rr-side-empty-option {
-  font-style: italic;
-  color: var(--rr-ink-muted) !important;
-}
-
-.rr-side-toggle input[type="radio"]:checked + .rr-side-empty-option {
-  background: var(--rr-ink-muted) !important;
-  color: #fff !important;
-}
-
-
-/* =============================================================================
-   8. FORM-GRID
-   ============================================================================= */
-.rr-row {
-  display: grid;
-  gap: var(--rr-space-md) 20px;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 14px;
-}
-
-.rr-row-three { grid-template-columns: 1fr 1fr 1fr; }
-.rr-row-full  { grid-template-columns: 1fr; }
-
-@media (max-width: 760px) {
-  .rr-row,
-  .rr-row-three { grid-template-columns: 1fr; }
-}
-
-
-/* =============================================================================
-   9. LABELS & INPUTS
-   ============================================================================= */
-label { display: block; font-size: var(--rr-fs-md); }
-
-.rr-lbl {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: var(--rr-fs-xs);
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.rr-lbl > span:first-child {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select,
-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: var(--rr-fs-lg);
-  border: 1px solid var(--rr-field-border);
-  background: var(--rr-field-bg);
-  border-radius: var(--rr-radius-sm);
-  color: var(--rr-ink);
-  font-family: inherit;
-  transition: border 0.15s, box-shadow 0.15s;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--rr-accent);
-  box-shadow: 0 0 0 3px var(--rr-accent-pale);
-}
-
-textarea {
-  min-height: 80px;
-  resize: vertical;
-  line-height: 1.5;
-}
-
-.rr-field-note {
-  font-size: var(--rr-fs-xs);
-  color: var(--rr-ink-muted);
-  margin-top: var(--rr-space-xs);
-  line-height: 1.4;
-}
-
-
-/* =============================================================================
-   10. AI-STATES & RADLEX-BADGES
-   ============================================================================= */
-input.rr-is-ai-filled,
-.rr-is-ai-filled {
-  background: var(--rr-ai-tint);
-  border-color: var(--rr-ai-border);
-}
-
-.rr-ai-badge {
-  background: var(--rr-accent);
-  color: #fff;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  padding: 2px 5px;
-  border-radius: var(--rr-radius-xs);
-  text-transform: uppercase;
-  display: none;
-}
-
-.rr-ai-badge.rr-is-active { display: inline-block; }
-
-.rr-rl-badge {
-  background: var(--rr-radlex-tint);
-  color: var(--rr-radlex-ink);
-  border: 1px solid var(--rr-radlex-ink);
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  padding: 1px 4px;
-  border-radius: var(--rr-radius-xs);
-  text-transform: uppercase;
-  font-weight: 600;
-  font-family: var(--rr-font-mono);
-}
-
-
-/* =============================================================================
-   11. DETAILS / COLLAPSIBLES
-   ============================================================================= */
-details {
-  border: 1px solid var(--rr-rule);
-  border-radius: var(--rr-radius);
-  margin-top: 12px;
-  background: var(--rr-bg);
-}
-
-details summary {
-  cursor: pointer;
-  padding: 12px var(--rr-space-md);
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  color: var(--rr-ink-soft);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  list-style: none;
-}
-
-details summary::-webkit-details-marker { display: none; }
-details summary::before { content: "▸ "; color: var(--rr-accent); margin-right: 6px; }
-details[open] summary::before { content: "▾ "; }
-details > div { padding: 0 var(--rr-space-md) var(--rr-space-md); }
-
-
-/* =============================================================================
-   12. GRADE-SUMMARY (generisch für KL, RAMRIS, Lung-RADS, etc.)
-   ============================================================================= */
-.rr-grade-summary {
-  background: var(--rr-bg-alt);
-  border-radius: var(--rr-radius);
-  padding: var(--rr-space-md) 20px;
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: var(--rr-space-md);
-}
-
-.rr-grade-item {
-  font-size: var(--rr-fs-sm);
-  color: var(--rr-ink-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.rr-grade-item strong {
-  display: block;
-  font-size: var(--rr-fs-xl);
-  font-weight: 600;
-  color: var(--rr-accent);
-  font-family: var(--rr-font-sans);
-  margin-top: 4px;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-
-/* =============================================================================
-   13. RESULT-BOX (CPAK, generische Berechnungs-Outputs)
-   ============================================================================= */
-.rr-result-box,
-.rr-cpak-box {
-  background: linear-gradient(to right, var(--rr-accent-pale), var(--rr-bg-alt));
-  border: 1px solid var(--rr-accent-pale);
-  border-radius: var(--rr-radius);
-  padding: 18px 22px;
-  margin-top: var(--rr-space-md);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.rr-result-value,
-.rr-cpak-result {
-  font-family: var(--rr-font-serif);
-  font-size: var(--rr-fs-2xl);
-  font-weight: 600;
-  color: var(--rr-accent);
-  min-width: 80px;
-}
-
-.rr-result-detail,
-.rr-cpak-detail {
-  font-size: var(--rr-fs-md);
-  color: var(--rr-ink-soft);
-  line-height: 1.5;
-}
-
-
-/* =============================================================================
-   14. PFLICHTFELD-VALIDIERUNG
-   ============================================================================= */
-.rr-req-indicator {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--rr-critical);
-  margin-left: 6px;
-  vertical-align: middle;
-  animation: rr-pulse 2s ease-in-out infinite;
-}
-
-@keyframes rr-pulse {
-  0%, 100% { opacity: 0.4; }
-  50%      { opacity: 1; }
-}
-
-select.rr-is-required-empty,
-.rr-side-toggle.rr-is-required-empty {
-  border-color: var(--rr-critical) !important;
-  box-shadow: 0 0 0 2px rgba(196, 88, 72, 0.1);
-}
-
-
-/* =============================================================================
-   15. PREVIEW-PANE
-   ============================================================================= */
-.rr-preview-title {
-  font-family: var(--rr-font-sans);
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--rr-accent);
-  margin: 0;
-}
-
-.rr-preview-title-rule {
-  height: 1px;
-  background: var(--rr-rule);
-  margin: var(--rr-space-sm) 0 28px;
-}
-
-.rr-preview-section { margin-bottom: 26px; }
-
-.rr-preview-section h4 {
-  font-size: 10px;
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin: 0 0 var(--rr-space-sm);
-  font-weight: 600;
-}
-
-.rr-preview-content {
-  font-family: var(--rr-font-serif);
-  font-size: var(--rr-fs-base);
-  line-height: 1.7;
-  color: var(--rr-ink);
-  white-space: pre-wrap;
-}
-
-.rr-preview-editable {
-  font-family: var(--rr-font-serif);
-  font-size: var(--rr-fs-base);
-  line-height: 1.7;
-  min-height: 90px;
-  background: var(--rr-bg);
-}
-
-
-/* =============================================================================
-   16. BUTTONS & ACTIONS
-   ============================================================================= */
-.rr-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-.rr-btn,
-button {
-  background: var(--rr-accent);
-  color: #fff;
-  padding: 10px 18px;
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  letter-spacing: 0.01em;
-  transition: all 0.15s;
-  box-shadow: var(--rr-shadow-sm);
-  font-family: inherit;
-}
-
-.rr-btn:hover,
-button:hover {
-  background: var(--rr-accent-light);
-  transform: translateY(-1px);
-  box-shadow: var(--rr-shadow-md);
-}
-
-.rr-btn-secondary,
-button.rr-btn-secondary {
-  background: var(--rr-bg);
-  color: var(--rr-ink-soft);
-  border: 1px solid var(--rr-field-border);
-  box-shadow: none;
-}
-
-.rr-btn-secondary:hover,
-button.rr-btn-secondary:hover {
-  background: var(--rr-accent-pale);
-  color: var(--rr-accent);
-  border-color: var(--rr-accent);
-  transform: none;
-}
-
-
-/* =============================================================================
-   17. EXPORT-AREA
-   ============================================================================= */
-.rr-export-area {
-  display: none;
-  margin-top: 20px;
-  padding: 20px;
-  background: #1e2a36;
-  color: #a8c4dd;
-  border-radius: var(--rr-radius);
-  font-family: var(--rr-font-mono);
-  font-size: var(--rr-fs-xs);
-  white-space: pre;
-  overflow-x: auto;
-  max-height: 400px;
-  overflow-y: auto;
-  line-height: 1.5;
-}
-
-.rr-export-area.rr-is-visible { display: block; }
-
-
-/* =============================================================================
-   18. CODESYSTEM-LEGENDE
-   ============================================================================= */
-.rr-codesystem-legend {
-  margin-top: var(--rr-space-sm);
-  font-size: 10px;
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.04em;
-  font-family: var(--rr-font-mono);
-}
-
-.rr-codesystem-legend .rr-badge-mini {
-  display: inline-block;
-  padding: 1px 5px;
-  border-radius: var(--rr-radius-xs);
-  margin-right: 4px;
-  font-weight: 600;
-}
-
-.rr-codesystem-legend .rr-is-verified {
-  background: #e8f5ec;
-  color: #2d6a4f;
-  border: 1px solid #2d6a4f;
-}
-
-.rr-codesystem-legend .rr-is-local {
-  background: #fdf4e3;
-  color: #8b6914;
-  border: 1px solid #c4a558;
-}
-
-.rr-codesystem-legend .rr-is-needs {
-  background: #fbe9e7;
-  color: #9c2c1a;
-  border: 1px solid #c45848;
-}
-
-
-/* =============================================================================
-   19. UTILITIES (sparsam einsetzen)
-   ============================================================================= */
-.rr-u-hidden  { display: none !important; }
-.rr-u-mt-sm   { margin-top: var(--rr-space-sm) !important; }
-.rr-u-mt-md   { margin-top: var(--rr-space-md) !important; }
-.rr-u-mt-lg   { margin-top: var(--rr-space-lg) !important; }
-.rr-u-text-warn { color: var(--rr-warn) !important; }
-.rr-u-text-critical { color: var(--rr-critical) !important; }
-
-
-/* =============================================================================
-   20. PRINT
-   ============================================================================= */
-@media print {
-  body { background: #fff; }
-  .rr-app { display: block; max-width: none; }
-  .rr-input-pane,
-  .rr-mode-switch,
-  .rr-actions,
-  .rr-export-area,
-  .rr-helper-info,
-  .rr-codesystem-legend { display: none !important; }
-  .rr-preview-pane {
-    position: static;
-    height: auto;
-    padding: 0;
-    background: #fff;
-    overflow: visible;
-  }
-  .rr-preview-section { page-break-inside: avoid; }
-  .rr-preview-editable {
-    border: none;
-    padding: 0;
-    background: transparent;
-  }
-}
-
-
-/* =================================================================
-   TEMPLATE-SPEZIFISCHES CSS – LI-RADS
-   ================================================================= */
-*{box-sizing:border-box}
-html,body{
-  margin:0;padding:0;
-  background:var(--rr-bg-alt);
-  color:var(--rr-ink);
-  font-family:"Source Sans 3","Segoe UI",-apple-system,BlinkMacSystemFont,sans-serif;
-  line-height:1.6;
-  font-size:15px;
-  font-weight:400;
-  -webkit-font-smoothing:antialiased;
-}
-
-.app{
-  display:grid;
-  grid-template-columns:minmax(480px,1fr) minmax(440px,560px);
-  gap:0;
-  min-height:100vh;
-  max-width:1700px;
-  margin:0 auto;
-  background:var(--rr-bg);
-}
-@media (max-width:1100px){.app{grid-template-columns:1fr}}
-
-.input-pane{
-  padding:48px 56px 100px;
-  background:var(--rr-bg);
-  border-right:1px solid var(--rr-rule);
-}
-.preview-pane{
-  padding:48px 48px 100px;
-  background:var(--rr-bg-alt);
-  position:sticky;
-  top:0;
-  height:100vh;
-  overflow-y:auto;
-}
-
-h1.doc-title{
-  font-family:"Source Sans 3",sans-serif;
-  font-weight:600;
-  font-size:30px;
-  letter-spacing:-0.02em;
-  color:var(--rr-ink);
-  margin:0 0 8px;
-  line-height:1.2;
-}
-.doc-sub{
-  font-size:13px;
-  color:var(--rr-ink-muted);
-  letter-spacing:0.02em;
-  margin-bottom:8px;
-  font-weight:400;
-}
-.title-rule{
-  width:48px;
-  height:2px;
-  background:var(--rr-accent);
-  margin:24px 0 36px;
-}
-
-h2{
-  font-family:"Source Sans 3",sans-serif;
-  font-weight:600;
-  font-size:21px;
-  color:var(--rr-ink);
-  margin:0 0 6px;
-  letter-spacing:-0.01em;
-  display:flex;
-  align-items:baseline;
-  gap:12px;
-}
-h2 .badge{
-  font-size:10px;
-  font-weight:600;
-  color:var(--rr-accent);
-  background:var(--rr-accent-pale);
-  padding:3px 8px;
-  border-radius:3px;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-}
-.h2-wrap{margin:40px 0 20px}
-.h2-wrap h2{margin:0 0 6px}
-.h2-wrap .h2-rule{width:32px;height:2px;background:var(--rr-accent)}
-.h2-wrap .h2-sub{
-  font-size:13px;color:var(--rr-ink-muted);margin-top:10px;
-  font-weight:400;line-height:1.5;
-}
-
-h3.lesion-title{
-  font-size:14px;font-weight:600;color:var(--rr-accent);
-  margin:0 0 14px;letter-spacing:0.02em;
-  display:flex;align-items:center;justify-content:space-between;
-}
-h3.lesion-title .lesion-cat{
-  font-family:"Source Sans 3";font-size:13px;font-weight:600;
-  padding:4px 10px;border-radius:4px;letter-spacing:0.04em;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-bottom:12px;
-}
-.row.three{grid-template-columns:1fr 1fr 1fr}
-.row.full{grid-template-columns:1fr}
-
-label{
-  display:flex;flex-direction:column;
-  font-size:13px;color:var(--rr-ink-soft);gap:6px;font-weight:400;
-}
-label .lbl{
-  display:flex;justify-content:space-between;align-items:baseline;
-  font-weight:500;color:var(--rr-ink);
-}
-label .unit{font-size:11px;color:var(--rr-ink-muted);font-weight:400}
-
-input[type="text"],input[type="number"],select,textarea{
-  font-family:inherit;font-size:14px;color:var(--rr-ink);
-  background:var(--field-bg);border:1px solid var(--rr-field-border);
-  padding:10px 12px;border-radius:4px;
-  transition:all 0.15s ease;font-weight:400;
-}
-input[type="number"]{font-variant-numeric:tabular-nums}
-input:focus,select:focus,textarea:focus{
-  outline:none;border-color:var(--rr-accent);
-  box-shadow:0 0 0 3px rgba(44,95,141,0.1);
-}
-textarea{min-height:70px;resize:vertical;line-height:1.5}
-select{
-  appearance:none;
-  background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%235a6c7d%22%20stroke-width%3D%222%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%2F%3E%3C%2Fsvg%3E");
-  background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;
-}
-
-/* MODE SWITCH */
-.mode-switch{
-  display:flex;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);
-  border-radius:6px;padding:4px;margin-bottom:20px;font-size:13px;gap:2px;
-}
-.mode-switch input{display:none}
-.mode-switch label{
-  flex:1;text-align:center;padding:9px 12px;cursor:pointer;border-radius:4px;
-  transition:all 0.2s;color:var(--rr-ink-soft);font-weight:500;
-  flex-direction:row;justify-content:center;
-}
-.mode-switch input:checked + label{
-  background:var(--rr-accent);color:#fff;box-shadow:var(--rr-shadow-sm);
-}
-
-/* MODALITY SWITCH */
-.modality-switch{
-  display:inline-flex;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);
-  border-radius:6px;padding:3px;font-size:13px;font-weight:500;margin-bottom:20px;
-}
-.modality-switch input{display:none}
-.modality-switch label{
-  padding:8px 18px;cursor:pointer;color:var(--rr-ink-soft);
-  border-radius:4px;transition:all 0.15s;flex-direction:row;
-}
-.modality-switch input:checked + label{background:var(--rr-accent);color:#fff}
-.modality-switch label.disabled{
-  opacity:0.4;cursor:not-allowed;position:relative;
-}
-.modality-switch label.disabled::after{
-  content:'v2.0';font-size:9px;background:var(--rr-ink-muted);color:#fff;
-  padding:1px 5px;border-radius:2px;margin-left:6px;letter-spacing:0.05em;
-}
-
-.helper-info{
-  background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);
-  padding:13px 18px;margin:14px 0 28px;font-size:13px;color:var(--rr-ink-soft);
-  line-height:1.5;border-radius:0 4px 4px 0;
-}
-.helper-info strong{color:var(--rr-accent);font-weight:600}
-
-.warn-box{
-  background:var(--warn-bg);border-left:3px solid var(--warn-border);
-  padding:13px 18px;margin:14px 0;font-size:13px;color:var(--rr-ink);
-  line-height:1.5;border-radius:0 4px 4px 0;
-  display:none;
-}
-.warn-box.show{display:block}
-.warn-box strong{color:var(--rr-warn);font-weight:600}
-
-.exclude-box{
-  background:var(--malignant-bg);border-left:3px solid var(--malignant);
-  padding:13px 18px;margin:14px 0;font-size:13px;color:var(--rr-ink);
-  line-height:1.5;border-radius:0 4px 4px 0;
-}
-.exclude-box strong{color:var(--malignant);font-weight:600}
-
-/* AT-RISK / EXCLUSION GRID */
-.atrisk-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 12px;
-}
-.atrisk-grid label.check{
-  flex-direction:row;align-items:center;gap:10px;color:var(--rr-ink);
-  font-size:14px;cursor:pointer;padding:10px 14px;border-radius:5px;
-  border:1px solid var(--rr-rule);background:var(--rr-bg);font-weight:400;
-  transition:all 0.15s;
-}
-.atrisk-grid label.check:hover{border-color:var(--rr-field-border);background:var(--rr-bg-alt)}
-.atrisk-grid input[type="checkbox"]{
-  appearance:none;width:18px;height:18px;border:1.5px solid var(--rr-field-border);
-  border-radius:3px;cursor:pointer;position:relative;transition:all 0.15s;flex-shrink:0;
-}
-.atrisk-grid input[type="checkbox"]:checked{background:var(--rr-accent);border-color:var(--rr-accent)}
-.atrisk-grid input[type="checkbox"]:checked::after{
-  content:'';position:absolute;left:5px;top:1px;width:5px;height:10px;
-  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
-}
-.atrisk-grid.exclude label.check input:checked{background:var(--malignant);border-color:var(--malignant)}
-
-/* LESION CARDS */
-.lesion-card{
-  border:1px solid var(--rr-rule);border-radius:8px;padding:24px 26px;
-  margin-bottom:18px;background:var(--rr-bg);transition:all 0.15s;
-  position:relative;
-}
-.lesion-card.has-data{border-color:var(--rr-accent-light);box-shadow:var(--rr-shadow-sm)}
-.lesion-card .lesion-remove{
-  position:absolute;top:18px;right:18px;
-  background:transparent;border:none;color:var(--rr-ink-faint);
-  font-size:18px;cursor:pointer;padding:4px 8px;
-  transition:color 0.15s;display:none;
-}
-.lesion-card .lesion-remove:hover{color:var(--malignant)}
-.lesion-card.has-data .lesion-remove{display:block}
-
-/* TREATED TOGGLE */
-.treated-toggle{
-  display:flex;align-items:center;gap:14px;
-  background:var(--tr-bg);border:1px solid var(--tr-color);
-  padding:12px 18px;border-radius:6px;margin:14px 0 18px;
-}
-.treated-toggle label{
-  flex-direction:row;align-items:center;gap:10px;cursor:pointer;
-  font-weight:500;color:var(--tr-color);font-size:13.5px;
-}
-.treated-toggle input[type="checkbox"]{
-  appearance:none;width:18px;height:18px;border:1.5px solid var(--tr-color);
-  border-radius:3px;cursor:pointer;position:relative;transition:all 0.15s;
-}
-.treated-toggle input[type="checkbox"]:checked{background:var(--tr-color)}
-.treated-toggle input[type="checkbox"]:checked::after{
-  content:'';position:absolute;left:5px;top:1px;width:5px;height:10px;
-  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
-}
-
-.feature-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;
-}
-.feature-grid label.check{
-  flex-direction:row;align-items:center;gap:10px;color:var(--rr-ink);
-  font-size:13.5px;cursor:pointer;padding:8px 12px;border-radius:4px;
-  border:1px solid var(--rr-rule);background:var(--rr-bg);font-weight:400;
-  transition:all 0.15s;
-}
-.feature-grid label.check:hover{border-color:var(--rr-field-border);background:var(--rr-bg-alt)}
-.feature-grid input[type="checkbox"]{
-  appearance:none;width:16px;height:16px;border:1.5px solid var(--rr-field-border);
-  border-radius:3px;cursor:pointer;position:relative;transition:all 0.15s;flex-shrink:0;
-}
-.feature-grid input[type="checkbox"]:checked{background:var(--rr-accent);border-color:var(--rr-accent)}
-.feature-grid input[type="checkbox"]:checked::after{
-  content:'';position:absolute;left:4px;top:0px;width:4px;height:9px;
-  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
-}
-
-.feature-section-label{
-  font-size:11px;text-transform:uppercase;letter-spacing:0.08em;
-  color:var(--rr-ink-soft);font-weight:600;margin:18px 0 6px;
-}
-.feature-section-label.malig{color:var(--malignant)}
-.feature-section-label.benign{color:var(--benign)}
-.feature-section-label.tr{color:var(--tr-color)}
-
-/* TIE-BREAK TOGGLE */
-.tiebreak-toggle{
-  display:flex;align-items:center;gap:14px;
-  background:var(--warn-bg);border:1px solid var(--warn-border);
-  padding:10px 16px;border-radius:5px;margin:14px 0;font-size:13px;
-}
-.tiebreak-toggle label{
-  flex-direction:row;align-items:center;gap:10px;cursor:pointer;
-  color:var(--rr-warn);font-weight:500;
-}
-.tiebreak-toggle input[type="checkbox"]{
-  appearance:none;width:16px;height:16px;border:1.5px solid var(--rr-warn);
-  border-radius:3px;cursor:pointer;position:relative;transition:all 0.15s;
-}
-.tiebreak-toggle input[type="checkbox"]:checked{background:var(--rr-warn);border-color:var(--rr-warn)}
-.tiebreak-toggle input[type="checkbox"]:checked::after{
-  content:'';position:absolute;left:4px;top:0px;width:4px;height:9px;
-  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
-}
-
-/* TIV SUBTYPE */
-.tiv-subtype{
-  margin-top:10px;padding:12px 16px;background:var(--malignant-bg);
-  border-radius:5px;display:none;
-}
-.tiv-subtype.show{display:block}
-.tiv-subtype .lbl{font-size:12px;color:var(--malignant);font-weight:600;margin-bottom:8px}
-.tiv-subtype select{font-size:13px}
-
-/* LR-TR SECTION */
-.lrtr-section{
-  margin-top:14px;padding:18px 20px;background:var(--tr-bg);
-  border:1px solid var(--tr-color);border-radius:6px;display:none;
-}
-.lrtr-section.show{display:block}
-.lrtr-section h4{
-  font-size:13px;color:var(--tr-color);margin:0 0 12px;
-  font-weight:600;letter-spacing:0.02em;
-}
-.lrtr-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:8px;
-}
-.lrtr-grid button{
-  font-family:inherit;font-size:13px;font-weight:500;
-  padding:11px 14px;background:var(--rr-bg);color:var(--tr-color);
-  border:1.5px solid var(--tr-color);border-radius:5px;cursor:pointer;
-  transition:all 0.15s;
-}
-.lrtr-grid button:hover{background:var(--tr-color);color:#fff}
-.lrtr-grid button.selected{background:var(--tr-color);color:#fff}
-
-/* LR CATEGORY BOX */
-.lr-box{
-  margin-top:16px;padding:20px 24px;border-radius:8px;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-  border:2px solid var(--rr-rule);background:var(--rr-bg-alt);
-}
-.lr-box.lr-1, .lr-box.lr-2{border-color:var(--benign);background:var(--benign-bg)}
-.lr-box.lr-3{border-color:var(--intermediate);background:var(--intermediate-bg)}
-.lr-box.lr-4, .lr-box.lr-5, .lr-box.lr-m, .lr-box.lr-tiv{
-  border-color:var(--malignant);background:var(--malignant-bg);
-}
-.lr-box.lr-tr{border-color:var(--tr-color);background:var(--tr-bg)}
-.lr-box .lr-label{
-  font-size:10px;text-transform:uppercase;letter-spacing:0.12em;
-  color:var(--rr-ink-muted);margin-bottom:6px;font-weight:600;
-}
-.lr-box .lr-value{
-  font-size:28px;font-weight:600;color:var(--rr-ink);
-  letter-spacing:-0.02em;line-height:1;
-}
-.lr-box.lr-1 .lr-value, .lr-box.lr-2 .lr-value{color:var(--benign)}
-.lr-box.lr-3 .lr-value{color:var(--intermediate)}
-.lr-box.lr-4 .lr-value, .lr-box.lr-5 .lr-value, .lr-box.lr-m .lr-value, .lr-box.lr-tiv .lr-value{color:var(--malignant)}
-.lr-box.lr-tr .lr-value{color:var(--tr-color)}
-.lr-box .lr-detail{
-  font-size:13px;color:var(--rr-ink-soft);line-height:1.5;text-align:right;flex:1;
-}
-.lr-box .lr-detail strong{color:var(--rr-ink)}
-
-/* CALC STEPS - show the 4 Schritte */
-.calc-steps{
-  margin-top:10px;padding:14px 18px;background:var(--rr-bg-alt);
-  border:1px dashed var(--rr-rule);border-radius:6px;font-size:12.5px;
-  color:var(--rr-ink-soft);line-height:1.7;
-}
-.calc-steps .step{margin:2px 0}
-.calc-steps .step strong{color:var(--rr-ink);font-weight:600}
-.calc-steps .step-active{color:var(--rr-accent);font-weight:500}
-.calc-steps .step-applied{color:var(--malignant);font-weight:500}
-.calc-steps .step-skipped{color:var(--rr-ink-muted);font-style:italic}
-
-/* WIZARD STEPS */
-.wizard{display:none}
-.wizard.active{display:block}
-.wizard-step{
-  border:1px solid var(--rr-rule);border-radius:6px;
-  padding:0;margin-bottom:14px;background:var(--rr-bg);
-  transition:all 0.2s;
-}
-.wizard-step.completed{border-color:var(--benign);background:var(--benign-bg)}
-.wizard-step.active{border-color:var(--rr-accent);box-shadow:0 0 0 3px rgba(44,95,141,0.1)}
-.wizard-step-header{
-  display:flex;align-items:center;gap:14px;padding:14px 20px;
-  cursor:pointer;font-weight:500;color:var(--rr-ink);
-}
-.wizard-step-number{
-  width:28px;height:28px;border-radius:50%;background:var(--rr-bg-alt);
-  border:1.5px solid var(--rr-field-border);display:flex;
-  align-items:center;justify-content:center;font-size:13px;
-  font-weight:600;color:var(--rr-ink-soft);flex-shrink:0;
-}
-.wizard-step.completed .wizard-step-number{
-  background:var(--benign);border-color:var(--benign);color:#fff;
-}
-.wizard-step.completed .wizard-step-number::after{content:'✓';font-size:14px}
-.wizard-step.completed .wizard-step-number-text{display:none}
-.wizard-step.active .wizard-step-number{
-  background:var(--rr-accent);border-color:var(--rr-accent);color:#fff;
-}
-.wizard-step-body{padding:0 20px 20px;display:none}
-.wizard-step.active .wizard-step-body{display:block}
-.wizard-step-question{font-size:14px;font-weight:500;color:var(--rr-ink);margin:6px 0 12px}
-.wizard-step-help{font-size:12.5px;color:var(--rr-ink-muted);margin-bottom:12px;line-height:1.5}
-.wizard-answer{display:flex;gap:8px;flex-wrap:wrap}
-.wizard-answer button{
-  font-family:inherit;font-size:13px;font-weight:500;
-  padding:9px 16px;background:var(--rr-bg);color:var(--rr-ink-soft);
-  border:1px solid var(--rr-field-border);border-radius:5px;cursor:pointer;
-  transition:all 0.15s;
-}
-.wizard-answer button:hover{
-  background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent);
-}
-.wizard-answer button.selected{
-  background:var(--rr-accent);color:#fff;border-color:var(--rr-accent);
-}
-
-/* DIRECT MODE */
-.direct-cat-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px;
-}
-.direct-cat-grid button{
-  font-family:inherit;font-size:14px;font-weight:600;
-  padding:18px 12px;border-radius:6px;cursor:pointer;
-  transition:all 0.15s;border:2px solid;
-}
-.direct-cat-grid .cat-1, .direct-cat-grid .cat-2{
-  background:var(--rr-bg);color:var(--benign);border-color:var(--benign);
-}
-.direct-cat-grid .cat-1:hover, .direct-cat-grid .cat-2:hover,
-.direct-cat-grid .cat-1.selected, .direct-cat-grid .cat-2.selected{
-  background:var(--benign);color:#fff;
-}
-.direct-cat-grid .cat-3{background:var(--rr-bg);color:var(--intermediate);border-color:var(--intermediate)}
-.direct-cat-grid .cat-3:hover, .direct-cat-grid .cat-3.selected{background:var(--intermediate);color:#fff}
-.direct-cat-grid .cat-4, .direct-cat-grid .cat-5,
-.direct-cat-grid .cat-m, .direct-cat-grid .cat-tiv,
-.direct-cat-grid .cat-nc{
-  background:var(--rr-bg);color:var(--malignant);border-color:var(--malignant);
-}
-.direct-cat-grid .cat-4:hover, .direct-cat-grid .cat-5:hover,
-.direct-cat-grid .cat-m:hover, .direct-cat-grid .cat-tiv:hover,
-.direct-cat-grid .cat-nc:hover,
-.direct-cat-grid .cat-4.selected, .direct-cat-grid .cat-5.selected,
-.direct-cat-grid .cat-m.selected, .direct-cat-grid .cat-tiv.selected,
-.direct-cat-grid .cat-nc.selected{
-  background:var(--malignant);color:#fff;
-}
-.direct-cat-grid .cat-tr{background:var(--rr-bg);color:var(--tr-color);border-color:var(--tr-color)}
-.direct-cat-grid .cat-tr:hover, .direct-cat-grid .cat-tr.selected{background:var(--tr-color);color:#fff}
-.direct-cat-grid .cat-nc{color:var(--rr-ink-soft);border-color:var(--rr-field-border)}
-.direct-cat-grid .cat-nc:hover, .direct-cat-grid .cat-nc.selected{background:var(--rr-ink-soft);color:#fff}
-
-/* LESION TABS */
-.lesion-tabs{
-  display:flex;gap:2px;margin:0 0 16px;border-bottom:1px solid var(--rr-rule);
-}
-.lesion-tab{
-  padding:10px 16px;font-size:13px;font-weight:500;cursor:pointer;
-  color:var(--rr-ink-soft);border:none;background:transparent;
-  border-bottom:2px solid transparent;transition:all 0.15s;
-  font-family:inherit;
-}
-.lesion-tab:hover{color:var(--rr-accent)}
-.lesion-tab.active{color:var(--rr-accent);border-bottom-color:var(--rr-accent)}
-.lesion-tab .tab-cat{
-  display:inline-block;margin-left:8px;font-size:11px;
-  padding:2px 7px;border-radius:3px;font-weight:600;
-}
-
-/* COLLAPSIBLE */
-details{
-  margin:14px 0;border:1px solid var(--rr-rule);border-radius:6px;background:var(--rr-bg);
-}
-details[open]{box-shadow:var(--rr-shadow-sm)}
-summary{
-  cursor:pointer;padding:12px 18px;font-size:13px;font-weight:600;
-  color:var(--rr-ink);list-style:none;display:flex;align-items:center;gap:10px;
-}
-summary::-webkit-details-marker{display:none}
-summary::before{
-  content:'+';display:inline-block;width:18px;height:18px;text-align:center;
-  line-height:16px;font-size:16px;color:var(--rr-accent);font-weight:400;
-}
-details[open] summary::before{content:'−'}
-details[open] summary{border-bottom:1px solid var(--rr-rule)}
-details > div{padding:18px}
-
-/* PREVIEW PANE */
-.preview-pane h2.preview-title{
-  font-size:23px;font-weight:600;color:var(--rr-ink);margin:0 0 8px;letter-spacing:-0.01em;
-}
-.preview-title-rule{width:32px;height:2px;background:var(--rr-accent);margin-bottom:30px}
-.preview-section{margin-bottom:24px}
-.preview-section h4{
-  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;
-  color:var(--rr-accent);margin:0 0 10px;
-}
-.preview-section .content{
-  font-size:14.5px;line-height:1.65;color:var(--rr-ink);white-space:pre-wrap;
-  background:var(--rr-bg);padding:18px 22px;border:1px solid var(--rr-rule);
-  border-radius:6px;font-family:"Source Serif 4",Georgia,serif;min-height:22px;
-}
-#prev_beurteilung{
-  width:100%;min-height:120px;
-  font-family:"Source Serif 4",Georgia,serif;font-size:14.5px;line-height:1.6;
-  background:var(--rr-bg);padding:18px 22px;border:1px solid var(--rr-rule);border-radius:6px;
-}
-#prev_beurteilung:focus{border-color:var(--rr-accent)}
-
-.actions{
-  position:sticky;bottom:0;background:var(--rr-bg-alt);padding:20px 0 0;
-  border-top:1px solid var(--rr-rule);margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;
-}
-button.btn-primary{
-  font-family:inherit;font-size:13.5px;font-weight:500;padding:11px 20px;
-  background:var(--rr-accent);color:#fff;border:none;border-radius:5px;cursor:pointer;
-  letter-spacing:0.01em;transition:all 0.15s;box-shadow:var(--rr-shadow-sm);
-}
-button.btn-primary:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md)}
-button.secondary{
-  background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border);
-  font-family:inherit;font-size:13.5px;font-weight:500;padding:11px 20px;
-  border-radius:5px;cursor:pointer;transition:all 0.15s;
-}
-button.secondary:hover{
-  background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent);
-}
-
-.export-area{
-  display:none;margin-top:20px;padding:20px;background:#1e2a36;color:#a8c4dd;
-  border-radius:6px;font-family:"SF Mono","Menlo",monospace;font-size:11px;
-  white-space:pre;overflow-x:auto;max-height:400px;overflow-y:auto;line-height:1.5;
-}
-.export-area.show{display:block}
-
-.evidence-footer{
-  margin-top:40px;padding:18px 0 0;border-top:1px solid var(--rr-rule);
-  font-size:12px;color:var(--rr-ink-muted);line-height:1.6;
-}
-.evidence-footer strong{color:var(--rr-ink-soft)}
-.evidence-footer em{color:var(--rr-accent);font-style:normal;font-weight:500}
-
-/* LTx Section */
-.ltx-section{
-  margin-top:30px;padding:24px 28px;background:var(--ltx-bg);
-  border:1px solid var(--ltx-border);border-radius:8px;
-  display:none;
-}
-.ltx-section.show{display:block}
-.ltx-section h3{
-  color:var(--ltx-color);font-size:16px;font-weight:600;margin:0 0 14px;
-  display:flex;align-items:center;gap:10px;
-}
-.ltx-section h3::before{
-  content:'§16';font-size:10px;background:var(--ltx-color);color:#fff;
-  padding:3px 7px;border-radius:3px;font-weight:600;letter-spacing:0.04em;
-}
-.ltx-section .ltx-sub{
-  font-size:13px;color:var(--rr-ink-soft);margin-bottom:18px;line-height:1.5;
-}
-.mailand-box{
-  background:var(--rr-bg);border:2px solid var(--ltx-border);
-  border-radius:6px;padding:18px 22px;margin-top:16px;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-}
-.mailand-box.in{border-color:var(--benign);background:var(--benign-bg)}
-.mailand-box.out{border-color:var(--malignant);background:var(--malignant-bg)}
-.mailand-box .ml-label{
-  font-size:10px;text-transform:uppercase;letter-spacing:0.12em;
-  color:var(--rr-ink-muted);margin-bottom:6px;font-weight:600;
-}
-.mailand-box .ml-value{
-  font-size:22px;font-weight:600;color:var(--rr-ink);
-  letter-spacing:-0.02em;line-height:1.1;
-}
-.mailand-box.in .ml-value{color:var(--benign)}
-.mailand-box.out .ml-value{color:var(--malignant)}
-.mailand-box .ml-detail{
-  font-size:13px;color:var(--rr-ink-soft);line-height:1.5;text-align:right;flex:1;
-}
-.ltx-criteria{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;
-  font-size:13px;
-}
-.ltx-criteria .crit{
-  padding:8px 12px;background:var(--rr-bg);border:1px solid var(--rr-rule);
-  border-radius:4px;display:flex;justify-content:space-between;align-items:center;
-}
-.ltx-criteria .crit.met{border-left:3px solid var(--benign);color:var(--rr-ink)}
-.ltx-criteria .crit.violated{border-left:3px solid var(--malignant);color:var(--rr-ink)}
-.ltx-criteria .crit-label{font-size:12.5px;color:var(--rr-ink-soft)}
-.ltx-criteria .crit-value{font-weight:600;font-size:13px}
-.ltx-criteria .crit.met .crit-value{color:var(--benign)}
-.ltx-criteria .crit.violated .crit-value{color:var(--malignant)}
-
-/* LTx-specific fields per lesion */
-.ltx-lesion-fields{
-  margin-top:14px;padding:14px 18px;background:var(--ltx-bg);
-  border:1px solid var(--ltx-border);border-radius:5px;
-  display:none;
-}
-.ltx-lesion-fields.show{display:block}
-.ltx-lesion-fields .ltx-lbl{
-  font-size:11px;color:var(--ltx-color);font-weight:600;
-  text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;
-}
-.ltx-lesion-fields .row{margin-bottom:8px}
-
-/* ET number & DRG-style fields */
-.et-row{
-  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;
-}
-
-/* RadLex info badge */
-.radlex-indicator{
-  display:inline-block;font-size:9px;font-weight:600;
-  background:#5a6c7d;color:#fff;padding:1px 5px;border-radius:2px;
-  margin-left:6px;letter-spacing:0.04em;vertical-align:middle;cursor:help;
-}
-</style>
 </head>
 <body>
 
-<div class="rr-app">
+<!--
+  KANONISCH / A-Struktur: nacktes deklaratives MRRT.
+  Enthält ausschließlich das kodierte Eingabeformular (rr-*-Struktur-Hooks).
+  Kein CSS, kein JS, kein Stylesheet-Link. Viewer-Chrome (Mode-Switch
+  Manuell/Geführt/Direkt, geführter Wizard, 4-Schritte-Algorithmus,
+  LR-Kategorie-Box, LR-TR-Buttons, Live-Vorschau, Export) wird in der Demo von
+  demo/ct-lirads-leber/demo.js zur Laufzeit erzeugt.
+  Der Läsionsblock ist EINMAL deklariert (data-lesion="1"); demo.js multipliziert
+  ihn auf bis zu drei Index-Observationen (Tabs).
+  Andock-Anker: risk_grid, tech_grid, lesion_tabs_anchor, lesion_block,
+  lr_calc_anchor.
+  Hinweis Kodierung: LI-RADS-spezifische RadLex-RIDs waren im abgelösten
+  Inline-Template widersprüchlich belegt und sind – bis Registry-Verifikation –
+  als data-radlex-status="local" geführt (Kandidaten siehe RADLEX-MAPPING.md).
+  Registry-verbatim gesichert kodiert: Läsionsgröße (RID13432/LOINC 21889-1),
+  Segment (RID29237), Verlaufstrend.
+-->
 
-<!-- ========================== INPUT PANE ========================== -->
+<div class="rr-app">
 <section class="rr-input-pane">
 
-  <h1 class="rr-doc-title">CT Leber – LI-RADS v2018 + DRG-LTx</h1>
-  <div class="doc-sub">MRRT-Template · HCC-Risikopatient · CT (MRT folgt) · v1.2 · HJK Wien</div>
+  <h1 class="rr-doc-title">CT Leber – LI-RADS v2018</h1>
+  <div class="rr-doc-sub">MRRT-Template · HCC-Risikopatient · 4-Schritte-Algorithmus (Schima/Kopf/Eisenhuber 2023) · v1.3 · RadLex-codiert · HJK Wien</div>
   <div class="rr-title-rule"></div>
 
-  <!-- MODALITY -->
-  <div class="modality-switch">
-    <input type="radio" name="modality" id="mod-ct" value="ct" checked>
-    <label for="mod-ct">CT (KM-mehrphasig)</label>
-    <input type="radio" name="modality" id="mod-mrt-ez" value="mrt-ez" disabled>
-    <label for="mod-mrt-ez" class="disabled">MRT extrazellulär</label>
-    <input type="radio" name="modality" id="mod-mrt-hba" value="mrt-hba" disabled>
-    <label for="mod-mrt-hba" class="disabled">MRT hepatobiliär</label>
-  </div>
-
-  <!-- MODE -->
-  <div class="mode-switch">
-    <input type="radio" name="mode" id="mode-manual" value="manual" checked>
-    <label for="mode-manual">Manuell</label>
-    <input type="radio" name="mode" id="mode-guided" value="guided">
-    <label for="mode-guided">Geführt (Made Easy)</label>
-    <input type="radio" name="mode" id="mode-direct" value="direct">
-    <label for="mode-direct">Direkt</label>
-    <input type="radio" name="mode" id="mode-ltx" value="ltx">
-    <label for="mode-ltx">LTx-Evaluation</label>
-  </div>
-
-  <div class="helper-info" id="modeHelper">
-    <strong>Modus Manuell:</strong> Alle Major und Ancillary Features pro Läsion direkt setzen, die LR-Kategorie wird automatisch nach dem 4-Schritte-Algorithmus berechnet.
-  </div>
-
-  <!-- ====================== AT-RISK-POPULATION ====================== -->
-  <div class="h2-wrap">
+  <!-- ===================== HCC-RISIKOPOPULATION ===================== -->
+  <div class="rr-h2-wrap">
     <h2>HCC-Risikopopulation</h2>
-    <div class="h2-rule"></div>
-    <div class="h2-sub">LI-RADS v2018 ist indiziert bei Erwachsenen mit ≥1 zutreffenden Risikomerkmal (nach Schima/Kopf/Eisenhuber 2023).</div>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">LI-RADS v2018 ist indiziert bei Erwachsenen mit ≥ 1 zutreffenden Risikomerkmal.</div>
   </div>
-
-  <div class="atrisk-grid">
-    <label class="check"><input type="checkbox" id="risk_cirrhosis" data-radlex-id="RID3822"> Leberzirrhose (außer Gefäßerkrankungen)</label>
-    <label class="check"><input type="checkbox" id="risk_hbv" data-radlex-id="RID28572"> Chronische HBV-Infektion</label>
-    <label class="check"><input type="checkbox" id="risk_hcc_current" data-radlex-id="RID4271"> Gesichertes/aktuelles HCC</label>
-    <label class="check"><input type="checkbox" id="risk_hcc_treated" data-radlex-id="RID4271"> Z.n. Behandlung eines HCC</label>
+  <div class="rr-checkgrid" id="risk_grid">
+    <label class="rr-check"><input type="checkbox" id="risk_cirrhosis" data-en="cirrhosis" data-radlex-status="local"> Leberzirrhose (außer Gefäßerkrankungen)</label>
+    <label class="rr-check"><input type="checkbox" id="risk_hbv" data-en="chronic hepatitis B" data-radlex-status="local"> Chronische HBV-Infektion</label>
+    <label class="rr-check"><input type="checkbox" id="risk_hcc_current" data-en="hepatocellular carcinoma" data-radlex-status="local"> Gesichertes/aktuelles HCC</label>
+    <label class="rr-check"><input type="checkbox" id="risk_hcc_treated" data-en="treated hepatocellular carcinoma" data-radlex-status="local"> Z. n. Behandlung eines HCC</label>
   </div>
 
   <details>
     <summary>Ausschlusskriterien (LI-RADS NICHT anwenden)</summary>
-    <div>
-      <div class="exclude-box">
-        <strong>LI-RADS darf nicht angewendet werden bei Zirrhose aufgrund von Gefäßerkrankungen:</strong> Budd-Chiari-Syndrom, hereditäre hämorrhagische Teleangiektasie (HHT/Morbus Osler), chronische kardiale Stauung, kongenitale Lebervenenerkrankungen. Ebenfalls nicht: fokale Leberläsionen bei Patienten ohne die o.g. Risikomerkmale, Pädiatrie (&lt; 18 Jahre).
-      </div>
-      <div style="margin-top:14px">
-      <label class="check" style="flex-direction:row;align-items:center;gap:10px;font-size:13.5px;cursor:pointer">
-        <input type="checkbox" id="exclude_vascular" style="appearance:none;width:18px;height:18px;border:1.5px solid var(--malignant);border-radius:3px;cursor:pointer;position:relative">
-        Ausschlusskriterium liegt vor – LI-RADS nicht anwenden
-      </label>
+    <div class="rr-note-block">
+      <strong>LI-RADS darf nicht angewendet werden bei Zirrhose aufgrund von Gefäßerkrankungen:</strong> Budd-Chiari-Syndrom, hereditäre hämorrhagische Teleangiektasie (HHT/Morbus Osler), chronische kardiale Stauung, kongenitale Lebervenenerkrankungen. Ebenfalls nicht: fokale Leberläsionen ohne o. g. Risikomerkmale, Pädiatrie (&lt; 18 Jahre).
+      <div class="rr-row">
+        <label class="rr-check"><input type="checkbox" id="exclude_vascular"> Ausschlusskriterium liegt vor – LI-RADS nicht anwenden</label>
       </div>
     </div>
   </details>
 
-  <div class="warn-box" id="risk_warn">
-    <strong>Hinweis:</strong> Ohne erfülltes Risikokriterium ist LI-RADS nicht anwendbar. Eine Befundung sollte als konventioneller Leberbefund erfolgen.
-  </div>
-
-  <!-- ====================== TECHNIK ====================== -->
-  <div class="h2-wrap">
+  <!-- ===================== TECHNIK ===================== -->
+  <div class="rr-h2-wrap">
     <h2>Technik</h2>
-    <div class="h2-rule"></div>
-    <div class="h2-sub">Multidetektor-CT (≥8 Detektorzeilen) mit dynamischer KM-Untersuchung. Nativphase bei vorangegangener lokoregionärer Therapie empfohlen.</div>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Multidetektor-CT (≥ 8 Zeilen) mit dynamischer KM-Untersuchung. Nativphase bei vorangegangener lokoregionärer Therapie empfohlen.</div>
   </div>
-  <div class="row">
+  <div class="rr-row" id="tech_grid">
     <label>
-      <span class="lbl"><span>Gerät</span></span>
+      <span class="rr-lbl"><span>Gerät</span></span>
       <select id="tech_geraet">
-        <option value="">– bitte wählen –</option>
-        <option value="GoeHei-Force">GöHei – Siemens Somatom Force</option>
+        <option value="" data-radlex-status="needs-mapping">– bitte wählen –</option>
+        <option value="Somatom-Force" data-radlex-status="local" data-en="CT scanner Siemens Somatom Force">Siemens Somatom Force</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>KM</span></span>
+      <span class="rr-lbl"><span>Kontrastmittel</span></span>
       <select id="tech_km">
-        <option value="iohexol">Iohexol (Iomeron 400)</option>
-        <option value="iodixanol">Iodixanol (Visipaque 320)</option>
-        <option value="iopromide">Iopromid (Ultravist 370)</option>
+        <option value="" data-radlex-status="needs-mapping">– bitte wählen –</option>
+        <option value="iohexol" data-radlex-status="local" data-en="iohexol">Iohexol</option>
+        <option value="iodixanol" data-radlex-status="local" data-en="iodixanol">Iodixanol</option>
+        <option value="iopromid" data-radlex-status="local" data-en="iopromide">Iopromid</option>
       </select>
     </label>
   </div>
-  <div class="row three">
+  <div class="rr-row rr-row-three">
     <label>
-      <span class="lbl"><span>Nativphase</span></span>
+      <span class="rr-lbl"><span>Nativphase</span></span>
       <select id="tech_native">
-        <option value="ja">durchgeführt</option>
-        <option value="nein">nicht durchgeführt</option>
+        <option value="" data-radlex-status="needs-mapping">–</option>
+        <option value="ja" data-radlex-status="local" data-en="unenhanced phase performed">durchgeführt</option>
+        <option value="nein" data-radlex-status="needs-mapping">nicht durchgeführt</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Spätarterielle Phase</span></span>
+      <span class="rr-lbl"><span>Spätarterielle Phase</span></span>
       <select id="tech_arterial">
-        <option value="ja">durchgeführt</option>
-        <option value="nein">nicht durchgeführt</option>
+        <option value="" data-radlex-status="needs-mapping">–</option>
+        <option value="ja" data-radlex-status="local" data-en="late arterial phase performed">durchgeführt</option>
+        <option value="nein" data-radlex-status="needs-mapping">nicht durchgeführt</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Portalvenöse Phase</span></span>
+      <span class="rr-lbl"><span>Portalvenöse Phase</span></span>
       <select id="tech_pv">
-        <option value="ja">durchgeführt</option>
-        <option value="nein">nicht durchgeführt</option>
+        <option value="" data-radlex-status="needs-mapping">–</option>
+        <option value="ja" data-radlex-status="local" data-en="portal venous phase performed">durchgeführt</option>
+        <option value="nein" data-radlex-status="needs-mapping">nicht durchgeführt</option>
       </select>
     </label>
   </div>
-  <div class="row">
+  <div class="rr-row">
     <label>
-      <span class="lbl"><span>Spätphase (≥3 min)</span></span>
+      <span class="rr-lbl"><span>Spätphase (≥ 3 min)</span></span>
       <select id="tech_delayed">
-        <option value="ja">durchgeführt</option>
-        <option value="nein">nicht durchgeführt</option>
+        <option value="" data-radlex-status="needs-mapping">–</option>
+        <option value="ja" data-radlex-status="local" data-en="delayed phase performed">durchgeführt</option>
+        <option value="nein" data-radlex-status="needs-mapping">nicht durchgeführt</option>
       </select>
     </label>
     <label>
-      <span class="lbl"><span>Bildqualität</span></span>
+      <span class="rr-lbl"><span>Bildqualität</span></span>
       <select id="tech_quality">
-        <option value="diagnostisch">diagnostisch</option>
-        <option value="eingeschraenkt">eingeschränkt (Begründung im Befund)</option>
-        <option value="nicht-diagnostisch">nicht diagnostisch (→ LR-NC)</option>
+        <option value="" data-radlex-status="needs-mapping">–</option>
+        <option value="diagnostisch" data-radlex-status="local" data-en="diagnostic image quality">diagnostisch</option>
+        <option value="eingeschraenkt" data-radlex-status="local" data-en="limited image quality">eingeschränkt (Begründung im Befund)</option>
+        <option value="nicht-diagnostisch" data-radlex-status="local" data-en="non-diagnostic image quality">nicht diagnostisch (→ LR-NC)</option>
       </select>
     </label>
   </div>
 
-  <!-- ====================== KLINIK ====================== -->
-  <div class="h2-wrap">
+  <!-- ===================== KLINISCHE ANGABE ===================== -->
+  <div class="rr-h2-wrap">
     <h2>Klinische Angabe</h2>
-    <div class="h2-rule"></div>
+    <div class="rr-h2-rule"></div>
   </div>
-  <div class="row full">
+  <div class="rr-row rr-row-full">
     <label>
-      <span class="lbl"><span>Indikation</span></span>
+      <span class="rr-lbl"><span>Indikation</span></span>
       <select id="indikation">
-        <option value="HCC-Surveillance bei Leberzirrhose">HCC-Surveillance bei Leberzirrhose</option>
-        <option value="Abklärung sonografisch detektierter Leberläsion">Abklärung sonografisch detektierter Leberläsion</option>
-        <option value="Restaging bei bekanntem HCC">Restaging bei bekanntem HCC</option>
-        <option value="Verlaufskontrolle nach lokoregionärer Therapie">Verlaufskontrolle nach lokoregionärer Therapie</option>
-        <option value="Präoperative Planung Leberresektion">Präoperative Planung Leberresektion</option>
-        <option value="Evaluierung vor Lebertransplantation">Evaluierung vor Lebertransplantation</option>
+        <option value="" data-radlex-status="needs-mapping">– bitte wählen –</option>
+        <option value="HCC-Surveillance bei Leberzirrhose" data-radlex-status="local" data-en="HCC surveillance in cirrhosis">HCC-Surveillance bei Leberzirrhose</option>
+        <option value="Abklärung sonografisch detektierter Leberläsion" data-radlex-status="local" data-en="workup of sonographically detected liver lesion">Abklärung sonografisch detektierter Leberläsion</option>
+        <option value="Restaging bei bekanntem HCC" data-radlex-status="local" data-en="restaging known HCC">Restaging bei bekanntem HCC</option>
+        <option value="Verlaufskontrolle nach lokoregionärer Therapie" data-radlex-status="local" data-en="follow-up after locoregional therapy">Verlaufskontrolle nach lokoregionärer Therapie</option>
+        <option value="Präoperative Planung Leberresektion" data-radlex-status="local" data-en="preoperative planning liver resection">Präoperative Planung Leberresektion</option>
+        <option value="Evaluierung vor Lebertransplantation" data-radlex-status="local" data-en="pre-transplant evaluation">Evaluierung vor Lebertransplantation</option>
       </select>
     </label>
   </div>
 
-  <!-- ====================== HINTERGRUNDLEBER ====================== -->
-  <div class="h2-wrap">
+  <!-- ===================== HINTERGRUNDLEBER ===================== -->
+  <div class="rr-h2-wrap">
     <h2>Hintergrundleber</h2>
-    <div class="h2-rule"></div>
+    <div class="rr-h2-rule"></div>
   </div>
-  <div class="row">
+  <div class="rr-row">
     <label>
-      <span class="lbl"><span>Lebermorphologie</span></span>
-      <div class="cg" id="bgm_wrap">
-            <label class="ci"><input type="checkbox" id="bgm_norm" onchange="update()"
-              data-radlex="RID1240-norm" data-en="liver morphology normal">
-              <span>Regelrecht</span></label>
-            <label class="ci"><input type="checkbox" id="bgm_zirr" onchange="update()"
-              data-radlex="RID5098" data-en="cirrhosis">
-              <span>Zirrhotisch konfiguriert</span></label>
-            <label class="ci"><input type="checkbox" id="bgm_steat" onchange="update()"
-              data-radlex="RID5097" data-en="hepatic steatosis">
-              <span>Steatose</span></label>
-            <label class="ci"><input type="checkbox" id="bgm_haemo" onchange="update()"
-              data-radlex="RID5099" data-en="hemochromatosis">
-              <span>Hinweis auf Hämochromatose</span></label>
-          </div>
+      <span class="rr-lbl"><span>Lebermorphologie</span></span>
+      <div class="rr-checkgrid" id="bgm_grid">
+        <label class="rr-check"><input type="checkbox" id="bgm_norm" data-en="liver morphology normal" data-radlex-status="local"> Regelrecht</label>
+        <label class="rr-check"><input type="checkbox" id="bgm_zirr" data-en="cirrhosis" data-radlex-status="local"> Zirrhotisch konfiguriert</label>
+        <label class="rr-check"><input type="checkbox" id="bgm_steat" data-en="hepatic steatosis" data-radlex-status="local"> Steatose</label>
+        <label class="rr-check"><input type="checkbox" id="bgm_haemo" data-en="hemochromatosis" data-radlex-status="local"> Hinweis auf Hämochromatose</label>
+      </div>
     </label>
     <label>
-      <span class="lbl"><span>Portale Hypertension</span></span>
+      <span class="rr-lbl"><span>Portale Hypertension</span></span>
       <select id="bg_porthyp">
-        <option value="keine">kein Hinweis</option>
-        <option value="splenomegalie">Splenomegalie</option>
-        <option value="kollateralen">Splenomegalie + Kollateralen</option>
-        <option value="aszites">zusätzlich Aszites</option>
+        <option value="" data-radlex-status="needs-mapping">–</option>
+        <option value="keine" data-radlex-status="needs-mapping">kein Hinweis</option>
+        <option value="splenomegalie" data-radlex-status="local" data-en="splenomegaly">Splenomegalie</option>
+        <option value="kollateralen" data-radlex-status="local" data-en="splenomegaly with collaterals">Splenomegalie + Kollateralen</option>
+        <option value="aszites" data-radlex-status="local" data-en="ascites">zusätzlich Aszites</option>
       </select>
     </label>
   </div>
 
-  <!-- ====================== LÄSIONEN ====================== -->
-  <div class="h2-wrap">
-    <h2>Strukturierte Läsionsbeschreibung <span class="badge">LI-RADS v2018</span></h2>
-    <div class="h2-rule"></div>
-    <div class="h2-sub">Bis zu drei Index-Observationen strukturiert kategorisieren. 4-Schritte-Algorithmus nach Schima/Kopf/Eisenhuber (RöFo 2023): (1) Algorithmus + Hauptkriterien · (2) Hilfskriterien · (3) Tie-Breaking · (4) Final Check.</div>
+  <!-- ===================== STRUKTURIERTE LÄSIONSBESCHREIBUNG ===================== -->
+  <div class="rr-h2-wrap">
+    <h2>Strukturierte Läsionsbeschreibung <span class="rr-rl-badge">LI-RADS v2018</span></h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Index-Observation nach 4-Schritte-Algorithmus (Schima/Kopf/Eisenhuber 2023): (1) Hauptkriterien · (2) Hilfskriterien · (3) Tie-Breaking · (4) Final Check. Der Block ist einmal deklariert; demo.js erzeugt bis zu drei Läsionen als Tabs.</div>
   </div>
 
-  <div class="lesion-tabs" id="lesion_tabs">
-    <button class="lesion-tab active" data-lesion="1">Läsion 1<span class="tab-cat" id="tab_cat_1"></span></button>
-    <button class="lesion-tab" data-lesion="2">Läsion 2<span class="tab-cat" id="tab_cat_2"></span></button>
-    <button class="lesion-tab" data-lesion="3">Läsion 3<span class="tab-cat" id="tab_cat_3"></span></button>
-  </div>
+  <!-- Andock-Anker: demo.js injiziert hier die Läsions-Tabs. -->
+  <div id="lesion_tabs_anchor"></div>
 
-  <div id="lesion_1_container" class="lesion-container"></div>
-  <div id="lesion_2_container" class="lesion-container" style="display:none"></div>
-  <div id="lesion_3_container" class="lesion-container" style="display:none"></div>
+  <div class="rr-lesion-block" id="lesion_block" data-lesion="1">
 
-  <!-- ====================== LTx-EVALUATION SECTION ====================== -->
-  <div class="ltx-section" id="ltx_section">
-    <h3>LTx-Evaluation – Mailand-Kriterien &amp; §16-TPG-Compliance</h3>
-    <div class="ltx-sub">
-      Befundungsbogen für die Eurotransplant-Anmeldung nach den Vorgaben der Bundesärztekammer-Richtlinie zu §16 TPG. Methodisch und feldbasiert anschlussfähig an das DRG-Template <em>gen_ltx_hcc.html</em> (Pinto dos Santos D et al. 2017, CC BY 4.0). Mailand-Kriterien werden aus den oben erfassten Läsionen automatisch berechnet.
-    </div>
-
-    <div class="et-row">
+    <div class="rr-row">
       <label>
-        <span class="lbl"><span>Eurotransplant-Nummer</span></span>
-        <input type="text" id="ltx_etnr" placeholder="z. B. AT-..." data-radlex-id="">
-      </label>
-      <label>
-        <span class="lbl"><span>Untersuchungsdatum (aktuell)</span></span>
-        <input type="text" id="ltx_datum_akt" placeholder="z. B. 19.05.2026">
-      </label>
-    </div>
-
-    <div class="row">
-      <label>
-        <span class="lbl"><span>Initiales HCC</span></span>
-        <select id="ltx_ini_hcc">
-          <option value="">–</option>
-          <option value="ja">ja (Erstdiagnose oder Rezidivfreiheit &gt; 24 Mo)</option>
-          <option value="nein">nein</option>
+        <span class="rr-lbl"><span>Lokalisation (Segment) <span class="rr-rl-badge">RID29237</span></span></span>
+        <select data-field="segment" data-radlex="RID29237" data-en="hepatic segment" data-lesion="1">
+          <option value="" data-radlex-status="needs-mapping">– wählen –</option>
+          <option value="I" data-radlex-status="local" data-en="Couinaud segment I">Segment I</option>
+          <option value="II" data-radlex-status="local" data-en="Couinaud segment II">Segment II</option>
+          <option value="III" data-radlex-status="local" data-en="Couinaud segment III">Segment III</option>
+          <option value="IV" data-radlex-status="local" data-en="Couinaud segment IV">Segment IV</option>
+          <option value="IVa" data-radlex-status="local" data-en="Couinaud segment IVa">Segment IVa</option>
+          <option value="IVb" data-radlex-status="local" data-en="Couinaud segment IVb">Segment IVb</option>
+          <option value="V" data-radlex-status="local" data-en="Couinaud segment V">Segment V</option>
+          <option value="VI" data-radlex-status="local" data-en="Couinaud segment VI">Segment VI</option>
+          <option value="VII" data-radlex-status="local" data-en="Couinaud segment VII">Segment VII</option>
+          <option value="VIII" data-radlex-status="local" data-en="Couinaud segment VIII">Segment VIII</option>
         </select>
       </label>
       <label>
-        <span class="lbl"><span>Verlaufsbericht</span></span>
-        <select id="ltx_verlauf">
-          <option value="">–</option>
-          <option value="ja">ja (Patient bereits gelistet, Follow-up)</option>
-          <option value="nein">nein</option>
-        </select>
+        <span class="rr-lbl"><span>Größe <span class="rr-rl-badge">RID13432 · LOINC 21889-1</span></span></span>
+        <input type="number" data-field="size" data-radlex="RID13432" data-loinc="21889-1" data-en="lesion size" data-lesion="1" min="1" step="1" placeholder="mm">
+        <div class="rr-field-note">Größter Durchmesser, mm</div>
       </label>
     </div>
 
-    <div class="row">
+    <!-- Schritt 1 – Hauptkriterien -->
+    <div class="rr-subhead">Schritt 1 – Hauptkriterien</div>
+    <div class="rr-checkgrid">
+      <label class="rr-check"><input type="checkbox" data-field="aphe" data-en="nonrim arterial phase hyperenhancement" data-radlex-status="local" data-lesion="1"> Nonrim APHE</label>
+      <label class="rr-check"><input type="checkbox" data-field="washout" data-en="nonperipheral washout" data-radlex-status="local" data-lesion="1"> Nonperipherer Wash-Out</label>
+      <label class="rr-check"><input type="checkbox" data-field="capsule" data-en="enhancing capsule" data-radlex-status="local" data-lesion="1"> Anreichernde Kapsel</label>
+      <label class="rr-check"><input type="checkbox" data-field="thresholdGrowth" data-en="threshold growth" data-radlex-status="local" data-lesion="1"> Schwellenwachstum (≥ 50 %/6 Mo)</label>
+    </div>
+
+    <!-- Sonderkategorien -->
+    <div class="rr-subhead rr-subhead-malig">Sonderkategorien (überschreiben Hauptkriterien-Logik)</div>
+    <div class="rr-checkgrid">
+      <label class="rr-check"><input type="checkbox" data-field="tiv" data-en="tumor in vein" data-radlex-status="local" data-lesion="1"> TIV – Tumor in Vene (KM-anreichernd)</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_targetoid" data-en="targetoid appearance" data-radlex-status="local" data-lesion="1"> LR-M: Targetoid appearance</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_infiltrative" data-en="infiltrative appearance" data-radlex-status="local" data-lesion="1"> LR-M: Infiltratives Erscheinungsbild</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_necrosis" data-en="marked necrosis" data-radlex-status="local" data-lesion="1"> LR-M: ausgeprägte Nekrose</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_diffusion" data-en="marked diffusion restriction" data-radlex-status="local" data-lesion="1"> LR-M: deutliche Diffusionseinschränkung</label>
+    </div>
+
+    <div class="rr-row" data-show-if="tiv">
       <label>
-        <span class="lbl"><span>HCC gesichert</span></span>
-        <select id="ltx_hcc_dx">
-          <option value="">–</option>
-          <option value="ja">ja (bildgebend oder histologisch)</option>
-          <option value="nein">nein</option>
-        </select>
-      </label>
-      <label>
-        <span class="lbl"><span>Leberzirrhose histologisch gesichert</span></span>
-        <select id="ltx_lci_dx">
-          <option value="">–</option>
-          <option value="ja">ja (histologisch)</option>
-          <option value="nein">nein</option>
+        <span class="rr-lbl"><span>TIV-Subtypisierung (nach Schima/Kopf/Eisenhuber)</span></span>
+        <select data-field="tiv_subtype" data-radlex-status="local" data-lesion="1">
+          <option value="" data-radlex-status="needs-mapping">– wählen –</option>
+          <option value="def_hcc" data-radlex-status="local" data-en="TIV definitely HCC">definitiv HCC (Kontakt zu LR-5)</option>
+          <option value="prob_hcc" data-radlex-status="local" data-en="TIV probably HCC">wahrscheinlich HCC (Standard)</option>
+          <option value="prob_nonhcc" data-radlex-status="local" data-en="TIV probably non-HCC">wahrscheinlich Nicht-HCC (Targetoid-Nachbarschaft)</option>
         </select>
       </label>
     </div>
 
-    <div class="row">
-      <label>
-        <span class="lbl"><span>Extrahepatische HCC-Manifestation</span></span>
-        <select id="ltx_extrahep" data-radlex-id="RID29896">
-          <option value="">–</option>
-          <option value="nein">nein</option>
-          <option value="ja">ja (CT-/MR-morphologisch mit 100%iger Sicherheit)</option>
-        </select>
-      </label>
-      <label>
-        <span class="lbl"><span>Zweites Verfahren (DD &lt; 2 cm)</span></span>
-        <select id="ltx_zweitverfahren">
-          <option value="">–</option>
-          <option value="nein">nicht erforderlich / nicht durchgeführt</option>
-          <option value="CT">CT</option>
-          <option value="MRT">MRT</option>
-        </select>
-      </label>
-    </div>
-
-    <!-- Mailand-Kriterien-Box (Live-Berechnung) -->
-    <div class="mailand-box" id="mailand_box">
-      <div>
-        <div class="ml-label">Mailand-Kriterien</div>
-        <div class="ml-value" id="mailand_value">–</div>
-      </div>
-      <div class="ml-detail" id="mailand_detail">Bitte mindestens eine Läsion erfassen.</div>
-    </div>
-
-    <div class="ltx-criteria" id="ltx_criteria_grid"></div>
-
-    <div style="margin-top:18px;font-size:12px;color:var(--rr-ink-muted);line-height:1.5">
-      <strong>Mailand-Kriterien (Konsens 1996):</strong> Solitärer Knoten ≤ 50 mm <em>oder</em> bis zu drei Knoten, alle ≤ 30 mm. Keine extrahepatische Manifestation. Keine makrovaskuläre Invasion. Patienten innerhalb der Mailand-Kriterien sind grundsätzlich für eine Lebertransplantation qualifiziert (Standard-Exception nach §16 TPG).
-    </div>
-  </div>
-
-  <!-- ====================== FREITEXT ====================== -->
-  <div class="h2-wrap">
-    <h2>Weitere Observationen / Freitext</h2>
-    <div class="h2-rule"></div>
-    <div class="h2-sub">Multiple kleinere Observationen ohne suspekte Features, atypische Befunde, extrahepatische Befunde.</div>
-  </div>
-  <div class="row full">
-    <label>
-      <textarea id="freetext" placeholder="z. B. 'Weitere ca. 6 kleinere Observationen bds. mit Charakteristika von Zysten (LR-1).' oder extrahepatische Befunde"></textarea>
-    </label>
-  </div>
-
-  <!-- ====================== VORUNTERSUCHUNG ====================== -->
-  <details>
-    <summary>Voruntersuchungs-Vergleich (optional)</summary>
-    <div>
-      <div class="row">
-        <label>
-          <span class="lbl"><span>VU vom</span></span>
-          <input type="text" id="vu_date" placeholder="z. B. 11/2025">
-        </label>
-        <label>
-          <span class="lbl"><span>Modalität VU</span></span>
-          <select id="vu_mod">
-            <option value="">–</option>
-            <option value="CT">CT</option>
-            <option value="MRT">MRT</option>
-            <option value="US">Ultraschall</option>
-          </select>
-        </label>
-      </div>
-      <div class="row full">
-        <label>
-          <span class="lbl"><span>Verlaufs-Bemerkung</span></span>
-          <textarea id="vu_text" placeholder="z. B. 'Läsion 1 zuvor 14 mm – nun 22 mm (entspricht Schwellenwachstum ≥50% in ≤6 Monaten).'"></textarea>
-        </label>
-      </div>
-    </div>
-  </details>
-
-  <div class="evidence-footer">
-    <strong>Algorithmus:</strong> ACR LI-RADS CT/MRI v2018 (American College of Radiology).<br>
-    <strong>Didaktische Aufbereitung, 4-Schritte-Logik, Hilfskriterien-Tabelle und LR-TIV-Subtypisierung:</strong>
-    <em>Schima W, Kopf H, Eisenhuber E. LI-RADS leicht gemacht (LI-RADS Made Easy). Fortschr Röntgenstr 2023; 195: 486–494. DOI 10.1055/a-1990-5924.</em><br>
-    <strong>LTx-Evaluation, Mailand-Berechnung, RadLex-Coding-Schema:</strong>
-    <em>Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template "LTx-Evaluation HCC" (gen_ltx_hcc.html, Identifier 041807.5), Deutsche Röntgengesellschaft, 2017. CC BY 4.0.</em><br>
-    <strong>Lizenz dieses Templates:</strong> Creative Commons Attribution 4.0 International (CC BY 4.0) – kompatibel zur DRG-Lizenz, ermöglicht spätere Zusammenführung.
-  </div>
-
-</section>
-
-<!-- ========================== PREVIEW PANE ========================== -->
-<aside class="rr-preview-pane">
-  <h2 class="preview-title">Befund-Vorschau</h2>
-  <div class="preview-title-rule"></div>
-
-  <div class="preview-section">
-    <h4>Technik</h4>
-    <div class="content" id="prev_technik">–</div>
-  </div>
-  <div class="preview-section">
-    <h4>Klinische Angabe</h4>
-    <div class="content" id="prev_klinik">–</div>
-  </div>
-  <div class="preview-section">
-    <h4>Befund</h4>
-    <div class="content" id="prev_befund">–</div>
-  </div>
-  <div class="preview-section">
-    <h4>Beurteilung <span style="font-size:9px;color:var(--rr-ink-muted);letter-spacing:0.1em;margin-left:4px">EDITIERBAR</span></h4>
-    <textarea id="prev_beurteilung"></textarea>
-  </div>
-
-  <div class="actions">
-    <button class="btn-primary" onclick="copyAll()">Befund kopieren</button>
-    <button class="secondary" onclick="showExport('fhir')">FHIR-Export</button>
-    <button class="secondary" onclick="showExport('json')">JSON</button>
-    <button class="secondary" onclick="resetForm()">Zurücksetzen</button>
-  </div>
-  <div class="export-area" id="exportArea"></div>
-</aside>
-
-</div>
-
-<script>
-/* ============================================================================
-   LI-RADS v2018 ENGINE v1.2 + DRG-LTx-Integration
-   Nach Schima/Kopf/Eisenhuber. Fortschr Röntgenstr 2023; 195: 486–494
-   ============================================================================
-   4-Schritte-Algorithmus:
-     Schritt 1: Hauptkriterien-Algorithmus (außer LR-1, LR-2, LR-M, LR-TIV, LR-TR)
-     Schritt 2: Hilfskriterien (Up/Down 1 Kategorie; nie zu LR-5)
-     Schritt 3: Tie-Breaking (bei Zweifel: weniger gewisse Kategorie)
-     Schritt 4: Final Check (Plausibilitätsprüfung)
-   ============================================================================ */
-
-const lesionState = {
-  1: createEmptyLesion(),
-  2: createEmptyLesion(),
-  3: createEmptyLesion()
-};
-let activeLesion = 1;
-let activeMode = 'manual';
-
-function createEmptyLesion(){
-  return {
-    // Lokalisation
-    segment: '', size: null,
-    // LTx-spezifische Felder (DRG-Template-Kompatibilität)
-    ltx_serie: '', ltx_bild: '', ltx_messphase: '', ltx_makrovasc: false,
-    // Treated?
-    treated: false,
-    lrtr_subcat: null, // nonviable, equivocal, viable, nonevaluable
-    // Major Features
-    aphe: false, washout: false, capsule: false, thresholdGrowth: false,
-    // TIV
-    tiv: false, tiv_subtype: null, // 'def_hcc', 'prob_hcc', 'prob_nonhcc'
-    // LR-M criteria
-    lrm_targetoid: false, lrm_infiltrative: false,
-    lrm_necrosis: false, lrm_diffusion: false,
-    // Hilfskriterien (Schima Tab. 1, wörtlich)
-    // Allg. Malignität (nicht HCC-spezifisch)
-    af_m_us_visible: false,
-    af_m_growth_subthreshold: false,
-    af_m_diffusion_restricted: false,
-    af_m_t2_mild_moderate: false,
-    af_m_corona: false,
-    af_m_fat_sparing: false,
-    af_m_iron_sparing: false,
-    af_m_transitional_hypo: false,
-    af_m_hbp_hypo: false,
-    // Speziell HCC
-    af_hcc_nonenhancing_capsule: false,
-    af_hcc_nodule_in_nodule: false,
-    af_hcc_mosaic: false,
-    af_hcc_blood_products: false,
-    af_hcc_fat_in_nodule: false,
-    // Benignität
-    af_b_size_stability: false,
-    af_b_size_reduction: false,
-    af_b_parallels_vessels: false,
-    af_b_undistorted_vessels: false,
-    af_b_iron_higher: false,
-    af_b_t2_marked: false,
-    af_b_hbp_iso: false,
-    // Tie-Breaking
-    tiebreak_uncertain: false,
-    tiebreak_direction: null, // 'down_malig', 'down_bening', 'to_lrm'
-    // Final Check
-    final_check_ok: null, // null, true, false
-    final_check_note: '',
-    // Direct mode
-    direct_category: null, direct_text: '',
-    // Wizard state
-    wizard_answers: {},
-    // Computed
-    calculatedCat: null, baseCat: null, afApplied: null, tieApplied: false,
-    used: false
-  };
-}
-
-/* ============================================================================
-   LR-CATEGORY CALCULATION (4 Schritte)
-   ============================================================================ */
-function calculateLR(l){
-  if (!l.used) return null;
-  if (l.direct_category) return l.direct_category;
-
-  // Pre-Schritt: Image quality / treated
-  if (l.treated){
-    if (l.lrtr_subcat){
-      const trMap = {
-        'nonviable': 'LR-TR nonviable',
-        'equivocal': 'LR-TR equivocal',
-        'viable': 'LR-TR viable',
-        'nonevaluable': 'LR-TR nonevaluable'
-      };
-      return trMap[l.lrtr_subcat];
-    }
-    return 'LR-TR';
-  }
-
-  // Vorzeitige Kategorien (vor Schritt 1)
-  if (l.tiv){
-    // TIV-Subtype
-    if (l.tiv_subtype === 'def_hcc') return 'LR-TIV (definitiv HCC)';
-    if (l.tiv_subtype === 'prob_nonhcc') return 'LR-TIV (wahrsch. Nicht-HCC)';
-    if (l.tiv_subtype === 'prob_hcc') return 'LR-TIV (wahrsch. HCC)';
-    return 'LR-TIV';
-  }
-
-  if (l.lrm_targetoid || l.lrm_infiltrative || l.lrm_necrosis || l.lrm_diffusion){
-    return 'LR-M';
-  }
-
-  if (!l.size) return null;
-
-  // SCHRITT 1: Hauptkriterien-Algorithmus
-  const size = l.size;
-  let mfCount = 0;
-  if (l.washout) mfCount++;
-  if (l.capsule) mfCount++;
-  if (l.thresholdGrowth) mfCount++;
-
-  let baseCat;
-  if (size < 10){
-    if (!l.aphe) baseCat = 'LR-3';
-    else if (mfCount === 0) baseCat = 'LR-3';
-    else baseCat = 'LR-4';
-  } else if (size < 20){
-    if (!l.aphe && mfCount === 0) baseCat = 'LR-3';
-    else if (l.aphe && mfCount === 0) baseCat = 'LR-3';
-    else if (!l.aphe && mfCount >= 1) baseCat = 'LR-4';
-    else if (l.aphe && l.washout) baseCat = 'LR-5'; // v2018 key
-    else if (l.aphe && mfCount >= 1) baseCat = 'LR-4';
-    else baseCat = 'LR-3';
-  } else { // ≥20 mm
-    if (!l.aphe && mfCount === 0) baseCat = 'LR-3';
-    else if (l.aphe && mfCount === 0) baseCat = 'LR-4';
-    else if (!l.aphe && mfCount >= 1) baseCat = 'LR-4';
-    else baseCat = 'LR-5';
-  }
-  l.baseCat = baseCat;
-
-  // SCHRITT 2: Hilfskriterien
-  const afMalig = ['af_m_us_visible','af_m_growth_subthreshold','af_m_diffusion_restricted',
-                   'af_m_t2_mild_moderate','af_m_corona','af_m_fat_sparing',
-                   'af_m_iron_sparing','af_m_transitional_hypo','af_m_hbp_hypo',
-                   'af_hcc_nonenhancing_capsule','af_hcc_nodule_in_nodule',
-                   'af_hcc_mosaic','af_hcc_blood_products','af_hcc_fat_in_nodule']
-                  .some(k => l[k]);
-  const afBen = ['af_b_size_stability','af_b_size_reduction','af_b_parallels_vessels',
-                 'af_b_undistorted_vessels','af_b_iron_higher','af_b_t2_marked','af_b_hbp_iso']
-                .some(k => l[k]);
-
-  let afCat = baseCat;
-  let afApplied = null;
-  if (afMalig && afBen){
-    afApplied = 'none'; // tie within AF
-  } else if (afMalig){
-    const upMap = {'LR-1':'LR-2','LR-2':'LR-3','LR-3':'LR-4','LR-4':'LR-4','LR-5':'LR-5'};
-    afCat = upMap[baseCat] || baseCat;
-    afApplied = 'up';
-  } else if (afBen){
-    const downMap = {'LR-5':'LR-4','LR-4':'LR-3','LR-3':'LR-2','LR-2':'LR-1','LR-1':'LR-1'};
-    afCat = downMap[baseCat] || baseCat;
-    afApplied = 'down';
-  }
-  l.afApplied = afApplied;
-
-  // SCHRITT 3: Tie-Breaking
-  let tieCat = afCat;
-  l.tieApplied = false;
-  if (l.tiebreak_uncertain && l.tiebreak_direction){
-    if (l.tiebreak_direction === 'down_malig'){
-      // weniger Gewissheit für Malignität: LR-5 → LR-4, LR-4 → LR-3
-      const m = {'LR-5':'LR-4','LR-4':'LR-3'};
-      if (m[afCat]){ tieCat = m[afCat]; l.tieApplied = true; }
-    } else if (l.tiebreak_direction === 'down_bening'){
-      // weniger Gewissheit für Benignität: LR-1 → LR-2, LR-2 → LR-3
-      const m = {'LR-1':'LR-2','LR-2':'LR-3'};
-      if (m[afCat]){ tieCat = m[afCat]; l.tieApplied = true; }
-    } else if (l.tiebreak_direction === 'to_lrm'){
-      // Zweifel an HCC-Ursprung: LR-4/5 → LR-M
-      if (afCat === 'LR-4' || afCat === 'LR-5'){
-        tieCat = 'LR-M'; l.tieApplied = true;
-      }
-    }
-  }
-
-  // SCHRITT 4: Final Check
-  // Wenn final_check_ok === false: Kategorie als LR-NC oder durch Befunder-Anmerkung markiert
-  return tieCat;
-}
-
-const LR_DESCRIPTIONS = {
-  'LR-1': 'definitiv benigne',
-  'LR-2': 'wahrscheinlich benigne',
-  'LR-3': 'intermediäre Wahrscheinlichkeit für HCC',
-  'LR-4': 'wahrscheinlich HCC',
-  'LR-5': 'definitiv HCC',
-  'LR-M': 'maligne, nicht HCC-spezifisch',
-  'LR-TIV': 'definitiver Tumor in Vene',
-  'LR-TIV (definitiv HCC)': 'Tumor in Vene, definitiv HCC',
-  'LR-TIV (wahrsch. HCC)': 'Tumor in Vene, wahrscheinlich HCC',
-  'LR-TIV (wahrsch. Nicht-HCC)': 'Tumor in Vene, wahrscheinlich Nicht-HCC-Malignom',
-  'LR-NC': 'nicht kategorisierbar',
-  'LR-TR': 'behandelte Observation',
-  'LR-TR nonviable': 'behandelt, avital',
-  'LR-TR equivocal': 'behandelt, unklar',
-  'LR-TR viable': 'behandelt, vital (Residualtumor)',
-  'LR-TR nonevaluable': 'behandelt, nicht beurteilbar'
-};
-
-function getCatBaseClass(cat){
-  if (!cat) return '';
-  if (cat.startsWith('LR-TR')) return 'lr-tr';
-  if (cat.startsWith('LR-TIV')) return 'lr-tiv';
-  if (cat === 'LR-1' || cat === 'LR-2') return cat.toLowerCase();
-  if (cat === 'LR-3') return 'lr-3';
-  if (cat === 'LR-4' || cat === 'LR-5' || cat === 'LR-M') return cat.toLowerCase();
-  return 'lr-3';
-}
-
-function getCatBgColor(cat){
-  if (!cat) return '#8b97a3';
-  if (cat.startsWith('LR-TR')) return '#6b4caa';
-  if (cat === 'LR-1' || cat === 'LR-2') return '#2d8a4f';
-  if (cat === 'LR-3') return '#c47f2a';
-  if (cat === 'LR-4' || cat === 'LR-5' || cat === 'LR-M' || cat.startsWith('LR-TIV')) return '#b3392f';
-  return '#8b97a3';
-}
-
-/* ============================================================================
-   RENDER LESION FORM
-   ============================================================================ */
-function renderLesion(n){
-  const l = lesionState[n];
-  const container = document.getElementById(`lesion_${n}_container`);
-
-  if (activeMode === 'direct'){
-    container.innerHTML = renderDirectMode(n, l);
-  } else if (activeMode === 'guided'){
-    container.innerHTML = renderGuidedMode(n, l);
-  } else {
-    container.innerHTML = renderManualMode(n, l);
-  }
-  attachLesionHandlers(n);
-  updateLRDisplay(n);
-}
-
-function renderLesionHeader(n, l, modeLabel){
-  return `
-  <button class="lesion-remove" onclick="clearLesion(${n})" title="Läsion löschen">×</button>
-  <h3 class="lesion-title">Läsion ${n}${modeLabel?' – '+modeLabel:''} <span class="lesion-cat" id="lr_cat_${n}_inline"></span></h3>
-
-  <div class="row">
-    <label>
-      <span class="lbl"><span>Lokalisation (Segment)<span class="radlex-indicator" title="RadLex RID29237">RadLex</span></span></span>
-      <select data-field="segment" data-radlex-id="RID29237" data-lesion="${n}">
-        <option value="">– wählen –</option>
-        <option value="I" ${l.segment==='I'?'selected':''}>Segment I</option>
-        <option value="II" ${l.segment==='II'?'selected':''}>Segment II</option>
-        <option value="III" ${l.segment==='III'?'selected':''}>Segment III</option>
-        <option value="IV" ${l.segment==='IV'?'selected':''}>Segment IV</option>
-        <option value="IVa" ${l.segment==='IVa'?'selected':''}>Segment IVa</option>
-        <option value="IVb" ${l.segment==='IVb'?'selected':''}>Segment IVb</option>
-        <option value="V" ${l.segment==='V'?'selected':''}>Segment V</option>
-        <option value="VI" ${l.segment==='VI'?'selected':''}>Segment VI</option>
-        <option value="VII" ${l.segment==='VII'?'selected':''}>Segment VII</option>
-        <option value="VIII" ${l.segment==='VIII'?'selected':''}>Segment VIII</option>
-      </select>
-    </label>
-    <label>
-      <span class="lbl"><span>Größe<span class="radlex-indicator" title="RadLex RID13432">RadLex</span></span><span class="unit">mm</span></span>
-      <input type="number" data-field="size" data-radlex-id="RID13432" data-lesion="${n}" placeholder="z. B. 18" min="1" step="1" value="${l.size||''}">
-    </label>
-  </div>
-
-  <div class="ltx-lesion-fields ${activeMode==='ltx'?'show':''}" id="ltx_fields_${n}">
-    <div class="ltx-lbl">§16-TPG-Felder (für LTx-Anmeldung)</div>
-    <div class="row three">
-      <label>
-        <span class="lbl"><span>Seriennr.</span></span>
-        <input type="number" data-field="ltx_serie" data-lesion="${n}" placeholder="Serie" value="${l.ltx_serie||''}">
-      </label>
-      <label>
-        <span class="lbl"><span>Bildnr.</span></span>
-        <input type="number" data-field="ltx_bild" data-lesion="${n}" placeholder="Bild" value="${l.ltx_bild||''}">
-      </label>
-      <label>
-        <span class="lbl"><span>Mess-KM-Phase</span></span>
-        <select data-field="ltx_messphase" data-lesion="${n}">
-          <option value="">–</option>
-          <option value="nativ" ${l.ltx_messphase==='nativ'?'selected':''}>nativ</option>
-          <option value="arteriell" ${l.ltx_messphase==='arteriell'?'selected':''}>arteriell</option>
-          <option value="portalvenoes" ${l.ltx_messphase==='portalvenoes'?'selected':''}>portalvenös</option>
-          <option value="verzoegert" ${l.ltx_messphase==='verzoegert'?'selected':''}>verzögert</option>
-        </select>
-      </label>
-    </div>
-    <div class="row">
-      <label class="check" style="flex-direction:row;align-items:center;gap:10px;font-size:13.5px;cursor:pointer;font-weight:500;color:var(--ltx-color)">
-        <input type="checkbox" data-field="ltx_makrovasc" data-radlex-id="RID3987" data-lesion="${n}" ${l.ltx_makrovasc?'checked':''} style="appearance:none;width:18px;height:18px;border:1.5px solid var(--ltx-color);border-radius:3px;cursor:pointer;position:relative">
-        <span>Makrovaskuläre Invasion (Pfortader/Lebervene) <span class="radlex-indicator" title="RadLex RID3987">RadLex</span></span>
-      </label>
-    </div>
-    <div style="font-size:11.5px;color:var(--rr-ink-muted);margin-top:8px;line-height:1.4">
-      Diese Felder werden zusätzlich zur LR-Kategorisierung erfasst und in den LTx-Compliance-Block übernommen.
-    </div>
-  </div>
-
-  <div class="treated-toggle">
-    <label>
-      <input type="checkbox" data-field="treated" data-lesion="${n}" ${l.treated?'checked':''}>
-      <span>Behandelte Observation? (Z.n. Resektion / Ablation / Embolisation) → LR-TR-Pfad</span>
-    </label>
-  </div>
-
-  <div class="lrtr-section ${l.treated?'show':''}" id="lrtr_section_${n}">
-    <h4>LR-TR (Treatment Response) – Sub-Kategorie wählen</h4>
-    <div class="lrtr-grid">
-      <button class="${l.lrtr_subcat==='nonviable'?'selected':''}" onclick="setLrtrSub(${n},'nonviable')">Nonviable (avital)</button>
-      <button class="${l.lrtr_subcat==='equivocal'?'selected':''}" onclick="setLrtrSub(${n},'equivocal')">Equivocal (unklar)</button>
-      <button class="${l.lrtr_subcat==='viable'?'selected':''}" onclick="setLrtrSub(${n},'viable')">Viable (vital, Residualtumor)</button>
-      <button class="${l.lrtr_subcat==='nonevaluable'?'selected':''}" onclick="setLrtrSub(${n},'nonevaluable')">Nonevaluable</button>
-    </div>
-  </div>
-  `;
-}
-
-function renderManualMode(n, l){
-  return `
-  <div class="lesion-card ${l.used?'has-data':''}">
-    ${renderLesionHeader(n, l)}
-
-    <div style="display:${l.treated?'none':'block'}">
-
-    <div class="feature-section-label">Schritt 1 – Hauptkriterien</div>
-    <div class="feature-grid">
-      <label class="check"><input type="checkbox" data-field="aphe" data-radlex-id="RID43355" data-lesion="${n}" ${l.aphe?'checked':''}> Nonrim APHE</label>
-      <label class="check"><input type="checkbox" data-field="washout" data-radlex-id="RID43353" data-lesion="${n}" ${l.washout?'checked':''}> Nonperipherer Wash-Out</label>
-      <label class="check"><input type="checkbox" data-field="capsule" data-radlex-id="RID39477" data-lesion="${n}" ${l.capsule?'checked':''}> Anreichernde Kapsel</label>
-      <label class="check"><input type="checkbox" data-field="thresholdGrowth" data-radlex-id="RID35936" data-lesion="${n}" ${l.thresholdGrowth?'checked':''}> Schwellenwachstum (≥50%/6Mo)</label>
-    </div>
-
-    <div class="feature-section-label malig">Sonderkategorien (überschreiben Hauptkriterien-Logik)</div>
-    <div class="feature-grid">
-      <label class="check"><input type="checkbox" data-field="tiv" data-lesion="${n}" ${l.tiv?'checked':''}> <strong>TIV</strong> – Tumor in Vene (KM-anreichernd)</label>
-      <label class="check"><input type="checkbox" data-field="lrm_targetoid" data-lesion="${n}" ${l.lrm_targetoid?'checked':''}> LR-M: Targetoid appearance</label>
-      <label class="check"><input type="checkbox" data-field="lrm_infiltrative" data-lesion="${n}" ${l.lrm_infiltrative?'checked':''}> LR-M: Infiltratives Erscheinungsbild</label>
-      <label class="check"><input type="checkbox" data-field="lrm_necrosis" data-lesion="${n}" ${l.lrm_necrosis?'checked':''}> LR-M: ausgeprägte Nekrose</label>
-      <label class="check"><input type="checkbox" data-field="lrm_diffusion" data-lesion="${n}" ${l.lrm_diffusion?'checked':''}> LR-M: deutliche Diffusionseinschränkung</label>
-    </div>
-
-    <div class="tiv-subtype ${l.tiv?'show':''}" id="tiv_subtype_${n}">
-      <div class="lbl">TIV-Subtypisierung (nach Schima/Kopf/Eisenhuber)</div>
-      <select data-field="tiv_subtype" data-lesion="${n}">
-        <option value="">– wählen –</option>
-        <option value="def_hcc" ${l.tiv_subtype==='def_hcc'?'selected':''}>definitiv HCC (Kontakt zu LR-5)</option>
-        <option value="prob_hcc" ${l.tiv_subtype==='prob_hcc'?'selected':''}>wahrscheinlich HCC (Standard)</option>
-        <option value="prob_nonhcc" ${l.tiv_subtype==='prob_nonhcc'?'selected':''}>wahrscheinlich Nicht-HCC (Targetoid-Nachbarschaft)</option>
-      </select>
-    </div>
-
+    <!-- Schritt 2 – Hilfskriterien -->
     <details>
       <summary>Schritt 2 – Hilfskriterien (optional, Up-/Downgrade)</summary>
       <div>
-        <div class="feature-section-label malig">Für Malignität allgemein, nicht spezifisch für HCC</div>
-        <div class="feature-grid">
-          <label class="check"><input type="checkbox" data-field="af_m_us_visible" data-lesion="${n}" ${l.af_m_us_visible?'checked':''}> Darstellbar im US als umschriebener Knoten</label>
-          <label class="check"><input type="checkbox" data-field="af_m_growth_subthreshold" data-lesion="${n}" ${l.af_m_growth_subthreshold?'checked':''}> Eindeutiges Wachstum (&lt; Schwellenwachstum)</label>
-          <label class="check"><input type="checkbox" data-field="af_m_diffusion_restricted" data-lesion="${n}" ${l.af_m_diffusion_restricted?'checked':''}> Eingeschränkte Diffusion</label>
-          <label class="check"><input type="checkbox" data-field="af_m_t2_mild_moderate" data-lesion="${n}" ${l.af_m_t2_mild_moderate?'checked':''}> Gering-mäßige Hyperintensität in T2</label>
-          <label class="check"><input type="checkbox" data-field="af_m_corona" data-lesion="${n}" ${l.af_m_corona?'checked':''}> Corona-Anreicherung</label>
-          <label class="check"><input type="checkbox" data-field="af_m_fat_sparing" data-lesion="${n}" ${l.af_m_fat_sparing?'checked':''}> Fettarmut/-freiheit in solidem Knoten</label>
-          <label class="check"><input type="checkbox" data-field="af_m_iron_sparing" data-lesion="${n}" ${l.af_m_iron_sparing?'checked':''}> Fehlender Eisennachweis in solidem Knoten</label>
+        <div class="rr-subhead rr-subhead-malig">Für Malignität allgemein (nicht HCC-spezifisch)</div>
+        <div class="rr-checkgrid">
+          <label class="rr-check"><input type="checkbox" data-field="af_m_us_visible" data-en="ancillary US visible discrete nodule" data-radlex-status="local" data-lesion="1"> Darstellbar im US als umschriebener Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_growth_subthreshold" data-en="ancillary subthreshold growth" data-radlex-status="local" data-lesion="1"> Eindeutiges Wachstum (&lt; Schwellenwachstum)</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_diffusion_restricted" data-en="ancillary restricted diffusion" data-radlex-status="local" data-lesion="1"> Eingeschränkte Diffusion</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_t2_mild_moderate" data-en="ancillary mild-moderate T2 hyperintensity" data-radlex-status="local" data-lesion="1"> Gering-mäßige Hyperintensität in T2</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_corona" data-en="ancillary corona enhancement" data-radlex-status="local" data-lesion="1"> Corona-Anreicherung</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_fat_sparing" data-en="ancillary fat sparing in solid mass" data-radlex-status="local" data-lesion="1"> Fettarmut/-freiheit in solidem Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_iron_sparing" data-en="ancillary iron sparing in solid mass" data-radlex-status="local" data-lesion="1"> Fehlender Eisennachweis in solidem Knoten</label>
         </div>
-        <div class="feature-section-label malig">Für HCC im Besonderen</div>
-        <div class="feature-grid">
-          <label class="check"><input type="checkbox" data-field="af_hcc_nonenhancing_capsule" data-lesion="${n}" ${l.af_hcc_nonenhancing_capsule?'checked':''}> Nichtanreichernde Kapsel</label>
-          <label class="check"><input type="checkbox" data-field="af_hcc_nodule_in_nodule" data-lesion="${n}" ${l.af_hcc_nodule_in_nodule?'checked':''}> Knoten im Knoten</label>
-          <label class="check"><input type="checkbox" data-field="af_hcc_mosaic" data-lesion="${n}" ${l.af_hcc_mosaic?'checked':''}> Mosaikarchitektur</label>
-          <label class="check"><input type="checkbox" data-field="af_hcc_blood_products" data-lesion="${n}" ${l.af_hcc_blood_products?'checked':''}> Blutabbauprodukte im Knoten</label>
-          <label class="check"><input type="checkbox" data-field="af_hcc_fat_in_nodule" data-lesion="${n}" ${l.af_hcc_fat_in_nodule?'checked':''}> Fettnachweis im Knoten (&gt; Umgebung)</label>
+        <div class="rr-subhead rr-subhead-malig">Für HCC im Besonderen</div>
+        <div class="rr-checkgrid">
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_nonenhancing_capsule" data-en="ancillary nonenhancing capsule" data-radlex-status="local" data-lesion="1"> Nichtanreichernde Kapsel</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_nodule_in_nodule" data-en="ancillary nodule-in-nodule" data-radlex-status="local" data-lesion="1"> Knoten im Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_mosaic" data-en="ancillary mosaic architecture" data-radlex-status="local" data-lesion="1"> Mosaikarchitektur</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_blood_products" data-en="ancillary intralesional blood products" data-radlex-status="local" data-lesion="1"> Blutabbauprodukte im Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_fat_in_nodule" data-en="ancillary fat in mass more than adjacent liver" data-radlex-status="local" data-lesion="1"> Fettnachweis im Knoten (&gt; Umgebung)</label>
         </div>
-        <div class="feature-section-label benign">Für Benignität</div>
-        <div class="feature-grid">
-          <label class="check"><input type="checkbox" data-field="af_b_size_stability" data-lesion="${n}" ${l.af_b_size_stability?'checked':''}> Größenstabilität &gt; 2 Jahre</label>
-          <label class="check"><input type="checkbox" data-field="af_b_size_reduction" data-lesion="${n}" ${l.af_b_size_reduction?'checked':''}> Größenabnahme</label>
-          <label class="check"><input type="checkbox" data-field="af_b_parallels_vessels" data-lesion="${n}" ${l.af_b_parallels_vessels?'checked':''}> KM-Anreicherung simultan zu Blutgefäßen</label>
-          <label class="check"><input type="checkbox" data-field="af_b_undistorted_vessels" data-lesion="${n}" ${l.af_b_undistorted_vessels?'checked':''}> Gefäße nicht verlagert/deformiert</label>
-          <label class="check"><input type="checkbox" data-field="af_b_iron_higher" data-lesion="${n}" ${l.af_b_iron_higher?'checked':''}> Höheres Eisensignal als Umgebung</label>
-          <label class="check"><input type="checkbox" data-field="af_b_t2_marked" data-lesion="${n}" ${l.af_b_t2_marked?'checked':''}> Ausgeprägte Hyperintensität in T2</label>
+        <div class="rr-subhead rr-subhead-benign">Für Benignität</div>
+        <div class="rr-checkgrid">
+          <label class="rr-check"><input type="checkbox" data-field="af_b_size_stability" data-en="ancillary size stability over 2 years" data-radlex-status="local" data-lesion="1"> Größenstabilität &gt; 2 Jahre</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_size_reduction" data-en="ancillary size reduction" data-radlex-status="local" data-lesion="1"> Größenabnahme</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_parallels_vessels" data-en="ancillary enhancement parallels vessels" data-radlex-status="local" data-lesion="1"> KM-Anreicherung simultan zu Blutgefäßen</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_undistorted_vessels" data-en="ancillary undistorted vessels" data-radlex-status="local" data-lesion="1"> Gefäße nicht verlagert/deformiert</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_iron_higher" data-en="ancillary iron higher than liver" data-radlex-status="local" data-lesion="1"> Höheres Eisensignal als Umgebung</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_t2_marked" data-en="ancillary marked T2 hyperintensity" data-radlex-status="local" data-lesion="1"> Ausgeprägte Hyperintensität in T2</label>
         </div>
-        <div style="font-size:11.5px;color:var(--rr-ink-muted);margin-top:10px;line-height:1.5">
-          Regel: ≥1 AF für Malignität (allg. oder HCC) → Upgrade 1 Kategorie, max. bis LR-4. ≥1 AF für Benignität → Downgrade 1 Kategorie. Bei beiden → keine Anpassung.
-        </div>
+        <div class="rr-field-note">Regel: ≥ 1 AF Malignität → Upgrade 1 Kategorie, max. LR-4. ≥ 1 AF Benignität → Downgrade 1 Kategorie. Beides → keine Anpassung.</div>
       </div>
     </details>
 
+    <!-- Schritt 3 – Tie-Breaking -->
     <details>
       <summary>Schritt 3 – Tie-Breaking-Regel (bei Zweifel)</summary>
       <div>
-        <div class="tiebreak-toggle">
+        <label class="rr-check"><input type="checkbox" data-field="tiebreak_uncertain" data-lesion="1"> Befunder hat Zweifel an der Zuordnung</label>
+        <div class="rr-row" data-show-if="tiebreak_uncertain">
           <label>
-            <input type="checkbox" data-field="tiebreak_uncertain" data-lesion="${n}" ${l.tiebreak_uncertain?'checked':''}>
-            <span>Befunder hat Zweifel an der Zuordnung</span>
-          </label>
-        </div>
-        <div style="display:${l.tiebreak_uncertain?'block':'none'}">
-          <label>
-            <span class="lbl"><span>Art der Unsicherheit</span></span>
-            <select data-field="tiebreak_direction" data-lesion="${n}">
-              <option value="">– wählen –</option>
-              <option value="down_malig" ${l.tiebreak_direction==='down_malig'?'selected':''}>Geringere Gewissheit für Malignität (LR-5 → LR-4, LR-4 → LR-3)</option>
-              <option value="down_bening" ${l.tiebreak_direction==='down_bening'?'selected':''}>Geringere Gewissheit für Benignität (LR-1 → LR-2, LR-2 → LR-3)</option>
-              <option value="to_lrm" ${l.tiebreak_direction==='to_lrm'?'selected':''}>Zweifel an HCC-Ursprung (LR-4/5 → LR-M)</option>
+            <span class="rr-lbl"><span>Art der Unsicherheit</span></span>
+            <select data-field="tiebreak_direction" data-lesion="1">
+              <option value="" data-radlex-status="needs-mapping">– wählen –</option>
+              <option value="down_malig" data-radlex-status="needs-mapping">Geringere Gewissheit für Malignität (LR-5 → LR-4, LR-4 → LR-3)</option>
+              <option value="down_bening" data-radlex-status="needs-mapping">Geringere Gewissheit für Benignität (LR-1 → LR-2, LR-2 → LR-3)</option>
+              <option value="to_lrm" data-radlex-status="needs-mapping">Zweifel an HCC-Ursprung (LR-4/5 → LR-M)</option>
             </select>
           </label>
         </div>
       </div>
     </details>
 
-    </div> <!-- end treated:none -->
-
+    <!-- Schritt 4 – Final Check -->
     <details>
       <summary>Schritt 4 – Final Check (Plausibilitätsprüfung)</summary>
       <div>
-        <div style="font-size:13px;color:var(--rr-ink-soft);margin-bottom:12px">
-          Macht die zugeordnete Kategorie nachvollziehbar Sinn?
-        </div>
-        <div class="wizard-answer">
-          <button class="${l.final_check_ok===true?'selected':''}" onclick="setFinalCheck(${n}, true)">Ja, plausibel</button>
-          <button class="${l.final_check_ok===false?'selected':''}" onclick="setFinalCheck(${n}, false)">Nein, Reevaluierung nötig</button>
-        </div>
-        <div style="margin-top:12px;display:${l.final_check_ok===false?'block':'none'}">
+        <label>
+          <span class="rr-lbl"><span>Zugeordnete Kategorie plausibel?</span></span>
+          <select data-field="final_check_ok" data-lesion="1">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="ja" data-radlex-status="needs-mapping">Ja, plausibel</option>
+            <option value="nein" data-radlex-status="needs-mapping">Nein, Reevaluierung nötig</option>
+          </select>
+        </label>
+        <div class="rr-row rr-row-full" data-show-if="final_check_ok=nein">
           <label>
-            <span class="lbl"><span>Anmerkung zur Reevaluierung</span></span>
-            <textarea data-field="final_check_note" data-lesion="${n}" placeholder="z. B. 'LR-5-Zuordnung trotz fehlendem APHE unplausibel – Reevaluierung nach MRT empfohlen.'">${l.final_check_note||''}</textarea>
+            <span class="rr-lbl"><span>Anmerkung zur Reevaluierung</span></span>
+            <textarea data-field="final_check_note" data-lesion="1" placeholder="z. B. 'LR-5 trotz fehlendem APHE unplausibel – Reevaluierung nach MRT empfohlen.'"></textarea>
           </label>
         </div>
       </div>
     </details>
 
-    <div class="lr-box ${getCatBaseClass(l.calculatedCat)}" id="lr_box_${n}">
-      <div class="lr-left">
-        <div class="lr-label">LI-RADS Kategorie</div>
-        <div class="lr-value" id="lr_value_${n}">–</div>
-      </div>
-      <div class="lr-detail" id="lr_detail_${n}">Bitte Hauptkriterien angeben.</div>
+    <!-- Behandelte Observation → LR-TR -->
+    <div class="rr-row">
+      <label class="rr-check"><input type="checkbox" data-field="treated" data-lesion="1"> Behandelte Observation? (Z. n. Resektion / Ablation / Embolisation) → LR-TR-Pfad</label>
     </div>
-
-    <div class="calc-steps" id="calc_steps_${n}">
-      <div class="step" id="step1_${n}"><strong>Schritt 1</strong> Hauptkriterien: <span class="step-skipped">noch nicht ausgewertet</span></div>
-      <div class="step" id="step2_${n}"><strong>Schritt 2</strong> Hilfskriterien: <span class="step-skipped">nicht angewendet</span></div>
-      <div class="step" id="step3_${n}"><strong>Schritt 3</strong> Tie-Breaking: <span class="step-skipped">nicht aktiviert</span></div>
-      <div class="step" id="step4_${n}"><strong>Schritt 4</strong> Final Check: <span class="step-skipped">ausstehend</span></div>
-    </div>
-  </div>`;
-}
-
-function renderGuidedMode(n, l){
-  const a = l.wizard_answers;
-  return `
-  <div class="lesion-card ${l.used?'has-data':''}">
-    ${renderLesionHeader(n, l, 'Geführter Modus')}
-
-    <div style="display:${l.treated?'none':'block'}">
-    <div class="wizard active">
-
-      <div class="wizard-step ${getStepClass(a, 'tiv')}">
-        <div class="wizard-step-header">
-          <div class="wizard-step-number"><span class="wizard-step-number-text">1</span></div>
-          <div>Tumor in Vene sichtbar?</div>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-step-help">Definitive KM-Anreicherung von Weichteilgewebe innerhalb eines Gefäßes (Pfortader/-ast oder Lebervene)?</div>
-          <div class="wizard-answer">
-            <button class="${a.tiv==='yes'?'selected':''}" onclick="wizAnswer(${n},'tiv','yes')">Ja → LR-TIV</button>
-            <button class="${a.tiv==='no'?'selected':''}" onclick="wizAnswer(${n},'tiv','no')">Nein</button>
-          </div>
-          ${a.tiv==='yes'?`
-          <div style="margin-top:12px">
-            <label style="font-size:12px">
-              <span class="lbl"><span>TIV-Subtypisierung</span></span>
-              <select data-field="tiv_subtype" data-lesion="${n}">
-                <option value="">– wählen –</option>
-                <option value="def_hcc" ${l.tiv_subtype==='def_hcc'?'selected':''}>definitiv HCC (Kontakt zu LR-5)</option>
-                <option value="prob_hcc" ${l.tiv_subtype==='prob_hcc'?'selected':''}>wahrscheinlich HCC (Standard)</option>
-                <option value="prob_nonhcc" ${l.tiv_subtype==='prob_nonhcc'?'selected':''}>wahrscheinlich Nicht-HCC (Targetoid-Nachbarschaft)</option>
-              </select>
-            </label>
-          </div>`:''}
-        </div>
-      </div>
-
-      ${a.tiv==='no'?`
-      <div class="wizard-step ${getStepClass(a, 'lrm')}">
-        <div class="wizard-step-header">
-          <div class="wizard-step-number"><span class="wizard-step-number-text">2</span></div>
-          <div>LR-M-Merkmale (maligne, nicht HCC-spezifisch)?</div>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-step-help">Targetoid appearance, infiltratives Erscheinungsbild, ausgeprägte Nekrose, deutliche Diffusionseinschränkung?</div>
-          <div class="wizard-answer">
-            <button class="${a.lrm==='yes'?'selected':''}" onclick="wizAnswer(${n},'lrm','yes')">Ja → LR-M</button>
-            <button class="${a.lrm==='no'?'selected':''}" onclick="wizAnswer(${n},'lrm','no')">Nein</button>
-          </div>
-        </div>
-      </div>`:''}
-
-      ${a.lrm==='no'?`
-      <div class="wizard-step ${getStepClass(a, 'aphe')}">
-        <div class="wizard-step-header">
-          <div class="wizard-step-number"><span class="wizard-step-number-text">3</span></div>
-          <div>Nonrim Arterielle Phase-Hyperenhancement (APHE)?</div>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-step-help">Erhöhte arterielle Enhancement-Intensität, nicht ringförmig (Rim-Enhancement spricht eher für CCC).</div>
-          <div class="wizard-answer">
-            <button class="${a.aphe==='yes'?'selected':''}" onclick="wizAnswer(${n},'aphe','yes')">Ja</button>
-            <button class="${a.aphe==='no'?'selected':''}" onclick="wizAnswer(${n},'aphe','no')">Nein</button>
-          </div>
-        </div>
-      </div>`:''}
-
-      ${a.aphe?`
-      <div class="wizard-step ${getStepClass(a, 'mf')}">
-        <div class="wizard-step-header">
-          <div class="wizard-step-number"><span class="wizard-step-number-text">4</span></div>
-          <div>Weitere Hauptkriterien</div>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-step-help">Bitte alle zutreffenden anklicken:</div>
-          <div class="feature-grid">
-            <label class="check"><input type="checkbox" data-field="washout" data-lesion="${n}" ${l.washout?'checked':''}> Nonperipherer Wash-Out</label>
-            <label class="check"><input type="checkbox" data-field="capsule" data-lesion="${n}" ${l.capsule?'checked':''}> Anreichernde Kapsel</label>
-            <label class="check"><input type="checkbox" data-field="thresholdGrowth" data-lesion="${n}" ${l.thresholdGrowth?'checked':''}> Schwellenwachstum (≥50%/6Mo)</label>
-          </div>
-          <div class="wizard-answer" style="margin-top:14px">
-            <button onclick="wizAnswer(${n},'mf','done')">Weiter → Schritt 2 (Hilfskriterien)</button>
-          </div>
-        </div>
-      </div>`:''}
-
-      ${a.mf==='done'?`
-      <div class="wizard-step ${getStepClass(a, 'af')}">
-        <div class="wizard-step-header">
-          <div class="wizard-step-number"><span class="wizard-step-number-text">5</span></div>
-          <div>Hilfskriterien (optional)</div>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-step-help">Hilfskriterien können die Kategorie um eine Stufe up- oder downgraden (nie zu LR-5). Bei beiden Seiten gleichzeitig: keine Anpassung.</div>
-          <div class="feature-section-label malig">Malignität / HCC</div>
-          <div class="feature-grid">
-            <label class="check"><input type="checkbox" data-field="af_m_diffusion_restricted" data-lesion="${n}" ${l.af_m_diffusion_restricted?'checked':''}> Eingeschränkte Diffusion</label>
-            <label class="check"><input type="checkbox" data-field="af_m_corona" data-lesion="${n}" ${l.af_m_corona?'checked':''}> Corona-Anreicherung</label>
-            <label class="check"><input type="checkbox" data-field="af_hcc_mosaic" data-lesion="${n}" ${l.af_hcc_mosaic?'checked':''}> Mosaikarchitektur</label>
-            <label class="check"><input type="checkbox" data-field="af_hcc_nodule_in_nodule" data-lesion="${n}" ${l.af_hcc_nodule_in_nodule?'checked':''}> Knoten im Knoten</label>
-          </div>
-          <div class="feature-section-label benign">Benignität</div>
-          <div class="feature-grid">
-            <label class="check"><input type="checkbox" data-field="af_b_size_stability" data-lesion="${n}" ${l.af_b_size_stability?'checked':''}> Größenstabilität &gt; 2 Jahre</label>
-            <label class="check"><input type="checkbox" data-field="af_b_undistorted_vessels" data-lesion="${n}" ${l.af_b_undistorted_vessels?'checked':''}> Gefäße nicht verlagert</label>
-            <label class="check"><input type="checkbox" data-field="af_b_parallels_vessels" data-lesion="${n}" ${l.af_b_parallels_vessels?'checked':''}> KM-Anreicherung simultan zu Gefäßen</label>
-          </div>
-          <div style="font-size:11.5px;color:var(--rr-ink-muted);margin-top:4px">Vollständige AF-Liste im Modus Manuell.</div>
-          <div class="wizard-answer" style="margin-top:14px">
-            <button onclick="wizAnswer(${n},'af','done')">Weiter → Schritt 3 (Tie-Breaking)</button>
-          </div>
-        </div>
-      </div>`:''}
-
-      ${a.af==='done'?`
-      <div class="wizard-step ${getStepClass(a, 'tie')}">
-        <div class="wizard-step-header">
-          <div class="wizard-step-number"><span class="wizard-step-number-text">6</span></div>
-          <div>Tie-Breaking – Zweifel an Zuordnung?</div>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-step-help">Bei Unsicherheit: die Kategorie mit geringerer Bestimmtheit wählen.</div>
-          <div class="wizard-answer">
-            <button class="${a.tie==='none'?'selected':''}" onclick="wizAnswer(${n},'tie','none')">Keine Zweifel</button>
-            <button class="${a.tie==='down_malig'?'selected':''}" onclick="wizAnswer(${n},'tie','down_malig')">Gewissheit Malignität geringer (→ LR-5→4, LR-4→3)</button>
-            <button class="${a.tie==='down_bening'?'selected':''}" onclick="wizAnswer(${n},'tie','down_bening')">Gewissheit Benignität geringer (→ LR-1→2, LR-2→3)</button>
-            <button class="${a.tie==='to_lrm'?'selected':''}" onclick="wizAnswer(${n},'tie','to_lrm')">Zweifel an HCC-Ursprung (→ LR-M)</button>
-          </div>
-        </div>
-      </div>`:''}
-
-      ${a.tie?`
-      <div class="wizard-step ${getStepClass(a, 'final')}">
-        <div class="wizard-step-header">
-          <div class="wizard-step-number"><span class="wizard-step-number-text">7</span></div>
-          <div>Final Check</div>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-step-help">Macht die zugeordnete Kategorie nachvollziehbar Sinn?</div>
-          <div class="wizard-answer">
-            <button class="${a.final==='ok'?'selected':''}" onclick="wizAnswer(${n},'final','ok')">Ja, plausibel</button>
-            <button class="${a.final==='no'?'selected':''}" onclick="wizAnswer(${n},'final','no')">Nein → Reevaluierung</button>
-          </div>
-        </div>
-      </div>`:''}
-
-    </div>
-    </div>
-
-    <div class="lr-box ${getCatBaseClass(l.calculatedCat)}" id="lr_box_${n}">
-      <div class="lr-left">
-        <div class="lr-label">LI-RADS Kategorie</div>
-        <div class="lr-value" id="lr_value_${n}">–</div>
-      </div>
-      <div class="lr-detail" id="lr_detail_${n}">Fragen schrittweise beantworten.</div>
-    </div>
-  </div>`;
-}
-
-function getStepClass(a, key){
-  if (a[key]) return 'completed';
-  const order = ['tiv','lrm','aphe','mf','af','tie','final'];
-  const idx = order.indexOf(key);
-  for (let i=0;i<idx;i++){
-    if (!a[order[i]]) return '';
-  }
-  return 'active';
-}
-
-function wizAnswer(n, key, val){
-  const l = lesionState[n];
-  l.wizard_answers[key] = val;
-  l.used = true;
-
-  if (key === 'tiv'){
-    l.tiv = (val === 'yes');
-  }
-  if (key === 'lrm'){
-    if (val === 'yes') l.lrm_targetoid = true;
-    else { l.lrm_targetoid = false; l.lrm_infiltrative = false; l.lrm_necrosis = false; l.lrm_diffusion = false; }
-  }
-  if (key === 'aphe'){
-    l.aphe = (val === 'yes');
-  }
-  if (key === 'tie'){
-    if (val === 'none'){ l.tiebreak_uncertain = false; l.tiebreak_direction = null; }
-    else { l.tiebreak_uncertain = true; l.tiebreak_direction = val; }
-  }
-  if (key === 'final'){
-    l.final_check_ok = (val === 'ok');
-  }
-
-  renderLesion(n);
-  updateMailand();
-  updatePreview();
-}
-
-function renderDirectMode(n, l){
-  return `
-  <div class="lesion-card ${l.used?'has-data':''}">
-    ${renderLesionHeader(n, l, 'Direkt-Modus')}
-
-    <div style="display:${l.treated?'none':'block'}">
-    <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--rr-ink-soft);font-weight:600;margin:18px 0 6px">Kategorie direkt zuweisen</div>
-    <div class="direct-cat-grid">
-      <button class="cat-1 ${l.direct_category==='LR-1'?'selected':''}" onclick="setDirectCat(${n},'LR-1')">LR-1</button>
-      <button class="cat-2 ${l.direct_category==='LR-2'?'selected':''}" onclick="setDirectCat(${n},'LR-2')">LR-2</button>
-      <button class="cat-3 ${l.direct_category==='LR-3'?'selected':''}" onclick="setDirectCat(${n},'LR-3')">LR-3</button>
-      <button class="cat-4 ${l.direct_category==='LR-4'?'selected':''}" onclick="setDirectCat(${n},'LR-4')">LR-4</button>
-      <button class="cat-5 ${l.direct_category==='LR-5'?'selected':''}" onclick="setDirectCat(${n},'LR-5')">LR-5</button>
-      <button class="cat-m ${l.direct_category==='LR-M'?'selected':''}" onclick="setDirectCat(${n},'LR-M')">LR-M</button>
-      <button class="cat-tiv ${l.direct_category==='LR-TIV'?'selected':''}" onclick="setDirectCat(${n},'LR-TIV')">LR-TIV</button>
-      <button class="cat-nc ${l.direct_category==='LR-NC'?'selected':''}" onclick="setDirectCat(${n},'LR-NC')">LR-NC</button>
-    </div>
-
-    <div class="row full" style="margin-top:18px">
+    <div class="rr-row" data-show-if="treated">
       <label>
-        <span class="lbl"><span>Begründende Merkmale (Freitext)</span></span>
-        <textarea data-field="direct_text" data-lesion="${n}" placeholder="z. B. 'Nonrim APHE, nonperipherer Wash-Out, ohne Kapsel. Schwellenwachstum gegenüber VU 11/2025.'">${l.direct_text||''}</textarea>
+        <span class="rr-lbl"><span>LR-TR (Treatment Response) – Sub-Kategorie</span></span>
+        <select data-field="lrtr_subcat" data-en="LI-RADS treatment response" data-radlex-status="local" data-lesion="1">
+          <option value="" data-radlex-status="needs-mapping">– wählen –</option>
+          <option value="nonviable" data-radlex-status="local" data-en="LR-TR nonviable">Nonviable (avital)</option>
+          <option value="equivocal" data-radlex-status="local" data-en="LR-TR equivocal">Equivocal (unklar)</option>
+          <option value="viable" data-radlex-status="local" data-en="LR-TR viable">Viable (vital, Residualtumor)</option>
+          <option value="nonevaluable" data-radlex-status="local" data-en="LR-TR nonevaluable">Nonevaluable</option>
+        </select>
       </label>
     </div>
-    </div>
 
-    <div class="lr-box ${getCatBaseClass(l.calculatedCat)}" id="lr_box_${n}">
-      <div class="lr-left">
-        <div class="lr-label">LI-RADS Kategorie</div>
-        <div class="lr-value" id="lr_value_${n}">–</div>
+    <!-- Andock-Anker: demo.js injiziert hier die LR-Kategorie-Box und die
+         4-Schritte-Berechnungsanzeige (berechnete Anzeige, kein Eingabefeld). -->
+    <div id="lr_calc_anchor" data-lesion="1"></div>
+
+  </div>
+
+  <!-- ===================== WEITERE OBSERVATIONEN / FREITEXT ===================== -->
+  <div class="rr-h2-wrap">
+    <h2>Weitere Observationen / Freitext</h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Multiple kleinere Observationen ohne suspekte Features, atypische oder extrahepatische Befunde.</div>
+  </div>
+  <div class="rr-row rr-row-full">
+    <label>
+      <textarea id="freetext" placeholder="z. B. 'Weitere ca. 6 kleinere Observationen bds. mit Zystencharakteristik (LR-1).'"></textarea>
+    </label>
+  </div>
+
+  <!-- ===================== VORUNTERSUCHUNGS-VERGLEICH ===================== -->
+  <details>
+    <summary>Voruntersuchungs-Vergleich (optional)</summary>
+    <div>
+      <div class="rr-row rr-row-three">
+        <label>
+          <span class="rr-lbl"><span>VU vom</span></span>
+          <input type="text" id="vu_date" placeholder="z. B. 11/2025">
+        </label>
+        <label>
+          <span class="rr-lbl"><span>Modalität VU</span></span>
+          <select id="vu_mod">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="CT" data-radlex-status="local" data-en="computed tomography">CT</option>
+            <option value="MRT" data-radlex-status="local" data-en="magnetic resonance imaging">MRT</option>
+            <option value="US" data-radlex-status="local" data-en="ultrasound">Ultraschall</option>
+          </select>
+        </label>
+        <label>
+          <span class="rr-lbl"><span>Verlauf</span></span>
+          <select id="vu_trend">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="stabil" data-radlex="RID39157" data-en="stable">weitgehend stabil</option>
+            <option value="progredient" data-radlex="RID36043" data-en="progression of disease">Befundprogredienz</option>
+            <option value="regredient" data-radlex="RID36044" data-en="regression of disease">Befundregredienz</option>
+          </select>
+        </label>
       </div>
-      <div class="lr-detail" id="lr_detail_${n}">Bitte Kategorie wählen.</div>
-    </div>
-  </div>`;
-}
-
-function setDirectCat(n, cat){
-  lesionState[n].direct_category = cat;
-  lesionState[n].used = true;
-  lesionState[n].calculatedCat = cat;
-  renderLesion(n);
-  updateMailand();
-  updatePreview();
-}
-
-function setLrtrSub(n, sub){
-  lesionState[n].lrtr_subcat = sub;
-  lesionState[n].used = true;
-  renderLesion(n);
-  updateMailand();
-  updatePreview();
-}
-
-function setFinalCheck(n, ok){
-  lesionState[n].final_check_ok = ok;
-  renderLesion(n);
-  updatePreview();
-}
-
-/* ============================================================================
-   FIELD HANDLERS
-   ============================================================================ */
-function attachLesionHandlers(n){
-  const container = document.getElementById(`lesion_${n}_container`);
-  container.querySelectorAll('[data-field]').forEach(el => {
-    el.addEventListener('change', handleFieldChange);
-    el.addEventListener('input', handleFieldChange);
-  });
-}
-
-function handleFieldChange(e){
-  const field = e.target.dataset.field;
-  const n = parseInt(e.target.dataset.lesion);
-  const l = lesionState[n];
-  if (e.target.type === 'checkbox'){
-    l[field] = e.target.checked;
-    if (field === 'treated'){
-      // Auto re-render to show/hide LR-TR section
-      l.used = true;
-      renderLesion(n); updatePreview(); return;
-    }
-    if (field === 'tiv'){
-      // re-render to show/hide TIV subtype
-      l.used = isLesionUsed(l);
-      renderLesion(n); updatePreview(); return;
-    }
-    if (field === 'tiebreak_uncertain'){
-      l.used = isLesionUsed(l);
-      renderLesion(n); updatePreview(); return;
-    }
-  } else if (e.target.type === 'number'){
-    l[field] = e.target.value ? parseFloat(e.target.value) : null;
-  } else {
-    l[field] = e.target.value;
-  }
-  l.used = isLesionUsed(l);
-  updateLRDisplay(n);
-  updateMailand();
-  updatePreview();
-}
-
-function isLesionUsed(l){
-  return !!(l.size || l.segment || l.aphe || l.washout || l.capsule ||
-            l.thresholdGrowth || l.tiv || l.lrm_targetoid ||
-            l.lrm_infiltrative || l.lrm_necrosis || l.lrm_diffusion ||
-            l.direct_category || l.treated);
-}
-
-function updateLRDisplay(n){
-  const l = lesionState[n];
-  l.calculatedCat = calculateLR(l);
-  const cat = l.calculatedCat;
-  const box = document.getElementById(`lr_box_${n}`);
-  const val = document.getElementById(`lr_value_${n}`);
-  const det = document.getElementById(`lr_detail_${n}`);
-  const inline = document.getElementById(`lr_cat_${n}_inline`);
-  const tabBadge = document.getElementById(`tab_cat_${n}`);
-  if (!val) return;
-
-  if (!cat){
-    val.textContent = '–';
-    if (box) box.className = 'lr-box';
-    if (inline){ inline.textContent = ''; inline.className = 'lesion-cat'; inline.style = ''; }
-    if (tabBadge){ tabBadge.textContent = ''; tabBadge.className = 'tab-cat'; tabBadge.style = ''; }
-    updateCalcSteps(n, l);
-    return;
-  }
-
-  val.textContent = cat;
-  if (box) box.className = `lr-box ${getCatBaseClass(cat)}`;
-  if (det) det.innerHTML = `<strong>${LR_DESCRIPTIONS[cat] || cat}</strong><br>${getCalcExplanation(l)}`;
-  if (inline){
-    inline.textContent = cat;
-    inline.style.background = getCatBgColor(cat);
-    inline.style.color = '#fff';
-  }
-  if (tabBadge){
-    tabBadge.textContent = cat;
-    tabBadge.style.background = getCatBgColor(cat);
-    tabBadge.style.color = '#fff';
-  }
-  updateCalcSteps(n, l);
-}
-
-function updateCalcSteps(n, l){
-  const s1 = document.getElementById(`step1_${n}`);
-  const s2 = document.getElementById(`step2_${n}`);
-  const s3 = document.getElementById(`step3_${n}`);
-  const s4 = document.getElementById(`step4_${n}`);
-  if (!s1) return; // not manual mode
-
-  if (l.treated){
-    s1.innerHTML = `<strong>Schritt 1</strong> Hauptkriterien: <span class="step-skipped">übersprungen (behandelte Observation)</span>`;
-    s2.innerHTML = `<strong>Schritt 2</strong> Hilfskriterien: <span class="step-skipped">n/a für LR-TR</span>`;
-    s3.innerHTML = `<strong>Schritt 3</strong> Tie-Breaking: <span class="step-skipped">n/a für LR-TR</span>`;
-  } else if (l.tiv){
-    s1.innerHTML = `<strong>Schritt 1</strong> Hauptkriterien: <span class="step-applied">übersprungen → direkt LR-TIV</span>`;
-    s2.innerHTML = `<strong>Schritt 2</strong> Hilfskriterien: <span class="step-skipped">n/a</span>`;
-    s3.innerHTML = `<strong>Schritt 3</strong> Tie-Breaking: <span class="step-skipped">n/a</span>`;
-  } else if (l.lrm_targetoid || l.lrm_infiltrative || l.lrm_necrosis || l.lrm_diffusion){
-    s1.innerHTML = `<strong>Schritt 1</strong> Hauptkriterien: <span class="step-applied">LR-M-Kriterien → direkt LR-M</span>`;
-    s2.innerHTML = `<strong>Schritt 2</strong> Hilfskriterien: <span class="step-skipped">n/a</span>`;
-    s3.innerHTML = `<strong>Schritt 3</strong> Tie-Breaking: <span class="step-skipped">n/a</span>`;
-  } else {
-    s1.innerHTML = `<strong>Schritt 1</strong> Hauptkriterien: ${l.baseCat?`<span class="step-active">${l.baseCat}</span>`:'<span class="step-skipped">unvollständig</span>'}`;
-    if (l.afApplied === 'up'){
-      s2.innerHTML = `<strong>Schritt 2</strong> Hilfskriterien: <span class="step-applied">Upgrade um 1 Kategorie</span>`;
-    } else if (l.afApplied === 'down'){
-      s2.innerHTML = `<strong>Schritt 2</strong> Hilfskriterien: <span class="step-applied">Downgrade um 1 Kategorie</span>`;
-    } else if (l.afApplied === 'none'){
-      s2.innerHTML = `<strong>Schritt 2</strong> Hilfskriterien: <span class="step-skipped">Mal+Ben gleichzeitig → keine Anpassung</span>`;
-    } else {
-      s2.innerHTML = `<strong>Schritt 2</strong> Hilfskriterien: <span class="step-skipped">keine angewendet</span>`;
-    }
-    if (l.tieApplied){
-      s3.innerHTML = `<strong>Schritt 3</strong> Tie-Breaking: <span class="step-applied">angewendet</span>`;
-    } else if (l.tiebreak_uncertain){
-      s3.innerHTML = `<strong>Schritt 3</strong> Tie-Breaking: <span class="step-skipped">Zweifel markiert, aber kein Effekt</span>`;
-    } else {
-      s3.innerHTML = `<strong>Schritt 3</strong> Tie-Breaking: <span class="step-skipped">nicht aktiviert</span>`;
-    }
-  }
-  if (l.final_check_ok === true){
-    s4.innerHTML = `<strong>Schritt 4</strong> Final Check: <span class="step-active">plausibel ✓</span>`;
-  } else if (l.final_check_ok === false){
-    s4.innerHTML = `<strong>Schritt 4</strong> Final Check: <span class="step-applied">Reevaluierung empfohlen</span>`;
-  } else {
-    s4.innerHTML = `<strong>Schritt 4</strong> Final Check: <span class="step-skipped">ausstehend</span>`;
-  }
-}
-
-function getCalcExplanation(l){
-  if (l.direct_category) return 'Direkt zugewiesen.';
-  if (l.treated) return l.lrtr_subcat ? `LR-TR-Pfad, Sub: ${l.lrtr_subcat}.` : 'LR-TR-Pfad, Sub-Kategorie wählen.';
-  if (l.tiv) return l.tiv_subtype ? `TIV-Kriterien erfüllt.` : 'TIV → Subtyp wählen.';
-  if (l.lrm_targetoid || l.lrm_infiltrative || l.lrm_necrosis || l.lrm_diffusion) return 'LR-M-Kriterien erfüllt.';
-  if (!l.size) return 'Größenangabe fehlt.';
-  let mf = [];
-  if (l.aphe) mf.push('APHE');
-  if (l.washout) mf.push('Wash-Out');
-  if (l.capsule) mf.push('Kapsel');
-  if (l.thresholdGrowth) mf.push('Schwellenwachstum');
-  return `${l.size} mm, ${mf.length?mf.join(' + '):'keine Hauptkriterien'}.`;
-}
-
-function clearLesion(n){
-  if (!confirm(`Läsion ${n} zurücksetzen?`)) return;
-  lesionState[n] = createEmptyLesion();
-  renderLesion(n);
-  updatePreview();
-}
-
-/* ============================================================================
-   TABS, MODE
-   ============================================================================ */
-document.querySelectorAll('.lesion-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    const n = parseInt(tab.dataset.lesion);
-    activeLesion = n;
-    document.querySelectorAll('.lesion-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelectorAll('.lesion-container').forEach((c,i) => {
-      c.style.display = (i+1 === n) ? 'block' : 'none';
-    });
-  });
-});
-
-const modeHelpers = {
-  manual: "<strong>Modus Manuell:</strong> Alle Hauptkriterien und Hilfskriterien pro Läsion direkt setzen, die LR-Kategorie wird automatisch nach dem 4-Schritte-Algorithmus berechnet.",
-  guided: "<strong>Modus Geführt (Made Easy):</strong> Schritt-für-Schritt-Wizard nach Schima/Kopf/Eisenhuber (RöFo 2023). Empfohlen für Einarbeitung in LI-RADS.",
-  direct: "<strong>Modus Direkt:</strong> Erfahrener Befunder weist die LR-Kategorie direkt zu, begründende Merkmale werden im Freitext beschrieben.",
-  ltx: "<strong>Modus LTx-Evaluation:</strong> Befundung für die Lebertransplantations-Anmeldung nach §16-TPG-Richtlinie und Mailand-Kriterien (analog DRG-Template Pinto dos Santos 2017). Erfasst ET-Nummer, Mailand-Compliance und – ergänzend – LI-RADS-Kategorien pro Knoten."
-};
-
-document.querySelectorAll('input[name="mode"]').forEach(r => {
-  r.addEventListener('change', () => {
-    activeMode = document.querySelector('input[name="mode"]:checked').value;
-    document.getElementById('modeHelper').innerHTML = modeHelpers[activeMode];
-    const ltxSec = document.getElementById('ltx_section');
-    if (ltxSec) ltxSec.classList.toggle('show', activeMode === 'ltx');
-    for (let n=1; n<=3; n++) renderLesion(n);
-    updateMailand();
-    updatePreview();
-  });
-});
-
-/* ============================================================================
-   AT-RISK CHECK
-   ============================================================================ */
-function checkAtRisk(){
-  const any = document.getElementById('risk_cirrhosis').checked ||
-              document.getElementById('risk_hbv').checked ||
-              document.getElementById('risk_hcc_current').checked ||
-              document.getElementById('risk_hcc_treated').checked;
-  document.getElementById('risk_warn').classList.toggle('show', !any);
-  return any;
-}
-['risk_cirrhosis','risk_hbv','risk_hcc_current','risk_hcc_treated','exclude_vascular'].forEach(id => {
-  document.getElementById(id).addEventListener('change', () => {
-    checkAtRisk(); updatePreview();
-  });
-});
-
-/* ============================================================================
-   TEXT GENERATION
-   ============================================================================ */
-function gv(id){ return document.getElementById(id)?.value || ''; }
-function gc(id){ return document.getElementById(id)?.checked || false; }
-
-function generateTechnik(){
-  const phases = [];
-  if (gv('tech_native')==='ja') phases.push('nativ');
-  if (gv('tech_arterial')==='ja') phases.push('spätarteriell');
-  if (gv('tech_pv')==='ja') phases.push('portalvenös');
-  if (gv('tech_delayed')==='ja') phases.push('spätvenös (≥3 min)');
-  const kmLabels = {
-    'iohexol':'Iohexol (Iomeron 400)',
-    'iodixanol':'Iodixanol (Visipaque 320)',
-    'iopromide':'Iopromid (Ultravist 370)'
-  };
-  let txt = `Mehrphasige CT der Leber nach i.v. Applikation von ${kmLabels[gv('tech_km')]} in folgenden Phasen: ${phases.join(', ')||'–'}.`;
-  if (gv('tech_quality')==='eingeschraenkt') txt += ' Bildqualität diagnostisch eingeschränkt.';
-  if (gv('tech_quality')==='nicht-diagnostisch') txt += ' Bildqualität nicht diagnostisch (entspricht LR-NC).';
-  return txt;
-}
-
-function generateKlinik(){
-  const risiken = [];
-  if (gc('risk_cirrhosis')) risiken.push('Leberzirrhose');
-  if (gc('risk_hbv')) risiken.push('chronische HBV-Infektion');
-  if (gc('risk_hcc_current')) risiken.push('aktuelles HCC');
-  if (gc('risk_hcc_treated')) risiken.push('Z.n. HCC-Therapie');
-  const riskTxt = risiken.length ? ` (Risikoprofil: ${risiken.join(', ')})` : '';
-  return `${gv('indikation')}${riskTxt}.`;
-}
-
-function generateBefund(){
-  const lines = [];
-  const morph = {
-    'regelrecht':'Unauffällige Lebermorphologie',
-    'zirrhotisch':'Zirrhotisch konfigurierte Leber',
-    'steatose':'Diffuse Lebersteatose',
-    'haemochromatose':'Dichteminderung des Leberparenchyms vereinbar mit Hämochromatose'
-  };
-  const portHyp = {
-    'keine':'',
-    'splenomegalie':', Splenomegalie',
-    'kollateralen':', Splenomegalie und portosystemische Kollateralen',
-    'aszites':', Splenomegalie, portosystemische Kollateralen und Aszites'
-  };
-  lines.push(`${morph[gv('bg_morph')]}${portHyp[gv('bg_porthyp')]}.`);
-
-  const lesionLines = [];
-  for (let n=1; n<=3; n++){
-    const l = lesionState[n];
-    if (!l.used) continue;
-    const parts = [];
-    if (l.segment) parts.push(`Segment ${l.segment}`);
-    if (l.size) parts.push(`${l.size} mm`);
-    const loc = parts.join(', ') || '—';
-
-    let featTxt = '';
-    if (activeMode === 'direct'){
-      featTxt = l.direct_text || 'Merkmale nicht näher spezifiziert.';
-    } else if (l.treated){
-      featTxt = 'Z.n. lokoregionärer Therapie';
-      if (l.lrtr_subcat === 'nonviable') featTxt += ', keine Hinweise auf Residualtumor';
-      else if (l.lrtr_subcat === 'viable') featTxt += ', noduläres bzw. irreguläres Randsaumenhancement (Residualtumor)';
-      else if (l.lrtr_subcat === 'equivocal') featTxt += ', unklares Enhancement-Verhalten';
-      else if (l.lrtr_subcat === 'nonevaluable') featTxt += ', nicht beurteilbar';
-    } else {
-      const features = [];
-      if (l.aphe) features.push('nonrim APHE');
-      if (l.washout) features.push('nonperipherer Wash-Out');
-      if (l.capsule) features.push('anreichernde Kapsel');
-      if (l.thresholdGrowth) features.push('Schwellenwachstum (≥50%/6Mo)');
-      if (l.tiv) features.push('TIV (KM-anreichernd intravasal)');
-      if (l.lrm_targetoid) features.push('targetoid appearance');
-      if (l.lrm_infiltrative) features.push('infiltratives Erscheinungsbild');
-      if (l.lrm_necrosis) features.push('ausgeprägte Nekrose');
-      if (l.lrm_diffusion) features.push('deutliche Diffusionseinschränkung');
-      featTxt = features.length ? features.join(', ') : 'keine Hauptkriterien';
-    }
-
-    const cat = l.calculatedCat || 'LR-?';
-    let line = `Observation ${n} (${loc}): ${featTxt}. → ${cat}.`;
-    if (l.final_check_ok === false && l.final_check_note){
-      line += ` Anmerkung Reevaluierung: ${l.final_check_note}`;
-    }
-    lesionLines.push(line);
-  }
-
-  if (lesionLines.length){
-    lines.push(...lesionLines);
-  } else {
-    lines.push('Keine fokalen Leberobservationen nachweisbar.');
-  }
-
-  if (gv('vu_date') && gv('vu_text')){
-    lines.push(`Im Vergleich zur VU vom ${gv('vu_date')} (${gv('vu_mod')||'?'}): ${gv('vu_text')}`);
-  }
-
-  if (gv('freetext').trim()) lines.push(gv('freetext').trim());
-
-  return lines.join('\n');
-}
-
-function generateBeurteilung(){
-  const usedLesions = [];
-  for (let n=1; n<=3; n++){
-    const l = lesionState[n];
-    if (l.used && l.calculatedCat) usedLesions.push({n, l});
-  }
-
-  if (!usedLesions.length){
-    if (gv('bg_morph')==='zirrhotisch'){
-      return 'Zirrhotisch konfigurierte Leber. Aktuell keine fokalen HCC-suspekten Observationen nachweisbar.';
-    }
-    return 'Unauffälliger Leberbefund. Keine HCC-suspekten Observationen.';
-  }
-
-  // Find highest severity
-  const sevOrder = ['LR-1','LR-2','LR-3','LR-4','LR-5','LR-M','LR-TIV','LR-TIV (wahrsch. Nicht-HCC)','LR-TIV (wahrsch. HCC)','LR-TIV (definitiv HCC)'];
-  const getSev = c => {
-    if (!c) return -1;
-    if (c.startsWith('LR-TR viable')) return 5;
-    if (c.startsWith('LR-TR equivocal')) return 4;
-    if (c.startsWith('LR-TR nonviable')) return 0;
-    if (c.startsWith('LR-TR nonevaluable')) return 2;
-    if (c.startsWith('LR-TIV')) return 9;
-    if (c === 'LR-M') return 7;
-    if (c === 'LR-5') return 8;
-    if (c === 'LR-4') return 6;
-    if (c === 'LR-3') return 3;
-    if (c === 'LR-2') return 1;
-    if (c === 'LR-1') return 0;
-    return -1;
-  };
-  const highest = usedLesions.reduce((a,b) => getSev(b.l.calculatedCat) > getSev(a.l.calculatedCat) ? b : a);
-  const cat = highest.l.calculatedCat;
-
-  let txt = '';
-  if (cat && cat.startsWith('LR-TIV (definitiv HCC)')){
-    txt = 'Definitiver Tumor in Vene mit Bezug zu LR-5 – HCC mit makroskopischer Veneninvasion. Kontraindikation für Lebertransplantation.';
-  } else if (cat && cat.startsWith('LR-TIV (wahrsch. Nicht-HCC)')){
-    txt = 'Tumor in Vene, wahrscheinlich Nicht-HCC-Malignom (z.B. iCCA, cHCC-CCA, Metastasen) – multidisziplinäre Diskussion empfohlen.';
-  } else if (cat && cat.startsWith('LR-TIV')){
-    txt = 'Definitiver Tumor in Vene, wahrscheinlich HCC – Kontraindikation für Lebertransplantation.';
-  } else if (cat && cat.startsWith('LR-TR viable')){
-    txt = 'Z.n. lokoregionärer HCC-Therapie mit Hinweis auf vitalen Residualtumor (LR-TR viable).';
-  } else if (cat && cat.startsWith('LR-TR equivocal')){
-    txt = 'Z.n. lokoregionärer HCC-Therapie mit unklarem Befund (LR-TR equivocal) – kurzfristige Verlaufskontrolle empfohlen.';
-  } else if (cat && cat.startsWith('LR-TR nonviable')){
-    txt = 'Z.n. lokoregionärer HCC-Therapie, keine Hinweise auf vitalen Tumor (LR-TR nonviable).';
-  } else if (cat && cat.startsWith('LR-TR')){
-    txt = `Z.n. lokoregionärer HCC-Therapie: ${cat}.`;
-  } else if (cat === 'LR-5'){
-    txt = `Bildgebung ${usedLesions.length>1?`mit ${usedLesions.length} Observationen, davon die führende `:''}als LR-5 zu kategorisieren – Diagnose eines HCC ist somit gesichert.`;
-  } else if (cat === 'LR-4'){
-    txt = 'Führende Observation LR-4 – wahrscheinlich HCC, multidisziplinäre Diskussion empfohlen.';
-  } else if (cat === 'LR-3'){
-    txt = 'Führende Observation LR-3 – intermediäre Wahrscheinlichkeit für HCC.';
-  } else if (cat === 'LR-M'){
-    txt = 'Führende Observation LR-M – maligne, jedoch nicht HCC-spezifisch (DD u.a. iCCA, cHCC-CCA, Metastasen).';
-  } else if (cat === 'LR-1' || cat === 'LR-2'){
-    txt = `Observation(en) als ${cat} kategorisiert – benigne.`;
-  } else {
-    txt = `Kategorisierung: ${cat}.`;
-  }
-  return txt;
-}
-
-/* ============================================================================
-   UPDATE PREVIEW
-   ============================================================================ */
-function updatePreview(){
-  document.getElementById('prev_technik').textContent = generateTechnik();
-  document.getElementById('prev_klinik').textContent = generateKlinik();
-  document.getElementById('prev_befund').textContent = generateBefund();
-  const beur = document.getElementById('prev_beurteilung');
-  if (!beur.dataset.touched) beur.value = generateBeurteilung();
-}
-
-document.getElementById('prev_beurteilung').addEventListener('input', e => {
-  e.target.dataset.touched = '1';
-});
-
-document.querySelectorAll('input, select, textarea').forEach(el => {
-  if (el.id === 'prev_beurteilung') return;
-  if (el.dataset.field) return;
-  el.addEventListener('change', updatePreview);
-  el.addEventListener('input', updatePreview);
-});
-
-/* ============================================================================
-   ACTIONS
-   ============================================================================ */
-function copyAll(){
-  const t = `TECHNIK\n${document.getElementById('prev_technik').textContent}\n\nKLINISCHE ANGABE\n${document.getElementById('prev_klinik').textContent}\n\nBEFUND\n${document.getElementById('prev_befund').textContent}\n\nBEURTEILUNG\n${document.getElementById('prev_beurteilung').value}`;
-  navigator.clipboard.writeText(t).then(() => {
-    const btn = event.target;
-    const orig = btn.textContent;
-    btn.textContent = '✓ Kopiert';
-    setTimeout(() => btn.textContent = orig, 1500);
-  });
-}
-
-function resetForm(){
-  if (!confirm('Alle Eingaben zurücksetzen?')) return;
-  for (let n=1; n<=3; n++){
-    lesionState[n] = createEmptyLesion();
-    renderLesion(n);
-  }
-  document.querySelectorAll('input[type=checkbox]').forEach(c => c.checked = false);
-  document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
-  document.querySelectorAll('input[type=text],input[type=number],textarea').forEach(el => {
-    el.value = '';
-  });
-  document.getElementById('prev_beurteilung').dataset.touched = '';
-  document.getElementById('mode-manual').checked = true;
-  activeMode = 'manual';
-  document.getElementById('modeHelper').innerHTML = modeHelpers.manual;
-  checkAtRisk();
-  updatePreview();
-}
-
-function showExport(format){
-  const area = document.getElementById('exportArea');
-  const lesions = [];
-  for (let n=1; n<=3; n++){
-    const l = lesionState[n];
-    if (l.used){
-      lesions.push({
-        index: n, segment: l.segment, size_mm: l.size,
-        lr_category: l.calculatedCat,
-        modus: activeMode,
-        treated: l.treated,
-        lrtr_subcat: l.lrtr_subcat,
-        tiv: l.tiv,
-        tiv_subtype: l.tiv_subtype,
-        major_features: {
-          aphe: l.aphe, washout: l.washout, capsule: l.capsule, threshold_growth: l.thresholdGrowth
-        },
-        lr_m_criteria: {
-          targetoid: l.lrm_targetoid, infiltrative: l.lrm_infiltrative,
-          necrosis: l.lrm_necrosis, diffusion: l.lrm_diffusion
-        },
-        algorithmus_schritte: {
-          schritt1_basis: l.baseCat,
-          schritt2_af: l.afApplied,
-          schritt3_tiebreak: l.tieApplied,
-          schritt4_final_check: l.final_check_ok
-        },
-        ltx_felder: {
-          seriennummer: l.ltx_serie,
-          bildnummer: l.ltx_bild,
-          messphase: l.ltx_messphase,
-          makrovaskulaere_invasion: l.ltx_makrovasc
-        },
-        radlex_codes: {
-          segment: 'RID29237',
-          size: 'RID13432',
-          aphe: l.aphe ? 'RID43355' : null,
-          washout: l.washout ? 'RID43353' : null,
-          capsule: l.capsule ? 'RID39477' : null,
-          threshold_growth: l.thresholdGrowth ? 'RID35936' : null,
-          makrovasc: l.ltx_makrovasc ? 'RID3987' : null
-        },
-        direct_assignment: !!l.direct_category
-      });
-    }
-  }
-
-  const data = {
-    template: 'HJK-MRRT-CT-LEBER-LIRADS-v1.2',
-    template_lizenz: 'CC-BY-4.0',
-    timestamp: new Date().toISOString(),
-    modalitaet: 'CT',
-    modus: activeMode,
-    risikoprofil: {
-      cirrhosis: gc('risk_cirrhosis'),
-      hbv: gc('risk_hbv'),
-      hcc_current: gc('risk_hcc_current'),
-      hcc_treated: gc('risk_hcc_treated'),
-      excluded_vascular: gc('exclude_vascular')
-    },
-    indikation: gv('indikation'),
-    technik: {
-      geraet: gv('tech_geraet'), km: gv('tech_km'),
-      nativ: gv('tech_native')==='ja', arteriell: gv('tech_arterial')==='ja',
-      portalvenoes: gv('tech_pv')==='ja', spaet: gv('tech_delayed')==='ja',
-      bildqualitaet: gv('tech_quality')
-    },
-    hintergrundleber: { morphologie: gv('bg_morph'), portale_hypertension: gv('bg_porthyp') },
-    laesionen: lesions,
-    voruntersuchung: { datum: gv('vu_date'), modalitaet: gv('vu_mod'), kommentar: gv('vu_text') },
-    freitext: gv('freetext'),
-    ltx_evaluation: {
-      etnummer: gv('ltx_etnr'),
-      untersuchungsdatum: gv('ltx_datum_akt'),
-      initiales_hcc: gv('ltx_ini_hcc'),
-      verlaufsbericht: gv('ltx_verlauf'),
-      hcc_gesichert: gv('ltx_hcc_dx'),
-      lci_gesichert: gv('ltx_lci_dx'),
-      extrahepatisch: gv('ltx_extrahep'),
-      zweitverfahren: gv('ltx_zweitverfahren'),
-      mailand_erfuellt: document.getElementById('mailand_value')?.textContent || null
-    },
-    fliesstext: {
-      technik: document.getElementById('prev_technik').textContent,
-      klinik: document.getElementById('prev_klinik').textContent,
-      befund: document.getElementById('prev_befund').textContent,
-      beurteilung: document.getElementById('prev_beurteilung').value
-    },
-    referenzen: {
-      algorithmus: 'Schima W, Kopf H, Eisenhuber E. LI-RADS leicht gemacht. Fortschr Röntgenstr 2023;195:486-494',
-      ltx_basis: 'Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template gen_ltx_hcc.html, CC BY 4.0, 2017',
-      coding_systems: ['RadLex', 'LOINC', 'ACR-LI-RADS']
-    }
-  };
-
-  if (format === 'json'){
-    area.textContent = JSON.stringify(data, null, 2);
-  } else if (format === 'fhir'){
-    const obs = lesions.map(les => ({
-      resourceType: 'Observation',
-      status: 'final',
-      code: { coding: [{ system: 'http://loinc.org', code: 'LP202113-1', display: 'LI-RADS Category' }] },
-      valueCodeableConcept: {
-        coding: [{
-          system: 'https://www.acr.org/Clinical-Resources/Reporting-and-Data-Systems/LI-RADS',
-          code: les.lr_category,
-          display: LR_DESCRIPTIONS[les.lr_category] || ''
-        }]
-      },
-      bodySite: les.segment ? { text: `Segment ${les.segment}` } : undefined,
-      component: [
-        les.size_mm ? {
-          code: { coding: [{ system: 'http://loinc.org', code: '21889-1', display: 'Size' }] },
-          valueQuantity: { value: les.size_mm, unit: 'mm', system: 'http://unitsofmeasure.org', code: 'mm' }
-        } : null
-      ].filter(Boolean)
-    }));
-
-    const bundle = {
-      resourceType: 'Bundle',
-      type: 'collection',
-      meta: { tag: [{ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'HJK-MRRT-CT-LEBER-LIRADS-v1.2' }] },
-      entry: [
-        {
-          resource: {
-            resourceType: 'DiagnosticReport',
-            status: 'final',
-            category: [{ coding: [{ system: 'http://loinc.org', code: 'LP29684-5', display: 'Radiology' }] }],
-            code: { coding: [{ system: 'http://loinc.org', code: '24571-9', display: 'CT Abdomen' }] },
-            conclusion: data.fliesstext.beurteilung,
-            presentedForm: [{
-              contentType: 'text/plain',
-              data: btoa(unescape(encodeURIComponent(Object.values(data.fliesstext).join('\n\n'))))
-            }]
-          }
-        },
-        ...obs.map(o => ({ resource: o }))
-      ]
-    };
-    area.textContent = JSON.stringify(bundle, null, 2);
-  }
-  area.classList.add('show');
-}
-
-/* ============================================================================
-   MAILAND-KRITERIEN BERECHNUNG (DRG-Template-Logik portiert)
-   Pinto dos Santos D et al. 2017, gen_ltx_hcc.html, calcMilan()
-   ============================================================================ */
-function updateMailand(){
-  const box = document.getElementById('mailand_box');
-  const val = document.getElementById('mailand_value');
-  const det = document.getElementById('mailand_detail');
-  const grid = document.getElementById('ltx_criteria_grid');
-  if (!box || !val) return;
-
-  // Sammele relevante Läsionsdaten
-  const lesions = [];
-  for (let n=1; n<=3; n++){
-    const l = lesionState[n];
-    if (l.used && l.size) lesions.push(l);
-  }
-
-  // Extrahepatic from LTx form
-  const extrahep = (document.getElementById('ltx_extrahep')?.value === 'ja');
-  const anyMakrovasc = lesions.some(l => l.ltx_makrovasc || l.tiv);
-
-  // Criteria evaluation
-  const c = {
-    laesionen_erfasst: lesions.length > 0,
-    n_knoten: lesions.length,
-    n_knoten_ok: false,
-    groessen_ok: false,
-    keine_extrahep: !extrahep,
-    keine_makrovasc: !anyMakrovasc
-  };
-
-  if (lesions.length === 1){
-    c.n_knoten_ok = true;
-    c.groessen_ok = lesions[0].size <= 50;
-  } else if (lesions.length >= 2 && lesions.length <= 3){
-    c.n_knoten_ok = true;
-    c.groessen_ok = lesions.every(l => l.size <= 30);
-  } else if (lesions.length > 3){
-    c.n_knoten_ok = false;
-    c.groessen_ok = lesions.every(l => l.size <= 30); // descriptive
-  }
-
-  // Update criteria grid
-  if (grid){
-    const items = [
-      { label: 'Anzahl Knoten ≤ 3', ok: c.n_knoten_ok, value: lesions.length || '–' },
-      { label: 'Größen erfüllt', ok: c.groessen_ok && c.laesionen_erfasst,
-        value: lesions.length === 1
-          ? (lesions[0].size <= 50 ? '≤ 50 mm ✓' : `${lesions[0].size} mm ✗`)
-          : lesions.length >= 2
-            ? (lesions.every(l => l.size <= 30) ? 'alle ≤ 30 mm ✓' : 'mind. 1 &gt; 30 mm ✗')
-            : '–'
-      },
-      { label: 'Keine extrahepat. Manifestation', ok: c.keine_extrahep,
-        value: extrahep ? 'extrahep. vorhanden ✗' : (document.getElementById('ltx_extrahep')?.value === 'nein' ? 'keine ✓' : '–') },
-      { label: 'Keine makrovaskuläre Invasion', ok: c.keine_makrovasc,
-        value: anyMakrovasc ? 'TIV/Invasion ✗' : 'keine ✓' }
-    ];
-    grid.innerHTML = items.map(it => `
-      <div class="crit ${it.ok ? 'met' : (lesions.length>0 ? 'violated' : '')}">
-        <span class="crit-label">${it.label}</span>
-        <span class="crit-value">${it.value}</span>
+      <div class="rr-row rr-row-full">
+        <label>
+          <span class="rr-lbl"><span>Verlaufs-Bemerkung</span></span>
+          <textarea id="vu_text" placeholder="z. B. 'Läsion 1 zuvor 14 mm – nun 22 mm (Schwellenwachstum ≥ 50 %/6 Mo).'"></textarea>
+        </label>
       </div>
-    `).join('');
-  }
+    </div>
+  </details>
 
-  // Verdict
-  let verdict = null;
-  if (!c.laesionen_erfasst){
-    val.textContent = '–';
-    det.innerHTML = 'Bitte mindestens eine Läsion mit Größe erfassen.';
-    box.className = 'mailand-box';
-    return;
-  }
-  if (c.n_knoten_ok && c.groessen_ok && c.keine_extrahep && c.keine_makrovasc){
-    verdict = 'in';
-  } else {
-    verdict = 'out';
-  }
+  <!-- ===================== CODESYSTEM-LEGENDE ===================== -->
+  <div class="rr-codesystem-legend">
+    <span class="rr-badge-mini rr-is-verified">verified</span> RadLex-RID aus RSNA-Ontologie verifiziert
+    <span class="rr-badge-mini rr-is-local">local</span> Lokales CodeSystem, RadLex-Mapping ausstehend
+    <span class="rr-badge-mini rr-is-needs">needs-mapping</span> Negation/Leerwert – kein eigenständiges Konzept
+  </div>
 
-  if (verdict === 'in'){
-    val.textContent = 'erfüllt';
-    det.innerHTML = '<strong>Mailand-Kriterien erfüllt.</strong> Standard-Exception für LTx grundsätzlich möglich.';
-    box.className = 'mailand-box in';
-  } else {
-    val.textContent = 'nicht erfüllt';
-    const violations = [];
-    if (!c.n_knoten_ok) violations.push(`Knotenzahl (${lesions.length})`);
-    if (!c.groessen_ok) violations.push('Größenkriterien');
-    if (!c.keine_extrahep) violations.push('extrahepat. Manifestation');
-    if (!c.keine_makrovasc) violations.push('makrovaskuläre Invasion');
-    det.innerHTML = `<strong>Mailand-Kriterien nicht erfüllt.</strong> Verletzung: ${violations.join(', ')}.`;
-    box.className = 'mailand-box out';
-  }
-}
+  <!-- ===================== EVIDENZ / ATTRIBUTION ===================== -->
+  <div class="rr-evidence-footer">
+    <strong>Algorithmus:</strong> ACR LI-RADS CT/MRI v2018 (American College of Radiology).<br>
+    <strong>Didaktische Aufbereitung, 4-Schritte-Logik, Hilfskriterien-Tabelle, LR-TIV-Subtypisierung:</strong>
+    Schima W, Kopf H, Eisenhuber E. LI-RADS leicht gemacht. Fortschr Röntgenstr 2023; 195: 486–494. DOI 10.1055/a-1990-5924.<br>
+    <strong>Hinweis:</strong> Die §16-TPG/LTx-Evaluation (Mailand-Kriterien) wurde in ein eigenständiges Template ausgelagert: HJK-MRRT-LTX-HCC-EVAL.<br>
+    <strong>Lizenz:</strong> Creative Commons Attribution 4.0 International (CC BY 4.0).
+  </div>
 
-/* Hook update for LTx form changes */
-['ltx_etnr','ltx_datum_akt','ltx_ini_hcc','ltx_verlauf','ltx_hcc_dx',
- 'ltx_lci_dx','ltx_extrahep','ltx_zweitverfahren'].forEach(id => {
-  document.addEventListener('change', e => {
-    if (e.target.id === id) { updateMailand(); updatePreview(); }
-  });
-});
+</section>
+</div>
 
-/* INIT */
-for (let n=1; n<=3; n++) renderLesion(n);
-checkAtRisk();
-updateMailand();
-updatePreview();
-</script>
 </body>
 </html>
