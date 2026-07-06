@@ -8,7 +8,7 @@ HTML5 · RadLex · FHIR R4 · Vendor-neutral
 [![License: MIT](https://img.shields.io/badge/Code-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 **Autor:** Florian Reiger-Ochsner, Facharzt für Radiologie, Stv. Vorstand Radiologie, Herz-Jesu-Krankenhaus Wien
-**Stand:** Juni 2026
+**Stand:** Juli 2026
 
 ---
 
@@ -51,7 +51,8 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 │       ├── abdomen-becken/         # CT Abdomen + Becken v1.0
 │       ├── urolithiasis/           # CT Urolithiasis v1.0 (DRG CC BY 4.0)
 │       ├── lungenembolie/          # CT Lungenarterien/CTPA v1.0 (DRG CC BY 4.0)
-│       ├── lirads-leber/           # CT/MRT Leber LI-RADS v1.2
+│       ├── lirads-leber/           # CT Leber LI-RADS v1.3 (A-Struktur)
+│       ├── ltx-hcc-evaluation/     # CT Leber LTx-Evaluation HCC v1.0 (DRG CC BY 4.0)
 │       └── schaedel-nativ/         # CT Schädel nativ v1.0
 ├── demo/                           # GitHub Pages Live-Demos
 │   ├── knie-prae-tep/
@@ -61,6 +62,7 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 │   ├── ct-urolithiasis/
 │   ├── ct-lungenembolie/
 │   ├── ct-lirads-leber/
+│   ├── ct-ltx-hcc-evaluation/
 │   └── ct-schaedel-nativ/
 └── docs/                           # Architektur, Style Guide
 ```
@@ -77,7 +79,8 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 | CT Abdomen + Becken | HJK-MRRT-CT-ABDBECKEN | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-abdomen/) |
 | CT Urolithiasis | HJK-MRRT-CT-UROLITHIASIS | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/) |
 | CT Lungenarterien (CTPA) | HJK-MRRT-CT-LUNGENEMBOLIE | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/) |
-| CT/MRT Leber LI-RADS | HJK-MRRT-CT-LEBER-LIRADS | v1.2 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/) |
+| CT Leber LI-RADS | HJK-MRRT-CT-LEBER-LIRADS | v1.3 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/) |
+| CT Leber LTx-Evaluation HCC | HJK-MRRT-LTX-HCC-EVAL | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-ltx-hcc-evaluation/) |
 | CT Schädel nativ | HJK-MRRT-CT-SCHAEDEL-NATIV | v1.0 | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/) |
 
 ---
@@ -149,7 +152,9 @@ Bei kombinierten Dateien (HTML-Template mit Inline-JavaScript) gilt CC BY 4.0
 für die Datei als Ganzes; der MIT-Grant gilt zusätzlich für die eingebetteten
 Software-Anteile. Details: [LICENSE](LICENSE).
 
-DRG-basierte Templates (CT Urolithiasis, CT Lungenarterien, CT/MRT Leber LI-RADS v1.2) enthalten Material,
+DRG-basierte Templates (CT Urolithiasis, CT Lungenarterien, CT Leber LTx-Evaluation HCC) enthalten Material,
 das ursprünglich von der Deutschen Röntgengesellschaft unter CC BY 4.0
 lizenziert wurde – Attribution in den jeweiligen Template-READMEs.
+(Hinweis: CT Leber LI-RADS enthält seit v1.3 kein DRG-Material mehr – die
+§16-TPG/LTx-Evaluation wurde nach HJK-MRRT-LTX-HCC-EVAL ausgelagert.)
 Quelle: <https://github.com/DRGagit/ak_befundung>
