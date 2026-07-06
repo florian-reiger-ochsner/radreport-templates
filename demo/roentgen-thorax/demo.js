@@ -568,6 +568,11 @@ function resetAll() {
   document.getElementById('btn-reset').addEventListener('click', resetAll);
 
   // Initialer Aufbau
+  // Anfangs-Verbergung der bedingten Felder (kanonisch sind sie sichtbar/CSS-frei;
+  // das Ein-/Ausblenden ist Viewer-Verhalten und wird hier zur Laufzeit gesetzt).
+  plToggle();
+  document.getElementById('frage_ft_row').style.display = 'none';
+  document.getElementById('beurt_ft_row').style.display = 'none';
   const pd = document.getElementById('prev-date'); if (pd) pd.textContent = new Date().toLocaleDateString('de-AT', { day: '2-digit', month: '2-digit', year: 'numeric' });
   decorateVoiceHints();
   update();

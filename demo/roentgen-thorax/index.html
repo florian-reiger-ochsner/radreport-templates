@@ -18,7 +18,7 @@
 <meta name="rrt:bodyregion"      content="Chest"/>
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-06T17:23:37.942Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-06T19:22:24.722Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,6 +57,7 @@
   </div>
 </div>
 <div class="rr-tx-grid2" style="margin-top:8px">
+
   <div class="rr-tx-row"><label><span class="rr-tx-lbl">Aufnahmequalität <span class="rr-rl-badge">RadLex</span></span>
     <select id="qual" data-radlex="RID13882" data-en="image quality" data-voice="aufnahmequalität">
       <option value="gut, diagnostisch ausreichend">gut, diagnostisch ausreichend</option>
@@ -65,6 +66,7 @@
       <option value="eingeschränkt (Unterbelichtung)">eingeschränkt – Unterbelichtung</option>
       <option value="eingeschränkt (Überbelichtung)">eingeschränkt – Überbelichtung</option>
     </select></label></div>
+
   <div class="rr-tx-row"><label><span class="rr-tx-lbl">Klinische Fragestellung</span>
     <select id="frage" data-voice="fragestellung">
       <option value="">– bitte wählen –</option>
@@ -79,7 +81,7 @@
       <option value="__ft__">Sonstige (Freitext)</option>
     </select></label></div>
 </div>
-<div class="rr-tx-row" id="frage_ft_row" style="display:none"><label><span class="rr-tx-lbl">Fragestellung Freitext</span>
+<div class="rr-tx-row" id="frage_ft_row"><label><span class="rr-tx-lbl">Fragestellung Freitext</span>
   <input type="text" id="frage_ft" placeholder="Fragestellung…"></label></div>
 
 <!-- ===================== BEFUND (Tri-State-Regionen) ===================== -->
@@ -102,6 +104,7 @@
       </div>
     </div>
     <div class="rr-tx-region-detail" id="rd-zwerchfell">
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Zwerchfell / Sinus <span class="rr-rl-badge">RadLex</span></span>
         <select id="zwf" data-voice="zwerchfell">
           <option value="bds. regelrecht gestellt, Sinus phrenicocostales frei" data-radlex="RID1303" data-en="diaphragm normal">Regelrecht bds., Sinus frei</option>
@@ -112,6 +115,7 @@
           <option value="Verlegung des li. Sinus phrenicocostalis" data-radlex="RID5312" data-en="costophrenic angle blunting left">Sinus verlegt li.</option>
           <option value="Verlegung der Sinus phrenicocostales bds." data-radlex="RID5312" data-en="costophrenic angle blunting bilateral">Sinus verlegt bds.</option>
         </select></label></div>
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
         <input type="text" id="ft_zwerchfell" data-voice="zusatz zwerchfell" placeholder="freie Ergänzung…"></label></div>
     </div>
@@ -131,6 +135,7 @@
       </div>
     </div>
     <div class="rr-tx-region-detail" id="rd-pleura">
+
       <div class="rr-tx-row"><span class="rr-tx-lbl">Befundtyp <span class="rr-rl-badge">RadLex</span></span>
         <div class="rr-tx-cg">
           <label class="rr-tx-ci"><input type="checkbox" id="pl_erguss" data-radlex="RID4872" data-en="pleural effusion"><span>Erguss</span></label>
@@ -140,8 +145,10 @@
           <label class="rr-tx-ci"><input type="checkbox" id="pl_tumor" data-radlex="RID34948" data-en="pleural mass"><span>Pleuratumor/RF</span></label>
         </div>
       </div>
-      <div class="rr-tx-row" id="pl_seite_row" style="display:none"><label><span class="rr-tx-lbl">Seite (Schwarte / Kalk / Tumor)</span><select id="pl_seite" data-voice="seite pleura"><option value="">–</option><option value="re.">re.</option><option value="li.">li.</option><option value="bds.">bds.</option></select></label></div>
-      <div class="rr-tx-row" id="pl_erguss_row" style="display:none">
+
+      <div class="rr-tx-row" id="pl_seite_row"><label><span class="rr-tx-lbl">Seite (Schwarte / Kalk / Tumor)</span><select id="pl_seite" data-voice="seite pleura"><option value="">–</option><option value="re.">re.</option><option value="li.">li.</option><option value="bds.">bds.</option></select></label></div>
+
+      <div class="rr-tx-row" id="pl_erguss_row">
         <span class="rr-tx-lbl">Pleuraerguss – Ausmaß je Seite <span class="rr-rl-badge">RadLex</span></span>
         <div class="rr-tx-grid2">
           <label><span class="rr-tx-lbl">rechts</span>
@@ -161,7 +168,8 @@
         </div>
         <div class="rr-tx-field-note">Nur eine Seite ausfüllen = einseitig. Beide Seiten = unterschiedlich ausgeprägter beidseitiger Erguss.</div>
       </div>
-      <div class="rr-tx-row" id="pl_ptx_row" style="display:none">
+
+      <div class="rr-tx-row" id="pl_ptx_row">
         <span class="rr-tx-lbl">Pneumothorax – Ausmaß je Seite <span class="rr-rl-badge">RadLex</span></span>
         <div class="rr-tx-grid2">
           <label><span class="rr-tx-lbl">rechts</span>
@@ -179,6 +187,7 @@
         </div>
         <div class="rr-tx-field-note">Nur eine Seite ausfüllen = einseitig. Beide Seiten = beidseitiger Pneumothorax. „Spannungspneumothorax" löst den Notfall-Hinweis aus.</div>
       </div>
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
         <input type="text" id="ft_pleura" data-voice="zusatz pleura" placeholder="freie Ergänzung…"></label></div>
     </div>
@@ -198,6 +207,7 @@
       </div>
     </div>
     <div class="rr-tx-region-detail" id="rd-herzmediastinum">
+
       <div class="rr-tx-grid2">
         <div class="rr-tx-row"><label><span class="rr-tx-lbl">Herzgröße (CTR) <span class="rr-rl-badge">RadLex</span></span>
           <select id="herz_gr" data-radlex="RID1786" data-en="cardiac size" data-voice="herzgröße">
@@ -214,6 +224,7 @@
           </div>
         </div>
       </div>
+
       <div class="rr-tx-row" style="margin-top:8px"><span class="rr-tx-lbl">Mediastinum <span class="rr-rl-badge">RadLex</span></span>
         <div class="rr-tx-cg">
           <label class="rr-tx-ci"><input type="checkbox" id="md_verb" data-radlex="RID34952" data-en="mediastinal widening"><span>Verbreitert</span></label>
@@ -222,6 +233,7 @@
           <label class="rr-tx-ci"><input type="checkbox" id="md_shift" data-radlex="RID34952" data-en="mediastinal shift"><span>Shift kontralateral</span></label>
         </div>
       </div>
+
       <div class="rr-tx-grid2" style="margin-top:8px">
         <div class="rr-tx-row"><span class="rr-tx-lbl">Hili <span class="rr-rl-badge">RadLex</span></span>
           <div class="rr-tx-cg">
@@ -231,12 +243,14 @@
         </div>
         <div class="rr-tx-row"><label><span class="rr-tx-lbl">Hilus-Seite</span><select id="hil_seite" data-voice="seite hilus"><option value="">–</option><option value="re.">re.</option><option value="li.">li.</option><option value="bds.">bds.</option></select></label></div>
       </div>
+
       <div class="rr-tx-row" style="margin-top:8px"><span class="rr-tx-lbl">Aorta</span>
         <div class="rr-tx-cg">
           <label class="rr-tx-ci"><input type="checkbox" id="ao_elon" data-radlex="RID5090" data-en="aortic calcification"><span>Elongiert/wandverkalkt</span></label>
           <label class="rr-tx-ci"><input type="checkbox" id="ao_dil" data-radlex="RID5091" data-en="aortic dilatation"><span>Dilatiert</span></label>
         </div>
       </div>
+
       <div class="rr-tx-row" style="margin-top:8px"><label><span class="rr-tx-lbl">Pulmonalvenöse Stauung <span class="rr-rl-badge">RadLex</span></span>
         <select id="herz_stau" data-radlex="RID5056" data-en="pulmonary vascular congestion" data-voice="stauungszeichen">
           <option value="">keine</option>
@@ -244,6 +258,7 @@
           <option value="mittelgradige">mittelgradige Stauungszeichen (interstitielles Ödem)</option>
           <option value="hochgradige">hochgradige Stauungszeichen (alveoläres Ödem)</option>
         </select></label></div>
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
         <input type="text" id="ft_herzmediastinum" data-voice="zusatz herzmediastinum" placeholder="freie Ergänzung…"></label></div>
     </div>
@@ -263,6 +278,7 @@
       </div>
     </div>
     <div class="rr-tx-region-detail" id="rd-lunge">
+
       <div class="rr-tx-hint"><strong>Mehrere Befunde möglich</strong> – z.&nbsp;B. Emphysem + Rundherd. Fleischner-Terminologie, RadLex pro Eintrag.</div>
       <!-- Parenchym-Stack: kanonisch eine kodierte Instanz; weitere Einträge fügt die Demo zur Laufzeit hinzu (Klon). -->
       <div id="par-list">
@@ -302,6 +318,7 @@
           <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung / Größe</span><input type="text" id="par-ft-1" placeholder="z.B. 8 mm, scharf begrenzt, subpleural…" data-voice="zusatz parenchym"></label></div>
         </div>
       </div>
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
         <input type="text" id="ft_lunge" data-voice="zusatz lunge" placeholder="freie Ergänzung…"></label></div>
     </div>
@@ -321,6 +338,7 @@
       </div>
     </div>
     <div class="rr-tx-region-detail" id="rd-skelett">
+
       <div class="rr-tx-row"><span class="rr-tx-lbl">Knochen <span class="rr-rl-badge">RadLex</span></span>
         <div class="rr-tx-cg">
           <label class="rr-tx-ci"><input type="checkbox" id="sk_deg" data-radlex="RID5222" data-en="degenerative changes spine"><span>Degenerativ WS</span></label>
@@ -332,6 +350,7 @@
           <label class="rr-tx-ci"><input type="checkbox" id="sk_stern_op" data-radlex="RID49557" data-en="status post sternotomy"><span>St.p. Sternotomie</span></label>
         </div>
       </div>
+
       <div class="rr-tx-row" style="margin-top:8px"><span class="rr-tx-lbl">Weichteile Thoraxwand</span>
         <div class="rr-tx-cg">
           <label class="rr-tx-ci"><input type="checkbox" id="wt_emph" data-radlex="RID5204" data-en="subcutaneous emphysema"><span>Weichteilemphysem</span></label>
@@ -340,6 +359,7 @@
           <label class="rr-tx-ci"><input type="checkbox" id="wt_mast_li" data-radlex="RID49560" data-en="status post mastectomy left"><span>St.p. Mastektomie li.</span></label>
         </div>
       </div>
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung (Freitext)</span>
         <input type="text" id="ft_skelett" data-voice="zusatz skelett" placeholder="z. B. BWK7 und BWK12 mit ca. 30 % Höhenminderung; 2 Wirbelkörper betroffen"></label></div>
     </div>
@@ -351,6 +371,7 @@
 <details id="dev-details">
   <summary>Devices / Fremdmaterial <span style="font-weight:400;color:var(--rr-ink-faint);font-size:11px">(aufklappen – mehrere Einträge möglich)</span></summary>
   <div>
+
     <div class="rr-tx-hint" style="margin-top:10px">Jedes Device einzeln hinzufügen – auch mehrere gleichartige. <span class="rr-rl-badge">RadLex</span> pro Device-Typ. Fehllage „dringlich" löst Notfall-Hinweis aus.</div>
     <!-- Device-Stack: kanonisch eine kodierte Instanz; weitere Einträge fügt die Demo zur Laufzeit hinzu (Klon). -->
     <div id="dev-list">
@@ -413,12 +434,16 @@
 <details id="vgl-details">
   <summary>Vergleichsaufnahme <span style="font-weight:400;color:var(--rr-ink-faint);font-size:11px">(optional)</span></summary>
   <div>
+
     <div class="rr-tx-grid2" style="margin-top:12px">
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Vergleich vorhanden</span>
         <select id="vgl_ja" data-voice="vergleich vorhanden"><option value="">Nein</option><option value="yes">Ja</option></select></label></div>
+
       <div class="rr-tx-row"><label><span class="rr-tx-lbl">Datum Voraufnahme</span>
         <input type="text" id="vgl_datum" placeholder="z.B. 05/2026"></label></div>
     </div>
+
     <div class="rr-tx-row"><label><span class="rr-tx-lbl">Verlaufsbeurteilung <span class="rr-rl-badge">RadLex</span></span>
       <select id="vgl_verlauf" data-radlex="RID49820" data-en="interval change" data-voice="verlauf">
         <option value="">–</option>
@@ -438,7 +463,7 @@
     <input type="radio" name="bmod" id="bmod_ft" value="ft"><label for="bmod_ft">Freitext</label>
   </div>
 </div>
-<div class="rr-tx-row" id="beurt_ft_row" style="display:none"><label><span class="rr-tx-lbl">Beurteilung Freitext</span>
+<div class="rr-tx-row" id="beurt_ft_row"><label><span class="rr-tx-lbl">Beurteilung Freitext</span>
   <textarea id="beurt_ft" rows="4" placeholder="Freitext…" data-voice="beurteilung"></textarea></label></div>
 
 </section>
