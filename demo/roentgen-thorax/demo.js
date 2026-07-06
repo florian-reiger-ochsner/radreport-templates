@@ -53,6 +53,8 @@ body.rr-tx-voice-on #btn-voice{background:var(--rr-accent);color:#fff}
 .rr-tx-vh{display:none;align-items:center;gap:4px;font-size:10.5px;color:var(--rr-accent);background:var(--rr-accent-pale);border:1px solid var(--rr-accent-light);border-radius:10px;padding:1px 8px;margin-top:4px;line-height:1.6;font-weight:600;white-space:nowrap;width:max-content;max-width:100%}
 body.rr-tx-voice-on .rr-tx-vh{display:inline-flex}
 .rr-tx-region-head .rr-tx-vh{margin:0}
+.rr-tx-rgroup{border:0;min-width:0}
+.rr-tx-rgroup>legend{display:none}
 .rr-tx-region{border:1px solid var(--rr-rule);border-radius:6px;margin-bottom:10px;background:var(--rr-bg);transition:border-color .15s}
 .rr-tx-region.rr-tx-is-bef{border-color:var(--rr-accent-light)}
 .rr-tx-region.rr-tx-is-crit{border-color:var(--notfall)}
