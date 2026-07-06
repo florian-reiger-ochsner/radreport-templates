@@ -1,15 +1,16 @@
 id: HJK-MRRT-CT-ABDBECKEN
-version: 1.0
+version: 2.0
 status: pilot
+struktur: A
 modalitaet: CT
 region: Abdomen-Becken
-indikation: CT Abdomen und Becken - Onkologie/RECIST, Akutes Abdomen, Allgemein
+indikation: CT Abdomen und Becken - Organsystematik, optional Akutes Abdomen und Onkologie/RECIST
 sprache: de
 autoren:
   - florian-reiger-ochsner
 reviewer: []
-geprueft: 2026-06-08
-naechste-pruefung: 2026-12-08
+geprueft: 2026-07-06
+naechste-pruefung: 2027-01-06
 klassifikationen:
   - name: RECIST 1.1
     quelle: "Eisenhauer EA et al. Eur J Cancer 2009;45(2):228-247"
@@ -23,10 +24,10 @@ standorte:
 loinc-codes:
   - code: "30652-8"
     description: CT Abdomen and Pelvis
-kontexte:
-  - onkologisches-staging-recist
-  - akutes-abdomen-notfall
-  - allgemein
+sektionen:
+  - organsystematik-basis
+  - akutes-abdomen-notfall-optional
+  - onkologie-recist-optional
 km-phasen:
   - nativ
   - arteriell
@@ -47,4 +48,4 @@ organe:
 output:
   - fliesstext
   - fhir-bundle
-radlex-coverage: vollstaendig
+radlex-coverage: teilweise-verifiziert

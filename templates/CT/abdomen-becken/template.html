@@ -2,176 +2,20 @@
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8">
-<title>CT-ABDOMEN – Live-Demo</title>
+<title>CT Abdomen + Becken – Strukturierte Befundvorlage (v2.0)</title>
+
+<!-- ===================== MRRT METADATA ===================== -->
 <meta name="dcterms.title"       content="CT Abdomen und Becken"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage CT Abdomen + Becken. Drei Kontexte: Onkologisches Staging/RECIST, Akutes Abdomen/Notfall, Allgemein. Alle KM-Phasen wählbar. Organ-systematische Befundung. RadLex/LOINC-kodiert. FHIR-Export."/>
+<meta name="dcterms.description" content="Strukturierte Befundvorlage CT Abdomen + Becken. Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular ohne CSS/JS. Organ-systematische Befundung (11 Organsysteme), optionale Notfall-Checkliste (akutes Abdomen) und optionaler onkologischer Kontext mit RECIST-1.1-Zielläsionen. Organ-Navigation, Live-Vorschau, Textbausteine, Ampel-Status und FHIR-Export werden in der Demo von demo.js zur Laufzeit erzeugt. RadLex/LOINC-kodiert, FHIR-R4-Export."/>
 <meta name="dcterms.language"    content="de"/>
 <meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date"        content="2026-05-20"/>
-<meta name="dcterms.identifier"  content="HJK-MRRT-CT-ABDBECKEN-v1.0"/>
+<meta name="dcterms.date"        content="2026-07-06"/>
+<meta name="dcterms.identifier"  content="HJK-MRRT-CT-ABDBECKEN-v2.0"/>
 <meta name="rrt:specialty"       content="Radiology"/>
 <meta name="rrt:subspecialty"    content="Abdominal Radiology"/>
 <meta name="rrt:modality"        content="CT"/>
 <meta name="rrt:bodyregion"      content="Abdomen Pelvis"/>
-
-
-
-
-<!-- Core-Stylesheet (Single Source of Truth) -->
-<!-- MRRT-Build: node shared/scripts/inline-css.js macht daraus template.html -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../shared/styles/radreport-core.css">
-
-<style>
-:root{--notfall:#7b1fa2;--notfall-pale:#f3e8f9;}
-/* =================================================================
-   TEMPLATE-SPEZIFISCHES CSS – NUR WAS CORE NICHT ABDECKT
-   Konvention: rr-ctabdomen-* Präfix
-   ================================================================= */
-
-
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.app{display:grid;grid-template-columns:minmax(540px,1fr) minmax(420px,520px);min-height:100vh;max-width:1640px;margin:0 auto;background:var(--rr-bg)}
-@media(max-width:1120px){.app{grid-template-columns:1fr}}
-.input-pane{padding:48px 56px 120px;background:var(--rr-bg);border-right:1px solid var(--rr-rule)}
-.preview-pane{padding:48px 48px 120px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto}
-
-/* ── Header ── */
-.doc-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:28px;color:var(--rr-ink);letter-spacing:-0.02em;line-height:1.2}
-.doc-meta{margin-top:5px;font-size:11.5px;color:var(--rr-ink-muted);letter-spacing:.04em;text-transform:uppercase}
-.title-rule{height:3px;background:linear-gradient(90deg,var(--rr-accent) 0%,var(--rr-accent-pale) 100%);border-radius:2px;margin:14px 0 26px}
-
-/* ── Kontext-Switch ── */
-.ctx-sw{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;margin-bottom:12px}
-.ctx-sw input{display:none}
-.ctx-sw label{flex:1;padding:9px 8px;text-align:center;font-size:12.5px;color:var(--rr-ink-muted);cursor:pointer;transition:all .15s;border-right:1px solid var(--rr-field-border);line-height:1.3}
-.ctx-sw label:last-of-type{border-right:none}
-.ctx-sw input:checked+label{background:var(--rr-accent);color:#fff;font-weight:600}
-.ctx-sw label:hover{background:var(--rr-accent-pale);color:var(--rr-accent)}
-.ctx-sw input#ctx_notfall:checked+label{background:var(--notfall);color:#fff;font-weight:600}
-
-/* ── Section ── */
-.sh{display:flex;align-items:baseline;gap:12px;margin:26px 0 10px}
-.sh h2{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--rr-accent)}
-.sh-line{flex:1;height:1px;background:var(--rr-rule)}
-.sh-sub{font-size:12px;color:var(--rr-ink-muted);margin:-5px 0 11px}
-
-/* ── Organ-Tabs ── */
-.organ-nav{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
-.organ-tab{padding:5px 12px;border-radius:16px;border:1px solid var(--rr-field-border);font-size:12.5px;color:var(--rr-ink-muted);cursor:pointer;transition:all .15s;user-select:none;background:var(--rr-bg)}
-.organ-tab:hover{border-color:var(--rr-accent-light);color:var(--rr-accent)}
-.organ-tab.active{background:var(--rr-accent);color:#fff;border-color:var(--rr-accent);font-weight:500}
-.organ-tab.auffaellig{border-color:var(--rr-warn);color:var(--rr-warn);background:#fdf6ec}
-.organ-tab.auffaellig.active{background:var(--rr-warn);color:#fff}
-.organ-panel{display:none}.organ-panel.show{display:block}
-
-/* ── Fields ── */
-.row{margin-bottom:11px}
-.row label{display:flex;flex-direction:column;gap:4px}
-.lbl{font-size:12px;font-weight:500;color:var(--rr-ink-soft);letter-spacing:.02em}
-.lbl .req{color:var(--rr-accent);margin-left:1px}
-.unit{font-size:11px;color:var(--rr-ink-muted);margin-left:3px;font-weight:400}
-.field-note{font-size:11px;color:var(--rr-ink-muted);margin-top:2px;font-style:italic}
-select,textarea,input[type=text],input[type=number]{width:100%;background:#fff;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);padding:8px 11px;font-family:"Source Sans 3",sans-serif;font-size:13.5px;color:var(--rr-ink);transition:border-color .15s,box-shadow .15s;appearance:none;-webkit-appearance:none}
-select:focus,textarea:focus,input:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale)}
-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%238b97a3' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
-textarea{resize:vertical;min-height:54px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-
-/* ── Hints ── */
-.hint{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-ink-soft);margin:4px 0 12px}
-.hint strong{color:var(--rr-accent)}
-.hint-notfall{background:var(--notfall-pale);border-left:3px solid var(--notfall);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--notfall);margin:4px 0 12px}
-.hint-notfall strong{color:var(--notfall)}
-.hint-warn{background:#fdf6ec;border-left:3px solid var(--rr-warn);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-warn);margin:4px 0 12px}
-
-/* ── Badges ── */
-.rl{display:inline-block;font-size:10px;font-weight:600;color:var(--rr-accent);background:var(--rr-accent-pale);border-radius:3px;padding:1px 5px;margin-left:5px;letter-spacing:.02em;vertical-align:middle}
-
-/* ── RECIST-Tabelle ── */
-.recist-tbl{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 14px}
-.recist-tbl th{text-align:left;padding:7px 9px;background:var(--rr-accent);color:#fff;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--accent-deep)}
-.recist-tbl td{padding:6px 8px;border:1px solid var(--rr-rule);vertical-align:middle}
-.recist-tbl td input,.recist-tbl td select{border:none;background:transparent;padding:2px 4px;font-size:12.5px;width:100%;min-width:60px}
-.recist-tbl td input:focus,.recist-tbl td select:focus{background:var(--rr-accent-pale);border-radius:3px}
-.recist-tbl tr:nth-child(even) td{background:var(--rr-bg-alt)}
-
-/* ── Notfall-Checkliste ── */
-.nf-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0 14px}
-.nf-item{display:flex;align-items:flex-start;gap:9px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:9px 12px;transition:all .15s}
-.nf-item.pos{border-color:var(--rr-critical);background:#fdf0ef}
-.nf-item.neg{border-color:var(--rr-success);background:#ecf7f2}
-.nf-inner{display:flex;gap:0;border:1px solid var(--rr-field-border);border-radius:4px;overflow:hidden;flex-shrink:0;margin-top:1px}
-.nf-inner label{padding:3px 8px;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .12s;border-right:1px solid var(--rr-field-border);color:var(--rr-ink-muted)}
-.nf-inner label:last-of-type{border-right:none}
-.nf-inner input[type=radio]{display:none}
-.nf-inner input:checked+label.nf-pos{background:var(--rr-critical);color:#fff;border-color:var(--rr-critical)}
-.nf-inner input:checked+label.nf-neg{background:var(--rr-success);color:#fff;border-color:var(--rr-success)}
-.nf-inner input:checked+label.nf-na{background:var(--rr-ink-muted);color:#fff;border-color:var(--rr-ink-muted)}
-.nf-text strong{display:block;font-size:13px;color:var(--rr-ink);font-weight:600;margin-bottom:1px}
-.nf-text span{font-size:11px;color:var(--rr-ink-muted);line-height:1.4}
-
-/* ── Kollabierbar ── */
-details{margin-bottom:8px}
-details>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:9px 13px;background:var(--rr-bg-alt);border-radius:var(--rr-radius);border:1px solid var(--rr-rule);font-size:13px;font-weight:500;color:var(--rr-ink-soft);user-select:none;transition:all .15s}
-details>summary:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent-light)}
-details>summary::-webkit-details-marker{display:none}
-details>summary::before{content:"▶";font-size:9px;color:var(--rr-ink-faint);transition:transform .15s}
-details[open]>summary::before{transform:rotate(90deg)}
-details>.db{padding:14px 13px 8px;border:1px solid var(--rr-rule);border-top:none;border-radius:0 0 var(--rr-radius) var(--rr-radius);background:var(--rr-bg)}
-
-/* ── Checkboxes ── */
-.cg{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
-.ci{display:flex;align-items:center;gap:6px;cursor:pointer}
-.ci input{width:14px;height:14px;accent-color:var(--rr-accent);cursor:pointer}
-.ci span{font-size:13px;color:var(--rr-ink-soft)}
-
-/* ── Phase-Chips ── */
-.phase-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
-.phase-chips input[type=checkbox]{display:none}
-.phase-chips label{padding:5px 13px;border-radius:18px;border:1px solid var(--rr-field-border);font-size:12.5px;color:var(--rr-ink-soft);cursor:pointer;transition:all .15s;user-select:none}
-.phase-chips input:checked+label{background:var(--rr-accent);color:#fff;border-color:var(--rr-accent);font-weight:500}
-.phase-chips label:hover{border-color:var(--rr-accent-light);color:var(--rr-accent)}
-
-/* ── Buttons ── */
-.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
-button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"Source Sans 3",sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn-p{background:var(--rr-accent);color:#fff;box-shadow:var(--rr-shadow-sm)}
-.btn-p:hover{background:var(--rr-accent-light);transform:translateY(-1px);box-shadow:var(--rr-shadow-md)}
-.btn-s{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border)}
-.btn-s:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent)}
-.btn-d{background:#fef2f2;color:#c0392b;border:1px solid #f5c6c6}
-.btn-d:hover{background:#fde8e8}
-
-/* ── Preview ── */
-.prev-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rr-ink-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.prev-lbl::after{content:"";flex:1;height:1px;background:var(--rr-rule)}
-.rcard{background:var(--rr-bg);border:1px solid var(--rr-rule);border-radius:10px;padding:22px 24px;box-shadow:var(--rr-shadow-sm)}
-.rcard-header{border-bottom:2px solid var(--rr-accent);padding-bottom:11px;margin-bottom:15px}
-.rcard-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:16px;color:var(--accent-deep);letter-spacing:-.01em}
-.rcard-sub{font-size:11.5px;color:var(--rr-ink-muted);margin-top:3px}
-.rsec{margin-bottom:13px}
-.rsec-lbl{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--rr-accent);margin-bottom:4px}
-.rtext{font-family:"Source Serif 4","Georgia",serif;font-size:13px;line-height:1.72;color:var(--rr-ink);white-space:pre-wrap;min-height:16px}
-.rtext:empty::before{content:"—";color:var(--rr-ink-faint);font-style:italic;font-family:"Source Sans 3",sans-serif}
-.stamp{margin-top:14px;padding-top:11px;border-top:1px solid var(--rr-rule);font-size:11px;color:var(--rr-ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:11px;font-size:12px;font-weight:600;margin-top:12px}
-.badge.ok{background:#ecf7f2;color:var(--rr-success)}
-.badge.warn{background:#fdf6ec;color:var(--rr-warn)}
-.badge.alert{background:#fdf0ef;color:var(--rr-critical)}
-
-/* ── Export ── */
-.ebox{display:none;margin-top:14px;background:#1a2535;color:#93b8d4;border-radius:var(--rr-radius);padding:16px 18px;font-family:"SF Mono","Menlo",monospace;font-size:11px;white-space:pre;overflow:auto;max-height:340px;line-height:1.55}
-.ebox.show{display:block}
-
-</style>
+<meta name="rrt:coding-systems"  content="RadLex, LOINC (partial), RECIST 1.1, local"/>
 </head>
 <body>
 <div class="rr-app">
@@ -180,807 +24,797 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
 <section class="rr-input-pane">
 
 <h1 class="rr-doc-title">CT Abdomen + Becken</h1>
-<div class="rr-doc-sub">MRRT · RadLex-kodiert · Onkologie / Akutes Abdomen / Allgemein · v1.0 · HJK Wien · 2026-05-20</div>
+<div class="rr-doc-sub">MRRT · RadLex-kodiert · Organsystematik + optional Notfall / Onkologie · v2.0 · HJK Wien</div>
 <div class="rr-title-rule"></div>
 
-<!-- KONTEXT-MODUS -->
-<div class="ctx-sw">
-  <input type="radio" name="ctx" id="ctx_allg" value="allg" checked>
-  <label for="ctx_allg">Allgemein<br><span style="font-size:10.5px;font-weight:400">Unklarer Befund</span></label>
-  <input type="radio" name="ctx" id="ctx_notfall" value="notfall">
-  <label for="ctx_notfall">Akutes Abdomen<br><span style="font-size:10.5px;font-weight:400">Notfall / Akut</span></label>
-  <input type="radio" name="ctx" id="ctx_onko" value="onko">
-  <label for="ctx_onko">Onkologisches Staging<br><span style="font-size:10.5px;font-weight:400">RECIST / Verlauf</span></label>
-</div>
-<div class="rr-helper-info" id="ctx-hint"></div>
-
 <!-- ══ TECHNIK ══ -->
-<div class="sh"><h2>Technik</h2><div class="sh-line"></div></div>
+<div class="rr-h2-wrap"><h2 class="rr-h2">Technik</h2><div class="rr-h2-rule"></div></div>
 
-<div class="row">
-  <span class="lbl">KM-Phasen<span class="req">*</span></span>
-  <div class="phase-chips">
-    <input type="checkbox" id="ph_nativ" onchange="update()">
+<div class="rr-row">
+  <span class="rr-lbl">KM-Phasen <span class="rr-req-indicator">*</span></span>
+  <div class="rr-phase-chips" id="phase_chips">
+    <input type="checkbox" id="ph_nativ" data-en="unenhanced phase">
     <label for="ph_nativ">Nativ (NECT)</label>
-    <input type="checkbox" id="ph_art" onchange="update()">
+    <input type="checkbox" id="ph_art" data-en="arterial phase">
     <label for="ph_art">Arteriell</label>
-    <input type="checkbox" id="ph_pv" checked onchange="update()">
+    <input type="checkbox" id="ph_pv" checked data-en="portal venous phase">
     <label for="ph_pv">Portal-venös</label>
-    <input type="checkbox" id="ph_spaet" onchange="update()">
+    <input type="checkbox" id="ph_spaet" data-en="delayed phase">
     <label for="ph_spaet">Spätphase</label>
-    <input type="checkbox" id="ph_nativ_nkm" onchange="update()">
+    <input type="checkbox" id="ph_nativ_nkm" data-en="unenhanced plus portal venous phase">
     <label for="ph_nativ_nkm">Nativ + PV</label>
   </div>
 </div>
 
-<div class="grid2">
-  <div class="row">
+<div class="rr-row-full">
+  <div class="rr-row">
     <label>
-      <span class="lbl">KM-Menge <span class="unit">ml</span></span>
-      <input type="number" id="km_menge" placeholder="z.B. 80" oninput="update()"
+      <span class="rr-lbl">KM-Menge <span class="rr-u-">ml</span></span>
+      <input type="number" id="km_menge" placeholder="z.B. 80"
         data-radlex="RID49850" data-en="contrast medium volume">
     </label>
   </div>
-  <div class="row">
+  <div class="rr-row">
     <label>
-      <span class="lbl">KM-Präparat</span>
-      <select id="km_praep" onchange="update()"
-        data-radlex="RID49851" data-en="contrast medium agent">
-        <option value="">– wählen –</option>
-        <option value="Ultravist 370">Ultravist 370</option>
-        <option value="Imeron 400">Imeron 400</option>
-        <option value="Omnipaque 350">Omnipaque 350</option>
-        <option value="Visipaque 320">Visipaque 320</option>
-        <option value="Accupaque 350">Accupaque 350</option>
+      <span class="rr-lbl">KM-Präparat</span>
+      <select id="km_praep" data-radlex="RID49851" data-en="contrast medium agent">
+        <option value="" data-radlex-status="needs-mapping">– wählen –</option>
+        <option value="Ultravist 370" data-radlex-status="local" data-en="iopromide 370">Ultravist 370</option>
+        <option value="Imeron 400" data-radlex-status="local" data-en="iomeprol 400">Imeron 400</option>
+        <option value="Omnipaque 350" data-radlex-status="local" data-en="iohexol 350">Omnipaque 350</option>
+        <option value="Visipaque 320" data-radlex-status="local" data-en="iodixanol 320">Visipaque 320</option>
+        <option value="Accupaque 350" data-radlex-status="local" data-en="iohexol 350">Accupaque 350</option>
       </select>
     </label>
   </div>
 </div>
 
-<div class="grid2">
-  <div class="row">
+<div class="rr-row-full">
+  <div class="rr-row">
     <label>
-      <span class="lbl">Schichtdicke <span class="unit">mm</span></span>
-      <select id="schicht" onchange="update()"
-        data-radlex="RID49852" data-en="slice thickness">
-        <option value="5 mm">5 mm</option>
-        <option value="3 mm">3 mm</option>
-        <option value="1 mm">1 mm (Dünnschicht)</option>
+      <span class="rr-lbl">Schichtdicke <span class="rr-u-">mm</span></span>
+      <select id="schicht" data-radlex="RID49852" data-en="slice thickness">
+        <option value="5 mm" data-radlex-status="local" data-en="slice thickness 5 mm">5 mm</option>
+        <option value="3 mm" data-radlex-status="local" data-en="slice thickness 3 mm">3 mm</option>
+        <option value="1 mm" data-radlex-status="local" data-en="slice thickness 1 mm">1 mm (Dünnschicht)</option>
       </select>
     </label>
   </div>
-  <div class="row">
+  <div class="rr-row">
     <label>
-      <span class="lbl">Rekonstruktion</span>
-      <select id="rekon" onchange="update()"
-        data-radlex="RID49853" data-en="reconstruction">
-        <option value="axial">Axial</option>
-        <option value="axial + coronar">Axial + Coronar</option>
-        <option value="axial + coronar + sagittal">Axial + Coronar + Sagittal</option>
-        <option value="multiplanar (MPR)">Multiplanar (MPR)</option>
+      <span class="rr-lbl">Rekonstruktion</span>
+      <select id="rekon" data-radlex="RID49853" data-en="reconstruction">
+        <option value="axial" data-radlex-status="local" data-en="axial reconstruction">Axial</option>
+        <option value="axial + coronar" data-radlex-status="local" data-en="axial coronal reconstruction">Axial + Coronar</option>
+        <option value="axial + coronar + sagittal" data-radlex-status="local" data-en="axial coronal sagittal reconstruction">Axial + Coronar + Sagittal</option>
+        <option value="multiplanar (MPR)" data-radlex-status="local" data-en="multiplanar reconstruction">Multiplanar (MPR)</option>
       </select>
     </label>
   </div>
 </div>
 
-<div class="grid2">
-  <div class="row">
+<div class="rr-row-full">
+  <div class="rr-row">
     <label>
-      <span class="lbl">Qualität</span>
-      <select id="qual" onchange="update()"
-        data-radlex="RID13882" data-en="image quality">
-        <option value="gut, diagnostisch ausreichend, keine wesentlichen Bewegungsartefakte">Gut, ausreichend</option>
-        <option value="eingeschränkt (Bewegungsartefakte)">Eingeschränkt – Bewegungsartefakte</option>
-        <option value="eingeschränkt (KM-Fluss insuffizient)">Eingeschränkt – KM-Fluss</option>
-        <option value="eingeschränkt (starke Metallartefakte)">Eingeschränkt – Metallartefakte</option>
+      <span class="rr-lbl">Qualität</span>
+      <select id="qual" data-radlex="RID13882" data-en="image quality">
+        <option value="gut, diagnostisch ausreichend, keine wesentlichen Bewegungsartefakte" data-radlex-status="local" data-en="diagnostic image quality">Gut, ausreichend</option>
+        <option value="eingeschränkt (Bewegungsartefakte)" data-radlex-status="local" data-en="motion artifact">Eingeschränkt – Bewegungsartefakte</option>
+        <option value="eingeschränkt (KM-Fluss insuffizient)" data-radlex-status="local" data-en="suboptimal contrast">Eingeschränkt – KM-Fluss</option>
+        <option value="eingeschränkt (starke Metallartefakte)" data-radlex-status="local" data-en="metal artifact">Eingeschränkt – Metallartefakte</option>
       </select>
     </label>
   </div>
-  <div class="row">
+  <div class="rr-row">
     <label>
-      <span class="lbl">Fragestellung</span>
-      <input type="text" id="fragestellung" placeholder="z.B. Staging Colonkarzinom" oninput="update()">
+      <span class="rr-lbl">Fragestellung</span>
+      <input type="text" id="fragestellung" placeholder="z.B. Staging Colonkarzinom"
+        data-en="clinical question">
     </label>
   </div>
 </div>
 
-<!-- ══ NOTFALL-CHECKLISTE (nur ctx=notfall) ══ -->
-<div id="nf-section" style="display:none">
-  <div class="sh"><h2>Notfall-Checkliste</h2><div class="sh-line"></div></div>
-  <div class="hint-notfall"><strong>Akutes Abdomen:</strong> Kritische Befunde zuerst ausschließen. Positive Befunde fließen prominent in Beurteilung.</div>
-  <div class="nf-grid" id="nf-grid"></div>
-</div>
+<!-- ══ NOTFALL-CHECKLISTE (optional) ══ -->
+<details class="rr-section-optional" id="sec-notfall">
+  <summary>Notfall-Checkliste <span class="rr-field-note">akutes Abdomen (optional)</span></summary>
+  <div class="rr-details-body">
+    <div class="rr-helper-info"><strong>Akutes Abdomen:</strong> Kritische Befunde systematisch ausschließen. Positive Befunde fließen prominent in die Beurteilung ein.</div>
+    <div class="rr-nf-grid" id="nf-grid">
 
-<!-- ══ ONKO-SEKTION (nur ctx=onko) ══ -->
-<div id="onko-section" style="display:none">
-  <div class="sh"><h2>Onkologischer Kontext</h2><div class="sh-line"></div></div>
-  <div class="grid2">
-    <div class="row">
-      <label>
-        <span class="lbl">Tumorentität</span>
-        <select id="tumor_entitaet" onchange="update()">
-          <option value="">– wählen –</option>
-          <optgroup label="GI-Trakt">
-            <option value="Colonkarzinom">Colonkarzinom</option>
-            <option value="Rektumkarzinom">Rektumkarzinom</option>
-            <option value="Magenkarzinom">Magenkarzinom</option>
-            <option value="Pankreaskarzinom">Pankreaskarzinom</option>
-            <option value="hepatozelluläres Karzinom (HCC)">HCC</option>
-            <option value="cholangiozelluläres Karzinom (CCC)">CCC</option>
-          </optgroup>
-          <optgroup label="Urogenital">
-            <option value="Nierenzellkarzinom">Nierenzellkarzinom</option>
-            <option value="Urothelkarzinom">Urothelkarzinom</option>
-            <option value="Prostatakarzinom">Prostatakarzinom</option>
-            <option value="Ovarialkarzinom">Ovarialkarzinom</option>
-            <option value="Zervixkarzinom">Zervixkarzinom</option>
-            <option value="Endometriumkarzinom">Endometriumkarzinom</option>
-          </optgroup>
-          <optgroup label="Sonstige">
-            <option value="Lymphom">Lymphom</option>
-            <option value="Retroperitoneales Sarkom">Retroperitoneales Sarkom</option>
-            <option value="Nebennierentumor">Nebennierentumor</option>
-            <option value="Sonstige Entität">Sonstige</option>
-          </optgroup>
-        </select>
-      </label>
-    </div>
-    <div class="row">
-      <label>
-        <span class="lbl">Staging-Zeitpunkt</span>
-        <select id="staging_zeitpunkt" onchange="update()">
-          <option value="Primärstaging">Primärstaging</option>
-          <option value="Verlaufskontrolle unter Therapie">Verlaufskontrolle unter Therapie</option>
-          <option value="Restaging nach Therapie">Restaging nach Therapie</option>
-          <option value="Verlaufskontrolle nach kurativer Therapie">Verlaufskontrolle nach kurativer Therapie</option>
-        </select>
-      </label>
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_perforation" data-radlex="RID5202" data-en="pneumoperitoneum">
+        <div class="rr-nf-text"><strong>Freie Luft / Perforation</strong><span>Pneumoperitoneum</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_perforation" id="nf_perforation_pos" value="positiv"><label for="nf_perforation_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_perforation" id="nf_perforation_neg" value="negativ"><label for="nf_perforation_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_perforation" id="nf_perforation_na" value="n.b."><label for="nf_perforation_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_ileus" data-radlex-status="local" data-en="bowel obstruction">
+        <div class="rr-nf-text"><strong>Ileus</strong><span>Mechanisch / paralytisch</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_ileus" id="nf_ileus_pos" value="positiv"><label for="nf_ileus_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_ileus" id="nf_ileus_neg" value="negativ"><label for="nf_ileus_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_ileus" id="nf_ileus_na" value="n.b."><label for="nf_ileus_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_ischaemie" data-radlex-status="local" data-en="mesenteric ischemia">
+        <div class="rr-nf-text"><strong>Mesenteriale Ischämie</strong><span>Durchblutung, Darmwand</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_ischaemie" id="nf_ischaemie_pos" value="positiv"><label for="nf_ischaemie_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_ischaemie" id="nf_ischaemie_neg" value="negativ"><label for="nf_ischaemie_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_ischaemie" id="nf_ischaemie_na" value="n.b."><label for="nf_ischaemie_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_appendizitis" data-radlex-status="local" data-en="appendicitis">
+        <div class="rr-nf-text"><strong>Appendizitis</strong><span>Appendix-Kaliber, Kokarde</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_appendizitis" id="nf_appendizitis_pos" value="positiv"><label for="nf_appendizitis_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_appendizitis" id="nf_appendizitis_neg" value="negativ"><label for="nf_appendizitis_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_appendizitis" id="nf_appendizitis_na" value="n.b."><label for="nf_appendizitis_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_divertikulitis" data-radlex-status="local" data-en="diverticulitis">
+        <div class="rr-nf-text"><strong>Divertikulitis</strong><span>Peridivertikuläre Entzündung</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_divertikulitis" id="nf_divertikulitis_pos" value="positiv"><label for="nf_divertikulitis_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_divertikulitis" id="nf_divertikulitis_neg" value="negativ"><label for="nf_divertikulitis_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_divertikulitis" id="nf_divertikulitis_na" value="n.b."><label for="nf_divertikulitis_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_pankreatitis" data-radlex-status="local" data-en="acute pancreatitis">
+        <div class="rr-nf-text"><strong>Akute Pankreatitis</strong><span>Nekrose, Exsudat, Schweregrad</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_pankreatitis" id="nf_pankreatitis_pos" value="positiv"><label for="nf_pankreatitis_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_pankreatitis" id="nf_pankreatitis_neg" value="negativ"><label for="nf_pankreatitis_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_pankreatitis" id="nf_pankreatitis_na" value="n.b."><label for="nf_pankreatitis_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_cholezystitis" data-radlex-status="local" data-en="acute cholecystitis">
+        <div class="rr-nf-text"><strong>Akute Cholezystitis</strong><span>Wandödem, Murphy-Zeichen CT</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_cholezystitis" id="nf_cholezystitis_pos" value="positiv"><label for="nf_cholezystitis_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_cholezystitis" id="nf_cholezystitis_neg" value="negativ"><label for="nf_cholezystitis_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_cholezystitis" id="nf_cholezystitis_na" value="n.b."><label for="nf_cholezystitis_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="rr-nf-item" id="nf-wrap-nf_aaa" data-radlex-status="local" data-en="ruptured aortic aneurysm">
+        <div class="rr-nf-text"><strong>Aortenaneurysma (ruptur.)</strong><span>BAA-Durchmesser, Retroperitoneum</span></div>
+        <div class="rr-nf-seg">
+          <input type="radio" name="nf_aaa" id="nf_aaa_pos" value="positiv"><label for="nf_aaa_pos" class="rr-nf-pos">⚠ Ja</label>
+          <input type="radio" name="nf_aaa" id="nf_aaa_neg" value="negativ"><label for="nf_aaa_neg" class="rr-nf-neg">✓ Nein</label>
+          <input type="radio" name="nf_aaa" id="nf_aaa_na" value="n.b."><label for="nf_aaa_na" class="rr-nf-na">n.b.</label>
+        </div>
+      </fieldset>
+
     </div>
   </div>
+</details>
 
-  <!-- RECIST -->
-  <div class="sh" style="margin-top:4px"><h2 style="font-size:11px">RECIST 1.1 – Zielläsionen</h2><div class="sh-line"></div></div>
-  <div class="rr-helper-info"><strong>RECIST 1.1:</strong> Max. 5 Zielläsionen, max. 2 pro Organ. Nur Läsionen ≥ 10 mm (KN ≥ 15 mm kurze Achse). Messung immer in längster Achse (LA) + kurze Achse (KA) bei Lymphknoten.</div>
-  <table class="recist-tbl" id="recist-tbl">
-    <thead>
-      <tr>
-        <th style="width:30px">#</th>
-        <th>Lokalisation</th>
-        <th style="width:80px">LA (mm)</th>
-        <th style="width:80px">KA (mm)</th>
-        <th>Verlauf</th>
-      </tr>
-    </thead>
-    <tbody id="recist-tbody"></tbody>
-    <tfoot>
-      <tr>
-        <td colspan="2" style="text-align:right;font-weight:600;font-size:12px;color:var(--rr-ink-soft);padding:8px">Summe LA (SLD):</td>
-        <td colspan="3" style="font-weight:700;color:var(--rr-accent);font-size:14px;padding:8px" id="recist-sum">– mm</td>
-      </tr>
-    </tfoot>
-  </table>
-  <button type="button" class="rr-btn-secondary" style="font-size:12px;padding:6px 14px;margin-bottom:14px" onclick="addRecistRow()">＋ Zielläsion hinzufügen</button>
-
-  <div class="grid2">
-    <div class="row">
-      <label>
-        <span class="lbl">RECIST-Gesamtansprechen <span class="rr-rl-badge">RadLex</span></span>
-        <select id="recist_response" onchange="update()"
-          data-radlex="RID49860" data-en="RECIST overall response">
-          <option value="">–</option>
-          <option value="Complete Response (CR)" data-radlex="RID49861" data-en="complete response">CR – Complete Response</option>
-          <option value="Partial Response (PR)" data-radlex="RID49862" data-en="partial response">PR – Partial Response (≥ 30% Abnahme)</option>
-          <option value="Stable Disease (SD)" data-radlex="RID49863" data-en="stable disease">SD – Stable Disease</option>
-          <option value="Progressive Disease (PD)" data-radlex="RID49864" data-en="progressive disease">PD – Progressive Disease (≥ 20% Zunahme)</option>
-        </select>
-      </label>
+<!-- ══ ONKOLOGISCHER KONTEXT / RECIST (optional) ══ -->
+<details class="rr-section-optional" id="sec-onko">
+  <summary>Onkologischer Kontext / RECIST 1.1 <span class="rr-field-note">Staging / Verlauf (optional)</span></summary>
+  <div class="rr-details-body">
+    <div class="rr-row-full">
+      <div class="rr-row">
+        <label>
+          <span class="rr-lbl">Tumorentität</span>
+          <select id="tumor_entitaet" data-en="tumor entity">
+            <option value="" data-radlex-status="needs-mapping">– wählen –</option>
+            <optgroup label="GI-Trakt">
+              <option value="Colonkarzinom" data-radlex-status="local" data-en="colon carcinoma">Colonkarzinom</option>
+              <option value="Rektumkarzinom" data-radlex-status="local" data-en="rectal carcinoma">Rektumkarzinom</option>
+              <option value="Magenkarzinom" data-radlex-status="local" data-en="gastric carcinoma">Magenkarzinom</option>
+              <option value="Pankreaskarzinom" data-radlex-status="local" data-en="pancreatic carcinoma">Pankreaskarzinom</option>
+              <option value="hepatozelluläres Karzinom (HCC)" data-radlex-status="local" data-en="hepatocellular carcinoma">HCC</option>
+              <option value="cholangiozelluläres Karzinom (CCC)" data-radlex-status="local" data-en="cholangiocarcinoma">CCC</option>
+            </optgroup>
+            <optgroup label="Urogenital">
+              <option value="Nierenzellkarzinom" data-radlex-status="local" data-en="renal cell carcinoma">Nierenzellkarzinom</option>
+              <option value="Urothelkarzinom" data-radlex-status="local" data-en="urothelial carcinoma">Urothelkarzinom</option>
+              <option value="Prostatakarzinom" data-radlex-status="local" data-en="prostate carcinoma">Prostatakarzinom</option>
+              <option value="Ovarialkarzinom" data-radlex-status="local" data-en="ovarian carcinoma">Ovarialkarzinom</option>
+              <option value="Zervixkarzinom" data-radlex-status="local" data-en="cervical carcinoma">Zervixkarzinom</option>
+              <option value="Endometriumkarzinom" data-radlex-status="local" data-en="endometrial carcinoma">Endometriumkarzinom</option>
+            </optgroup>
+            <optgroup label="Sonstige">
+              <option value="Lymphom" data-radlex-status="local" data-en="lymphoma">Lymphom</option>
+              <option value="Retroperitoneales Sarkom" data-radlex-status="local" data-en="retroperitoneal sarcoma">Retroperitoneales Sarkom</option>
+              <option value="Nebennierentumor" data-radlex-status="local" data-en="adrenal tumor">Nebennierentumor</option>
+              <option value="Sonstige Entität" data-radlex-status="local" data-en="other tumor entity">Sonstige</option>
+            </optgroup>
+          </select>
+        </label>
+      </div>
+      <div class="rr-row">
+        <label>
+          <span class="rr-lbl">Staging-Zeitpunkt</span>
+          <select id="staging_zeitpunkt" data-en="staging timepoint">
+            <option value="Primärstaging" data-radlex-status="local" data-en="primary staging">Primärstaging</option>
+            <option value="Verlaufskontrolle unter Therapie" data-radlex-status="local" data-en="follow-up under therapy">Verlaufskontrolle unter Therapie</option>
+            <option value="Restaging nach Therapie" data-radlex-status="local" data-en="restaging after therapy">Restaging nach Therapie</option>
+            <option value="Verlaufskontrolle nach kurativer Therapie" data-radlex-status="local" data-en="follow-up after curative therapy">Verlaufskontrolle nach kurativer Therapie</option>
+          </select>
+        </label>
+      </div>
     </div>
-    <div class="row">
-      <label>
-        <span class="lbl">Nicht-Zielläsionen</span>
-        <select id="recist_nontarget" onchange="update()"
-          data-radlex="RID49865" data-en="non-target lesion response">
-          <option value="">–</option>
-          <option value="Nicht-Zielläsionen stabil" data-radlex="RID49866">Stabil</option>
-          <option value="Nicht-Zielläsionen rückläufig" data-radlex="RID49867">Rückläufig</option>
-          <option value="Nicht-Zielläsionen progredient" data-radlex="RID49868">Progredient</option>
-          <option value="Neue Läsionen nachweisbar (PD)" data-radlex="RID49869">Neue Läsionen (→ PD)</option>
-        </select>
-      </label>
+
+    <!-- RECIST 1.1 – bis zu 5 Zielläsionen (max. 2/Organ), deklarativ -->
+    <div class="rr-h2-wrap"><h2 class="rr-h2">RECIST 1.1 – Zielläsionen</h2><div class="rr-h2-rule"></div></div>
+    <div class="rr-helper-info"><strong>RECIST 1.1:</strong> Max. 5 Zielläsionen, max. 2 pro Organ. Nur Läsionen ≥ 10 mm (Lymphknoten ≥ 15 mm kurze Achse). Messung in längster Achse (LA); bei Lymphknoten zusätzlich kurze Achse (KA).</div>
+    <table class="rr-recist-tbl" id="recist-tbl">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Lokalisation</th>
+          <th>LA (mm)</th>
+          <th>KA (mm)</th>
+          <th>Verlauf</th>
+        </tr>
+      </thead>
+      <tbody id="recist-tbody">
+        <tr class="rr-recist-row" id="recist-row-1">
+          <td>1</td>
+          <td><input type="text" id="rl_lok_1" placeholder="z.B. Leber Seg. VI" data-en="target lesion location"></td>
+          <td><input type="number" step="0.1" id="rl_la_1" placeholder="mm" data-radlex-status="local" data-en="target lesion long axis"></td>
+          <td><input type="number" step="0.1" id="rl_ka_1" placeholder="mm" data-radlex-status="local" data-en="target lesion short axis"></td>
+          <td><select id="rl_verl_1" data-en="target lesion interval change">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="neu" data-radlex-status="local" data-en="new lesion">Neu</option>
+            <option value="stabil" data-radlex-status="local" data-en="stable">Stabil</option>
+            <option value="regredient" data-radlex-status="local" data-en="decreased">Regredient</option>
+            <option value="progredient" data-radlex-status="local" data-en="increased">Progredient</option>
+          </select></td>
+        </tr>
+        <tr class="rr-recist-row" id="recist-row-2">
+          <td>2</td>
+          <td><input type="text" id="rl_lok_2" placeholder="Lokalisation" data-en="target lesion location"></td>
+          <td><input type="number" step="0.1" id="rl_la_2" placeholder="mm" data-radlex-status="local" data-en="target lesion long axis"></td>
+          <td><input type="number" step="0.1" id="rl_ka_2" placeholder="mm" data-radlex-status="local" data-en="target lesion short axis"></td>
+          <td><select id="rl_verl_2" data-en="target lesion interval change">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="neu" data-radlex-status="local" data-en="new lesion">Neu</option>
+            <option value="stabil" data-radlex-status="local" data-en="stable">Stabil</option>
+            <option value="regredient" data-radlex-status="local" data-en="decreased">Regredient</option>
+            <option value="progredient" data-radlex-status="local" data-en="increased">Progredient</option>
+          </select></td>
+        </tr>
+        <tr class="rr-recist-row" id="recist-row-3">
+          <td>3</td>
+          <td><input type="text" id="rl_lok_3" placeholder="Lokalisation" data-en="target lesion location"></td>
+          <td><input type="number" step="0.1" id="rl_la_3" placeholder="mm" data-radlex-status="local" data-en="target lesion long axis"></td>
+          <td><input type="number" step="0.1" id="rl_ka_3" placeholder="mm" data-radlex-status="local" data-en="target lesion short axis"></td>
+          <td><select id="rl_verl_3" data-en="target lesion interval change">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="neu" data-radlex-status="local" data-en="new lesion">Neu</option>
+            <option value="stabil" data-radlex-status="local" data-en="stable">Stabil</option>
+            <option value="regredient" data-radlex-status="local" data-en="decreased">Regredient</option>
+            <option value="progredient" data-radlex-status="local" data-en="increased">Progredient</option>
+          </select></td>
+        </tr>
+        <tr class="rr-recist-row" id="recist-row-4">
+          <td>4</td>
+          <td><input type="text" id="rl_lok_4" placeholder="Lokalisation" data-en="target lesion location"></td>
+          <td><input type="number" step="0.1" id="rl_la_4" placeholder="mm" data-radlex-status="local" data-en="target lesion long axis"></td>
+          <td><input type="number" step="0.1" id="rl_ka_4" placeholder="mm" data-radlex-status="local" data-en="target lesion short axis"></td>
+          <td><select id="rl_verl_4" data-en="target lesion interval change">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="neu" data-radlex-status="local" data-en="new lesion">Neu</option>
+            <option value="stabil" data-radlex-status="local" data-en="stable">Stabil</option>
+            <option value="regredient" data-radlex-status="local" data-en="decreased">Regredient</option>
+            <option value="progredient" data-radlex-status="local" data-en="increased">Progredient</option>
+          </select></td>
+        </tr>
+        <tr class="rr-recist-row" id="recist-row-5">
+          <td>5</td>
+          <td><input type="text" id="rl_lok_5" placeholder="Lokalisation" data-en="target lesion location"></td>
+          <td><input type="number" step="0.1" id="rl_la_5" placeholder="mm" data-radlex-status="local" data-en="target lesion long axis"></td>
+          <td><input type="number" step="0.1" id="rl_ka_5" placeholder="mm" data-radlex-status="local" data-en="target lesion short axis"></td>
+          <td><select id="rl_verl_5" data-en="target lesion interval change">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="neu" data-radlex-status="local" data-en="new lesion">Neu</option>
+            <option value="stabil" data-radlex-status="local" data-en="stable">Stabil</option>
+            <option value="regredient" data-radlex-status="local" data-en="decreased">Regredient</option>
+            <option value="progredient" data-radlex-status="local" data-en="increased">Progredient</option>
+          </select></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="rr-recist-sumlbl">Summe LA (SLD):</td>
+          <td colspan="3" class="rr-recist-sumval" id="recist-sum">– mm</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="rr-row-full">
+      <div class="rr-row">
+        <label>
+          <span class="rr-lbl">RECIST-Gesamtansprechen <span class="rr-rl-badge">RadLex</span></span>
+          <select id="recist_response" data-radlex="RID49860" data-en="RECIST overall response">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="Complete Response (CR)" data-radlex="RID49861" data-en="complete response">CR – Complete Response</option>
+            <option value="Partial Response (PR)" data-radlex="RID49862" data-en="partial response">PR – Partial Response (≥ 30% Abnahme)</option>
+            <option value="Stable Disease (SD)" data-radlex="RID49863" data-en="stable disease">SD – Stable Disease</option>
+            <option value="Progressive Disease (PD)" data-radlex="RID49864" data-en="progressive disease">PD – Progressive Disease (≥ 20% Zunahme)</option>
+          </select>
+        </label>
+      </div>
+      <div class="rr-row">
+        <label>
+          <span class="rr-lbl">Nicht-Zielläsionen</span>
+          <select id="recist_nontarget" data-radlex-status="local" data-en="non-target lesion response">
+            <option value="" data-radlex-status="needs-mapping">–</option>
+            <option value="Nicht-Zielläsionen stabil" data-radlex-status="local" data-en="non-target stable">Stabil</option>
+            <option value="Nicht-Zielläsionen rückläufig" data-radlex-status="local" data-en="non-target decreased">Rückläufig</option>
+            <option value="Nicht-Zielläsionen progredient" data-radlex-status="local" data-en="non-target progression">Progredient</option>
+            <option value="Neue Läsionen nachweisbar (PD)" data-radlex-status="local" data-en="new lesions present">Neue Läsionen (→ PD)</option>
+          </select>
+        </label>
+      </div>
     </div>
   </div>
-</div>
+</details>
 
 <!-- ══ ORGAN-BEFUNDUNG (systematisch) ══ -->
-<div class="sh"><h2>Organbefundung</h2><div class="sh-line"></div></div>
-<div class="sh-sub">Organ anklicken → Befund eingeben. Auffällige Organe werden orange markiert.</div>
+<div class="rr-h2-wrap"><h2 class="rr-h2">Organbefundung</h2><div class="rr-h2-rule"></div></div>
+<div class="rr-h2-sub">Organsystematische Befundung. In der Demo Organ anklicken → Befund eingeben; auffällige Organe werden markiert.</div>
 
-<div class="organ-nav" id="organ-nav"></div>
+<div class="rr-organ-nav" id="organ-nav"></div>
 
 <!-- ══ ORGAN-PANELS ══ -->
 <div id="organ-panels">
 
   <!-- LEBER -->
-  <div class="organ-panel" id="panel-leber">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-leber" data-organ="leber" data-organ-label="Leber" data-radlex="RID58" data-en="liver">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Leber – Parenchym <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg" id="lp_wrap">
-            <label class="ci"><input type="checkbox" id="lp_norm" onchange="organCheck('leber');update()"
-              data-radlex="RID1240-norm" data-en="liver parenchyma normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="lp_steat" onchange="organCheck('leber');update()"
-              data-radlex="RID5097" data-en="hepatic steatosis">
-              <span>Steatose</span></label>
-            <label class="ci"><input type="checkbox" id="lp_zirr" onchange="organCheck('leber');update()"
-              data-radlex="RID5098" data-en="cirrhosis">
-              <span>Zirrhose</span></label>
-            <label class="ci"><input type="checkbox" id="lp_kong" onchange="organCheck('leber');update()"
-              data-radlex="RID5099" data-en="hepatic congestion">
-              <span>Kongestion</span></label>
+          <span class="rr-lbl">Leber – Parenchym <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-checkgroup" id="lp_wrap">
+            <label class="rr-check"><input type="checkbox" id="lp_norm" data-radlex-status="local" data-en="liver parenchyma normal"><span>Unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="lp_steat" data-radlex="RID5097" data-en="hepatic steatosis"><span>Steatose</span></label>
+            <label class="rr-check"><input type="checkbox" id="lp_zirr" data-radlex="RID5098" data-en="cirrhosis"><span>Zirrhose</span></label>
+            <label class="rr-check"><input type="checkbox" id="lp_kong" data-radlex-status="local" data-en="hepatic congestion"><span>Kongestion</span></label>
           </div>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Lebergröße <span class="rr-rl-badge">RadLex</span></span>
-          <select id="leber_groesse" onchange="organCheck('leber');update()"
-            data-radlex="RID1241" data-en="liver size">
-            <option value="normal groß" data-radlex="RID1241-norm">Normal</option>
+          <span class="rr-lbl">Lebergröße <span class="rr-rl-badge">RadLex</span></span>
+          <select id="leber_groesse" data-radlex="RID1241" data-en="liver size">
+            <option value="normal groß" data-radlex-status="local" data-en="liver size normal">Normal</option>
             <option value="vergrößert (Hepatomegalie)" data-radlex="RID5100" data-en="hepatomegaly">Hepatomegalie</option>
-            <option value="verkleinert" data-radlex="RID5101" data-en="small liver">Verkleinert</option>
+            <option value="verkleinert" data-radlex-status="local" data-en="small liver">Verkleinert</option>
           </select>
         </label>
       </div>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Fokale Leberläsion(en) <span class="rr-rl-badge">RadLex</span></span>
-        <select id="leber_fokal" onchange="organCheck('leber');update()"
-          data-radlex="RID1248" data-en="focal liver lesion">
-          <option value="keine fokale Leberläsion nachweisbar" data-radlex="RID1248-neg">Keine</option>
+        <span class="rr-lbl">Fokale Leberläsion(en) <span class="rr-rl-badge">RadLex</span></span>
+        <select id="leber_fokal" data-radlex="RID1248" data-en="focal liver lesion">
+          <option value="keine fokale Leberläsion nachweisbar" data-radlex-status="local" data-en="no focal liver lesion">Keine</option>
           <option value="Zyste(n)" data-radlex="RID5102" data-en="hepatic cyst">Zyste(n)</option>
           <option value="Hämangiom" data-radlex="RID5103" data-en="hepatic hemangioma">Hämangiom</option>
           <option value="fokale Steatose / Aussparung" data-radlex="RID5104" data-en="focal steatosis">Fokale Steatose / Aussparung</option>
           <option value="solide Raumforderung – Metastasen V.a." data-radlex="RID5105" data-en="liver metastasis">Metastasen V.a.</option>
           <option value="solide Raumforderung – HCC V.a." data-radlex="RID5106" data-en="hepatocellular carcinoma">HCC V.a.</option>
-          <option value="solide Raumforderung – unklare Dignität" data-radlex="RID1248" data-en="indeterminate liver lesion">Unklare Raumforderung</option>
+          <option value="solide Raumforderung – unklare Dignität" data-radlex-status="local" data-en="indeterminate liver lesion">Unklare Raumforderung</option>
           <option value="Abszess V.a." data-radlex="RID5107" data-en="hepatic abscess">Abszess V.a.</option>
         </select>
       </label>
     </div>
-    <div class="row" id="leber_fokal_detail" style="display:none">
+    <div class="rr-row" id="leber_fokal_detail">
       <label>
-        <span class="lbl">Läsions-Detail (Größe, Segment, Charakteristik)</span>
-        <textarea id="leber_fokal_ft" rows="2" placeholder="z.B. 2 Rundherde Segment VI/VII, hypodens nativ, KM-Wash-out PV-Phase, max. 18 mm" oninput="update()"></textarea>
+        <span class="rr-lbl">Läsions-Detail (Größe, Segment, Charakteristik)</span>
+        <textarea id="leber_fokal_ft" rows="2" placeholder="z.B. 2 Rundherde Segment VI/VII, hypodens nativ, KM-Wash-out PV-Phase, max. 18 mm" data-en="liver lesion detail"></textarea>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Intrahepatische Gallenwege <span class="rr-rl-badge">RadLex</span></span>
-        <select id="leber_gw" onchange="organCheck('leber');update()"
-          data-radlex="RID1253" data-en="intrahepatic bile ducts">
-          <option value="nicht dilatiert" data-radlex="RID1253-norm">Nicht dilatiert</option>
+        <span class="rr-lbl">Intrahepatische Gallenwege <span class="rr-rl-badge">RadLex</span></span>
+        <select id="leber_gw" data-radlex="RID1253" data-en="intrahepatic bile ducts">
+          <option value="nicht dilatiert" data-radlex-status="local" data-en="intrahepatic bile ducts not dilated">Nicht dilatiert</option>
           <option value="dilatiert" data-radlex="RID5108" data-en="intrahepatic biliary dilatation">Dilatiert</option>
           <option value="Pneumobilie" data-radlex="RID5109" data-en="pneumobilia">Pneumobilie</option>
         </select>
       </label>
     </div>
-  </div>
+  </section>
 
   <!-- GALLENWEGE / GB -->
-  <div class="organ-panel" id="panel-galle">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-galle" data-organ="galle" data-organ-label="GB / Gallen" data-radlex="RID187" data-en="gallbladder biliary system">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Gallenblase <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg" id="gb_wrap">
-            <label class="ci"><input type="checkbox" id="gb_norm" onchange="organCheck('gb');update()"
-              data-radlex="RID1257-norm" data-en="gallbladder normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="gb_lith" onchange="organCheck('gb');update()"
-              data-radlex="RID5120" data-en="cholelithiasis">
-              <span>Cholezystolithiasis</span></label>
-            <label class="ci"><input type="checkbox" id="gb_chol" onchange="organCheck('gb');update()"
-              data-radlex="RID5121" data-en="acute cholecystitis">
-              <span>Akute Cholezystitis</span></label>
-            <label class="ci"><input type="checkbox" id="gb_hydr" onchange="organCheck('gb');update()"
-              data-radlex="RID5122" data-en="gallbladder hydrops">
-              <span>Hydrops</span></label>
-            <label class="ci"><input type="checkbox" id="gb_che" onchange="organCheck('gb');update()"
-              data-radlex="RID5123" data-en="status post cholecystectomy">
-              <span>St.p. Cholezystektomie</span></label>
-            <label class="ci"><input type="checkbox" id="gb_wand" onchange="organCheck('gb');update()"
-              data-radlex="RID5124" data-en="gallbladder wall thickening">
-              <span>Wandverdickung DD</span></label>
+          <span class="rr-lbl">Gallenblase <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-checkgroup" id="gb_wrap">
+            <label class="rr-check"><input type="checkbox" id="gb_norm" data-radlex-status="local" data-en="gallbladder normal"><span>Unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="gb_lith" data-radlex="RID5120" data-en="cholelithiasis"><span>Cholezystolithiasis</span></label>
+            <label class="rr-check"><input type="checkbox" id="gb_chol" data-radlex="RID5121" data-en="acute cholecystitis"><span>Akute Cholezystitis</span></label>
+            <label class="rr-check"><input type="checkbox" id="gb_hydr" data-radlex="RID5122" data-en="gallbladder hydrops"><span>Hydrops</span></label>
+            <label class="rr-check"><input type="checkbox" id="gb_che" data-radlex-status="local" data-en="status post cholecystectomy"><span>St.p. Cholezystektomie</span></label>
+            <label class="rr-check"><input type="checkbox" id="gb_wand" data-radlex="RID5124" data-en="gallbladder wall thickening"><span>Wandverdickung DD</span></label>
           </div>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Ductus choledochus <span class="rr-rl-badge">RadLex</span></span>
-          <select id="chd" onchange="organCheck('galle');update()"
-            data-radlex="RID1263" data-en="common bile duct">
-            <option value="nicht dilatiert (≤ 7 mm)" data-radlex="RID1263-norm">Nicht dilatiert (≤ 7 mm)</option>
-            <option value="dilatiert (> 7 mm)" data-radlex="RID5125" data-en="choledochal dilatation">Dilatiert (&gt; 7 mm)</option>
+          <span class="rr-lbl">Ductus choledochus <span class="rr-rl-badge">RadLex</span></span>
+          <select id="chd" data-radlex="RID1263" data-en="common bile duct">
+            <option value="nicht dilatiert (≤ 7 mm)" data-radlex-status="local" data-en="common bile duct not dilated">Nicht dilatiert (≤ 7 mm)</option>
+            <option value="dilatiert (> 7 mm)" data-radlex="RID5125" data-en="common bile duct dilatation">Dilatiert (&gt; 7 mm)</option>
             <option value="Choledocholithiasis" data-radlex="RID5126" data-en="choledocholithiasis">Choledocholithiasis</option>
           </select>
         </label>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- PANKREAS -->
-  <div class="organ-panel" id="panel-pankreas">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-pankreas" data-organ="pankreas" data-organ-label="Pankreas" data-radlex="RID170" data-en="pancreas">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Pankreas-Parenchym <span class="rr-rl-badge">RadLex</span></span>
-          <select id="pank_par" onchange="organCheck('pankreas');update()"
-            data-radlex="RID1281" data-en="pancreatic parenchyma">
-            <option value="unauffällig, homogen, altersentsprechend" data-radlex="RID1281-norm">Unauffällig</option>
+          <span class="rr-lbl">Pankreas-Parenchym <span class="rr-rl-badge">RadLex</span></span>
+          <select id="pank_par" data-radlex="RID1281" data-en="pancreatic parenchyma">
+            <option value="unauffällig, homogen, altersentsprechend" data-radlex-status="local" data-en="pancreas normal">Unauffällig</option>
             <option value="lipomatös atrophiert" data-radlex="RID5130" data-en="pancreatic lipomatosis">Lipomatose / Atrophie</option>
             <option value="akute Pankreatitis V.a." data-radlex="RID5131" data-en="acute pancreatitis">Akute Pankreatitis V.a.</option>
             <option value="chronische Pankreatitis" data-radlex="RID5132" data-en="chronic pancreatitis">Chronische Pankreatitis</option>
           </select>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Ductus pancreaticus <span class="rr-rl-badge">RadLex</span></span>
-          <select id="pank_duct" onchange="organCheck('pankreas');update()"
-            data-radlex="RID1285" data-en="pancreatic duct">
-            <option value="nicht dilatiert" data-radlex="RID1285-norm">Nicht dilatiert</option>
+          <span class="rr-lbl">Ductus pancreaticus <span class="rr-rl-badge">RadLex</span></span>
+          <select id="pank_duct" data-radlex="RID1285" data-en="pancreatic duct">
+            <option value="nicht dilatiert" data-radlex-status="local" data-en="pancreatic duct not dilated">Nicht dilatiert</option>
             <option value="dilatiert (> 3 mm)" data-radlex="RID5133" data-en="pancreatic duct dilatation">Dilatiert (&gt; 3 mm)</option>
           </select>
         </label>
       </div>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Fokale Pankreasläsion <span class="rr-rl-badge">RadLex</span></span>
-        <select id="pank_fokal" onchange="organCheck('pankreas');update()"
-          data-radlex="RID1282" data-en="focal pancreatic lesion">
-          <option value="keine fokale Raumforderung" data-radlex="RID1282-neg">Keine</option>
+        <span class="rr-lbl">Fokale Pankreasläsion <span class="rr-rl-badge">RadLex</span></span>
+        <select id="pank_fokal" data-radlex="RID1282" data-en="focal pancreatic lesion">
+          <option value="keine fokale Raumforderung" data-radlex-status="local" data-en="no focal pancreatic lesion">Keine</option>
           <option value="Pankreaskarzinom V.a." data-radlex="RID5134" data-en="pancreatic ductal carcinoma">Pankreaskarzinom V.a.</option>
-          <option value="neuroendokriner Tumor V.a. (NET)" data-radlex="RID5135" data-en="pancreatic NET">NET V.a.</option>
-          <option value="IPMN" data-radlex="RID5136" data-en="IPMN">IPMN</option>
+          <option value="neuroendokriner Tumor V.a. (NET)" data-radlex="RID5135" data-en="pancreatic neuroendocrine tumor">NET V.a.</option>
+          <option value="IPMN" data-radlex="RID5136" data-en="intraductal papillary mucinous neoplasm">IPMN</option>
           <option value="muzinöse Zystadenomä" data-radlex="RID5137" data-en="mucinous cystic neoplasm">Muzinöses Zystadenom</option>
           <option value="Pseudozyste" data-radlex="RID5138" data-en="pancreatic pseudocyst">Pseudozyste</option>
         </select>
       </label>
     </div>
-    <div class="row" id="pank_fokal_detail" style="display:none">
+    <div class="rr-row" id="pank_fokal_detail">
       <label>
-        <span class="lbl">Läsions-Detail</span>
-        <textarea id="pank_fokal_ft" rows="2" placeholder="z.B. 28 mm hypovaskuläre Raumforderung Pankreaskopf mit Gangobstruktion…" oninput="update()"></textarea>
+        <span class="rr-lbl">Läsions-Detail</span>
+        <textarea id="pank_fokal_ft" rows="2" placeholder="z.B. 28 mm hypovaskuläre Raumforderung Pankreaskopf mit Gangobstruktion…" data-en="pancreatic lesion detail"></textarea>
       </label>
     </div>
-  </div>
+  </section>
 
   <!-- MILZ -->
-  <div class="organ-panel" id="panel-milz">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-milz" data-organ="milz" data-organ-label="Milz" data-radlex="RID86" data-en="spleen">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Milzgröße <span class="rr-rl-badge">RadLex</span></span>
-          <select id="milz_gr" onchange="organCheck('milz');update()"
-            data-radlex="RID1303" data-en="spleen size">
-            <option value="normal groß (≤ 12 cm)" data-radlex="RID1303-norm">Normal (≤ 12 cm)</option>
+          <span class="rr-lbl">Milzgröße <span class="rr-rl-badge">RadLex</span></span>
+          <select id="milz_gr" data-radlex="RID1303" data-en="spleen size">
+            <option value="normal groß (≤ 12 cm)" data-radlex-status="local" data-en="spleen size normal">Normal (≤ 12 cm)</option>
             <option value="vergrößert (Splenomegalie)" data-radlex="RID5140" data-en="splenomegaly">Splenomegalie</option>
           </select>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Milzparenchym <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg" id="mlz_wrap">
-            <label class="ci"><input type="checkbox" id="mlz_norm" onchange="organCheck('milz');update()"
-              data-radlex="RID1304-norm" data-en="spleen normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="mlz_zys" onchange="organCheck('milz');update()"
-              data-radlex="RID5141" data-en="splenic cyst">
-              <span>Zyste(n)</span></label>
-            <label class="ci"><input type="checkbox" id="mlz_haem" onchange="organCheck('milz');update()"
-              data-radlex="RID5142" data-en="splenic hemangioma">
-              <span>Hämangiom</span></label>
-            <label class="ci"><input type="checkbox" id="mlz_mets" onchange="organCheck('milz');update()"
-              data-radlex="RID5143" data-en="splenic metastasis">
-              <span>Metastase(n) V.a.</span></label>
-            <label class="ci"><input type="checkbox" id="mlz_inf" onchange="organCheck('milz');update()"
-              data-radlex="RID5144" data-en="splenic infarct">
-              <span>Infarkt</span></label>
+          <span class="rr-lbl">Milzparenchym <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-checkgroup" id="mlz_wrap">
+            <label class="rr-check"><input type="checkbox" id="mlz_norm" data-radlex-status="local" data-en="spleen normal"><span>Unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="mlz_zys" data-radlex="RID5141" data-en="splenic cyst"><span>Zyste(n)</span></label>
+            <label class="rr-check"><input type="checkbox" id="mlz_haem" data-radlex="RID5142" data-en="splenic hemangioma"><span>Hämangiom</span></label>
+            <label class="rr-check"><input type="checkbox" id="mlz_mets" data-radlex="RID5143" data-en="splenic metastasis"><span>Metastase(n) V.a.</span></label>
+            <label class="rr-check"><input type="checkbox" id="mlz_inf" data-radlex="RID5144" data-en="splenic infarct"><span>Infarkt</span></label>
           </div>
         </label>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- NIEREN / NN -->
-  <div class="organ-panel" id="panel-nieren">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-nieren" data-organ="nieren" data-organ-label="Nieren / NN" data-radlex="RID205" data-en="kidneys adrenals">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Nieren bds. – Parenchym <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg" id="niere_wrap">
-            <label class="ci"><input type="checkbox" id="niere_norm" onchange="organCheck('nieren');update()"
-              data-radlex="RID1316-norm" data-en="kidneys normal">
-              <span>Bds. unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="niere_zys" onchange="organCheck('nieren');update()"
-              data-radlex="RID5150" data-en="renal cyst">
-              <span>Nierenzyste(n)</span></label>
-            <label class="ci"><input type="checkbox" id="niere_nzk" onchange="organCheck('nieren');update()"
-              data-radlex="RID5151" data-en="renal cell carcinoma">
-              <span>Solide RF – NZK V.a.</span></label>
-            <label class="ci"><input type="checkbox" id="niere_aml" onchange="organCheck('nieren');update()"
-              data-radlex="RID5152" data-en="angiomyolipoma">
-              <span>Angiomyolipom</span></label>
-            <label class="ci"><input type="checkbox" id="niere_hydro" onchange="organCheck('nieren');update()"
-              data-radlex="RID5153" data-en="hydronephrosis">
-              <span>Hydronephrose</span></label>
-            <label class="ci"><input type="checkbox" id="niere_lith" onchange="organCheck('nieren');update()"
-              data-radlex="RID5154" data-en="nephrolithiasis">
-              <span>Nephrolithiasis</span></label>
-            <label class="ci"><input type="checkbox" id="niere_pye" onchange="organCheck('nieren');update()"
-              data-radlex="RID5155" data-en="pyelonephritis">
-              <span>Pyelonephritis</span></label>
+          <span class="rr-lbl">Nieren bds. – Parenchym <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-checkgroup" id="niere_wrap">
+            <label class="rr-check"><input type="checkbox" id="niere_norm" data-radlex-status="local" data-en="kidneys normal"><span>Bds. unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="niere_zys" data-radlex="RID5150" data-en="renal cyst"><span>Nierenzyste(n)</span></label>
+            <label class="rr-check"><input type="checkbox" id="niere_nzk" data-radlex="RID5151" data-en="renal cell carcinoma"><span>Solide RF – NZK V.a.</span></label>
+            <label class="rr-check"><input type="checkbox" id="niere_aml" data-radlex="RID5152" data-en="angiomyolipoma"><span>Angiomyolipom</span></label>
+            <label class="rr-check"><input type="checkbox" id="niere_hydro" data-radlex="RID5153" data-en="hydronephrosis"><span>Hydronephrose</span></label>
+            <label class="rr-check"><input type="checkbox" id="niere_lith" data-radlex="RID5154" data-en="nephrolithiasis"><span>Nephrolithiasis</span></label>
+            <label class="rr-check"><input type="checkbox" id="niere_pye" data-radlex="RID5155" data-en="pyelonephritis"><span>Pyelonephritis</span></label>
           </div>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Nebennieren <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg" id="nn_wrap">
-            <label class="ci"><input type="checkbox" id="nn_norm" onchange="organCheck('nieren');update()"
-              data-radlex="RID1344-norm" data-en="adrenal glands normal">
-              <span>Bds. unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="nn_adn_re" onchange="organCheck('nieren');update()"
-              data-radlex="RID5156" data-en="adrenal adenoma right">
-              <span>Adenom re.</span></label>
-            <label class="ci"><input type="checkbox" id="nn_adn_li" onchange="organCheck('nieren');update()"
-              data-radlex="RID5156-li" data-en="adrenal adenoma left">
-              <span>Adenom li.</span></label>
-            <label class="ci"><input type="checkbox" id="nn_hyp" onchange="organCheck('nieren');update()"
-              data-radlex="RID5157" data-en="adrenal hyperplasia">
-              <span>Hyperplasie</span></label>
-            <label class="ci"><input type="checkbox" id="nn_mets" onchange="organCheck('nieren');update()"
-              data-radlex="RID5158" data-en="adrenal metastasis">
-              <span>Metastase V.a.</span></label>
-            <label class="ci"><input type="checkbox" id="nn_rf" onchange="organCheck('nieren');update()"
-              data-radlex="RID5159" data-en="indeterminate adrenal lesion">
-              <span>Unklare RF</span></label>
+          <span class="rr-lbl">Nebennieren <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-checkgroup" id="nn_wrap">
+            <label class="rr-check"><input type="checkbox" id="nn_norm" data-radlex-status="local" data-en="adrenal glands normal"><span>Bds. unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="nn_adn_re" data-radlex="RID5156" data-en="adrenal adenoma"><span>Adenom re.</span></label>
+            <label class="rr-check"><input type="checkbox" id="nn_adn_li" data-radlex="RID5156" data-en="adrenal adenoma"><span>Adenom li.</span></label>
+            <label class="rr-check"><input type="checkbox" id="nn_hyp" data-radlex="RID5157" data-en="adrenal hyperplasia"><span>Hyperplasie</span></label>
+            <label class="rr-check"><input type="checkbox" id="nn_mets" data-radlex="RID5158" data-en="adrenal metastasis"><span>Metastase V.a.</span></label>
+            <label class="rr-check"><input type="checkbox" id="nn_rf" data-radlex-status="local" data-en="indeterminate adrenal lesion"><span>Unklare RF</span></label>
           </div>
         </label>
       </div>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Ergänzung Nieren / NN</span>
-        <textarea id="nieren_ft" rows="2" placeholder="Bosniak-Kategorie, Größe, Seite, HU-Werte…" oninput="organCheck('nieren');update()"></textarea>
+        <span class="rr-lbl">Ergänzung Nieren / NN</span>
+        <textarea id="nieren_ft" rows="2" placeholder="Bosniak-Kategorie, Größe, Seite, HU-Werte…" data-en="kidneys adrenals detail"></textarea>
       </label>
     </div>
-  </div>
+  </section>
 
   <!-- GI-TRAKT -->
-  <div class="organ-panel" id="panel-gi">
-    <div class="row">
+  <section class="rr-organ-panel" id="panel-gi" data-organ="gi" data-organ-label="GI-Trakt" data-radlex="RID132" data-en="gastrointestinal tract">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Magen <span class="rr-rl-badge">RadLex</span></span>
-        <select id="gi_magen" onchange="organCheck('gi');update()"
-          data-radlex="RID1316" data-en="stomach">
-          <option value="unauffällig soweit beurteilbar" data-radlex="RID1316-norm">Unauffällig</option>
+        <span class="rr-lbl">Magen <span class="rr-rl-badge">RadLex</span></span>
+        <select id="gi_magen" data-radlex="RID120" data-en="stomach">
+          <option value="unauffällig soweit beurteilbar" data-radlex-status="local" data-en="stomach normal">Unauffällig</option>
           <option value="Wandverdickung Magen" data-radlex="RID5160" data-en="gastric wall thickening">Wandverdickung</option>
           <option value="Raumforderung Magen" data-radlex="RID5161" data-en="gastric mass">Raumforderung</option>
         </select>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Dünndarm <span class="rr-rl-badge">RadLex</span></span>
-        <div class="cg" id="gid_wrap">
-            <label class="ci"><input type="checkbox" id="gid_norm" onchange="organCheck('gi');update()"
-              data-radlex="RID1386-norm" data-en="small bowel normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="gid_ileus" onchange="organCheck('gi');update()"
-              data-radlex="RID5162" data-en="small bowel obstruction">
-              <span>Ileus</span></label>
-            <label class="ci"><input type="checkbox" id="gid_wand" onchange="organCheck('gi');update()"
-              data-radlex="RID5163" data-en="small bowel wall thickening">
-              <span>Wandverdickung</span></label>
-            <label class="ci"><input type="checkbox" id="gid_adh" onchange="organCheck('gi');update()"
-              data-radlex="RID5164" data-en="small bowel adhesion">
-              <span>Konvolut/Adhäsion</span></label>
-            <label class="ci"><input type="checkbox" id="gid_isch" onchange="organCheck('gi');update()"
-              data-radlex="RID5165" data-en="small bowel ischemia">
-              <span>Ischämiezeichen</span></label>
-          </div>
+        <span class="rr-lbl">Dünndarm <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-checkgroup" id="gid_wrap">
+          <label class="rr-check"><input type="checkbox" id="gid_norm" data-radlex-status="local" data-en="small bowel normal"><span>Unauffällig</span></label>
+          <label class="rr-check"><input type="checkbox" id="gid_ileus" data-radlex="RID5162" data-en="small bowel obstruction"><span>Ileus</span></label>
+          <label class="rr-check"><input type="checkbox" id="gid_wand" data-radlex="RID5163" data-en="small bowel wall thickening"><span>Wandverdickung</span></label>
+          <label class="rr-check"><input type="checkbox" id="gid_adh" data-radlex="RID5164" data-en="small bowel adhesion"><span>Konvolut/Adhäsion</span></label>
+          <label class="rr-check"><input type="checkbox" id="gid_isch" data-radlex="RID5165" data-en="small bowel ischemia"><span>Ischämiezeichen</span></label>
+        </div>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Colon / Rektum <span class="rr-rl-badge">RadLex</span></span>
-        <div class="cg" id="gic_wrap">
-            <label class="ci"><input type="checkbox" id="gic_norm" onchange="organCheck('gi');update()"
-              data-radlex="RID1396-norm" data-en="colon normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="gic_ileus" onchange="organCheck('gi');update()"
-              data-radlex="RID5170" data-en="large bowel obstruction">
-              <span>Ileus/Stenose</span></label>
-            <label class="ci"><input type="checkbox" id="gic_diver" onchange="organCheck('gi');update()"
-              data-radlex="RID5171" data-en="diverticulitis">
-              <span>Divertikulitis V.a.</span></label>
-            <label class="ci"><input type="checkbox" id="gic_wand" onchange="organCheck('gi');update()"
-              data-radlex="RID5172" data-en="colonic wall thickening">
-              <span>Wandverdickung/Tumor</span></label>
-            <label class="ci"><input type="checkbox" id="gic_app" onchange="organCheck('gi');update()"
-              data-radlex="RID5173" data-en="appendicitis">
-              <span>Appendizitis V.a.</span></label>
-          </div>
+        <span class="rr-lbl">Colon / Rektum <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-checkgroup" id="gic_wrap">
+          <label class="rr-check"><input type="checkbox" id="gic_norm" data-radlex-status="local" data-en="colon normal"><span>Unauffällig</span></label>
+          <label class="rr-check"><input type="checkbox" id="gic_ileus" data-radlex="RID5170" data-en="large bowel obstruction"><span>Ileus/Stenose</span></label>
+          <label class="rr-check"><input type="checkbox" id="gic_diver" data-radlex="RID5171" data-en="diverticulitis"><span>Divertikulitis V.a.</span></label>
+          <label class="rr-check"><input type="checkbox" id="gic_wand" data-radlex="RID5172" data-en="colonic wall thickening"><span>Wandverdickung/Tumor</span></label>
+          <label class="rr-check"><input type="checkbox" id="gic_app" data-radlex="RID5173" data-en="appendicitis"><span>Appendizitis V.a.</span></label>
+        </div>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Ergänzung GI-Trakt</span>
-        <textarea id="gi_ft" rows="2" placeholder="Freie Luft, Passagestörung, Wanddicke, Lokalisation…" oninput="organCheck('gi');update()"></textarea>
+        <span class="rr-lbl">Ergänzung GI-Trakt</span>
+        <textarea id="gi_ft" rows="2" placeholder="Freie Luft, Passagestörung, Wanddicke, Lokalisation…" data-en="gastrointestinal tract detail"></textarea>
       </label>
     </div>
-  </div>
+  </section>
 
   <!-- GEFÄSSE -->
-  <div class="organ-panel" id="panel-gefaesse">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-gefaesse" data-organ="gefaesse" data-organ-label="Gefäße" data-radlex="RID480" data-en="abdominal vessels">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Aorta abdominalis <span class="rr-rl-badge">RadLex</span></span>
-          <select id="gef_aorta" onchange="organCheck('gefaesse');update()"
-            data-radlex="RID480" data-en="abdominal aorta">
-            <option value="unauffällig, normal weit" data-radlex="RID480-norm">Unauffällig</option>
+          <span class="rr-lbl">Aorta abdominalis <span class="rr-rl-badge">RadLex</span></span>
+          <select id="gef_aorta" data-radlex="RID480" data-en="abdominal aorta">
+            <option value="unauffällig, normal weit" data-radlex-status="local" data-en="abdominal aorta normal">Unauffällig</option>
             <option value="elongiert, wandverkalkt" data-radlex="RID5180" data-en="aortic calcification">Elongiert, wandverkalkt</option>
             <option value="Bauchaortenaneurysma (BAA)" data-radlex="RID5181" data-en="abdominal aortic aneurysm">BAA – Größe Freitext</option>
             <option value="Aortendissektion V.a." data-radlex="RID5182" data-en="aortic dissection">Dissektion V.a.</option>
           </select>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Pfortader / Lebervenen <span class="rr-rl-badge">RadLex</span></span>
-          <select id="gef_pfortader" onchange="organCheck('gefaesse');update()"
-            data-radlex="RID1393" data-en="portal vein">
-            <option value="Pfortader unauffällig durchströmbar" data-radlex="RID1393-norm">Unauffällig</option>
+          <span class="rr-lbl">Pfortader / Lebervenen <span class="rr-rl-badge">RadLex</span></span>
+          <select id="gef_pfortader" data-radlex="RID1393" data-en="portal vein">
+            <option value="Pfortader unauffällig durchströmbar" data-radlex-status="local" data-en="portal vein normal">Unauffällig</option>
             <option value="Pfortaderthrombose" data-radlex="RID5183" data-en="portal vein thrombosis">Pfortaderthrombose</option>
             <option value="portale Hypertension (Kollateralen)" data-radlex="RID5184" data-en="portal hypertension">Port. Hypertension</option>
-            <option value="Budd-Chiari V.a." data-radlex="RID5185">Budd-Chiari V.a.</option>
+            <option value="Budd-Chiari V.a." data-radlex-status="local" data-en="Budd-Chiari syndrome">Budd-Chiari V.a.</option>
           </select>
         </label>
       </div>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Ergänzung Gefäße</span>
-        <textarea id="gef_ft" rows="2" placeholder="BAA-Durchmesser, Thrombus, mesenteriale Gefäße…" oninput="organCheck('gefaesse');update()"></textarea>
+        <span class="rr-lbl">Ergänzung Gefäße</span>
+        <textarea id="gef_ft" rows="2" placeholder="BAA-Durchmesser, Thrombus, mesenteriale Gefäße…" data-en="vessels detail"></textarea>
       </label>
     </div>
-  </div>
+  </section>
 
   <!-- LYMPHKNOTEN -->
-  <div class="organ-panel" id="panel-lymph">
-    <div class="row">
+  <section class="rr-organ-panel" id="panel-lymph" data-organ="lymph" data-organ-label="Lymphknoten" data-radlex="RID1448" data-en="lymph nodes">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Retroperitoneale Lymphknoten <span class="rr-rl-badge">RadLex</span></span>
-        <select id="lymph_retro" onchange="organCheck('lymph');update()"
-          data-radlex="RID1448" data-en="retroperitoneal lymph nodes">
-          <option value="keine vergrößerten retroperitonealen Lymphknoten (KA < 10 mm)" data-radlex="RID1448-norm">Unauffällig (KA &lt; 10 mm)</option>
+        <span class="rr-lbl">Retroperitoneale Lymphknoten <span class="rr-rl-badge">RadLex</span></span>
+        <select id="lymph_retro" data-radlex="RID1448" data-en="retroperitoneal lymph nodes">
+          <option value="keine vergrößerten retroperitonealen Lymphknoten (KA < 10 mm)" data-radlex-status="local" data-en="retroperitoneal lymph nodes normal">Unauffällig (KA &lt; 10 mm)</option>
           <option value="vergrößerte retroperitoneale Lymphknoten" data-radlex="RID5190" data-en="retroperitoneal lymphadenopathy">Vergrößert – Lokalisation Freitext</option>
-          <option value="Lymphknotenkonglomerat retroperitoneal" data-radlex="RID5191">Konglomerat</option>
+          <option value="Lymphknotenkonglomerat retroperitoneal" data-radlex-status="local" data-en="retroperitoneal nodal conglomerate">Konglomerat</option>
         </select>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Mesenterialer / iliakaler LK-Status <span class="rr-rl-badge">RadLex</span></span>
-        <div class="cg" id="lym_wrap">
-            <label class="ci"><input type="checkbox" id="lym_norm" onchange="organCheck('lymph');update()"
-              data-radlex="RID1449-norm" data-en="mesenteric lymph nodes normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="lym_mes" onchange="organCheck('lymph');update()"
-              data-radlex="RID5192" data-en="mesenteric lymphadenopathy">
-              <span>Mesenterial vergrößert</span></label>
-            <label class="ci"><input type="checkbox" id="lym_ili" onchange="organCheck('lymph');update()"
-              data-radlex="RID5193" data-en="iliac lymphadenopathy">
-              <span>Iliakal vergrößert</span></label>
-            <label class="ci"><input type="checkbox" id="lym_ing" onchange="organCheck('lymph');update()"
-              data-radlex="RID5194" data-en="inguinal lymphadenopathy">
-              <span>Inguinal vergrößert</span></label>
-          </div>
+        <span class="rr-lbl">Mesenterialer / iliakaler LK-Status <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-checkgroup" id="lym_wrap">
+          <label class="rr-check"><input type="checkbox" id="lym_norm" data-radlex-status="local" data-en="mesenteric lymph nodes normal"><span>Unauffällig</span></label>
+          <label class="rr-check"><input type="checkbox" id="lym_mes" data-radlex="RID5192" data-en="mesenteric lymphadenopathy"><span>Mesenterial vergrößert</span></label>
+          <label class="rr-check"><input type="checkbox" id="lym_ili" data-radlex="RID5193" data-en="iliac lymphadenopathy"><span>Iliakal vergrößert</span></label>
+          <label class="rr-check"><input type="checkbox" id="lym_ing" data-radlex="RID5194" data-en="inguinal lymphadenopathy"><span>Inguinal vergrößert</span></label>
+        </div>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">LK-Detail (Lokalisation, Größe kurze Achse)</span>
-        <textarea id="lymph_ft" rows="2" placeholder="z.B. paraaortaler LK 18 mm KA, Konglomerat iliakal re.…" oninput="organCheck('lymph');update()"></textarea>
+        <span class="rr-lbl">LK-Detail (Lokalisation, Größe kurze Achse)</span>
+        <textarea id="lymph_ft" rows="2" placeholder="z.B. paraaortaler LK 18 mm KA, Konglomerat iliakal re.…" data-en="lymph nodes detail"></textarea>
       </label>
     </div>
-  </div>
+  </section>
 
   <!-- PERITONEUM / ASZITES -->
-  <div class="organ-panel" id="panel-peritoneum">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-peritoneum" data-organ="peritoneum" data-organ-label="Peritoneum" data-radlex="RID1460" data-en="peritoneum">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Peritoneum <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg" id="peri_wrap">
-            <label class="ci"><input type="checkbox" id="peri_norm" onchange="organCheck('peri');update()"
-              data-radlex="RID1460-norm" data-en="peritoneum normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="peri_karz" onchange="organCheck('peri');update()"
-              data-radlex="RID5200" data-en="peritoneal carcinomatosis">
-              <span>Peritonealkarzinose</span></label>
-            <label class="ci"><input type="checkbox" id="peri_perit" onchange="organCheck('peri');update()"
-              data-radlex="RID5201" data-en="peritonitis">
-              <span>Peritonitis V.a.</span></label>
-            <label class="ci"><input type="checkbox" id="peri_luft" onchange="organCheck('peri');update()"
-              data-radlex="RID5202" data-en="pneumoperitoneum">
-              <span>Freie Luft (Pneumoperitoneum)</span></label>
+          <span class="rr-lbl">Peritoneum <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-checkgroup" id="peri_wrap">
+            <label class="rr-check"><input type="checkbox" id="peri_norm" data-radlex-status="local" data-en="peritoneum normal"><span>Unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="peri_karz" data-radlex="RID5200" data-en="peritoneal carcinomatosis"><span>Peritonealkarzinose</span></label>
+            <label class="rr-check"><input type="checkbox" id="peri_perit" data-radlex="RID5201" data-en="peritonitis"><span>Peritonitis V.a.</span></label>
+            <label class="rr-check"><input type="checkbox" id="peri_luft" data-radlex="RID5202" data-en="pneumoperitoneum"><span>Freie Luft (Pneumoperitoneum)</span></label>
           </div>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Aszites <span class="rr-rl-badge">RadLex</span></span>
-          <select id="aszites" onchange="organCheck('peritoneum');update()"
-            data-radlex="RID1461" data-en="ascites">
-            <option value="kein Aszites" data-radlex="RID1461-neg">Kein Aszites</option>
-            <option value="geringer Aszites" data-radlex="RID5203" data-en="small ascites">Gering</option>
-            <option value="mäßiger Aszites" data-radlex="RID5204" data-en="moderate ascites">Mäßig</option>
-            <option value="ausgeprägter Aszites" data-radlex="RID5205" data-en="large ascites">Ausgeprägt</option>
+          <span class="rr-lbl">Aszites <span class="rr-rl-badge">RadLex</span></span>
+          <select id="aszites" data-radlex="RID1461" data-en="ascites">
+            <option value="kein Aszites" data-radlex-status="local" data-en="no ascites">Kein Aszites</option>
+            <option value="geringer Aszites" data-radlex-status="local" data-en="small ascites">Gering</option>
+            <option value="mäßiger Aszites" data-radlex-status="local" data-en="moderate ascites">Mäßig</option>
+            <option value="ausgeprägter Aszites" data-radlex-status="local" data-en="large ascites">Ausgeprägt</option>
           </select>
         </label>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- BECKEN -->
-  <div class="organ-panel" id="panel-becken">
-    <div class="row">
+  <section class="rr-organ-panel" id="panel-becken" data-organ="becken" data-organ-label="Becken" data-radlex="RID1368" data-en="pelvis">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Harnblase <span class="rr-rl-badge">RadLex</span></span>
-        <select id="blase" onchange="organCheck('becken');update()"
-          data-radlex="RID1376" data-en="urinary bladder">
-          <option value="unauffällig soweit beurteilbar" data-radlex="RID1376-norm">Unauffällig</option>
+        <span class="rr-lbl">Harnblase <span class="rr-rl-badge">RadLex</span></span>
+        <select id="blase" data-radlex="RID1376" data-en="urinary bladder">
+          <option value="unauffällig soweit beurteilbar" data-radlex-status="local" data-en="urinary bladder normal">Unauffällig</option>
           <option value="Harnblase – Wandverdickung / Tumor V.a." data-radlex="RID5210" data-en="bladder wall thickening">Wandverdickung / Tumor</option>
           <option value="Harnblase – Stein" data-radlex="RID5211" data-en="bladder calculus">Stein</option>
-          <option value="Harnblase nicht beurteilbar (leer / entleert)" data-radlex="RID5212">Nicht beurteilbar</option>
+          <option value="Harnblase nicht beurteilbar (leer / entleert)" data-radlex-status="local" data-en="bladder not assessable">Nicht beurteilbar</option>
         </select>
       </label>
     </div>
-    <div class="row" id="becken_gynae_row">
+    <div class="rr-row" id="becken_gynae_row">
       <label>
-        <span class="lbl">Uterus / Adnexe <span class="rr-rl-badge">RadLex</span></span>
-        <div class="cg" id="gyn_wrap">
-            <label class="ci"><input type="checkbox" id="gyn_norm" onchange="organCheck('becken');update()"
-              data-radlex="RID1368-norm" data-en="uterus adnexa normal">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="gyn_myo" onchange="organCheck('becken');update()"
-              data-radlex="RID5213" data-en="uterine fibroid">
-              <span>Myome</span></label>
-            <label class="ci"><input type="checkbox" id="gyn_adr_re" onchange="organCheck('becken');update()"
-              data-radlex="RID5214" data-en="adnexal mass right">
-              <span>Adnexraumforderung re.</span></label>
-            <label class="ci"><input type="checkbox" id="gyn_adr_li" onchange="organCheck('becken');update()"
-              data-radlex="RID5214-li" data-en="adnexal mass left">
-              <span>Adnexraumforderung li.</span></label>
-            <label class="ci"><input type="checkbox" id="gyn_zys" onchange="organCheck('becken');update()"
-              data-radlex="RID5215" data-en="ovarian cyst">
-              <span>Ovarialzyste(n)</span></label>
-          </div>
+        <span class="rr-lbl">Uterus / Adnexe <span class="rr-rl-badge">RadLex</span></span>
+        <div class="rr-checkgroup" id="gyn_wrap">
+          <label class="rr-check"><input type="checkbox" id="gyn_norm" data-radlex-status="local" data-en="uterus adnexa normal"><span>Unauffällig</span></label>
+          <label class="rr-check"><input type="checkbox" id="gyn_myo" data-radlex="RID5213" data-en="uterine fibroid"><span>Myome</span></label>
+          <label class="rr-check"><input type="checkbox" id="gyn_adr_re" data-radlex="RID5214" data-en="adnexal mass"><span>Adnexraumforderung re.</span></label>
+          <label class="rr-check"><input type="checkbox" id="gyn_adr_li" data-radlex="RID5214" data-en="adnexal mass"><span>Adnexraumforderung li.</span></label>
+          <label class="rr-check"><input type="checkbox" id="gyn_zys" data-radlex="RID5215" data-en="ovarian cyst"><span>Ovarialzyste(n)</span></label>
+        </div>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Prostata <span class="rr-rl-badge">RadLex</span></span>
-        <select id="becken_prostata" onchange="organCheck('becken');update()"
-          data-radlex="RID1375" data-en="prostate">
-          <option value="">– nur bei männlichen Patienten –</option>
-          <option value="Prostata unauffällig" data-radlex="RID1375-norm">Unauffällig</option>
+        <span class="rr-lbl">Prostata <span class="rr-rl-badge">RadLex</span></span>
+        <select id="becken_prostata" data-radlex="RID1375" data-en="prostate">
+          <option value="" data-radlex-status="needs-mapping">– nur bei männlichen Patienten –</option>
+          <option value="Prostata unauffällig" data-radlex-status="local" data-en="prostate normal">Unauffällig</option>
           <option value="Prostata vergrößert (BPH)" data-radlex="RID5216" data-en="benign prostatic hyperplasia">BPH</option>
-          <option value="Prostata – Raumforderung / Tumor V.a." data-radlex="RID5217">Raumforderung / Tumor V.a.</option>
+          <option value="Prostata – Raumforderung / Tumor V.a." data-radlex-status="local" data-en="prostate mass">Raumforderung / Tumor V.a.</option>
         </select>
       </label>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Ergänzung Becken</span>
-        <textarea id="becken_ft" rows="2" placeholder="Ossäre Strukturen Becken, weitere Befunde…" oninput="organCheck('becken');update()"></textarea>
+        <span class="rr-lbl">Ergänzung Becken</span>
+        <textarea id="becken_ft" rows="2" placeholder="Ossäre Strukturen Becken, weitere Befunde…" data-en="pelvis detail"></textarea>
       </label>
     </div>
-  </div>
+  </section>
 
   <!-- SKELETT / WEICHTEILE -->
-  <div class="organ-panel" id="panel-skelett">
-    <div class="grid2">
-      <div class="row">
+  <section class="rr-organ-panel" id="panel-skelett" data-organ="skelett" data-organ-label="Skelett / WT" data-radlex="RID13573" data-en="skeleton soft tissues">
+    <div class="rr-row-full">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Ossäre Strukturen <span class="rr-rl-badge">RadLex</span></span>
-          <div class="cg" id="sk_wrap">
-            <label class="ci"><input type="checkbox" id="sk_norm" onchange="organCheck('skel');update()"
-              data-radlex="RID13573-norm" data-en="osseous structures unremarkable">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="sk_deg" onchange="organCheck('skel');update()"
-              data-radlex="RID5222" data-en="degenerative changes">
-              <span>Degenerativ</span></label>
-            <label class="ci"><input type="checkbox" id="sk_dest" onchange="organCheck('skel');update()"
-              data-radlex="RID5223" data-en="osseous destruction">
-              <span>Destruktion/Metastase(n)</span></label>
-            <label class="ci"><input type="checkbox" id="sk_frak" onchange="organCheck('skel');update()"
-              data-radlex="RID5224" data-en="fracture">
-              <span>Fraktur</span></label>
-            <label class="ci"><input type="checkbox" id="sk_opo" onchange="organCheck('skel');update()"
-              data-radlex="RID5223" data-en="osteoporosis">
-              <span>Osteoporose</span></label>
+          <span class="rr-lbl">Ossäre Strukturen <span class="rr-rl-badge">RadLex</span></span>
+          <div class="rr-checkgroup" id="sk_wrap">
+            <label class="rr-check"><input type="checkbox" id="sk_norm" data-radlex-status="local" data-en="osseous structures normal"><span>Unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="sk_deg" data-radlex="RID5222" data-en="degenerative changes"><span>Degenerativ</span></label>
+            <label class="rr-check"><input type="checkbox" id="sk_dest" data-radlex="RID5223" data-en="osseous destruction"><span>Destruktion/Metastase(n)</span></label>
+            <label class="rr-check"><input type="checkbox" id="sk_frak" data-radlex="RID5224" data-en="fracture"><span>Fraktur</span></label>
+            <label class="rr-check"><input type="checkbox" id="sk_opo" data-radlex-status="local" data-en="osteoporosis"><span>Osteoporose</span></label>
           </div>
         </label>
       </div>
-      <div class="row">
+      <div class="rr-row">
         <label>
-          <span class="lbl">Weichteile / Bauchdecke</span>
-          <div class="cg" id="wt_wrap">
-            <label class="ci"><input type="checkbox" id="wt_norm" onchange="organCheck('wt');update()"
-              data-radlex="RID5200-norm" data-en="soft tissues unremarkable">
-              <span>Unauffällig</span></label>
-            <label class="ci"><input type="checkbox" id="wt_narb" onchange="organCheck('wt');update()"
-              data-radlex="RID5225" data-en="incisional hernia">
-              <span>Narbenhernie</span></label>
-            <label class="ci"><input type="checkbox" id="wt_lei_re" onchange="organCheck('wt');update()"
-              data-radlex="RID5226" data-en="inguinal hernia right">
-              <span>Leistenhernie re.</span></label>
-            <label class="ci"><input type="checkbox" id="wt_lei_li" onchange="organCheck('wt');update()"
-              data-radlex="RID5226-li" data-en="inguinal hernia left">
-              <span>Leistenhernie li.</span></label>
-            <label class="ci"><input type="checkbox" id="wt_tumor" onchange="organCheck('wt');update()"
-              data-radlex="RID5227" data-en="soft tissue tumor">
-              <span>Weichteiltumor</span></label>
+          <span class="rr-lbl">Weichteile / Bauchdecke</span>
+          <div class="rr-checkgroup" id="wt_wrap">
+            <label class="rr-check"><input type="checkbox" id="wt_norm" data-radlex-status="local" data-en="soft tissues normal"><span>Unauffällig</span></label>
+            <label class="rr-check"><input type="checkbox" id="wt_narb" data-radlex="RID5225" data-en="incisional hernia"><span>Narbenhernie</span></label>
+            <label class="rr-check"><input type="checkbox" id="wt_lei_re" data-radlex="RID5226" data-en="inguinal hernia"><span>Leistenhernie re.</span></label>
+            <label class="rr-check"><input type="checkbox" id="wt_lei_li" data-radlex="RID5226" data-en="inguinal hernia"><span>Leistenhernie li.</span></label>
+            <label class="rr-check"><input type="checkbox" id="wt_tumor" data-radlex="RID5227" data-en="soft tissue tumor"><span>Weichteiltumor</span></label>
           </div>
         </label>
       </div>
     </div>
-    <div class="row">
+    <div class="rr-row">
       <label>
-        <span class="lbl">Ergänzung ossär / Weichteile</span>
-        <textarea id="skel_ft" rows="2" placeholder="Lokalisaton, Größe, Anzahl Läsionen…" oninput="organCheck('skelett');update()"></textarea>
+        <span class="rr-lbl">Ergänzung ossär / Weichteile</span>
+        <textarea id="skel_ft" rows="2" placeholder="Lokalisation, Größe, Anzahl Läsionen…" data-en="skeleton soft tissues detail"></textarea>
       </label>
     </div>
-  </div>
+  </section>
 
 </div><!-- #organ-panels -->
 
 <!-- ══ VERGLEICH ══ -->
-<details>
-  <summary>Vergleichsuntersuchung <span style="font-size:11px;color:var(--rr-ink-faint);margin-left:6px">(optional)</span></summary>
-  <div class="db">
-    <div class="grid2">
-      <div class="row">
-        <label><span class="lbl">Vergleich vorhanden</span>
-          <select id="vgl_ja" onchange="update()">
-            <option value="">Nein</option><option value="yes">Ja</option>
+<details class="rr-section-optional" id="sec-vergleich">
+  <summary>Vergleichsuntersuchung <span class="rr-field-note">(optional)</span></summary>
+  <div class="rr-details-body">
+    <div class="rr-row-full">
+      <div class="rr-row">
+        <label><span class="rr-lbl">Vergleich vorhanden</span>
+          <select id="vgl_ja" data-en="prior study available">
+            <option value="" data-radlex-status="local" data-en="no prior study">Nein</option>
+            <option value="yes" data-radlex-status="local" data-en="prior study available">Ja</option>
           </select>
         </label>
       </div>
-      <div class="row">
-        <label><span class="lbl">Datum</span>
-          <input type="text" id="vgl_dat" placeholder="MM/JJJJ" oninput="update()">
+      <div class="rr-row">
+        <label><span class="rr-lbl">Datum</span>
+          <input type="text" id="vgl_dat" placeholder="MM/JJJJ" data-en="prior study date">
         </label>
       </div>
     </div>
-    <div class="row">
-      <label><span class="lbl">Verlaufsbeurteilung</span>
-        <select id="vgl_verl" onchange="update()"
-          data-radlex="RID49820" data-en="interval change">
-          <option value="">–</option>
-          <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel.">Kein wesentlicher Wandel</option>
-          <option value="Im Vergleich zur Voruntersuchung Progredienz der beschriebenen Befunde.">Progredienz</option>
-          <option value="Im Vergleich zur Voruntersuchung Regredienz / Befundbesserung.">Regredienz / Besserung</option>
-          <option value="Im Vergleich zur Voruntersuchung neu aufgetretene Befunde.">Neue Befunde</option>
+    <div class="rr-row">
+      <label><span class="rr-lbl">Verlaufsbeurteilung</span>
+        <select id="vgl_verl" data-radlex="RID49820" data-en="interval change">
+          <option value="" data-radlex-status="needs-mapping">–</option>
+          <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel." data-radlex-status="local" data-en="no significant interval change">Kein wesentlicher Wandel</option>
+          <option value="Im Vergleich zur Voruntersuchung Progredienz der beschriebenen Befunde." data-radlex-status="local" data-en="interval progression">Progredienz</option>
+          <option value="Im Vergleich zur Voruntersuchung Regredienz / Befundbesserung." data-radlex-status="local" data-en="interval regression">Regredienz / Besserung</option>
+          <option value="Im Vergleich zur Voruntersuchung neu aufgetretene Befunde." data-radlex-status="local" data-en="new interval findings">Neue Befunde</option>
         </select>
       </label>
     </div>
@@ -988,607 +822,32 @@ button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"
 </details>
 
 <!-- ══ ZUFALLSBEFUNDE ══ -->
-<details>
-  <summary>Zufallsbefunde / Incidentalome <span style="font-size:11px;color:var(--rr-ink-faint);margin-left:6px">(optional)</span></summary>
-  <div class="db">
-    <div class="row">
-      <label><span class="lbl">Zufallsbefund Freitext</span>
-        <textarea id="zufall_ft" rows="3" placeholder="z.B. Nierenzyste Bosniak I re., 12 mm. Klinische Relevanz: keine weitere Abklärung erforderlich." oninput="update()"></textarea>
+<details class="rr-section-optional" id="sec-zufall">
+  <summary>Zufallsbefunde / Incidentalome <span class="rr-field-note">(optional)</span></summary>
+  <div class="rr-details-body">
+    <div class="rr-row">
+      <label><span class="rr-lbl">Zufallsbefund Freitext</span>
+        <textarea id="zufall_ft" rows="3" placeholder="z.B. Nierenzyste Bosniak I re., 12 mm. Klinische Relevanz: keine weitere Abklärung erforderlich." data-en="incidental finding"></textarea>
       </label>
     </div>
   </div>
 </details>
 
 <!-- ══ FREITEXT / BEURTEILUNG ══ -->
-<div class="sh"><h2>Freitext &amp; Beurteilung</h2><div class="sh-line"></div></div>
-<div class="row">
-  <label><span class="lbl">Ergänzungen Freitext</span>
-    <textarea id="freetext" rows="2" placeholder="Zusätzliche Befunde, Besonderheiten…" oninput="update()"></textarea>
+<div class="rr-h2-wrap"><h2 class="rr-h2">Freitext &amp; Beurteilung</h2><div class="rr-h2-rule"></div></div>
+<div class="rr-row">
+  <label><span class="rr-lbl">Ergänzungen Freitext</span>
+    <textarea id="freetext" rows="2" placeholder="Zusätzliche Befunde, Besonderheiten…" data-en="additional free text"></textarea>
   </label>
 </div>
-<div class="row">
-  <label><span class="lbl">Beurteilung</span>
-    <textarea id="beurt" rows="6"
-      placeholder="Synthese – Freitext. Vorschlag erscheint unten sobald Felder ausgefüllt." oninput="update()"></textarea>
+<div class="rr-row">
+  <label><span class="rr-lbl">Beurteilung</span>
+    <textarea id="beurt" rows="6" placeholder="Synthese – Freitext. In der Demo erscheint ein Vorschlag, sobald Felder ausgefüllt sind."
+      data-radlex="RID13166" data-en="impression"></textarea>
   </label>
 </div>
-<div id="vorschlag-box" style="margin-bottom:10px"></div>
-
-<!-- BUTTONS -->
-<div class="rr-actions">
-  <button class="rr-btn" onclick="copyReport()">📋 Befundtext kopieren</button>
-  <button class="rr-btn-secondary" onclick="toggleExport('fhir')">{ } FHIR-Export</button>
-  <button class="btn-d" onclick="resetAll()">↺ Zurücksetzen</button>
-</div>
-<div class="rr-export-area" id="export-box"></div>
 
 </section>
-
-<!-- ══════════════════ PREVIEW PANE ══════════════════ -->
-<aside class="rr-preview-pane">
-<div class="rr-preview-title">Befund-Vorschau (Live)</div>
-<div class="rcard">
-  <div class="rcard-header">
-    <div class="rcard-title">CT Abdomen + Becken</div>
-    <div class="rcard-sub" id="prev-sub">–</div>
-  </div>
-  <div class="rsec"><div class="rsec-lbl">Technik</div><div class="rtext" id="prev-technik"></div></div>
-  <div class="rsec" id="prev-nf-sec" style="display:none">
-    <div class="rsec-lbl" style="color:var(--notfall)">Notfall-Checkliste</div>
-    <div class="rtext" id="prev-nf"></div>
-  </div>
-  <div class="rsec"><div class="rsec-lbl">Befund</div><div class="rtext" id="prev-befund"></div></div>
-  <div class="rsec"><div class="rsec-lbl">Beurteilung</div><div class="rtext" id="prev-beurt"></div></div>
-  <div class="stamp">
-    <span>HJK-MRRT-CT-ABDBECKEN-v1.0</span>
-    <span id="prev-date"></span>
-  </div>
-</div>
-<div id="status-badge" class="badge warn">● Befund ausfüllen</div>
-</aside>
-
-</div><!-- .app -->
-
-<script>
-/* ════════════════════════════════════════════════════════════
-   ORGAN-KONFIGURATION
-   ════════════════════════════════════════════════════════════ */
-const ORGANS = [
-  {id:'leber',      label:'Leber',        radlex:'RID1240', en:'liver'},
-  {id:'galle',      label:'GB / Gallen',  radlex:'RID1257', en:'gallbladder biliary'},
-  {id:'pankreas',   label:'Pankreas',     radlex:'RID1281', en:'pancreas'},
-  {id:'milz',       label:'Milz',         radlex:'RID1303', en:'spleen'},
-  {id:'nieren',     label:'Nieren / NN',  radlex:'RID1316', en:'kidneys adrenals'},
-  {id:'gi',         label:'GI-Trakt',     radlex:'RID1386', en:'gastrointestinal tract'},
-  {id:'gefaesse',   label:'Gefäße',       radlex:'RID480',  en:'vessels'},
-  {id:'lymph',      label:'Lymphknoten',  radlex:'RID1448', en:'lymph nodes'},
-  {id:'peritoneum', label:'Peritoneum',   radlex:'RID1460', en:'peritoneum'},
-  {id:'becken',     label:'Becken',       radlex:'RID1368', en:'pelvis'},
-  {id:'skelett',    label:'Skelett / WT', radlex:'RID13573',en:'skeleton soft tissues'},
-];
-
-const organAuffaellig = {};
-let activeOrgan = 'leber';
-
-/* ════════════════════════════════════════════════════════════
-   NOTFALL-CHECKLISTE
-   ════════════════════════════════════════════════════════════ */
-const NF_ITEMS = [
-  {id:'nf_perforation', label:'Freie Luft / Perforation',  note:'Pneumoperitoneum',               rid:'RID5202', en:'pneumoperitoneum'},
-  {id:'nf_ileus',       label:'Ileus',                     note:'Mechanisch / paralytisch',        rid:'RID5162', en:'bowel obstruction'},
-  {id:'nf_ischaemie',   label:'Mesenteriale Ischämie',     note:'Durchblutung, Darmwand',          rid:'RID5165', en:'mesenteric ischemia'},
-  {id:'nf_appendizitis',label:'Appendizitis',              note:'Appendix-Kaliber, Kokarde',       rid:'RID5173', en:'appendicitis'},
-  {id:'nf_divertikulitis',label:'Divertikulitis',          note:'Peridivertikuläre Entzündung',    rid:'RID5171', en:'diverticulitis'},
-  {id:'nf_pankreatitis',label:'Akute Pankreatitis',        note:'Nekrose, Exsudat, Schweregrad',   rid:'RID5131', en:'acute pancreatitis'},
-  {id:'nf_cholezystitis',label:'Akute Cholezystitis',      note:'Wandödem, Murphy-Zeichen CT',     rid:'RID5121', en:'acute cholecystitis'},
-  {id:'nf_aaa',         label:'Aortenaneurysma (ruptur.)', note:'BAA-Durchmesser, Retroperitoneum',rid:'RID5181', en:'aortic aneurysm rupture'},
-];
-
-const getNfVal = id => document.querySelector(`input[name=${id}]:checked`)?.value || '';
-
-/* ════════════════════════════════════════════════════════════
-   RECIST
-   ════════════════════════════════════════════════════════════ */
-let recistCount = 0;
-
-function addRecistRow(){
-  if(recistCount >= 5){ alert('RECIST 1.1: max. 5 Zielläsionen'); return; }
-  recistCount++;
-  const n = recistCount;
-  const tr = document.createElement('tr');
-  tr.id = `recist-row-${n}`;
-  tr.innerHTML = `
-    <td style="font-weight:600;color:var(--rr-accent)">${n}</td>
-    <td><input type="text" id="rl_lok_${n}" placeholder="z.B. Leber Seg. VI" oninput="calcRecist();update()"></td>
-    <td><input type="number" id="rl_la_${n}" step="0.1" placeholder="mm" oninput="calcRecist();update()"></td>
-    <td><input type="number" id="rl_ka_${n}" step="0.1" placeholder="mm" oninput="calcRecist();update()"></td>
-    <td>
-      <select id="rl_verl_${n}" onchange="update()" style="min-width:90px">
-        <option value="">–</option>
-        <option value="neu">Neu</option>
-        <option value="stabil">Stabil</option>
-        <option value="regredient">Regredient</option>
-        <option value="progredient">Progredient</option>
-      </select>
-    </td>`;
-  document.getElementById('recist-tbody').appendChild(tr);
-}
-
-function calcRecist(){
-  let sum = 0;
-  for(let i=1;i<=recistCount;i++){
-    const v = parseFloat(document.getElementById(`rl_la_${i}`)?.value);
-    if(!isNaN(v)) sum += v;
-  }
-  document.getElementById('recist-sum').textContent = sum > 0 ? `${sum.toFixed(1)} mm` : '– mm';
-}
-
-function getRecistRows(){
-  const rows = [];
-  for(let i=1;i<=recistCount;i++){
-    const lok  = document.getElementById(`rl_lok_${i}`)?.value?.trim();
-    const la   = document.getElementById(`rl_la_${i}`)?.value;
-    const ka   = document.getElementById(`rl_ka_${i}`)?.value;
-    const verl = document.getElementById(`rl_verl_${i}`)?.value;
-    if(lok||la) rows.push({n:i,lok:lok||'–',la:la||'–',ka:ka||'–',verl:verl||'–'});
-  }
-  return rows;
-}
-
-/* ════════════════════════════════════════════════════════════
-   INIT
-   ════════════════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('prev-date').textContent =
-    new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
-
-  renderOrganNav();
-  renderNfGrid();
-
-  document.querySelectorAll('input[name=ctx]').forEach(r => r.addEventListener('change', () => {
-    updateCtxHint(); update();
-  }));
-
-  // Leber-Fokal-Detail
-  document.getElementById('leber_fokal').addEventListener('change', function(){
-    document.getElementById('leber_fokal_detail').style.display =
-      this.value !== 'keine fokale Leberläsion nachweisbar' ? '' : 'none';
-  });
-  document.getElementById('pank_fokal').addEventListener('change', function(){
-    document.getElementById('pank_fokal_detail').style.display =
-      this.value !== 'keine fokale Raumforderung' ? '' : 'none';
-  });
-
-  // Standardorgan einblenden
-  showOrgan('leber');
-  updateCtxHint();
-  update();
-});
-
-/* ── Organ-Nav ── */
-function renderOrganNav(){
-  const nav = document.getElementById('organ-nav');
-  nav.innerHTML = '';
-  ORGANS.forEach(o => {
-    const btn = document.createElement('div');
-    btn.className = 'organ-tab' + (o.id === activeOrgan ? ' active' : '');
-    btn.id = `tab-${o.id}`;
-    btn.textContent = o.label;
-    btn.addEventListener('click', () => showOrgan(o.id));
-    nav.appendChild(btn);
-  });
-}
-
-function showOrgan(id){
-  activeOrgan = id;
-  document.querySelectorAll('.organ-panel').forEach(p => p.classList.remove('show'));
-  document.getElementById(`panel-${id}`)?.classList.add('show');
-  document.querySelectorAll('.organ-tab').forEach(t => {
-    t.classList.remove('active');
-    if(t.id === `tab-${id}`) t.classList.add('active');
-  });
-}
-
-function organCheck(id){
-  // Prüft ob Organ auffällig – setzt orange Tab
-  organAuffaellig[id] = true; // vereinfacht; wird bei update() verfeinert
-  const tab = document.getElementById(`tab-${id}`);
-  if(tab) tab.classList.add('auffaellig');
-}
-
-/* ── Notfall-Grid ── */
-function renderNfGrid(){
-  const grid = document.getElementById('nf-grid');
-  if(!grid) return;
-  grid.innerHTML = '';
-  NF_ITEMS.forEach(c => {
-    const div = document.createElement('div');
-    div.className = 'nf-item';
-    div.id = `nf-wrap-${c.id}`;
-    div.innerHTML = `
-      <div class="nf-inner">
-        <input type="radio" name="${c.id}" id="${c.id}_pos" value="positiv">
-        <label for="${c.id}_pos" class="nf-pos">⚠ Ja</label>
-        <input type="radio" name="${c.id}" id="${c.id}_neg" value="negativ">
-        <label for="${c.id}_neg" class="nf-neg">✓ Nein</label>
-        <input type="radio" name="${c.id}" id="${c.id}_na" value="n.b.">
-        <label for="${c.id}_na" class="nf-na">n.b.</label>
-      </div>
-      <div class="nf-text"><strong>${c.label}</strong><span>${c.note}</span></div>`;
-    grid.appendChild(div);
-    div.querySelectorAll('input[type=radio]').forEach(r => r.addEventListener('change', () => {
-      const v = getNfVal(c.id);
-      const w = document.getElementById(`nf-wrap-${c.id}`);
-      w.classList.remove('pos','neg');
-      if(v==='positiv') w.classList.add('pos');
-      if(v==='negativ') w.classList.add('neg');
-      update();
-    }));
-  });
-}
-
-/* ════════════════════════════════════════════════════════════
-   CTX-HINT
-   ════════════════════════════════════════════════════════════ */
-function getCtx(){ return document.querySelector('input[name=ctx]:checked')?.value || 'onko'; }
-const gv = id => document.getElementById(id)?.value?.trim() ?? '';
-
-function updateCtxHint(){
-  const ctx = getCtx();
-  const hints = {
-    onko:'<strong>Onkologisches Staging / RECIST:</strong> Zielläsionen messen, Gesamtansprechen dokumentieren. Lymphknoten, Peritoneum, Ossär systematisch erfassen.',
-    notfall:'<strong>Akutes Abdomen:</strong> Kritische Befunde zuerst ausschließen. Notfall-Checkliste vollständig ausfüllen. Direkte Kommunikation bei positiven Befunden.',
-    allg:'<strong>Allgemein / unklarer Befund:</strong> Organsystematische Befundung. Zufallsbefunde dokumentieren und bewerten.',
-  };
-  document.getElementById('ctx-hint').innerHTML = hints[ctx];
-  document.getElementById('nf-section').style.display   = ctx==='notfall' ? '' : 'none';
-  document.getElementById('onko-section').style.display = ctx==='onko'    ? '' : 'none';
-  document.getElementById('prev-nf-sec').style.display  = ctx==='notfall' ? '' : 'none';
-}
-
-/* ════════════════════════════════════════════════════════════
-   TEXT BUILDERS
-   ════════════════════════════════════════════════════════════ */
-function buildTechnik(){
-  const phasen = [];
-  if(document.getElementById('ph_nativ')?.checked)   phasen.push('Nativ');
-  if(document.getElementById('ph_art')?.checked)     phasen.push('arteriell');
-  if(document.getElementById('ph_pv')?.checked)      phasen.push('portal-venös');
-  if(document.getElementById('ph_spaet')?.checked)   phasen.push('Spätphase');
-  if(document.getElementById('ph_nativ_nkm')?.checked) phasen.push('nativ + portal-venös');
-  const km_menge = gv('km_menge');
-  const km_praep = gv('km_praep');
-  const schicht  = gv('schicht') || '5 mm';
-  const rekon    = gv('rekon')   || 'axial';
-  const qual     = gv('qual')    || 'gut, diagnostisch ausreichend';
-  const frage    = gv('fragestellung');
-  let t = `CT Abdomen + Becken`;
-  if(phasen.length) t += `, ${phasen.join(' + ')}.`;
-  if(km_praep && km_menge) t += ` KM: ${km_praep} ${km_menge} ml i.v.`;
-  else if(km_menge) t += ` KM: ${km_menge} ml i.v.`;
-  t += ` Schichtdicke ${schicht}, Rekonstruktion ${rekon}. Qualität ${qual}.`;
-  if(frage) t += ` Fragestellung: ${frage}.`;
-  return t;
-}
-
-function buildNfText(){
-  const pos = NF_ITEMS.filter(c => getNfVal(c.id) === 'positiv');
-  const neg = NF_ITEMS.filter(c => getNfVal(c.id) === 'negativ');
-  const nb  = NF_ITEMS.filter(c => getNfVal(c.id) === 'n.b.');
-  let t = '';
-  if(pos.length) t += `POSITIV: ${pos.map(c=>c.label).join(', ')}.\n`;
-  if(neg.length) t += `Ausgeschlossen: ${neg.map(c=>c.label).join(', ')}.\n`;
-  if(nb.length)  t += `Nicht beurteilbar: ${nb.map(c=>c.label).join(', ')}.`;
-  return t.trim();
-}
-
-function buildBefund(){
-  const lines = [];
-  const ctx = getCtx();
-
-  // Onkologisch: RECIST
-  if(ctx === 'onko'){
-    const rows = getRecistRows();
-    const entitaet = gv('tumor_entitaet');
-    const staging  = gv('staging_zeitpunkt');
-    if(entitaet || staging) lines.push(`Onkologischer Kontext: ${[entitaet,staging].filter(Boolean).join(', ')}.`);
-    if(rows.length){
-      const recistLines = rows.map(r => `  ${r.n}. ${r.lok}: LA ${r.la} mm${r.ka!=='–'?', KA '+r.ka+' mm':''}${r.verl!=='–'?' – '+r.verl:''}`);
-      const sum = document.getElementById('recist-sum')?.textContent || '';
-      lines.push(`RECIST 1.1 Zielläsionen:\n${recistLines.join('\n')}\n  SLD: ${sum}`);
-      const resp = gv('recist_response');
-      const nont = gv('recist_nontarget');
-      if(resp) lines.push(`RECIST-Ansprechen: ${resp}.`);
-      if(nont) lines.push(`Nicht-Zielläsionen: ${nont}.`);
-    }
-  }
-
-  // Organ-Befunde
-  const organLines = [];
-
-  // Leber
-  const lp = [document.getElementById('lp_norm')?.checked?'Unauffällig':null, document.getElementById('lp_steat')?.checked?'Steatose':null, document.getElementById('lp_zirr')?.checked?'Zirrhose':null, document.getElementById('lp_kong')?.checked?'Kongestion':null].filter(Boolean).join(', ') || "unauffällig";
-  const lg = gv('leber_groesse'), lf = gv('leber_fokal'), ld = gv('leber_fokal_ft'), lgw = gv('leber_gw');
-  let leber = 'Leber:';
-  if(lg !== 'normal groß') leber += ` ${lg}.`;
-  leber += ` Parenchym ${lp}.`;
-  leber += ` ${lf}.`;
-  if(ld) leber += ` ${ld}.`;
-  leber += ` Intrahepatische Gallenwege ${lgw}.`;
-  organLines.push(leber);
-
-  // GB
-  const gb = [document.getElementById('gb_norm')?.checked?'Unauffällig':null, document.getElementById('gb_lith')?.checked?'Cholezystolithiasis':null, document.getElementById('gb_chol')?.checked?'Akute Cholezystitis':null, document.getElementById('gb_hydr')?.checked?'Hydrops':null, document.getElementById('gb_che')?.checked?'St.p. Cholezystektomie':null, document.getElementById('gb_wand')?.checked?'Wandverdickung DD':null].filter(Boolean).join(', ') || "unauffällig"; const chd = gv('chd');
-  organLines.push(`Gallenblase: ${gb}. Ductus choledochus: ${chd}.`);
-
-  // Pankreas
-  const pp = gv('pank_par'), pd = gv('pank_duct'), pf = gv('pank_fokal'), pft = gv('pank_fokal_ft');
-  let pankreas = `Pankreas: Parenchym ${pp}. Ductus pancreaticus ${pd}. ${pf}.`;
-  if(pft) pankreas += ` ${pft}.`;
-  organLines.push(pankreas);
-
-  // Milz
-  organLines.push(`Milz: ${gv('milz_gr')}. Parenchym ${gv('milz_par')}.`);
-
-  // Nieren
-  const np = [document.getElementById('niere_norm')?.checked?'Bds. unauffällig':null, document.getElementById('niere_zys')?.checked?'Nierenzyste(n)':null, document.getElementById('niere_nzk')?.checked?'Solide RF – NZK V.a.':null, document.getElementById('niere_aml')?.checked?'Angiomyolipom':null, document.getElementById('niere_hydro')?.checked?'Hydronephrose':null, document.getElementById('niere_lith')?.checked?'Nephrolithiasis':null, document.getElementById('niere_pye')?.checked?'Pyelonephritis':null].filter(Boolean).join(', ') || "bds. unauffällig"; const nn = [document.getElementById('nn_norm')?.checked?'Bds. unauffällig':null, document.getElementById('nn_adn_re')?.checked?'Adenom re.':null, document.getElementById('nn_adn_li')?.checked?'Adenom li.':null, document.getElementById('nn_hyp')?.checked?'Hyperplasie':null, document.getElementById('nn_mets')?.checked?'Metastase V.a.':null, document.getElementById('nn_rf')?.checked?'Unklare RF':null].filter(Boolean).join(', ') || ""; const nft = gv('nieren_ft');
-  let nieren = `Nieren: ${np}.`;
-  if(nn) nieren += ` Nebennieren: ${nn}.`;
-  if(nft) nieren += ` ${nft}.`;
-  organLines.push(nieren);
-
-  // GI
-  const gim = gv('gi_magen'), gid = [document.getElementById('gid_norm')?.checked?'Unauffällig':null, document.getElementById('gid_ileus')?.checked?'Ileus':null, document.getElementById('gid_wand')?.checked?'Wandverdickung':null, document.getElementById('gid_adh')?.checked?'Konvolut/Adhäsion':null, document.getElementById('gid_isch')?.checked?'Ischämiezeichen':null].filter(Boolean).join(', ') || "unauffällig", gic = [document.getElementById('gic_norm')?.checked?'Unauffällig':null, document.getElementById('gic_ileus')?.checked?'Ileus/Stenose':null, document.getElementById('gic_diver')?.checked?'Divertikulitis V.a.':null, document.getElementById('gic_wand')?.checked?'Wandverdickung/Tumor':null, document.getElementById('gic_app')?.checked?'Appendizitis V.a.':null].filter(Boolean).join(', ') || "unauffällig", gift = gv('gi_ft');
-  let gi = `GI-Trakt: Magen ${gim}. Dünndarm ${gid}. Colon/Rektum ${gic}.`;
-  if(gift) gi += ` ${gift}.`;
-  organLines.push(gi);
-
-  // Gefässe
-  const ga = [
-    document.getElementById('gef_ao_norm')?.checked ? 'Aorta abdominalis unauffällig' : null,
-    document.getElementById('gef_ao_elon')?.checked ? 'elongiert, wandverkalkt' : null,
-    document.getElementById('gef_ao_baa')?.checked  ? 'Bauchaortenaneurysma (BAA)' : null,
-    document.getElementById('gef_ao_diss')?.checked ? 'Aortendissektion V.a.' : null,
-  ].filter(Boolean).join(', ') || '–';
-  const gp = [
-    document.getElementById('gef_pf_norm')?.checked  ? 'Pfortader unauffällig' : null,
-    document.getElementById('gef_pf_throm')?.checked ? 'Pfortaderthrombose' : null,
-    document.getElementById('gef_pf_htn')?.checked   ? 'portale Hypertension' : null,
-    document.getElementById('gef_pf_budd')?.checked  ? 'Budd-Chiari V.a.' : null,
-  ].filter(Boolean).join(', ') || '–';
-  const gft = gv('gef_ft');
-  let gef = `Gefäße: Aorta abdominalis ${ga}. ${gp}.`;
-  if(gft) gef += ` ${gft}.`;
-  organLines.push(gef);
-
-  // Lymphknoten
-  const lr = gv('lymph_retro'), lm = [document.getElementById('lym_norm')?.checked?'Unauffällig':null, document.getElementById('lym_mes')?.checked?'Mesenterial vergrößert':null, document.getElementById('lym_ili')?.checked?'Iliakal vergrößert':null, document.getElementById('lym_ing')?.checked?'Inguinal vergrößert':null].filter(Boolean).join(', ') || "unauffällig", lft = gv('lymph_ft');
-  let lymph = `Lymphknoten: ${lr}. ${lm}.`;
-  if(lft) lymph += ` ${lft}.`;
-  organLines.push(lymph);
-
-  // Peritoneum / Aszites
-  organLines.push(`Peritoneum: ${gv('peri_bef')}. Aszites: ${gv('aszites')}.`);
-
-  // Becken
-  const bl = gv('blase'), bg = gv('becken_gynae'), bp = gv('becken_prostata'), bft = gv('becken_ft');
-  let becken = `Becken: Harnblase ${bl}.`;
-  if(bg) becken += ` ${bg}.`;
-  if(bp) becken += ` ${bp}.`;
-  if(bft) becken += ` ${bft}.`;
-  organLines.push(becken);
-
-  // Skelett
-  const sk = [document.getElementById('sk_norm')?.checked?'Unauffällig':null, document.getElementById('sk_deg')?.checked?'Degenerativ':null, document.getElementById('sk_dest')?.checked?'Destruktion/Metastase(n)':null, document.getElementById('sk_frak')?.checked?'Fraktur':null, document.getElementById('sk_opo')?.checked?'Osteoporose':null].filter(Boolean).join(', ') || "unauffällig", wt = [document.getElementById('wt_norm')?.checked?'Unauffällig':null, document.getElementById('wt_narb')?.checked?'Narbenhernie':null, document.getElementById('wt_lei_re')?.checked?'Leistenhernie re.':null, document.getElementById('wt_lei_li')?.checked?'Leistenhernie li.':null, document.getElementById('wt_tumor')?.checked?'Weichteiltumor':null].filter(Boolean).join(', ') || "unauffällig", sft = gv('skel_ft');
-  let skel = `Skelett / Weichteile: ${sk}. ${wt}.`;
-  if(sft) skel += ` ${sft}.`;
-  organLines.push(skel);
-
-  lines.push(organLines.join('\n'));
-
-  // Vergleich
-  if(gv('vgl_ja') === 'yes'){
-    const vd = gv('vgl_dat'), vv = gv('vgl_verl');
-    let vgl = 'Vergleich:';
-    if(vd) vgl += ` Voruntersuchung ${vd}.`;
-    if(vv) vgl += ` ${vv}`;
-    lines.push(vgl);
-  }
-
-  // Zufallsbefunde
-  const zf = gv('zufall_ft');
-  if(zf) lines.push(`Zufallsbefunde: ${zf}`);
-
-  // Freitext
-  const ft = gv('freetext');
-  if(ft) lines.push(ft);
-
-  return lines.join('\n\n');
-}
-
-function buildVorschlag(){
-  const ctx = getCtx();
-  const entitaet = gv('tumor_entitaet');
-  const staging  = gv('staging_zeitpunkt');
-  const resp     = gv('recist_response');
-
-  if(ctx === 'onko'){
-    const rows = getRecistRows();
-    let v = `CT Abdomen + Becken`;
-    if(entitaet) v += ` bei bekanntem ${entitaet}`;
-    if(staging)  v += ` (${staging})`;
-    v += '.';
-    if(resp) v += ` RECIST 1.1: ${resp}.`;
-    if(rows.length){
-      const sum = document.getElementById('recist-sum')?.textContent || '';
-      v += ` SLD: ${sum}.`;
-    }
-    return v;
-  }
-
-  if(ctx === 'notfall'){
-    const pos = NF_ITEMS.filter(c => getNfVal(c.id) === 'positiv');
-    if(pos.length) return `CT Abdomen + Becken: Nachweis von ${pos.map(c=>c.label).join(', ')}. Klinische Korrelation und unmittelbare Information des zuweisenden Arztes empfohlen.`;
-    return 'CT Abdomen + Becken: Kein Hinweis auf akutes intraabdominelles Geschehen.';
-  }
-
-  return 'CT Abdomen + Becken ohne wegweisenden pathologischen Befund.';
-}
-
-/* ════════════════════════════════════════════════════════════
-   MAIN UPDATE
-   ════════════════════════════════════════════════════════════ */
-function update(){
-  document.getElementById('prev-technik').textContent = buildTechnik();
-  document.getElementById('prev-befund').textContent  = buildBefund();
-  document.getElementById('prev-beurt').textContent   = gv('beurt') || '—';
-
-  const ctx = getCtx();
-  const frage = gv('fragestellung');
-  const phasen = [];
-  if(document.getElementById('ph_nativ')?.checked)   phasen.push('nativ');
-  if(document.getElementById('ph_art')?.checked)     phasen.push('art.');
-  if(document.getElementById('ph_pv')?.checked)      phasen.push('PV');
-  if(document.getElementById('ph_spaet')?.checked)   phasen.push('Spät');
-  if(document.getElementById('ph_nativ_nkm')?.checked) phasen.push('nativ+PV');
-  document.getElementById('prev-sub').textContent =
-    `${phasen.join('+') || 'PV'} · ${ctx==='onko'?'Onkologie/RECIST':ctx==='notfall'?'Akutes Abdomen':'Allgemein'}${frage?' · '+frage:''}`;
-
-  if(ctx === 'notfall'){
-    document.getElementById('prev-nf').textContent = buildNfText();
-  }
-
-  // Vorschlag
-  const vbox = document.getElementById('vorschlag-box');
-  if(!gv('beurt')){
-    const v = buildVorschlag();
-    vbox.innerHTML = `<div class="rr-helper-info" style="cursor:pointer" onclick="document.getElementById('beurt').value=${JSON.stringify(v)};update()" title="Klicken zum Übernehmen"><strong>Vorschlag (klicken):</strong><br>${v}</div>`;
-  } else {
-    vbox.innerHTML = '';
-  }
-
-  // Badge
-  const hasBeurt = gv('beurt').length > 10;
-  const nfPos = NF_ITEMS.some(c => getNfVal(c.id) === 'positiv');
-  const badge = document.getElementById('status-badge');
-  if(ctx==='notfall' && nfPos){ badge.className='badge alert'; badge.textContent='⚠ Positiver Notfall-Befund'; }
-  else if(!hasBeurt){ badge.className='badge warn'; badge.textContent='● Beurteilung fehlt'; }
-  else { badge.className='badge ok'; badge.textContent='✓ Vollständig'; }
-}
-
-/* ════════════════════════════════════════════════════════════
-   FHIR EXPORT
-   ════════════════════════════════════════════════════════════ */
-function buildFhir(){
-  const now = new Date().toISOString();
-  const obsArr = [];
-  let idx = 0;
-
-  const addObs = (rid, en, val, loinc) => {
-    if(!val) return;
-    idx++;
-    const coding = [{system:'http://radlex.org', code:rid, display:en}];
-    if(loinc) coding.push({system:'http://loinc.org', code:loinc, display:en});
-    obsArr.push({fullUrl:`urn:uuid:obs-${idx}`, resource:{
-      resourceType:'Observation', status:'final', id:`obs-${idx}`,
-      code:{coding}, valueString: val,
-    }});
-  };
-
-  // Organe
-  ORGANS.forEach(o => {
-    const ft = gv(`${o.id}_ft`) || '';
-    addObs(o.radlex, o.en, ft, null);
-  });
-
-  // RECIST
-  const resp = gv('recist_response');
-  if(resp){
-    const respEl = document.getElementById('recist_response');
-    const rid = respEl?.options[respEl.selectedIndex]?.dataset?.radlex || 'RID49860';
-    const en  = respEl?.options[respEl.selectedIndex]?.dataset?.en  || 'RECIST response';
-    addObs(rid, en, resp, null);
-  }
-
-  // Notfall
-  NF_ITEMS.forEach(c => {
-    const v = getNfVal(c.id);
-    if(v === 'positiv'){
-      idx++;
-      obsArr.push({fullUrl:`urn:uuid:obs-${idx}`, resource:{
-        resourceType:'Observation', status:'final', id:`obs-${idx}`,
-        code:{coding:[{system:'http://radlex.org', code:c.rid, display:c.en}]},
-        valueString:`POSITIV: ${c.label}`,
-        interpretation:[{coding:[{system:'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',code:'A',display:'Abnormal'}]}],
-      }});
-    }
-  });
-
-  const dr = {
-    resourceType:'DiagnosticReport', status:'final', id:'ct-abd-report',
-    code:{coding:[{system:'http://loinc.org',code:'30652-8',display:'CT Abdomen and Pelvis'}]},
-    effectiveDateTime:now,
-    identifier:[{value:'HJK-MRRT-CT-ABDBECKEN-v1.0'}],
-    conclusion: gv('beurt'),
-    result: obsArr.map(o=>({reference:o.fullUrl})),
-    presentedForm:[{contentType:'text/plain',title:'CT Abdomen + Becken',
-      data:btoa(unescape(encodeURIComponent(
-        'TECHNIK\n'+buildTechnik()+'\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+gv('beurt')
-      )))
-    }],
-  };
-
-  return JSON.stringify({
-    resourceType:'Bundle', type:'document', timestamp:now,
-    meta:{tag:[{system:'http://hjk.wien/fhir/CodeSystem/radiology-templates', code:'radlex-coded'}]},
-    entry:[{fullUrl:'urn:uuid:ct-abd-report', resource:dr},...obsArr],
-  }, null, 2);
-}
-
-function toggleExport(type){
-  const box = document.getElementById('export-box');
-  if(box.classList.contains('show')){ box.classList.remove('show'); return; }
-  box.textContent = buildFhir();
-  box.classList.add('show');
-}
-
-function copyReport(){
-  const t = `CT ABDOMEN + BECKEN\n${new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'})}\n\nTECHNIK\n${buildTechnik()}\n\nBEFUND\n${buildBefund()}\n\nBEURTEILUNG\n${gv('beurt')}`;
-  navigator.clipboard.writeText(t).then(()=>{
-    const btn=event.target; btn.textContent='✓ Kopiert!';
-    setTimeout(()=>{btn.textContent='📋 Befundtext kopieren';},2000);
-  }).catch(()=>{
-    const el=document.createElement('textarea');el.value=t;
-    document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);
-  });
-}
-
-function resetAll(){
-  if(!confirm('Alle Eingaben zurücksetzen?')) return;
-  document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
-  document.querySelectorAll('textarea,input[type=text],input[type=number]').forEach(i=>i.value='');
-  document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);
-  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
-  document.getElementById('ph_pv').checked = true;
-  document.getElementById('ctx_allg').checked = true;
-  document.getElementById('recist-tbody').innerHTML = '';
-  recistCount = 0;
-  document.getElementById('recist-sum').textContent = '– mm';
-  document.getElementById('leber_fokal_detail').style.display = 'none';
-  document.getElementById('pank_fokal_detail').style.display = 'none';
-  NF_ITEMS.forEach(c=>{
-    const w=document.getElementById(`nf-wrap-${c.id}`);
-    if(w) w.classList.remove('pos','neg');
-  });
-  ORGANS.forEach(o => {
-    organAuffaellig[o.id] = false;
-    document.getElementById(`tab-${o.id}`)?.classList.remove('auffaellig');
-  });
-  document.getElementById('export-box').classList.remove('show');
-  showOrgan('leber');
-  updateCtxHint();
-  update();
-}
-</script>
+</div><!-- .rr-app -->
 </body>
 </html>

@@ -1,8 +1,8 @@
 # CT Abdomen + Becken
 
 **ID:** HJK-MRRT-CT-ABDBECKEN
-**Version:** 1.0
-**Status:** Pilot
+**Version:** 2.0
+**Status:** Pilot · A-Struktur
 
 ## Auf einen Blick
 
@@ -14,15 +14,17 @@ Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
 
 ## Zweck
 
-Strukturierte Befundvorlage **CT Abdomen + Becken** mit drei klinischen Kontexten: Onkologisches Staging/RECIST, Akutes Abdomen/Notfall, Allgemein. Alle KM-Phasen wählbar. Organ-systematische Tab-Navigation.
+Strukturierte Befundvorlage **CT Abdomen + Becken**. Basis ist die organsystematische Befundung (11 Organsysteme); Akutes Abdomen und Onkologie/RECIST sind optionale, immer zugängliche Sektionen. Alle KM-Phasen wählbar.
 
-## Kontexte
+> **A-Struktur / Modiswitch aufgelöst (v2.0):** Der frühere 3-Kontext-Umschalter (allg/notfall/onko) entfällt. Die Notfall-Checkliste und der onkologische Kontext/RECIST sind optionale `<details>`-Sektionen. Textbausteine und Ampel-Status schalten **inhaltsgetrieben** (Notfall-Positiva bzw. RECIST-Daten vorhanden), nicht mehr über einen Modus.
 
-| Kontext | Besonderheit |
+## Sektionen
+
+| Sektion | Besonderheit |
 |---|---|
-| Onkologisches Staging / RECIST | RECIST-1.1-Tabelle (bis 5 Zielläsionen), SLD-Summe automatisch, Gesamtansprechen CR/PR/SD/PD |
-| Akutes Abdomen / Notfall | 8-Punkte-Notfall-Checkliste (Perforation, Ileus, Ischämie, Appendizitis…), Alert-Badge bei positivem Befund |
-| Allgemein | Organsystematische Befundung, Zufallsbefunde |
+| Organsystematik (Basis) | 11 Organsysteme, RadLex-kodierte Felder, Organ-Navigation (Demo) |
+| Akutes Abdomen (optional) | 8-Punkte-Notfall-Checkliste (Perforation, Ileus, Ischämie, Appendizitis…), Alert-Badge bei positivem Befund |
+| Onkologie / RECIST (optional) | RECIST-1.1-Tabelle (bis 5 Zielläsionen), SLD-Summe automatisch, Gesamtansprechen CR/PR/SD/PD |
 
 ## Organe (11 Tabs)
 
