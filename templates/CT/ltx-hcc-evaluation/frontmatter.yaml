@@ -1,0 +1,82 @@
+id: HJK-MRRT-LTX-HCC-EVAL
+version: 1.0
+status: pilot
+drg-kompatibel: true
+modalitaet: CT
+region: Leber
+organsystem: Abdominell
+indikation: Lebertransplantations-Anmeldung bei HCC (Mailand-Kriterien, §16 TPG)
+sprache: de
+lizenz: CC-BY-4.0
+struktur: A  # kanonisch nacktes template.html + abgeleitete Demo (build-demo.js)
+herkunft:
+  abgespalten-aus: HJK-MRRT-CT-LEBER-LIRADS
+  vormals-modus: ltx-evaluation
+autoren:
+  - florian-reiger-ochsner
+reviewer: []
+reviewer-geplant:
+  - daniel-pinto-dos-santos
+geprueft: 2026-07-06
+naechste-pruefung: 2027-01-06
+klassifikationen:
+  - name: Mailand-Kriterien
+    quelle: "Mazzaferro V et al. NEJM 1996; 334: 693-699"
+  - name: §16 TPG-Richtlinie
+    quelle: Bundesärztekammer
+quelle-drg:
+  titel: "DRG-Template LTx-Evaluation HCC"
+  datei: gen_ltx_hcc.html
+  identifier: "041807.5"
+  autoren: "Pinto dos Santos D, Mildenberger P, Klos G"
+  organisation: Deutsche Röntgengesellschaft
+  jahr: 2017
+  lizenz: CC-BY-4.0
+referenzen:
+  - "Mazzaferro V et al. Liver transplantation for HCC. NEJM 1996; 334: 693-699"
+  - "Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template gen_ltx_hcc.html (041807.5), Deutsche Röntgengesellschaft 2017, CC BY 4.0"
+  - "Bundesärztekammer. Richtlinien zur Organtransplantation gem. §16 TPG"
+  - "Ringe KI et al. Strukturierte Befundung in der Radiologie. Rofo 2021"
+coding-systems:
+  - RadLex
+  - LOINC
+  - local (§16-TPG-spezifisch)
+messgroessen:
+  - id: ltx_n_knoten
+    name: Anzahl HCC-Knoten
+    einheit: stueck
+  - id: ltx_dm1
+    name: Knoten 1 – größter Durchmesser
+    einheit: mm
+    radlex: RID13432
+    loinc: "21889-1"
+  - id: ltx_dm2
+    name: Knoten 2 – größter Durchmesser
+    einheit: mm
+    radlex: RID13432
+    loinc: "21889-1"
+  - id: ltx_dm3
+    name: Knoten 3 – größter Durchmesser
+    einheit: mm
+    radlex: RID13432
+    loinc: "21889-1"
+radlex-mapping:
+  lesion-size: RID13432
+mailand-logik:
+  - solitaer-≤50mm-ok
+  - bis-3-knoten-alle-≤30mm-ok
+  - mehr-als-3-knoten-ausserhalb
+  - keine-extrahepatische-manifestation
+  - keine-makrovaskulaere-invasion
+  - berechnung-nachgelagert-in-demo-js
+ki-tools: []
+standorte:
+  - HJK
+loinc-codes:
+  - code: "21889-1"
+    description: Size Tumor
+output:
+  - fliesstext
+  - json
+  - fhir-bundle
+radlex-coverage: teilweise  # §16-TPG-spezifische Felder überwiegend local
