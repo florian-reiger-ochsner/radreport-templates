@@ -2,23 +2,29 @@
 
 **Datei:** `radreport-core.css`
 **Version:** 1.0.0
-**Stand:** 2026-05-23
+**Stand:** 2026-07-06
 **Maintainer:** Florian Reiger-Ochsner (HJK)
 
 ---
 
 ## Worum es geht
 
-Single Source of Truth für visuelle Eigenschaften aller Befundvorlagen. Statt CSS in jedem Template inline zu duplizieren, liegt es zentral hier und wird je nach Kontext entweder per `<link>` referenziert oder per Build inline injiziert.
+Single Source of Truth für die visuellen Eigenschaften aller Befundvorlagen.
+Klassen (`.rr-*`) und Design-Tokens (`--rr-*`) liegen zentral hier, statt in
+jedem Template dupliziert zu werden. Der Core-Link lebt **ausschließlich in der
+abgeleiteten Demo** — das kanonische `template.html` bleibt stylefrei.
 
-## Architektur
+## Architektur (A-Struktur)
 
-Hybrid-Ansatz wegen IHE MRRT-Constraint:
+Zwei Gesichter je Template, klar getrennt (siehe `CLAUDE.md §1`):
 
-| Datei-Typ | CSS-Einbindung |
+| Datei | CSS-Einbindung |
 |---|---|
-| MRRT-Template (Import in Carbon) | inline `<style>` via Build |
-| GitHub Pages Demo, Messleitfäden, Doku | externes `<link>` |
+| **Kanonisch** `template.html` (Quelle der Wahrheit) | **keine** — kein `<link>`, kein `<style>`, kein `<script>`. Die `.rr-*`-Klassen bleiben nur als Struktur-Hooks. |
+| **Abgeleitet** `demo/<id>/index.html` (Schaufenster) | externer `<link>` auf `radreport-core.css`, von `build-demo.js` in den `<head>` injiziert. |
+
+Das CSS wird also **nicht** mehr ins Template inline gebaut. Es wird
+ausschließlich in der Demo referenziert.
 
 ### Repo-Struktur
 
@@ -27,17 +33,21 @@ radreport-templates/
 ├── shared/
 │   ├── styles/
 │   │   ├── radreport-core.css     ← Single Source of Truth
-│   │   └── README.md            ← dieses File
+│   │   └── README.md              ← dieses File
 │   └── scripts/
-│       └── inline-css.js        ← Build-Skript
+│       └── build-demo.js          ← Build: kanonisch → Demo (injiziert Core-Link)
 ├── templates/
 │   └── Roentgen/MSK/knie-praetep/
-│       ├── template.source.html ← Quelle mit <link>
-│       └── template.html        ← Build-Output mit inline CSS
+│       └── template.html          ← KANONISCH, nackt, ohne CSS/JS
 └── demo/
     └── knie-prae-tep/
-        └── index.html           ← nutzt externes CSS direkt
+        └── index.html             ← ABGELEITET, mit Core-Link im <head>
 ```
+
+> **Abgekündigt (B-Struktur):** `template.source.html` als separate Quelle und
+> `shared/scripts/inline-css.js` (Inline-CSS-Build) gehören zur abgelösten
+> B-Struktur. Das Skript liegt noch im Repo, wird aber nicht mehr verwendet.
+> Bestehende Templates werden je beim nächsten Anfassen auf A umgestellt.
 
 ## Verwendung
 
@@ -52,34 +62,43 @@ radreport-templates/
 </head>
 ```
 
-Pfad-Tiefe nach Bedarf anpassen (`../../` von `demo/knie-prae-tep/`, `../../../../` von `templates/Roentgen/MSK/knie-praetep/`).
+In den Template-Demos setzt `build-demo.js` diesen Core-Link automatisch. Für
+handgepflegte Demos/Leitfäden die Pfad-Tiefe nach Bedarf anpassen (`../../` von
+`demo/<id>/`).
 
-### B) In MRRT-Templates – inline CSS via Build
+### B) In Templates – gar kein CSS
 
-1. Quelldatei heißt `template.source.html` und enthält den `<link>` auf `radreport-core.css`
-2. Build:
-   ```bash
-   node shared/scripts/inline-css.js templates/Roentgen/MSK/knie-praetep/template.source.html
-   ```
-3. Erzeugt: `template.html` mit injiziertem `<style>`-Block
+Das kanonische `template.html` trägt **kein** Stylesheet. `build-demo.js` bricht
+ab, wenn doch ein `<link>`/`<style>`/`<script>` enthalten ist — dieser Guard ist
+die Lean-Prüfung des kanonischen Templates.
 
 ### Build-Workflow
 
-Quelle → Build → Commit, beide Dateien committen:
+Inhalt immer im kanonischen `template.html` ändern, danach die Demo neu ableiten
+und beide committen:
 
 ```bash
-# Nach Änderungen an template.source.html ODER radreport-core.css:
-node shared/scripts/inline-css.js templates/Roentgen/MSK/knie-praetep/template.source.html
-git add templates/Roentgen/MSK/knie-praetep/template.source.html
-git add templates/Roentgen/MSK/knie-praetep/template.html
-git commit -m "chore(ktep): rebuild MRRT after stylesheet update"
+# Nach Änderung am kanonischen template.html ODER an radreport-core.css:
+node shared/scripts/build-demo.js \
+  templates/Roentgen/MSK/knie-praetep/template.html \
+  demo/knie-prae-tep/index.html
+git add templates/Roentgen/MSK/knie-praetep/template.html demo/knie-prae-tep/index.html
+git commit -m "chore(ktep): Demo nach Stylesheet-Update neu abgeleitet"
 ```
 
-Optional automatisierbar per GitHub Action (siehe weiter unten).
+Optional mit eigenem Demo-Skript für Vorschau/Interaktivität:
+
+```bash
+node shared/scripts/build-demo.js \
+  templates/Roentgen/MSK/knie-praetep/template.html \
+  demo/knie-prae-tep/index.html \
+  demo.js
+```
 
 ## Naming-Conventions
 
-Alle Klassen und CSS-Variablen tragen das `rr-` Prefix. Verhindert Kollisionen mit Carbon-internem CSS bei späterer Integration.
+Alle Klassen und CSS-Variablen tragen das `rr-` Prefix. Verhindert Kollisionen
+mit plattform-internem CSS (z. B. Carbon/Sectra) bei späterer Integration.
 
 | Pattern | Zweck |
 |---|---|
@@ -87,6 +106,7 @@ Alle Klassen und CSS-Variablen tragen das `rr-` Prefix. Verhindert Kollisionen m
 | `.rr-*` | Komponenten-Klassen (`.rr-app`, `.rr-input-pane`, `.rr-result-box`) |
 | `.rr-is-*` | Status-Modifier (`.rr-is-active`, `.rr-is-required-empty`) |
 | `.rr-u-*` | Utility-Klassen, sparsam einzusetzen (`.rr-u-mt-lg`) |
+| `.rr-<templatename>-*` | Template-spezifisches CSS (nur in der Demo) |
 
 ## Generische Komponenten
 
@@ -116,14 +136,16 @@ Vollständige Liste siehe Sektion 1 in `radreport-core.css`.
 
 ## Optional: Automatisierter Build per GitHub Action
 
-`.github/workflows/build-templates.yml`:
+Da `build-demo.js` ein explizites Paar `template.html → demo/<id>/index.html`
+erwartet, iteriert eine Automatisierung über die Template→Demo-Zuordnung. Beispiel
+(`.github/workflows/build-demos.yml`), Zuordnung als Mapping gepflegt:
 
 ```yaml
-name: Build MRRT Templates
+name: Build Demos
 on:
   push:
     paths:
-      - 'templates/**/*.source.html'
+      - 'templates/**/template.html'
       - 'shared/styles/radreport-core.css'
 jobs:
   build:
@@ -131,25 +153,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - name: Build all templates
+      - name: Demos ableiten
         run: |
-          find templates -name "*.source.html" -exec node shared/scripts/inline-css.js {} \;
-      - name: Commit built templates
+          # je Template ein explizites Paar (kanonisch → Demo-ID)
+          node shared/scripts/build-demo.js templates/Roentgen/MSK/knie-praetep/template.html demo/knie-prae-tep/index.html
+          # … weitere Templates analog
+      - name: Committen
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add templates/**/*.html
-          git diff --staged --quiet || git commit -m "build: regenerate MRRT templates"
+          git add demo/**/index.html
+          git diff --staged --quiet || git commit -m "build: Demos neu abgeleitet"
           git push
 ```
 
-Empfehlung: erst manuell builden, später automatisieren wenn der Workflow stabil läuft.
+Empfehlung: erst manuell ableiten, später automatisieren wenn der Workflow stabil läuft.
 
 ## Versionierung des Stylesheets
 
 Bei Änderungen an `radreport-core.css`:
-- Token-Änderung (Farbe, Spacing) → Patch (1.0.0 → 1.0.1), alle Templates rebuilden
-- Neue Komponente hinzugefügt → Minor (1.0.0 → 1.1.0), Templates können bei nächster Gelegenheit aktualisieren
-- Breaking Change (Klassen-Rename) → Major (1.0.0 → 2.0.0), alle Templates müssen migriert werden
+- Token-Änderung (Farbe, Spacing) → Patch (1.0.0 → 1.0.1), alle Demos neu ableiten
+- Neue Komponente hinzugefügt → Minor (1.0.0 → 1.1.0), Demos bei nächster Gelegenheit neu ableiten
+- Breaking Change (Klassen-Rename) → Major (1.0.0 → 2.0.0), alle Demos müssen neu abgeleitet werden
 
 Version steht im Datei-Header. Bei Major-Bumps: Migrations-Tabelle in CHANGELOG dokumentieren.
