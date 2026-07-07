@@ -2,6 +2,30 @@
 
 Format orientiert an Keep a Changelog. Versionierung: SemVer.
 
+## [1.1.0] – 2026-07-06
+
+### Geändert (Architektur A-Struktur)
+- Umstellung auf **A-Struktur**: kanonisches `template.html` ist jetzt nacktes,
+  JS-/CSS-freies MRRT (Struktur-Hooks `rr-*`, volle RadLex-Kodierung, MRRT-Metadaten).
+  Die 7 Befundregionen sind deklarativ ausgeschrieben (vormals per Inline-JS
+  gerendert); Feld-/Region-Kodierung sitzt am DOM (`data-region`, `data-f`,
+  `data-radlex`/`data-en`).
+- **Viewer-Chrome ausgelagert** nach `demo/ct-schaedel-nativ/demo.js`: Normalbefund-Makro,
+  Tri-State-Reveal, Live-Vorschau, Beurteilungs-Vorschlag, Kopier-/FHIR-/Reset-Buttons,
+  Status-Badge. Verdrahtung via `addEventListener` statt Inline-`onclick`.
+- Demo wird nun aus dem kanonischen Template abgeleitet (`build-demo.js`,
+  Lean-Guard bestanden); Core-Link nur in der Demo.
+- Kleinkorrektur Kodierung: Bildqualität-Option „diagnostisch ausreichend" auf
+  `RID13882` normalisiert (vormals Pseudo-Suffix `RID13882-good`).
+
+### Entfernt
+- `template.source.html` (B-Struktur-Quelle). Das kanonische `template.html`
+  **ist** jetzt die Quelle der Wahrheit; kein separater Inline-CSS-Build mehr.
+
+### Unverändert
+- Feldinventar, RadLex-RIDs (42), `data-voice`-Tokens, FHIR-Bundle-Logik und
+  additives Normalbefund-Modell verbatim erhalten (Round-Trip-fähig).
+
 ## [1.0.0] – 2026-06-19
 
 ### Hinzugefügt

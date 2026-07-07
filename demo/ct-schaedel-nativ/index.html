@@ -1,1496 +1,508 @@
 <!DOCTYPE html>
-<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
+<html lang="de"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-  <!-- Build: 2026-06-19T10:07:23.322Z | radreport-core.css inlined for MRRT-conformance -->
-<meta charset="UTF-8">
-<title>CT-SCHÄDEL NATIV – Live-Demo</title>
-
-<!-- IHE MRRT METADATA -->
-<meta name="dcterms.title"       content="CT Schädel nativ (CCT)"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage CT Schädel nativ (Notfall-Massentemplate). Basierend auf DRG AK Befundung 041807.2.2104072101 ct_stroke_nativ (CC BY 4.0), erweitert zur allgemeinen kraniellen Nativ-CT: additives Normalbefund-Modell (Attestierung statt Default), Blutungstypen, Raumforderung, Kalvaria/NNH. HJK-Design-System, RadLex-Kodierung, FHIR-Export, Voice-ready."/>
-<meta name="dcterms.language"    content="de"/>
-<meta name="dcterms.identifier"  content="HJK-MRRT-CT-SCHAEDEL-NATIV-v1.0"/>
-<meta name="dcterms.source"      content="DRG AK Befundung, Template 041807.2.2104072101 (ct_stroke_nativ), CC BY 4.0, https://github.com/DRGagit/ak_befundung"/>
-<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date"        content="2026-06-19"/>
-<meta name="dcterms.rights"      content="Basierend auf DRG-Template CC BY 4.0. Adaption und Erweiterung: HJK Wien."/>
-<meta name="rrt:specialty"       content="Radiology"/>
-<meta name="rrt:subspecialty"    content="Neuroradiology"/>
-<meta name="rrt:modality"        content="CT"/>
-<meta name="rrt:bodyregion"      content="Head"/>
-
-<!-- Core-Stylesheet (Single Source of Truth) -->
-<!-- MRRT-Build: node shared/scripts/inline-css.js macht daraus template.html -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-/* Inlined from radreport-core.css – do not edit here, edit source */
-/* =============================================================================
-   RADREPORT – CORE STYLESHEET
-   =============================================================================
-   Single Source of Truth für visuelle Eigenschaften aller Radreport-Templates.
-   IHE MRRT-kompatibel (über Build-Inlining in MRRT-Output).
-
-   Version:   1.0.0
-   Datum:     2026-05-23
-   Autor:     F. Reiger-Ochsner, HJK Wien
-
-   Verwendung:
-   - Externe Einbindung (Demos, Messleitfäden, GitHub Pages):
-     <link rel="stylesheet" href="../../shared/styles/radreport-core.css">
-   - MRRT-Build (template.source.html → template.html):
-     node shared/scripts/inline-css.js <source-html>
-
-   Naming-Convention:
-   - Tokens:          :root { --rr-* }
-   - Komponenten:     .rr-*
-   - Status-Modifier: .rr-is-* (z.B. .rr-is-active, .rr-is-required-empty)
-   - Utility:         .rr-u-* (z.B. .rr-u-mt-lg)
-
-   Sektionen:
-   1.  Design-Tokens
-   2.  Reset & Base
-   3.  Layout (App-Grid, Panes)
-   4.  Typografie (Titel, Headings)
-   5.  Mode-Switch
-   6.  Helper-Info-Box
-   7.  Side-Toggle (re./li./bds.)
-   8.  Form-Grid (Rows)
-   9.  Labels & Inputs
-   10. AI-States & RadLex-Badges
-   11. Details/Collapsibles
-   12. Grade-Summary (KL, RAMRIS, Lung-RADS, generisch)
-   13. Result-Box (CPAK, generische Berechnungs-Outputs)
-   14. Pflichtfeld-Validierung
-   15. Preview-Pane
-   16. Buttons & Actions
-   17. Export-Area
-   18. CodeSystem-Legende
-   19. Utilities
-   20. Print
-   ============================================================================= */
-
-
-/* =============================================================================
-   1. DESIGN-TOKENS
-   ============================================================================= */
-:root {
-  /* Farben – HJK Clinical Light Theme */
-  --rr-bg:           #ffffff;
-  --rr-bg-alt:       #f7f8fa;
-  --rr-bg-card:      #ffffff;
-  --rr-ink:          #2c3e50;
-  --rr-ink-soft:     #5a6c7d;
-  --rr-ink-muted:    #8b97a3;
-  --rr-ink-faint:    #b8c2cc;
-  --rr-accent:       #2c5f8d;
-  --rr-accent-light: #4a86b8;
-  --rr-accent-pale:  #e8f0f7;
-  --rr-rule:         #e6eaef;
-  --rr-rule-soft:    #f0f3f6;
-  --rr-field-bg:     #ffffff;
-  --rr-field-border: #d8dee5;
-  --rr-ai-tint:      #f4f9fd;
-  --rr-ai-border:    #2c5f8d;
-  --rr-radlex-tint:  #f5f1f7;
-  --rr-radlex-ink:   #7a4e96;
-  --rr-warn:         #c47f2a;
-  --rr-critical:     #c45848;
-  --notfall:         #7b1fa2;
-  --notfall-pale:    #f3e8f9;
-  --rr-critical:     #c45848;
-  --rr-success:      #2d7a4f;
-
-  /* Typografie */
-  --rr-font-sans:  "Source Sans 3", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-  --rr-font-serif: "Source Serif 4", Georgia, serif;
-  --rr-font-mono:  "SF Mono", "Menlo", "JetBrains Mono", monospace;
-
-  /* Font-Size Scale */
-  --rr-fs-xs:   11px;
-  --rr-fs-sm:   12px;
-  --rr-fs-base: 15px;
-  --rr-fs-md:   13px;
-  --rr-fs-lg:   14px;
-  --rr-fs-xl:   20px;
-  --rr-fs-2xl:  28px;
-  --rr-fs-3xl:  32px;
-
-  /* Spacing (8px-Skala) */
-  --rr-space-xs:  0.25rem;  /* 4px */
-  --rr-space-sm:  0.5rem;   /* 8px */
-  --rr-space-md:  1rem;     /* 16px */
-  --rr-space-lg:  1.5rem;   /* 24px */
-  --rr-space-xl:  2rem;     /* 32px */
-  --rr-space-2xl: 3.5rem;   /* 56px */
-
-  /* Layout */
-  --rr-max-width: 1600px;
-  --rr-radius:    6px;
-  --rr-radius-sm: 4px;
-  --rr-radius-xs: 3px;
-
-  /* Shadows */
-  --rr-shadow-sm: 0 1px 2px rgba(44, 62, 80, 0.04);
-  --rr-shadow-md: 0 2px 8px rgba(44, 62, 80, 0.06);
-
-  /* Breakpoints (für Doku, nicht im CSS verwendbar) */
-  --rr-bp-md: 760px;
-  --rr-bp-lg: 1100px;
-}
-
-
-/* =============================================================================
-   2. RESET & BASE
-   ============================================================================= */
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--rr-bg-alt);
-  color: var(--rr-ink);
-  font-family: var(--rr-font-sans);
-  font-size: var(--rr-fs-base);
-  line-height: 1.6;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-}
-
-
-/* =============================================================================
-   3. LAYOUT
-   ============================================================================= */
-.rr-app {
-  display: grid;
-  grid-template-columns: minmax(480px, 1fr) minmax(440px, 540px);
-  gap: 0;
-  min-height: 100vh;
-  max-width: var(--rr-max-width);
-  margin: 0 auto;
-  background: var(--rr-bg);
-}
-
-@media (max-width: 1100px) {
-  .rr-app { grid-template-columns: 1fr; }
-}
-
-.rr-input-pane {
-  padding: var(--rr-space-2xl) 64px 100px;
-  background: var(--rr-bg);
-  border-right: 1px solid var(--rr-rule);
-}
-
-.rr-preview-pane {
-  padding: var(--rr-space-2xl) var(--rr-space-2xl) 100px;
-  background: var(--rr-bg-alt);
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-
-/* =============================================================================
-   4. TYPOGRAFIE
-   ============================================================================= */
-.rr-doc-title {
-  font-family: var(--rr-font-sans);
-  font-weight: 600;
-  font-size: var(--rr-fs-3xl);
-  line-height: 1.25;
-  margin: 0 0 6px;
-  letter-spacing: -0.02em;
-  color: var(--rr-ink);
-}
-
-.rr-doc-sub {
-  font-size: var(--rr-fs-md);
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.rr-title-rule {
-  width: 48px;
-  height: 2px;
-  background: var(--rr-accent);
-  margin: var(--rr-space-lg) 0 40px;
-}
-
-.rr-h2-wrap { margin: 36px 0 var(--rr-space-md); }
-
-.rr-h2-wrap h2,
-.rr-h2 {
-  font-family: var(--rr-font-sans);
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--rr-accent);
-  margin: 0 0 4px;
-}
-
-.rr-h2-rule {
-  height: 1px;
-  background: var(--rr-rule);
-  margin: var(--rr-space-sm) 0 0;
-}
-
-.rr-h2-sub {
-  font-size: var(--rr-fs-sm);
-  color: var(--rr-ink-muted);
-  font-style: italic;
-  margin-top: 6px;
-}
-
-
-/* =============================================================================
-   5. MODE-SWITCH
-   ============================================================================= */
-.rr-mode-switch {
-  display: flex;
-  gap: 0;
-  background: var(--rr-bg-alt);
-  border: 1px solid var(--rr-rule);
-  border-radius: var(--rr-radius);
-  padding: 3px;
-  margin: 0 0 12px;
-}
-
-.rr-mode-switch input[type="radio"] { display: none; }
-
-.rr-mode-switch label {
-  flex: 1;
-  text-align: center;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: var(--rr-fs-sm);
-  font-weight: 500;
-  color: var(--rr-ink-soft);
-  border-radius: var(--rr-radius-sm);
-  transition: all 0.15s;
-  letter-spacing: 0.02em;
-}
-
-.rr-mode-switch input[type="radio"]:checked + label {
-  background: var(--rr-bg);
-  color: var(--rr-accent);
-  box-shadow: var(--rr-shadow-sm);
-  font-weight: 600;
-}
-
-
-/* =============================================================================
-   6. HELPER-INFO-BOX
-   ============================================================================= */
-.rr-helper-info {
-  background: var(--rr-accent-pale);
-  border-left: 3px solid var(--rr-accent);
-  padding: 10px 14px;
-  font-size: var(--rr-fs-md);
-  color: var(--rr-ink-soft);
-  margin-bottom: var(--rr-space-sm);
-  border-radius: 0 var(--rr-radius-sm) var(--rr-radius-sm) 0;
-}
-
-
-/* =============================================================================
-   7. SIDE-TOGGLE
-   ============================================================================= */
-.rr-side-toggle {
-  display: inline-flex;
-  border: 1px solid var(--rr-field-border);
-  border-radius: var(--rr-radius);
-  overflow: hidden;
-}
-
-.rr-side-toggle input[type="radio"] { display: none; }
-
-.rr-side-toggle label {
-  padding: 8px 18px;
-  cursor: pointer;
-  font-size: var(--rr-fs-lg);
-  font-weight: 500;
-  background: var(--rr-bg);
-  color: var(--rr-ink-soft);
-  transition: all 0.15s;
-}
-
-.rr-side-toggle input[type="radio"]:checked + label {
-  background: var(--rr-accent);
-  color: #fff;
-}
-
-.rr-side-empty-option {
-  font-style: italic;
-  color: var(--rr-ink-muted) !important;
-}
-
-.rr-side-toggle input[type="radio"]:checked + .rr-side-empty-option {
-  background: var(--rr-ink-muted) !important;
-  color: #fff !important;
-}
-
-
-/* =============================================================================
-   8. FORM-GRID
-   ============================================================================= */
-.rr-row {
-  display: grid;
-  gap: var(--rr-space-md) 20px;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 14px;
-}
-
-.rr-row-three { grid-template-columns: 1fr 1fr 1fr; }
-.rr-row-full  { grid-template-columns: 1fr; }
-
-@media (max-width: 760px) {
-  .rr-row,
-  .rr-row-three { grid-template-columns: 1fr; }
-}
-
-
-/* =============================================================================
-   9. LABELS & INPUTS
-   ============================================================================= */
-label { display: block; font-size: var(--rr-fs-md); }
-
-.rr-lbl {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: var(--rr-fs-xs);
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.rr-lbl > span:first-child {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select,
-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: var(--rr-fs-lg);
-  border: 1px solid var(--rr-field-border);
-  background: var(--rr-field-bg);
-  border-radius: var(--rr-radius-sm);
-  color: var(--rr-ink);
-  font-family: inherit;
-  transition: border 0.15s, box-shadow 0.15s;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--rr-accent);
-  box-shadow: 0 0 0 3px var(--rr-accent-pale);
-}
-
-textarea {
-  min-height: 80px;
-  resize: vertical;
-  line-height: 1.5;
-}
-
-.rr-field-note {
-  font-size: var(--rr-fs-xs);
-  color: var(--rr-ink-muted);
-  margin-top: var(--rr-space-xs);
-  line-height: 1.4;
-}
-
-
-/* =============================================================================
-   10. AI-STATES & RADLEX-BADGES
-   ============================================================================= */
-input.rr-is-ai-filled,
-.rr-is-ai-filled {
-  background: var(--rr-ai-tint);
-  border-color: var(--rr-ai-border);
-}
-
-.rr-ai-badge {
-  background: var(--rr-accent);
-  color: #fff;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  padding: 2px 5px;
-  border-radius: var(--rr-radius-xs);
-  text-transform: uppercase;
-  display: none;
-}
-
-.rr-ai-badge.rr-is-active { display: inline-block; }
-
-.rr-rl-badge {
-  background: var(--rr-radlex-tint);
-  color: var(--rr-radlex-ink);
-  border: 1px solid var(--rr-radlex-ink);
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  padding: 1px 4px;
-  border-radius: var(--rr-radius-xs);
-  text-transform: uppercase;
-  font-weight: 600;
-  font-family: var(--rr-font-mono);
-}
-
-
-/* =============================================================================
-   11. DETAILS / COLLAPSIBLES
-   ============================================================================= */
-details {
-  border: 1px solid var(--rr-rule);
-  border-radius: var(--rr-radius);
-  margin-top: 12px;
-  background: var(--rr-bg);
-}
-
-details summary {
-  cursor: pointer;
-  padding: 12px var(--rr-space-md);
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  color: var(--rr-ink-soft);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  list-style: none;
-}
-
-details summary::-webkit-details-marker { display: none; }
-details summary::before { content: "▸ "; color: var(--rr-accent); margin-right: 6px; }
-details[open] summary::before { content: "▾ "; }
-details > div { padding: 0 var(--rr-space-md) var(--rr-space-md); }
-
-
-/* =============================================================================
-   12. GRADE-SUMMARY (generisch für KL, RAMRIS, Lung-RADS, etc.)
-   ============================================================================= */
-.rr-grade-summary {
-  background: var(--rr-bg-alt);
-  border-radius: var(--rr-radius);
-  padding: var(--rr-space-md) 20px;
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: var(--rr-space-md);
-}
-
-.rr-grade-item {
-  font-size: var(--rr-fs-sm);
-  color: var(--rr-ink-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.rr-grade-item strong {
-  display: block;
-  font-size: var(--rr-fs-xl);
-  font-weight: 600;
-  color: var(--rr-accent);
-  font-family: var(--rr-font-sans);
-  margin-top: 4px;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-
-/* =============================================================================
-   13. RESULT-BOX (CPAK, generische Berechnungs-Outputs)
-   ============================================================================= */
-.rr-result-box,
-.rr-cpak-box {
-  background: linear-gradient(to right, var(--rr-accent-pale), var(--rr-bg-alt));
-  border: 1px solid var(--rr-accent-pale);
-  border-radius: var(--rr-radius);
-  padding: 18px 22px;
-  margin-top: var(--rr-space-md);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.rr-result-value,
-.rr-cpak-result {
-  font-family: var(--rr-font-serif);
-  font-size: var(--rr-fs-2xl);
-  font-weight: 600;
-  color: var(--rr-accent);
-  min-width: 80px;
-}
-
-.rr-result-detail,
-.rr-cpak-detail {
-  font-size: var(--rr-fs-md);
-  color: var(--rr-ink-soft);
-  line-height: 1.5;
-}
-
-
-/* =============================================================================
-   14. PFLICHTFELD-VALIDIERUNG
-   ============================================================================= */
-.rr-req-indicator {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--rr-critical);
-  margin-left: 6px;
-  vertical-align: middle;
-  animation: rr-pulse 2s ease-in-out infinite;
-}
-
-@keyframes rr-pulse {
-  0%, 100% { opacity: 0.4; }
-  50%      { opacity: 1; }
-}
-
-select.rr-is-required-empty,
-.rr-side-toggle.rr-is-required-empty {
-  border-color: var(--rr-critical) !important;
-  box-shadow: 0 0 0 2px rgba(196, 88, 72, 0.1);
-}
-
-
-/* =============================================================================
-   15. PREVIEW-PANE
-   ============================================================================= */
-.rr-preview-title {
-  font-family: var(--rr-font-sans);
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--rr-accent);
-  margin: 0;
-}
-
-.rr-preview-title-rule {
-  height: 1px;
-  background: var(--rr-rule);
-  margin: var(--rr-space-sm) 0 28px;
-}
-
-.rr-preview-section { margin-bottom: 26px; }
-
-.rr-preview-section h4 {
-  font-size: 10px;
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin: 0 0 var(--rr-space-sm);
-  font-weight: 600;
-}
-
-.rr-preview-content {
-  font-family: var(--rr-font-serif);
-  font-size: var(--rr-fs-base);
-  line-height: 1.7;
-  color: var(--rr-ink);
-  white-space: pre-wrap;
-}
-
-.rr-preview-editable {
-  font-family: var(--rr-font-serif);
-  font-size: var(--rr-fs-base);
-  line-height: 1.7;
-  min-height: 90px;
-  background: var(--rr-bg);
-}
-
-
-/* =============================================================================
-   16. BUTTONS & ACTIONS
-   ============================================================================= */
-.rr-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-.rr-btn,
-button {
-  background: var(--rr-accent);
-  color: #fff;
-  padding: 10px 18px;
-  font-size: var(--rr-fs-md);
-  font-weight: 600;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  letter-spacing: 0.01em;
-  transition: all 0.15s;
-  box-shadow: var(--rr-shadow-sm);
-  font-family: inherit;
-}
-
-.rr-btn:hover,
-button:hover {
-  background: var(--rr-accent-light);
-  transform: translateY(-1px);
-  box-shadow: var(--rr-shadow-md);
-}
-
-.rr-btn-secondary,
-button.rr-btn-secondary {
-  background: var(--rr-bg);
-  color: var(--rr-ink-soft);
-  border: 1px solid var(--rr-field-border);
-  box-shadow: none;
-}
-
-.rr-btn-secondary:hover,
-button.rr-btn-secondary:hover {
-  background: var(--rr-accent-pale);
-  color: var(--rr-accent);
-  border-color: var(--rr-accent);
-  transform: none;
-}
-
-
-/* =============================================================================
-   17. EXPORT-AREA
-   ============================================================================= */
-.rr-export-area {
-  display: none;
-  margin-top: 20px;
-  padding: 20px;
-  background: #1e2a36;
-  color: #a8c4dd;
-  border-radius: var(--rr-radius);
-  font-family: var(--rr-font-mono);
-  font-size: var(--rr-fs-xs);
-  white-space: pre;
-  overflow-x: auto;
-  max-height: 400px;
-  overflow-y: auto;
-  line-height: 1.5;
-}
-
-.rr-export-area.rr-is-visible { display: block; }
-
-
-/* =============================================================================
-   18. CODESYSTEM-LEGENDE
-   ============================================================================= */
-.rr-codesystem-legend {
-  margin-top: var(--rr-space-sm);
-  font-size: 10px;
-  color: var(--rr-ink-muted);
-  letter-spacing: 0.04em;
-  font-family: var(--rr-font-mono);
-}
-
-.rr-codesystem-legend .rr-badge-mini {
-  display: inline-block;
-  padding: 1px 5px;
-  border-radius: var(--rr-radius-xs);
-  margin-right: 4px;
-  font-weight: 600;
-}
-
-.rr-codesystem-legend .rr-is-verified {
-  background: #e8f5ec;
-  color: #2d6a4f;
-  border: 1px solid #2d6a4f;
-}
-
-.rr-codesystem-legend .rr-is-local {
-  background: #fdf4e3;
-  color: #8b6914;
-  border: 1px solid #c4a558;
-}
-
-.rr-codesystem-legend .rr-is-needs {
-  background: #fbe9e7;
-  color: #9c2c1a;
-  border: 1px solid #c45848;
-}
-
-
-/* =============================================================================
-   19. UTILITIES (sparsam einsetzen)
-   ============================================================================= */
-.rr-u-hidden  { display: none !important; }
-.rr-u-mt-sm   { margin-top: var(--rr-space-sm) !important; }
-.rr-u-mt-md   { margin-top: var(--rr-space-md) !important; }
-.rr-u-mt-lg   { margin-top: var(--rr-space-lg) !important; }
-.rr-u-text-warn { color: var(--rr-warn) !important; }
-.rr-u-text-critical { color: var(--rr-critical) !important; }
-
-
-/* =============================================================================
-   20. PRINT
-   ============================================================================= */
-@media print {
-  body { background: #fff; }
-  .rr-app { display: block; max-width: none; }
-  .rr-input-pane,
-  .rr-mode-switch,
-  .rr-actions,
-  .rr-export-area,
-  .rr-helper-info,
-  .rr-codesystem-legend { display: none !important; }
-  .rr-preview-pane {
-    position: static;
-    height: auto;
-    padding: 0;
-    background: #fff;
-    overflow: visible;
-  }
-  .rr-preview-section { page-break-inside: avoid; }
-  .rr-preview-editable {
-    border: none;
-    padding: 0;
-    background: transparent;
-  }
-}
-
-</style>
-
-<style>
-/* =================================================================
-   TEMPLATE-SPEZIFISCHES CSS – NUR WAS CORE NICHT ABDECKT
-   Konvention: rr-cct-* Präfix
-   Designprinzip dieses Templates: additive Klickökonomie.
-   Anzeigezustand = unbeurteilt (kein klinischer Default). Der Befunder
-   ATTESTIERT (o.B.) oder FÜGT Pathologie HINZU (Befund). Der
-   Normalbefund-Makro setzt alle offenen Regionen in EINEM bewussten
-   Akt auf o.B. → Null-Klick-Normalbefund, aber als Attestierung.
-   ================================================================= */
-
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--rr-bg-alt);color:var(--rr-ink);font-family:var(--rr-font-sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.app{display:grid;grid-template-columns:minmax(540px,1fr) minmax(400px,500px);min-height:100vh;max-width:1580px;margin:0 auto;background:var(--rr-bg)}
-@media(max-width:1080px){.app{grid-template-columns:1fr}}
-.input-pane{padding:48px 56px 120px;background:var(--rr-bg);border-right:1px solid var(--rr-rule)}
-.preview-pane{padding:48px 48px 120px;background:var(--rr-bg-alt);position:sticky;top:0;height:100vh;overflow-y:auto}
-
-.doc-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:28px;color:var(--rr-ink);letter-spacing:-0.02em;line-height:1.2}
-.doc-meta{margin-top:5px;font-size:11.5px;color:var(--rr-ink-muted);letter-spacing:.04em;text-transform:uppercase}
-.drg-credit{display:inline-flex;align-items:center;gap:6px;background:var(--rr-bg-alt);border:1px solid var(--rr-rule);border-radius:var(--rr-radius);padding:5px 11px;font-size:11px;color:var(--rr-ink-muted);margin-top:8px}
-.title-rule{height:3px;background:linear-gradient(90deg,var(--rr-accent) 0%,var(--rr-accent-pale) 100%);border-radius:2px;margin:14px 0 22px}
-
-.sh{display:flex;align-items:baseline;gap:12px;margin:24px 0 8px}
-.sh h2{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--rr-accent)}
-.sh-line{flex:1;height:1px;background:var(--rr-rule)}
-.sh-sub{font-size:12px;color:var(--rr-ink-muted);margin:-3px 0 9px}
-
-.row{margin-bottom:10px}
-.row label{display:flex;flex-direction:column;gap:4px}
-.lbl{font-size:12px;font-weight:500;color:var(--rr-ink-soft);letter-spacing:.02em}
-.unit{font-size:11px;color:var(--rr-ink-muted);margin-left:3px;font-weight:400}
-.field-note{font-size:11px;color:var(--rr-ink-muted);margin-top:2px;font-style:italic}
-select,textarea,input[type=text],input[type=number]{width:100%;background:#fff;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);padding:8px 11px;font-family:"Source Sans 3",sans-serif;font-size:13.5px;color:var(--rr-ink);transition:border-color .15s,box-shadow .15s;appearance:none;-webkit-appearance:none}
-select:focus,textarea:focus,input:focus{outline:none;border-color:var(--rr-accent);box-shadow:0 0 0 3px var(--rr-accent-pale)}
-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%238b97a3' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
-textarea{resize:vertical;min-height:48px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-
-.rl{display:inline-block;font-size:10px;font-weight:600;color:var(--rr-accent);background:var(--rr-accent-pale);border-radius:3px;padding:1px 5px;margin-left:5px;letter-spacing:.02em;vertical-align:middle}
-.hint{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);border-radius:0 var(--rr-radius) var(--rr-radius) 0;padding:9px 13px;font-size:12px;color:var(--rr-ink-soft);margin:4px 0 12px}
-.hint strong{color:var(--rr-accent)}
-
-/* ── Normalbefund-Makro (bewusster Attestierungsakt, KEIN Default) ── */
-.macro-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:linear-gradient(to right,var(--rr-accent-pale),var(--rr-bg-alt));border:1px solid var(--rr-accent-pale);border-radius:var(--rr-radius);padding:12px 15px;margin-bottom:18px}
-.macro-bar .macro-txt{flex:1;min-width:200px;font-size:12px;color:var(--rr-ink-soft);line-height:1.45}
-.macro-bar .macro-txt strong{color:var(--rr-accent)}
-#btn-normal{background:var(--rr-success);color:#fff;white-space:nowrap}
-#btn-normal:hover{filter:brightness(1.07);transform:translateY(-1px)}
-
-/* ── Region (tri-state additive Einheit) ── */
-.region{border:1px solid var(--rr-rule);border-radius:var(--rr-radius);margin-bottom:10px;background:var(--rr-bg);transition:border-color .15s}
-.region.is-bef{border-color:var(--rr-accent-light)}
-.region.is-crit{border-color:var(--notfall)}
-.region-head{display:flex;align-items:center;gap:12px;padding:11px 14px}
-.region-name{flex:1;font-size:13.5px;font-weight:600;color:var(--rr-ink)}
-.region-name .rl{font-weight:600}
-.region-norm-preview{font-size:11.5px;color:var(--rr-ink-muted);font-style:italic}
-
-/* Tri-state Segmented Control: —  /  o.B.  /  Befund  */
-.tri{display:inline-flex;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius);overflow:hidden;flex-shrink:0}
-.tri input[type=radio]{display:none}
-.tri label{padding:6px 13px;cursor:pointer;font-size:12px;font-weight:500;background:var(--rr-bg);color:var(--rr-ink-soft);transition:all .12s;border-right:1px solid var(--rr-field-border)}
-.tri label:last-child{border-right:none}
-.tri label:hover{background:var(--rr-bg-alt)}
-.tri .t-unset{color:var(--rr-ink-faint)}
-.tri input.t-unset-in:checked + label{background:var(--rr-ink-faint);color:#fff}
-.tri input.t-ob-in:checked + label{background:var(--rr-success);color:#fff;font-weight:600}
-.tri input.t-bef-in:checked + label{background:var(--rr-accent);color:#fff;font-weight:600}
-.region.is-crit .tri input.t-bef-in:checked + label{background:var(--notfall)}
-
-/* Detail-Bereich (erscheint bei "Befund"; bleibt linear, kein tiefes Nesting) */
-.region-detail{display:none;padding:2px 14px 14px;border-top:1px solid var(--rr-rule-soft)}
-.region.is-bef .region-detail{display:block}
-
-/* Checkbox-Gruppe (Blutungstypen etc. – koexistierende Befunde) */
-.cg{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.ci{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--rr-field-border);border-radius:16px;font-size:12.5px;color:var(--rr-ink-soft);cursor:pointer;transition:all .12s;user-select:none}
-.ci:hover{border-color:var(--rr-accent-light)}
-.ci input{width:auto;margin:0}
-.ci:has(input:checked){background:var(--rr-accent-pale);border-color:var(--rr-accent);color:var(--rr-accent);font-weight:600}
-
-/* Preview */
-.prev-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--rr-ink-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.prev-lbl::after{content:"";flex:1;height:1px;background:var(--rr-rule)}
-.rcard{background:var(--rr-bg);border:1px solid var(--rr-rule);border-radius:10px;padding:22px 24px;box-shadow:var(--rr-shadow-sm)}
-.rcard-header{border-bottom:2px solid var(--rr-accent);padding-bottom:11px;margin-bottom:15px}
-.rcard-title{font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:16px;color:var(--rr-accent);letter-spacing:-.01em}
-.rcard-sub{font-size:11.5px;color:var(--rr-ink-muted);margin-top:3px}
-.rsec{margin-bottom:13px}
-.rsec-lbl{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--rr-accent);margin-bottom:4px}
-.rtext{font-family:"Source Serif 4","Georgia",serif;font-size:13px;line-height:1.72;color:var(--rr-ink);white-space:pre-wrap;min-height:16px}
-.rtext:empty::before{content:"—";color:var(--rr-ink-faint);font-style:italic;font-family:"Source Sans 3",sans-serif}
-.stamp{margin-top:14px;padding-top:11px;border-top:1px solid var(--rr-rule);font-size:11px;color:var(--rr-ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:11px;font-size:12px;font-weight:600;margin-top:12px}
-.badge.ok{background:#ecf7f2;color:var(--rr-success)}
-.badge.warn{background:#fdf6ec;color:var(--rr-warn)}
-.badge.crit{background:var(--notfall-pale);color:var(--notfall)}
-
-.ebox{display:none;margin-top:14px;background:#1a2535;color:#93b8d4;border-radius:var(--rr-radius);padding:16px 18px;font-family:"SF Mono","Menlo",monospace;font-size:11px;white-space:pre;overflow:auto;max-height:340px;line-height:1.55}
-.ebox.show{display:block}
-
-.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
-button{padding:9px 18px;border:none;border-radius:var(--rr-radius);font-family:"Source Sans 3",sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
-.btn-p{background:var(--rr-accent);color:#fff;box-shadow:var(--rr-shadow-sm)}
-.btn-p:hover{background:var(--rr-accent-light);transform:translateY(-1px)}
-.btn-s{background:var(--rr-bg);color:var(--rr-ink-soft);border:1px solid var(--rr-field-border)}
-.btn-s:hover{background:var(--rr-accent-pale);color:var(--rr-accent);border-color:var(--rr-accent)}
-.btn-d{background:#fef2f2;color:#c0392b;border:1px solid #f5c6c6}
-</style>
+<meta charset="UTF-8" />
+<title>CT Schädel nativ (CCT) – Strukturierte Befundvorlage (v1.1)</title>
+
+<!-- ===================== IHE MRRT METADATA ===================== -->
+<meta name="dcterms.title"       content="CT Schädel nativ (CCT)" />
+<meta name="dcterms.description" content="Strukturierte Befundvorlage CT Schädel nativ (Notfall-Massentemplate). Basierend auf DRG AK Befundung 041807.2.2104072101 ct_stroke_nativ (CC BY 4.0), erweitert zur allgemeinen kraniellen Nativ-CT: additives Normalbefund-Modell (Attestierung statt Default), Blutungstypen, Raumforderung, Kalvaria/NNH. Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular, ohne CSS/JS. Normalbefund-Makro, Tri-State-Reveal, Live-Vorschau, Beurteilungsvorschlag, FHIR-Export und Status-Badge werden in der Demo von demo.js zur Laufzeit erzeugt. RadLex-Kodierung, Voice-ready (data-voice)." />
+<meta name="dcterms.language"    content="de" />
+<meta name="dcterms.identifier"  content="HJK-MRRT-CT-SCHAEDEL-NATIV-v1.1" />
+<meta name="dcterms.source"      content="DRG AK Befundung, Template 041807.2.2104072101 (ct_stroke_nativ), CC BY 4.0, https://github.com/DRGagit/ak_befundung" />
+<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
+<meta name="dcterms.date"        content="2026-07-06" />
+<meta name="dcterms.rights"      content="Basierend auf DRG-Template CC BY 4.0. Adaption und Erweiterung: HJK Wien." />
+<meta name="rrt:specialty"       content="Radiology" />
+<meta name="rrt:subspecialty"    content="Neuroradiology" />
+<meta name="rrt:modality"        content="CT" />
+<meta name="rrt:bodyregion"      content="Head" />
+<meta name="rrt:coding-systems"  content="RadLex, LOINC (partial), local" />
+
+
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-07T11:09:45.774Z -->
+  <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/styles/radreport-core.css">
 </head>
 <body>
+
+<!--
+  KANONISCH / A-Struktur: nacktes deklaratives MRRT.
+  Enthält ausschließlich das kodierte Eingabeformular (rr-*-Struktur-Hooks).
+  Kein CSS, kein JS, kein Stylesheet-Link. Viewer-Chrome (Normalbefund-Makro,
+  Tri-State-Reveal der Region-Details, Live-Vorschau, Beurteilungs-Vorschlag,
+  Kopier-/FHIR-/Reset-Buttons, Status-Badge) wird in der Demo von
+  demo/ct-schaedel-nativ/demo.js zur Laufzeit erzeugt und verdrahtet.
+
+  Additives Modell: Jede Region trägt eine Tri-State-Auswahl
+  (— unbeurteilt / o.B. attestiert / Befund). Der Anzeigezustand ist
+  unbeurteilt (kein klinischer Default). Die Detailfelder je Region sind
+  deklariert (data-f="…") und werden von demo.js erst bei "Befund" eingeblendet.
+  Negativsätze (o.B.) und Satzbau je Region liegen als Textlogik in demo.js.
+
+  Andock-Anker: befund_regions, beurt_row, vgl_dat_row.
+  Region-Kodierung: data-radlex/data-en am Region-Container (rr-region-detail);
+  Feld-Kodierung: data-radlex + data-en (bzw. data-radlex-status="local") an
+  jeder <option>/quantitativem <input />.
+-->
+
 <div class="rr-app">
 <section class="rr-input-pane">
 
-<h1 class="rr-doc-title">CT Schädel nativ</h1>
-<div class="rr-doc-sub">MRRT · RadLex-kodiert · Notfall · Voice-ready · v1.0 · HJK Wien · 2026-06-19</div>
-<div class="drg-credit">📄 Basierend auf DRG AK Befundung 041807.2.2104072101 (ct_stroke_nativ) · CC BY 4.0</div>
-<div class="rr-title-rule"></div>
+  <h1 class="rr-doc-title">CT Schädel nativ</h1>
+  <div class="rr-doc-sub">MRRT · RadLex-kodiert · Notfall · Voice-ready · v1.1 · HJK Wien</div>
+  <div class="rr-title-rule"></div>
+  <div class="rr-helper-info">Basierend auf DRG AK Befundung 041807.2.2104072101 (ct_stroke_nativ) · CC BY 4.0. Additives Modell: keine Region ist vorbelegt — o.&#160;B. attestieren oder Befund hinzufügen.</div>
 
-<!-- NORMALBEFUND-MAKRO -->
-<div class="macro-bar">
-  <div class="macro-txt">
-    <strong>Additives Modell:</strong> Keine Region ist vorbelegt. Du <strong>attestierst</strong> (o.&nbsp;B.) oder <strong>fügst Pathologie hinzu</strong> (Befund). Der Makro setzt alle offenen Regionen in einem Akt auf o.&nbsp;B. — als bewusste Attestierung, kein stiller Default.
+  <!-- ===================== TECHNIK ===================== -->
+  <div class="rr-h2-wrap">
+    <h2>Technik</h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Standard-Vorgaben zulässig (kein diagnostisches Feld).</div>
   </div>
-  <button type="button" id="btn-normal" onclick="setNormalbefund()">✓ Normalbefund attestieren</button>
-</div>
-
-<!-- TECHNIK (Standard-Defaults zulässig – kein diagnostisches Feld) -->
-<div class="sh"><h2>Technik</h2><div class="sh-line"></div></div>
-<div class="grid3">
-  <div class="row">
-    <label><span class="lbl">Gerät</span>
-      <select id="geraet" onchange="update()">
-        <option value="Siemens Somatom Force">Somatom Force</option>
-        <option value="Siemens Somatom (Standard)">Somatom (Standard)</option>
+  <div class="rr-row rr-row-three">
+    <label>
+      <span class="rr-lbl"><span>Gerät</span></span>
+      <select id="geraet" data-voice="gerät">
+        <option value="Siemens Somatom Force" data-radlex-status="local" data-en="CT scanner Siemens Somatom Force">Somatom Force</option>
+        <option value="Siemens Somatom (Standard)" data-radlex-status="local" data-en="CT scanner Siemens Somatom">Somatom (Standard)</option>
       </select>
     </label>
-  </div>
-  <div class="row">
-    <label><span class="lbl">Protokoll <span class="rr-rl-badge">RadLex</span></span>
-      <select id="protokoll" onchange="update()" data-radlex="RID10337" data-en="CT head protocol" data-voice="protokoll">
+    <label>
+      <span class="rr-lbl"><span>Protokoll <span class="rr-rl-badge">RadLex</span></span></span>
+      <select id="protokoll" data-radlex="RID10337" data-en="CT head protocol" data-voice="protokoll">
         <option value="nativ, axial, 3/5 mm" data-radlex="RID10337" data-en="non-contrast CT head">Nativ, axial</option>
-        <option value="nativ, axial + sagittale/koronare Reformat" data-en="non-contrast CT head with reformats">Nativ + Reformat</option>
-        <option value="nativ, Dünnschicht (Knochenfenster)" data-en="thin section bone window">Nativ + Dünnschicht/Knochen</option>
+        <option value="nativ, axial + sagittale/koronare Reformat" data-radlex-status="local" data-en="non-contrast CT head with reformats">Nativ + Reformat</option>
+        <option value="nativ, Dünnschicht (Knochenfenster)" data-radlex-status="local" data-en="thin section bone window">Nativ + Dünnschicht/Knochen</option>
+      </select>
+    </label>
+    <label>
+      <span class="rr-lbl"><span>Bildqualität <span class="rr-rl-badge">RadLex</span></span></span>
+      <select id="qual" data-radlex="RID13882" data-en="image quality" data-voice="bildqualität">
+        <option value="diagnostisch ausreichend" data-radlex="RID13882" data-en="diagnostic image quality">Diagnostisch ausreichend</option>
+        <option value="eingeschränkt (Bewegungsartefakte)" data-radlex-status="local" data-en="limited by motion">Eingeschränkt (Bewegung)</option>
+        <option value="eingeschränkt (Strahlaufhärtung Schädelbasis)" data-radlex-status="local" data-en="limited by beam hardening">Eingeschränkt (Schädelbasis)</option>
       </select>
     </label>
   </div>
-  <div class="row">
-    <label><span class="lbl">Bildqualität <span class="rr-rl-badge">RadLex</span></span>
-      <select id="qual" onchange="update()" data-radlex="RID13882" data-en="image quality" data-voice="bildqualität">
-        <option value="diagnostisch ausreichend" data-radlex="RID13882-good">Diagnostisch ausreichend</option>
-        <option value="eingeschränkt (Bewegungsartefakte)" data-radlex="RID13882-lim" data-en="limited by motion">Eingeschränkt (Bewegung)</option>
-        <option value="eingeschränkt (Strahlaufhärtung Schädelbasis)" data-en="limited by beam hardening">Eingeschränkt (Schädelbasis)</option>
-      </select>
+  <div class="rr-row">
+    <label>
+      <span class="rr-lbl"><span>Klinik / Fragestellung</span></span>
+      <input type="text" id="fragestellung" placeholder="z.B. Sturz, Vigilanzminderung, Blutung? Ischämie?" data-voice="fragestellung" />
     </label>
-  </div>
-</div>
-<div class="grid2">
-  <div class="row">
-    <label><span class="lbl">Klinik / Fragestellung</span>
-      <input type="text" id="fragestellung" placeholder="z.B. Sturz, Vigilanzminderung, Blutung? Ischämie?" oninput="update()" data-voice="fragestellung">
-    </label>
-  </div>
-  <div class="row">
-    <label><span class="lbl">Voruntersuchung</span>
-      <select id="vgl" onchange="document.getElementById('vgl_dat_row').style.display=this.value==='yes'?'':'none';update()" data-voice="voruntersuchung">
+    <label>
+      <span class="rr-lbl"><span>Voruntersuchung</span></span>
+      <select id="vgl" data-voice="voruntersuchung">
         <option value="">Keine</option>
-        <option value="yes">Vorliegend</option>
+        <option value="yes" data-radlex-status="local" data-en="prior examination available">Vorliegend</option>
       </select>
     </label>
   </div>
-</div>
-<div class="row" id="vgl_dat_row" style="display:none">
-  <label><span class="lbl">Datum/Modalität Vergleich</span>
-    <input type="text" id="vgl_dat" placeholder="z.B. CCT 14.06.2026" oninput="update()">
-  </label>
-</div>
+  <div class="rr-row rr-row-full" id="vgl_dat_row" data-show-if="vgl=yes">
+    <label>
+      <span class="rr-lbl"><span>Datum/Modalität Vergleich</span></span>
+      <input type="text" id="vgl_dat" placeholder="z.B. CCT 14.06.2026" data-voice="vergleichsdatum" />
+    </label>
+  </div>
 
-<!-- BEFUND-REGIONEN -->
-<div class="sh"><h2>Befund</h2><div class="sh-line"></div></div>
-<div class="sh-sub">Reihenfolge = Befundungsreihenfolge. Jede Region: — (unbeurteilt) · o.&nbsp;B. (attestiert) · Befund (Detail).</div>
+  <!-- ===================== BEFUND (additive Regionen) ===================== -->
+  <div class="rr-h2-wrap">
+    <h2>Befund</h2>
+    <div class="rr-h2-rule"></div>
+    <div class="rr-h2-sub">Reihenfolge = Befundungsreihenfolge. Jede Region: — (unbeurteilt) · o.&#160;B. (attestiert) · Befund (Detail).</div>
+  </div>
 
-<!-- Regionen werden per JS gerendert (config-getrieben, additiv) -->
-<div id="regions"></div>
+  <div id="befund_regions">
 
-<!-- BEURTEILUNG -->
-<div class="sh"><h2>Beurteilung</h2><div class="sh-line"></div></div>
-<div class="row">
-  <label><span class="lbl">Beurteilung</span>
-    <textarea id="beurt" rows="4" placeholder="z.B.: Akute Subarachnoidalblutung Fissura Sylvii li. Kein Hydrozephalus, keine Mittellinienverlagerung. Empfehlung: CT-Angiographie zur Aneurysmasuche." oninput="update()" data-voice="beurteilung"></textarea>
-  </label>
-</div>
-<div id="vorschlag-box" style="margin-bottom:10px"></div>
+    <!-- Region 1: Intrakranielle Blutung -->
+    <div class="rr-region" id="rg-blutung" data-region="blutung" data-crit="1">
+      <div class="rr-region-head">
+        <div class="rr-region-name">Intrakranielle Blutung <span class="rr-rl-badge">RadLex</span></div>
+        <div class="rr-tri">
+          <input class="t-unset-in" type="radio" name="st_blutung" id="st_blutung_unset" value="" checked="checked" />
+          <label class="t-unset" for="st_blutung_unset" title="unbeurteilt">—</label>
+          <input class="t-ob-in" type="radio" name="st_blutung" id="st_blutung_ob" value="ob" data-voice="blutung unauffällig" />
+          <label for="st_blutung_ob" title="o.B. – attestiert">o.&#160;B.</label>
+          <input class="t-bef-in" type="radio" name="st_blutung" id="st_blutung_bef" value="bef" data-voice="blutung befund" />
+          <label for="st_blutung_bef" title="Befund – Detail">Befund</label>
+        </div>
+      </div>
+      <div class="rr-region-detail" id="rd-blutung" data-radlex="RID4700" data-en="intracranial hemorrhage">
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Blutungstyp <span class="rr-rl-badge">RadLex</span></span><span class="rr-field-note">Mehrfachauswahl – können koexistieren</span></span>
+            <div class="rr-cg">
+              <label class="rr-ci"><input type="checkbox" data-bt="EDH" data-radlex="RID4702" data-en="epidural hematoma" data-voice="epidural" /><span>Epidural (EDH)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="SDH" data-radlex="RID4703" data-en="subdural hematoma" data-voice="subdural" /><span>Subdural (SDH)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="SAB" data-radlex="RID4706" data-en="subarachnoid hemorrhage" data-voice="subarachnoidal" /><span>Subarachnoidal (SAB)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="ICB" data-radlex="RID4701" data-en="intraparenchymal hemorrhage" data-voice="intraparenchymal" /><span>Intraparenchymal (ICB)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="IVB" data-radlex="RID4705" data-en="intraventricular hemorrhage" data-voice="intraventrikulär" /><span>Intraventrikulär (IVB)</span></label>
+            </div>
+          </label>
+        </div>
+        <div class="rr-row rr-row-three">
+          <label>
+            <span class="rr-lbl"><span>Seite <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="seite" data-radlex="RID5824" data-en="laterality">
+              <option value="" data-voice="seite offen">– Seite –</option>
+              <option value="rechts" data-radlex="RID5826" data-en="right" data-voice="rechts">rechts</option>
+              <option value="links" data-radlex="RID5825" data-en="left" data-voice="links">links</option>
+              <option value="bds." data-radlex="RID5827" data-en="bilateral" data-voice="beidseits">beidseits</option>
+              <option value="median" data-radlex-status="local" data-en="midline" data-voice="median">median</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Max. Dicke / Ausdehnung (mm)</span></span>
+            <input type="number" data-f="dicke" step="0.1" placeholder="–" data-radlex="RID13173" data-en="measurement" data-voice="dicke" />
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Alter</span></span>
+            <select data-f="alter" data-voice="alter blutung">
+              <option value="">–</option>
+              <option value="akut (hyperdens)" data-radlex="RID5733" data-en="acute" data-voice="akut">akut (hyperdens)</option>
+              <option value="subakut" data-radlex="RID5734" data-en="subacute" data-voice="subakut">subakut</option>
+              <option value="chronisch (hypodens)" data-radlex="RID5735" data-en="chronic" data-voice="chronisch">chronisch</option>
+              <option value="akut-auf-chronisch" data-radlex-status="local" data-en="acute on chronic" data-voice="akut auf chronisch">akut-auf-chronisch</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Lokalisation / Zusatz (Freitext)</span></span>
+            <input type="text" data-f="lok" placeholder="z.B. frontotemporal li.; Fissura Sylvii; Volumen ml" data-voice="lokalisation" />
+          </label>
+        </div>
+      </div>
+    </div>
 
-<div class="rr-actions">
-  <button class="rr-btn" onclick="copyReport()">📋 Befundtext kopieren</button>
-  <button class="rr-btn-secondary" onclick="toggleFhir()">{ } FHIR-Mapping (Demo)</button>
-  <button class="btn-d" onclick="resetAll()">↺ Zurücksetzen</button>
-</div>
-<div class="rr-export-area" id="fhir-box"></div>
-<p class="rr-demo-note" style="font-size:11px;color:var(--rr-ink-muted);margin-top:6px;max-width:64ch;line-height:1.45">Demo-Mapping, kein produktiver Export: zeigt, welches Feld auf welche FHIR-Observation und welchen Code abgebildet wird. Die tatsächliche FHIR-Erzeugung erfolgt plattformseitig.</p>
+    <!-- Region 2: Ischämie / Infarkt -->
+    <div class="rr-region" id="rg-ischaemie" data-region="ischaemie" data-crit="1">
+      <div class="rr-region-head">
+        <div class="rr-region-name">Ischämie / Infarkt <span class="rr-rl-badge">RadLex</span></div>
+        <div class="rr-tri">
+          <input class="t-unset-in" type="radio" name="st_ischaemie" id="st_ischaemie_unset" value="" checked="checked" />
+          <label class="t-unset" for="st_ischaemie_unset" title="unbeurteilt">—</label>
+          <input class="t-ob-in" type="radio" name="st_ischaemie" id="st_ischaemie_ob" value="ob" data-voice="ischämie unauffällig" />
+          <label for="st_ischaemie_ob" title="o.B. – attestiert">o.&#160;B.</label>
+          <input class="t-bef-in" type="radio" name="st_ischaemie" id="st_ischaemie_bef" value="bef" data-voice="ischämie befund" />
+          <label for="st_ischaemie_bef" title="Befund – Detail">Befund</label>
+        </div>
+      </div>
+      <div class="rr-region-detail" id="rd-ischaemie" data-radlex="RID5722" data-en="cerebral ischemia">
+        <div class="rr-row">
+          <label>
+            <span class="rr-lbl"><span>Stadium <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="stadium" data-radlex="RID5722" data-en="ischemia stage" data-voice="stadium">
+              <option value="">–</option>
+              <option value="Infarktfrühzeichen" data-radlex="RID5760" data-en="early infarct signs" data-voice="frühzeichen">Infarktfrühzeichen</option>
+              <option value="demarkierter Infarkt (hypodens)" data-radlex="RID28793" data-en="demarcated infarct" data-voice="demarkiert">Demarkierter Infarkt</option>
+              <option value="mehrzeitiges Infarktgeschehen" data-radlex-status="local" data-en="multiphasic infarction" data-voice="mehrzeitig">Mehrzeitig</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Gefäßterritorium <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="territorium" data-radlex="RID5798" data-en="vascular territory" data-voice="territorium">
+              <option value="">–</option>
+              <option value="ACM" data-radlex="RID5800" data-en="MCA territory" data-voice="mediastromgebiet">ACM (Mediastromgebiet)</option>
+              <option value="ACA" data-radlex="RID5799" data-en="ACA territory" data-voice="anterior">ACA</option>
+              <option value="ACP / pc" data-radlex="RID5801" data-en="PCA territory" data-voice="posterior">ACP / posteriore Zirkulation</option>
+              <option value="Grenzzone" data-radlex-status="local" data-en="watershed" data-voice="grenzzone">Grenzzone</option>
+              <option value="Hirnstamm" data-radlex-status="local" data-en="brainstem" data-voice="hirnstamm">Hirnstamm</option>
+              <option value="Kleinhirn" data-radlex-status="local" data-en="cerebellum" data-voice="kleinhirn">Kleinhirn</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Seite <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="seite" data-radlex="RID5824" data-en="laterality">
+              <option value="" data-voice="seite offen">– Seite –</option>
+              <option value="rechts" data-radlex="RID5826" data-en="right" data-voice="rechts">rechts</option>
+              <option value="links" data-radlex="RID5825" data-en="left" data-voice="links">links</option>
+              <option value="bds." data-radlex="RID5827" data-en="bilateral" data-voice="beidseits">beidseits</option>
+              <option value="median" data-radlex-status="local" data-en="midline" data-voice="median">median</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>ASPECTS (0–10)</span></span>
+            <input type="number" data-f="aspects" min="0" max="10" step="1" placeholder="–" data-radlex="RID35795" data-en="ASPECTS" data-voice="aspects" />
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Hämorrhagische Transformation <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="ht" data-radlex="RID4707" data-en="hemorrhagic transformation" data-voice="hämorrhagische transformation">
+              <option value="">– keine Angabe –</option>
+              <option value="keine" data-radlex-status="local" data-en="none" data-voice="keine">Keine</option>
+              <option value="fokale petechiale Blutungen (HI1)" data-radlex-status="local" data-en="petechial focal" data-voice="petechial fokal">Petechial fokal (HI1)</option>
+              <option value="konfluierende petechiale Blutungen (HI2)" data-radlex-status="local" data-en="petechial confluent" data-voice="petechial konfluierend">Petechial konfluierend (HI2)</option>
+              <option value="parenchymatöse Einblutung (PH1/PH2)" data-radlex-status="local" data-en="parenchymal hematoma" data-voice="parenchymatöse einblutung">Parenchymatöse Einblutung (PH)</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Zusatz (Freitext)</span></span>
+            <input type="text" data-f="lok" placeholder="z.B. >1/3 ACM-Territorium; alte Defekte abzugrenzen" data-voice="zusatz ischämie" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 3: Raumforderung / fokale Läsion -->
+    <div class="rr-region" id="rg-raumforderung" data-region="raumforderung" data-crit="0">
+      <div class="rr-region-head">
+        <div class="rr-region-name">Raumforderung / fokale Läsion <span class="rr-rl-badge">RadLex</span></div>
+        <div class="rr-tri">
+          <input class="t-unset-in" type="radio" name="st_raumforderung" id="st_raumforderung_unset" value="" checked="checked" />
+          <label class="t-unset" for="st_raumforderung_unset" title="unbeurteilt">—</label>
+          <input class="t-ob-in" type="radio" name="st_raumforderung" id="st_raumforderung_ob" value="ob" data-voice="raumforderung unauffällig" />
+          <label for="st_raumforderung_ob" title="o.B. – attestiert">o.&#160;B.</label>
+          <input class="t-bef-in" type="radio" name="st_raumforderung" id="st_raumforderung_bef" value="bef" data-voice="raumforderung befund" />
+          <label for="st_raumforderung_bef" title="Befund – Detail">Befund</label>
+        </div>
+      </div>
+      <div class="rr-region-detail" id="rd-raumforderung" data-radlex="RID3798" data-en="mass">
+        <div class="rr-row rr-row-three">
+          <label>
+            <span class="rr-lbl"><span>Lokalisation</span></span>
+            <input type="text" data-f="lok" placeholder="z.B. frontal re." data-voice="lokalisation raumforderung" />
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Größe (mm)</span></span>
+            <input type="text" data-f="groesse" placeholder="z.B. 22 × 18" data-radlex="RID13173" data-en="measurement" data-voice="größe" />
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Perifokales Ödem <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="oedem" data-radlex="RID4675" data-en="perilesional edema" data-voice="ödem">
+              <option value="">–</option>
+              <option value="kein" data-radlex-status="local" data-en="no edema" data-voice="kein ödem">Kein</option>
+              <option value="vorhanden" data-radlex-status="local" data-en="present" data-voice="vorhanden">Vorhanden</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Charakter / Zusatz (Freitext)</span></span>
+            <input type="text" data-f="char" placeholder="z.B. hyperdens, verkalkt; DD Meningeom; KM-Gabe empfohlen" data-voice="charakter" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 4: Mittellinie &amp; raumfordernde Wirkung -->
+    <div class="rr-region" id="rg-mittellinie" data-region="mittellinie" data-crit="1">
+      <div class="rr-region-head">
+        <div class="rr-region-name">Mittellinie &amp; raumfordernde Wirkung <span class="rr-rl-badge">RadLex</span></div>
+        <div class="rr-tri">
+          <input class="t-unset-in" type="radio" name="st_mittellinie" id="st_mittellinie_unset" value="" checked="checked" />
+          <label class="t-unset" for="st_mittellinie_unset" title="unbeurteilt">—</label>
+          <input class="t-ob-in" type="radio" name="st_mittellinie" id="st_mittellinie_ob" value="ob" data-voice="mittellinie unauffällig" />
+          <label for="st_mittellinie_ob" title="o.B. – attestiert">o.&#160;B.</label>
+          <input class="t-bef-in" type="radio" name="st_mittellinie" id="st_mittellinie_bef" value="bef" data-voice="mittellinie befund" />
+          <label for="st_mittellinie_bef" title="Befund – Detail">Befund</label>
+        </div>
+      </div>
+      <div class="rr-region-detail" id="rd-mittellinie" data-radlex="RID5783" data-en="midline shift">
+        <div class="rr-row">
+          <label>
+            <span class="rr-lbl"><span>Mittellinienverlagerung (mm) <span class="rr-rl-badge">RadLex</span></span></span>
+            <input type="number" data-f="mls" step="0.1" placeholder="–" data-radlex="RID5783" data-en="midline shift" data-voice="mittellinienverlagerung" />
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Richtung</span></span>
+            <select data-f="richtung" data-voice="richtung">
+              <option value="">–</option>
+              <option value="nach rechts" data-radlex-status="local" data-en="to the right" data-voice="nach rechts">nach rechts</option>
+              <option value="nach links" data-radlex-status="local" data-en="to the left" data-voice="nach links">nach links</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Herniationsmuster <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="herniation" data-radlex="RID5782" data-en="herniation" data-voice="herniation">
+              <option value="">– keine –</option>
+              <option value="subfalzine Herniation" data-radlex="RID5784" data-en="subfalcine" data-voice="subfalzin">Subfalzin</option>
+              <option value="Uncusherniation" data-radlex="RID5785" data-en="uncal" data-voice="uncus">Uncus</option>
+              <option value="zentrale Herniation" data-radlex-status="local" data-en="central" data-voice="zentral">Zentral</option>
+              <option value="transtentorielle Herniation" data-radlex-status="local" data-en="transtentorial" data-voice="transtentoriell">Transtentoriell</option>
+              <option value="tonsilläre Herniation" data-radlex-status="local" data-en="tonsillar" data-voice="tonsillär">Tonsillär</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Basale Zisternen <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="zisternen" data-radlex="RID6043" data-en="basal cisterns" data-voice="zisternen">
+              <option value="">–</option>
+              <option value="frei" data-radlex-status="local" data-en="patent" data-voice="frei">Frei</option>
+              <option value="komprimiert" data-radlex-status="local" data-en="compressed" data-voice="komprimiert">Komprimiert</option>
+              <option value="aufgehoben" data-radlex-status="local" data-en="effaced" data-voice="aufgehoben">Aufgehoben</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 5: Ventrikel &amp; Liquorräume -->
+    <div class="rr-region" id="rg-ventrikel" data-region="ventrikel" data-crit="0">
+      <div class="rr-region-head">
+        <div class="rr-region-name">Ventrikel &amp; Liquorräume <span class="rr-rl-badge">RadLex</span></div>
+        <div class="rr-tri">
+          <input class="t-unset-in" type="radio" name="st_ventrikel" id="st_ventrikel_unset" value="" checked="checked" />
+          <label class="t-unset" for="st_ventrikel_unset" title="unbeurteilt">—</label>
+          <input class="t-ob-in" type="radio" name="st_ventrikel" id="st_ventrikel_ob" value="ob" data-voice="ventrikel unauffällig" />
+          <label for="st_ventrikel_ob" title="o.B. – attestiert">o.&#160;B.</label>
+          <input class="t-bef-in" type="radio" name="st_ventrikel" id="st_ventrikel_bef" value="bef" data-voice="ventrikel befund" />
+          <label for="st_ventrikel_bef" title="Befund – Detail">Befund</label>
+        </div>
+      </div>
+      <div class="rr-region-detail" id="rd-ventrikel" data-radlex="RID6042" data-en="ventricular system">
+        <div class="rr-row">
+          <label>
+            <span class="rr-lbl"><span>Innere Liquorräume <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="innen" data-radlex="RID6042" data-en="ventricles" data-voice="innere liquorräume">
+              <option value="">–</option>
+              <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate" data-voice="altersentsprechend">Altersentsprechend</option>
+              <option value="erweitert" data-radlex="RID5811" data-en="dilated" data-voice="erweitert">Erweitert</option>
+              <option value="Hydrozephalus" data-radlex="RID4724" data-en="hydrocephalus" data-voice="hydrozephalus">Hydrozephalus</option>
+              <option value="reduziert" data-radlex-status="local" data-en="reduced" data-voice="reduziert">Reduziert (Hirnödem)</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Äußere Liquorräume <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="aussen" data-radlex="RID6044" data-en="external CSF spaces" data-voice="äußere liquorräume">
+              <option value="">–</option>
+              <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate" data-voice="altersentsprechend">Altersentsprechend</option>
+              <option value="erweitert (Atrophie)" data-radlex-status="local" data-en="atrophy" data-voice="erweitert">Erweitert (Atrophie)</option>
+              <option value="reduziert" data-radlex-status="local" data-en="reduced" data-voice="reduziert">Reduziert</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Zusatz (Freitext)</span></span>
+            <input type="text" data-f="lok" placeholder="z.B. asymmetrische Seitenventrikel; Liquoraufstau" data-voice="zusatz ventrikel" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 6: Hirnparenchym allgemein -->
+    <div class="rr-region" id="rg-parenchym" data-region="parenchym" data-crit="0">
+      <div class="rr-region-head">
+        <div class="rr-region-name">Hirnparenchym allgemein <span class="rr-rl-badge">RadLex</span></div>
+        <div class="rr-tri">
+          <input class="t-unset-in" type="radio" name="st_parenchym" id="st_parenchym_unset" value="" checked="checked" />
+          <label class="t-unset" for="st_parenchym_unset" title="unbeurteilt">—</label>
+          <input class="t-ob-in" type="radio" name="st_parenchym" id="st_parenchym_ob" value="ob" data-voice="parenchym unauffällig" />
+          <label for="st_parenchym_ob" title="o.B. – attestiert">o.&#160;B.</label>
+          <input class="t-bef-in" type="radio" name="st_parenchym" id="st_parenchym_bef" value="bef" data-voice="parenchym befund" />
+          <label for="st_parenchym_bef" title="Befund – Detail">Befund</label>
+        </div>
+      </div>
+      <div class="rr-region-detail" id="rd-parenchym" data-radlex="RID6434" data-en="brain parenchyma">
+        <div class="rr-row">
+          <label>
+            <span class="rr-lbl"><span>Mikroangiopathie (Fazekas) <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="fazekas" data-radlex="RID35577" data-en="white matter disease" data-voice="fazekas">
+              <option value="">–</option>
+              <option value="Fazekas 0" data-radlex-status="local" data-en="Fazekas 0" data-voice="fazekas null">Fazekas 0 – keine</option>
+              <option value="Fazekas 1 (geringgradig)" data-radlex-status="local" data-en="Fazekas 1" data-voice="fazekas eins">Fazekas 1 – geringgradig</option>
+              <option value="Fazekas 2 (mittelgradig)" data-radlex-status="local" data-en="Fazekas 2" data-voice="fazekas zwei">Fazekas 2 – mittelgradig</option>
+              <option value="Fazekas 3 (hochgradig)" data-radlex-status="local" data-en="Fazekas 3" data-voice="fazekas drei">Fazekas 3 – hochgradig</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Alte Defekte <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="defekte" data-radlex="RID28793" data-en="old infarct" data-voice="alte defekte">
+              <option value="">–</option>
+              <option value="keine" data-radlex-status="local" data-en="none" data-voice="keine">Keine</option>
+              <option value="postischämisch" data-radlex-status="local" data-en="postischemic defect" data-voice="postischämisch">Postischämisch</option>
+              <option value="posthämorrhagisch" data-radlex-status="local" data-en="posthemorrhagic defect" data-voice="posthämorrhagisch">Posthämorrhagisch</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Zusatz (Freitext)</span></span>
+            <input type="text" data-f="lok" placeholder="z.B. lakunärer Defekt Stammganglien li.; Verkalkungen" data-voice="zusatz parenchym" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 7: Kalvaria · NNH · Weichteile -->
+    <div class="rr-region" id="rg-extraaxial" data-region="extraaxial" data-crit="0">
+      <div class="rr-region-head">
+        <div class="rr-region-name">Kalvaria · NNH · Weichteile <span class="rr-rl-badge">RadLex</span></div>
+        <div class="rr-tri">
+          <input class="t-unset-in" type="radio" name="st_extraaxial" id="st_extraaxial_unset" value="" checked="checked" />
+          <label class="t-unset" for="st_extraaxial_unset" title="unbeurteilt">—</label>
+          <input class="t-ob-in" type="radio" name="st_extraaxial" id="st_extraaxial_ob" value="ob" data-voice="kalvaria unauffällig" />
+          <label for="st_extraaxial_ob" title="o.B. – attestiert">o.&#160;B.</label>
+          <input class="t-bef-in" type="radio" name="st_extraaxial" id="st_extraaxial_bef" value="bef" data-voice="kalvaria befund" />
+          <label for="st_extraaxial_bef" title="Befund – Detail">Befund</label>
+        </div>
+      </div>
+      <div class="rr-region-detail" id="rd-extraaxial" data-radlex="RID8497" data-en="skull">
+        <div class="rr-row rr-row-three">
+          <label>
+            <span class="rr-lbl"><span>Kalvaria / Fraktur <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="kalvaria" data-radlex="RID4760" data-en="skull fracture" data-voice="kalvaria">
+              <option value="">–</option>
+              <option value="intakt" data-radlex-status="local" data-en="intact" data-voice="intakt">Intakt</option>
+              <option value="Fraktur" data-radlex="RID4760" data-en="fracture" data-voice="fraktur">Fraktur</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>NNH / Mastoid <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="nnh" data-radlex="RID8595" data-en="paranasal sinuses" data-voice="nnh">
+              <option value="">–</option>
+              <option value="unauffällig" data-radlex-status="local" data-en="unremarkable" data-voice="unauffällig">Unauffällig</option>
+              <option value="Verschattung / Sekret" data-radlex-status="local" data-en="opacification" data-voice="verschattung">Verschattung/Sekret</option>
+            </select>
+          </label>
+          <label>
+            <span class="rr-lbl"><span>Weichteile <span class="rr-rl-badge">RadLex</span></span></span>
+            <select data-f="weichteile" data-radlex="RID1241" data-en="soft tissue" data-voice="weichteile">
+              <option value="">–</option>
+              <option value="unauffällig" data-radlex-status="local" data-en="unremarkable" data-voice="unauffällig">Unauffällig</option>
+              <option value="Galeahämatom / Schwellung" data-radlex-status="local" data-en="soft tissue swelling" data-voice="schwellung">Galeahämatom/Schwellung</option>
+            </select>
+          </label>
+        </div>
+        <div class="rr-row rr-row-full">
+          <label>
+            <span class="rr-lbl"><span>Lokalisation / Zusatz (Freitext)</span></span>
+            <input type="text" data-f="lok" placeholder="z.B. nicht dislozierte Kalottenfraktur parietal re." data-voice="zusatz knochen" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== BEURTEILUNG ===================== -->
+  <div class="rr-h2-wrap">
+    <h2>Beurteilung</h2>
+    <div class="rr-h2-rule"></div>
+  </div>
+  <div class="rr-row rr-row-full" id="beurt_row">
+    <label>
+      <span class="rr-lbl"><span>Beurteilung</span></span>
+      <textarea id="beurt" rows="4" placeholder="z.B.: Akute Subarachnoidalblutung Fissura Sylvii li. Kein Hydrozephalus, keine Mittellinienverlagerung. Empfehlung: CT-Angiographie zur Aneurysmasuche." data-voice="beurteilung"></textarea>
+    </label>
+  </div>
 
 </section>
-
-<!-- PREVIEW -->
-<aside class="rr-preview-pane">
-<div class="rr-preview-title">Befund-Vorschau (Live)</div>
-<div class="rcard">
-  <div class="rcard-header">
-    <div class="rcard-title">CT Schädel nativ</div>
-    <div class="rcard-sub" id="prev-sub">nativ · axial</div>
-  </div>
-  <div class="rsec"><div class="rsec-lbl">Technik</div><div class="rtext" id="prev-technik"></div></div>
-  <div class="rsec"><div class="rsec-lbl">Befund</div><div class="rtext" id="prev-befund"></div></div>
-  <div class="rsec"><div class="rsec-lbl">Beurteilung</div><div class="rtext" id="prev-beurt"></div></div>
-  <div class="stamp">
-    <span>HJK-MRRT-CT-SCHAEDEL-NATIV-v1.0 · Quelle: DRG CC BY 4.0</span>
-    <span id="prev-date"></span>
-  </div>
-</div>
-<div id="status-badge" class="badge warn">● Befund ausfüllen</div>
-</aside>
 </div>
 
-<script>
-/* ══════════════════════════════════════════════════════════════
-   REGION-KONFIG  (additives Modell)
-   Jede Region:
-     key       – DOM/State-Schlüssel
-     name      – sichtbarer Titel
-     radlex    – RadLex RID (Region/Beobachtung)  [Verifikationsstatus: RADLEX-MAPPING.md]
-     en        – englischer RadLex-Term
-     crit      – true → Notfall-Akzent bei "Befund"
-     neg       – expliziter Negativsatz bei o.B. (Attestierung)
-     detail    – HTML der Detailfelder (nur bei "Befund" sichtbar)
-     build(st) – liefert Befundsatz für Region (st = 'ob' | 'bef')
-   Konvention: jede <select>/<option> trägt data-radlex + data-en,
-   zusätzlich data-voice (deutsche Sprechform) für Voice-Befüllung.
-   ══════════════════════════════════════════════════════════════ */
 
-const SEITE_OPTS = `
-  <option value="" data-voice="seite offen">– Seite –</option>
-  <option value="rechts" data-radlex="RID5826" data-en="right" data-voice="rechts">rechts</option>
-  <option value="links" data-radlex="RID5825" data-en="left" data-voice="links">links</option>
-  <option value="bds." data-radlex="RID5827" data-en="bilateral" data-voice="beidseits">beidseits</option>
-  <option value="median" data-en="midline" data-voice="median">median</option>`;
-
-const REGIONS = [
-  {
-    key:'blutung', name:'Intrakranielle Blutung', radlex:'RID4700', en:'intracranial hemorrhage', crit:true,
-    neg:'Keine intra- oder extraaxiale Blutung.',
-    detail:`
-      <div class="row"><span class="lbl">Blutungstyp <span class="rr-rl-badge">RadLex</span> <span class="field-note" style="font-style:normal">(Mehrfachauswahl – können koexistieren)</span></span>
-        <div class="cg">
-          <label class="ci"><input type="checkbox" data-bt="EDH" data-radlex="RID4702" data-en="epidural hematoma" data-voice="epidural" onchange="update()"><span>Epidural (EDH)</span></label>
-          <label class="ci"><input type="checkbox" data-bt="SDH" data-radlex="RID4703" data-en="subdural hematoma" data-voice="subdural" onchange="update()"><span>Subdural (SDH)</span></label>
-          <label class="ci"><input type="checkbox" data-bt="SAB" data-radlex="RID4706" data-en="subarachnoid hemorrhage" data-voice="subarachnoidal" onchange="update()"><span>Subarachnoidal (SAB)</span></label>
-          <label class="ci"><input type="checkbox" data-bt="ICB" data-radlex="RID4701" data-en="intraparenchymal hemorrhage" data-voice="intraparenchymal" onchange="update()"><span>Intraparenchymal (ICB)</span></label>
-          <label class="ci"><input type="checkbox" data-bt="IVB" data-radlex="RID4705" data-en="intraventricular hemorrhage" data-voice="intraventrikulär" onchange="update()"><span>Intraventrikulär (IVB)</span></label>
-        </div>
-      </div>
-      <div class="grid3">
-        <div class="row"><label><span class="lbl">Seite <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="seite" onchange="update()" data-radlex="RID5824" data-en="laterality">${SEITE_OPTS}</select></label></div>
-        <div class="row"><label><span class="lbl">Max. Dicke / Ausdehnung <span class="unit">mm</span></span>
-          <input type="number" data-f="dicke" step="0.1" placeholder="–" oninput="update()" data-radlex="RID13173" data-en="measurement"></label></div>
-        <div class="row"><label><span class="lbl">Alter</span>
-          <select data-f="alter" onchange="update()" data-voice="alter blutung">
-            <option value="">–</option>
-            <option value="akut (hyperdens)" data-radlex="RID5733" data-en="acute" data-voice="akut">akut (hyperdens)</option>
-            <option value="subakut" data-radlex="RID5734" data-en="subacute" data-voice="subakut">subakut</option>
-            <option value="chronisch (hypodens)" data-radlex="RID5735" data-en="chronic" data-voice="chronisch">chronisch</option>
-            <option value="akut-auf-chronisch" data-en="acute on chronic" data-voice="akut auf chronisch">akut-auf-chronisch</option>
-          </select></label></div>
-      </div>
-      <div class="row"><label><span class="lbl">Lokalisation / Zusatz (Freitext)</span>
-        <input type="text" data-f="lok" placeholder="z.B. frontotemporal li.; Fissura Sylvii; Volumen ml" oninput="update()" data-voice="lokalisation"></label></div>`,
-    build(st){
-      if(st==='ob') return this.neg;
-      const types=[...document.querySelectorAll('#rd-blutung input[data-bt]:checked')].map(c=>c.parentElement.querySelector('span').textContent);
-      const seite=rf('blutung','seite'), dicke=rf('blutung','dicke'), alter=rf('blutung','alter'), lok=rf('blutung','lok');
-      if(!types.length && !lok) return 'Intrakranielle Blutung: Typ bitte spezifizieren.';
-      let s='Blutung: '+(types.length?types.join(', '):'Blutung');
-      if(seite) s+=' '+seite;
-      if(alter) s+=', '+alter;
-      if(dicke) s+=', max. '+dicke+' mm';
-      if(lok) s+=' ('+lok+')';
-      return s+'.';
-    }
-  },
-  {
-    key:'ischaemie', name:'Ischämie / Infarkt', radlex:'RID5722', en:'cerebral ischemia', crit:true,
-    neg:'Keine Infarktfrühzeichen, keine umschriebene Hypodensität, Mark-Rinden-Differenzierung erhalten.',
-    detail:`
-      <div class="grid2">
-        <div class="row"><label><span class="lbl">Stadium <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="stadium" onchange="update()" data-radlex="RID5722" data-en="ischemia stage" data-voice="stadium">
-            <option value="">–</option>
-            <option value="Infarktfrühzeichen" data-radlex="RID5760" data-en="early infarct signs" data-voice="frühzeichen">Infarktfrühzeichen</option>
-            <option value="demarkierter Infarkt (hypodens)" data-radlex="RID28793" data-en="demarcated infarct" data-voice="demarkiert">Demarkierter Infarkt</option>
-            <option value="mehrzeitiges Infarktgeschehen" data-en="multiphasic infarction" data-voice="mehrzeitig">Mehrzeitig</option>
-          </select></label></div>
-        <div class="row"><label><span class="lbl">Gefäßterritorium <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="territorium" onchange="update()" data-radlex="RID5798" data-en="vascular territory" data-voice="territorium">
-            <option value="">–</option>
-            <option value="ACM" data-radlex="RID5800" data-en="MCA territory" data-voice="mediastromgebiet">ACM (Mediastromgebiet)</option>
-            <option value="ACA" data-radlex="RID5799" data-en="ACA territory" data-voice="anterior">ACA</option>
-            <option value="ACP / pc" data-radlex="RID5801" data-en="PCA territory" data-voice="posterior">ACP / posteriore Zirkulation</option>
-            <option value="Grenzzone" data-en="watershed" data-voice="grenzzone">Grenzzone</option>
-            <option value="Hirnstamm" data-en="brainstem" data-voice="hirnstamm">Hirnstamm</option>
-            <option value="Kleinhirn" data-en="cerebellum" data-voice="kleinhirn">Kleinhirn</option>
-          </select></label></div>
-        <div class="row"><label><span class="lbl">Seite <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="seite" onchange="update()" data-radlex="RID5824" data-en="laterality">${SEITE_OPTS}</select></label></div>
-        <div class="row"><label><span class="lbl">ASPECTS <span class="field-note" style="font-style:normal">(optional, 0–10)</span></span>
-          <input type="number" data-f="aspects" min="0" max="10" step="1" placeholder="–" oninput="update()" data-radlex="RID35795" data-en="ASPECTS"></label></div>
-      </div>
-      <div class="row"><label><span class="lbl">Hämorrhagische Transformation <span class="rr-rl-badge">RadLex</span></span>
-        <select data-f="ht" onchange="update()" data-radlex="RID4707" data-en="hemorrhagic transformation" data-voice="hämorrhagische transformation">
-          <option value="">– keine Angabe –</option>
-          <option value="keine" data-voice="keine">Keine</option>
-          <option value="fokale petechiale Blutungen (HI1)" data-en="petechial focal">Petechial fokal (HI1)</option>
-          <option value="konfluierende petechiale Blutungen (HI2)" data-en="petechial confluent">Petechial konfluierend (HI2)</option>
-          <option value="parenchymatöse Einblutung (PH1/PH2)" data-en="parenchymal hematoma">Parenchymatöse Einblutung (PH)</option>
-        </select></label></div>
-      <div class="row"><label><span class="lbl">Zusatz (Freitext)</span>
-        <input type="text" data-f="lok" placeholder="z.B. >1/3 ACM-Territorium; alte Defekte abzugrenzen" oninput="update()" data-voice="zusatz ischämie"></label></div>`,
-    build(st){
-      if(st==='ob') return this.neg;
-      const stad=rf('ischaemie','stadium'), terr=rf('ischaemie','territorium'), seite=rf('ischaemie','seite'),
-            asp=rf('ischaemie','aspects'), ht=rf('ischaemie','ht'), lok=rf('ischaemie','lok');
-      let s='Ischämie: '+(stad||'Ischämiezeichen');
-      if(terr) s+=' im '+terr+'-Stromgebiet';
-      if(seite) s+=' '+seite;
-      if(asp!=='') s+=', ASPECTS '+asp;
-      if(ht && ht!=='keine') s+=', hämorrhagische Transformation: '+ht;
-      else if(ht==='keine') s+=', keine hämorrhagische Transformation';
-      if(lok) s+=' ('+lok+')';
-      return s+'.';
-    }
-  },
-  {
-    key:'raumforderung', name:'Raumforderung / fokale Läsion', radlex:'RID3798', en:'mass', crit:false,
-    neg:'Kein Nachweis einer intrakraniellen Raumforderung.',
-    detail:`
-      <div class="grid3">
-        <div class="row"><label><span class="lbl">Lokalisation</span>
-          <input type="text" data-f="lok" placeholder="z.B. frontal re." oninput="update()" data-voice="lokalisation raumforderung"></label></div>
-        <div class="row"><label><span class="lbl">Größe <span class="unit">mm</span></span>
-          <input type="text" data-f="groesse" placeholder="z.B. 22 × 18" oninput="update()" data-radlex="RID13173" data-en="measurement"></label></div>
-        <div class="row"><label><span class="lbl">Perifokales Ödem <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="oedem" onchange="update()" data-radlex="RID4675" data-en="perilesional edema" data-voice="ödem">
-            <option value="">–</option>
-            <option value="kein" data-voice="kein ödem">Kein</option>
-            <option value="vorhanden" data-voice="vorhanden">Vorhanden</option>
-          </select></label></div>
-      </div>
-      <div class="row"><label><span class="lbl">Charakter / Zusatz (Freitext)</span>
-        <input type="text" data-f="char" placeholder="z.B. hyperdens, verkalkt; DD Meningeom; KM-Gabe empfohlen" oninput="update()" data-voice="charakter"></label></div>`,
-    build(st){
-      if(st==='ob') return this.neg;
-      const lok=rf('raumforderung','lok'), gr=rf('raumforderung','groesse'), oe=rf('raumforderung','oedem'), ch=rf('raumforderung','char');
-      let s='Raumforderung'+(lok?' '+lok:'');
-      if(gr) s+=', '+gr+' mm';
-      if(oe==='vorhanden') s+=', mit perifokalem Ödem';
-      else if(oe==='kein') s+=', ohne perifokales Ödem';
-      if(ch) s+=' ('+ch+')';
-      return s+'.';
-    }
-  },
-  {
-    key:'mittellinie', name:'Mittellinie & raumfordernde Wirkung', radlex:'RID5783', en:'midline shift', crit:true,
-    neg:'Mittellinie mittelständig. Keine raumfordernde Wirkung, keine Herniation. Basale Zisternen frei.',
-    detail:`
-      <div class="grid2">
-        <div class="row"><label><span class="lbl">Mittellinienverlagerung <span class="unit">mm</span> <span class="rr-rl-badge">RadLex</span></span>
-          <input type="number" data-f="mls" step="0.1" placeholder="–" oninput="update()" data-radlex="RID5783" data-en="midline shift"></label></div>
-        <div class="row"><label><span class="lbl">Richtung</span>
-          <select data-f="richtung" onchange="update()" data-voice="richtung">
-            <option value="">–</option>
-            <option value="nach rechts" data-voice="nach rechts">nach rechts</option>
-            <option value="nach links" data-voice="nach links">nach links</option>
-          </select></label></div>
-      </div>
-      <div class="row"><label><span class="lbl">Herniationsmuster <span class="rr-rl-badge">RadLex</span></span>
-        <select data-f="herniation" onchange="update()" data-radlex="RID5782" data-en="herniation" data-voice="herniation">
-          <option value="">– keine –</option>
-          <option value="subfalzine Herniation" data-radlex="RID5784" data-en="subfalcine" data-voice="subfalzin">Subfalzin</option>
-          <option value="Uncusherniation" data-radlex="RID5785" data-en="uncal" data-voice="uncus">Uncus</option>
-          <option value="zentrale Herniation" data-en="central" data-voice="zentral">Zentral</option>
-          <option value="transtentorielle Herniation" data-en="transtentorial" data-voice="transtentoriell">Transtentoriell</option>
-          <option value="tonsilläre Herniation" data-en="tonsillar" data-voice="tonsillär">Tonsillär</option>
-        </select></label></div>
-      <div class="row"><label><span class="lbl">Basale Zisternen <span class="rr-rl-badge">RadLex</span></span>
-        <select data-f="zisternen" onchange="update()" data-radlex="RID6043" data-en="basal cisterns" data-voice="zisternen">
-          <option value="">–</option>
-          <option value="frei" data-voice="frei">Frei</option>
-          <option value="komprimiert" data-en="compressed" data-voice="komprimiert">Komprimiert</option>
-          <option value="aufgehoben" data-en="effaced" data-voice="aufgehoben">Aufgehoben</option>
-        </select></label></div>`,
-    build(st){
-      if(st==='ob') return this.neg;
-      const mls=rf('mittellinie','mls'), ri=rf('mittellinie','richtung'), he=rf('mittellinie','herniation'), zi=rf('mittellinie','zisternen');
-      let parts=[];
-      if(mls) parts.push('Mittellinienverlagerung '+mls+' mm'+(ri?' '+ri:''));
-      else parts.push('Mittellinie mittelständig');
-      if(he) parts.push(he);
-      if(zi) parts.push('basale Zisternen '+zi);
-      return parts.join(', ')+'.';
-    }
-  },
-  {
-    key:'ventrikel', name:'Ventrikel & Liquorräume', radlex:'RID6042', en:'ventricular system', crit:false,
-    neg:'Inneres und äußeres Liquorraumsystem altersentsprechend konfiguriert, kein Hydrozephalus.',
-    detail:`
-      <div class="grid2">
-        <div class="row"><label><span class="lbl">Innere Liquorräume <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="innen" onchange="update()" data-radlex="RID6042" data-en="ventricles" data-voice="innere liquorräume">
-            <option value="">–</option>
-            <option value="altersentsprechend" data-voice="altersentsprechend">Altersentsprechend</option>
-            <option value="erweitert" data-radlex="RID5811" data-en="dilated" data-voice="erweitert">Erweitert</option>
-            <option value="Hydrozephalus" data-radlex="RID4724" data-en="hydrocephalus" data-voice="hydrozephalus">Hydrozephalus</option>
-            <option value="reduziert" data-en="reduced" data-voice="reduziert">Reduziert (Hirnödem)</option>
-          </select></label></div>
-        <div class="row"><label><span class="lbl">Äußere Liquorräume <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="aussen" onchange="update()" data-radlex="RID6044" data-en="external CSF spaces" data-voice="äußere liquorräume">
-            <option value="">–</option>
-            <option value="altersentsprechend" data-voice="altersentsprechend">Altersentsprechend</option>
-            <option value="erweitert (Atrophie)" data-en="atrophy" data-voice="erweitert">Erweitert (Atrophie)</option>
-            <option value="reduziert" data-en="reduced" data-voice="reduziert">Reduziert</option>
-          </select></label></div>
-      </div>
-      <div class="row"><label><span class="lbl">Zusatz (Freitext)</span>
-        <input type="text" data-f="lok" placeholder="z.B. asymmetrische Seitenventrikel; Liquoraufstau" oninput="update()" data-voice="zusatz ventrikel"></label></div>`,
-    build(st){
-      if(st==='ob') return this.neg;
-      const inn=rf('ventrikel','innen'), au=rf('ventrikel','aussen'), lok=rf('ventrikel','lok');
-      let parts=[];
-      if(inn) parts.push('innere Liquorräume '+inn);
-      if(au) parts.push('äußere Liquorräume '+au);
-      let s=(parts.length?'Liquorräume: '+parts.join(', '):'Liquorräume: siehe Freitext');
-      if(lok) s+=' ('+lok+')';
-      return s+'.';
-    }
-  },
-  {
-    key:'parenchym', name:'Hirnparenchym allgemein', radlex:'RID6434', en:'brain parenchyma', crit:false,
-    neg:'Hirnparenchym regelrecht, Mark-Rinden-Differenzierung erhalten, keine fokalen Dichteveränderungen.',
-    detail:`
-      <div class="grid2">
-        <div class="row"><label><span class="lbl">Mikroangiopathie (Fazekas) <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="fazekas" onchange="update()" data-radlex="RID35577" data-en="white matter disease" data-voice="fazekas">
-            <option value="">–</option>
-            <option value="Fazekas 0" data-voice="fazekas null">Fazekas 0 – keine</option>
-            <option value="Fazekas 1 (geringgradig)" data-voice="fazekas eins">Fazekas 1 – geringgradig</option>
-            <option value="Fazekas 2 (mittelgradig)" data-voice="fazekas zwei">Fazekas 2 – mittelgradig</option>
-            <option value="Fazekas 3 (hochgradig)" data-voice="fazekas drei">Fazekas 3 – hochgradig</option>
-          </select></label></div>
-        <div class="row"><label><span class="lbl">Alte Defekte <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="defekte" onchange="update()" data-radlex="RID28793" data-en="old infarct" data-voice="alte defekte">
-            <option value="">–</option>
-            <option value="keine" data-voice="keine">Keine</option>
-            <option value="postischämisch" data-en="postischemic defect" data-voice="postischämisch">Postischämisch</option>
-            <option value="posthämorrhagisch" data-en="posthemorrhagic defect" data-voice="posthämorrhagisch">Posthämorrhagisch</option>
-          </select></label></div>
-      </div>
-      <div class="row"><label><span class="lbl">Zusatz (Freitext)</span>
-        <input type="text" data-f="lok" placeholder="z.B. lakunärer Defekt Stammganglien li.; Verkalkungen" oninput="update()" data-voice="zusatz parenchym"></label></div>`,
-    build(st){
-      if(st==='ob') return this.neg;
-      const fa=rf('parenchym','fazekas'), de=rf('parenchym','defekte'), lok=rf('parenchym','lok');
-      let parts=[];
-      if(fa) parts.push('Marklager: '+fa);
-      if(de && de!=='keine') parts.push('alte Defekte: '+de);
-      else if(de==='keine') parts.push('keine alten Defekte');
-      let s=parts.length?'Parenchym: '+parts.join(', '):'Parenchym: siehe Freitext';
-      if(lok) s+=' ('+lok+')';
-      return s+'.';
-    }
-  },
-  {
-    key:'extraaxial', name:'Kalvaria · NNH · Weichteile', radlex:'RID8497', en:'skull', crit:false,
-    neg:'Kalvaria intakt, kein Frakturnachweis. Miterfasste NNH und Mastoide unauffällig pneumatisiert. Weichteile unauffällig.',
-    detail:`
-      <div class="grid3">
-        <div class="row"><label><span class="lbl">Kalvaria / Fraktur <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="kalvaria" onchange="update()" data-radlex="RID4760" data-en="skull fracture" data-voice="kalvaria">
-            <option value="">–</option>
-            <option value="intakt" data-voice="intakt">Intakt</option>
-            <option value="Fraktur" data-radlex="RID4760" data-en="fracture" data-voice="fraktur">Fraktur</option>
-          </select></label></div>
-        <div class="row"><label><span class="lbl">NNH / Mastoid <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="nnh" onchange="update()" data-radlex="RID8595" data-en="paranasal sinuses" data-voice="nnh">
-            <option value="">–</option>
-            <option value="unauffällig" data-voice="unauffällig">Unauffällig</option>
-            <option value="Verschattung / Sekret" data-en="opacification" data-voice="verschattung">Verschattung/Sekret</option>
-          </select></label></div>
-        <div class="row"><label><span class="lbl">Weichteile <span class="rr-rl-badge">RadLex</span></span>
-          <select data-f="weichteile" onchange="update()" data-radlex="RID1241" data-en="soft tissue" data-voice="weichteile">
-            <option value="">–</option>
-            <option value="unauffällig" data-voice="unauffällig">Unauffällig</option>
-            <option value="Galeahämatom / Schwellung" data-en="soft tissue swelling" data-voice="schwellung">Galeahämatom/Schwellung</option>
-          </select></label></div>
-      </div>
-      <div class="row"><label><span class="lbl">Lokalisation / Zusatz (Freitext)</span>
-        <input type="text" data-f="lok" placeholder="z.B. nicht dislozierte Kalottenfraktur parietal re." oninput="update()" data-voice="zusatz knochen"></label></div>`,
-    build(st){
-      if(st==='ob') return this.neg;
-      const ka=rf('extraaxial','kalvaria'), nn=rf('extraaxial','nnh'), we=rf('extraaxial','weichteile'), lok=rf('extraaxial','lok');
-      let parts=[];
-      if(ka) parts.push('Kalvaria: '+ka);
-      if(nn) parts.push('NNH/Mastoid: '+nn);
-      if(we) parts.push('Weichteile: '+we);
-      let s=parts.length?parts.join(', '):'Kalvaria/NNH/Weichteile: siehe Freitext';
-      if(lok) s+=' ('+lok+')';
-      return s+'.';
-    }
-  },
-];
-
-/* ── Region-Renderer ── */
-function renderRegions(){
-  const wrap=document.getElementById('regions');
-  wrap.innerHTML = REGIONS.map(r=>`
-    <div class="region" id="rg-${r.key}">
-      <div class="region-head">
-        <div class="region-name">${r.name} <span class="rr-rl-badge">RadLex</span></div>
-        <div class="tri">
-          <input class="t-unset-in" type="radio" name="st_${r.key}" id="st_${r.key}_unset" value="" checked onchange="onStatus('${r.key}')">
-          <label class="t-unset" for="st_${r.key}_unset" title="unbeurteilt">—</label>
-          <input class="t-ob-in" type="radio" name="st_${r.key}" id="st_${r.key}_ob" value="ob" onchange="onStatus('${r.key}')" data-voice="${r.key} unauffällig">
-          <label for="st_${r.key}_ob" title="o.B. – attestiert">o.&nbsp;B.</label>
-          <input class="t-bef-in" type="radio" name="st_${r.key}" id="st_${r.key}_bef" value="bef" onchange="onStatus('${r.key}')" data-voice="${r.key} befund">
-          <label for="st_${r.key}_bef" title="Befund – Detail">Befund</label>
-        </div>
-      </div>
-      <div class="region-detail" id="rd-${r.key}">${r.detail}</div>
-    </div>`).join('');
-}
-
-function regStatus(key){ return document.querySelector(`input[name=st_${key}]:checked`)?.value ?? ''; }
-
-/* Feld-Lesehelfer innerhalb einer Region: data-f Attribut */
-function rf(key,f){
-  const el=document.querySelector(`#rd-${key} [data-f="${f}"]`);
-  return el? (el.value??'').trim() : '';
-}
-
-function onStatus(key){
-  const st=regStatus(key);
-  const rg=document.getElementById('rg-'+key);
-  const cfg=REGIONS.find(r=>r.key===key);
-  rg.classList.toggle('is-bef', st==='bef');
-  rg.classList.toggle('is-crit', st==='bef' && cfg.crit);
-  update();
-}
-
-/* ══════════════════════════════════════════════
-   NORMALBEFUND-MAKRO
-   Setzt ALLE noch offenen ("—") Regionen auf o.B.
-   Bewusster Attestierungsakt: erzeugt explizite Negativsätze.
-   Bereits auf "Befund" gesetzte Regionen bleiben unangetastet.
-   ══════════════════════════════════════════════ */
-function setNormalbefund(){
-  REGIONS.forEach(r=>{
-    if(regStatus(r.key)===''){
-      const ob=document.getElementById(`st_${r.key}_ob`);
-      ob.checked=true;
-      onStatus(r.key);
-    }
-  });
-  update();
-}
-
-/* ══════════════════════════════════════════════
-   HELPERS / TEXT BUILDERS
-   ══════════════════════════════════════════════ */
-const gv = id => document.getElementById(id)?.value?.trim() ?? '';
-
-function buildTechnik(){
-  const g=gv('geraet'), p=gv('protokoll'), q=gv('qual'), fr=gv('fragestellung');
-  let t=`CT des Schädels, ${p} (${g}). Bildqualität: ${q}.`;
-  if(fr) t+=` Fragestellung: ${fr}.`;
-  if(gv('vgl')==='yes'){ const d=gv('vgl_dat'); t+=` Voruntersuchung${d?' ('+d+')':''} zum Vergleich vorliegend.`; }
-  return t;
-}
-
-function buildBefund(){
-  const lines=[];
-  REGIONS.forEach(r=>{
-    const st=regStatus(r.key);
-    if(st==='') return;                 // unbeurteilt → kein Satz (kein Default)
-    lines.push(r.build(st));
-  });
-  if(!lines.length) return '';
-  return lines.join('\n');
-}
-
-function nUnassessed(){ return REGIONS.filter(r=>regStatus(r.key)==='').length; }
-function hasCrit(){ return REGIONS.some(r=>r.crit && regStatus(r.key)==='bef'); }
-
-function buildVorschlag(){
-  // Vorschlag aus pathologischen Regionen (nur "bef")
-  const pos=REGIONS.filter(r=>regStatus(r.key)==='bef').map(r=>r.build('bef'));
-  if(!pos.length){
-    if(nUnassessed()===0) return 'CT Schädel nativ: Altersentsprechender unauffälliger Befund. Keine intrakranielle Blutung, kein Infarktnachweis, keine Mittellinienverlagerung.';
-    return '';
-  }
-  return pos.join(' ');
-}
-
-/* ══════════════════════════════════════════════
-   UPDATE
-   ══════════════════════════════════════════════ */
-function update(){
-  document.getElementById('prev-technik').textContent = buildTechnik();
-  document.getElementById('prev-befund').textContent  = buildBefund();
-  document.getElementById('prev-beurt').textContent   = gv('beurt') || '—';
-  document.getElementById('prev-sub').textContent     = (gv('protokoll')||'nativ')+' · nativ';
-
-  // Negativ-Vorschau im Region-Kopf (für Regionen auf "—")
-  REGIONS.forEach(r=>{
-    const head=document.querySelector(`#rg-${r.key} .region-name`);
-    // (keine zusätzliche Vorschau – Kopf bleibt schlank; Negativsatz erscheint im Preview)
-  });
-
-  // Beurteilungs-Vorschlag
-  const vbox=document.getElementById('vorschlag-box');
-  if(!gv('beurt')){
-    const v=buildVorschlag();
-    vbox.innerHTML = v ? `<div class="rr-helper-info" style="cursor:pointer" onclick="document.getElementById('beurt').value=${JSON.stringify(v)};update()" title="Klicken zum Übernehmen"><strong>Vorschlag (klicken):</strong><br>${v}</div>` : '';
-  } else vbox.innerHTML='';
-
-  // Status-Badge: sichtbarer Fortschritt ohne Scrollen
-  const badge=document.getElementById('status-badge');
-  const open=nUnassessed();
-  if(hasCrit()){ badge.className='badge crit'; badge.textContent='⚠ Kritischer Befund – '+(open?open+' Region(en) noch offen':'alle Regionen beurteilt'); }
-  else if(open>0){ badge.className='badge warn'; badge.textContent='● '+open+' Region(en) unbeurteilt'; }
-  else if(gv('beurt').length<=5){ badge.className='badge warn'; badge.textContent='● Beurteilung fehlt'; }
-  else { badge.className='badge ok'; badge.textContent='✓ Vollständig'; }
-}
-
-/* ══════════════════════════════════════════════
-   FHIR  (nur beurteilte Regionen → Observation;
-          o.B. = attestierter Negativbefund, kein Default)
-   ══════════════════════════════════════════════ */
-function buildFhir(){
-  const now=new Date().toISOString();
-  const obsArr=[];
-  REGIONS.forEach((r,i)=>{
-    const st=regStatus(r.key);
-    if(st==='') return;
-    const isNeg = (st==='ob');
-    const obs={
-      resourceType:'Observation', status:'final', id:`obs-${r.key}`,
-      code:{coding:[{system:'http://radlex.org', code:r.radlex, display:r.en}]},
-      // Attestierter Negativbefund vs. positiver Befund – Verification-Floor sichtbar:
-      interpretation:[{coding:[{system:'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation',
-        code:isNeg?'NEG':'POS', display:isNeg?'Negative':'Positive'}]}],
-      valueCodeableConcept:{text:r.build(st)},
-      note:[{text:isNeg?'Ärztlich attestierter Negativbefund (o.B.).':'Befund.'}],
-    };
-    obsArr.push({fullUrl:`urn:uuid:obs-${r.key}`, resource:obs});
-  });
-
-  const dr={
-    resourceType:'DiagnosticReport', status:'final', id:'cct-report',
-    code:{coding:[
-      {system:'http://loinc.org',  code:'30799-1', display:'CT Head'},
-      {system:'http://radlex.org', code:'RID10337', display:'CT head'},
-    ]},
-    effectiveDateTime:now,
-    identifier:[
-      {value:'HJK-MRRT-CT-SCHAEDEL-NATIV-v1.0'},
-      {system:'http://drg.de', value:'DRG-041807.2.2104072101-CC-BY-4.0'},
-    ],
-    conclusion:gv('beurt'),
-    result:obsArr.map(o=>({reference:o.fullUrl})),
-    presentedForm:[{contentType:'text/plain',title:'CT Schädel nativ',
-      data:btoa(unescape(encodeURIComponent(
-        'TECHNIK\n'+buildTechnik()+'\n\nBEFUND\n'+buildBefund()+'\n\nBEURTEILUNG\n'+gv('beurt')
-      )))}],
-  };
-
-  return JSON.stringify({
-    resourceType:'Bundle',type:'document',timestamp:now,
-    meta:{tag:[{system:'http://hjk.wien/fhir/CodeSystem/radiology-templates',code:'radlex-coded'},{system:'http://drg.de',code:'drg-cc-by-4.0'}]},
-    entry:[{fullUrl:'urn:uuid:cct-report',resource:dr},...obsArr],
-  },null,2);
-}
-
-function toggleFhir(){
-  const box=document.getElementById('fhir-box');
-  if(box.classList.contains('show')){ box.classList.remove('show'); return; }
-  box.textContent=buildFhir();
-  box.classList.add('show');
-}
-
-function copyReport(){
-  const t=`CT SCHÄDEL NATIV\n${new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'})}\n\nTECHNIK\n${buildTechnik()}\n\nBEFUND\n${buildBefund()}\n\nBEURTEILUNG\n${gv('beurt')}`;
-  navigator.clipboard.writeText(t).then(()=>{
-    const btn=event.target; btn.textContent='✓ Kopiert!';
-    setTimeout(()=>{btn.textContent='📋 Befundtext kopieren';},2000);
-  }).catch(()=>{
-    const el=document.createElement('textarea');el.value=t;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);
-  });
-}
-
-function resetAll(){
-  if(!confirm('Alle Eingaben zurücksetzen?')) return;
-  renderRegions();
-  document.querySelectorAll('.input-pane select').forEach(s=>{ if(s.id) s.selectedIndex=0; });
-  document.querySelectorAll('textarea,input[type=text],input[type=number]').forEach(i=>i.value='');
-  document.getElementById('vgl_dat_row').style.display='none';
-  document.getElementById('fhir-box').classList.remove('show');
-  update();
-}
-
-/* ══════════════════════════════════════════════ INIT ══════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('prev-date').textContent =
-    new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
-  renderRegions();
-  update();
-});
-</script>
+  <script src="demo.js"></script>
 </body>
 </html>
