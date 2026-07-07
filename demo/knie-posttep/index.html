@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Röntgen Knie post-KTEP – Strukturierte Befundvorlage (v1.1)</title>
 
 <!-- ===================== IHE MRRT METADATA ===================== -->
-<meta name="dcterms.title"       content="Röntgen Knie postoperativ / intraoperativ nach Knie-Totalendoprothese"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage Röntgen Knie post-KTEP. Stufe 1. Vier Kontexte: Intraoperativ/EndoCert, Früh-postoperativ, Verlaufskontrolle, Revisionsverdacht. Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular, ohne CSS/JS. Kontext-Sektionslogik, Implantat-Presets, EndoCert-Checkliste, Ewald-Zonentabelle, Komplikations-Flags, Live-Vorschau, Beurteilungsvorschlag, FHIR-/JSON-Export und Status-Badge werden in der Demo von demo.js zur Laufzeit erzeugt. RadLex-kodiert, LOINC auf Messwerten. LAMA/KOALA-Integration vorbereitet."/>
-<meta name="dcterms.language"    content="de"/>
-<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date"        content="2026-07-06"/>
-<meta name="dcterms.identifier"  content="HJK-MRRT-KNIE-POSTTEP-v1.1"/>
-<meta name="rrt:specialty"       content="Radiology"/>
-<meta name="rrt:subspecialty"    content="Musculoskeletal Radiology"/>
-<meta name="rrt:modality"        content="DX"/>
-<meta name="rrt:bodyregion"      content="Knee"/>
-<meta name="rrt:coding-systems"  content="RadLex, LOINC (partial), local"/>
+<meta name="dcterms.title"       content="Röntgen Knie postoperativ / intraoperativ nach Knie-Totalendoprothese" />
+<meta name="dcterms.description" content="Strukturierte Befundvorlage Röntgen Knie post-KTEP. Stufe 1. Vier Kontexte: Intraoperativ/EndoCert, Früh-postoperativ, Verlaufskontrolle, Revisionsverdacht. Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular, ohne CSS/JS. Kontext-Sektionslogik, Implantat-Presets, EndoCert-Checkliste, Ewald-Zonentabelle, Komplikations-Flags, Live-Vorschau, Beurteilungsvorschlag, FHIR-/JSON-Export und Status-Badge werden in der Demo von demo.js zur Laufzeit erzeugt. RadLex-kodiert, LOINC auf Messwerten. LAMA/KOALA-Integration vorbereitet." />
+<meta name="dcterms.language"    content="de" />
+<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
+<meta name="dcterms.date"        content="2026-07-06" />
+<meta name="dcterms.identifier"  content="HJK-MRRT-KNIE-POSTTEP-v1.1" />
+<meta name="rrt:specialty"       content="Radiology" />
+<meta name="rrt:subspecialty"    content="Musculoskeletal Radiology" />
+<meta name="rrt:modality"        content="DX" />
+<meta name="rrt:bodyregion"      content="Knee" />
+<meta name="rrt:coding-systems"  content="RadLex, LOINC (partial), local" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-06T18:48:01.233Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-07T11:09:45.794Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +44,7 @@
 
   Andock-Anker (leere ids, von demo.js befüllt): preset-bar, ec-checklist,
   ewald-tbody, flag-grid, ctx-hint, align-intraop-hint, beurt-vorschlag.
-  Kodierung sitzt an <option>/quantitativem <input>
+  Kodierung sitzt an <option>/quantitativem <input />
   (data-radlex + data-en; data-loinc auf Messwerten).
 -->
 
@@ -57,14 +57,14 @@
 
 <!-- KONTEXT-MODUS -->
 <div class="ctx-sw">
-  <input type="radio" name="ctx" id="ctx_intraop" value="intraop">
-  <label for="ctx_intraop">Intraoperativ<br><span style="font-size:10.5px;font-weight:400">EndoCert-Pflicht</span></label>
-  <input type="radio" name="ctx" id="ctx_frueh" value="frueh" checked>
-  <label for="ctx_frueh">Früh-postoperativ<br><span style="font-size:10.5px;font-weight:400">0–6 Wochen</span></label>
-  <input type="radio" name="ctx" id="ctx_verlauf" value="verlauf">
-  <label for="ctx_verlauf">Verlaufskontrolle<br><span style="font-size:10.5px;font-weight:400">6 Wo – 2 Jahre</span></label>
-  <input type="radio" name="ctx" id="ctx_revision" value="revision">
-  <label for="ctx_revision">Revisionsverdacht<br><span style="font-size:10.5px;font-weight:400">Loosening / Infektion</span></label>
+  <input type="radio" name="ctx" id="ctx_intraop" value="intraop" />
+  <label for="ctx_intraop">Intraoperativ<br /><span style="font-size:10.5px;font-weight:400">EndoCert-Pflicht</span></label>
+  <input type="radio" name="ctx" id="ctx_frueh" value="frueh" checked="checked" />
+  <label for="ctx_frueh">Früh-postoperativ<br /><span style="font-size:10.5px;font-weight:400">0–6 Wochen</span></label>
+  <input type="radio" name="ctx" id="ctx_verlauf" value="verlauf" />
+  <label for="ctx_verlauf">Verlaufskontrolle<br /><span style="font-size:10.5px;font-weight:400">6 Wo – 2 Jahre</span></label>
+  <input type="radio" name="ctx" id="ctx_revision" value="revision" />
+  <label for="ctx_revision">Revisionsverdacht<br /><span style="font-size:10.5px;font-weight:400">Loosening / Infektion</span></label>
 </div>
 <!-- Andock-Anker: Kontext-Hinweistext von demo.js -->
 <div class="rr-helper-info" id="ctx-hint"></div>
@@ -72,9 +72,9 @@
 <!-- SEITE -->
 <div class="sh"><h2>Seite</h2><div class="sh-line"></div></div>
 <div class="side-tg">
-  <input type="radio" name="seite" id="s_re" value="re." checked>
+  <input type="radio" name="seite" id="s_re" value="re." checked="checked" />
   <label for="s_re">re.</label>
-  <input type="radio" name="seite" id="s_li" value="li.">
+  <input type="radio" name="seite" id="s_li" value="li." />
   <label for="s_li">li.</label>
 </div>
 
@@ -153,7 +153,7 @@
     </div>
     <div class="row">
       <label><span class="lbl">Operateur</span>
-        <input type="text" id="io_operateur" placeholder="Name / Kürzel">
+        <input type="text" id="io_operateur" placeholder="Name / Kürzel" />
       </label>
     </div>
   </div>
@@ -214,7 +214,7 @@
   <div class="row">
     <label>
       <span class="lbl">Modell (Freitext)</span>
-      <input type="text" id="imp_modell" placeholder="z.B. Persona, Attune, Legion…">
+      <input type="text" id="imp_modell" placeholder="z.B. Persona, Attune, Legion…" />
     </label>
   </div>
 </div>
@@ -261,13 +261,13 @@
   <div class="row">
     <label>
       <span class="lbl">OP-Datum</span>
-      <input type="text" id="op_datum" placeholder="TT.MM.JJJJ">
+      <input type="text" id="op_datum" placeholder="TT.MM.JJJJ" />
     </label>
   </div>
   <div class="row">
     <label>
       <span class="lbl">Postoperativer Tag / Woche</span>
-      <input type="text" id="pop_tag" placeholder="z.B. POD 2 / Woche 6">
+      <input type="text" id="pop_tag" placeholder="z.B. POD 2 / Woche 6" />
     </label>
   </div>
 </div>
@@ -286,7 +286,7 @@
 <div class="row" id="vu_datum_row" style="display:none">
   <label>
     <span class="lbl">Datum Vergleichsaufnahme</span>
-    <input type="text" id="vu_datum" placeholder="MM/JJJJ">
+    <input type="text" id="vu_datum" placeholder="MM/JJJJ" />
   </label>
 </div>
 
@@ -309,7 +309,7 @@
         <div class="ai-field">
           <input type="number" id="fem_cor" step="0.1" placeholder="Ziel: 90 ± 3° zu mech. Achse"
             data-radlex="RID49730" data-en="femoral component coronal alignment"
-            data-loinc="LP410789-0">
+            data-loinc="LP410789-0" />
         </div>
         <div class="field-note">Varus &lt; 87° / Valgus &gt; 93°</div>
       </label>
@@ -320,9 +320,9 @@
         <select id="fem_cor_q"
           data-radlex="RID49731" data-en="femoral component coronal alignment assessment">
           <option value="regelrecht" data-radlex="RID49731-norm" data-en="neutral femoral alignment">Regelrecht (neutral)</option>
-          <option value="leichter Varus (< 5°)" data-radlex="RID49732" data-en="mild femoral varus">Leichter Varus (&lt; 5°)</option>
+          <option value="leichter Varus (&lt; 5°)" data-radlex="RID49732" data-en="mild femoral varus">Leichter Varus (&lt; 5°)</option>
           <option value="relevanter Varus (≥ 5°)" data-radlex="RID49733" data-en="significant femoral varus">Relevanter Varus (≥ 5°)</option>
-          <option value="leichter Valgus (< 5°)" data-radlex="RID49734" data-en="mild femoral valgus">Leichter Valgus (&lt; 5°)</option>
+          <option value="leichter Valgus (&lt; 5°)" data-radlex="RID49734" data-en="mild femoral valgus">Leichter Valgus (&lt; 5°)</option>
           <option value="relevanter Valgus (≥ 5°)" data-radlex="RID49735" data-en="significant femoral valgus">Relevanter Valgus (≥ 5°)</option>
         </select>
       </label>
@@ -360,7 +360,7 @@
         <span class="lbl">Coronare Stellung <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
         <div class="ai-field">
           <input type="number" id="tib_cor" step="0.1" placeholder="Ziel: 90 ± 3° zur Tibiaachse"
-            data-radlex="RID49750" data-en="tibial component coronal alignment">
+            data-radlex="RID49750" data-en="tibial component coronal alignment" />
         </div>
         <div class="field-note">Varus &lt; 87° / Valgus &gt; 93°</div>
       </label>
@@ -371,9 +371,9 @@
         <select id="tib_cor_q"
           data-radlex="RID49751" data-en="tibial component coronal alignment assessment">
           <option value="regelrecht" data-radlex="RID49751-norm" data-en="neutral tibial alignment">Regelrecht (neutral)</option>
-          <option value="leichter Varus (< 5°)" data-radlex="RID49752" data-en="mild tibial varus">Leichter Varus (&lt; 5°)</option>
+          <option value="leichter Varus (&lt; 5°)" data-radlex="RID49752" data-en="mild tibial varus">Leichter Varus (&lt; 5°)</option>
           <option value="relevanter Varus (≥ 5°)" data-radlex="RID49753" data-en="significant tibial varus">Relevanter Varus (≥ 5°)</option>
-          <option value="leichter Valgus (< 5°)" data-radlex="RID49754" data-en="mild tibial valgus">Leichter Valgus (&lt; 5°)</option>
+          <option value="leichter Valgus (&lt; 5°)" data-radlex="RID49754" data-en="mild tibial valgus">Leichter Valgus (&lt; 5°)</option>
           <option value="relevanter Valgus (≥ 5°)" data-radlex="RID49755" data-en="significant tibial valgus">Relevanter Valgus (≥ 5°)</option>
         </select>
       </label>
@@ -412,7 +412,7 @@
     <div class="ai-field">
       <input type="number" id="hka_post" step="0.1" placeholder="Ziel: 180 ± 3° (mechanisch neutral)"
         data-radlex="RID49504" data-en="hip-knee-ankle angle postoperative"
-        data-loinc="LP410789-0">
+        data-loinc="LP410789-0" />
     </div>
     <div class="field-note">Prä-op CPAK als Referenz; Ziel je nach geplanter Alignment-Strategie (kinematic vs. mechanical)</div>
   </label>
@@ -449,7 +449,7 @@
             <option value="">–</option>
             <option value="regelrecht (IS-Index 0,8–1,2)" data-radlex="RID49520-norm" data-en="normal patellar height">Regelrecht</option>
             <option value="Patella alta (IS-Index > 1,2)" data-radlex="RID49521" data-en="patella alta">Patella alta</option>
-            <option value="Patella baja / infera (IS-Index < 0,8)" data-radlex="RID49522" data-en="patella baja">Patella baja / infera</option>
+            <option value="Patella baja / infera (IS-Index &lt; 0,8)" data-radlex="RID49522" data-en="patella baja">Patella baja / infera</option>
           </select>
         </label>
       </div>
@@ -513,7 +513,7 @@
     <select id="peri_ges"
       data-radlex="RID49790" data-en="periprosthetic assessment">
       <option value="kein signifikanter Lysesaum, keine Osteolyse" data-radlex="RID49790-norm" data-en="no periprosthetic lucency">Unauffällig – kein Lysesaum, keine Osteolyse</option>
-      <option value="marginaler Lysesaum (< 2 mm), klinisch nicht signifikant" data-radlex="RID49791" data-en="minor periprosthetic lucency">Marginaler Saum (&lt; 2 mm), klinisch nicht signifikant</option>
+      <option value="marginaler Lysesaum (&lt; 2 mm), klinisch nicht signifikant" data-radlex="RID49791" data-en="minor periprosthetic lucency">Marginaler Saum (&lt; 2 mm), klinisch nicht signifikant</option>
       <option value="signifikanter Lysesaum (≥ 2 mm)" data-radlex="RID49792" data-en="significant periprosthetic lucency">Signifikanter Saum (≥ 2 mm) – Verlaufskontrolle</option>
       <option value="progrediente Osteolyse" data-radlex="RID49793" data-en="progressive osteolysis">Progrediente Osteolyse – Revisionsverdacht</option>
     </select>

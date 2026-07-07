@@ -3,23 +3,23 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.5)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
-<meta name="dcterms.title" content="Röntgen Knie präoperativ vor Totalendoprothese"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). RadLex/LOINC-codiert, mit FHIR-R4-Export. CPAK-Phänotypisierung erfolgt nachgelagert (nicht im kanonischen Template)."/>
-<meta name="dcterms.language" content="de"/>
-<meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date" content="2026-05-23"/>
-<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.5"/>
-<meta name="rrt:specialty" content="Radiology"/>
-<meta name="rrt:subspecialty" content="Musculoskeletal Radiology"/>
-<meta name="rrt:modality" content="DX"/>
-<meta name="rrt:bodyregion" content="Knee"/>
-<meta name="rrt:bodyregion.code" content="RID2472"/>
-<meta name="rrt:bodyregion.codesystem" content="http://radlex.org"/>
-<meta name="rrt:bodyregion.codesystem.version" content="4.1"/>
+<meta name="dcterms.title" content="Röntgen Knie präoperativ vor Totalendoprothese" />
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die präoperative Bildgebung vor Knie-TEP bei Primärarthrose. Integriert automatische Vermessung über ImageBiopsy Lab LAMA (DICOM SR). RadLex/LOINC-codiert, mit FHIR-R4-Export. CPAK-Phänotypisierung erfolgt nachgelagert (nicht im kanonischen Template)." />
+<meta name="dcterms.language" content="de" />
+<meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
+<meta name="dcterms.date" content="2026-05-23" />
+<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.5" />
+<meta name="rrt:specialty" content="Radiology" />
+<meta name="rrt:subspecialty" content="Musculoskeletal Radiology" />
+<meta name="rrt:modality" content="DX" />
+<meta name="rrt:bodyregion" content="Knee" />
+<meta name="rrt:bodyregion.code" content="RID2472" />
+<meta name="rrt:bodyregion.codesystem" content="http://radlex.org" />
+<meta name="rrt:bodyregion.codesystem.version" content="4.1" />
 
 </head>
 <body>
@@ -48,11 +48,11 @@
     <div class="rr-h2-rule"></div>
   </div>
   <div class="rr-side-toggle" id="side_toggle">
-    <input type="radio" name="seite" id="seite-none" value="" checked>
+    <input type="radio" name="seite" id="seite-none" value="" checked="checked" />
     <label for="seite-none" class="rr-side-empty-option">– bitte wählen –</label>
-    <input type="radio" name="seite" id="seite-re" value="re." data-radlex="RID5825" data-en="right">
+    <input type="radio" name="seite" id="seite-re" value="re." data-radlex="RID5825" data-en="right" />
     <label for="seite-re">re.</label>
-    <input type="radio" name="seite" id="seite-li" value="li." data-radlex="RID5824" data-en="left">
+    <input type="radio" name="seite" id="seite-li" value="li." data-radlex="RID5824" data-en="left" />
     <label for="seite-li">li.</label>
   </div>
 
@@ -66,42 +66,42 @@
     <label>
       <span class="rr-lbl"><span>a.p. stehend</span></span>
       <select id="proj_ap">
-        <option value="ja" data-radlex="RID10395" data-en="anteroposterior projection" selected>ja</option>
+        <option value="ja" data-radlex="RID10395" data-en="anteroposterior projection" selected="selected">ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>seitlich</span></span>
       <select id="proj_lat">
-        <option value="ja" data-radlex="RID10412" data-en="lateral projection" selected>ja</option>
+        <option value="ja" data-radlex="RID10412" data-en="lateral projection" selected="selected">ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>Patella tangential</span></span>
       <select id="proj_pat">
-        <option value="ja" data-radlex-status="local" data-en="patella tangential view" selected>ja</option>
+        <option value="ja" data-radlex-status="local" data-en="patella tangential view" selected="selected">ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>Ganzbein-Standaufnahme</span></span>
       <select id="proj_lla">
-        <option value="ja" data-radlex-status="local" data-en="long leg standing radiograph" selected>ja</option>
+        <option value="ja" data-radlex-status="local" data-en="long leg standing radiograph" selected="selected">ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>Rosenberg-Aufnahme</span></span>
       <select id="proj_rb">
-        <option value="nein" data-radlex-status="needs-mapping" selected>nein</option>
+        <option value="nein" data-radlex-status="needs-mapping" selected="selected">nein</option>
         <option value="ja" data-radlex-status="local" data-en="Rosenberg view (PA 45° flexion)">ja</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>Kalibrationskugel</span></span>
       <select id="proj_kugel">
-        <option value="ja" data-radlex-status="local" data-en="calibration sphere" selected>ja</option>
+        <option value="ja" data-radlex-status="local" data-en="calibration sphere" selected="selected">ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
@@ -117,37 +117,37 @@
     <label>
       <span class="rr-lbl"><span>HKA <span class="rr-rl-badge">LOINC LP410789-0</span></span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="hka" data-en="hip-knee-ankle angle"
-             data-loinc="LP410789-0" step="0.1" placeholder="z. B. 174.2">
+             data-loinc="LP410789-0" step="0.1" placeholder="z. B. 174.2" />
       <div class="rr-field-note">Hip-knee-ankle angle, °</div>
     </label>
     <label>
       <span class="rr-lbl"><span>MAD</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="mad" data-en="mechanical axis deviation"
-             data-radlex-status="local" step="0.1" placeholder="z. B. -12.4">
+             data-radlex-status="local" step="0.1" placeholder="z. B. -12.4" />
       <div class="rr-field-note">Mechanical axis deviation, mm (− = medial)</div>
     </label>
     <label>
       <span class="rr-lbl"><span>LLD <span class="rr-rl-badge">LOINC LP35279-5</span></span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="lld" data-en="leg length discrepancy"
-             data-loinc="LP35279-5" step="0.1" placeholder="z. B. -3.0">
+             data-loinc="LP35279-5" step="0.1" placeholder="z. B. -3.0" />
       <div class="rr-field-note">Beinlängendifferenz, mm (− = Untersuchungsseite kürzer)</div>
     </label>
     <label>
       <span class="rr-lbl"><span>mLDFA</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="mldfa" data-en="mechanical lateral distal femoral angle"
-             data-radlex-status="local" step="0.1" placeholder="z. B. 88.5">
+             data-radlex-status="local" step="0.1" placeholder="z. B. 88.5" />
       <div class="rr-field-note">Mech. lateraler distaler Femurwinkel, °</div>
     </label>
     <label>
       <span class="rr-lbl"><span>mMPTA</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="mmpta" data-en="mechanical medial proximal tibial angle"
-             data-radlex-status="local" step="0.1" placeholder="z. B. 84.1">
+             data-radlex-status="local" step="0.1" placeholder="z. B. 84.1" />
       <div class="rr-field-note">Mech. medialer proximaler Tibiawinkel, °</div>
     </label>
     <label>
       <span class="rr-lbl"><span>JLCA</span><span class="rr-ai-badge">KI</span></span>
       <input type="number" id="jlca" data-en="joint line convergence angle"
-             data-radlex-status="local" step="0.1" placeholder="z. B. 3.8">
+             data-radlex-status="local" step="0.1" placeholder="z. B. 3.8" />
       <div class="rr-field-note">Joint line convergence angle, °</div>
     </label>
   </div>
@@ -162,7 +162,7 @@
     <label>
       <span class="rr-lbl"><span>Medial</span></span>
       <select id="kl_med">
-        <option value="" data-radlex-status="needs-mapping" selected>–</option>
+        <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
         <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
@@ -173,7 +173,7 @@
     <label>
       <span class="rr-lbl"><span>Lateral</span></span>
       <select id="kl_lat">
-        <option value="" data-radlex-status="needs-mapping" selected>–</option>
+        <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
         <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
@@ -184,7 +184,7 @@
     <label>
       <span class="rr-lbl"><span>Patellofemoral</span></span>
       <select id="kl_pf">
-        <option value="" data-radlex-status="needs-mapping" selected>–</option>
+        <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
         <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
         <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
@@ -246,7 +246,7 @@
       <label>
         <span class="rr-lbl"><span>Tibialer Slope (sagittal)</span></span>
         <input type="number" id="slope" data-en="posterior tibial slope"
-               data-radlex-status="local" step="0.1" placeholder="z. B. 7.0">
+               data-radlex-status="local" step="0.1" placeholder="z. B. 7.0" />
         <div class="rr-field-note">Posteriorer tibialer Slope, °</div>
       </label>
     </div>
@@ -258,14 +258,14 @@
     <div class="rr-h2-rule"></div>
   </div>
   <div class="rr-row">
-    <label><input type="checkbox" id="add_osteophyten" data-radlex="RID4757" data-en="osteophyte"> Osteophyten <span class="rr-rl-badge">RID4757</span></label>
-    <label><input type="checkbox" id="add_zysten" data-radlex-status="local" data-en="subchondral cyst"> Subchondrale Zysten</label>
-    <label><input type="checkbox" id="add_sklerose" data-radlex-status="local" data-en="subchondral sclerosis"> Subchondrale Sklerose</label>
-    <label><input type="checkbox" id="add_freikorper" data-radlex-status="local" data-en="intraarticular loose body"> Freikörper</label>
-    <label><input type="checkbox" id="add_erguss" data-radlex="RID34769" data-en="joint effusion"> Gelenkserguss <span class="rr-rl-badge">RID34769</span></label>
-    <label><input type="checkbox" id="add_baker" data-radlex-status="local" data-en="Baker cyst"> Baker-Zyste</label>
-    <label><input type="checkbox" id="add_verkalk" data-radlex-status="local" data-en="soft tissue calcification"> Weichteilverkalkungen</label>
-    <label><input type="checkbox" id="add_chondrocalc" data-radlex-status="local" data-en="chondrocalcinosis"> Chondrokalzinose</label>
+    <label><input type="checkbox" id="add_osteophyten" data-radlex="RID4757" data-en="osteophyte" /> Osteophyten <span class="rr-rl-badge">RID4757</span></label>
+    <label><input type="checkbox" id="add_zysten" data-radlex-status="local" data-en="subchondral cyst" /> Subchondrale Zysten</label>
+    <label><input type="checkbox" id="add_sklerose" data-radlex-status="local" data-en="subchondral sclerosis" /> Subchondrale Sklerose</label>
+    <label><input type="checkbox" id="add_freikorper" data-radlex-status="local" data-en="intraarticular loose body" /> Freikörper</label>
+    <label><input type="checkbox" id="add_erguss" data-radlex="RID34769" data-en="joint effusion" /> Gelenkserguss <span class="rr-rl-badge">RID34769</span></label>
+    <label><input type="checkbox" id="add_baker" data-radlex-status="local" data-en="Baker cyst" /> Baker-Zyste</label>
+    <label><input type="checkbox" id="add_verkalk" data-radlex-status="local" data-en="soft tissue calcification" /> Weichteilverkalkungen</label>
+    <label><input type="checkbox" id="add_chondrocalc" data-radlex-status="local" data-en="chondrocalcinosis" /> Chondrokalzinose</label>
   </div>
 
   <!-- KNOCHENSTRUKTUR -->
@@ -276,7 +276,7 @@
   <label>
     <span class="rr-lbl"><span>Qualitative Beurteilung</span></span>
     <select id="bone_q">
-      <option value="" data-radlex-status="needs-mapping" selected>–</option>
+      <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
       <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate bone density">altersentsprechend</option>
       <option value="osteopen" data-radlex-status="local" data-en="osteopenic bone density">osteopen</option>
       <option value="osteoporotisch" data-radlex="RID3406" data-en="osteoporosis">osteoporotisch</option>
@@ -298,7 +298,7 @@
       <div class="rr-row">
         <label>
           <span class="rr-lbl"><span>Datum VU</span></span>
-          <input type="text" id="vu_date" placeholder="z. B. 03/2024">
+          <input type="text" id="vu_date" placeholder="z. B. 03/2024" />
         </label>
         <label>
           <span class="rr-lbl"><span>Verlauf</span></span>

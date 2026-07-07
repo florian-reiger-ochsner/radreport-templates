@@ -3,26 +3,26 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>CT Leber – LI-RADS v2018 – Strukturierte Befundvorlage (v1.3)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
-<meta name="dcterms.title" content="CT Leber bei HCC-Risikopatient – LI-RADS v2018"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage für die CT-Bildgebung der Leber bei Patienten mit erhöhtem HCC-Risiko nach LI-RADS v2018 (didaktische Aufbereitung nach Schima/Kopf/Eisenhuber RöFo 2023). Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular, ohne CSS/JS. Mode-Switch, geführter Wizard, 4-Schritte-Algorithmus, LR-Kategorie-Berechnung, LR-TR und Vorschau werden in der Demo von demo.js zur Laufzeit erzeugt. Die §16-TPG/LTx-Evaluation wurde in ein eigenständiges Template ausgelagert (HJK-MRRT-LTX-HCC-EVAL)."/>
-<meta name="dcterms.language" content="de"/>
-<meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date" content="2026-07-06"/>
-<meta name="dcterms.identifier" content="HJK-MRRT-CT-LEBER-LIRADS-v1.3"/>
-<meta name="dcterms.rights" content="Creative Commons Attribution 4.0 International (CC BY 4.0)."/>
-<meta name="dcterms.license" content="https://creativecommons.org/licenses/by/4.0/"/>
-<meta name="rrt:specialty" content="Radiology"/>
-<meta name="rrt:subspecialty" content="Abdominal Radiology"/>
-<meta name="rrt:modality" content="CT"/>
-<meta name="rrt:bodyregion" content="Liver"/>
-<meta name="rrt:coding-systems" content="RadLex, LOINC (partial), ACR-LI-RADS, local"/>
+<meta name="dcterms.title" content="CT Leber bei HCC-Risikopatient – LI-RADS v2018" />
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die CT-Bildgebung der Leber bei Patienten mit erhöhtem HCC-Risiko nach LI-RADS v2018 (didaktische Aufbereitung nach Schima/Kopf/Eisenhuber RöFo 2023). Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular, ohne CSS/JS. Mode-Switch, geführter Wizard, 4-Schritte-Algorithmus, LR-Kategorie-Berechnung, LR-TR und Vorschau werden in der Demo von demo.js zur Laufzeit erzeugt. Die §16-TPG/LTx-Evaluation wurde in ein eigenständiges Template ausgelagert (HJK-MRRT-LTX-HCC-EVAL)." />
+<meta name="dcterms.language" content="de" />
+<meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
+<meta name="dcterms.date" content="2026-07-06" />
+<meta name="dcterms.identifier" content="HJK-MRRT-CT-LEBER-LIRADS-v1.3" />
+<meta name="dcterms.rights" content="Creative Commons Attribution 4.0 International (CC BY 4.0)." />
+<meta name="dcterms.license" content="https://creativecommons.org/licenses/by/4.0/" />
+<meta name="rrt:specialty" content="Radiology" />
+<meta name="rrt:subspecialty" content="Abdominal Radiology" />
+<meta name="rrt:modality" content="CT" />
+<meta name="rrt:bodyregion" content="Liver" />
+<meta name="rrt:coding-systems" content="RadLex, LOINC (partial), ACR-LI-RADS, local" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-06T04:57:50.209Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-07T11:09:45.662Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,10 +63,10 @@
     <div class="rr-h2-sub">LI-RADS v2018 ist indiziert bei Erwachsenen mit ≥ 1 zutreffenden Risikomerkmal.</div>
   </div>
   <div class="rr-checkgrid" id="risk_grid">
-    <label class="rr-check"><input type="checkbox" id="risk_cirrhosis" data-en="cirrhosis" data-radlex-status="local"> Leberzirrhose (außer Gefäßerkrankungen)</label>
-    <label class="rr-check"><input type="checkbox" id="risk_hbv" data-en="chronic hepatitis B" data-radlex-status="local"> Chronische HBV-Infektion</label>
-    <label class="rr-check"><input type="checkbox" id="risk_hcc_current" data-en="hepatocellular carcinoma" data-radlex-status="local"> Gesichertes/aktuelles HCC</label>
-    <label class="rr-check"><input type="checkbox" id="risk_hcc_treated" data-en="treated hepatocellular carcinoma" data-radlex-status="local"> Z. n. Behandlung eines HCC</label>
+    <label class="rr-check"><input type="checkbox" id="risk_cirrhosis" data-en="cirrhosis" data-radlex-status="local" /> Leberzirrhose (außer Gefäßerkrankungen)</label>
+    <label class="rr-check"><input type="checkbox" id="risk_hbv" data-en="chronic hepatitis B" data-radlex-status="local" /> Chronische HBV-Infektion</label>
+    <label class="rr-check"><input type="checkbox" id="risk_hcc_current" data-en="hepatocellular carcinoma" data-radlex-status="local" /> Gesichertes/aktuelles HCC</label>
+    <label class="rr-check"><input type="checkbox" id="risk_hcc_treated" data-en="treated hepatocellular carcinoma" data-radlex-status="local" /> Z. n. Behandlung eines HCC</label>
   </div>
 
   <details>
@@ -74,7 +74,7 @@
     <div class="rr-note-block">
       <strong>LI-RADS darf nicht angewendet werden bei Zirrhose aufgrund von Gefäßerkrankungen:</strong> Budd-Chiari-Syndrom, hereditäre hämorrhagische Teleangiektasie (HHT/Morbus Osler), chronische kardiale Stauung, kongenitale Lebervenenerkrankungen. Ebenfalls nicht: fokale Leberläsionen ohne o. g. Risikomerkmale, Pädiatrie (&lt; 18 Jahre).
       <div class="rr-row">
-        <label class="rr-check"><input type="checkbox" id="exclude_vascular"> Ausschlusskriterium liegt vor – LI-RADS nicht anwenden</label>
+        <label class="rr-check"><input type="checkbox" id="exclude_vascular" /> Ausschlusskriterium liegt vor – LI-RADS nicht anwenden</label>
       </div>
     </div>
   </details>
@@ -178,10 +178,10 @@
     <label>
       <span class="rr-lbl"><span>Lebermorphologie</span></span>
       <div class="rr-checkgrid" id="bgm_grid">
-        <label class="rr-check"><input type="checkbox" id="bgm_norm" data-en="liver morphology normal" data-radlex-status="local"> Regelrecht</label>
-        <label class="rr-check"><input type="checkbox" id="bgm_zirr" data-en="cirrhosis" data-radlex-status="local"> Zirrhotisch konfiguriert</label>
-        <label class="rr-check"><input type="checkbox" id="bgm_steat" data-en="hepatic steatosis" data-radlex-status="local"> Steatose</label>
-        <label class="rr-check"><input type="checkbox" id="bgm_haemo" data-en="hemochromatosis" data-radlex-status="local"> Hinweis auf Hämochromatose</label>
+        <label class="rr-check"><input type="checkbox" id="bgm_norm" data-en="liver morphology normal" data-radlex-status="local" /> Regelrecht</label>
+        <label class="rr-check"><input type="checkbox" id="bgm_zirr" data-en="cirrhosis" data-radlex-status="local" /> Zirrhotisch konfiguriert</label>
+        <label class="rr-check"><input type="checkbox" id="bgm_steat" data-en="hepatic steatosis" data-radlex-status="local" /> Steatose</label>
+        <label class="rr-check"><input type="checkbox" id="bgm_haemo" data-en="hemochromatosis" data-radlex-status="local" /> Hinweis auf Hämochromatose</label>
       </div>
     </label>
     <label>
@@ -227,7 +227,7 @@
       </label>
       <label>
         <span class="rr-lbl"><span>Größe <span class="rr-rl-badge">RID13432 · LOINC 21889-1</span></span></span>
-        <input type="number" data-field="size" data-radlex="RID13432" data-loinc="21889-1" data-en="lesion size" data-lesion="1" min="1" step="1" placeholder="mm">
+        <input type="number" data-field="size" data-radlex="RID13432" data-loinc="21889-1" data-en="lesion size" data-lesion="1" min="1" step="1" placeholder="mm" />
         <div class="rr-field-note">Größter Durchmesser, mm</div>
       </label>
     </div>
@@ -235,20 +235,20 @@
     <!-- Schritt 1 – Hauptkriterien -->
     <div class="rr-subhead">Schritt 1 – Hauptkriterien</div>
     <div class="rr-checkgrid">
-      <label class="rr-check"><input type="checkbox" data-field="aphe" data-en="nonrim arterial phase hyperenhancement" data-radlex-status="local" data-lesion="1"> Nonrim APHE</label>
-      <label class="rr-check"><input type="checkbox" data-field="washout" data-en="nonperipheral washout" data-radlex-status="local" data-lesion="1"> Nonperipherer Wash-Out</label>
-      <label class="rr-check"><input type="checkbox" data-field="capsule" data-en="enhancing capsule" data-radlex-status="local" data-lesion="1"> Anreichernde Kapsel</label>
-      <label class="rr-check"><input type="checkbox" data-field="thresholdGrowth" data-en="threshold growth" data-radlex-status="local" data-lesion="1"> Schwellenwachstum (≥ 50 %/6 Mo)</label>
+      <label class="rr-check"><input type="checkbox" data-field="aphe" data-en="nonrim arterial phase hyperenhancement" data-radlex-status="local" data-lesion="1" /> Nonrim APHE</label>
+      <label class="rr-check"><input type="checkbox" data-field="washout" data-en="nonperipheral washout" data-radlex-status="local" data-lesion="1" /> Nonperipherer Wash-Out</label>
+      <label class="rr-check"><input type="checkbox" data-field="capsule" data-en="enhancing capsule" data-radlex-status="local" data-lesion="1" /> Anreichernde Kapsel</label>
+      <label class="rr-check"><input type="checkbox" data-field="thresholdGrowth" data-en="threshold growth" data-radlex-status="local" data-lesion="1" /> Schwellenwachstum (≥ 50 %/6 Mo)</label>
     </div>
 
     <!-- Sonderkategorien -->
     <div class="rr-subhead rr-subhead-malig">Sonderkategorien (überschreiben Hauptkriterien-Logik)</div>
     <div class="rr-checkgrid">
-      <label class="rr-check"><input type="checkbox" data-field="tiv" data-en="tumor in vein" data-radlex-status="local" data-lesion="1"> TIV – Tumor in Vene (KM-anreichernd)</label>
-      <label class="rr-check"><input type="checkbox" data-field="lrm_targetoid" data-en="targetoid appearance" data-radlex-status="local" data-lesion="1"> LR-M: Targetoid appearance</label>
-      <label class="rr-check"><input type="checkbox" data-field="lrm_infiltrative" data-en="infiltrative appearance" data-radlex-status="local" data-lesion="1"> LR-M: Infiltratives Erscheinungsbild</label>
-      <label class="rr-check"><input type="checkbox" data-field="lrm_necrosis" data-en="marked necrosis" data-radlex-status="local" data-lesion="1"> LR-M: ausgeprägte Nekrose</label>
-      <label class="rr-check"><input type="checkbox" data-field="lrm_diffusion" data-en="marked diffusion restriction" data-radlex-status="local" data-lesion="1"> LR-M: deutliche Diffusionseinschränkung</label>
+      <label class="rr-check"><input type="checkbox" data-field="tiv" data-en="tumor in vein" data-radlex-status="local" data-lesion="1" /> TIV – Tumor in Vene (KM-anreichernd)</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_targetoid" data-en="targetoid appearance" data-radlex-status="local" data-lesion="1" /> LR-M: Targetoid appearance</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_infiltrative" data-en="infiltrative appearance" data-radlex-status="local" data-lesion="1" /> LR-M: Infiltratives Erscheinungsbild</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_necrosis" data-en="marked necrosis" data-radlex-status="local" data-lesion="1" /> LR-M: ausgeprägte Nekrose</label>
+      <label class="rr-check"><input type="checkbox" data-field="lrm_diffusion" data-en="marked diffusion restriction" data-radlex-status="local" data-lesion="1" /> LR-M: deutliche Diffusionseinschränkung</label>
     </div>
 
     <div class="rr-row" data-show-if="tiv">
@@ -269,30 +269,30 @@
       <div>
         <div class="rr-subhead rr-subhead-malig">Für Malignität allgemein (nicht HCC-spezifisch)</div>
         <div class="rr-checkgrid">
-          <label class="rr-check"><input type="checkbox" data-field="af_m_us_visible" data-en="ancillary US visible discrete nodule" data-radlex-status="local" data-lesion="1"> Darstellbar im US als umschriebener Knoten</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_m_growth_subthreshold" data-en="ancillary subthreshold growth" data-radlex-status="local" data-lesion="1"> Eindeutiges Wachstum (&lt; Schwellenwachstum)</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_m_diffusion_restricted" data-en="ancillary restricted diffusion" data-radlex-status="local" data-lesion="1"> Eingeschränkte Diffusion</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_m_t2_mild_moderate" data-en="ancillary mild-moderate T2 hyperintensity" data-radlex-status="local" data-lesion="1"> Gering-mäßige Hyperintensität in T2</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_m_corona" data-en="ancillary corona enhancement" data-radlex-status="local" data-lesion="1"> Corona-Anreicherung</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_m_fat_sparing" data-en="ancillary fat sparing in solid mass" data-radlex-status="local" data-lesion="1"> Fettarmut/-freiheit in solidem Knoten</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_m_iron_sparing" data-en="ancillary iron sparing in solid mass" data-radlex-status="local" data-lesion="1"> Fehlender Eisennachweis in solidem Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_us_visible" data-en="ancillary US visible discrete nodule" data-radlex-status="local" data-lesion="1" /> Darstellbar im US als umschriebener Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_growth_subthreshold" data-en="ancillary subthreshold growth" data-radlex-status="local" data-lesion="1" /> Eindeutiges Wachstum (&lt; Schwellenwachstum)</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_diffusion_restricted" data-en="ancillary restricted diffusion" data-radlex-status="local" data-lesion="1" /> Eingeschränkte Diffusion</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_t2_mild_moderate" data-en="ancillary mild-moderate T2 hyperintensity" data-radlex-status="local" data-lesion="1" /> Gering-mäßige Hyperintensität in T2</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_corona" data-en="ancillary corona enhancement" data-radlex-status="local" data-lesion="1" /> Corona-Anreicherung</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_fat_sparing" data-en="ancillary fat sparing in solid mass" data-radlex-status="local" data-lesion="1" /> Fettarmut/-freiheit in solidem Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_m_iron_sparing" data-en="ancillary iron sparing in solid mass" data-radlex-status="local" data-lesion="1" /> Fehlender Eisennachweis in solidem Knoten</label>
         </div>
         <div class="rr-subhead rr-subhead-malig">Für HCC im Besonderen</div>
         <div class="rr-checkgrid">
-          <label class="rr-check"><input type="checkbox" data-field="af_hcc_nonenhancing_capsule" data-en="ancillary nonenhancing capsule" data-radlex-status="local" data-lesion="1"> Nichtanreichernde Kapsel</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_hcc_nodule_in_nodule" data-en="ancillary nodule-in-nodule" data-radlex-status="local" data-lesion="1"> Knoten im Knoten</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_hcc_mosaic" data-en="ancillary mosaic architecture" data-radlex-status="local" data-lesion="1"> Mosaikarchitektur</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_hcc_blood_products" data-en="ancillary intralesional blood products" data-radlex-status="local" data-lesion="1"> Blutabbauprodukte im Knoten</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_hcc_fat_in_nodule" data-en="ancillary fat in mass more than adjacent liver" data-radlex-status="local" data-lesion="1"> Fettnachweis im Knoten (&gt; Umgebung)</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_nonenhancing_capsule" data-en="ancillary nonenhancing capsule" data-radlex-status="local" data-lesion="1" /> Nichtanreichernde Kapsel</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_nodule_in_nodule" data-en="ancillary nodule-in-nodule" data-radlex-status="local" data-lesion="1" /> Knoten im Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_mosaic" data-en="ancillary mosaic architecture" data-radlex-status="local" data-lesion="1" /> Mosaikarchitektur</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_blood_products" data-en="ancillary intralesional blood products" data-radlex-status="local" data-lesion="1" /> Blutabbauprodukte im Knoten</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_hcc_fat_in_nodule" data-en="ancillary fat in mass more than adjacent liver" data-radlex-status="local" data-lesion="1" /> Fettnachweis im Knoten (&gt; Umgebung)</label>
         </div>
         <div class="rr-subhead rr-subhead-benign">Für Benignität</div>
         <div class="rr-checkgrid">
-          <label class="rr-check"><input type="checkbox" data-field="af_b_size_stability" data-en="ancillary size stability over 2 years" data-radlex-status="local" data-lesion="1"> Größenstabilität &gt; 2 Jahre</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_b_size_reduction" data-en="ancillary size reduction" data-radlex-status="local" data-lesion="1"> Größenabnahme</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_b_parallels_vessels" data-en="ancillary enhancement parallels vessels" data-radlex-status="local" data-lesion="1"> KM-Anreicherung simultan zu Blutgefäßen</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_b_undistorted_vessels" data-en="ancillary undistorted vessels" data-radlex-status="local" data-lesion="1"> Gefäße nicht verlagert/deformiert</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_b_iron_higher" data-en="ancillary iron higher than liver" data-radlex-status="local" data-lesion="1"> Höheres Eisensignal als Umgebung</label>
-          <label class="rr-check"><input type="checkbox" data-field="af_b_t2_marked" data-en="ancillary marked T2 hyperintensity" data-radlex-status="local" data-lesion="1"> Ausgeprägte Hyperintensität in T2</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_size_stability" data-en="ancillary size stability over 2 years" data-radlex-status="local" data-lesion="1" /> Größenstabilität &gt; 2 Jahre</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_size_reduction" data-en="ancillary size reduction" data-radlex-status="local" data-lesion="1" /> Größenabnahme</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_parallels_vessels" data-en="ancillary enhancement parallels vessels" data-radlex-status="local" data-lesion="1" /> KM-Anreicherung simultan zu Blutgefäßen</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_undistorted_vessels" data-en="ancillary undistorted vessels" data-radlex-status="local" data-lesion="1" /> Gefäße nicht verlagert/deformiert</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_iron_higher" data-en="ancillary iron higher than liver" data-radlex-status="local" data-lesion="1" /> Höheres Eisensignal als Umgebung</label>
+          <label class="rr-check"><input type="checkbox" data-field="af_b_t2_marked" data-en="ancillary marked T2 hyperintensity" data-radlex-status="local" data-lesion="1" /> Ausgeprägte Hyperintensität in T2</label>
         </div>
         <div class="rr-field-note">Regel: ≥ 1 AF Malignität → Upgrade 1 Kategorie, max. LR-4. ≥ 1 AF Benignität → Downgrade 1 Kategorie. Beides → keine Anpassung.</div>
       </div>
@@ -302,7 +302,7 @@
     <details>
       <summary>Schritt 3 – Tie-Breaking-Regel (bei Zweifel)</summary>
       <div>
-        <label class="rr-check"><input type="checkbox" data-field="tiebreak_uncertain" data-lesion="1"> Befunder hat Zweifel an der Zuordnung</label>
+        <label class="rr-check"><input type="checkbox" data-field="tiebreak_uncertain" data-lesion="1" /> Befunder hat Zweifel an der Zuordnung</label>
         <div class="rr-row" data-show-if="tiebreak_uncertain">
           <label>
             <span class="rr-lbl"><span>Art der Unsicherheit</span></span>
@@ -340,7 +340,7 @@
 
     <!-- Behandelte Observation → LR-TR -->
     <div class="rr-row">
-      <label class="rr-check"><input type="checkbox" data-field="treated" data-lesion="1"> Behandelte Observation? (Z. n. Resektion / Ablation / Embolisation) → LR-TR-Pfad</label>
+      <label class="rr-check"><input type="checkbox" data-field="treated" data-lesion="1" /> Behandelte Observation? (Z. n. Resektion / Ablation / Embolisation) → LR-TR-Pfad</label>
     </div>
     <div class="rr-row" data-show-if="treated">
       <label>
@@ -380,7 +380,7 @@
       <div class="rr-row rr-row-three">
         <label>
           <span class="rr-lbl"><span>VU vom</span></span>
-          <input type="text" id="vu_date" placeholder="z. B. 11/2025">
+          <input type="text" id="vu_date" placeholder="z. B. 11/2025" />
         </label>
         <label>
           <span class="rr-lbl"><span>Modalität VU</span></span>
@@ -419,10 +419,10 @@
 
   <!-- ===================== EVIDENZ / ATTRIBUTION ===================== -->
   <div class="rr-evidence-footer">
-    <strong>Algorithmus:</strong> ACR LI-RADS CT/MRI v2018 (American College of Radiology).<br>
+    <strong>Algorithmus:</strong> ACR LI-RADS CT/MRI v2018 (American College of Radiology).<br />
     <strong>Didaktische Aufbereitung, 4-Schritte-Logik, Hilfskriterien-Tabelle, LR-TIV-Subtypisierung:</strong>
-    Schima W, Kopf H, Eisenhuber E. LI-RADS leicht gemacht. Fortschr Röntgenstr 2023; 195: 486–494. DOI 10.1055/a-1990-5924.<br>
-    <strong>Hinweis:</strong> Die §16-TPG/LTx-Evaluation (Mailand-Kriterien) wurde in ein eigenständiges Template ausgelagert: HJK-MRRT-LTX-HCC-EVAL.<br>
+    Schima W, Kopf H, Eisenhuber E. LI-RADS leicht gemacht. Fortschr Röntgenstr 2023; 195: 486–494. DOI 10.1055/a-1990-5924.<br />
+    <strong>Hinweis:</strong> Die §16-TPG/LTx-Evaluation (Mailand-Kriterien) wurde in ein eigenständiges Template ausgelagert: HJK-MRRT-LTX-HCC-EVAL.<br />
     <strong>Lizenz:</strong> Creative Commons Attribution 4.0 International (CC BY 4.0).
   </div>
 

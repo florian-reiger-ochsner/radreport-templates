@@ -3,27 +3,27 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>CT Lungenarterien (CTPA) – Lungenembolie – Strukturierte Befundvorlage (v1.0)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
-<meta name="dcterms.title"       content="CT Lungenarterien (CTPA) – Lungenembolie"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage CT Pulmonalisangiographie (CTPA). Basierend auf DRG-Template 041807.2.1806120000 (CC BY 4.0). RadLex-/LOINC-kodiert, FHIR-R4-Export. RV/LV-Ratio-Kalkulator mit ESC-2019-Risikostratifizierung wird nachgelagert in der Demo berechnet (nicht im kanonischen Template)."/>
-<meta name="dcterms.language"    content="de"/>
-<meta name="dcterms.identifier"  content="HJK-MRRT-CT-LUNGENEMBOLIE-v1.0"/>
-<meta name="dcterms.source"      content="DRG AK Befundung AG Thoraxdiagnostik, Template 041807.2.1806120000, CC BY 4.0, https://github.com/DRGagit/ak_befundung"/>
-<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date"        content="2026-07-06"/>
-<meta name="dcterms.rights"      content="Basierend auf DRG-Template CC BY 4.0. Adaption und Erweiterung: HJK Wien."/>
-<meta name="dcterms.license"     content="https://creativecommons.org/licenses/by/4.0/"/>
-<meta name="rrt:specialty"       content="Radiology"/>
-<meta name="rrt:subspecialty"    content="Chest Radiology; Vascular Radiology"/>
-<meta name="rrt:modality"        content="CT"/>
-<meta name="rrt:bodyregion"      content="Chest"/>
-<meta name="rrt:coding-systems"  content="RadLex, LOINC (partial), SNOMED CT (PE), local"/>
+<meta name="dcterms.title"       content="CT Lungenarterien (CTPA) – Lungenembolie" />
+<meta name="dcterms.description" content="Strukturierte Befundvorlage CT Pulmonalisangiographie (CTPA). Basierend auf DRG-Template 041807.2.1806120000 (CC BY 4.0). RadLex-/LOINC-kodiert, FHIR-R4-Export. RV/LV-Ratio-Kalkulator mit ESC-2019-Risikostratifizierung wird nachgelagert in der Demo berechnet (nicht im kanonischen Template)." />
+<meta name="dcterms.language"    content="de" />
+<meta name="dcterms.identifier"  content="HJK-MRRT-CT-LUNGENEMBOLIE-v1.0" />
+<meta name="dcterms.source"      content="DRG AK Befundung AG Thoraxdiagnostik, Template 041807.2.1806120000, CC BY 4.0, https://github.com/DRGagit/ak_befundung" />
+<meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
+<meta name="dcterms.date"        content="2026-07-06" />
+<meta name="dcterms.rights"      content="Basierend auf DRG-Template CC BY 4.0. Adaption und Erweiterung: HJK Wien." />
+<meta name="dcterms.license"     content="https://creativecommons.org/licenses/by/4.0/" />
+<meta name="rrt:specialty"       content="Radiology" />
+<meta name="rrt:subspecialty"    content="Chest Radiology; Vascular Radiology" />
+<meta name="rrt:modality"        content="CT" />
+<meta name="rrt:bodyregion"      content="Chest" />
+<meta name="rrt:coding-systems"  content="RadLex, LOINC (partial), SNOMED CT (PE), local" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-06T18:34:26.172Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-07T11:09:45.708Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +51,7 @@
   <div class="rr-doc-sub">CTPA · Lungenembolie · RadLex-kodiert · v1.0 · HJK Wien</div>
   <div class="rr-title-rule"></div>
 
-  <!-- ===================== TECHNIK & KLINISCHE ANGABEN ===================== -->
+  <!-- ===================== TECHNIK &amp; KLINISCHE ANGABEN ===================== -->
   <div class="rr-h2-wrap">
     <h2>Technik &amp; klinische Angaben</h2>
     <div class="rr-h2-rule"></div>
@@ -60,7 +60,7 @@
     <label>
       <span class="rr-lbl"><span>KM-Menge (ml)</span></span>
       <input type="number" id="km_menge" placeholder="z. B. 70"
-        data-radlex="RID49850" data-en="contrast medium volume">
+        data-radlex="RID49850" data-en="contrast medium volume" />
     </label>
     <label>
       <span class="rr-lbl"><span>KM-Fluss / Bolus-Qualität <span class="rr-rl-badge">RID49851</span></span></span>
@@ -75,11 +75,11 @@
     <label>
       <span class="rr-lbl"><span>D-Dimer (mg/l FEU)</span></span>
       <input type="number" id="ddimer" step="0.01" placeholder="–"
-        data-loinc="48065-7" data-en="D-dimer">
+        data-loinc="48065-7" data-en="D-dimer" />
     </label>
     <label>
       <span class="rr-lbl"><span>Klinische Fragestellung</span></span>
-      <input type="text" id="fragestellung" placeholder="z. B. Lungenembolie?">
+      <input type="text" id="fragestellung" placeholder="z. B. Lungenembolie?" />
     </label>
   </div>
   <div class="rr-row">
@@ -92,7 +92,7 @@
     </label>
     <label>
       <span class="rr-lbl"><span>Datum Vergleich</span></span>
-      <input type="text" id="vgl_dat" placeholder="MM/JJJJ">
+      <input type="text" id="vgl_dat" placeholder="MM/JJJJ" />
     </label>
   </div>
 
@@ -106,13 +106,13 @@
       <span class="rr-lbl"><span>LE-Nachweis <span class="rr-rl-badge">RID5352</span></span></span>
       <div class="rr-side-toggle" id="le_toggle">
         <input type="radio" name="le_nachweis" id="le_ja" value="ja"
-          data-radlex="RID5352" data-en="pulmonary embolism">
+          data-radlex="RID5352" data-en="pulmonary embolism" />
         <label for="le_ja">Ja – LE nachweisbar</label>
         <input type="radio" name="le_nachweis" id="le_nein" value="nein"
-          data-radlex="RID5352-neg" data-en="no pulmonary embolism">
+          data-radlex="RID5352-neg" data-en="no pulmonary embolism" />
         <label for="le_nein">Nein – keine LE</label>
         <input type="radio" name="le_nachweis" id="le_fraglich" value="fraglich"
-          data-radlex="RID5352-frag" data-en="indeterminate for pulmonary embolism">
+          data-radlex="RID5352-frag" data-en="indeterminate for pulmonary embolism" />
         <label for="le_fraglich">Fraglich</label>
       </div>
     </label>
@@ -125,29 +125,29 @@
   </div>
   <div class="ctpa-chips" id="lok_ebene">
     <label class="ctpa-chip"><input type="checkbox" id="lok_zentral"
-      data-radlex="RID5352-cen" data-en="central pulmonary embolism"><span>Zentral</span></label>
+      data-radlex="RID5352-cen" data-en="central pulmonary embolism" /><span>Zentral</span></label>
     <label class="ctpa-chip"><input type="checkbox" id="lok_lobär"
-      data-radlex="RID5352-lob" data-en="lobar pulmonary embolism"><span>Lobär</span></label>
+      data-radlex="RID5352-lob" data-en="lobar pulmonary embolism" /><span>Lobär</span></label>
     <label class="ctpa-chip"><input type="checkbox" id="lok_segmental"
-      data-radlex="RID5352-seg" data-en="segmental pulmonary embolism"><span>Segmental</span></label>
+      data-radlex="RID5352-seg" data-en="segmental pulmonary embolism" /><span>Segmental</span></label>
     <label class="ctpa-chip"><input type="checkbox" id="lok_subsegmental"
-      data-radlex="RID5352-sub" data-en="subsegmental pulmonary embolism"><span>Subsegmental</span></label>
+      data-radlex="RID5352-sub" data-en="subsegmental pulmonary embolism" /><span>Subsegmental</span></label>
   </div>
 
   <!-- Lokalisation – anatomisch -->
   <div class="ctpa-checkgrid">
     <div>
       <div class="ctpa-col-head">Rechts</div>
-      <label class="ctpa-check"><input type="checkbox" id="loc_trpulm_re"><span>Truncus pulmonalis / A. pulmonalis re.</span></label>
-      <label class="ctpa-check"><input type="checkbox" id="loc_ol_re"><span>Oberlappen re.</span></label>
-      <label class="ctpa-check"><input type="checkbox" id="loc_ml_re"><span>Mittellappen re.</span></label>
-      <label class="ctpa-check"><input type="checkbox" id="loc_ul_re"><span>Unterlappen re.</span></label>
+      <label class="ctpa-check"><input type="checkbox" id="loc_trpulm_re" /><span>Truncus pulmonalis / A. pulmonalis re.</span></label>
+      <label class="ctpa-check"><input type="checkbox" id="loc_ol_re" /><span>Oberlappen re.</span></label>
+      <label class="ctpa-check"><input type="checkbox" id="loc_ml_re" /><span>Mittellappen re.</span></label>
+      <label class="ctpa-check"><input type="checkbox" id="loc_ul_re" /><span>Unterlappen re.</span></label>
     </div>
     <div>
       <div class="ctpa-col-head">Links</div>
-      <label class="ctpa-check"><input type="checkbox" id="loc_trpulm_li"><span>A. pulmonalis li.</span></label>
-      <label class="ctpa-check"><input type="checkbox" id="loc_ol_li"><span>Oberlappen / Lingula li.</span></label>
-      <label class="ctpa-check"><input type="checkbox" id="loc_ul_li"><span>Unterlappen li.</span></label>
+      <label class="ctpa-check"><input type="checkbox" id="loc_trpulm_li" /><span>A. pulmonalis li.</span></label>
+      <label class="ctpa-check"><input type="checkbox" id="loc_ol_li" /><span>Oberlappen / Lingula li.</span></label>
+      <label class="ctpa-check"><input type="checkbox" id="loc_ul_li" /><span>Unterlappen li.</span></label>
     </div>
   </div>
 
@@ -156,9 +156,9 @@
     <label>
       <span class="rr-lbl"><span>Zeichen älterer Embolien</span></span>
       <div class="ctpa-checkrow">
-        <label class="ctpa-check"><input type="checkbox" id="alt_dil"><span>Dilatierte Bronchialarterien</span></label>
-        <label class="ctpa-check"><input type="checkbox" id="alt_wand"><span>Wandständige Thromben</span></label>
-        <label class="ctpa-check"><input type="checkbox" id="alt_webs"><span>Webs / Bands</span></label>
+        <label class="ctpa-check"><input type="checkbox" id="alt_dil" /><span>Dilatierte Bronchialarterien</span></label>
+        <label class="ctpa-check"><input type="checkbox" id="alt_wand" /><span>Wandständige Thromben</span></label>
+        <label class="ctpa-check"><input type="checkbox" id="alt_webs" /><span>Webs / Bands</span></label>
       </div>
     </label>
   </div>
@@ -173,19 +173,19 @@
     <label>
       <span class="rr-lbl"><span>RV-Ø (mm)</span></span>
       <input type="number" id="rv_dia" step="0.1" placeholder="–"
-        data-radlex="RID5069" data-en="right ventricular diameter" data-loinc="79900-0">
+        data-radlex="RID5069" data-en="right ventricular diameter" data-loinc="79900-0" />
     </label>
     <label>
       <span class="rr-lbl"><span>LV-Ø (mm)</span></span>
       <input type="number" id="lv_dia" step="0.1" placeholder="–"
-        data-radlex="RID5073" data-en="left ventricular diameter" data-loinc="79901-8">
+        data-radlex="RID5073" data-en="left ventricular diameter" data-loinc="79901-8" />
     </label>
   </div>
   <div class="rr-row">
     <label>
       <span class="rr-lbl"><span>Tr. pulmonalis-Ø (mm)</span></span>
       <input type="number" id="trpulm_dia" step="0.1" placeholder="Norm ≤ 29 mm"
-        data-radlex="RID5074" data-en="pulmonary trunk diameter">
+        data-radlex="RID5074" data-en="pulmonary trunk diameter" />
     </label>
     <label>
       <span class="rr-lbl"><span>IVS-Shift <span class="rr-rl-badge">RID5075</span></span></span>
@@ -220,7 +220,7 @@
   </div>
 
   <!-- ===================== WEITERE THORAX-BEFUNDE ===================== -->
-  <details open>
+  <details open="open">
     <summary>Weitere Thorax-Befunde</summary>
     <div>
       <div class="rr-row">
@@ -247,17 +247,17 @@
           <span class="rr-lbl"><span>Lungenparenchym <span class="rr-rl-badge">RID1326</span></span></span>
           <div class="ctpa-checkrow" id="par_wrap">
             <label class="ctpa-check"><input type="checkbox" id="par_norm"
-              data-radlex="RID1326-norm" data-en="lung parenchyma normal"><span>Unauffällig</span></label>
+              data-radlex="RID1326-norm" data-en="lung parenchyma normal" /><span>Unauffällig</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_infarkt"
-              data-radlex="RID5085" data-en="pulmonary infarct"><span>Infarktpneumonie</span></label>
+              data-radlex="RID5085" data-en="pulmonary infarct" /><span>Infarktpneumonie</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_hampton"
-              data-radlex="RID5086" data-en="Hampton hump"><span>Hamptons Hump</span></label>
+              data-radlex="RID5086" data-en="Hampton hump" /><span>Hamptons Hump</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_konsol"
-              data-radlex="RID4803" data-en="consolidation"><span>Konsolidierung/Infiltrat</span></label>
+              data-radlex="RID4803" data-en="consolidation" /><span>Konsolidierung/Infiltrat</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_ggo"
-              data-radlex="RID4800" data-en="ground-glass opacity"><span>Milchglastrübung (GGO)</span></label>
+              data-radlex="RID4800" data-en="ground-glass opacity" /><span>Milchglastrübung (GGO)</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_emph"
-              data-radlex="RID4799" data-en="pulmonary emphysema"><span>Emphysem</span></label>
+              data-radlex="RID4799" data-en="pulmonary emphysema" /><span>Emphysem</span></label>
           </div>
         </label>
       </div>
@@ -282,11 +282,11 @@
           <span class="rr-lbl"><span>Herz &amp; übrige Gefäße</span></span>
           <div class="ctpa-checkrow" id="herz_gefaesse_wrap">
             <label class="ctpa-check"><input type="checkbox" id="hg_unauf"
-              data-radlex="RID1317-norm" data-en="heart vessels unremarkable"><span>Unauffällig</span></label>
+              data-radlex="RID1317-norm" data-en="heart vessels unremarkable" /><span>Unauffällig</span></label>
             <label class="ctpa-check"><input type="checkbox" id="hg_peri"
-              data-radlex="RID5081" data-en="pericardial effusion"><span>Perikarderguss</span></label>
+              data-radlex="RID5081" data-en="pericardial effusion" /><span>Perikarderguss</span></label>
             <label class="ctpa-check"><input type="checkbox" id="hg_ao"
-              data-radlex="RID5082" data-en="aortic sclerosis"><span>Aortensklerose</span></label>
+              data-radlex="RID5082" data-en="aortic sclerosis" /><span>Aortensklerose</span></label>
           </div>
         </label>
       </div>
@@ -295,11 +295,11 @@
           <span class="rr-lbl"><span>Knochen (soweit abgebildet) <span class="rr-rl-badge">RID13573</span></span></span>
           <div class="ctpa-checkrow" id="kno_wrap">
             <label class="ctpa-check"><input type="checkbox" id="kno_norm"
-              data-radlex="RID13573-norm" data-en="osseous structures unremarkable"><span>Unauffällig</span></label>
+              data-radlex="RID13573-norm" data-en="osseous structures unremarkable" /><span>Unauffällig</span></label>
             <label class="ctpa-check"><input type="checkbox" id="kno_deg"
-              data-radlex="RID5222" data-en="degenerative changes"><span>Degenerativ</span></label>
+              data-radlex="RID5222" data-en="degenerative changes" /><span>Degenerativ</span></label>
             <label class="ctpa-check"><input type="checkbox" id="kno_dest"
-              data-radlex="RID5223" data-en="osseous destruction"><span>Destruktion/Metastase</span></label>
+              data-radlex="RID5223" data-en="osseous destruction" /><span>Destruktion/Metastase</span></label>
           </div>
         </label>
       </div>
@@ -333,8 +333,8 @@
 
   <!-- ===================== EVIDENZ / ATTRIBUTION ===================== -->
   <div class="rr-evidence-footer">
-    <strong>Feldsatz basierend auf:</strong> DRG AK Befundung AG Thoraxdiagnostik, CT-Lungenembolie-Template 041807.2.1806120000, CC BY 4.0 (https://github.com/DRGagit/ak_befundung).<br>
-    <strong>Risikostratifizierung:</strong> RV/LV-Ratio ≥ 1,0 nach Konstantinides SV et al. ESC Guidelines on Acute PE. Eur Heart J 2020;41(4):543–603.<br>
+    <strong>Feldsatz basierend auf:</strong> DRG AK Befundung AG Thoraxdiagnostik, CT-Lungenembolie-Template 041807.2.1806120000, CC BY 4.0 (https://github.com/DRGagit/ak_befundung).<br />
+    <strong>Risikostratifizierung:</strong> RV/LV-Ratio ≥ 1,0 nach Konstantinides SV et al. ESC Guidelines on Acute PE. Eur Heart J 2020;41(4):543–603.<br />
     <strong>Lizenz dieses Templates:</strong> Creative Commons Attribution 4.0 International (CC BY 4.0) – kompatibel zur DRG-Lizenz.
   </div>
 

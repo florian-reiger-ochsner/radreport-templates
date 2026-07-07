@@ -3,27 +3,27 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>LTx-Evaluation HCC – Mailand-Kriterien &amp; §16-TPG – Strukturierte Befundvorlage (v1.0)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
-<meta name="dcterms.title" content="LTx-Evaluation HCC – Mailand-Kriterien und §16-TPG-Compliance"/>
-<meta name="dcterms.description" content="Strukturierte Befundvorlage für die bildgebende Evaluation von HCC-Patienten zur Lebertransplantations-Anmeldung nach §16-TPG-Richtlinie (Bundesärztekammer) und Mailand-Kriterien. Feldbasiert anschlussfähig an das DRG-Template gen_ltx_hcc.html (Pinto dos Santos D et al. 2017, CC BY 4.0). Aus dem CT-Leber-LI-RADS-Template als eigenständiges Paket abgespalten (vormals Modus 'LTx-Evaluation'). RadLex-codiert, FHIR-R4-Export. Mailand-Auswertung erfolgt nachgelagert (nicht im kanonischen Template)."/>
-<meta name="dcterms.language" content="de"/>
-<meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien"/>
-<meta name="dcterms.date" content="2026-07-06"/>
-<meta name="dcterms.identifier" content="HJK-MRRT-LTX-HCC-EVAL-v1.0"/>
-<meta name="dcterms.rights" content="Creative Commons Attribution 4.0 International (CC BY 4.0). Bezugnahme: DRG-Template gen_ltx_hcc.html (CC BY 4.0)."/>
-<meta name="dcterms.license" content="https://creativecommons.org/licenses/by/4.0/"/>
-<meta name="dcterms.source" content="Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template 'LTx-Evaluation HCC' (gen_ltx_hcc.html, Identifier 041807.5), Deutsche Röntgengesellschaft 2017, CC BY 4.0."/>
-<meta name="rrt:specialty" content="Radiology"/>
-<meta name="rrt:subspecialty" content="Abdominal Radiology"/>
-<meta name="rrt:modality" content="CT"/>
-<meta name="rrt:bodyregion" content="Liver"/>
-<meta name="rrt:coding-systems" content="RadLex, LOINC (partial), local (§16-TPG-spezifisch)"/>
+<meta name="dcterms.title" content="LTx-Evaluation HCC – Mailand-Kriterien und §16-TPG-Compliance" />
+<meta name="dcterms.description" content="Strukturierte Befundvorlage für die bildgebende Evaluation von HCC-Patienten zur Lebertransplantations-Anmeldung nach §16-TPG-Richtlinie (Bundesärztekammer) und Mailand-Kriterien. Feldbasiert anschlussfähig an das DRG-Template gen_ltx_hcc.html (Pinto dos Santos D et al. 2017, CC BY 4.0). Aus dem CT-Leber-LI-RADS-Template als eigenständiges Paket abgespalten (vormals Modus 'LTx-Evaluation'). RadLex-codiert, FHIR-R4-Export. Mailand-Auswertung erfolgt nachgelagert (nicht im kanonischen Template)." />
+<meta name="dcterms.language" content="de" />
+<meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
+<meta name="dcterms.date" content="2026-07-06" />
+<meta name="dcterms.identifier" content="HJK-MRRT-LTX-HCC-EVAL-v1.0" />
+<meta name="dcterms.rights" content="Creative Commons Attribution 4.0 International (CC BY 4.0). Bezugnahme: DRG-Template gen_ltx_hcc.html (CC BY 4.0)." />
+<meta name="dcterms.license" content="https://creativecommons.org/licenses/by/4.0/" />
+<meta name="dcterms.source" content="Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template 'LTx-Evaluation HCC' (gen_ltx_hcc.html, Identifier 041807.5), Deutsche Röntgengesellschaft 2017, CC BY 4.0." />
+<meta name="rrt:specialty" content="Radiology" />
+<meta name="rrt:subspecialty" content="Abdominal Radiology" />
+<meta name="rrt:modality" content="CT" />
+<meta name="rrt:bodyregion" content="Liver" />
+<meta name="rrt:coding-systems" content="RadLex, LOINC (partial), local (§16-TPG-spezifisch)" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-06T04:17:07.834Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-07T11:09:45.815Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,11 +60,11 @@
   <div class="rr-row" id="row_anmeldung">
     <label>
       <span class="rr-lbl"><span>Eurotransplant-Nummer</span></span>
-      <input type="text" id="ltx_etnr" placeholder="z. B. AT-…">
+      <input type="text" id="ltx_etnr" placeholder="z. B. AT-…" />
     </label>
     <label>
       <span class="rr-lbl"><span>Untersuchungsdatum (aktuell)</span></span>
-      <input type="text" id="ltx_datum_akt" placeholder="TT.MM.JJJJ">
+      <input type="text" id="ltx_datum_akt" placeholder="TT.MM.JJJJ" />
     </label>
     <label>
       <span class="rr-lbl"><span>Untersuchungsmodalität</span></span>
@@ -136,22 +136,22 @@
   <div class="rr-row rr-row-three" id="row_tumorlast">
     <label>
       <span class="rr-lbl"><span>Anzahl HCC-Knoten</span></span>
-      <input type="number" id="ltx_n_knoten" min="0" step="1" data-en="number of tumor nodules" data-radlex-status="local" placeholder="z. B. 2">
+      <input type="number" id="ltx_n_knoten" min="0" step="1" data-en="number of tumor nodules" data-radlex-status="local" placeholder="z. B. 2" />
       <div class="rr-field-note">Gesamtzahl vitaler HCC-Knoten</div>
     </label>
     <label>
       <span class="rr-lbl"><span>Knoten 1 – größter Durchmesser <span class="rr-rl-badge">RID13432</span></span></span>
-      <input type="number" id="ltx_dm1" min="0" step="1" data-en="lesion size" data-radlex="RID13432" data-loinc="21889-1" placeholder="mm">
+      <input type="number" id="ltx_dm1" min="0" step="1" data-en="lesion size" data-radlex="RID13432" data-loinc="21889-1" placeholder="mm" />
       <div class="rr-field-note">Größter Durchmesser, mm</div>
     </label>
     <label>
       <span class="rr-lbl"><span>Knoten 2 – größter Durchmesser <span class="rr-rl-badge">RID13432</span></span></span>
-      <input type="number" id="ltx_dm2" min="0" step="1" data-en="lesion size" data-radlex="RID13432" data-loinc="21889-1" placeholder="mm">
+      <input type="number" id="ltx_dm2" min="0" step="1" data-en="lesion size" data-radlex="RID13432" data-loinc="21889-1" placeholder="mm" />
       <div class="rr-field-note">Größter Durchmesser, mm</div>
     </label>
     <label>
       <span class="rr-lbl"><span>Knoten 3 – größter Durchmesser <span class="rr-rl-badge">RID13432</span></span></span>
-      <input type="number" id="ltx_dm3" min="0" step="1" data-en="lesion size" data-radlex="RID13432" data-loinc="21889-1" placeholder="mm">
+      <input type="number" id="ltx_dm3" min="0" step="1" data-en="lesion size" data-radlex="RID13432" data-loinc="21889-1" placeholder="mm" />
       <div class="rr-field-note">Größter Durchmesser, mm</div>
     </label>
   </div>
@@ -197,7 +197,7 @@
       <div class="rr-row">
         <label>
           <span class="rr-lbl"><span>VU vom</span></span>
-          <input type="text" id="vu_date" placeholder="z. B. 11/2025">
+          <input type="text" id="vu_date" placeholder="z. B. 11/2025" />
         </label>
         <label>
           <span class="rr-lbl"><span>Modalität VU</span></span>
@@ -236,10 +236,10 @@
 
   <!-- ===================== EVIDENZ / ATTRIBUTION ===================== -->
   <div class="rr-evidence-footer">
-    <strong>Methodik:</strong> §16-TPG-Richtlinie zur Organvermittlung (Bundesärztekammer); Mailand-Kriterien (Mazzaferro V et al. NEJM 1996).<br>
+    <strong>Methodik:</strong> §16-TPG-Richtlinie zur Organvermittlung (Bundesärztekammer); Mailand-Kriterien (Mazzaferro V et al. NEJM 1996).<br />
     <strong>Feldsatz &amp; Mailand-Logik anschlussfähig an:</strong>
-    Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template „LTx-Evaluation HCC" (gen_ltx_hcc.html, Identifier 041807.5), Deutsche Röntgengesellschaft 2017. CC BY 4.0.<br>
-    <strong>Herkunft:</strong> abgespalten aus HJK-MRRT-CT-LEBER-LIRADS (vormals Modus „LTx-Evaluation").<br>
+    Pinto dos Santos D, Mildenberger P, Klos G. DRG-Template „LTx-Evaluation HCC" (gen_ltx_hcc.html, Identifier 041807.5), Deutsche Röntgengesellschaft 2017. CC BY 4.0.<br />
+    <strong>Herkunft:</strong> abgespalten aus HJK-MRRT-CT-LEBER-LIRADS (vormals Modus „LTx-Evaluation").<br />
     <strong>Lizenz dieses Templates:</strong> Creative Commons Attribution 4.0 International (CC BY 4.0) – kompatibel zur DRG-Lizenz, ermöglicht spätere Zusammenführung.
   </div>
 
