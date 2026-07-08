@@ -6,8 +6,3 @@ package-lock.json
 .fuse_hidden*
 *.log
 .DS_Store
-
-# Agent-/Tooling-Kontext (nicht öffentlich)
-.claude/
-skills/
-CLAUDE.md
