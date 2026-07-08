@@ -36,6 +36,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
 
 const canonicalPath = process.argv[2];
 const demoPath = process.argv[3];
@@ -70,6 +71,32 @@ if (violations.length) {
   console.error(
     'Das kanonische Template trägt kein CSS/JS. Styling/Interaktivität ' +
       'gehören ausschließlich in die abgeleitete Demo.'
+  );
+  process.exit(1);
+}
+
+// --- Guard: kanonisches Template muss wohlgeformtes XML sein --------------
+// MRRT ist XHTML. Aus einer nicht wohlgeformten Quelle wird keine Demo
+// gebaut. Häufige Verstöße: Void-Elemente nicht selbstgeschlossen
+// (<input ...> statt <input ... />), Boolean-Attribute ohne Wert (checked
+// statt checked="checked"), benannte Entities (&nbsp; statt &#160;),
+// unescaptes < oder & in Attributwerten. Fixer: shared/scripts/xml-sanitize.py.
+const xml = spawnSync('xmllint', ['--noout', canonicalPath], { encoding: 'utf8' });
+if (xml.error && xml.error.code === 'ENOENT') {
+  console.warn(
+    'Warnung: xmllint nicht gefunden – XML-Wohlgeformtheits-Check übersprungen. ' +
+      'Für den Guard libxml2 (xmllint) installieren.'
+  );
+} else if (xml.status !== 0) {
+  console.error(
+    'Fehler: Kanonisches template.html ist nicht wohlgeformtes XML (polyglot-XHTML).'
+  );
+  if (xml.stderr) console.error(xml.stderr.trim());
+  console.error(
+    'Fix: Void-Elemente selbstschließen (<input ... />), Boolean-Attribute mit ' +
+      'Wert (checked="checked"), Entities numerisch (&#160;), < und & in ' +
+      'Attributwerten escapen. Automatisch: python3 shared/scripts/xml-sanitize.py --apply ' +
+      canonicalPath
   );
   process.exit(1);
 }

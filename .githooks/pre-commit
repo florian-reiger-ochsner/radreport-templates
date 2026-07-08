@@ -1,0 +1,37 @@
+#!/bin/sh
+# pre-commit – XML-Wohlgeformtheit (polyglot-XHTML) fuer kanonische template.html.
+#
+# Aktivieren (einmalig pro Klon):
+#   git config core.hooksPath .githooks
+#
+# Prueft jede GESTAGTE templates/**/template.html gegen xmllint (auf dem
+# gestagten Blob, nicht dem Arbeitsbaum). Bricht den Commit ab, wenn eine
+# Datei nicht wohlgeformt ist. Fehlt xmllint, wird der Check uebersprungen.
+set -eu
+
+if ! command -v xmllint >/dev/null 2>&1; then
+  echo "pre-commit: xmllint nicht gefunden – XML-Check uebersprungen (libxml2 installieren)." >&2
+  exit 0
+fi
+
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^templates/.*/template\.html$' || true)
+[ -z "$files" ] && exit 0
+
+err=$(mktemp)
+fail=0
+for f in $files; do
+  if ! git show ":$f" | xmllint --noout - 2>"$err"; then
+    fail=1
+    echo "✗ nicht wohlgeformt: $f" >&2
+    sed 's/^/    /' "$err" >&2
+  fi
+done
+rm -f "$err"
+
+if [ "$fail" -ne 0 ]; then
+  echo "" >&2
+  echo "Commit abgebrochen: kanonische template.html muss wohlgeformtes XHTML sein." >&2
+  echo "Fix: python3 shared/scripts/xml-sanitize.py --apply <datei>  (danach erneut stagen)." >&2
+  exit 1
+fi
+exit 0
