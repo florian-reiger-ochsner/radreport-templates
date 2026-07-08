@@ -593,3 +593,23 @@ function resetAll() {
   decorateVoiceHints();
   update();
 })();
+
+// -----------------------------------------------------------------------------
+// 13) Devices als eingeklappte Disclosure — reines Viewer-Verhalten.
+//     Kanonisch ist Devices eine offene, gleichrangige Sektion (#dev-section
+//     mit rr-tx-sh-Header). Für die Demo wird sie zur Laufzeit in ein <details>
+//     umgehängt, damit sie wie die übrigen optionalen Zusatzblöcke eingeklappt
+//     erscheint. Das kanonische template.html bleibt davon unberührt.
+// -----------------------------------------------------------------------------
+(function collapseDevices() {
+  const sec = document.getElementById('dev-section');
+  if (!sec) return;
+  const sh = sec.previousElementSibling;
+  const isHeader = !!(sh && sh.classList && sh.classList.contains('rr-tx-sh'));
+  const det = document.createElement('details');
+  det.id = 'dev-details';
+  det.innerHTML = '<summary>Devices / Fremdmaterial <span style="font-weight:400;color:var(--rr-ink-faint);font-size:11px">(bei Bedarf aufklappen – mehrere Einträge möglich)</span></summary>';
+  sec.parentNode.insertBefore(det, isHeader ? sh : sec);
+  det.appendChild(sec);
+  if (isHeader) sh.remove();
+})();

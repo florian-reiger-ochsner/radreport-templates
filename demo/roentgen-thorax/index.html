@@ -18,7 +18,7 @@
 <meta name="rrt:bodyregion"      content="Chest" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-08T04:29:49.331Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-08T04:41:36.988Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -410,12 +410,13 @@
 
 </div>
 
-<!-- ===================== DEVICES / FREMDMATERIAL (Stack, einklappbar) ===================== -->
-<details id="dev-details">
-  <summary>Devices / Fremdmaterial <span style="font-weight:400;color:var(--rr-ink-faint);font-size:11px">(bei Bedarf aufklappen – mehrere Einträge möglich)</span></summary>
-  <div>
+<!-- ===================== DEVICES / FREMDMATERIAL (Stack) ===================== -->
+<!-- Kanonisch offene, gleichrangige Sektion. Das Einklappen zur Disclosure ist
+     reines Viewer-Verhalten und wird in demo.js zur Laufzeit erzeugt. -->
+<div class="rr-tx-sh"><h2>Devices / Fremdmaterial</h2><div class="rr-tx-sh-line"></div></div>
+<div id="dev-section">
 
-    <div class="rr-tx-hint" style="margin-top:10px">Jedes Device einzeln hinzufügen – auch mehrere gleichartige. <span class="rr-rl-badge">RadLex</span> pro Device-Typ. Fehllage „dringlich" löst Notfall-Hinweis aus.</div>
+    <div class="rr-tx-hint">Jedes Device einzeln hinzufügen – auch mehrere gleichartige. <span class="rr-rl-badge">RadLex</span> pro Device-Typ. Fehllage „dringlich" löst Notfall-Hinweis aus.</div>
     <!-- Device-Stack: kanonisch eine kodierte Instanz; weitere Einträge fügt die Demo zur Laufzeit hinzu (Klon). -->
     <div id="dev-list">
       <div class="rr-tx-stack-item rr-tx-dev-item" id="dev-item-1">
@@ -470,8 +471,7 @@
         <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung</span><input type="text" id="dev-ft-1" placeholder="z.B. Karina-Abstand 5 cm…" data-voice="zusatz device" /></label></div>
       </div>
     </div>
-  </div>
-</details>
+</div>
 
 <!-- ===================== BEURTEILUNG ===================== -->
 <div class="rr-tx-sh"><h2>Beurteilung</h2><div class="rr-tx-sh-line"></div></div>
