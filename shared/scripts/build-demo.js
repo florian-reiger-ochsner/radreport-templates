@@ -40,11 +40,12 @@ const { spawnSync } = require('child_process');
 
 const canonicalPath = process.argv[2];
 const demoPath = process.argv[3];
-const demoJs = process.argv[4]; // optional: Dateiname eines Demo-Skripts
+const demoJsArg = process.argv[4]; // optional: Dateiname eines Demo-Skripts (Override)
 
 if (!canonicalPath || !demoPath) {
   console.error('Fehler: kanonisches Template und Demo-Ausgabepfad angeben.');
   console.error('Usage: node build-demo.js <template.html> <demo/index.html> [demo-js]');
+  console.error('  [demo-js] optional – fehlt es, wird eine demo.js im Ausgabeordner automatisch eingebunden.');
   process.exit(1);
 }
 
@@ -106,6 +107,18 @@ if (xml.error && xml.error.code === 'ENOENT') {
 // relativ zum Demo-File aufgelöst.
 const repoRoot = path.resolve(__dirname, '..', '..');
 const demoDir = path.dirname(path.resolve(demoPath));
+
+// --- Demo-JS-Slot bestimmen ----------------------------------------------
+// Expliziter Parameter [demo-js] hat Vorrang. Fehlt er, wird eine neben dem
+// Demo-File liegende demo.js automatisch erkannt und eingebunden. So kann der
+// Script-Tag nicht mehr versehentlich fehlen (chrome-lose Demo), nur weil das
+// dritte Argument beim Aufruf vergessen wurde.
+let demoJs = demoJsArg;
+if (!demoJs && fs.existsSync(path.join(demoDir, 'demo.js'))) {
+  demoJs = 'demo.js';
+  console.log('  Hinweis: demo.js im Ausgabeordner erkannt – Script-Tag automatisch eingebunden.');
+}
+
 const coreAbs = path.join(repoRoot, 'shared', 'styles', 'radreport-core.css');
 let coreHref = path.relative(demoDir, coreAbs).split(path.sep).join('/');
 if (!coreHref.startsWith('.')) coreHref = './' + coreHref;
