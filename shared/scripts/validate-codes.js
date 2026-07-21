@@ -51,10 +51,11 @@ const path = require('path');
  * ----------------------------------------------------------------------- */
 
 function parseArgs(argv) {
-  const opts = { target: null, resolve: false, cache: null, strictStatus: false, json: false };
+  const opts = { target: null, resolve: false, cache: null, strictStatus: false, json: false, all: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--resolve') opts.resolve = true;
+    else if (a === '--all') opts.all = true;
     else if (a === '--strict-status') opts.strictStatus = true;
     else if (a === '--json') opts.json = true;
     else if (a === '--cache') opts.cache = argv[++i];
@@ -68,6 +69,23 @@ function parseArgs(argv) {
 function fail(msg, code) {
   process.stderr.write(`validate-codes: ${msg}\n`);
   process.exit(code == null ? 2 : code);
+}
+
+/** Alle Template-Verzeichnisse (template.html + RADLEX-MAPPING.md) unter templates/. */
+function allTargets() {
+  const repoRoot = path.resolve(__dirname, '..', '..');
+  const out = [];
+  (function walk(d) {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      if (e.name === 'node_modules' || e.name.startsWith('.')) continue;
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) walk(p);
+    }
+    if (fs.existsSync(path.join(d, 'template.html')) && fs.existsSync(path.join(d, 'RADLEX-MAPPING.md'))) {
+      out.push({ html: path.join(d, 'template.html'), mapping: path.join(d, 'RADLEX-MAPPING.md'), name: path.basename(d), dir: d });
+    }
+  })(path.join(repoRoot, 'templates'));
+  return out.sort((a, b) => a.dir.localeCompare(b.dir));
 }
 
 /** Löst target zu { html, mapping, name } auf. */
@@ -150,7 +168,14 @@ function parseTemplate(html) {
 }
 
 function mkEntry(kind, a, text) {
-  const rid = a['data-radlex'] || null;
+  const rawRid = a['data-radlex'] || null;
+  // Konvention RID<basis>-<qualifier> (z.B. RID5352-neg) erkennen: Basis-RID
+  // gegen die Registry prüfbar, Suffix = lokaler Qualifier (→ NORMALISIEREN).
+  let rid = rawRid, qualifier = null;
+  if (rawRid) {
+    const mm = rawRid.match(/^(RID\d+)-(.+)$/);
+    if (mm) { rid = mm[1]; qualifier = mm[2]; }
+  }
   const loinc = a['data-loinc'] || null;
   const status = a['data-radlex-status'] || null;
   return {
@@ -159,7 +184,9 @@ function mkEntry(kind, a, text) {
     id: a['id'] || a['name'] || null,
     value: a['value'] != null ? a['value'] : null,
     display: a['data-en'] || null,     // der kodierte englische Term
-    rid,
+    rid,                               // Basis-RID (Suffix entfernt)
+    rawRid,                            // roher data-radlex-Wert
+    qualifier,                         // lokaler Suffix oder null
     loinc,
     status,
     text,                              // sichtbarer (deutscher) Text
@@ -261,6 +288,10 @@ function analyze(entries, mapRows, opts, cache) {
     if (e.rid && !isRid(e.rid)) {
       errors.push(`[STRUKTUR] ${where}: ungültiges RID-Format "${e.rid}".`);
     }
+    // [NORMALISIEREN] Suffix-Konvention RID<basis>-<qualifier> → auflösen
+    if (e.qualifier) {
+      warnings.push(`[NORMALISIEREN] ${where}: data-radlex="${e.rawRid}" (Basis ${e.rid} + Qualifier "${e.qualifier}", data-en="${e.display || '—'}"). Basis-RID als reinen RadLex-Code, Qualifier separat/local.`);
+    }
     if (e.loinc && !isLoinc(e.loinc)) {
       errors.push(`[STRUKTUR] ${where}: ungültiges LOINC-Format "${e.loinc}".`);
     }
@@ -285,12 +316,13 @@ function analyze(entries, mapRows, opts, cache) {
 
     if (!e.coded) continue; // ab hier nur echte Codes (RID/LOINC)
 
-    // [DISPLAY] Abgleich per Code gegen Mapping
+    // [DISPLAY] Abgleich per Code gegen Mapping (nur saubere, nicht-qualifizierte
+    // RIDs — bei Suffix-Codes differiert das spezifische Konzept von der Basis).
     if (e.rid) {
       usedTemplateRids.add(e.rid);
-      const mr = mapByRid.get(e.rid);
-      if (mr) {
-        if (mr.term && e.display && mr.term !== e.display) {
+      if (!e.qualifier) {
+        const mr = mapByRid.get(e.rid);
+        if (mr && mr.term && e.display && mr.term !== e.display) {
           errors.push(`[DISPLAY] RID ${e.rid}: Template data-en="${e.display}" ≠ Mapping "${mr.term}" (${mr.section}).`);
         }
       }
@@ -321,6 +353,10 @@ function analyze(entries, mapRows, opts, cache) {
         errors.push(`[REGISTRY] RID ${e.rid} ("${e.display}") nicht im Cache — via resolve-radlex.js gegen BioPortal auflösen.`);
       } else if (c.notFound) {
         errors.push(`[REGISTRY] RID ${e.rid} in BioPortal nicht gefunden (existiert nicht).`);
+      } else if (e.qualifier) {
+        // Suffix-Code: kein Strict-Match (spez. Konzept ≠ Basis); Basis-Label
+        // zeigen, damit sichtbar wird, ob schon die Basis falsch ist.
+        warnings.push(`[NORMALISIEREN] Basis ${e.rid} = RadLex "${c.englishLabel || c.prefLabel}" — Template-Feld "${e.display}" (Qualifier "${e.qualifier}"): spezifisches RadLex-Konzept suchen oder local.`);
       } else if (e.display) {
         // BioPortals RADLEX-prefLabel ist teils deutsch → data-en gegen den
         // englischen Term (englishLabel/Preferred_name), prefLabel ODER Synonyme
@@ -350,57 +386,74 @@ function analyze(entries, mapRows, opts, cache) {
  * Main
  * ----------------------------------------------------------------------- */
 
-function main() {
-  const opts = parseArgs(process.argv.slice(2));
-  const t = resolveTarget(opts.target);
-
+/** Analysiert genau ein Template. */
+function runOne(t, cache, opts) {
   const html = fs.readFileSync(t.html, 'utf8');
   const md = fs.readFileSync(t.mapping, 'utf8');
-
-  let cache = null;
-  if (opts.resolve) {
-    const cachePath = opts.cache
-      ? path.resolve(opts.cache)
-      : path.resolve(__dirname, '..', 'codesystems', 'radlex-cache.json');
-    if (!fs.existsSync(cachePath)) {
-      fail(`--resolve verlangt Cache, aber ${cachePath} fehlt. Erst: node shared/scripts/resolve-radlex.js`, 2);
-    }
-    cache = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
-  }
-
   const entries = parseTemplate(html);
   const mapRows = parseMapping(md);
   const { errors, warnings } = analyze(entries, mapRows, opts, cache);
+  return { name: t.name, dir: t.dir, coded: entries.filter((e) => e.coded).length, mappingRows: mapRows.length, errors, warnings };
+}
 
-  const codedCount = entries.filter((e) => e.coded).length;
+function loadCache(opts) {
+  if (!opts.resolve) return null;
+  const cachePath = opts.cache
+    ? path.resolve(opts.cache)
+    : path.resolve(__dirname, '..', 'codesystems', 'radlex-cache.json');
+  if (!fs.existsSync(cachePath)) {
+    fail(`--resolve verlangt Cache, aber ${cachePath} fehlt. Erst: node shared/scripts/resolve-radlex.js --all`, 2);
+  }
+  return JSON.parse(fs.readFileSync(cachePath, 'utf8'));
+}
+
+function printOne(r, opts, header) {
+  const line = '─'.repeat(72);
+  if (header) { console.log(line); console.log(`validate-codes · ${r.name}`);
+    console.log(`  kodierte Formularelemente: ${r.coded}   Mapping-Zeilen: ${r.mappingRows}` +
+      (opts.resolve ? '   [--resolve gegen Cache]' : '   [offline]'));
+    console.log(line); }
+  if (r.errors.length) { console.log(`\n✗ HARTE FEHLER (${r.errors.length}):`); for (const e of r.errors) console.log('  ' + e); }
+  if (r.warnings.length) { console.log(`\n⚠ REPORT (${r.warnings.length}):`); for (const w of r.warnings) console.log('  ' + w); }
+  console.log('');
+  if (r.errors.length === 0) console.log('✓ Keine harten Fehler.' + (r.warnings.length ? ` (${r.warnings.length} Report-Hinweise)` : ''));
+  else console.log(`✗ ${r.errors.length} harte(r) Fehler → exit 1.`);
+  console.log(line);
+}
+
+function main() {
+  const opts = parseArgs(process.argv.slice(2));
+  const cache = loadCache(opts);
+  const targets = opts.all ? allTargets() : [resolveTarget(opts.target)];
+  if (opts.all && !targets.length) fail('Keine Templates unter templates/ gefunden.', 2);
+
+  const results = targets.map((t) => runOne(t, cache, opts));
+  const totalErr = results.reduce((n, r) => n + r.errors.length, 0);
 
   if (opts.json) {
-    process.stdout.write(JSON.stringify({
-      template: t.name, coded: codedCount, mappingRows: mapRows.length,
-      errors, warnings, ok: errors.length === 0,
-    }, null, 2) + '\n');
+    process.stdout.write(JSON.stringify(
+      opts.all ? { templates: results.map((r) => ({ template: r.name, coded: r.coded, errors: r.errors, warnings: r.warnings, ok: r.errors.length === 0 })), ok: totalErr === 0 }
+               : { template: results[0].name, coded: results[0].coded, mappingRows: results[0].mappingRows, errors: results[0].errors, warnings: results[0].warnings, ok: totalErr === 0 },
+      null, 2) + '\n');
+  } else if (opts.all) {
+    const line = '═'.repeat(72);
+    console.log(line);
+    console.log(`validate-codes · ALLE Templates (${results.length})` + (opts.resolve ? '   [--resolve]' : '   [offline]'));
+    console.log(line);
+    for (const r of results) printOne(r, opts, true);
+    console.log('\n' + line + '\nGESAMT-ÜBERSICHT');
+    for (const r of results) {
+      const mark = r.errors.length ? '✗' : '✓';
+      console.log(`  ${mark} ${r.name.padEnd(22)} ${String(r.errors.length).padStart(2)} Fehler   ${String(r.warnings.length).padStart(2)} Report`);
+    }
+    console.log(line);
+    console.log(totalErr === 0 ? `✓ Alle ${results.length} Templates ohne harte Fehler.` : `✗ ${totalErr} harte Fehler über ${results.filter((r) => r.errors.length).length} Template(s) → exit 1.`);
+    console.log(line);
   } else {
-    const line = '─'.repeat(72);
-    console.log(line);
-    console.log(`validate-codes · ${t.name}`);
-    console.log(`  kodierte Formularelemente: ${codedCount}   Mapping-Zeilen: ${mapRows.length}` +
-      (opts.resolve ? '   [--resolve gegen Cache]' : '   [offline]'));
-    console.log(line);
-    if (errors.length) {
-      console.log(`\n✗ HARTE FEHLER (${errors.length}):`);
-      for (const e of errors) console.log('  ' + e);
-    }
-    if (warnings.length) {
-      console.log(`\n⚠ REPORT (${warnings.length}):`);
-      for (const w of warnings) console.log('  ' + w);
-    }
-    console.log('');
-    if (errors.length === 0) console.log('✓ Keine harten Fehler.' + (warnings.length ? ` (${warnings.length} Report-Hinweise)` : ''));
-    else console.log(`✗ ${errors.length} harte(r) Fehler → exit 1.`);
-    console.log(line);
+    printOne(results[0], opts, true);
   }
 
-  process.exit(errors.length === 0 ? 0 : 1);
+  process.exit(totalErr === 0 ? 0 : 1);
 }
 
 main();

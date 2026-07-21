@@ -100,7 +100,8 @@ function collectRids(dirs) {
     if (fs.existsSync(htmlPath)) {
       const html = fs.readFileSync(htmlPath, 'utf8');
       const body = (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [null, html])[1];
-      const re = /data-radlex\s*=\s*"(RID\d+)"/g;
+      // Basis-RID erfassen, auch bei Suffix-Konvention RID<basis>-<qualifier>.
+      const re = /data-radlex\s*=\s*"(RID\d+)(?:-[^"]*)?"/g;
       let m; while ((m = re.exec(body)) !== null) add(m[1], `${path.basename(dir)}/template.html`);
     }
     if (fs.existsSync(mapPath)) {
