@@ -1,5 +1,28 @@
 # Changelog – Röntgen Knie präoperativ vor TEP
 
+## [1.6] – 2026-07-21
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Neun falsch geratene RID-Codes ersetzt.** Registry-Abgleich (`validate-codes.js
+  --resolve`) deckte auf, dass die bisherigen RIDs auf fremde Konzepte zeigten:
+  a.p. RID10395 (*marking for intervention*) → **RID28784** (anteroposterior projection);
+  seitlich RID10412 (*thrombectomy*) → **RID10523** (lateral projection);
+  Osteophyt RID4757 (*dextroscoliosis*) → **RID5076** (osteophyte);
+  Gelenkserguss RID34769 (*viral pneumonia*) → **RID4872** (effusion);
+  osteoporotisch RID3406 (*dacryoadenitis*) → **RID5389** (osteoporosis);
+  Verlauf stabil RID39157 → **RID39268** (unchanged), progredient RID36043 → **RID29041**
+  (disease progression), regredient RID36044 → **RID39105** (improved).
+- **KL-Grad 0** RID5352 (*pneumothorax*) entfernt → `local` (KL-Score sitzt am Feld via
+  LOINC LP410785-8; KL-Grade sind kein eigenständiges RadLex-Konzept).
+- **Bisher `local`, jetzt registry-verifiziert (✅):** Freikörper **RID5367**
+  (intraarticular osseous body), Baker-Zyste **RID3892**, Chondrokalzinose **RID5398**,
+  osteopen **RID5388** (osteopenia).
+- `RADLEX-MAPPING.md` synchronisiert: geratene RID495xx/RID517x-Platzhalter (teils
+  *Milzinfarkt*-Codes) entfernt, ✅ nur noch mit BioPortal-Beleg. Subchondrale Zyste/
+  Sklerose, Weichteilverkalkung, Messwinkel und CPAK bleiben bewusst `local`.
+- `data-en` an mehreren Feldern an den echten RadLex-Term angeglichen (effusion,
+  intraarticular osseous body, osteopenia, unchanged, disease progression, improved).
+- Feld-`id`s unverändert → Provenance/Vorbefund-Carryover stabil.
+
 ## [1.5] – 2026-07-01
 ### Geändert (Architektur, keine klinische Inhaltsänderung)
 - Migration auf **A-Struktur**: `template.html` ist jetzt kanonisch und **nackt** –

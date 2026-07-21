@@ -1,0 +1,270 @@
+{
+  "codeSystem": "http://radlex.org",
+  "source": "NCBO BioPortal (ontologies/RADLEX)",
+  "generated": "2026-07-21T20:43:38.892Z",
+  "ridUriScheme": "http://www.radlex.org/RID/RID<n>",
+  "counts": {
+    "total": 20,
+    "resolved": 20,
+    "notFound": 0,
+    "errors": 0
+  },
+  "terms": {
+    "RID3890": {
+      "uri": "http://www.radlex.org/RID/RID3890",
+      "prefLabel": "Zyste",
+      "englishLabel": "cyst",
+      "synonyms": [
+        "cyst"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID3892": {
+      "uri": "http://www.radlex.org/RID/RID3892",
+      "prefLabel": "Bakerzyste",
+      "englishLabel": "Baker cyst",
+      "synonyms": [
+        "Baker cyst"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID4757": {
+      "uri": "http://www.radlex.org/RID/RID4757",
+      "prefLabel": "Dextroskoliose",
+      "englishLabel": "dextroscoliosis",
+      "synonyms": [
+        "dextroscoliosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID4872": {
+      "uri": "http://www.radlex.org/RID/RID4872",
+      "prefLabel": "Erguss",
+      "englishLabel": "effusion",
+      "synonyms": [
+        "effusion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID5076": {
+      "uri": "http://www.radlex.org/RID/RID5076",
+      "prefLabel": "Osteophyt",
+      "englishLabel": "osteophyte",
+      "synonyms": [
+        "osteophyte"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID5172": {
+      "uri": "http://www.radlex.org/RID/RID5172",
+      "prefLabel": "Infarkt",
+      "englishLabel": "infarction",
+      "synonyms": [
+        "infarction"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID5175": {
+      "uri": "http://www.radlex.org/RID/RID5175",
+      "prefLabel": "Milzinfarkt",
+      "englishLabel": "infarction of spleen",
+      "synonyms": [
+        "infarction of spleen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID5227": {
+      "uri": "http://www.radlex.org/RID/RID5227",
+      "prefLabel": "Sklerose",
+      "englishLabel": "sclerosis",
+      "synonyms": [
+        "sclerosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID5367": {
+      "uri": "http://www.radlex.org/RID/RID5367",
+      "prefLabel": "Intraartikulärer Knochenkörper",
+      "englishLabel": "intraarticular osseous body",
+      "synonyms": [
+        "intraarticular osseous body"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID5388": {
+      "uri": "http://www.radlex.org/RID/RID5388",
+      "prefLabel": "Osteopenie",
+      "englishLabel": "osteopenia",
+      "synonyms": [
+        "osteopenia"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID5389": {
+      "uri": "http://www.radlex.org/RID/RID5389",
+      "prefLabel": "Osteoporose",
+      "englishLabel": "osteoporosis",
+      "synonyms": [
+        "osteoporosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID5398": {
+      "uri": "http://www.radlex.org/RID/RID5398",
+      "prefLabel": "Chondrokalzinose",
+      "englishLabel": "chondrocalcinosis",
+      "synonyms": [
+        "chondrocalcinosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID5824": {
+      "uri": "http://www.radlex.org/RID/RID5824",
+      "prefLabel": "links",
+      "englishLabel": "left",
+      "synonyms": [
+        "linker",
+        "left"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID5825": {
+      "uri": "http://www.radlex.org/RID/RID5825",
+      "prefLabel": "rechts",
+      "englishLabel": "right",
+      "synonyms": [
+        "rechter",
+        "right"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID6120": {
+      "uri": "http://www.radlex.org/RID/RID6120",
+      "prefLabel": "subchondraler Knochen",
+      "englishLabel": "subchondral bone",
+      "synonyms": [
+        "subchondral bone"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID10523": {
+      "uri": "http://www.radlex.org/RID/RID10523",
+      "prefLabel": "laterale Projektion",
+      "englishLabel": "lateral projection",
+      "synonyms": [
+        "lateral projection"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID28784": {
+      "uri": "http://www.radlex.org/RID/RID28784",
+      "prefLabel": "anteroposteriore Projektion",
+      "englishLabel": "anteroposterior projection",
+      "synonyms": [
+        "anteroposterior projection"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID29041": {
+      "uri": "http://www.radlex.org/RID/RID29041",
+      "prefLabel": "Krankheitsprogression",
+      "englishLabel": "disease progression",
+      "synonyms": [
+        "disease progression"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID39105": {
+      "uri": "http://www.radlex.org/RID/RID39105",
+      "prefLabel": "verbessert",
+      "englishLabel": "improved",
+      "synonyms": [
+        "improved"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    },
+    "RID39268": {
+      "uri": "http://www.radlex.org/RID/RID39268",
+      "prefLabel": "unverändert",
+      "englishLabel": "unchanged",
+      "synonyms": [
+        "unchanged"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md",
+        "knie-praetep/template.html"
+      ]
+    }
+  }
+}

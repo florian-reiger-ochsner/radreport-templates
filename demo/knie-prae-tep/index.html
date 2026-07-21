@@ -4,7 +4,7 @@
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8" />
-<title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.5)</title>
+<title>Planungsröntgen Knie vor TEP – Strukturierte Befundvorlage (v1.6)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
 <meta name="dcterms.title" content="Röntgen Knie präoperativ vor Totalendoprothese" />
@@ -12,7 +12,7 @@
 <meta name="dcterms.language" content="de" />
 <meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
 <meta name="dcterms.date" content="2026-05-23" />
-<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.5" />
+<meta name="dcterms.identifier" content="HJK-MRRT-KNIE-PRAETEP-v1.6" />
 <meta name="rrt:specialty" content="Radiology" />
 <meta name="rrt:subspecialty" content="Musculoskeletal Radiology" />
 <meta name="rrt:modality" content="DX" />
@@ -22,7 +22,7 @@
 <meta name="rrt:bodyregion.codesystem.version" content="4.1" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-07T11:09:45.641Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-21T20:41:31.075Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,7 @@
 <section class="rr-input-pane">
 
   <h1 class="rr-doc-title">Planungsröntgen Knie vor TEP</h1>
-  <div class="rr-doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.5 · RadLex-codiert · HJK Wien</div>
+  <div class="rr-doc-sub">MRRT-Template · Primärarthrose · Kalibrierte Vermessung · v1.6 · RadLex-codiert · HJK Wien</div>
   <div class="rr-title-rule"></div>
 
   <!-- SEITE -->
@@ -73,14 +73,14 @@
     <label>
       <span class="rr-lbl"><span>a.p. stehend</span></span>
       <select id="proj_ap">
-        <option value="ja" data-radlex="RID10395" data-en="anteroposterior projection" selected="selected">ja</option>
+        <option value="ja" data-radlex="RID28784" data-en="anteroposterior projection" selected="selected">ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>seitlich</span></span>
       <select id="proj_lat">
-        <option value="ja" data-radlex="RID10412" data-en="lateral projection" selected="selected">ja</option>
+        <option value="ja" data-radlex="RID10523" data-en="lateral projection" selected="selected">ja</option>
         <option value="nein" data-radlex-status="needs-mapping">nein</option>
       </select>
     </label>
@@ -170,7 +170,7 @@
       <span class="rr-lbl"><span>Medial</span></span>
       <select id="kl_med">
         <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
-        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
+        <option value="0" data-radlex-status="local" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
         <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
         <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
@@ -181,7 +181,7 @@
       <span class="rr-lbl"><span>Lateral</span></span>
       <select id="kl_lat">
         <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
-        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
+        <option value="0" data-radlex-status="local" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
         <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
         <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
@@ -192,7 +192,7 @@
       <span class="rr-lbl"><span>Patellofemoral</span></span>
       <select id="kl_pf">
         <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
-        <option value="0" data-radlex="RID5352" data-en="no osteoarthritis (KL 0)">0 – keine</option>
+        <option value="0" data-radlex-status="local" data-en="no osteoarthritis (KL 0)">0 – keine</option>
         <option value="1" data-radlex-status="local" data-en="doubtful osteoarthritis (KL 1)">1 – fraglich</option>
         <option value="2" data-radlex-status="local" data-en="mild osteoarthritis (KL 2)">2 – gering</option>
         <option value="3" data-radlex-status="local" data-en="moderate osteoarthritis (KL 3)">3 – mäßig</option>
@@ -265,14 +265,14 @@
     <div class="rr-h2-rule"></div>
   </div>
   <div class="rr-row">
-    <label><input type="checkbox" id="add_osteophyten" data-radlex="RID4757" data-en="osteophyte" /> Osteophyten <span class="rr-rl-badge">RID4757</span></label>
+    <label><input type="checkbox" id="add_osteophyten" data-radlex="RID5076" data-en="osteophyte" /> Osteophyten <span class="rr-rl-badge">RID5076</span></label>
     <label><input type="checkbox" id="add_zysten" data-radlex-status="local" data-en="subchondral cyst" /> Subchondrale Zysten</label>
     <label><input type="checkbox" id="add_sklerose" data-radlex-status="local" data-en="subchondral sclerosis" /> Subchondrale Sklerose</label>
-    <label><input type="checkbox" id="add_freikorper" data-radlex-status="local" data-en="intraarticular loose body" /> Freikörper</label>
-    <label><input type="checkbox" id="add_erguss" data-radlex="RID34769" data-en="joint effusion" /> Gelenkserguss <span class="rr-rl-badge">RID34769</span></label>
-    <label><input type="checkbox" id="add_baker" data-radlex-status="local" data-en="Baker cyst" /> Baker-Zyste</label>
+    <label><input type="checkbox" id="add_freikorper" data-radlex="RID5367" data-en="intraarticular osseous body" /> Freikörper <span class="rr-rl-badge">RID5367</span></label>
+    <label><input type="checkbox" id="add_erguss" data-radlex="RID4872" data-en="effusion" /> Gelenkserguss <span class="rr-rl-badge">RID4872</span></label>
+    <label><input type="checkbox" id="add_baker" data-radlex="RID3892" data-en="Baker cyst" /> Baker-Zyste <span class="rr-rl-badge">RID3892</span></label>
     <label><input type="checkbox" id="add_verkalk" data-radlex-status="local" data-en="soft tissue calcification" /> Weichteilverkalkungen</label>
-    <label><input type="checkbox" id="add_chondrocalc" data-radlex-status="local" data-en="chondrocalcinosis" /> Chondrokalzinose</label>
+    <label><input type="checkbox" id="add_chondrocalc" data-radlex="RID5398" data-en="chondrocalcinosis" /> Chondrokalzinose <span class="rr-rl-badge">RID5398</span></label>
   </div>
 
   <!-- KNOCHENSTRUKTUR -->
@@ -285,8 +285,8 @@
     <select id="bone_q">
       <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
       <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate bone density">altersentsprechend</option>
-      <option value="osteopen" data-radlex-status="local" data-en="osteopenic bone density">osteopen</option>
-      <option value="osteoporotisch" data-radlex="RID3406" data-en="osteoporosis">osteoporotisch</option>
+      <option value="osteopen" data-radlex="RID5388" data-en="osteopenia">osteopen</option>
+      <option value="osteoporotisch" data-radlex="RID5389" data-en="osteoporosis">osteoporotisch</option>
     </select>
   </label>
 
@@ -311,9 +311,9 @@
           <span class="rr-lbl"><span>Verlauf</span></span>
           <select id="vu_trend">
             <option value="" data-radlex-status="needs-mapping">–</option>
-            <option value="stabil" data-radlex="RID39157" data-en="stable">weitgehend stabil</option>
-            <option value="progredient" data-radlex="RID36043" data-en="progression of disease">Befundprogredienz</option>
-            <option value="regredient" data-radlex="RID36044" data-en="regression of disease">Befundregredienz</option>
+            <option value="stabil" data-radlex="RID39268" data-en="unchanged">weitgehend stabil</option>
+            <option value="progredient" data-radlex="RID29041" data-en="disease progression">Befundprogredienz</option>
+            <option value="regredient" data-radlex="RID39105" data-en="improved">Befundregredienz</option>
           </select>
         </label>
       </div>
