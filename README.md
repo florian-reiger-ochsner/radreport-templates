@@ -38,26 +38,35 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 ├── shared/
 │   ├── styles/
 │   │   └── radreport-core.css      # Globale CSS-Tokens (--rr-*) und Klassen (.rr-*)
-│   └── scripts/
-│       └── build-demo.js           # Build: kanonisches template.html → demo/<id>/index.html (Core-Link)
+│   ├── scripts/
+│   │   ├── build-demo.js           # Build: kanonisches template.html → demo/<id>/index.html (Core-Link)
+│   │   ├── validate-codes.js       # Code-Treue-Lint: Display-Abgleich Template ⇄ Mapping (+ --resolve, --all)
+│   │   ├── resolve-radlex.js       # RID-Auflösung gegen NCBO BioPortal → radlex-cache.json
+│   │   ├── suggest-radlex.js       # RID-Vorschläge je data-en-Konzept (BioPortal-Suche, Top-5)
+│   │   └── apply-decisions.js      # wendet RadLex-Entscheidungen aufs Template an
+│   └── codesystems/
+│       ├── radlex-cache.json       # BioPortal-Snapshot der verwendeten RIDs (Offline-Lint)
+│       └── README.md               # Zwei-Schichten-Lint-Workflow
 ├── templates/
 │   ├── Roentgen/
 │   │   ├── MSK/
-│   │   │   ├── knie-praetep/       # Röntgen Knie prä-TEP v1.4
-│   │   │   └── knie-posttep/       # Röntgen Knie post-KTEP v1.1
+│   │   │   ├── knie-praetep/       # Röntgen Knie prä-TEP v1.6 (RadLex ✅ verifiziert)
+│   │   │   └── knie-posttep/       # Röntgen Knie post-KTEP v1.1.1
 │   │   └── Thorax/
-│   │       └── thorax-standard/    # Röntgen Thorax v2.1
+│   │       ├── thorax-standard/    # Röntgen Thorax (p.a.) v2.3 (RadLex ✅ verifiziert)
+│   │       └── thorax-liegend/     # Röntgen Thorax liegend (ICU/portable) v1.0
 │   └── CT/
-│       ├── abdomen-becken/         # CT Abdomen + Becken v1.0
-│       ├── urolithiasis/           # CT Urolithiasis v1.0 (DRG CC BY 4.0)
+│       ├── abdomen-becken/         # CT Abdomen + Becken v2.0
+│       ├── urolithiasis/           # CT Urolithiasis v1.1 (DRG CC BY 4.0)
 │       ├── lungenembolie/          # CT Lungenarterien/CTPA v1.0 (DRG CC BY 4.0)
 │       ├── lirads-leber/           # CT Leber LI-RADS v1.3 (A-Struktur)
 │       ├── ltx-hcc-evaluation/     # CT Leber LTx-Evaluation HCC v1.0 (DRG CC BY 4.0)
-│       └── schaedel-nativ/         # CT Schädel nativ v1.0
+│       └── schaedel-nativ/         # CT Schädel nativ v1.2
 ├── demo/                           # GitHub Pages Live-Demos
 │   ├── knie-prae-tep/
 │   ├── knie-posttep/
 │   ├── roentgen-thorax/
+│   ├── roentgen-thorax-liegend/
 │   ├── ct-abdomen/
 │   ├── ct-urolithiasis/
 │   ├── ct-lungenembolie/
@@ -76,17 +85,21 @@ Je Template zwei Gesichter, beide als gerenderte Seite auf GitHub Pages verlinkt
 Plattform-Gesicht bewusst ungestylt) · **Demo** = das daraus abgeleitete,
 gestylte Schaufenster (gebaut, nicht von Hand editieren).
 
-| Template | ID | Version | Kanonisch | Demo |
-|---|---|---|---|---|
-| Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.5 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-praetep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
-| Röntgen Knie post-KTEP | HJK-MRRT-KNIE-POSTTEP | v1.1 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-posttep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/) |
-| Röntgen Thorax | HJK-MRRT-ROE-THORAX | v2.1 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-standard/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/) |
-| CT Abdomen + Becken | HJK-MRRT-CT-ABDBECKEN | v1.0 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/abdomen-becken/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-abdomen/) |
-| CT Urolithiasis | HJK-MRRT-CT-UROLITHIASIS | v1.0 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/urolithiasis/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/) |
-| CT Lungenarterien (CTPA) | HJK-MRRT-CT-LUNGENEMBOLIE | v1.0 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lungenembolie/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/) |
-| CT Leber LI-RADS | HJK-MRRT-CT-LEBER-LIRADS | v1.3 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lirads-leber/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/) |
-| CT Leber LTx-Evaluation HCC | HJK-MRRT-LTX-HCC-EVAL | v1.0 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/ltx-hcc-evaluation/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-ltx-hcc-evaluation/) |
-| CT Schädel nativ | HJK-MRRT-CT-SCHAEDEL-NATIV | v1.0 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/schaedel-nativ/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/) |
+Die Spalte **RadLex** zeigt den Verifizierungsstand der Kodierung:
+✅ registry-verifiziert (NCBO BioPortal) · 🔧 Codes in Verifikation (Rebuild läuft).
+
+| Template | ID | Version | RadLex | Kanonisch | Demo |
+|---|---|---|---|---|---|
+| Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.6 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-praetep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
+| Röntgen Thorax (p.a.) | HJK-MRRT-ROE-THORAX | v2.3 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-standard/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/) |
+| Röntgen Knie post-KTEP | HJK-MRRT-KNIE-POSTTEP | v1.1.1 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-posttep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/) |
+| Röntgen Thorax liegend (ICU/portable) | HJK-MRRT-ROE-THORAX-LIEGEND | v1.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-liegend/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax-liegend/) |
+| CT Abdomen + Becken | HJK-MRRT-CT-ABDBECKEN | v2.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/abdomen-becken/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-abdomen/) |
+| CT Urolithiasis | HJK-MRRT-CT-UROLITHIASIS | v1.1 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/urolithiasis/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/) |
+| CT Lungenarterien (CTPA) | HJK-MRRT-CT-LUNGENEMBOLIE | v1.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lungenembolie/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/) |
+| CT Leber LI-RADS | HJK-MRRT-CT-LEBER-LIRADS | v1.3 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lirads-leber/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/) |
+| CT Leber LTx-Evaluation HCC | HJK-MRRT-LTX-HCC-EVAL | v1.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/ltx-hcc-evaluation/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-ltx-hcc-evaluation/) |
+| CT Schädel nativ | HJK-MRRT-CT-SCHAEDEL-NATIV | v1.2 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/schaedel-nativ/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/) |
 
 ---
 
@@ -125,11 +138,36 @@ demo/<demo-id>/
 ---
 
 
+## RadLex-Kodierung & Verifikation
+
+Die RadLex-Codes werden gegen die **echte Registry** (NCBO BioPortal, Ontologie
+RADLEX) verifiziert, nicht nur auf Existenz geprüft. Ein Code-Treue-Lint gleicht
+den am Feld hängenden englischen Term (`data-en`) verbatim gegen das RadLex-
+prefLabel ab und fängt so die „valid-but-wrong"-Falle (gültiger Code, falsches
+Konzept):
+
+```bash
+node shared/scripts/resolve-radlex.js --all      # RIDs → radlex-cache.json (BioPortal)
+node shared/scripts/validate-codes.js --all --resolve
+```
+
+Wo RadLex kein exaktes Konzept führt, wird bewusst der klinisch tragfähige
+Oberbegriff kodiert (Lokalisation/Spezifik über den Feldnamen) oder das Feld
+`local` belassen — statt einen unpassenden Code zu erzwingen.
+
+**Status:** `knie-praetep` und `thorax-standard` sind vollständig registry-
+verifiziert (✅). Für die übrigen Templates läuft die Verifikation/Neubelegung
+der Kodierung (🔧); die Vorlagen selbst sind nutzbar, die RadLex-RIDs dort aber
+noch nicht registry-bestätigt.
+
+---
+
 ## Standards & Pflege
 
 Template-Aufbau und Konventionen folgen dem internen Style Guide.
 
 - Style Guide: [docs/style-guide/](./docs/style-guide/)
+- Code-Fidelity-Lint: [shared/codesystems/](./shared/codesystems/)
 
 ---
 
