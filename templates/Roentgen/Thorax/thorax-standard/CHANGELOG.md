@@ -5,6 +5,23 @@ Format: [Semantic Versioning](https://semver.org/lang/de/)
 
 ---
 
+## [2.3] – 2026-07-21
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Gesamte RadLex-Kodierung neu belegt.** Der repo-weite Registry-Audit deckte auf, dass
+  praktisch alle bisherigen RIDs auf Fremdkonzepte zeigten (z. B. ground-glass RID4800 =
+  pneumocephalus, zentraler Venenkatheter RID49600 = injection treatment, Zwerchfell-
+  Hochstand RID5310 = proteinuria, Konsolidierung RID4803 = pneumoperitoneum).
+- **42 Felder registry-verifiziert** neu kodiert (u. a. Milchglas RID28531, Konsolidierung
+  RID43255, Atelektase RID28493, Pleuraerguss RID34539, Pneumothorax RID5352, CVK RID5578,
+  ET-Tubus RID5557, Thoraxdrainage RID5573, Osteodestruktion RID5382 = osteolysis).
+- **Hybrid-Kodierung** wo RadLex kein exaktes Konzept führt: klinisch tragfähiger Oberbegriff
+  (mass RID3874, calcification RID5196, enlargement RID3775, thickening RID28509, fracture
+  RID4650, dilation RID4743) – Lokalisation/Spezifik über den Feldnamen.
+- **21 Felder auf `local` demoted** wo kein RadLex-Konzept existiert (Kardiomegalie, Zwerchfell-
+  Hochstand/Sinus-Verlegung, Mediastinalshift/-verbreiterung, Trachealverlagerung, VAD, PEG,
+  Weichteilemphysem, Herz-Konfigurationen u. a.).
+- `RADLEX-MAPPING.md` neu aus den verifizierten Codes generiert. Feld-`id`s unverändert.
+
 ## [2.2] – 2026-07-06
 
 ### Geändert – Aufspaltung: Liegend-Befund ausgelagert
