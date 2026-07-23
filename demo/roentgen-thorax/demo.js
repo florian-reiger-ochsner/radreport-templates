@@ -36,6 +36,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 textarea{resize:vertical;min-height:48px}
 .rr-tx-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .rr-tx-rl{display:inline-block;font-size:10px;font-weight:600;color:var(--rr-accent);background:var(--rr-accent-pale);border-radius:3px;padding:1px 5px;margin-left:5px;vertical-align:middle}
+.rr-rl-badge::before{content:"RadLex"}
 .rr-tx-hint{background:var(--rr-accent-pale);border-left:3px solid var(--rr-accent);border-radius:0 6px 6px 0;padding:9px 13px;font-size:12px;color:var(--rr-ink-soft);margin:4px 0 12px}
 .rr-tx-hint strong{color:var(--rr-accent)}
 .rr-tx-proj-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
@@ -602,10 +603,11 @@ function resetAll() {
 
 // -----------------------------------------------------------------------------
 // 13) Devices als eingeklappte Disclosure — reines Viewer-Verhalten.
-//     Kanonisch ist Devices eine offene, gleichrangige Sektion (#dev-section
-//     mit rr-tx-sh-Header). Für die Demo wird sie zur Laufzeit in ein <details>
-//     umgehängt, damit sie wie die übrigen optionalen Zusatzblöcke eingeklappt
-//     erscheint. Das kanonische template.html bleibt davon unberührt.
+//     Kanonisch ist Devices eine offene, gerahmte Sektion (#dev-section als
+//     fieldset.rr-tx-rgroup mit <legend>). Für die Demo wird sie zur Laufzeit in
+//     ein <details> umgehängt (Legende via rr-tx-rgroup-Regel verborgen, Summary
+//     liefert das Label), damit sie wie die übrigen optionalen Zusatzblöcke
+//     eingeklappt erscheint. Das kanonische template.html bleibt davon unberührt.
 // -----------------------------------------------------------------------------
 (function collapseDevices() {
   const sec = document.getElementById('dev-section');
