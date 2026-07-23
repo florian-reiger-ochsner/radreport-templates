@@ -18,7 +18,7 @@
 <meta name="rrt:bodyregion"      content="Chest" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-22T19:37:59.191Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-22T20:34:42.131Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -318,7 +318,7 @@
     <div class="rr-tx-region-detail" id="rd-lunge">
 
       <div class="rr-tx-hint"><strong>Mehrere Befunde möglich</strong> – z.&#160;B. Emphysem + Rundherd. Fleischner-Terminologie, RadLex pro Eintrag.</div>
-      <!-- Parenchym-Stack: kanonisch eine kodierte Instanz; weitere Einträge fügt die Demo zur Laufzeit hinzu (Klon). -->
+      <!-- Parenchym-Stack: kanonisch zwei kodierte Instanzen; die Demo zeigt standardmäßig eine, weitere fügt sie zur Laufzeit hinzu (Klon). -->
       <div id="par-list">
         <div class="rr-tx-stack-item rr-tx-par-item" id="par-item-1">
           <div class="rr-tx-row"><label><span class="rr-tx-lbl">Befundtyp <span class="rr-rl-badge">RadLex</span></span>
@@ -354,6 +354,41 @@
             <div class="rr-tx-row"><label><span class="rr-tx-lbl">Lokalisation</span><select id="par-lok-1" data-voice="lokalisation parenchym"><option value="">–</option><option value="Oberlappen">Oberlappen</option><option value="Mittellappen / Lingula">Mittellappen / Lingula</option><option value="Unterlappen">Unterlappen</option><option value="perihilär">perihilär</option><option value="basal">basal</option><option value="diffus">diffus</option></select></label></div>
           </div>
           <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung / Größe</span><input type="text" id="par-ft-1" placeholder="z.B. 8 mm, scharf begrenzt, subpleural…" data-voice="zusatz parenchym" /></label></div>
+        </div>
+        <div class="rr-tx-stack-item rr-tx-par-item" id="par-item-2">
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Befundtyp <span class="rr-rl-badge">RadLex</span></span>
+            <select id="par-typ-2" data-voice="parenchymbefund">
+              <option value="">– bitte wählen –</option>
+              <optgroup label="Fleischner">
+                <option value="RID4800" data-radlex="RID28531" data-de="Milchglastrübung (Ground-Glass-Opacity)" data-en="ground-glass opacity">Milchglastrübung (Ground-Glass-Opacity)</option>
+                <option value="RID5177" data-radlex="RID43271" data-de="Retikuläres Muster" data-en="reticular pattern">Retikuläres Muster</option>
+                <option value="RID5178" data-radlex="RID43272" data-de="Retikulonoduläres Muster" data-en="reticulonodular pattern">Retikulonoduläres Muster</option>
+                <option value="RID4803" data-radlex="RID43255" data-de="Konsolidierung" data-en="consolidation">Konsolidierung</option>
+                <option value="RID5179" data-radlex="RID43256" data-de="Crazy-Paving-Muster" data-en="crazy-paving pattern">Crazy-Paving-Muster</option>
+                <option value="RID5180" data-radlex="RID35280" data-de="Honigwabenmuster" data-en="honeycomb lung">Honigwabenmuster</option>
+              </optgroup>
+              <optgroup label="Nodulär">
+                <option value="RID4941" data-radlex="RID50149" data-de="Solitärer Rundherd" data-en="pulmonary nodule">Solitärer Rundherd</option>
+                <option value="RID5231" data-radlex="RID50149" data-de="Multiple Rundherde" data-en="pulmonary nodule">Multiple Rundherde</option>
+                <option value="RID5055" data-de="Mikronoduli" data-en="micronodules" data-radlex-status="local">Mikronoduli</option>
+                <option value="RID5234" data-radlex="RID7475" data-de="Kaverne / Herdschatten mit Kaverne" data-en="cavitary">Kaverne / Herdschatten mit Kaverne</option>
+                <option value="RID5235" data-radlex="RID3874" data-de="Hilusnahe Raumforderung" data-en="mass">Hilusnahe Raumforderung</option>
+              </optgroup>
+              <optgroup label="Flächig">
+                <option value="RID28530" data-radlex="RID28530" data-de="Flächige Transparenzminderung / Infiltrat" data-en="opacity">Flächige Transparenzminderung / Infiltrat</option>
+                <option value="RID4804" data-radlex="RID43255" data-de="Lobuläre Verschattung / Segmentale Infiltration" data-en="consolidation">Lobuläre Verschattung / Segmentale Infiltration</option>
+                <option value="RID28493" data-radlex="RID28493" data-de="Atelektase" data-en="atelectasis">Atelektase</option>
+              </optgroup>
+              <optgroup label="Überblähung">
+                <option value="RID4799" data-radlex="RID4799" data-de="Lungenemphysem" data-en="emphysema">Lungenemphysem</option>
+                <option value="RID5050" data-radlex="RID28537" data-de="Überblähung / Air Trapping" data-en="air trapping">Überblähung / Air Trapping</option>
+              </optgroup>
+            </select></label></div>
+          <div class="rr-tx-grid2">
+            <div class="rr-tx-row"><label><span class="rr-tx-lbl">Seite</span><select id="par-seite-2" data-voice="seite parenchym"><option value="">–</option><option value="re.">re.</option><option value="li.">li.</option><option value="bds.">bds.</option></select></label></div>
+            <div class="rr-tx-row"><label><span class="rr-tx-lbl">Lokalisation</span><select id="par-lok-2" data-voice="lokalisation parenchym"><option value="">–</option><option value="Oberlappen">Oberlappen</option><option value="Mittellappen / Lingula">Mittellappen / Lingula</option><option value="Unterlappen">Unterlappen</option><option value="perihilär">perihilär</option><option value="basal">basal</option><option value="diffus">diffus</option></select></label></div>
+          </div>
+          <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung / Größe</span><input type="text" id="par-ft-2" placeholder="z.B. 8 mm, scharf begrenzt, subpleural…" data-voice="zusatz parenchym" /></label></div>
         </div>
       </div>
 
@@ -417,7 +452,7 @@
 <div id="dev-section">
 
     <div class="rr-tx-hint">Jedes Device einzeln hinzufügen – auch mehrere gleichartige. <span class="rr-rl-badge">RadLex</span> pro Device-Typ. Fehllage „dringlich" löst Notfall-Hinweis aus.</div>
-    <!-- Device-Stack: kanonisch eine kodierte Instanz; weitere Einträge fügt die Demo zur Laufzeit hinzu (Klon). -->
+    <!-- Device-Stack: kanonisch zwei kodierte Instanzen; die Demo zeigt standardmäßig eine, weitere fügt sie zur Laufzeit hinzu (Klon). -->
     <div id="dev-list">
       <div class="rr-tx-stack-item rr-tx-dev-item" id="dev-item-1">
         <div class="rr-tx-row"><label><span class="rr-tx-lbl">Device-Typ <span class="rr-rl-badge">RadLex</span></span>
@@ -469,6 +504,57 @@
             <option value="Fehllage – dringliche Korrektur">Fehllage – dringlich (!)</option>
           </select></label></div>
         <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung</span><input type="text" id="dev-ft-1" placeholder="z.B. Karina-Abstand 5 cm…" data-voice="zusatz device" /></label></div>
+      </div>
+      <div class="rr-tx-stack-item rr-tx-dev-item" id="dev-item-2">
+        <div class="rr-tx-row"><label><span class="rr-tx-lbl">Device-Typ <span class="rr-rl-badge">RadLex</span></span>
+          <select id="dev-typ-2" data-voice="device typ">
+            <option value="">– Device wählen –</option>
+            <optgroup label="Vaskulär">
+              <option value="ZVK re. Subklavia" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID5578" data-en="central venous catheter">ZVK re. Subklavia</option>
+              <option value="ZVK li. Subklavia" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID5578" data-en="central venous catheter">ZVK li. Subklavia</option>
+              <option value="ZVK re. Jugularis" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID5578" data-en="central venous catheter">ZVK re. Jugularis</option>
+              <option value="ZVK li. Jugularis" data-ph="V. cava superior – Mitte" data-rid="RID49600" data-radlex="RID5578" data-en="central venous catheter">ZVK li. Jugularis</option>
+              <option value="Port-Katheter re." data-ph="V. cava superior / RA-Übergang" data-rid="RID49601" data-radlex="RID50336" data-en="port">Port-Katheter re.</option>
+              <option value="Port-Katheter li." data-ph="V. cava superior / RA-Übergang" data-rid="RID49601" data-radlex="RID50336" data-en="port">Port-Katheter li.</option>
+              <option value="Dialysekatheter" data-ph="V. cava superior – Lage" data-rid="RID49602" data-radlex="RID50530" data-en="dialysis catheter">Dialysekatheter</option>
+              <option value="PICC-Line" data-ph="V. cava superior – Mitte" data-rid="RID49603" data-radlex="RID5581" data-en="peripheral intravenous central catheter">PICC-Line</option>
+              <option value="Arterienkatheter" data-ph="A. radialis / A. femoralis" data-rid="RID49604" data-radlex="RID5576" data-en="catheter">Arterienkatheter</option>
+              <option value="IABP" data-ph="Deszend. Aorta, ca. 2 cm unterh. A. subclavia li." data-rid="RID49605" data-radlex="RID5587" data-en="intraaortic balloon pump">IABP</option>
+              <option value="Impella / VAD" data-ph="LV-Spitze / Auslass Aortenwurzel" data-rid="RID49606" data-en="ventricular assist device" data-radlex-status="local">Impella / VAD</option>
+            </optgroup>
+            <optgroup label="Kardial">
+              <option value="Schrittmacher (SM)" data-ph="Elektroden: re. Ventrikel / Vorhof" data-rid="RID49610" data-radlex="RID5436" data-en="pacemaker">Schrittmacher (SM)</option>
+              <option value="ICD" data-ph="Elektrodenlage re. Ventrikel" data-rid="RID49611" data-radlex="RID5434" data-en="automated implantable cardiac defibrillator">ICD</option>
+              <option value="CRT-D (biventrikulärer SM)" data-ph="Elektroden: re. Ventrikel / Vorhof / KS" data-rid="RID49612" data-radlex="RID5431" data-en="cardiac rhythm therapy device">CRT-D (biventrikulärer SM)</option>
+              <option value="Loop-Recorder (ILR)" data-ph="subkutan li. Thoraxwand" data-rid="RID49613" data-radlex="RID5429" data-en="implantable device">Loop-Recorder (ILR)</option>
+            </optgroup>
+            <optgroup label="Atemweg">
+              <option value="Endotrachealtubus (ETT)" data-ph="Karina-Abstand ca. 4–5 cm" data-rid="RID49620" data-radlex="RID5557" data-en="endotracheal tube">Endotrachealtubus (ETT)</option>
+              <option value="Tracheostoma-Kanüle" data-ph="Trachea – Lage, Karina-Abstand" data-rid="RID49621" data-radlex="RID5560" data-en="tracheostomy tube">Tracheostoma-Kanüle</option>
+            </optgroup>
+            <optgroup label="Sonden">
+              <option value="Magensonde (MS)" data-ph="Magenkorpus" data-rid="RID49630" data-radlex="RID5566" data-en="nasogastric tube">Magensonde (MS)</option>
+              <option value="Jejunalsonde" data-ph="Jejunum – Lage" data-rid="RID49631" data-radlex="RID50341" data-en="jejunostomy tube">Jejunalsonde</option>
+              <option value="Ernährungssonde (PEG)" data-ph="Magenkorpus / Jejunum" data-rid="RID49632" data-en="PEG tube" data-radlex-status="local">Ernährungssonde (PEG)</option>
+            </optgroup>
+            <optgroup label="Drainage">
+              <option value="Thoraxdrainage re." data-ph="Pleuraspalt re. – apikal / basal / dorsal" data-rid="RID49640" data-radlex="RID5573" data-en="thoracostomy tube">Thoraxdrainage re.</option>
+              <option value="Thoraxdrainage li." data-ph="Pleuraspalt li. – apikal / basal / dorsal" data-rid="RID49640" data-radlex="RID5573" data-en="thoracostomy tube">Thoraxdrainage li.</option>
+              <option value="Perikarddrainage" data-ph="Perikardspalt – Lage" data-rid="RID49641" data-radlex="RID5610" data-en="surgical drain">Perikarddrainage</option>
+            </optgroup>
+            <optgroup label="Sonstige">
+              <option value="Sonstige / Fremdmaterial" data-ph="Beschreibung und Lage" data-rid="RID49699" data-radlex="RID5425" data-en="foreign body">Sonstige / Fremdmaterial</option>
+            </optgroup>
+          </select></label></div>
+        <div class="rr-tx-row"><label><span class="rr-tx-lbl">Lage / Spitze</span><input type="text" id="dev-lage-2" placeholder="Lage beschreiben…" data-voice="device lage" /></label></div>
+        <div class="rr-tx-row"><label><span class="rr-tx-lbl">Beurteilung</span>
+          <select id="dev-burt-2" data-voice="device beurteilung">
+            <option value="regelrecht platziert, Lage korrekt">Regelrecht – Lage korrekt</option>
+            <option value="Lage kontrollbedürftig">Kontrollbedürftig</option>
+            <option value="Fehllage – Korrektur empfohlen">Fehllage – Korrektur empfohlen</option>
+            <option value="Fehllage – dringliche Korrektur">Fehllage – dringlich (!)</option>
+          </select></label></div>
+        <div class="rr-tx-row"><label><span class="rr-tx-lbl">Ergänzung</span><input type="text" id="dev-ft-2" placeholder="z.B. Karina-Abstand 5 cm…" data-voice="zusatz device" /></label></div>
       </div>
     </div>
 </div>

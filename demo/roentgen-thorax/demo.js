@@ -243,12 +243,19 @@ let parTemplateHTML = '', devTemplateHTML = '', parCount = 1, devCount = 1;
     </div>
   `);
 
-  // Stack-Kopf (Nummer + Löschen) in ALLE statischen Items einsetzen
-  // (kanonisch liegen je 2 Slots vor; weitere fügt die Demo zur Laufzeit hinzu).
-  document.querySelectorAll('.rr-tx-par-item').forEach((el, i) => el.insertAdjacentHTML('afterbegin',
-    `<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Parenchymbefund ${i + 1}</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>`));
-  document.querySelectorAll('.rr-tx-dev-item').forEach((el, i) => el.insertAdjacentHTML('afterbegin',
-    `<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Device ${i + 1}</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>`));
+  // Kanonisch liegen 2 Slots je Stack vor (Import-Gesicht). In der Demo ist nur der
+  // ERSTE Standard: Stack-Kopf ins erste Item, überzählige statische Slots entfernen.
+  // Weitere fügt der Add-Button als Klon hinzu.
+  document.querySelectorAll('.rr-tx-par-item').forEach((el, i) => {
+    if (i === 0) el.insertAdjacentHTML('afterbegin',
+      `<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Parenchymbefund 1</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>`);
+    else el.remove();
+  });
+  document.querySelectorAll('.rr-tx-dev-item').forEach((el, i) => {
+    if (i === 0) el.insertAdjacentHTML('afterbegin',
+      `<div class="rr-tx-stack-head"><span class="rr-tx-stack-num">Device 1</span><button type="button" class="rr-tx-stack-del" title="entfernen">✕</button></div>`);
+    else el.remove();
+  });
 
   // Add-Buttons (Chrome) nach den Stack-Listen
   document.getElementById('par-list').insertAdjacentHTML('afterend',
@@ -256,12 +263,11 @@ let parTemplateHTML = '', devTemplateHTML = '', parCount = 1, devCount = 1;
   document.getElementById('dev-list').insertAdjacentHTML('afterend',
     '<button type="button" class="rr-tx-add-btn" id="btn-add-dev">＋ Device hinzufügen</button>');
 
-  // Pristine-Vorlagen aus dem Erst-Item festhalten (mit Stack-Kopf, ohne Voice-Chips)
+  // Pristine-Vorlage aus dem verbleibenden Erst-Item festhalten (mit Stack-Kopf)
   parTemplateHTML = document.getElementById('par-item-1').outerHTML;
   devTemplateHTML = document.getElementById('dev-item-1').outerHTML;
-  // Zähler auf die tatsächlich vorhandene Slot-Zahl setzen -> nächster Add kollisionsfrei
-  parCount = document.querySelectorAll('.rr-tx-par-item').length;
-  devCount = document.querySelectorAll('.rr-tx-dev-item').length;
+  parCount = 1;
+  devCount = 1;
 
   // Beurteilungs-Modus-Schalter (Workflow-Chrome) – im kanonischen Template nicht vorhanden,
   // hier zur Laufzeit vor die Freitext-Zeile injiziert.
