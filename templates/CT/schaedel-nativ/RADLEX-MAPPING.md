@@ -1,64 +1,109 @@
 # RadLex-Mapping – CT Schädel nativ
 
-Jede strukturierte Option im Template trägt `data-radlex` (RID) und `data-en` (englischer RadLex-Term). FHIR-Observations werden mit `system: http://radlex.org` kodiert.
+Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
-## ⚠ Verifikationsstatus – ehrlich
+> **Registry-Verifikation (2026-07-21):** RIDs gegen NCBO BioPortal (RADLEX) geprüft,
+> `system: http://radlex.org`. Suffix-Konvention aufgelöst (Feld trägt das Konzept,
+> Optionswerte/Grade sind lokal). Wo RadLex kein exaktes Konzept führt, ist der
+> tragfähige Oberbegriff kodiert oder das Feld `local`. Frühere RIDs waren großteils
+> geraten (RID13882 „image quality" = right parietal lobe, RID4702 epidural hematoma = contusion u. a.).
 
-Die hier gelisteten neuro-spezifischen RIDs sind **provisorisch zugewiesen** und wurden **noch nicht** gegen den offiziellen RadLex-Browser (radlex.org / BioPortal RADLEX) verifiziert. Sie folgen der Repo-Konvention (Basis-RID + ggf. lokaler Suffix wie `-good`, `-lim`), die tatsächlichen Nummern müssen aber vor Produktiveinsatz einzeln geprüft werden. Lokale Suffix-Codes (`RIDxxxx-yyy`) sind bewusste HJK-Erweiterungen, **keine** offiziellen RadLex-IDs.
+## Registry-verifiziert (RadLex-RID)
 
-**Status-Legende:**
-`🟢 verifiziert` · `🔵 aus Repo-Bestand übernommen (konsistent, noch zu verifizieren)` · `🟡 zu verifizieren (offline nicht prüfbar)` · `⚪ lokaler HJK-Suffix (kein offizieller RID)`
-
-| Konzept (de) | RID | data-en | Status |
-|---|---|---|---|
-| CT Schädel (Protokoll) | RID10337 | CT head | 🟡 |
-| Bildqualität | RID13882 | image quality | 🟡 |
-| Bildqualität – gut/eingeschränkt | RID13882-good / -lim | – | ⚪ |
-| Messung (generisch) | RID13173 | measurement | 🟡 |
-| Lateralität (Container) | RID5824 | laterality | 🔵 |
-| rechts | RID5826 | right | 🔵 |
-| links | RID5825 | left | 🔵 |
-| beidseits | RID5827 | bilateral | 🔵 |
-| **Intrakranielle Blutung** | RID4700 | intracranial hemorrhage | 🟡 |
-| Intraparenchymale Blutung (ICB) | RID4701 | intraparenchymal hemorrhage | 🟡 |
-| Epidurales Hämatom (EDH) | RID4702 | epidural hematoma | 🟡 |
-| Subdurales Hämatom (SDH) | RID4703 | subdural hematoma | 🟡 |
-| Intraventrikuläre Blutung (IVB) | RID4705 | intraventricular hemorrhage | 🟡 |
-| Subarachnoidalblutung (SAB) | RID4706 | subarachnoid hemorrhage | 🟡 |
-| Blutungsalter akut/subakut/chronisch | RID5733 / RID5734 / RID5735 | acute / subacute / chronic | 🟡 |
-| **Zerebrale Ischämie** | RID5722 | cerebral ischemia | 🟡 |
-| Infarktfrühzeichen | RID5760 | early infarct signs | 🟡 |
-| Demarkierter Infarkt / alte Defekte | RID28793 | demarcated/old infarct | 🟡 |
-| Gefäßterritorium | RID5798 | vascular territory | 🟡 |
-| ACA / ACM / ACP-Territorium | RID5799 / RID5800 / RID5801 | ACA / MCA / PCA territory | 🟡 |
-| ASPECTS | RID35795 | ASPECTS | 🟡 |
-| Hämorrhagische Transformation | RID4707 | hemorrhagic transformation | 🟡 |
-| **Mittellinienverlagerung** | RID5783 | midline shift | 🟡 |
-| Herniation (Container) | RID5782 | herniation | 🟡 |
-| Subfalzine Herniation | RID5784 | subfalcine herniation | 🟡 |
-| Uncusherniation | RID5785 | uncal herniation | 🟡 |
-| Basale Zisternen | RID6043 | basal cisterns | 🟡 |
-| **Ventrikelsystem** | RID6042 | ventricular system | 🟡 |
-| Ventrikel erweitert | RID5811 | dilated ventricles | 🟡 |
-| Hydrozephalus | RID4724 | hydrocephalus | 🟡 |
-| Äußere Liquorräume | RID6044 | external CSF spaces | 🟡 |
-| Hirnparenchym | RID6434 | brain parenchyma | 🟡 |
-| Mikroangiopathie / White Matter Disease (Fazekas) | RID35577 | white matter disease | 🟡 |
-| Raumforderung | RID3798 | mass | 🟡 |
-| Perilesionales Ödem | RID4675 | perilesional edema | 🟡 |
-| Schädelfraktur / Kalvaria | RID4760 | skull fracture | 🟡 |
-| NNH | RID8595 | paranasal sinuses | 🟡 |
-| Weichteile | RID1241 | soft tissue | 🟡 |
-
-## LOINC
-
-| Konzept | LOINC | Status |
+| Konzept (`data-en`) | RID | Status |
 |---|---|---|
-| CT Head | 30799-1 | 🟡 zu verifizieren |
+| acute | RID5718 | ✅ |
+| age appropriate | RID5696 | ✅ |
+| atrophy | RID5046 | ✅ |
+| bilateral | RID5771 | ✅ |
+| brainstem | RID6677 | ✅ |
+| central | RID5827 | ✅ |
+| cerebellum | RID6815 | ✅ |
+| cerebral herniation | RID4948 | ✅ |
+| cerebral ventricle | RID7123 | ✅ |
+| chronic | RID5719 | ✅ |
+| compressed | RID5871 | ✅ |
+| diagnostic quality | RID12 | ✅ |
+| dilated | RID5786 | ✅ |
+| edema | RID4865 | ✅ |
+| epidural hematoma | RID4708 | ✅ |
+| fracture | RID4650 | ✅ |
+| hematoma | RID4705 | ✅ |
+| hemorrhage | RID4700 | ✅ |
+| hydrocephalus | RID4885 | ✅ |
+| image quality | RID10 | ✅ |
+| infarction | RID5172 | ✅ |
+| intact | RID39115 | ✅ |
+| ischemia | RID3376 | ✅ |
+| left | RID5824 | ✅ |
+| mass | RID3874 | ✅ |
+| midline | RID5826 | ✅ |
+| paranasal sinuses | RID28579 | ✅ |
+| patent | RID5895 | ✅ |
+| portion of soft tissue | RID35730 | ✅ |
+| right | RID5825 | ✅ |
+| skull | RID9196 | ✅ |
+| subarachnoid cistern | RID7180 | ✅ |
+| subarachnoid hemorrhage | RID4710 | ✅ |
+| subdural hematoma | RID4706 | ✅ |
+| subfalcine herniation | RID4949 | ✅ |
+| transtentorial herniation | RID4951 | ✅ |
+| uncal herniation | RID4950 | ✅ |
+| watershed | RID6408 | ✅ |
 
-## Verifikations-Workflow (vor Produktiveinsatz)
+## Lokal (Werte/Grade/kein exaktes Konzept)
 
-1. Jeden 🟡-RID im RadLex-Browser (radlex.org bzw. BioPortal) gegen den deutschen/englischen Term prüfen.
-2. Korrekte RID eintragen oder Term anpassen; Status auf 🟢 setzen.
-3. 🔵-Lateralitätscodes mit dem Repo-Bestand (z. B. urolithiasis) konsolidieren – einmal zentral verifizieren, dann überall identisch.
-4. ⚪-Suffixe als lokale HJK-Granularität dokumentieren; sie bleiben bewusst außerhalb des offiziellen RadLex-Namensraums.
+| Konzept (`data-en`) | Status |
+|---|---|
+| ACA territory | 🟡 |
+| ASPECTS | 🟡 |
+| CT head protocol | 🟡 |
+| CT scanner Siemens Somatom Force | 🟡 |
+| CT scanner Siemens Somatom | 🟡 |
+| Fazekas 0 | 🟡 |
+| Fazekas 1 | 🟡 |
+| Fazekas 2 | 🟡 |
+| Fazekas 3 | 🟡 |
+| MCA territory | 🟡 |
+| PCA territory | 🟡 |
+| acute on chronic | 🟡 |
+| brain parenchyma | 🟡 |
+| early infarct signs | 🟡 |
+| effaced | 🟡 |
+| external CSF spaces | 🟡 |
+| hemorrhagic transformation | 🟡 |
+| ischemia stage | 🟡 |
+| laterality | 🟡 |
+| limited by beam hardening | 🟡 |
+| limited by motion | 🟡 |
+| measurement | 🟡 |
+| midline shift | 🟡 |
+| multiphasic infarction | 🟡 |
+| no edema | 🟡 |
+| non-contrast CT head with reformats | 🟡 |
+| non-contrast CT head | 🟡 |
+| none | 🟡 |
+| opacification | 🟡 |
+| petechial confluent | 🟡 |
+| petechial focal | 🟡 |
+| posthemorrhagic defect | 🟡 |
+| postischemic defect | 🟡 |
+| present | 🟡 |
+| prior examination available | 🟡 |
+| reduced | 🟡 |
+| soft tissue swelling | 🟡 |
+| subacute | 🟡 |
+| thin section bone window | 🟡 |
+| to the left | 🟡 |
+| to the right | 🟡 |
+| tonsillar | 🟡 |
+| unremarkable | 🟡 |
+| vascular territory | 🟡 |
+| white matter disease | 🟡 |
+
+## FHIR-Kodierung
+
+| Ressource | Code | System |
+|---|---|---|
+| DiagnosticReport | 24725-4 | http://loinc.org |
+| Observations (RadLex) | RID* | http://radlex.org |

@@ -2,6 +2,48 @@
 
 Format orientiert an Keep a Changelog. Versionierung: SemVer.
 
+## [1.3.0] – 2026-07-21
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Gesamte RadLex-Kodierung neu belegt** (Rebuild 6/8). Fast alle bisherigen RIDs trafen Fremdkonzepte
+  (RID13882 „image quality" = right parietal lobe, RID4702 „epidural hematoma" = contusion,
+  RID4703 „subdural" = hemarthrosis, RID6043 „basal cisterns" = equal density).
+- **38 Felder registry-verifiziert:** Blutungen epidural RID4708 / subdural RID4706 / SAB RID4710,
+  Herniationen subfalcine RID4949 / uncal RID4950 / transtentorial RID4951 / cerebral RID4948,
+  hydrocephalus RID4885, atrophy RID5046, Anatomie cerebral ventricle RID7123, subarachnoid cistern
+  RID7180, paranasal sinuses RID28579, skull RID9196, edema RID4865, ischemia RID3376, mass RID3874 u. a.
+- **Hybrid-Oberbegriffe** wo kein exaktes Konzept: intraparenchymal/intraventricular/intracranial
+  hemorrhage → hemorrhage RID4700; skull fracture → fracture RID4650; old/demarcated infarct → infarction RID5172.
+- **45 Werte/Scores/Anker auf `local`:** Fazekas 0–3, ASPECTS, ACA/MCA/PCA territory, midline shift,
+  brain parenchyma, white matter disease, non-contrast CT head, Bildqualitäts-Limitationen u. a.
+- `RADLEX-MAPPING.md` neu generiert. Feld-`id`s unverändert.
+
+## [1.2.0] – 2026-07-08
+
+### Hinzugefügt (RIS-/Signatur-Ebene)
+- **Geteilter RIS-/Signatur-Block** (Pilot). Neuer Kopfbereich mit
+  Auftrags-/RIS-Feldern (Zugangsnummer/Accession, Patient-ID,
+  Untersuchungsdatum, Zuweiser) und Signatur (signierender Befunder als ID +
+  optionaler Klartext, Signaturdatum). Administrative Felder tragen
+  `data-ris-source` (HL7/RIS-Mapping-Schlüssel), bewusst **kein** `data-radlex`.
+  In Produktion vom RIS/HL7 gefüllt, im Standalone-Export überschreibbar; keine
+  Defaults.
+- **Single-Source-Mechanik:** Der Block ist genau einmal in
+  `shared/partials/ris-header.html` definiert und wird via
+  `shared/scripts/stamp-ris-header.js` idempotent in die kanonische
+  `template.html` gestempelt (Marker `rr:ris-header:start/end`). Verhindert
+  Copy-Paste-Drift über die Templates.
+- **FHIR-Export erweitert** (`demo.js`): `DiagnosticReport.resultsInterpreter`
+  referenziert einen `Practitioner` mit generischem Identifier
+  (`http://hjk.wien/fhir/sid/interpreter`) → ermöglicht die Auswertung „nur
+  meine Befunde". Zusätzlich `subject` (Patient-Identifier),
+  Accession-Identifier (v2-0203 `ACSN`), `effectiveDateTime` aus
+  Untersuchungsdatum, `issued` aus Signaturdatum. Alle Zusätze nur bei
+  ausgefüllten Feldern (sauberer Leerfall).
+
+### Hinweis
+- Pilot auf diesem Template. Rollout auf die übrigen Templates erfolgt je
+  Template durch erneutes `stamp-ris-header.js` + `build-demo.js`.
+
 ## [1.1.0] – 2026-07-06
 
 ### Geändert (Architektur A-Struktur)

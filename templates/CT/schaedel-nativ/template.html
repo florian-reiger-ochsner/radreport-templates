@@ -4,16 +4,16 @@
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8" />
-<title>CT Schädel nativ (CCT) – Strukturierte Befundvorlage (v1.1)</title>
+<title>CT Schädel nativ (CCT) – Strukturierte Befundvorlage (v1.3)</title>
 
 <!-- ===================== IHE MRRT METADATA ===================== -->
 <meta name="dcterms.title"       content="CT Schädel nativ (CCT)" />
 <meta name="dcterms.description" content="Strukturierte Befundvorlage CT Schädel nativ (Notfall-Massentemplate). Basierend auf DRG AK Befundung 041807.2.2104072101 ct_stroke_nativ (CC BY 4.0), erweitert zur allgemeinen kraniellen Nativ-CT: additives Normalbefund-Modell (Attestierung statt Default), Blutungstypen, Raumforderung, Kalvaria/NNH. Kanonisch nacktes MRRT (A-Struktur): kodiertes Eingabeformular, ohne CSS/JS. Normalbefund-Makro, Tri-State-Reveal, Live-Vorschau, Beurteilungsvorschlag, FHIR-Export und Status-Badge werden in der Demo von demo.js zur Laufzeit erzeugt. RadLex-Kodierung, Voice-ready (data-voice)." />
 <meta name="dcterms.language"    content="de" />
-<meta name="dcterms.identifier"  content="HJK-MRRT-CT-SCHAEDEL-NATIV-v1.1" />
+<meta name="dcterms.identifier"  content="HJK-MRRT-CT-SCHAEDEL-NATIV-v1.3" />
 <meta name="dcterms.source"      content="DRG AK Befundung, Template 041807.2.2104072101 (ct_stroke_nativ), CC BY 4.0, https://github.com/DRGagit/ak_befundung" />
 <meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
-<meta name="dcterms.date"        content="2026-07-06" />
+<meta name="dcterms.date"        content="2026-07-08" />
 <meta name="dcterms.rights"      content="Basierend auf DRG-Template CC BY 4.0. Adaption und Erweiterung: HJK Wien." />
 <meta name="rrt:specialty"       content="Radiology" />
 <meta name="rrt:subspecialty"    content="Neuroradiology" />
@@ -48,11 +48,86 @@
 <section class="rr-input-pane">
 
   <h1 class="rr-doc-title">CT Schädel nativ</h1>
-  <div class="rr-doc-sub">MRRT · RadLex-kodiert · Notfall · Voice-ready · v1.1 · HJK Wien</div>
+  <div class="rr-doc-sub">MRRT · RadLex-kodiert · Notfall · Voice-ready · v1.3 · HJK Wien</div>
   <div class="rr-title-rule"></div>
   <div class="rr-helper-info">Basierend auf DRG AK Befundung 041807.2.2104072101 (ct_stroke_nativ) · CC BY 4.0. Additives Modell: keine Region ist vorbelegt — o.&#160;B. attestieren oder Befund hinzufügen.</div>
 
   <!-- ===================== TECHNIK ===================== -->
+  <!-- rr:ris-header:start — gestempelt aus shared/partials/ris-header.html; NICHT hier editieren, Quelle ist das Partial -->
+<!--
+  GETEILTER RIS-/SIGNATUR-BLOCK  ·  Quelle der Wahrheit für alle Templates.
+
+  Dieses Fragment ist das EINZIGE Definitionsorgan der administrativen
+  Auftrags-/RIS- und Signatur-Felder. Es wird NICHT von Hand in die einzelnen
+  template.html kopiert, sondern per shared/scripts/stamp-ris-header.js zwischen
+  die rr:ris-header-Marker (start/end) in jede kanonische template.html
+  gestempelt (idempotent). Änderungen also hier machen und neu stempeln, damit
+  die Templates nicht auseinanderdriften. (Hinweis: die Marker bewusst NICHT als
+  Kommentar-Syntax hier ausschreiben – sonst Kollision beim Ersetzen.)
+
+  Architektur-Konformität (CLAUDE.md):
+  - Deklaratives, XML-wohlgeformtes MRRT. Kein CSS, kein JS, kein Script-Tag.
+  - rr-*-Klassen sind Struktur-Hooks; fieldset/legend gruppiert lesbar
+    (Styling-Reset in demo.js).
+  - ADMINISTRATIVE Felder → data-ris-source (HL7/RIS-Mapping-Schlüssel),
+    bewusst KEIN data-radlex (RadLex kodiert Befunde, nicht Auftragsmetadaten).
+  - Keine klinisch/administrativ vorbefüllten Defaults: alle Felder leer.
+    In Produktion füllt das RIS/HL7 die Werte; im Standalone-Export sind sie
+    manuell überschreibbar.
+  - Signierender Befunder = GENERISCHER Practitioner-Identifier (stabile ID),
+    nicht der Klartextname. Die konkrete Personenliste ist Deployment-Config,
+    NICHT Repo-Inhalt (respektiert „keine institutsspezifischen Inhalte").
+    interpreter-id → FHIR DiagnosticReport.resultsInterpreter, damit sich
+    Befunde später je Signierendem auswerten lassen („nur meine Befunde").
+
+  data-ris-source-Vokabular (HL7/RIS-Mapping):
+    accession-number · patient-id · study-datetime · referring-physician
+    interpreter-id · interpreter-name · signed-datetime
+-->
+  <fieldset class="rr-fieldset" id="fs_ris">
+    <legend>Auftrag / RIS</legend>
+    <div class="rr-h2-sub">In Produktion vom RIS/HL7 gesetzt; im Standalone-Export manuell überschreibbar. Kein diagnostisches Feld.</div>
+    <div class="rr-row rr-row-three">
+      <label>
+        <span class="rr-lbl"><span>Zugangsnummer (Accession)</span></span>
+        <input type="text" id="ris_accession" data-ris-source="accession-number" placeholder="vom RIS gesetzt" data-voice="accession" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Patient-ID</span></span>
+        <input type="text" id="ris_patient_id" data-ris-source="patient-id" placeholder="vom RIS gesetzt" data-voice="patienten id" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Untersuchungsdatum</span></span>
+        <input type="date" id="ris_study_date" data-ris-source="study-datetime" data-voice="untersuchungsdatum" />
+      </label>
+    </div>
+    <div class="rr-row">
+      <label>
+        <span class="rr-lbl"><span>Zuweiser</span></span>
+        <input type="text" id="ris_referrer" data-ris-source="referring-physician" placeholder="vom RIS gesetzt" data-voice="zuweiser" />
+      </label>
+    </div>
+  </fieldset>
+  <fieldset class="rr-fieldset" id="fs_sig">
+    <legend>Signatur</legend>
+    <div class="rr-h2-sub">Signierender Befunder als stabiler Practitioner-Identifier (Personalnr./LANR o.&#160;ä.). Klartextname optional. Grundlage für die Auswertung „nur meine Befunde".</div>
+    <div class="rr-row rr-row-three">
+      <label>
+        <span class="rr-lbl"><span>Signierender Befunder – ID</span></span>
+        <input type="text" id="sig_interpreter_id" data-ris-source="interpreter-id" placeholder="z.&#160;B. Personalnr./LANR" data-voice="befunder kennung" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Signierender Befunder – Klartext</span></span>
+        <input type="text" id="sig_interpreter_name" data-ris-source="interpreter-name" placeholder="Anzeigename (optional)" data-voice="befunder name" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Signaturdatum</span></span>
+        <input type="date" id="sig_datetime" data-ris-source="signed-datetime" data-voice="signaturdatum" />
+      </label>
+    </div>
+  </fieldset>
+  <!-- rr:ris-header:end — Ende geteilter RIS-/Signatur-Block -->
+
   <div class="rr-h2-wrap">
     <h2>Technik</h2>
     <div class="rr-h2-rule"></div>
@@ -68,16 +143,16 @@
     </label>
     <label>
       <span class="rr-lbl"><span>Protokoll <span class="rr-rl-badge">RadLex</span></span></span>
-      <select id="protokoll" data-radlex="RID10337" data-en="CT head protocol" data-voice="protokoll">
-        <option value="nativ, axial, 3/5 mm" data-radlex="RID10337" data-en="non-contrast CT head">Nativ, axial</option>
+      <select id="protokoll" data-en="CT head protocol" data-radlex-status="local" data-voice="protokoll">
+        <option value="nativ, axial, 3/5 mm" data-en="non-contrast CT head" data-radlex-status="local">Nativ, axial</option>
         <option value="nativ, axial + sagittale/koronare Reformat" data-radlex-status="local" data-en="non-contrast CT head with reformats">Nativ + Reformat</option>
         <option value="nativ, Dünnschicht (Knochenfenster)" data-radlex-status="local" data-en="thin section bone window">Nativ + Dünnschicht/Knochen</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>Bildqualität <span class="rr-rl-badge">RadLex</span></span></span>
-      <select id="qual" data-radlex="RID13882" data-en="image quality" data-voice="bildqualität">
-        <option value="diagnostisch ausreichend" data-radlex="RID13882" data-en="diagnostic image quality">Diagnostisch ausreichend</option>
+      <select id="qual" data-radlex="RID10" data-en="image quality" data-voice="bildqualität">
+        <option value="diagnostisch ausreichend" data-radlex="RID12" data-en="diagnostic quality">Diagnostisch ausreichend</option>
         <option value="eingeschränkt (Bewegungsartefakte)" data-radlex-status="local" data-en="limited by motion">Eingeschränkt (Bewegung)</option>
         <option value="eingeschränkt (Strahlaufhärtung Schädelbasis)" data-radlex-status="local" data-en="limited by beam hardening">Eingeschränkt (Schädelbasis)</option>
       </select>
@@ -125,41 +200,41 @@
           <label for="st_blutung_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="rr-region-detail" id="rd-blutung" data-radlex="RID4700" data-en="intracranial hemorrhage">
+      <div class="rr-region-detail" id="rd-blutung" data-radlex="RID4700" data-en="hemorrhage">
         <div class="rr-row rr-row-full">
           <label>
             <span class="rr-lbl"><span>Blutungstyp <span class="rr-rl-badge">RadLex</span></span><span class="rr-field-note">Mehrfachauswahl – können koexistieren</span></span>
             <div class="rr-cg">
-              <label class="rr-ci"><input type="checkbox" data-bt="EDH" data-radlex="RID4702" data-en="epidural hematoma" data-voice="epidural" /><span>Epidural (EDH)</span></label>
-              <label class="rr-ci"><input type="checkbox" data-bt="SDH" data-radlex="RID4703" data-en="subdural hematoma" data-voice="subdural" /><span>Subdural (SDH)</span></label>
-              <label class="rr-ci"><input type="checkbox" data-bt="SAB" data-radlex="RID4706" data-en="subarachnoid hemorrhage" data-voice="subarachnoidal" /><span>Subarachnoidal (SAB)</span></label>
-              <label class="rr-ci"><input type="checkbox" data-bt="ICB" data-radlex="RID4701" data-en="intraparenchymal hemorrhage" data-voice="intraparenchymal" /><span>Intraparenchymal (ICB)</span></label>
-              <label class="rr-ci"><input type="checkbox" data-bt="IVB" data-radlex="RID4705" data-en="intraventricular hemorrhage" data-voice="intraventrikulär" /><span>Intraventrikulär (IVB)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="EDH" data-radlex="RID4708" data-en="epidural hematoma" data-voice="epidural" /><span>Epidural (EDH)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="SDH" data-radlex="RID4706" data-en="subdural hematoma" data-voice="subdural" /><span>Subdural (SDH)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="SAB" data-radlex="RID4710" data-en="subarachnoid hemorrhage" data-voice="subarachnoidal" /><span>Subarachnoidal (SAB)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="ICB" data-radlex="RID4700" data-en="hemorrhage" data-voice="intraparenchymal" /><span>Intraparenchymal (ICB)</span></label>
+              <label class="rr-ci"><input type="checkbox" data-bt="IVB" data-radlex="RID4700" data-en="hemorrhage" data-voice="intraventrikulär" /><span>Intraventrikulär (IVB)</span></label>
             </div>
           </label>
         </div>
         <div class="rr-row rr-row-three">
           <label>
             <span class="rr-lbl"><span>Seite <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="seite" data-radlex="RID5824" data-en="laterality">
+            <select data-f="seite" data-en="laterality" data-radlex-status="local">
               <option value="" data-voice="seite offen">– Seite –</option>
-              <option value="rechts" data-radlex="RID5826" data-en="right" data-voice="rechts">rechts</option>
-              <option value="links" data-radlex="RID5825" data-en="left" data-voice="links">links</option>
-              <option value="bds." data-radlex="RID5827" data-en="bilateral" data-voice="beidseits">beidseits</option>
-              <option value="median" data-radlex-status="local" data-en="midline" data-voice="median">median</option>
+              <option value="rechts" data-radlex="RID5825" data-en="right" data-voice="rechts">rechts</option>
+              <option value="links" data-radlex="RID5824" data-en="left" data-voice="links">links</option>
+              <option value="bds." data-radlex="RID5771" data-en="bilateral" data-voice="beidseits">beidseits</option>
+              <option value="median" data-en="midline" data-radlex="RID5826" data-voice="median">median</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>Max. Dicke / Ausdehnung (mm)</span></span>
-            <input type="number" data-f="dicke" step="0.1" placeholder="–" data-radlex="RID13173" data-en="measurement" data-voice="dicke" />
+            <input type="number" data-f="dicke" step="0.1" placeholder="–" data-en="measurement" data-radlex-status="local" data-voice="dicke" />
           </label>
           <label>
             <span class="rr-lbl"><span>Alter</span></span>
             <select data-f="alter" data-voice="alter blutung">
               <option value="">–</option>
-              <option value="akut (hyperdens)" data-radlex="RID5733" data-en="acute" data-voice="akut">akut (hyperdens)</option>
-              <option value="subakut" data-radlex="RID5734" data-en="subacute" data-voice="subakut">subakut</option>
-              <option value="chronisch (hypodens)" data-radlex="RID5735" data-en="chronic" data-voice="chronisch">chronisch</option>
+              <option value="akut (hyperdens)" data-radlex="RID5718" data-en="acute" data-voice="akut">akut (hyperdens)</option>
+              <option value="subakut" data-en="subacute" data-radlex-status="local" data-voice="subakut">subakut</option>
+              <option value="chronisch (hypodens)" data-radlex="RID5719" data-en="chronic" data-voice="chronisch">chronisch</option>
               <option value="akut-auf-chronisch" data-radlex-status="local" data-en="acute on chronic" data-voice="akut auf chronisch">akut-auf-chronisch</option>
             </select>
           </label>
@@ -186,53 +261,53 @@
           <label for="st_ischaemie_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="rr-region-detail" id="rd-ischaemie" data-radlex="RID5722" data-en="cerebral ischemia">
+      <div class="rr-region-detail" id="rd-ischaemie" data-radlex="RID3376" data-en="ischemia">
         <div class="rr-row">
           <label>
             <span class="rr-lbl"><span>Stadium <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="stadium" data-radlex="RID5722" data-en="ischemia stage" data-voice="stadium">
+            <select data-f="stadium" data-en="ischemia stage" data-radlex-status="local" data-voice="stadium">
               <option value="">–</option>
-              <option value="Infarktfrühzeichen" data-radlex="RID5760" data-en="early infarct signs" data-voice="frühzeichen">Infarktfrühzeichen</option>
-              <option value="demarkierter Infarkt (hypodens)" data-radlex="RID28793" data-en="demarcated infarct" data-voice="demarkiert">Demarkierter Infarkt</option>
+              <option value="Infarktfrühzeichen" data-en="early infarct signs" data-radlex-status="local" data-voice="frühzeichen">Infarktfrühzeichen</option>
+              <option value="demarkierter Infarkt (hypodens)" data-radlex="RID5172" data-en="infarction" data-voice="demarkiert">Demarkierter Infarkt</option>
               <option value="mehrzeitiges Infarktgeschehen" data-radlex-status="local" data-en="multiphasic infarction" data-voice="mehrzeitig">Mehrzeitig</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>Gefäßterritorium <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="territorium" data-radlex="RID5798" data-en="vascular territory" data-voice="territorium">
+            <select data-f="territorium" data-en="vascular territory" data-radlex-status="local" data-voice="territorium">
               <option value="">–</option>
-              <option value="ACM" data-radlex="RID5800" data-en="MCA territory" data-voice="mediastromgebiet">ACM (Mediastromgebiet)</option>
-              <option value="ACA" data-radlex="RID5799" data-en="ACA territory" data-voice="anterior">ACA</option>
-              <option value="ACP / pc" data-radlex="RID5801" data-en="PCA territory" data-voice="posterior">ACP / posteriore Zirkulation</option>
-              <option value="Grenzzone" data-radlex-status="local" data-en="watershed" data-voice="grenzzone">Grenzzone</option>
-              <option value="Hirnstamm" data-radlex-status="local" data-en="brainstem" data-voice="hirnstamm">Hirnstamm</option>
-              <option value="Kleinhirn" data-radlex-status="local" data-en="cerebellum" data-voice="kleinhirn">Kleinhirn</option>
+              <option value="ACM" data-en="MCA territory" data-radlex-status="local" data-voice="mediastromgebiet">ACM (Mediastromgebiet)</option>
+              <option value="ACA" data-en="ACA territory" data-radlex-status="local" data-voice="anterior">ACA</option>
+              <option value="ACP / pc" data-en="PCA territory" data-radlex-status="local" data-voice="posterior">ACP / posteriore Zirkulation</option>
+              <option value="Grenzzone" data-en="watershed" data-radlex="RID6408" data-voice="grenzzone">Grenzzone</option>
+              <option value="Hirnstamm" data-en="brainstem" data-radlex="RID6677" data-voice="hirnstamm">Hirnstamm</option>
+              <option value="Kleinhirn" data-en="cerebellum" data-radlex="RID6815" data-voice="kleinhirn">Kleinhirn</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>Seite <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="seite" data-radlex="RID5824" data-en="laterality">
+            <select data-f="seite" data-en="laterality" data-radlex-status="local">
               <option value="" data-voice="seite offen">– Seite –</option>
-              <option value="rechts" data-radlex="RID5826" data-en="right" data-voice="rechts">rechts</option>
-              <option value="links" data-radlex="RID5825" data-en="left" data-voice="links">links</option>
-              <option value="bds." data-radlex="RID5827" data-en="bilateral" data-voice="beidseits">beidseits</option>
-              <option value="median" data-radlex-status="local" data-en="midline" data-voice="median">median</option>
+              <option value="rechts" data-radlex="RID5825" data-en="right" data-voice="rechts">rechts</option>
+              <option value="links" data-radlex="RID5824" data-en="left" data-voice="links">links</option>
+              <option value="bds." data-radlex="RID5771" data-en="bilateral" data-voice="beidseits">beidseits</option>
+              <option value="median" data-en="midline" data-radlex="RID5826" data-voice="median">median</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>ASPECTS (0–10)</span></span>
-            <input type="number" data-f="aspects" min="0" max="10" step="1" placeholder="–" data-radlex="RID35795" data-en="ASPECTS" data-voice="aspects" />
+            <input type="number" data-f="aspects" min="0" max="10" step="1" placeholder="–" data-en="ASPECTS" data-radlex-status="local" data-voice="aspects" />
           </label>
         </div>
         <div class="rr-row rr-row-full">
           <label>
             <span class="rr-lbl"><span>Hämorrhagische Transformation <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="ht" data-radlex="RID4707" data-en="hemorrhagic transformation" data-voice="hämorrhagische transformation">
+            <select data-f="ht" data-en="hemorrhagic transformation" data-radlex-status="local" data-voice="hämorrhagische transformation">
               <option value="">– keine Angabe –</option>
               <option value="keine" data-radlex-status="local" data-en="none" data-voice="keine">Keine</option>
               <option value="fokale petechiale Blutungen (HI1)" data-radlex-status="local" data-en="petechial focal" data-voice="petechial fokal">Petechial fokal (HI1)</option>
               <option value="konfluierende petechiale Blutungen (HI2)" data-radlex-status="local" data-en="petechial confluent" data-voice="petechial konfluierend">Petechial konfluierend (HI2)</option>
-              <option value="parenchymatöse Einblutung (PH1/PH2)" data-radlex-status="local" data-en="parenchymal hematoma" data-voice="parenchymatöse einblutung">Parenchymatöse Einblutung (PH)</option>
+              <option value="parenchymatöse Einblutung (PH1/PH2)" data-en="hematoma" data-radlex="RID4705" data-voice="parenchymatöse einblutung">Parenchymatöse Einblutung (PH)</option>
             </select>
           </label>
         </div>
@@ -258,7 +333,7 @@
           <label for="st_raumforderung_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="rr-region-detail" id="rd-raumforderung" data-radlex="RID3798" data-en="mass">
+      <div class="rr-region-detail" id="rd-raumforderung" data-radlex="RID3874" data-en="mass">
         <div class="rr-row rr-row-three">
           <label>
             <span class="rr-lbl"><span>Lokalisation</span></span>
@@ -266,11 +341,11 @@
           </label>
           <label>
             <span class="rr-lbl"><span>Größe (mm)</span></span>
-            <input type="text" data-f="groesse" placeholder="z.B. 22 × 18" data-radlex="RID13173" data-en="measurement" data-voice="größe" />
+            <input type="text" data-f="groesse" placeholder="z.B. 22 × 18" data-en="measurement" data-radlex-status="local" data-voice="größe" />
           </label>
           <label>
             <span class="rr-lbl"><span>Perifokales Ödem <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="oedem" data-radlex="RID4675" data-en="perilesional edema" data-voice="ödem">
+            <select data-f="oedem" data-radlex="RID4865" data-en="edema" data-voice="ödem">
               <option value="">–</option>
               <option value="kein" data-radlex-status="local" data-en="no edema" data-voice="kein ödem">Kein</option>
               <option value="vorhanden" data-radlex-status="local" data-en="present" data-voice="vorhanden">Vorhanden</option>
@@ -299,11 +374,11 @@
           <label for="st_mittellinie_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="rr-region-detail" id="rd-mittellinie" data-radlex="RID5783" data-en="midline shift">
+      <div class="rr-region-detail" id="rd-mittellinie" data-en="midline shift" data-radlex-status="local">
         <div class="rr-row">
           <label>
             <span class="rr-lbl"><span>Mittellinienverlagerung (mm) <span class="rr-rl-badge">RadLex</span></span></span>
-            <input type="number" data-f="mls" step="0.1" placeholder="–" data-radlex="RID5783" data-en="midline shift" data-voice="mittellinienverlagerung" />
+            <input type="number" data-f="mls" step="0.1" placeholder="–" data-en="midline shift" data-radlex-status="local" data-voice="mittellinienverlagerung" />
           </label>
           <label>
             <span class="rr-lbl"><span>Richtung</span></span>
@@ -317,12 +392,12 @@
         <div class="rr-row rr-row-full">
           <label>
             <span class="rr-lbl"><span>Herniationsmuster <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="herniation" data-radlex="RID5782" data-en="herniation" data-voice="herniation">
+            <select data-f="herniation" data-radlex="RID4948" data-en="cerebral herniation" data-voice="herniation">
               <option value="">– keine –</option>
-              <option value="subfalzine Herniation" data-radlex="RID5784" data-en="subfalcine" data-voice="subfalzin">Subfalzin</option>
-              <option value="Uncusherniation" data-radlex="RID5785" data-en="uncal" data-voice="uncus">Uncus</option>
-              <option value="zentrale Herniation" data-radlex-status="local" data-en="central" data-voice="zentral">Zentral</option>
-              <option value="transtentorielle Herniation" data-radlex-status="local" data-en="transtentorial" data-voice="transtentoriell">Transtentoriell</option>
+              <option value="subfalzine Herniation" data-radlex="RID4949" data-en="subfalcine herniation" data-voice="subfalzin">Subfalzin</option>
+              <option value="Uncusherniation" data-radlex="RID4950" data-en="uncal herniation" data-voice="uncus">Uncus</option>
+              <option value="zentrale Herniation" data-en="central" data-radlex="RID5827" data-voice="zentral">Zentral</option>
+              <option value="transtentorielle Herniation" data-en="transtentorial herniation" data-radlex="RID4951" data-voice="transtentoriell">Transtentoriell</option>
               <option value="tonsilläre Herniation" data-radlex-status="local" data-en="tonsillar" data-voice="tonsillär">Tonsillär</option>
             </select>
           </label>
@@ -330,10 +405,10 @@
         <div class="rr-row rr-row-full">
           <label>
             <span class="rr-lbl"><span>Basale Zisternen <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="zisternen" data-radlex="RID6043" data-en="basal cisterns" data-voice="zisternen">
+            <select data-f="zisternen" data-radlex="RID7180" data-en="subarachnoid cistern" data-voice="zisternen">
               <option value="">–</option>
-              <option value="frei" data-radlex-status="local" data-en="patent" data-voice="frei">Frei</option>
-              <option value="komprimiert" data-radlex-status="local" data-en="compressed" data-voice="komprimiert">Komprimiert</option>
+              <option value="frei" data-en="patent" data-radlex="RID5895" data-voice="frei">Frei</option>
+              <option value="komprimiert" data-en="compressed" data-radlex="RID5871" data-voice="komprimiert">Komprimiert</option>
               <option value="aufgehoben" data-radlex-status="local" data-en="effaced" data-voice="aufgehoben">Aufgehoben</option>
             </select>
           </label>
@@ -354,24 +429,24 @@
           <label for="st_ventrikel_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="rr-region-detail" id="rd-ventrikel" data-radlex="RID6042" data-en="ventricular system">
+      <div class="rr-region-detail" id="rd-ventrikel" data-radlex="RID7123" data-en="cerebral ventricle">
         <div class="rr-row">
           <label>
             <span class="rr-lbl"><span>Innere Liquorräume <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="innen" data-radlex="RID6042" data-en="ventricles" data-voice="innere liquorräume">
+            <select data-f="innen" data-radlex="RID7123" data-en="cerebral ventricle" data-voice="innere liquorräume">
               <option value="">–</option>
-              <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate" data-voice="altersentsprechend">Altersentsprechend</option>
-              <option value="erweitert" data-radlex="RID5811" data-en="dilated" data-voice="erweitert">Erweitert</option>
-              <option value="Hydrozephalus" data-radlex="RID4724" data-en="hydrocephalus" data-voice="hydrozephalus">Hydrozephalus</option>
+              <option value="altersentsprechend" data-en="age appropriate" data-radlex="RID5696" data-voice="altersentsprechend">Altersentsprechend</option>
+              <option value="erweitert" data-radlex="RID5786" data-en="dilated" data-voice="erweitert">Erweitert</option>
+              <option value="Hydrozephalus" data-radlex="RID4885" data-en="hydrocephalus" data-voice="hydrozephalus">Hydrozephalus</option>
               <option value="reduziert" data-radlex-status="local" data-en="reduced" data-voice="reduziert">Reduziert (Hirnödem)</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>Äußere Liquorräume <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="aussen" data-radlex="RID6044" data-en="external CSF spaces" data-voice="äußere liquorräume">
+            <select data-f="aussen" data-en="external CSF spaces" data-radlex-status="local" data-voice="äußere liquorräume">
               <option value="">–</option>
-              <option value="altersentsprechend" data-radlex-status="local" data-en="age-appropriate" data-voice="altersentsprechend">Altersentsprechend</option>
-              <option value="erweitert (Atrophie)" data-radlex-status="local" data-en="atrophy" data-voice="erweitert">Erweitert (Atrophie)</option>
+              <option value="altersentsprechend" data-en="age appropriate" data-radlex="RID5696" data-voice="altersentsprechend">Altersentsprechend</option>
+              <option value="erweitert (Atrophie)" data-en="atrophy" data-radlex="RID5046" data-voice="erweitert">Erweitert (Atrophie)</option>
               <option value="reduziert" data-radlex-status="local" data-en="reduced" data-voice="reduziert">Reduziert</option>
             </select>
           </label>
@@ -398,11 +473,11 @@
           <label for="st_parenchym_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="rr-region-detail" id="rd-parenchym" data-radlex="RID6434" data-en="brain parenchyma">
+      <div class="rr-region-detail" id="rd-parenchym" data-en="brain parenchyma" data-radlex-status="local">
         <div class="rr-row">
           <label>
             <span class="rr-lbl"><span>Mikroangiopathie (Fazekas) <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="fazekas" data-radlex="RID35577" data-en="white matter disease" data-voice="fazekas">
+            <select data-f="fazekas" data-en="white matter disease" data-radlex-status="local" data-voice="fazekas">
               <option value="">–</option>
               <option value="Fazekas 0" data-radlex-status="local" data-en="Fazekas 0" data-voice="fazekas null">Fazekas 0 – keine</option>
               <option value="Fazekas 1 (geringgradig)" data-radlex-status="local" data-en="Fazekas 1" data-voice="fazekas eins">Fazekas 1 – geringgradig</option>
@@ -412,7 +487,7 @@
           </label>
           <label>
             <span class="rr-lbl"><span>Alte Defekte <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="defekte" data-radlex="RID28793" data-en="old infarct" data-voice="alte defekte">
+            <select data-f="defekte" data-radlex="RID5172" data-en="infarction" data-voice="alte defekte">
               <option value="">–</option>
               <option value="keine" data-radlex-status="local" data-en="none" data-voice="keine">Keine</option>
               <option value="postischämisch" data-radlex-status="local" data-en="postischemic defect" data-voice="postischämisch">Postischämisch</option>
@@ -442,19 +517,19 @@
           <label for="st_extraaxial_bef" title="Befund – Detail">Befund</label>
         </div>
       </div>
-      <div class="rr-region-detail" id="rd-extraaxial" data-radlex="RID8497" data-en="skull">
+      <div class="rr-region-detail" id="rd-extraaxial" data-radlex="RID9196" data-en="skull">
         <div class="rr-row rr-row-three">
           <label>
             <span class="rr-lbl"><span>Kalvaria / Fraktur <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="kalvaria" data-radlex="RID4760" data-en="skull fracture" data-voice="kalvaria">
+            <select data-f="kalvaria" data-radlex="RID4650" data-en="fracture" data-voice="kalvaria">
               <option value="">–</option>
-              <option value="intakt" data-radlex-status="local" data-en="intact" data-voice="intakt">Intakt</option>
-              <option value="Fraktur" data-radlex="RID4760" data-en="fracture" data-voice="fraktur">Fraktur</option>
+              <option value="intakt" data-en="intact" data-radlex="RID39115" data-voice="intakt">Intakt</option>
+              <option value="Fraktur" data-radlex="RID4650" data-en="fracture" data-voice="fraktur">Fraktur</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>NNH / Mastoid <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="nnh" data-radlex="RID8595" data-en="paranasal sinuses" data-voice="nnh">
+            <select data-f="nnh" data-radlex="RID28579" data-en="paranasal sinuses" data-voice="nnh">
               <option value="">–</option>
               <option value="unauffällig" data-radlex-status="local" data-en="unremarkable" data-voice="unauffällig">Unauffällig</option>
               <option value="Verschattung / Sekret" data-radlex-status="local" data-en="opacification" data-voice="verschattung">Verschattung/Sekret</option>
@@ -462,7 +537,7 @@
           </label>
           <label>
             <span class="rr-lbl"><span>Weichteile <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-f="weichteile" data-radlex="RID1241" data-en="soft tissue" data-voice="weichteile">
+            <select data-f="weichteile" data-radlex="RID35730" data-en="portion of soft tissue" data-voice="weichteile">
               <option value="">–</option>
               <option value="unauffällig" data-radlex-status="local" data-en="unremarkable" data-voice="unauffällig">Unauffällig</option>
               <option value="Galeahämatom / Schwellung" data-radlex-status="local" data-en="soft tissue swelling" data-voice="schwellung">Galeahämatom/Schwellung</option>

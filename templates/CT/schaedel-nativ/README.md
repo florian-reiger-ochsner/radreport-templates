@@ -78,11 +78,35 @@ Kritische Regionen lösen bei „Befund" den `--notfall`-Akzent und ein Alert-Ba
 
 ## Output
 
-- **Fließtext** (Technik / Befund / Beurteilung) – kopierbar
+- **Fließtext** (Technik / Befund / Beurteilung) – kopierbar; Kopf mit Accession/
+  Patient-ID/Untersuchung/Zuweiser und Signatur-Zeile, sofern RIS-Felder gefüllt
 - **FHIR-Bundle** (`document`): DiagnosticReport + Observations
   - nur **beurteilte** Regionen erzeugen eine Observation (unbeurteilte „—" nicht)
   - attestierte Negativbefunde tragen `interpretation = NEG` und eine `note`, die den Negativbefund als **ärztlich attestiert** kennzeichnet → Verification-Floor maschinenlesbar
   - RadLex-kodiert (`system: http://radlex.org`), LOINC `30799-1` (CT Head)
+  - **signierender Befunder** als `resultsInterpreter` → `Practitioner` mit stabilem Identifier; plus `subject` (Patient-ID), Accession-Identifier, `effectiveDateTime` (Untersuchung), `issued` (Signatur). Nur bei gefüllten Feldern.
+
+---
+
+## RIS-/Signatur-Kopf (geteilter Block, ab v1.2)
+
+Auftrags-/RIS-Felder (Zugangsnummer, Patient-ID, Untersuchungsdatum, Zuweiser)
+und Signatur (signierender Befunder als **generischer Identifier** + optionaler
+Klartext, Signaturdatum). Administrativ → `data-ris-source`, **kein** `data-radlex`.
+In Produktion vom RIS/HL7 gesetzt, im Standalone überschreibbar, keine Defaults.
+
+Der Block ist **einmal** in `shared/partials/ris-header.html` definiert und wird
+per `shared/scripts/stamp-ris-header.js` in die kanonische `template.html`
+gestempelt (nicht von Hand kopieren):
+
+```bash
+node shared/scripts/stamp-ris-header.js templates/CT/schaedel-nativ/template.html
+# danach immer Demo neu ableiten (siehe Build)
+```
+
+Zweck des stabilen `interpreter-id`: Auswertung „nur meine Befunde" über die
+FHIR-Query `results-interpreter`. Die Personenliste ist Deployment-Config, nicht
+Repo-Inhalt.
 
 ---
 

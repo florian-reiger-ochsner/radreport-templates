@@ -1,0 +1,309 @@
+{
+  "epidural hematoma": {
+    "rid": "RID4708",
+    "en": "epidural hematoma"
+  },
+  "subdural hematoma": {
+    "rid": "RID4706",
+    "en": "subdural hematoma"
+  },
+  "subarachnoid hemorrhage": {
+    "rid": "RID4710",
+    "en": "subarachnoid hemorrhage"
+  },
+  "intraparenchymal hemorrhage": {
+    "rid": "RID4700",
+    "en": "hemorrhage"
+  },
+  "intraventricular hemorrhage": {
+    "rid": "RID4700",
+    "en": "hemorrhage"
+  },
+  "parenchymal hematoma": {
+    "rid": "RID4705",
+    "en": "hematoma"
+  },
+  "acute": {
+    "rid": "RID5718",
+    "en": "acute"
+  },
+  "subacute": {
+    "local": true
+  },
+  "chronic": {
+    "rid": "RID5719",
+    "en": "chronic"
+  },
+  "acute on chronic": {
+    "local": true
+  },
+  "demarcated infarct": {
+    "rid": "RID5172",
+    "en": "infarction"
+  },
+  "early infarct signs": {
+    "local": true
+  },
+  "multiphasic infarction": {
+    "local": true
+  },
+  "ASPECTS": {
+    "local": true
+  },
+  "ACA territory": {
+    "local": true
+  },
+  "MCA territory": {
+    "local": true
+  },
+  "PCA territory": {
+    "local": true
+  },
+  "watershed": {
+    "rid": "RID6408",
+    "en": "watershed"
+  },
+  "subfalcine": {
+    "rid": "RID4949",
+    "en": "subfalcine herniation"
+  },
+  "uncal": {
+    "rid": "RID4950",
+    "en": "uncal herniation"
+  },
+  "transtentorial": {
+    "rid": "RID4951",
+    "en": "transtentorial herniation"
+  },
+  "tonsillar": {
+    "local": true
+  },
+  "midline": {
+    "rid": "RID5826",
+    "en": "midline"
+  },
+  "midline shift": {
+    "local": true
+  },
+  "to the left": {
+    "local": true
+  },
+  "to the right": {
+    "local": true
+  },
+  "dilated": {
+    "rid": "RID5786",
+    "en": "dilated"
+  },
+  "compressed": {
+    "rid": "RID5871",
+    "en": "compressed"
+  },
+  "effaced": {
+    "local": true
+  },
+  "hydrocephalus": {
+    "rid": "RID4885",
+    "en": "hydrocephalus"
+  },
+  "patent": {
+    "rid": "RID5895",
+    "en": "patent"
+  },
+  "opacification": {
+    "local": true
+  },
+  "Fazekas 0": {
+    "local": true
+  },
+  "Fazekas 1": {
+    "local": true
+  },
+  "Fazekas 2": {
+    "local": true
+  },
+  "Fazekas 3": {
+    "local": true
+  },
+  "no edema": {
+    "local": true
+  },
+  "petechial confluent": {
+    "local": true
+  },
+  "petechial focal": {
+    "local": true
+  },
+  "posthemorrhagic defect": {
+    "local": true
+  },
+  "postischemic defect": {
+    "local": true
+  },
+  "brainstem": {
+    "rid": "RID6677",
+    "en": "brainstem"
+  },
+  "cerebellum": {
+    "rid": "RID6815",
+    "en": "cerebellum"
+  },
+  "central": {
+    "rid": "RID5827",
+    "en": "central"
+  },
+  "atrophy": {
+    "rid": "RID5046",
+    "en": "atrophy"
+  },
+  "fracture": {
+    "rid": "RID4650",
+    "en": "fracture"
+  },
+  "soft tissue swelling": {
+    "local": true
+  },
+  "age-appropriate": {
+    "rid": "RID5696",
+    "en": "age appropriate"
+  },
+  "unremarkable": {
+    "local": true
+  },
+  "intact": {
+    "rid": "RID39115",
+    "en": "intact"
+  },
+  "none": {
+    "local": true
+  },
+  "present": {
+    "local": true
+  },
+  "reduced": {
+    "local": true
+  },
+  "bilateral": {
+    "rid": "RID5771",
+    "en": "bilateral"
+  },
+  "left": {
+    "rid": "RID5824",
+    "en": "left"
+  },
+  "right": {
+    "rid": "RID5825",
+    "en": "right"
+  },
+  "measurement": {
+    "local": true
+  },
+  "non-contrast CT head": {
+    "local": true
+  },
+  "non-contrast CT head with reformats": {
+    "local": true
+  },
+  "thin section bone window": {
+    "local": true
+  },
+  "CT scanner Siemens Somatom": {
+    "local": true
+  },
+  "diagnostic image quality": {
+    "rid": "RID12",
+    "en": "diagnostic quality"
+  },
+  "limited by beam hardening": {
+    "local": true
+  },
+  "limited by motion": {
+    "local": true
+  },
+  "prior examination available": {
+    "local": true
+  },
+  "CT scanner Siemens Somatom Force": {
+    "local": true
+  },
+  "CT head protocol": {
+    "local": true
+  },
+  "image quality": {
+    "rid": "RID10",
+    "en": "image quality"
+  },
+  "laterality": {
+    "local": true
+  },
+  "ischemia stage": {
+    "local": true
+  },
+  "vascular territory": {
+    "local": true
+  },
+  "hemorrhagic transformation": {
+    "local": true
+  },
+  "perilesional edema": {
+    "rid": "RID4865",
+    "en": "edema"
+  },
+  "herniation": {
+    "rid": "RID4948",
+    "en": "cerebral herniation"
+  },
+  "basal cisterns": {
+    "rid": "RID7180",
+    "en": "subarachnoid cistern"
+  },
+  "ventricles": {
+    "rid": "RID7123",
+    "en": "cerebral ventricle"
+  },
+  "ventricular system": {
+    "rid": "RID7123",
+    "en": "cerebral ventricle"
+  },
+  "external CSF spaces": {
+    "local": true
+  },
+  "white matter disease": {
+    "local": true
+  },
+  "old infarct": {
+    "rid": "RID5172",
+    "en": "infarction"
+  },
+  "skull fracture": {
+    "rid": "RID4650",
+    "en": "fracture"
+  },
+  "paranasal sinuses": {
+    "rid": "RID28579",
+    "en": "paranasal sinuses"
+  },
+  "soft tissue": {
+    "rid": "RID35730",
+    "en": "portion of soft tissue"
+  },
+  "intracranial hemorrhage": {
+    "rid": "RID4700",
+    "en": "hemorrhage"
+  },
+  "cerebral ischemia": {
+    "rid": "RID3376",
+    "en": "ischemia"
+  },
+  "mass": {
+    "rid": "RID3874",
+    "en": "mass"
+  },
+  "brain parenchyma": {
+    "local": true
+  },
+  "skull": {
+    "rid": "RID9196",
+    "en": "skull"
+  }
+}
