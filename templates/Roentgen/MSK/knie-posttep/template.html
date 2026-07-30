@@ -2,7 +2,7 @@
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8" />
-<title>Röntgen Knie post-KTEP – Strukturierte Befundvorlage (v1.1)</title>
+<title>Röntgen Knie post-KTEP – Strukturierte Befundvorlage (v1.2)</title>
 
 <!-- ===================== IHE MRRT METADATA ===================== -->
 <meta name="dcterms.title"       content="Röntgen Knie postoperativ / intraoperativ nach Knie-Totalendoprothese" />
@@ -10,7 +10,7 @@
 <meta name="dcterms.language"    content="de" />
 <meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
 <meta name="dcterms.date"        content="2026-07-06" />
-<meta name="dcterms.identifier"  content="HJK-MRRT-KNIE-POSTTEP-v1.1" />
+<meta name="dcterms.identifier"  content="HJK-MRRT-KNIE-POSTTEP-v1.2" />
 <meta name="rrt:specialty"       content="Radiology" />
 <meta name="rrt:subspecialty"    content="Musculoskeletal Radiology" />
 <meta name="rrt:modality"        content="DX" />
@@ -45,7 +45,7 @@
 <section class="rr-input-pane">
 
 <h1 class="rr-doc-title">Röntgen Knie post-KTEP</h1>
-<div class="rr-doc-sub">MRRT · RadLex-kodiert · Intraop / Früh-postop / Verlauf / Revision · v1.1 · HJK Wien</div>
+<div class="rr-doc-sub">MRRT · RadLex-kodiert · Intraop / Früh-postop / Verlauf / Revision · v1.2 · HJK Wien</div>
 <div class="rr-title-rule"></div>
 
 <!-- KONTEXT-MODUS -->
@@ -77,7 +77,7 @@
   <div class="row">
     <label>
       <span class="lbl">a.p. stehend / liegend</span>
-      <select id="pr_ap" data-radlex="RID10395" data-en="anteroposterior projection">
+      <select id="pr_ap" data-radlex="RID28784" data-en="anteroposterior projection">
         <option value="a.p. stehend">a.p. stehend</option>
         <option value="a.p. liegend">a.p. liegend</option>
       </select>
@@ -86,7 +86,7 @@
   <div class="row">
     <label>
       <span class="lbl">Seitlich</span>
-      <select id="pr_lat" data-radlex="RID10396" data-en="lateral projection">
+      <select id="pr_lat" data-radlex="RID10523" data-en="lateral projection">
         <option value="ja">Ja</option>
         <option value="nein">Nein</option>
       </select>
@@ -95,7 +95,7 @@
   <div class="row">
     <label>
       <span class="lbl">Patella axial</span>
-      <select id="pr_pat" data-radlex="RID13430" data-en="skyline view patella">
+      <select id="pr_pat" data-en="skyline view patella" data-radlex-status="local">
         <option value="nein">Nein</option>
         <option value="ja">Ja</option>
       </select>
@@ -104,7 +104,7 @@
   <div class="row">
     <label>
       <span class="lbl">Ganzbein-Standaufnahme</span>
-      <select id="pr_lla" data-radlex="RID28657" data-en="full length lower limb radiograph">
+      <select id="pr_lla" data-en="full length lower limb radiograph" data-radlex-status="local">
         <option value="nein">Nein</option>
         <option value="ja (einseitig, kalibriert)">Ja – kalibriert</option>
       </select>
@@ -114,7 +114,7 @@
 <div class="row">
   <label>
     <span class="lbl">Aufnahmequalität</span>
-    <select id="qual" data-radlex="RID13882" data-en="image quality">
+    <select id="qual" data-radlex="RID10" data-en="image quality">
       <option value="gut, diagnostisch ausreichend">gut, diagnostisch ausreichend</option>
       <option value="eingeschränkt (Lagerungsartefakte, Liegendaufnahme)">eingeschränkt – Lagerungsartefakte / Liegend</option>
       <option value="eingeschränkt (Überlagerung Verbandsmaterial)">eingeschränkt – Überlagerung Verbandsmaterial</option>
@@ -137,10 +137,10 @@
     <div class="row">
       <label><span class="lbl">Zeitpunkt der Aufnahme</span>
         <select id="io_zeitpunkt"
-          data-radlex="RID49900" data-en="intraoperative radiograph timing">
-          <option value="unmittelbar intraoperativ" data-radlex="RID49900-intra" data-en="intraoperative">Intraoperativ (im OP-Saal)</option>
-          <option value="unmittelbar postoperativ (OP-Saal)" data-radlex="RID49900-postop" data-en="immediately postoperative">Unmittelbar postoperativ – OP-Saal</option>
-          <option value="früh postoperativ (Aufwachraum)" data-radlex="RID49900-pacu" data-en="immediate postoperative recovery">Aufwachraum</option>
+          data-en="intraoperative radiograph timing" data-radlex-status="local">
+          <option value="unmittelbar intraoperativ" data-radlex="RID39334" data-en="intraoperative">Intraoperativ (im OP-Saal)</option>
+          <option value="unmittelbar postoperativ (OP-Saal)" data-radlex="RID5729" data-en="postoperative">Unmittelbar postoperativ – OP-Saal</option>
+          <option value="früh postoperativ (Aufwachraum)" data-en="immediate postoperative recovery" data-radlex-status="local">Aufwachraum</option>
         </select>
       </label>
     </div>
@@ -162,12 +162,12 @@
     <label>
       <span class="lbl">Prothesentyp <span class="rr-rl-badge">RadLex</span></span>
       <select id="imp_typ"
-        data-radlex="RID49700" data-en="knee arthroplasty type">
-        <option value="bikondyläre KTEP" data-radlex="RID49701" data-en="total knee arthroplasty bicondylar">Bikondylär (KTEP)</option>
-        <option value="unikondyläre Schlittenprothese medial" data-radlex="RID49702" data-en="unicompartmental knee arthroplasty medial">Schlittenprothese medial</option>
-        <option value="unikondyläre Schlittenprothese lateral" data-radlex="RID49703" data-en="unicompartmental knee arthroplasty lateral">Schlittenprothese lateral</option>
-        <option value="Scharnierprothese (gekoppelt)" data-radlex="RID49704" data-en="constrained hinge knee arthroplasty">Scharnierprothese (gekoppelt)</option>
-        <option value="Revisionsimplantat" data-radlex="RID49705" data-en="revision knee arthroplasty">Revisionsimplantat</option>
+        data-en="knee arthroplasty type" data-radlex-status="local">
+        <option value="bikondyläre KTEP" data-radlex="RID1845" data-en="arthroplasty">Bikondylär (KTEP)</option>
+        <option value="unikondyläre Schlittenprothese medial" data-radlex="RID1846" data-en="unicompartmental arthroplasty">Schlittenprothese medial</option>
+        <option value="unikondyläre Schlittenprothese lateral" data-radlex="RID1846" data-en="unicompartmental arthroplasty">Schlittenprothese lateral</option>
+        <option value="Scharnierprothese (gekoppelt)" data-radlex="RID6414" data-en="fully constrained implant">Scharnierprothese (gekoppelt)</option>
+        <option value="Revisionsimplantat" data-radlex="RID1845" data-en="arthroplasty">Revisionsimplantat</option>
       </select>
     </label>
   </div>
@@ -175,12 +175,12 @@
     <label>
       <span class="lbl">Constraint-Level <span class="rr-rl-badge">RadLex</span></span>
       <select id="imp_const"
-        data-radlex="RID49706" data-en="knee implant constraint">
-        <option value="CR (Kreuzband-erhaltend)" data-radlex="RID49707" data-en="cruciate retaining">CR – Kreuzband-erhaltend</option>
-        <option value="PS (Posterior-stabilisiert)" data-radlex="RID49708" data-en="posterior stabilized">PS – Posterior-stabilisiert</option>
-        <option value="CCK (kondylär-gekoppelt)" data-radlex="RID49709" data-en="condylar constrained">CCK – kondylär-gekoppelt</option>
-        <option value="VVC (gekoppelt)" data-radlex="RID49710" data-en="varus-valgus constrained">VVC – Varus/Valgus-Constrained</option>
-        <option value="Scharnier (fully constrained)" data-radlex="RID49711" data-en="fully constrained hinge">Scharnier – fully constrained</option>
+        data-en="knee implant constraint" data-radlex-status="local">
+        <option value="CR (Kreuzband-erhaltend)" data-en="cruciate retaining" data-radlex-status="local">CR – Kreuzband-erhaltend</option>
+        <option value="PS (Posterior-stabilisiert)" data-en="posterior stabilized" data-radlex-status="local">PS – Posterior-stabilisiert</option>
+        <option value="CCK (kondylär-gekoppelt)" data-radlex="RID6414" data-en="fully constrained implant">CCK – kondylär-gekoppelt</option>
+        <option value="VVC (gekoppelt)" data-radlex="RID6414" data-en="fully constrained implant">VVC – Varus/Valgus-Constrained</option>
+        <option value="Scharnier (fully constrained)" data-radlex="RID6414" data-en="fully constrained implant">Scharnier – fully constrained</option>
       </select>
     </label>
   </div>
@@ -217,10 +217,10 @@
     <label>
       <span class="lbl">Fixation Femur <span class="rr-rl-badge">RadLex</span></span>
       <select id="imp_fix_fem"
-        data-radlex="RID49712" data-en="femoral component fixation">
-        <option value="zementiert" data-radlex="RID49713" data-en="cemented femoral component">Zementiert</option>
-        <option value="zementfrei" data-radlex="RID49714" data-en="cementless femoral component">Zementfrei</option>
-        <option value="hybrid (Femur zementfrei)" data-radlex="RID49715" data-en="hybrid fixation">Hybrid</option>
+        data-en="femoral component fixation" data-radlex-status="local">
+        <option value="zementiert" data-en="cemented femoral component" data-radlex-status="local">Zementiert</option>
+        <option value="zementfrei" data-en="cementless femoral component" data-radlex-status="local">Zementfrei</option>
+        <option value="hybrid (Femur zementfrei)" data-en="hybrid fixation" data-radlex-status="local">Hybrid</option>
       </select>
     </label>
   </div>
@@ -228,10 +228,10 @@
     <label>
       <span class="lbl">Fixation Tibia <span class="rr-rl-badge">RadLex</span></span>
       <select id="imp_fix_tib"
-        data-radlex="RID49716" data-en="tibial component fixation">
-        <option value="zementiert" data-radlex="RID49713" data-en="cemented tibial component">Zementiert</option>
-        <option value="zementfrei" data-radlex="RID49714" data-en="cementless tibial component">Zementfrei</option>
-        <option value="hybrid (Tibia zementiert)" data-radlex="RID49715" data-en="hybrid fixation">Hybrid</option>
+        data-en="tibial component fixation" data-radlex-status="local">
+        <option value="zementiert" data-en="cemented tibial component" data-radlex-status="local">Zementiert</option>
+        <option value="zementfrei" data-en="cementless tibial component" data-radlex-status="local">Zementfrei</option>
+        <option value="hybrid (Tibia zementiert)" data-en="hybrid fixation" data-radlex-status="local">Hybrid</option>
       </select>
     </label>
   </div>
@@ -241,9 +241,9 @@
   <label>
     <span class="lbl">Patellaersatz <span class="rr-rl-badge">RadLex</span></span>
     <select id="imp_patella"
-      data-radlex="RID49718" data-en="patellar resurfacing">
-      <option value="kein Patellaersatz" data-radlex="RID49719" data-en="no patellar resurfacing">Kein Patellaersatz</option>
-      <option value="Patellaersatz" data-radlex="RID49720" data-en="patellar component">Patellaersatz</option>
+      data-en="patellar resurfacing" data-radlex-status="local">
+      <option value="kein Patellaersatz" data-en="no patellar resurfacing" data-radlex-status="local">Kein Patellaersatz</option>
+      <option value="Patellaersatz" data-en="patellar component" data-radlex-status="local">Patellaersatz</option>
     </select>
   </label>
 </div>
@@ -301,7 +301,7 @@
         <span class="lbl">Coronare Stellung <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
         <div class="ai-field">
           <input type="number" id="fem_cor" step="0.1" placeholder="Ziel: 90 ± 3° zu mech. Achse"
-            data-radlex="RID49730" data-en="femoral component coronal alignment"
+            data-radlex="RID38801" data-en="alignment"
             data-loinc="LP410789-0" />
         </div>
         <div class="field-note">Varus &lt; 87° / Valgus &gt; 93°</div>
@@ -311,12 +311,12 @@
       <label>
         <span class="lbl">Coronares Alignment <span class="rr-rl-badge">RadLex</span></span>
         <select id="fem_cor_q"
-          data-radlex="RID49731" data-en="femoral component coronal alignment assessment">
-          <option value="regelrecht" data-radlex="RID49731-norm" data-en="neutral femoral alignment">Regelrecht (neutral)</option>
-          <option value="leichter Varus (&lt; 5°)" data-radlex="RID49732" data-en="mild femoral varus">Leichter Varus (&lt; 5°)</option>
-          <option value="relevanter Varus (≥ 5°)" data-radlex="RID49733" data-en="significant femoral varus">Relevanter Varus (≥ 5°)</option>
-          <option value="leichter Valgus (&lt; 5°)" data-radlex="RID49734" data-en="mild femoral valgus">Leichter Valgus (&lt; 5°)</option>
-          <option value="relevanter Valgus (≥ 5°)" data-radlex="RID49735" data-en="significant femoral valgus">Relevanter Valgus (≥ 5°)</option>
+          data-en="femoral component coronal alignment assessment" data-radlex-status="local">
+          <option value="regelrecht" data-en="neutral femoral alignment" data-radlex-status="local">Regelrecht (neutral)</option>
+          <option value="leichter Varus (&lt; 5°)" data-radlex="RID4769" data-en="varus deformity">Leichter Varus (&lt; 5°)</option>
+          <option value="relevanter Varus (≥ 5°)" data-radlex="RID4769" data-en="varus deformity">Relevanter Varus (≥ 5°)</option>
+          <option value="leichter Valgus (&lt; 5°)" data-radlex="RID4768" data-en="valgus deformity">Leichter Valgus (&lt; 5°)</option>
+          <option value="relevanter Valgus (≥ 5°)" data-radlex="RID4768" data-en="valgus deformity">Relevanter Valgus (≥ 5°)</option>
         </select>
       </label>
     </div>
@@ -324,11 +324,11 @@
       <label>
         <span class="lbl">Sagittale Stellung <span class="rr-rl-badge">RadLex</span></span>
         <select id="fem_sag"
-          data-radlex="RID49736" data-en="femoral component sagittal alignment">
-          <option value="regelrecht positioniert" data-radlex="RID49736-norm" data-en="neutral femoral sagittal position">Regelrecht</option>
-          <option value="in leichter Flexionsstellung" data-radlex="RID49737" data-en="femoral flexion">Leichte Flexionsstellung</option>
-          <option value="in relevanter Flexionsstellung" data-radlex="RID49738" data-en="significant femoral flexion">Relevante Flexionsstellung</option>
-          <option value="in Extensionsstellung" data-radlex="RID49739" data-en="femoral extension">Extensionsstellung</option>
+          data-en="femoral component sagittal alignment" data-radlex-status="local">
+          <option value="regelrecht positioniert" data-en="neutral femoral sagittal position" data-radlex-status="local">Regelrecht</option>
+          <option value="in leichter Flexionsstellung" data-radlex="RID4765" data-en="flexion deformity">Leichte Flexionsstellung</option>
+          <option value="in relevanter Flexionsstellung" data-radlex="RID4765" data-en="flexion deformity">Relevante Flexionsstellung</option>
+          <option value="in Extensionsstellung" data-en="femoral extension" data-radlex-status="local">Extensionsstellung</option>
         </select>
       </label>
     </div>
@@ -336,10 +336,10 @@
       <label>
         <span class="lbl">Anteriores Notching <span class="rr-rl-badge">RadLex</span></span>
         <select id="fem_notch"
-          data-radlex="RID49740" data-en="anterior femoral notching">
-          <option value="kein anteriores Notching" data-radlex="RID49740-neg" data-en="no anterior notching">Kein Notching</option>
-          <option value="leichtes anteriores Notching" data-radlex="RID49741" data-en="mild anterior notching">Leichtes Notching</option>
-          <option value="relevantes anteriores Notching" data-radlex="RID49742" data-en="significant anterior notching">Relevantes Notching</option>
+          data-en="anterior femoral notching" data-radlex-status="local">
+          <option value="kein anteriores Notching" data-en="no anterior notching" data-radlex-status="local">Kein Notching</option>
+          <option value="leichtes anteriores Notching" data-en="mild anterior notching" data-radlex-status="local">Leichtes Notching</option>
+          <option value="relevantes anteriores Notching" data-en="significant anterior notching" data-radlex-status="local">Relevantes Notching</option>
         </select>
       </label>
     </div>
@@ -353,7 +353,7 @@
         <span class="lbl">Coronare Stellung <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
         <div class="ai-field">
           <input type="number" id="tib_cor" step="0.1" placeholder="Ziel: 90 ± 3° zur Tibiaachse"
-            data-radlex="RID49750" data-en="tibial component coronal alignment" />
+            data-radlex="RID38801" data-en="alignment" />
         </div>
         <div class="field-note">Varus &lt; 87° / Valgus &gt; 93°</div>
       </label>
@@ -362,12 +362,12 @@
       <label>
         <span class="lbl">Coronares Alignment <span class="rr-rl-badge">RadLex</span></span>
         <select id="tib_cor_q"
-          data-radlex="RID49751" data-en="tibial component coronal alignment assessment">
-          <option value="regelrecht" data-radlex="RID49751-norm" data-en="neutral tibial alignment">Regelrecht (neutral)</option>
-          <option value="leichter Varus (&lt; 5°)" data-radlex="RID49752" data-en="mild tibial varus">Leichter Varus (&lt; 5°)</option>
-          <option value="relevanter Varus (≥ 5°)" data-radlex="RID49753" data-en="significant tibial varus">Relevanter Varus (≥ 5°)</option>
-          <option value="leichter Valgus (&lt; 5°)" data-radlex="RID49754" data-en="mild tibial valgus">Leichter Valgus (&lt; 5°)</option>
-          <option value="relevanter Valgus (≥ 5°)" data-radlex="RID49755" data-en="significant tibial valgus">Relevanter Valgus (≥ 5°)</option>
+          data-en="tibial component coronal alignment assessment" data-radlex-status="local">
+          <option value="regelrecht" data-en="neutral tibial alignment" data-radlex-status="local">Regelrecht (neutral)</option>
+          <option value="leichter Varus (&lt; 5°)" data-radlex="RID4769" data-en="varus deformity">Leichter Varus (&lt; 5°)</option>
+          <option value="relevanter Varus (≥ 5°)" data-radlex="RID4769" data-en="varus deformity">Relevanter Varus (≥ 5°)</option>
+          <option value="leichter Valgus (&lt; 5°)" data-radlex="RID4768" data-en="valgus deformity">Leichter Valgus (&lt; 5°)</option>
+          <option value="relevanter Valgus (≥ 5°)" data-radlex="RID4768" data-en="valgus deformity">Relevanter Valgus (≥ 5°)</option>
         </select>
       </label>
     </div>
@@ -375,10 +375,10 @@
       <label>
         <span class="lbl">Tibialer Slope Komponente <span class="rr-rl-badge">RadLex</span></span>
         <select id="tib_slope"
-          data-radlex="RID49756" data-en="tibial component posterior slope">
-          <option value="regelrecht" data-radlex="RID49756-norm" data-en="normal tibial slope">Regelrecht (0–7°)</option>
+          data-en="tibial component posterior slope" data-radlex-status="local">
+          <option value="regelrecht" data-en="normal tibial slope" data-radlex-status="local">Regelrecht (0–7°)</option>
           <option value="erhöht (> 7°)" data-radlex="RID49757" data-en="increased tibial slope">Erhöht (&gt; 7°)</option>
-          <option value="erniedrigt / kein Slope" data-radlex="RID49758" data-en="reduced tibial slope">Erniedrigt / kein Slope</option>
+          <option value="erniedrigt / kein Slope" data-en="reduced tibial slope" data-radlex-status="local">Erniedrigt / kein Slope</option>
         </select>
       </label>
     </div>
@@ -386,12 +386,12 @@
       <label>
         <span class="lbl">Tibia-Stiel/-Plateau-Position</span>
         <select id="tib_pos"
-          data-radlex="RID49759" data-en="tibial component position">
-          <option value="zentral, regelrecht" data-radlex="RID49759-norm" data-en="central tibial position">Zentral, regelrecht</option>
-          <option value="leicht medial versetzt" data-radlex="RID49760" data-en="medial tibial offset">Leicht medial versetzt</option>
-          <option value="leicht lateral versetzt" data-radlex="RID49761" data-en="lateral tibial offset">Leicht lateral versetzt</option>
-          <option value="Überhang medial" data-radlex="RID49762" data-en="medial tibial overhang">Überhang medial</option>
-          <option value="Überhang lateral" data-radlex="RID49763" data-en="lateral tibial overhang">Überhang lateral</option>
+          data-en="tibial component position" data-radlex-status="local">
+          <option value="zentral, regelrecht" data-en="central tibial position" data-radlex-status="local">Zentral, regelrecht</option>
+          <option value="leicht medial versetzt" data-en="medial tibial offset" data-radlex-status="local">Leicht medial versetzt</option>
+          <option value="leicht lateral versetzt" data-en="lateral tibial offset" data-radlex-status="local">Leicht lateral versetzt</option>
+          <option value="Überhang medial" data-en="medial tibial overhang" data-radlex-status="local">Überhang medial</option>
+          <option value="Überhang lateral" data-en="lateral tibial overhang" data-radlex-status="local">Überhang lateral</option>
         </select>
       </label>
     </div>
@@ -404,7 +404,7 @@
     <span class="lbl">Postoperative Gesamtachse (HKA) <span class="rr-ai-badge rr-is-active">LAMA</span><span class="unit">°</span></span>
     <div class="ai-field">
       <input type="number" id="hka_post" step="0.1" placeholder="Ziel: 180 ± 3° (mechanisch neutral)"
-        data-radlex="RID49504" data-en="hip-knee-ankle angle postoperative"
+        data-en="hip-knee-ankle angle postoperative" data-radlex-status="local"
         data-loinc="LP410789-0" />
     </div>
     <div class="field-note">Prä-op CPAK als Referenz; Ziel je nach geplanter Alignment-Strategie (kinematic vs. mechanical)</div>
@@ -419,12 +419,12 @@
   <label>
     <span class="lbl">Postoperatives Alignment <span class="rr-rl-badge">RadLex</span></span>
     <select id="align_ges"
-      data-radlex="RID49770" data-en="postoperative knee alignment">
-      <option value="regelrechte postoperative Achsverhältnisse" data-radlex="RID49770-norm" data-en="neutral postoperative alignment">Regelrecht – mechanisch neutral</option>
-      <option value="leichtes Varusalignment" data-radlex="RID49771" data-en="mild varus alignment postoperative">Leichtes Varusalignment</option>
-      <option value="relevantes Varusalignment" data-radlex="RID49772" data-en="significant varus alignment postoperative">Relevantes Varusalignment</option>
-      <option value="leichtes Valgusalignment" data-radlex="RID49773" data-en="mild valgus alignment postoperative">Leichtes Valgusalignment</option>
-      <option value="relevantes Valgusalignment" data-radlex="RID49774" data-en="significant valgus alignment postoperative">Relevantes Valgusalignment</option>
+      data-en="postoperative knee alignment" data-radlex-status="local">
+      <option value="regelrechte postoperative Achsverhältnisse" data-en="neutral postoperative alignment" data-radlex-status="local">Regelrecht – mechanisch neutral</option>
+      <option value="leichtes Varusalignment" data-radlex="RID4769" data-en="varus deformity">Leichtes Varusalignment</option>
+      <option value="relevantes Varusalignment" data-radlex="RID4769" data-en="varus deformity">Relevantes Varusalignment</option>
+      <option value="leichtes Valgusalignment" data-radlex="RID4768" data-en="valgus deformity">Leichtes Valgusalignment</option>
+      <option value="relevantes Valgusalignment" data-radlex="RID4768" data-en="valgus deformity">Relevantes Valgusalignment</option>
     </select>
   </label>
 </div>
@@ -438,11 +438,11 @@
         <label>
           <span class="lbl">Patellahöhe post-op <span class="rr-rl-badge">RadLex</span></span>
           <select id="pat_hoehe"
-            data-radlex="RID49520" data-en="patellar height postoperative">
+            data-en="patellar height postoperative" data-radlex-status="local">
             <option value="">–</option>
-            <option value="regelrecht (IS-Index 0,8–1,2)" data-radlex="RID49520-norm" data-en="normal patellar height">Regelrecht</option>
+            <option value="regelrecht (IS-Index 0,8–1,2)" data-en="normal patellar height" data-radlex-status="local">Regelrecht</option>
             <option value="Patella alta (IS-Index > 1,2)" data-radlex="RID49521" data-en="patella alta">Patella alta</option>
-            <option value="Patella baja / infera (IS-Index &lt; 0,8)" data-radlex="RID49522" data-en="patella baja">Patella baja / infera</option>
+            <option value="Patella baja / infera (IS-Index &lt; 0,8)" data-radlex="RID39260" data-en="patella infera">Patella baja / infera</option>
           </select>
         </label>
       </div>
@@ -450,11 +450,11 @@
         <label>
           <span class="lbl">Patellazentrierung <span class="rr-rl-badge">RadLex</span></span>
           <select id="pat_zentr"
-            data-radlex="RID49780" data-en="patellar tracking">
+            data-en="patellar tracking" data-radlex-status="local">
             <option value="">–</option>
-            <option value="regelrecht zentriert" data-radlex="RID49780-norm" data-en="normal patellar tracking">Regelrecht zentriert</option>
-            <option value="lateraler Tilt / Subluxation" data-radlex="RID49781" data-en="lateral patellar tilt">Lateraler Tilt / Subluxation</option>
-            <option value="medialer Tilt" data-radlex="RID49782" data-en="medial patellar tilt">Medialer Tilt</option>
+            <option value="regelrecht zentriert" data-en="normal patellar tracking" data-radlex-status="local">Regelrecht zentriert</option>
+            <option value="lateraler Tilt / Subluxation" data-radlex="RID4782" data-en="tilt">Lateraler Tilt / Subluxation</option>
+            <option value="medialer Tilt" data-radlex="RID4782" data-en="tilt">Medialer Tilt</option>
           </select>
         </label>
       </div>
@@ -463,11 +463,11 @@
       <label>
         <span class="lbl">Patellakomponente (falls vorhanden)</span>
         <select id="pat_komp"
-          data-radlex="RID49783" data-en="patellar component assessment">
+          data-en="patellar component assessment" data-radlex-status="local">
           <option value="">Kein Patellaersatz / nicht beurteilbar</option>
-          <option value="Patellakomponente regelrecht verankert und zentriert" data-radlex="RID49783-norm" data-en="patellar component well seated">Regelrecht verankert und zentriert</option>
-          <option value="Patellakomponente – Subluxationstendenz" data-radlex="RID49784" data-en="patellar component subluxation">Subluxationstendenz</option>
-          <option value="Patellakomponente – Lockerungszeichen" data-radlex="RID49785" data-en="patellar component loosening">Lockerungszeichen</option>
+          <option value="Patellakomponente regelrecht verankert und zentriert" data-en="patellar component well seated" data-radlex-status="local">Regelrecht verankert und zentriert</option>
+          <option value="Patellakomponente – Subluxationstendenz" data-radlex="RID4778" data-en="subluxation">Subluxationstendenz</option>
+          <option value="Patellakomponente – Lockerungszeichen" data-radlex="RID4619" data-en="arthroplasty loosening">Lockerungszeichen</option>
         </select>
       </label>
     </div>
@@ -504,11 +504,11 @@
   <label>
     <span class="lbl">Gesamtbeurteilung periprothetisch <span class="rr-rl-badge">RadLex</span></span>
     <select id="peri_ges"
-      data-radlex="RID49790" data-en="periprosthetic assessment">
-      <option value="kein signifikanter Lysesaum, keine Osteolyse" data-radlex="RID49790-norm" data-en="no periprosthetic lucency">Unauffällig – kein Lysesaum, keine Osteolyse</option>
-      <option value="marginaler Lysesaum (&lt; 2 mm), klinisch nicht signifikant" data-radlex="RID49791" data-en="minor periprosthetic lucency">Marginaler Saum (&lt; 2 mm), klinisch nicht signifikant</option>
-      <option value="signifikanter Lysesaum (≥ 2 mm)" data-radlex="RID49792" data-en="significant periprosthetic lucency">Signifikanter Saum (≥ 2 mm) – Verlaufskontrolle</option>
-      <option value="progrediente Osteolyse" data-radlex="RID49793" data-en="progressive osteolysis">Progrediente Osteolyse – Revisionsverdacht</option>
+      data-en="periprosthetic assessment" data-radlex-status="local">
+      <option value="kein signifikanter Lysesaum, keine Osteolyse" data-en="no periprosthetic lucency" data-radlex-status="local">Unauffällig – kein Lysesaum, keine Osteolyse</option>
+      <option value="marginaler Lysesaum (&lt; 2 mm), klinisch nicht signifikant" data-en="minor periprosthetic lucency" data-radlex-status="local">Marginaler Saum (&lt; 2 mm), klinisch nicht signifikant</option>
+      <option value="signifikanter Lysesaum (≥ 2 mm)" data-en="significant periprosthetic lucency" data-radlex-status="local">Signifikanter Saum (≥ 2 mm) – Verlaufskontrolle</option>
+      <option value="progrediente Osteolyse" data-radlex="RID5382" data-en="osteolysis">Progrediente Osteolyse – Revisionsverdacht</option>
     </select>
   </label>
 </div>
@@ -523,11 +523,11 @@
         <label>
           <span class="lbl">Zementmantel Femur <span class="rr-rl-badge">RadLex</span></span>
           <select id="zem_fem"
-            data-radlex="RID49800" data-en="femoral cement mantle">
+            data-en="femoral cement mantle" data-radlex-status="local">
             <option value="">–</option>
-            <option value="vollständiger Zementmantel Femur" data-radlex="RID49800-norm" data-en="complete femoral cement mantle">Vollständig, regelrecht</option>
-            <option value="Zementmantel Femur mit Defekten" data-radlex="RID49801" data-en="femoral cement mantle defect">Defekte im Zementmantel</option>
-            <option value="inkompletter Zementmantel Femur" data-radlex="RID49802" data-en="incomplete femoral cement mantle">Inkompletter Mantel</option>
+            <option value="vollständiger Zementmantel Femur" data-en="complete femoral cement mantle" data-radlex-status="local">Vollständig, regelrecht</option>
+            <option value="Zementmantel Femur mit Defekten" data-en="femoral cement mantle defect" data-radlex-status="local">Defekte im Zementmantel</option>
+            <option value="inkompletter Zementmantel Femur" data-en="incomplete femoral cement mantle" data-radlex-status="local">Inkompletter Mantel</option>
           </select>
         </label>
       </div>
@@ -535,11 +535,11 @@
         <label>
           <span class="lbl">Zementmantel Tibia <span class="rr-rl-badge">RadLex</span></span>
           <select id="zem_tib"
-            data-radlex="RID49803" data-en="tibial cement mantle">
+            data-en="tibial cement mantle" data-radlex-status="local">
             <option value="">–</option>
-            <option value="vollständiger Zementmantel Tibia" data-radlex="RID49803-norm" data-en="complete tibial cement mantle">Vollständig, regelrecht</option>
-            <option value="Zementmantel Tibia mit Defekten" data-radlex="RID49804" data-en="tibial cement mantle defect">Defekte im Zementmantel</option>
-            <option value="inkompletter Zementmantel Tibia" data-radlex="RID49805" data-en="incomplete tibial cement mantle">Inkompletter Mantel</option>
+            <option value="vollständiger Zementmantel Tibia" data-en="complete tibial cement mantle" data-radlex-status="local">Vollständig, regelrecht</option>
+            <option value="Zementmantel Tibia mit Defekten" data-en="tibial cement mantle defect" data-radlex-status="local">Defekte im Zementmantel</option>
+            <option value="inkompletter Zementmantel Tibia" data-en="incomplete tibial cement mantle" data-radlex-status="local">Inkompletter Mantel</option>
           </select>
         </label>
       </div>
@@ -567,10 +567,10 @@
     <label>
       <span class="lbl">Knochenstruktur / -qualität <span class="rr-rl-badge">RadLex</span></span>
       <select id="bone_q"
-        data-radlex="RID13573" data-en="bone quality">
-        <option value="regelrechte Knochenstruktur" data-radlex="RID13573-norm" data-en="normal bone">Regelrecht</option>
-        <option value="osteopenische Knochenstruktur" data-radlex="RID5222" data-en="osteopenia">Ostopenie</option>
-        <option value="osteoporotische Knochenstruktur" data-radlex="RID5223" data-en="osteoporosis">Osteoporose</option>
+        data-en="bone quality" data-radlex-status="local">
+        <option value="regelrechte Knochenstruktur" data-en="normal bone" data-radlex-status="local">Regelrecht</option>
+        <option value="osteopenische Knochenstruktur" data-radlex="RID5388" data-en="osteopenia">Ostopenie</option>
+        <option value="osteoporotische Knochenstruktur" data-radlex="RID5389" data-en="osteoporosis">Osteoporose</option>
       </select>
     </label>
   </div>
@@ -579,11 +579,11 @@
     <label>
       <span class="lbl">Gelenkerguss <span class="rr-rl-badge">RadLex</span></span>
       <select id="erguss"
-        data-radlex="RID4872" data-en="joint effusion">
-        <option value="kein wesentlicher Gelenkerguss" data-radlex="RID4872-neg" data-en="no joint effusion">Kein wesentlicher Erguss</option>
-        <option value="leichter Gelenkerguss" data-radlex="RID4872-mild" data-en="mild joint effusion">Leichter Erguss</option>
-        <option value="mäßiger Gelenkerguss" data-radlex="RID4872-mod" data-en="moderate joint effusion">Mäßiger Erguss</option>
-        <option value="ausgeprägter Gelenkerguss" data-radlex="RID4872-sev" data-en="large joint effusion">Ausgeprägter Erguss</option>
+        data-radlex="RID4872" data-en="effusion">
+        <option value="kein wesentlicher Gelenkerguss" data-en="no joint effusion" data-radlex-status="local">Kein wesentlicher Erguss</option>
+        <option value="leichter Gelenkerguss" data-radlex="RID4872" data-en="effusion">Leichter Erguss</option>
+        <option value="mäßiger Gelenkerguss" data-radlex="RID4872" data-en="effusion">Mäßiger Erguss</option>
+        <option value="ausgeprägter Gelenkerguss" data-radlex="RID4872" data-en="effusion">Ausgeprägter Erguss</option>
       </select>
     </label>
   </div>
@@ -593,10 +593,10 @@
   <label>
     <span class="lbl">Heterotope Ossifikationen <span class="rr-rl-badge">RadLex</span></span>
     <select id="hto"
-      data-radlex="RID5060" data-en="heterotopic ossification">
-      <option value="keine heterotopen Ossifikationen" data-radlex="RID5060-neg" data-en="no heterotopic ossification">Keine</option>
-      <option value="geringe heterotope Ossifikationen periartikulär" data-radlex="RID5060-mild" data-en="mild heterotopic ossification">Gering – Brooker I–II</option>
-      <option value="ausgeprägte heterotope Ossifikationen (Brooker III–IV)" data-radlex="RID5060-sev" data-en="significant heterotopic ossification">Ausgeprägt – Brooker III–IV</option>
+      data-radlex="RID5226" data-en="heterotopic ossification">
+      <option value="keine heterotopen Ossifikationen" data-en="no heterotopic ossification" data-radlex-status="local">Keine</option>
+      <option value="geringe heterotope Ossifikationen periartikulär" data-radlex="RID5226" data-en="heterotopic ossification">Gering – Brooker I–II</option>
+      <option value="ausgeprägte heterotope Ossifikationen (Brooker III–IV)" data-radlex="RID5226" data-en="heterotopic ossification">Ausgeprägt – Brooker III–IV</option>
     </select>
   </label>
 </div>
@@ -608,12 +608,12 @@
     <label>
       <span class="lbl">Verlauf im Vergleich</span>
       <select id="verlauf_q"
-        data-radlex="RID49820" data-en="interval change">
+        data-en="interval change" data-radlex-status="local">
         <option value="">–</option>
-        <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel." data-radlex="RID49820-stable" data-en="no significant interval change">Kein wesentlicher Wandel</option>
-        <option value="Im Vergleich zur Voruntersuchung regelrechte postoperative Progression." data-radlex="RID49821" data-en="expected postoperative interval change">Regelrechte postoperative Progression</option>
-        <option value="Im Vergleich zur Voruntersuchung neu aufgetretener / progredienter Befund." data-radlex="RID49822" data-en="new or progressive finding">Neu / progredient – klinische Korrelation empfohlen</option>
-        <option value="Im Vergleich zur Voruntersuchung Progredienz der Lysesäume / Osteolyse." data-radlex="RID49823" data-en="progressive osteolysis on follow-up">Progredienz Lysesaum / Osteolyse</option>
+        <option value="Im Vergleich zur Voruntersuchung kein wesentlicher Befundwandel." data-en="no significant interval change" data-radlex-status="local">Kein wesentlicher Wandel</option>
+        <option value="Im Vergleich zur Voruntersuchung regelrechte postoperative Progression." data-radlex="RID4591" data-en="postoperative change">Regelrechte postoperative Progression</option>
+        <option value="Im Vergleich zur Voruntersuchung neu aufgetretener / progredienter Befund." data-en="new or progressive finding" data-radlex-status="local">Neu / progredient – klinische Korrelation empfohlen</option>
+        <option value="Im Vergleich zur Voruntersuchung Progredienz der Lysesäume / Osteolyse." data-en="progressive osteolysis on follow-up" data-radlex-status="local">Progredienz Lysesaum / Osteolyse</option>
       </select>
     </label>
   </div>

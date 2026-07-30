@@ -1,64 +1,116 @@
-# RadLex-Mapping – Röntgen Knie postoperativ nach KTEP
+# RadLex-Mapping – Röntgen Knie post-TEP
 
 Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
-## Implantat-Identifikation
+> **Registry-Verifikation (2026-07-21):** RIDs gegen NCBO BioPortal (RADLEX) geprüft,
+> `system: http://radlex.org`. Suffix-Konvention aufgelöst (Feld trägt das Konzept,
+> Optionswerte/Grade sind lokal). Wo RadLex kein exaktes Konzept führt, ist der
+> tragfähige Oberbegriff kodiert oder das Feld `local`. Implantat-Details (Fixation,
+> Zementmantel, Constraint-Typ) sind bewusst lokal – RadLex führt hierfür keine
+> spezifischen Prothesen-Konzepte. Frühere RIDs waren großteils geraten.
 
-| Feld | RadLex-Term | RID | Status |
-|---|---|---|---|
-| Prothesentyp allgemein | knee arthroplasty type | RID49700 | 🟡 |
-| Bikondylär (KTEP) | total knee arthroplasty bicondylar | RID49701 | 🟡 |
-| Unikondylär medial | unicompartmental knee arthroplasty medial | RID49702 | 🟡 |
-| Unikondylär lateral | unicompartmental knee arthroplasty lateral | RID49703 | 🟡 |
-| Scharnierprothese | constrained hinge knee arthroplasty | RID49704 | 🟡 |
-| CR-Constraint | cruciate retaining | RID49707 | 🟡 |
-| PS-Constraint | posterior stabilized | RID49708 | 🟡 |
-| Fixation zementiert | cemented fixation | RID49713 | 🟡 |
-| Fixation zementfrei | cementless fixation | RID49714 | 🟡 |
-| Patellaersatz | patellar resurfacing | RID49720 | 🟡 |
+## Registry-verifiziert (RadLex-RID)
 
-## Komponentenstellung
+| Konzept (`data-en`) | RID | Status |
+|---|---|---|
+| alignment | RID38801 | ✅ |
+| anteroposterior projection | RID28784 | ✅ |
+| arthroplasty loosening | RID4619 | ✅ |
+| arthroplasty | RID1845 | ✅ |
+| effusion | RID4872 | ✅ |
+| flexion deformity | RID4765 | ✅ |
+| fully constrained implant | RID6414 | ✅ |
+| heterotopic ossification | RID5226 | ✅ |
+| image quality | RID10 | ✅ |
+| intraoperative | RID39334 | ✅ |
+| lateral projection | RID10523 | ✅ |
+| osteolysis | RID5382 | ✅ |
+| osteopenia | RID5388 | ✅ |
+| osteoporosis | RID5389 | ✅ |
+| patella infera | RID39260 | ✅ |
+| postoperative change | RID4591 | ✅ |
+| postoperative | RID5729 | ✅ |
+| subluxation | RID4778 | ✅ |
+| tilt | RID4782 | ✅ |
+| unicompartmental arthroplasty | RID1846 | ✅ |
+| valgus deformity | RID4768 | ✅ |
+| varus deformity | RID4769 | ✅ |
 
-| Feld | RadLex-Term | RID | LOINC | Status |
-|---|---|---|---|---|
-| Femur coronar | femoral component coronal alignment | RID49730 | LP410789-0 | 🟡 |
-| Tibia coronar | tibial component coronal alignment | RID49750 | – | 🟡 |
-| HKA postoperativ | hip-knee-ankle angle postoperative | RID49504 | LP410789-0 | 🟡 |
-| Gesamtalignment | postoperative knee alignment | RID49770 | – | 🟡 |
-| Anteriores Notching | anterior femoral notching | RID49740 | – | 🟡 |
-| Tibialer Slope Komp. | tibial component posterior slope | RID49756 | – | 🟡 |
+## Lokal (Werte/Grade/kein exaktes Konzept)
 
-## Periprothetisch / Ewald-Zonen
-
-| Feld | RadLex-Term | RID | Status |
-|---|---|---|---|
-| Periprothetische Gesamtbeurteilung | periprosthetic assessment | RID49790 | 🟡 |
-| Kein Lysesaum | no periprosthetic lucency | RID49790-norm | 🟡 |
-| Signifikanter Lysesaum ≥ 2 mm | significant periprosthetic lucency | RID49792 | 🟡 |
-| Progrediente Osteolyse | progressive osteolysis | RID49793 | 🟡 |
-
-## Komplikations-Flags
-
-| Flag | RadLex-Term | RID | Severity | Status |
-|---|---|---|---|---|
-| Periprothetische Fraktur | periprosthetic fracture | RID49830 | alert | 🟡 |
-| Luxation | prosthesis dislocation | RID49831 | alert | 🟡 |
-| Lockerungszeichen | prosthetic loosening | RID49832 | warn | 🟡 |
-| V.a. periprothet. Infektion | periprosthetic infection | RID49833 | alert | 🟡 |
-| Relevantes Malalignment | prosthetic malalignment | RID49834 | warn | 🟡 |
-
-## Weichteile / Allgemein
-
-| Feld | RadLex-Term | RID | Status |
-|---|---|---|---|
-| Gelenkerguss | joint effusion | RID4872 | ✅ |
-| Heterotope Ossifikationen | heterotopic ossification | RID5060 | ✅ |
-| Knochenstruktur | bone quality | RID13573 | ✅ |
+| Konzept (`data-en`) | Status |
+|---|---|
+| anterior femoral notching | 🟡 |
+| bone quality | 🟡 |
+| cemented femoral component | 🟡 |
+| cemented tibial component | 🟡 |
+| cementless femoral component | 🟡 |
+| cementless tibial component | 🟡 |
+| central tibial position | 🟡 |
+| complete femoral cement mantle | 🟡 |
+| complete tibial cement mantle | 🟡 |
+| cruciate retaining | 🟡 |
+| femoral cement mantle defect | 🟡 |
+| femoral cement mantle | 🟡 |
+| femoral component coronal alignment assessment | 🟡 |
+| femoral component fixation | 🟡 |
+| femoral component sagittal alignment | 🟡 |
+| femoral extension | 🟡 |
+| full length lower limb radiograph | 🟡 |
+| hip-knee-ankle angle postoperative | 🟡 |
+| hybrid fixation | 🟡 |
+| immediate postoperative recovery | 🟡 |
+| incomplete femoral cement mantle | 🟡 |
+| incomplete tibial cement mantle | 🟡 |
+| interval change | 🟡 |
+| intraoperative radiograph timing | 🟡 |
+| knee arthroplasty type | 🟡 |
+| knee implant constraint | 🟡 |
+| lateral tibial offset | 🟡 |
+| lateral tibial overhang | 🟡 |
+| medial tibial offset | 🟡 |
+| medial tibial overhang | 🟡 |
+| mild anterior notching | 🟡 |
+| minor periprosthetic lucency | 🟡 |
+| neutral femoral alignment | 🟡 |
+| neutral femoral sagittal position | 🟡 |
+| neutral postoperative alignment | 🟡 |
+| neutral tibial alignment | 🟡 |
+| new or progressive finding | 🟡 |
+| no anterior notching | 🟡 |
+| no heterotopic ossification | 🟡 |
+| no joint effusion | 🟡 |
+| no patellar resurfacing | 🟡 |
+| no periprosthetic lucency | 🟡 |
+| no significant interval change | 🟡 |
+| normal bone | 🟡 |
+| normal patellar height | 🟡 |
+| normal patellar tracking | 🟡 |
+| normal tibial slope | 🟡 |
+| patellar component assessment | 🟡 |
+| patellar component well seated | 🟡 |
+| patellar component | 🟡 |
+| patellar height postoperative | 🟡 |
+| patellar resurfacing | 🟡 |
+| patellar tracking | 🟡 |
+| periprosthetic assessment | 🟡 |
+| posterior stabilized | 🟡 |
+| postoperative knee alignment | 🟡 |
+| progressive osteolysis on follow-up | 🟡 |
+| reduced tibial slope | 🟡 |
+| significant anterior notching | 🟡 |
+| significant periprosthetic lucency | 🟡 |
+| skyline view patella | 🟡 |
+| tibial cement mantle defect | 🟡 |
+| tibial cement mantle | 🟡 |
+| tibial component coronal alignment assessment | 🟡 |
+| tibial component fixation | 🟡 |
+| tibial component position | 🟡 |
+| tibial component posterior slope | 🟡 |
 
 ## FHIR-Kodierung
 
 | Ressource | Code | System |
 |---|---|---|
-| DiagnosticReport | 24650-4 | http://loinc.org |
-| Observations | RID* | http://radlex.org |
-| Bundle meta tag (EndoCert) | endocert-documentation | http://endocert.de/fhir |
+| DiagnosticReport | LP410789-0 | http://loinc.org |
+| Observations (RadLex) | RID* | http://radlex.org |

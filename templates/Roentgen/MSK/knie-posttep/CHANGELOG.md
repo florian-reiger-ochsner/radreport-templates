@@ -1,5 +1,24 @@
 # Changelog – Röntgen Knie postoperativ nach KTEP
 
+## [1.2] – 2026-07-21
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Gesamte RadLex-Kodierung neu belegt** (Rebuild 8/8, letztes Template). Frühere RIDs
+  waren großteils geraten und trafen Fremdkonzepte.
+- **22 Felder registry-verifiziert**: Arthroplastik (arthroplasty RID1845, unicompartmental
+  arthroplasty RID1846, fully constrained implant RID6414), Achsen/Fehlstellung (varus
+  deformity RID4769, valgus deformity RID4768, flexion deformity RID4765, alignment RID38801),
+  Patella (tilt RID4782, subluxation RID4778, patella infera/„baja" RID39260), Komplikationen
+  (arthroplasty loosening RID4619, osteolysis RID5382, heterotopic ossification RID5226,
+  effusion RID4872), Knochen (osteopenia RID5388, osteoporosis RID5389), Verlauf/Timing
+  (postoperative change RID4591, postoperative RID5729, intraoperative RID39334), Aufnahme
+  (anteroposterior projection RID28784, lateral projection RID10523, image quality RID10).
+- **Implantat-Details bewusst lokal** (Fixation zementiert/zementfrei/hybrid, Zementmantel
+  Femur/Tibia, Constraint-Typ, Overhang/Offset, Slope): RadLex führt hierfür keine
+  spezifischen Prothesen-Konzepte; kodiert als `data-radlex-status="local"`.
+- Konvention: Feld/Select trägt das Oberkonzept, Optionswerte/Grade sind lokal. `RADLEX-MAPPING.md`
+  aus dem finalen Template regeneriert; offline- und `--resolve`-Validierung fehlerfrei.
+- Round-trip-stabil: Struktur/`rr-*`-Hooks/Andock-Anker unverändert.
+
 ## [1.1.1] – 2026-07-06
 ### Geändert (Architektur: Umstellung auf A-Struktur)
 - `template.html` ist jetzt **kanonisch nacktes MRRT**: kein `<link rel="stylesheet">`, kein `<style>`, kein `<script>`, keine Inline-Handler. Nur das kodierte Eingabeformular mit `rr-*`/Struktur-Hooks und Andock-Ankern (`#preset-bar`, `#ec-checklist`, `#ewald-tbody`, `#flag-grid`, `#ctx-hint`, `#align-intraop-hint`, `#beurt-vorschlag`).
