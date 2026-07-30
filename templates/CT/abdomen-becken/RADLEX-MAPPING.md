@@ -1,77 +1,204 @@
-# RadLex-Mapping – CT Abdomen + Becken (v2.0)
+# RadLex-Mapping – CT Abdomen + Becken
 
 Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
-**Kodierpolitik (A-Struktur):** Jede Option trägt `data-en` (englischer RadLex-Term).
-`data-radlex` nur mit einem sauberen RID (`RIDxxxx`, ohne Suffix). Nicht
-registry-verifizierte Konzepte werden als `data-radlex-status="local"` geführt –
-**kein RID-Raten**. Normal-/Negativ-Zustände, Technik-Parameter, Markennamen,
-Lateralitäts-Varianten und quantitative RECIST-Messfelder sind bewusst `local`,
-bis der Code registry-verbatim belegt ist.
+> **Registry-Verifikation (2026-07-21):** RIDs gegen NCBO BioPortal (RADLEX) geprüft,
+> `system: http://radlex.org`. Suffix-Konvention aufgelöst (Feld trägt das Konzept,
+> Optionswerte/Grade sind lokal). Wo RadLex kein exaktes Konzept führt, ist der
+> tragfähige Oberbegriff kodiert oder das Feld `local`. Frühere RIDs waren großteils
+> geraten (RID5154/5104/5120 usw. trafen neurologische/orthopädische Fremdkonzepte).
 
-## Verifizierte / plausible Konzept-RIDs
+## Registry-verifiziert (RadLex-RID)
 
-| Befund | RadLex-Term | RID | Status |
-|---|---|---|---|
-| Leberparenchym | liver parenchyma | RID1240 | ✅ |
-| Steatose | hepatic steatosis | RID5097 | ✅ |
-| Zirrhose | cirrhosis | RID5098 | ✅ |
-| Fokale Leberläsion | focal liver lesion | RID1248 | ✅ |
-| Lebermetastase | liver metastasis | RID5105 | ✅ |
-| HCC | hepatocellular carcinoma | RID5106 | ✅ |
-| Intrahepatische Gallenwege dilatiert | intrahepatic biliary dilatation | RID5108 | ✅ |
-| Cholelithiasis | cholelithiasis | RID5120 | ✅ |
-| Akute Cholezystitis | acute cholecystitis | RID5121 | ✅ |
-| Pankreaskarzinom | pancreatic ductal carcinoma | RID5134 | ✅ |
-| NET | pancreatic neuroendocrine tumor | RID5135 | ✅ |
-| IPMN | intraductal papillary mucinous neoplasm | RID5136 | ✅ |
-| Pseudozyste | pancreatic pseudocyst | RID5138 | ✅ |
-| Akute Pankreatitis | acute pancreatitis | RID5131 | ✅ |
-| Retroperitoneale LK | retroperitoneal lymph nodes | RID1448 | ✅ |
-| Lymphadenopathie retroperitoneal | retroperitoneal lymphadenopathy | RID5190 | ✅ |
-| Peritonealkarzinose | peritoneal carcinomatosis | RID5200 | ✅ |
-| Pneumoperitoneum | pneumoperitoneum | RID5202 | ✅ |
-| Aszites | ascites | RID1461 | ✅ |
-| Hydronephrose | hydronephrosis | RID5153 | 🟡 |
-| Nephrolithiasis | nephrolithiasis | RID5154 | 🟡 |
-| Nierenzellkarzinom | renal cell carcinoma | RID5151 | 🟡 |
-| Splenomegalie | splenomegaly | RID5140 | 🟡 |
-| Bauchaortenaneurysma | abdominal aortic aneurysm | RID5181 | 🟡 |
-| Pfortaderthrombose | portal vein thrombosis | RID5183 | 🟡 |
-| Divertikulitis | diverticulitis | RID5171 | 🟡 |
-| Appendizitis | appendicitis | RID5173 | 🟡 |
-
-> Die RID5xxx-Codes dieses Templates stammen aus der v1.0-Kuratierung und sind
-> als 🟡 zu behandeln, solange nicht einzeln gegen die RadLex-Registry
-> verifiziert. Anzeige-Label ↔ `data-en` wurde in v2.0 abgeglichen.
-
-## Bewusst lokal geführt (`data-radlex-status="local"`)
-
-| Gruppe | Beispiele | Grund |
+| Konzept (`data-en`) | RID | Status |
 |---|---|---|
-| Normal-/Negativ-Zustände | „unauffällig", „nicht dilatiert", „kein Aszites", „keine fokale Läsion" | Negation/Normalbefund ist kein eigener RID (vormals ungültige `-norm`/`-neg`-Suffixe) |
-| Technik-Parameter | Schichtdicke 5/3/1 mm, Rekonstruktion axial/MPR, Qualitätsstufen | keine belegten RIDs; am Container `RID498xx` |
-| KM-Markennamen | Ultravist 370, Imeron 400, Omnipaque 350 … | Produktnamen; `data-en` = Wirkstoff |
-| Lateralität | Adenom re./li. (RID5156), Adnex-RF re./li. (RID5214), Leistenhernie re./li. (RID5226) | Seite ist kein RID-Axis; re./li. teilen den Basis-RID |
-| Tumorentitäten (Onko-Kontext) | Colon-/Rektum-/Magen-/Pankreaskarzinom … | Freitext-nahe Entitätsauswahl |
-| RECIST-Messfelder | LA/KA (mm), Verlauf neu/stabil/regredient/progredient | quantitativ am Input; Ansprechen (CR/PR/SD/PD) bleibt RID498xx |
-| Nicht-Zielläsionen | stabil/rückläufig/progredient/neu | kein belegter RID |
+| Budd-Chiari syndrome | RID46044 | ✅ |
+| abdominal aorta | RID905 | ✅ |
+| abscess | RID3711 | ✅ |
+| adrenal cortical adenoma | RID4214 | ✅ |
+| aneurysm | RID3321 | ✅ |
+| angiomyolipoma | RID4343 | ✅ |
+| aortic dissection | RID3320 | ✅ |
+| appendicitis | RID3383 | ✅ |
+| arterial phase | RID11080 | ✅ |
+| ascites | RID1541 | ✅ |
+| benign prostatic hyperplasia | RID3784 | ✅ |
+| bladder calculus | RID5008 | ✅ |
+| calcification | RID5196 | ✅ |
+| carcinoma | RID4247 | ✅ |
+| carcinomatosis | RID4264 | ✅ |
+| cholangiocarcinoma | RID4266 | ✅ |
+| cholecystectomy | RID1670 | ✅ |
+| cholecystitis | RID3394 | ✅ |
+| cirrhosis | RID3822 | ✅ |
+| common bile duct | RID199 | ✅ |
+| complete imaging response | RID11511 | ✅ |
+| congestion | RID4863 | ✅ |
+| conglomerate | RID5872 | ✅ |
+| cyst | RID3890 | ✅ |
+| decreased | RID36044 | ✅ |
+| degenerative disorder | RID5043 | ✅ |
+| delayed phase | RID11081 | ✅ |
+| diagnostic quality | RID12 | ✅ |
+| disease progression | RID29041 | ✅ |
+| diverticulitis | RID3409 | ✅ |
+| ductal adenocarcinoma | RID4228 | ✅ |
+| endometrial cancer | RID45685 | ✅ |
+| enlarged liver | RID34593 | ✅ |
+| enlarged spleen | RID34587 | ✅ |
+| fibromyoma | RID39270 | ✅ |
+| fracture | RID4650 | ✅ |
+| gallstone in bile duct | RID4992 | ✅ |
+| gallstone in gallbladder | RID4990 | ✅ |
+| gastric carcinoma | RID4251 | ✅ |
+| hemangioma | RID3969 | ✅ |
+| hepatocellular carcinoma | RID4271 | ✅ |
+| hydronephrosis | RID34393 | ✅ |
+| hydrops | RID4883 | ✅ |
+| hyperplasia | RID3777 | ✅ |
+| image quality | RID10 | ✅ |
+| incisional hernia | RID4920 | ✅ |
+| increased | RID36043 | ✅ |
+| infarction | RID5172 | ✅ |
+| inguinal hernia | RID4926 | ✅ |
+| intraductal papillary mucinous neoplasm | RID4157 | ✅ |
+| iodixanol | RID38741 | ✅ |
+| iohexol | RID38701 | ✅ |
+| iomeprol | RID38708 | ✅ |
+| iopromide | RID38723 | ✅ |
+| ischemia | RID3376 | ✅ |
+| lymphadenopathy | RID3798 | ✅ |
+| lymphoma | RID3840 | ✅ |
+| mass | RID3874 | ✅ |
+| mesenteric ischemia | RID38592 | ✅ |
+| metal artifact | RID11334 | ✅ |
+| metastasis | RID5231 | ✅ |
+| motion related artifact | RID11423 | ✅ |
+| mucinous cystic neoplasm | RID4164 | ✅ |
+| multiplanar reformat | RID12759 | ✅ |
+| neuroendocrine neoplasm | RID4483 | ✅ |
+| obstruction | RID4962 | ✅ |
+| osteolysis | RID5382 | ✅ |
+| osteoporosis | RID5389 | ✅ |
+| ovarian cancer | RID45687 | ✅ |
+| ovarian cyst | RID34656 | ✅ |
+| pancreatic cancer | RID45688 | ✅ |
+| pancreatic duct | RID176 | ✅ |
+| pancreatitis | RID3529 | ✅ |
+| partial response | RID11513 | ✅ |
+| peritonitis | RID3535 | ✅ |
+| pneumoperitoneum | RID4803 | ✅ |
+| portal hypertension | RID34614 | ✅ |
+| portal vein | RID1208 | ✅ |
+| portal venous phase | RID11085 | ✅ |
+| progressive disease | RID11515 | ✅ |
+| prostate cancer | RID45689 | ✅ |
+| prostate | RID343 | ✅ |
+| pseudocyst | RID3954 | ✅ |
+| pyelonephritis | RID3547 | ✅ |
+| reconstruction | RID28665 | ✅ |
+| regression | RID11521 | ✅ |
+| renal adenocarcinoma | RID4230 | ✅ |
+| renal calculus | RID38586 | ✅ |
+| renal cyst | RID35811 | ✅ |
+| sarcoma | RID4521 | ✅ |
+| slice thickness | RID28669 | ✅ |
+| stable disease | RID11514 | ✅ |
+| stable | RID5734 | ✅ |
+| steatosis | RID5217 | ✅ |
+| stomach | RID114 | ✅ |
+| thickening | RID28509 | ✅ |
+| unenhanced phase | RID11086 | ✅ |
+| urinary bladder | RID237 | ✅ |
 
-## RECIST (Ansprechen)
+## Lokal (Werte/Grade/kein exaktes Konzept)
 
-| Feld | RadLex-Term | RID | Status |
-|---|---|---|---|
-| Gesamtansprechen | RECIST overall response | RID49860 | 🟡 |
-| Complete Response | complete response | RID49861 | 🟡 |
-| Partial Response | partial response | RID49862 | 🟡 |
-| Stable Disease | stable disease | RID49863 | 🟡 |
-| Progressive Disease | progressive disease | RID49864 | 🟡 |
+| Konzept (`data-en`) | Status |
+|---|---|
+| RECIST overall response | 🟡 |
+| abdominal aorta normal | 🟡 |
+| adrenal glands normal | 🟡 |
+| adrenal tumor | 🟡 |
+| axial coronal reconstruction | 🟡 |
+| axial coronal sagittal reconstruction | 🟡 |
+| bladder not assessable | 🟡 |
+| clinical question | 🟡 |
+| colon normal | 🟡 |
+| common bile duct not dilated | 🟡 |
+| contrast medium agent | 🟡 |
+| contrast medium volume | 🟡 |
+| focal liver lesion | 🟡 |
+| focal pancreatic lesion | 🟡 |
+| follow-up after curative therapy | 🟡 |
+| follow-up under therapy | 🟡 |
+| gallbladder normal | 🟡 |
+| indeterminate adrenal lesion | 🟡 |
+| indeterminate liver lesion | 🟡 |
+| interval change | 🟡 |
+| intrahepatic bile ducts not dilated | 🟡 |
+| intrahepatic bile ducts | 🟡 |
+| intrahepatic biliary dilatation | 🟡 |
+| kidneys normal | 🟡 |
+| liver parenchyma normal | 🟡 |
+| liver size normal | 🟡 |
+| liver size | 🟡 |
+| mesenteric lymph nodes normal | 🟡 |
+| new interval findings | 🟡 |
+| new lesion | 🟡 |
+| new lesions present | 🟡 |
+| no ascites | 🟡 |
+| no focal liver lesion | 🟡 |
+| no focal pancreatic lesion | 🟡 |
+| no prior study | 🟡 |
+| no significant interval change | 🟡 |
+| non-target decreased | 🟡 |
+| non-target lesion response | 🟡 |
+| non-target progression | 🟡 |
+| non-target stable | 🟡 |
+| osseous structures normal | 🟡 |
+| other tumor entity | 🟡 |
+| pancreas normal | 🟡 |
+| pancreatic duct not dilated | 🟡 |
+| pancreatic lipomatosis | 🟡 |
+| pancreatic parenchyma | 🟡 |
+| peritoneum normal | 🟡 |
+| pneumobilia | 🟡 |
+| portal vein normal | 🟡 |
+| portal vein thrombosis | 🟡 |
+| primary staging | 🟡 |
+| prior study available | 🟡 |
+| prior study date | 🟡 |
+| prostate normal | 🟡 |
+| restaging after therapy | 🟡 |
+| retroperitoneal lymph nodes normal | 🟡 |
+| retroperitoneal lymph nodes | 🟡 |
+| ruptured aortic aneurysm | 🟡 |
+| slice thickness 1 mm | 🟡 |
+| slice thickness 3 mm | 🟡 |
+| slice thickness 5 mm | 🟡 |
+| small bowel adhesion | 🟡 |
+| small bowel normal | 🟡 |
+| small liver | 🟡 |
+| soft tissue tumor | 🟡 |
+| soft tissues normal | 🟡 |
+| spleen normal | 🟡 |
+| spleen size normal | 🟡 |
+| spleen size | 🟡 |
+| staging timepoint | 🟡 |
+| stomach normal | 🟡 |
+| suboptimal contrast | 🟡 |
+| target lesion interval change | 🟡 |
+| target lesion location | 🟡 |
+| target lesion long axis | 🟡 |
+| target lesion short axis | 🟡 |
+| tumor entity | 🟡 |
+| unenhanced plus portal venous phase | 🟡 |
+| urinary bladder normal | 🟡 |
+| uterus adnexa normal | 🟡 |
 
 ## FHIR-Kodierung
 
 | Ressource | Code | System |
 |---|---|---|
-| DiagnosticReport | 30652-8 | http://loinc.org |
-| Observations (RadLex) | RIDxxxx | http://radlex.org |
-| Observations (local) | local:&lt;en&gt; | http://hjk.wien/fhir/CodeSystem/radiology-templates |
-| Notfall-Positiva | + interpretation `A` (Abnormal) | http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation |
+| DiagnosticReport | 24558-9 | http://loinc.org |
+| Observations (RadLex) | RID* | http://radlex.org |

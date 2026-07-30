@@ -1,5 +1,21 @@
 # Changelog – CT Abdomen + Becken
 
+## [2.1] – 2026-07-21
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Gesamte RadLex-Kodierung neu belegt** (Rebuild 7/8, umfangreichstes Template, 202 Konzepte).
+  Fast alle bisherigen RIDs trafen Fremdkonzepte (RID5104 „focal steatosis" = migrated disc extrusion,
+  RID5131 „acute pancreatitis" = Cockayne-Syndrom, RID5181 „AAA" = dysbaric osteonecrosis).
+- **98 Felder registry-verifiziert** über alle Organe: Leber (HCC RID4271, cholangiocarcinoma RID4266,
+  cirrhosis RID3822, steatosis RID5217, hepatomegaly RID34593), Galle (cholelithiasis RID4990,
+  choledocholithiasis RID4992), Pankreas (IPMN RID4157, MCN RID4164, pancreatitis RID3529, pNET RID4483),
+  Niere/NN (renal cyst RID35811, angiomyolipoma RID4343, pyelonephritis RID3547, adrenal adenoma RID4214),
+  Darm (appendicitis RID3383, diverticulitis RID3409, obstruction RID4962), Gefäße (aortic dissection RID3320,
+  portal hypertension RID34614), Kontrastmittel (iohexol/iomeprol/iopromide/iodixanol), Phasen, RECIST-Response.
+- **Hybrid-Oberbegriffe** wo kein exaktes Konzept (mass RID3874, metastasis RID5231, cyst RID3890,
+  hemangioma RID3969, carcinoma RID4247, thickening RID28509, ascites RID1541, lymphadenopathy RID3798).
+- **80 Werte/Normalbefunde/RECIST-Felder auf `local`**.
+- `RADLEX-MAPPING.md` neu generiert. Feld-`id`s unverändert.
+
 ## [2.0] – 2026-07-06
 ### Geändert – Umstellung auf A-Struktur (Breaking)
 - `template.html` ist jetzt **kanonisch nacktes MRRT**: kein `<style>`, kein `<script>`, kein Stylesheet-Link. Reines kodiertes Eingabeformular mit `rr-*`-Struktur-Hooks.

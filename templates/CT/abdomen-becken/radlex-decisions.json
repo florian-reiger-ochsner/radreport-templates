@@ -1,0 +1,730 @@
+{
+  "abdominal aorta normal": {
+    "local": true
+  },
+  "abdominal aortic aneurysm": {
+    "rid": "RID3321",
+    "en": "aneurysm"
+  },
+  "acute cholecystitis": {
+    "rid": "RID3394",
+    "en": "cholecystitis"
+  },
+  "acute pancreatitis": {
+    "rid": "RID3529",
+    "en": "pancreatitis"
+  },
+  "adnexal mass": {
+    "rid": "RID3874",
+    "en": "mass"
+  },
+  "adrenal adenoma": {
+    "rid": "RID4214",
+    "en": "adrenal cortical adenoma"
+  },
+  "adrenal glands normal": {
+    "local": true
+  },
+  "adrenal hyperplasia": {
+    "rid": "RID3777",
+    "en": "hyperplasia"
+  },
+  "adrenal metastasis": {
+    "rid": "RID5231",
+    "en": "metastasis"
+  },
+  "adrenal tumor": {
+    "local": true
+  },
+  "angiomyolipoma": {
+    "rid": "RID4343",
+    "en": "angiomyolipoma"
+  },
+  "aortic calcification": {
+    "rid": "RID5196",
+    "en": "calcification"
+  },
+  "aortic dissection": {
+    "rid": "RID3320",
+    "en": "aortic dissection"
+  },
+  "appendicitis": {
+    "rid": "RID3383",
+    "en": "appendicitis"
+  },
+  "arterial phase": {
+    "rid": "RID11080",
+    "en": "arterial phase"
+  },
+  "axial coronal reconstruction": {
+    "local": true
+  },
+  "axial coronal sagittal reconstruction": {
+    "local": true
+  },
+  "axial reconstruction": {
+    "rid": "RID28665",
+    "en": "reconstruction"
+  },
+  "benign prostatic hyperplasia": {
+    "rid": "RID3784",
+    "en": "benign prostatic hyperplasia"
+  },
+  "bladder calculus": {
+    "rid": "RID5008",
+    "en": "bladder calculus"
+  },
+  "bladder not assessable": {
+    "local": true
+  },
+  "bladder wall thickening": {
+    "rid": "RID28509",
+    "en": "thickening"
+  },
+  "Budd-Chiari syndrome": {
+    "rid": "RID46044",
+    "en": "Budd-Chiari syndrome"
+  },
+  "cervical carcinoma": {
+    "rid": "RID4247",
+    "en": "carcinoma"
+  },
+  "cholangiocarcinoma": {
+    "rid": "RID4266",
+    "en": "cholangiocarcinoma"
+  },
+  "choledocholithiasis": {
+    "rid": "RID4992",
+    "en": "gallstone in bile duct"
+  },
+  "cholelithiasis": {
+    "rid": "RID4990",
+    "en": "gallstone in gallbladder"
+  },
+  "chronic pancreatitis": {
+    "rid": "RID3529",
+    "en": "pancreatitis"
+  },
+  "cirrhosis": {
+    "rid": "RID3822",
+    "en": "cirrhosis"
+  },
+  "clinical question": {
+    "local": true
+  },
+  "colon carcinoma": {
+    "rid": "RID4247",
+    "en": "carcinoma"
+  },
+  "colon normal": {
+    "local": true
+  },
+  "colonic wall thickening": {
+    "rid": "RID28509",
+    "en": "thickening"
+  },
+  "common bile duct not dilated": {
+    "local": true
+  },
+  "complete response": {
+    "rid": "RID11511",
+    "en": "complete imaging response"
+  },
+  "contrast medium volume": {
+    "local": true
+  },
+  "decreased": {
+    "rid": "RID36044",
+    "en": "decreased"
+  },
+  "degenerative changes": {
+    "rid": "RID5043",
+    "en": "degenerative disorder"
+  },
+  "delayed phase": {
+    "rid": "RID11081",
+    "en": "delayed phase"
+  },
+  "diagnostic image quality": {
+    "rid": "RID12",
+    "en": "diagnostic quality"
+  },
+  "diverticulitis": {
+    "rid": "RID3409",
+    "en": "diverticulitis"
+  },
+  "endometrial carcinoma": {
+    "rid": "RID45685",
+    "en": "endometrial cancer"
+  },
+  "focal steatosis": {
+    "rid": "RID5217",
+    "en": "steatosis"
+  },
+  "follow-up after curative therapy": {
+    "local": true
+  },
+  "follow-up under therapy": {
+    "local": true
+  },
+  "fracture": {
+    "rid": "RID4650",
+    "en": "fracture"
+  },
+  "gallbladder hydrops": {
+    "rid": "RID4883",
+    "en": "hydrops"
+  },
+  "gallbladder normal": {
+    "local": true
+  },
+  "gallbladder wall thickening": {
+    "rid": "RID28509",
+    "en": "thickening"
+  },
+  "gastric carcinoma": {
+    "rid": "RID4251",
+    "en": "gastric carcinoma"
+  },
+  "gastric mass": {
+    "rid": "RID3874",
+    "en": "mass"
+  },
+  "gastric wall thickening": {
+    "rid": "RID28509",
+    "en": "thickening"
+  },
+  "hepatic abscess": {
+    "rid": "RID3711",
+    "en": "abscess"
+  },
+  "hepatic congestion": {
+    "rid": "RID4863",
+    "en": "congestion"
+  },
+  "hepatic cyst": {
+    "rid": "RID3890",
+    "en": "cyst"
+  },
+  "hepatic hemangioma": {
+    "rid": "RID3969",
+    "en": "hemangioma"
+  },
+  "hepatic steatosis": {
+    "rid": "RID5217",
+    "en": "steatosis"
+  },
+  "hepatocellular carcinoma": {
+    "rid": "RID4271",
+    "en": "hepatocellular carcinoma"
+  },
+  "hepatomegaly": {
+    "rid": "RID34593",
+    "en": "enlarged liver"
+  },
+  "hydronephrosis": {
+    "rid": "RID34393",
+    "en": "hydronephrosis"
+  },
+  "iliac lymphadenopathy": {
+    "rid": "RID3798",
+    "en": "lymphadenopathy"
+  },
+  "incisional hernia": {
+    "rid": "RID4920",
+    "en": "incisional hernia"
+  },
+  "increased": {
+    "rid": "RID36043",
+    "en": "increased"
+  },
+  "indeterminate adrenal lesion": {
+    "local": true
+  },
+  "indeterminate liver lesion": {
+    "local": true
+  },
+  "inguinal hernia": {
+    "rid": "RID4926",
+    "en": "inguinal hernia"
+  },
+  "inguinal lymphadenopathy": {
+    "rid": "RID3798",
+    "en": "lymphadenopathy"
+  },
+  "interval progression": {
+    "rid": "RID29041",
+    "en": "disease progression"
+  },
+  "interval regression": {
+    "rid": "RID11521",
+    "en": "regression"
+  },
+  "intraductal papillary mucinous neoplasm": {
+    "rid": "RID4157",
+    "en": "intraductal papillary mucinous neoplasm"
+  },
+  "intrahepatic bile ducts not dilated": {
+    "local": true
+  },
+  "intrahepatic biliary dilatation": {
+    "local": true
+  },
+  "iodixanol 320": {
+    "rid": "RID38741",
+    "en": "iodixanol"
+  },
+  "iohexol 350": {
+    "rid": "RID38701",
+    "en": "iohexol"
+  },
+  "iomeprol 400": {
+    "rid": "RID38708",
+    "en": "iomeprol"
+  },
+  "iopromide 370": {
+    "rid": "RID38723",
+    "en": "iopromide"
+  },
+  "kidneys normal": {
+    "local": true
+  },
+  "large ascites": {
+    "rid": "RID1541",
+    "en": "ascites"
+  },
+  "large bowel obstruction": {
+    "rid": "RID4962",
+    "en": "obstruction"
+  },
+  "liver metastasis": {
+    "rid": "RID5231",
+    "en": "metastasis"
+  },
+  "liver parenchyma normal": {
+    "local": true
+  },
+  "liver size normal": {
+    "local": true
+  },
+  "lymphoma": {
+    "rid": "RID3840",
+    "en": "lymphoma"
+  },
+  "mesenteric lymph nodes normal": {
+    "local": true
+  },
+  "mesenteric lymphadenopathy": {
+    "rid": "RID3798",
+    "en": "lymphadenopathy"
+  },
+  "metal artifact": {
+    "rid": "RID11334",
+    "en": "metal artifact"
+  },
+  "moderate ascites": {
+    "rid": "RID1541",
+    "en": "ascites"
+  },
+  "motion artifact": {
+    "rid": "RID11423",
+    "en": "motion related artifact"
+  },
+  "mucinous cystic neoplasm": {
+    "rid": "RID4164",
+    "en": "mucinous cystic neoplasm"
+  },
+  "multiplanar reconstruction": {
+    "rid": "RID12759",
+    "en": "multiplanar reformat"
+  },
+  "nephrolithiasis": {
+    "rid": "RID38586",
+    "en": "renal calculus"
+  },
+  "new interval findings": {
+    "local": true
+  },
+  "new lesion": {
+    "local": true
+  },
+  "new lesions present": {
+    "local": true
+  },
+  "no ascites": {
+    "local": true
+  },
+  "no focal liver lesion": {
+    "local": true
+  },
+  "no focal pancreatic lesion": {
+    "local": true
+  },
+  "no prior study": {
+    "local": true
+  },
+  "no significant interval change": {
+    "local": true
+  },
+  "non-target decreased": {
+    "local": true
+  },
+  "non-target progression": {
+    "local": true
+  },
+  "non-target stable": {
+    "local": true
+  },
+  "osseous destruction": {
+    "rid": "RID5382",
+    "en": "osteolysis"
+  },
+  "osseous structures normal": {
+    "local": true
+  },
+  "osteoporosis": {
+    "rid": "RID5389",
+    "en": "osteoporosis"
+  },
+  "other tumor entity": {
+    "local": true
+  },
+  "ovarian carcinoma": {
+    "rid": "RID45687",
+    "en": "ovarian cancer"
+  },
+  "ovarian cyst": {
+    "rid": "RID34656",
+    "en": "ovarian cyst"
+  },
+  "pancreas normal": {
+    "local": true
+  },
+  "pancreatic carcinoma": {
+    "rid": "RID45688",
+    "en": "pancreatic cancer"
+  },
+  "pancreatic duct not dilated": {
+    "local": true
+  },
+  "pancreatic ductal carcinoma": {
+    "rid": "RID4228",
+    "en": "ductal adenocarcinoma"
+  },
+  "pancreatic lipomatosis": {
+    "local": true
+  },
+  "pancreatic neuroendocrine tumor": {
+    "rid": "RID4483",
+    "en": "neuroendocrine neoplasm"
+  },
+  "pancreatic pseudocyst": {
+    "rid": "RID3954",
+    "en": "pseudocyst"
+  },
+  "partial response": {
+    "rid": "RID11513",
+    "en": "partial response"
+  },
+  "peritoneal carcinomatosis": {
+    "rid": "RID4264",
+    "en": "carcinomatosis"
+  },
+  "peritoneum normal": {
+    "local": true
+  },
+  "pneumobilia": {
+    "local": true
+  },
+  "pneumoperitoneum": {
+    "rid": "RID4803",
+    "en": "pneumoperitoneum"
+  },
+  "portal hypertension": {
+    "rid": "RID34614",
+    "en": "portal hypertension"
+  },
+  "portal vein normal": {
+    "local": true
+  },
+  "portal vein thrombosis": {
+    "local": true
+  },
+  "portal venous phase": {
+    "rid": "RID11085",
+    "en": "portal venous phase"
+  },
+  "primary staging": {
+    "local": true
+  },
+  "prior study available": {
+    "local": true
+  },
+  "prior study date": {
+    "local": true
+  },
+  "progressive disease": {
+    "rid": "RID11515",
+    "en": "progressive disease"
+  },
+  "prostate carcinoma": {
+    "rid": "RID45689",
+    "en": "prostate cancer"
+  },
+  "prostate mass": {
+    "rid": "RID3874",
+    "en": "mass"
+  },
+  "prostate normal": {
+    "local": true
+  },
+  "pyelonephritis": {
+    "rid": "RID3547",
+    "en": "pyelonephritis"
+  },
+  "rectal carcinoma": {
+    "rid": "RID4247",
+    "en": "carcinoma"
+  },
+  "renal cell carcinoma": {
+    "rid": "RID4230",
+    "en": "renal adenocarcinoma"
+  },
+  "renal cyst": {
+    "rid": "RID35811",
+    "en": "renal cyst"
+  },
+  "restaging after therapy": {
+    "local": true
+  },
+  "retroperitoneal lymph nodes normal": {
+    "local": true
+  },
+  "retroperitoneal lymphadenopathy": {
+    "rid": "RID3798",
+    "en": "lymphadenopathy"
+  },
+  "retroperitoneal nodal conglomerate": {
+    "rid": "RID5872",
+    "en": "conglomerate"
+  },
+  "retroperitoneal sarcoma": {
+    "rid": "RID4521",
+    "en": "sarcoma"
+  },
+  "slice thickness 1 mm": {
+    "local": true
+  },
+  "slice thickness 3 mm": {
+    "local": true
+  },
+  "slice thickness 5 mm": {
+    "local": true
+  },
+  "small ascites": {
+    "rid": "RID1541",
+    "en": "ascites"
+  },
+  "small bowel adhesion": {
+    "local": true
+  },
+  "small bowel ischemia": {
+    "rid": "RID3376",
+    "en": "ischemia"
+  },
+  "small bowel normal": {
+    "local": true
+  },
+  "small bowel obstruction": {
+    "rid": "RID4962",
+    "en": "obstruction"
+  },
+  "small bowel wall thickening": {
+    "rid": "RID28509",
+    "en": "thickening"
+  },
+  "small liver": {
+    "local": true
+  },
+  "soft tissue tumor": {
+    "local": true
+  },
+  "soft tissues normal": {
+    "local": true
+  },
+  "spleen normal": {
+    "local": true
+  },
+  "spleen size normal": {
+    "local": true
+  },
+  "splenic cyst": {
+    "rid": "RID3890",
+    "en": "cyst"
+  },
+  "splenic hemangioma": {
+    "rid": "RID3969",
+    "en": "hemangioma"
+  },
+  "splenic infarct": {
+    "rid": "RID5172",
+    "en": "infarction"
+  },
+  "splenic metastasis": {
+    "rid": "RID5231",
+    "en": "metastasis"
+  },
+  "splenomegaly": {
+    "rid": "RID34587",
+    "en": "enlarged spleen"
+  },
+  "stable": {
+    "rid": "RID5734",
+    "en": "stable"
+  },
+  "stable disease": {
+    "rid": "RID11514",
+    "en": "stable disease"
+  },
+  "status post cholecystectomy": {
+    "rid": "RID1670",
+    "en": "cholecystectomy"
+  },
+  "stomach normal": {
+    "local": true
+  },
+  "suboptimal contrast": {
+    "local": true
+  },
+  "target lesion location": {
+    "local": true
+  },
+  "target lesion long axis": {
+    "local": true
+  },
+  "target lesion short axis": {
+    "local": true
+  },
+  "unenhanced phase": {
+    "rid": "RID11086",
+    "en": "unenhanced phase"
+  },
+  "unenhanced plus portal venous phase": {
+    "local": true
+  },
+  "urinary bladder normal": {
+    "local": true
+  },
+  "urothelial carcinoma": {
+    "rid": "RID4247",
+    "en": "carcinoma"
+  },
+  "uterine fibroid": {
+    "rid": "RID39270",
+    "en": "fibromyoma"
+  },
+  "uterus adnexa normal": {
+    "local": true
+  },
+  "peritonitis": {
+    "rid": "RID3535",
+    "en": "peritonitis"
+  },
+  "contrast medium agent": {
+    "local": true
+  },
+  "slice thickness": {
+    "rid": "RID28669",
+    "en": "slice thickness"
+  },
+  "reconstruction": {
+    "rid": "RID28665",
+    "en": "reconstruction"
+  },
+  "image quality": {
+    "rid": "RID10",
+    "en": "image quality"
+  },
+  "tumor entity": {
+    "local": true
+  },
+  "staging timepoint": {
+    "local": true
+  },
+  "target lesion interval change": {
+    "local": true
+  },
+  "RECIST overall response": {
+    "local": true
+  },
+  "non-target lesion response": {
+    "local": true
+  },
+  "liver size": {
+    "local": true
+  },
+  "focal liver lesion": {
+    "local": true
+  },
+  "intrahepatic bile ducts": {
+    "local": true
+  },
+  "common bile duct": {
+    "rid": "RID199",
+    "en": "common bile duct"
+  },
+  "pancreatic parenchyma": {
+    "local": true
+  },
+  "pancreatic duct": {
+    "rid": "RID176",
+    "en": "pancreatic duct"
+  },
+  "focal pancreatic lesion": {
+    "local": true
+  },
+  "spleen size": {
+    "local": true
+  },
+  "stomach": {
+    "rid": "RID114",
+    "en": "stomach"
+  },
+  "abdominal aorta": {
+    "rid": "RID905",
+    "en": "abdominal aorta"
+  },
+  "portal vein": {
+    "rid": "RID1208",
+    "en": "portal vein"
+  },
+  "retroperitoneal lymph nodes": {
+    "local": true
+  },
+  "ascites": {
+    "rid": "RID1541",
+    "en": "ascites"
+  },
+  "urinary bladder": {
+    "rid": "RID237",
+    "en": "urinary bladder"
+  },
+  "prostate": {
+    "rid": "RID343",
+    "en": "prostate"
+  },
+  "interval change": {
+    "local": true
+  },
+  "bowel obstruction": {
+    "rid": "RID4962",
+    "en": "obstruction"
+  },
+  "mesenteric ischemia": {
+    "rid": "RID38592",
+    "en": "mesenteric ischemia"
+  },
+  "ruptured aortic aneurysm": {
+    "local": true
+  }
+}
