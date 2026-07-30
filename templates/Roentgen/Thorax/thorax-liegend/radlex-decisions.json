@@ -1,0 +1,242 @@
+{
+  "endotracheal tube": {
+    "rid": "RID5557",
+    "en": "endotracheal tube"
+  },
+  "tracheostomy tube": {
+    "rid": "RID5560",
+    "en": "tracheostomy tube"
+  },
+  "nasogastric tube": {
+    "rid": "RID5566",
+    "en": "nasogastric tube"
+  },
+  "jejunal tube": {
+    "rid": "RID50341",
+    "en": "jejunostomy tube"
+  },
+  "PEG tube": {
+    "local": true
+  },
+  "central venous catheter": {
+    "rid": "RID5578",
+    "en": "central venous catheter"
+  },
+  "port catheter": {
+    "rid": "RID50336",
+    "en": "port"
+  },
+  "dialysis catheter": {
+    "rid": "RID50530",
+    "en": "dialysis catheter"
+  },
+  "PICC line": {
+    "rid": "RID5581",
+    "en": "peripheral intravenous central catheter"
+  },
+  "arterial catheter": {
+    "rid": "RID5576",
+    "en": "catheter"
+  },
+  "intra-aortic balloon pump": {
+    "rid": "RID5587",
+    "en": "intraaortic balloon pump"
+  },
+  "ventricular assist device": {
+    "local": true
+  },
+  "cardiac pacemaker": {
+    "rid": "RID5436",
+    "en": "pacemaker"
+  },
+  "implantable cardioverter defibrillator": {
+    "rid": "RID5434",
+    "en": "automated implantable cardiac defibrillator"
+  },
+  "cardiac resynchronization therapy": {
+    "rid": "RID5431",
+    "en": "cardiac rhythm therapy device"
+  },
+  "implantable loop recorder": {
+    "rid": "RID5429",
+    "en": "implantable device"
+  },
+  "chest tube right": {
+    "rid": "RID5573",
+    "en": "thoracostomy tube"
+  },
+  "chest tube left": {
+    "rid": "RID5573",
+    "en": "thoracostomy tube"
+  },
+  "pericardial drain": {
+    "rid": "RID5610",
+    "en": "surgical drain"
+  },
+  "foreign body / device": {
+    "rid": "RID5425",
+    "en": "foreign body"
+  },
+  "pulmonary vascular congestion": {
+    "rid": "RID4863",
+    "en": "congestion"
+  },
+  "consolidation": {
+    "rid": "RID43255",
+    "en": "consolidation"
+  },
+  "opacity": {
+    "rid": "RID28530",
+    "en": "opacity"
+  },
+  "lobular consolidation": {
+    "rid": "RID43255",
+    "en": "consolidation"
+  },
+  "ground-glass opacity": {
+    "rid": "RID28531",
+    "en": "ground-glass opacity"
+  },
+  "atelectasis": {
+    "rid": "RID28493",
+    "en": "atelectasis"
+  },
+  "pulmonary emphysema": {
+    "rid": "RID4799",
+    "en": "emphysema"
+  },
+  "air trapping": {
+    "rid": "RID28537",
+    "en": "air trapping"
+  },
+  "solitary pulmonary nodule": {
+    "rid": "RID50149",
+    "en": "pulmonary nodule"
+  },
+  "multiple pulmonary nodules": {
+    "rid": "RID50149",
+    "en": "pulmonary nodule"
+  },
+  "cavitary lesion": {
+    "rid": "RID7475",
+    "en": "cavitary"
+  },
+  "pleural effusion": {
+    "rid": "RID34539",
+    "en": "pleural effusion"
+  },
+  "pneumothorax": {
+    "rid": "RID5352",
+    "en": "pneumothorax"
+  },
+  "pleural thickening": {
+    "rid": "RID28509",
+    "en": "thickening"
+  },
+  "pleural calcification": {
+    "rid": "RID5196",
+    "en": "calcification"
+  },
+  "pleural mass": {
+    "rid": "RID3874",
+    "en": "mass"
+  },
+  "cardiac size not assessable supine": {
+    "local": true
+  },
+  "cardiomegaly": {
+    "local": true
+  },
+  "vascular pedicle width": {
+    "local": true
+  },
+  "mediastinal widening": {
+    "local": true
+  },
+  "mediastinal mass": {
+    "rid": "RID3874",
+    "en": "mass"
+  },
+  "tracheal deviation": {
+    "local": true
+  },
+  "mediastinal shift": {
+    "local": true
+  },
+  "hilar enlargement": {
+    "local": true
+  },
+  "hilar opacity": {
+    "rid": "RID28530",
+    "en": "opacity"
+  },
+  "degenerative changes spine": {
+    "rid": "RID5043",
+    "en": "degenerative disorder"
+  },
+  "vertebral compression fracture": {
+    "rid": "RID4658",
+    "en": "compression fracture"
+  },
+  "rib fracture": {
+    "rid": "RID4650",
+    "en": "fracture"
+  },
+  "sternal fracture": {
+    "rid": "RID4650",
+    "en": "fracture"
+  },
+  "osseous destruction": {
+    "rid": "RID5382",
+    "en": "osteolysis"
+  },
+  "kyphoscoliosis": {
+    "rid": "RID4760",
+    "en": "kyphoscoliosis"
+  },
+  "status post sternotomy": {
+    "local": true
+  },
+  "subcutaneous emphysema": {
+    "local": true
+  },
+  "soft tissue mass": {
+    "rid": "RID3874",
+    "en": "mass"
+  },
+  "status post mastectomy right": {
+    "rid": "RID49910",
+    "en": "mastectomy"
+  },
+  "status post mastectomy left": {
+    "rid": "RID49910",
+    "en": "mastectomy"
+  },
+  "image quality": {
+    "rid": "RID10",
+    "en": "image quality"
+  },
+  "support and monitoring devices": {
+    "local": true
+  },
+  "lung": {
+    "rid": "RID1301",
+    "en": "lung"
+  },
+  "pleura": {
+    "rid": "RID1362",
+    "en": "pleura"
+  },
+  "heart and mediastinum": {
+    "local": true
+  },
+  "cardiac size": {
+    "local": true
+  },
+  "osseous structures and soft tissue": {
+    "local": true
+  },
+  "interval change": {
+    "local": true
+  }
+}

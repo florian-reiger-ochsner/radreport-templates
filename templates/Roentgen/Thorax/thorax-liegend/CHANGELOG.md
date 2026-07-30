@@ -4,6 +4,21 @@ Alle nennenswerten Änderungen an diesem Template. Format nach
 [Keep a Changelog](https://keepachangelog.com/de/1.0.0/), Versionierung nach
 [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.1] – 2026-07-21
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Gesamte RadLex-Kodierung neu belegt** (Rebuild 2/8). Der Registry-Audit zeigte, dass
+  praktisch alle bisherigen RIDs auf Fremdkonzepte zeigten (ground-glass RID4800 =
+  pneumocephalus, CVK RID49600 = injection treatment, Konsolidierung RID4803 = pneumoperitoneum).
+- **37 Befund-Felder registry-verifiziert** neu kodiert; Hybrid-Oberbegriffe wo RadLex kein
+  exaktes Konzept führt (mass RID3874, thickening RID28509, fracture RID4650, congestion RID4863).
+- **11 Felder auf `local` demoted** (Kardiomegalie, Mediastinalshift/-verbreiterung, VAD, PEG,
+  Weichteilemphysem, Trachealverlagerung, cardiac size not assessable supine, vascular pedicle width u. a.).
+- **Region-Anker korrigiert:** lung RID1301 (war korrekt), pleura RID1362 (war RID5350),
+  image quality RID10 (war RID13882); Kombi-Anker (heart and mediastinum, osseous structures
+  and soft tissue, cardiac size, interval change) auf `local`, da kein Einzelkonzept.
+- `RADLEX-MAPPING.md` neu aus den verifizierten Codes generiert. Konzepte weitgehend
+  konsistent mit thorax-standard v2.3. Feld-`id`s unverändert.
+
 ## [1.0] – 2026-07-06
 
 ### Hinzugefügt – Neues Template (Abspaltung aus `thorax-standard`)

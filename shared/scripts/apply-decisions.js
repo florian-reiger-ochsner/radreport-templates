@@ -61,6 +61,10 @@ function processTag(tag) {
 
 html = html.replace(/<option\b[^>]*>/g, processTag);
 html = html.replace(/<input\b[^>]*?\/?>/g, processTag);
+// Region-/Sektions-Anker tragen data-radlex auf <select>/<div>/<fieldset> selbst.
+html = html.replace(/<select\b[^>]*>/g, processTag);
+html = html.replace(/<div\b[^>]*>/g, processTag);
+html = html.replace(/<fieldset\b[^>]*>/g, processTag);
 
 fs.writeFileSync(outPath, html);
 
