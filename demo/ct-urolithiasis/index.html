@@ -8,7 +8,7 @@
 <meta name="dcterms.title"       content="CT Urolithiasis (Steinsuche, nativ)" />
 <meta name="dcterms.description" content="Strukturierte Befundvorlage CT Urolithiasis. Basierend auf DRG-Template 041807.2.2203092150 (CC BY 4.0). Adaptiert und erweitert: RadLex-Kodierung, FHIR-Export, Multi-Stein-Stack, beidseitige Harntransportstörungs-Bewertung. Kanonisch nacktes MRRT (A-Struktur): nur das kodierte Eingabeformular, ohne CSS/JS. Multi-Stein-Stack (Add/Del), Live-Vorschau, Beurteilungsvorschlag, Status-Badge und FHIR-Export werden in der Demo von demo.js zur Laufzeit erzeugt. Der Konkrement-Block ist EINMAL deklariert (data-stein=&quot;1&quot;); demo.js multipliziert ihn auf beliebig viele Konkremente." />
 <meta name="dcterms.language"    content="de" />
-<meta name="dcterms.identifier"  content="HJK-MRRT-CT-UROLITHIASIS-v1.1" />
+<meta name="dcterms.identifier"  content="HJK-MRRT-CT-UROLITHIASIS-v1.2" />
 <meta name="dcterms.source"      content="DRG AK Befundung, Template 041807.2.2203092150, CC BY 4.0, https://github.com/DRGagit/ak_befundung" />
 <meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
 <meta name="dcterms.date"        content="2026-07-06" />
@@ -20,7 +20,7 @@
 <meta name="rrt:coding-systems"  content="RadLex, LOINC (partial), local" />
 
 
-  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-07T11:09:45.728Z -->
+  <!-- ABGELEITET (build-demo.js) – NICHT von Hand editieren. Quelle der Wahrheit: kanonisches template.html. Build: 2026-07-30T19:51:38.486Z -->
   <!-- Core-Stylesheet nur in der Demo (Schaufenster), nicht im kanonischen Template -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
 <section class="rr-input-pane">
 
   <h1 class="rr-doc-title">CT Urolithiasis</h1>
-  <div class="rr-doc-sub">MRRT · RadLex-kodiert · Steinsuche nativ · v1.1 · HJK Wien</div>
+  <div class="rr-doc-sub">MRRT · RadLex-kodiert · Steinsuche nativ · v1.2 · HJK Wien</div>
   <div class="rr-title-rule"></div>
 
   <!-- ===================== TECHNIK ===================== -->
@@ -59,15 +59,15 @@
   <div class="rr-row rr-row-three">
     <label>
       <span class="rr-lbl"><span>Protokoll <span class="rr-rl-badge">RadLex</span></span></span>
-      <select id="protokoll" data-radlex="RID10361" data-en="CT protocol urolithiasis">
-        <option value="Nativ (NECT), Niedrigdosis" data-radlex="RID10361-low" data-en="low dose NECT">Nativ, Niedrigdosis</option>
-        <option value="Nativ (NECT), Standarddosis" data-radlex="RID10361-std" data-en="standard dose NECT">Nativ, Standarddosis</option>
-        <option value="Dual-Energy CT (DECT), nativ" data-radlex="RID10361-dect" data-en="dual energy CT">Dual-Energy (DECT)</option>
+      <select id="protokoll" data-en="CT protocol urolithiasis" data-radlex-status="local">
+        <option value="Nativ (NECT), Niedrigdosis" data-radlex="RID35737" data-en="low dose">Nativ, Niedrigdosis</option>
+        <option value="Nativ (NECT), Standarddosis" data-en="standard dose NECT" data-radlex-status="local">Nativ, Standarddosis</option>
+        <option value="Dual-Energy CT (DECT), nativ" data-radlex="RID38660" data-en="dual-energy CT">Dual-Energy (DECT)</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>Schichtdicke</span></span>
-      <select id="schicht" data-radlex-status="local" data-en="slice thickness">
+      <select id="schicht" data-en="slice thickness" data-radlex="RID28669">
         <option value="3 mm" data-radlex-status="local" data-en="3 mm slice thickness">3 mm</option>
         <option value="1 mm" data-radlex-status="local" data-en="1 mm slice thickness">1 mm (Dünnschicht)</option>
         <option value="5 mm" data-radlex-status="local" data-en="5 mm slice thickness">5 mm</option>
@@ -75,10 +75,10 @@
     </label>
     <label>
       <span class="rr-lbl"><span>Bildqualität <span class="rr-rl-badge">RadLex</span></span></span>
-      <select id="qual" data-radlex="RID13882" data-en="image quality">
-        <option value="gut, diagnostisch ausreichend" data-radlex="RID13882-good" data-en="good image quality">Gut</option>
-        <option value="ausreichend" data-radlex="RID13882-suf" data-en="sufficient image quality">Ausreichend</option>
-        <option value="eingeschränkt (Bewegungsartefakte)" data-radlex="RID13882-lim" data-en="limited image quality">Eingeschränkt</option>
+      <select id="qual" data-radlex="RID10" data-en="image quality">
+        <option value="gut, diagnostisch ausreichend" data-en="good image quality" data-radlex-status="local">Gut</option>
+        <option value="ausreichend" data-en="sufficient image quality" data-radlex-status="local">Ausreichend</option>
+        <option value="eingeschränkt (Bewegungsartefakte)" data-en="limited image quality" data-radlex-status="local">Eingeschränkt</option>
       </select>
     </label>
   </div>
@@ -127,34 +127,34 @@
         <div class="rr-row">
           <label>
             <span class="rr-lbl"><span>Typ <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-field="typ" data-radlex="RID5154" data-en="urinary calculus" data-stein="1">
-              <option value="Konkrement" data-radlex="RID5154" data-en="calculus">Konkrement</option>
-              <option value="Konkrementkonglomerat" data-radlex="RID5155" data-en="calculus aggregate">Konkrementkonglomerat</option>
+            <select data-field="typ" data-radlex="RID4994" data-en="calculus" data-stein="1">
+              <option value="Konkrement" data-radlex="RID4994" data-en="calculus">Konkrement</option>
+              <option value="Konkrementkonglomerat" data-radlex="RID4994" data-en="calculus">Konkrementkonglomerat</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>Seite <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-field="seite" data-radlex="RID5156" data-en="laterality" data-stein="1">
-              <option value="re." data-radlex="RID5826" data-en="right">Re.</option>
-              <option value="li." data-radlex="RID5825" data-en="left">Li.</option>
-              <option value="bds." data-radlex="RID5827" data-en="bilateral">Bds.</option>
+            <select data-field="seite" data-en="laterality" data-radlex-status="local" data-stein="1">
+              <option value="re." data-radlex="RID5825" data-en="right">Re.</option>
+              <option value="li." data-radlex="RID5824" data-en="left">Li.</option>
+              <option value="bds." data-radlex="RID5771" data-en="bilateral">Bds.</option>
             </select>
           </label>
         </div>
         <div class="rr-row rr-row-full">
           <label>
             <span class="rr-lbl"><span>Lokalisation <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-field="lok" data-radlex="RID5160" data-en="urinary calculus location" data-stein="1">
+            <select data-field="lok" data-en="urinary calculus location" data-radlex-status="local" data-stein="1">
               <option value="Obere Kelchgruppe" data-radlex-status="local" data-en="upper calyceal group">Obere Kelchgruppe</option>
               <option value="Mittlere Kelchgruppe" data-radlex-status="local" data-en="middle calyceal group">Mittlere Kelchgruppe</option>
               <option value="Untere Kelchgruppe" data-radlex-status="local" data-en="lower calyceal group">Untere Kelchgruppe</option>
-              <option value="Nierenbecken" data-radlex-status="local" data-en="renal pelvis">Nierenbecken</option>
+              <option value="Nierenbecken" data-en="renal pelvis" data-radlex="RID228">Nierenbecken</option>
               <option value="Proximales Ureterdrittel" data-radlex-status="local" data-en="proximal ureter">Proximales Ureterdrittel</option>
               <option value="Mittleres Ureterdrittel, suprailiacal" data-radlex-status="local" data-en="mid ureter suprailiac">Mittleres Ureterdrittel, suprailiacal</option>
               <option value="Mittleres Ureterdrittel, infrailiacal" data-radlex-status="local" data-en="mid ureter infrailiac">Mittleres Ureterdrittel, infrailiacal</option>
               <option value="Distales Ureterdrittel" data-radlex-status="local" data-en="distal ureter">Distales Ureterdrittel</option>
-              <option value="Prävesikal" data-radlex-status="local" data-en="prevesical">Prävesikal</option>
-              <option value="Intramural" data-radlex-status="local" data-en="intramural">Intramural</option>
+              <option value="Prävesikal" data-en="prevesical space" data-radlex="RID441">Prävesikal</option>
+              <option value="Intramural" data-en="intramural" data-radlex="RID6247">Intramural</option>
               <option value="Vesikal (Harnblase)" data-radlex-status="local" data-en="vesical">Vesikal (Harnblase)</option>
             </select>
           </label>
@@ -162,40 +162,40 @@
         <div class="rr-row rr-row-three">
           <label>
             <span class="rr-lbl"><span>Max. Ø <span class="rr-unit">mm</span></span></span>
-            <input type="number" data-field="dia" data-radlex="RID5161" data-en="calculus diameter" data-stein="1" step="0.1" placeholder="–" />
+            <input type="number" data-field="dia" data-radlex="RID13432" data-en="diameter" data-stein="1" step="0.1" placeholder="–" />
           </label>
           <label>
             <span class="rr-lbl"><span>Volumen <span class="rr-unit">mm³</span></span></span>
-            <input type="number" data-field="vol" data-radlex="RID5162" data-en="calculus volume" data-stein="1" step="1" placeholder="–" />
+            <input type="number" data-field="vol" data-en="calculus volume" data-radlex-status="local" data-stein="1" step="1" placeholder="–" />
           </label>
           <label>
             <span class="rr-lbl"><span>Dichte <span class="rr-unit">HU</span></span></span>
-            <input type="number" data-field="hu" data-radlex="RID5163" data-en="calculus density HU" data-stein="1" step="1" placeholder="–" />
+            <input type="number" data-field="hu" data-radlex="RID39166" data-en="density" data-stein="1" step="1" placeholder="–" />
           </label>
         </div>
         <div class="rr-row">
           <label>
             <span class="rr-lbl"><span>Substanz (DECT) <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-field="subst" data-radlex="RID5164" data-en="calculus composition" data-stein="1">
+            <select data-field="subst" data-en="calculus composition" data-radlex-status="local" data-stein="1">
               <option value="">– nicht bestimmt –</option>
-              <option value="Calciumkonkrement" data-radlex="RID5165" data-en="calcium calculus">Calciumkonkrement</option>
-              <option value="Harnsäurekonkrement" data-radlex="RID5166" data-en="uric acid calculus">Harnsäurekonkrement</option>
-              <option value="Sonstige Zusammensetzung" data-radlex="RID5167" data-en="other calculus">Sonstige</option>
+              <option value="Calciumkonkrement" data-en="calcium calculus" data-radlex-status="local">Calciumkonkrement</option>
+              <option value="Harnsäurekonkrement" data-radlex="RID5002" data-en="uric acid stone">Harnsäurekonkrement</option>
+              <option value="Sonstige Zusammensetzung" data-en="other calculus" data-radlex-status="local">Sonstige</option>
             </select>
           </label>
           <label>
             <span class="rr-lbl"><span>Soft-tissue-rim-sign <span class="rr-rl-badge">RadLex</span></span></span>
-            <select data-field="rim" data-radlex="RID5168" data-en="soft tissue rim sign" data-stein="1">
+            <select data-field="rim" data-radlex="RID35558" data-en="soft-tissue rim sign" data-stein="1">
               <option value="">–</option>
-              <option value="positiv" data-radlex="RID5168-pos" data-en="positive soft tissue rim sign">Positiv</option>
-              <option value="negativ" data-radlex="RID5168-neg" data-en="negative soft tissue rim sign">Negativ</option>
+              <option value="positiv" data-en="positive soft tissue rim sign" data-radlex-status="local">Positiv</option>
+              <option value="negativ" data-en="negative soft tissue rim sign" data-radlex-status="local">Negativ</option>
             </select>
           </label>
         </div>
         <div class="rr-row">
           <label>
             <span class="rr-lbl"><span>Zentrale Dichteabsenkung</span></span>
-            <select data-field="zda" data-radlex="RID5169" data-en="central density reduction" data-stein="1">
+            <select data-field="zda" data-en="central density reduction" data-radlex-status="local" data-stein="1">
               <option value="">–</option>
               <option value="vorhanden" data-radlex-status="local" data-en="central density reduction present">Vorhanden</option>
               <option value="nicht vorhanden" data-radlex-status="local" data-en="central density reduction absent">Nicht vorhanden</option>
@@ -203,10 +203,10 @@
           </label>
           <label>
             <span class="rr-lbl"><span>Comet-tail-sign</span></span>
-            <select data-field="comet" data-radlex="RID5170" data-en="comet tail sign" data-stein="1">
+            <select data-field="comet" data-radlex="RID34407" data-en="comet tail sign" data-stein="1">
               <option value="">–</option>
-              <option value="positiv (→ Phlebolith)" data-radlex="RID5170-pos" data-en="positive comet tail sign">Positiv (→ Phlebolith)</option>
-              <option value="negativ" data-radlex="RID5170-neg" data-en="negative comet tail sign">Negativ</option>
+              <option value="positiv (→ Phlebolith)" data-en="positive comet tail sign" data-radlex-status="local">Positiv (→ Phlebolith)</option>
+              <option value="negativ" data-en="negative comet tail sign" data-radlex-status="local">Negativ</option>
             </select>
           </label>
         </div>
@@ -230,19 +230,19 @@
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>NBKS-Aufweitung li. <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="nbks_li" data-radlex="RID5153" data-en="hydronephrosis left">
+          <select id="nbks_li" data-radlex="RID34393" data-en="hydronephrosis">
             <option value="keine" data-radlex-status="local" data-en="no hydronephrosis">Keine</option>
-            <option value="Grad 1 (leicht)" data-radlex="RID5153-1" data-en="mild hydronephrosis">Grad 1 – leicht</option>
-            <option value="Grad 2 (mäßig)" data-radlex="RID5153-2" data-en="moderate hydronephrosis">Grad 2 – mäßig</option>
-            <option value="Grad 3 (deutlich)" data-radlex="RID5153-3" data-en="severe hydronephrosis">Grad 3 – deutlich</option>
-            <option value="Grad 4 (massiv)" data-radlex="RID5153-4" data-en="massive hydronephrosis">Grad 4 – massiv</option>
+            <option value="Grad 1 (leicht)" data-en="mild hydronephrosis" data-radlex-status="local">Grad 1 – leicht</option>
+            <option value="Grad 2 (mäßig)" data-en="moderate hydronephrosis" data-radlex-status="local">Grad 2 – mäßig</option>
+            <option value="Grad 3 (deutlich)" data-en="severe hydronephrosis" data-radlex-status="local">Grad 3 – deutlich</option>
+            <option value="Grad 4 (massiv)" data-en="massive hydronephrosis" data-radlex-status="local">Grad 4 – massiv</option>
           </select>
         </label>
       </div>
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>Ureter-Aufweitung li. <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="ureter_li" data-radlex="RID5157" data-en="ureteral dilatation left">
+          <select id="ureter_li" data-en="ureteral dilatation left" data-radlex-status="local">
             <option value="keine" data-radlex-status="local" data-en="no ureteral dilatation">Keine</option>
             <option value="bis proximales Drittel" data-radlex-status="local" data-en="ureteral dilatation to proximal third">Bis prox. Drittel</option>
             <option value="bis mittleres Drittel" data-radlex-status="local" data-en="ureteral dilatation to middle third">Bis mittl. Drittel</option>
@@ -253,15 +253,15 @@
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>Max. Ureterdurchmesser li. <span class="rr-unit">mm</span></span></span>
-          <input type="number" id="ureter_li_dia" data-radlex="RID5157-diam" data-en="ureteral diameter left" step="0.1" placeholder="–" />
+          <input type="number" id="ureter_li_dia" data-radlex="RID13432" data-en="diameter" step="0.1" placeholder="–" />
         </label>
       </div>
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>Perirenales Ödem li. <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="peririnal_li" data-radlex="RID5158" data-en="perirenal edema left">
+          <select id="peririnal_li" data-en="perirenal edema left" data-radlex-status="local">
             <option value="keines" data-radlex-status="local" data-en="no perirenal edema">Keines</option>
-            <option value="vorhanden" data-radlex="RID5158-pos" data-en="perirenal edema present">Vorhanden</option>
+            <option value="vorhanden" data-en="perirenal edema present" data-radlex-status="local">Vorhanden</option>
           </select>
         </label>
       </div>
@@ -271,19 +271,19 @@
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>NBKS-Aufweitung re. <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="nbks_re" data-radlex="RID5153" data-en="hydronephrosis right">
+          <select id="nbks_re" data-radlex="RID34393" data-en="hydronephrosis">
             <option value="keine" data-radlex-status="local" data-en="no hydronephrosis">Keine</option>
-            <option value="Grad 1 (leicht)" data-radlex="RID5153-1" data-en="mild hydronephrosis">Grad 1 – leicht</option>
-            <option value="Grad 2 (mäßig)" data-radlex="RID5153-2" data-en="moderate hydronephrosis">Grad 2 – mäßig</option>
-            <option value="Grad 3 (deutlich)" data-radlex="RID5153-3" data-en="severe hydronephrosis">Grad 3 – deutlich</option>
-            <option value="Grad 4 (massiv)" data-radlex="RID5153-4" data-en="massive hydronephrosis">Grad 4 – massiv</option>
+            <option value="Grad 1 (leicht)" data-en="mild hydronephrosis" data-radlex-status="local">Grad 1 – leicht</option>
+            <option value="Grad 2 (mäßig)" data-en="moderate hydronephrosis" data-radlex-status="local">Grad 2 – mäßig</option>
+            <option value="Grad 3 (deutlich)" data-en="severe hydronephrosis" data-radlex-status="local">Grad 3 – deutlich</option>
+            <option value="Grad 4 (massiv)" data-en="massive hydronephrosis" data-radlex-status="local">Grad 4 – massiv</option>
           </select>
         </label>
       </div>
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>Ureter-Aufweitung re. <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="ureter_re" data-radlex="RID5157" data-en="ureteral dilatation right">
+          <select id="ureter_re" data-en="ureteral dilatation right" data-radlex-status="local">
             <option value="keine" data-radlex-status="local" data-en="no ureteral dilatation">Keine</option>
             <option value="bis proximales Drittel" data-radlex-status="local" data-en="ureteral dilatation to proximal third">Bis prox. Drittel</option>
             <option value="bis mittleres Drittel" data-radlex-status="local" data-en="ureteral dilatation to middle third">Bis mittl. Drittel</option>
@@ -294,15 +294,15 @@
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>Max. Ureterdurchmesser re. <span class="rr-unit">mm</span></span></span>
-          <input type="number" id="ureter_re_dia" data-radlex="RID5157-diam" data-en="ureteral diameter right" step="0.1" placeholder="–" />
+          <input type="number" id="ureter_re_dia" data-radlex="RID13432" data-en="diameter" step="0.1" placeholder="–" />
         </label>
       </div>
       <div class="rr-row rr-row-full">
         <label>
           <span class="rr-lbl"><span>Perirenales Ödem re. <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="peririnal_re" data-radlex="RID5158" data-en="perirenal edema right">
+          <select id="peririnal_re" data-en="perirenal edema right" data-radlex-status="local">
             <option value="keines" data-radlex-status="local" data-en="no perirenal edema">Keines</option>
-            <option value="vorhanden" data-radlex="RID5158-pos" data-en="perirenal edema present">Vorhanden</option>
+            <option value="vorhanden" data-en="perirenal edema present" data-radlex-status="local">Vorhanden</option>
           </select>
         </label>
       </div>
@@ -316,16 +316,16 @@
       <div class="rr-row">
         <label>
           <span class="rr-lbl"><span>Bauchorgane <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="bauchorgane" data-radlex="RID1240" data-en="abdominal organs">
-            <option value="unauffällig" data-radlex="RID1240-norm" data-en="abdominal organs unremarkable">Unauffällig</option>
+          <select id="bauchorgane" data-radlex="RID35810" data-en="set of solid abdominal organs">
+            <option value="unauffällig" data-en="abdominal organs unremarkable" data-radlex-status="local">Unauffällig</option>
             <option value="mit Befund – siehe Freitext" data-radlex-status="local" data-en="abdominal organs with finding">Mit Befund – Freitext</option>
           </select>
         </label>
         <label>
           <span class="rr-lbl"><span>Gefäße <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="gefaesse" data-radlex="RID480" data-en="vessels">
-            <option value="unauffällig" data-radlex="RID480-norm" data-en="vessels unremarkable">Unauffällig</option>
-            <option value="Aortensklerose" data-radlex="RID5180" data-en="aortic sclerosis">Aortensklerose</option>
+          <select id="gefaesse" data-radlex="RID49921" data-en="set of abdominal vessels">
+            <option value="unauffällig" data-en="vessels unremarkable" data-radlex-status="local">Unauffällig</option>
+            <option value="Aortensklerose" data-radlex="RID5227" data-en="sclerosis">Aortensklerose</option>
             <option value="mit sonstigem Befund" data-radlex-status="local" data-en="vessels with other finding">Mit sonstigem Befund</option>
           </select>
         </label>
@@ -333,26 +333,26 @@
       <div class="rr-row">
         <label>
           <span class="rr-lbl"><span>Lymphknoten <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="lymph" data-radlex="RID1448" data-en="lymph nodes">
-            <option value="unauffällig" data-radlex="RID1448-norm" data-en="lymph nodes unremarkable">Unauffällig</option>
-            <option value="vergrößert" data-radlex="RID5190" data-en="enlarged lymph nodes">Vergrößert</option>
+          <select id="lymph" data-en="lymph nodes" data-radlex-status="local">
+            <option value="unauffällig" data-en="lymph nodes unremarkable" data-radlex-status="local">Unauffällig</option>
+            <option value="vergrößert" data-en="enlarged lymph nodes" data-radlex-status="local">Vergrößert</option>
           </select>
         </label>
         <label>
           <span class="rr-lbl"><span>Skelett <span class="rr-rl-badge">RadLex</span></span></span>
-          <select id="skelett" data-radlex="RID13573" data-en="skeleton">
-            <option value="unauffällig" data-radlex="RID13573-norm" data-en="skeleton unremarkable">Unauffällig</option>
-            <option value="degenerativ" data-radlex="RID5222" data-en="degenerative changes">Degenerativ</option>
-            <option value="ossäre Läsion" data-radlex="RID5223" data-en="osseous lesion">Ossäre Läsion</option>
+          <select id="skelett" data-radlex="RID39064" data-en="skeleton">
+            <option value="unauffällig" data-en="skeleton unremarkable" data-radlex-status="local">Unauffällig</option>
+            <option value="degenerativ" data-radlex="RID5043" data-en="degenerative disorder">Degenerativ</option>
+            <option value="ossäre Läsion" data-en="osseous lesion" data-radlex-status="local">Ossäre Läsion</option>
           </select>
         </label>
       </div>
       <div class="rr-row rr-row-full">
         <span class="rr-lbl"><span>Basaler Thorax <span class="rr-rl-badge">RadLex</span></span></span>
         <div class="rr-checkgrid" id="bth_wrap">
-          <label class="rr-check"><input type="checkbox" id="bth_norm" data-radlex="RID1327-norm" data-en="basal thorax unremarkable" /> Unauffällig</label>
-          <label class="rr-check"><input type="checkbox" id="bth_erguss" data-radlex="RID4872" data-en="pleural effusion" /> Pleuraerguss</label>
-          <label class="rr-check"><input type="checkbox" id="bth_atel" data-radlex="RID28493" data-en="basal atelectasis" /> Basale Atelektase</label>
+          <label class="rr-check"><input type="checkbox" id="bth_norm" data-en="basal thorax unremarkable" data-radlex-status="local" /> Unauffällig</label>
+          <label class="rr-check"><input type="checkbox" id="bth_erguss" data-radlex="RID34539" data-en="pleural effusion" /> Pleuraerguss</label>
+          <label class="rr-check"><input type="checkbox" id="bth_atel" data-radlex="RID28493" data-en="atelectasis" /> Basale Atelektase</label>
           <label class="rr-check"><input type="checkbox" id="bth_sonst" data-radlex-status="local" data-en="basal thorax other finding" /> Sonstiger Befund</label>
         </div>
       </div>

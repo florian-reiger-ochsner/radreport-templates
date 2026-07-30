@@ -1,5 +1,20 @@
 # Changelog – CT Urolithiasis
 
+## [1.2] – 2026-07-21
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Gesamte RadLex-Kodierung neu belegt** (Rebuild 5/8). Fast alle bisherigen RIDs trafen
+  Fremdkonzepte (RID5154 „calculus" = Huntington chorea, RID13882 „image quality" = right
+  parietal lobe, RID10361 = fluoroscopy) und die Suffix-Konvention (RID5153-1 usw.) wurde aufgelöst.
+- **24 Felder registry-verifiziert:** calculus RID4994, uric acid stone RID5002, hydronephrosis
+  RID34393, comet tail sign RID34407, soft-tissue rim sign RID35558, dual-energy CT RID38660,
+  renal pelvis RID228, prevesical space RID441, image quality RID10, diameter RID13432,
+  slice thickness RID28669, laterality right/left/bilateral RID5825/5824/5771 u. a.
+- **Muster Feld=Konzept, Optionswert=lokal:** z. B. Hydronephrose-Feld → RID34393, Grade (mild/
+  moderat/schwer/massiv) → local; Bildqualität-Feld → RID10, good/limited/sufficient → local.
+- **57 Werte/Grade/Anker auf `local`** (Ureter-Lokalisationen, Kelchgruppen, Normalbefunde,
+  Volumen/Dichte-Messungen ohne eigenes Konzept).
+- `RADLEX-MAPPING.md` neu generiert. Feld-`id`s unverändert.
+
 ## [1.1] – 2026-07-06
 ### Changed – Migration B → A-Struktur
 - `template.html` ist jetzt kanonisch nacktes MRRT: kein `<link rel="stylesheet">`, kein `<style>`, kein `<script>`. Nur das kodierte Eingabeformular mit `rr-*`-Struktur-Hooks.

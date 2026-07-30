@@ -1,0 +1,289 @@
+{
+  "1 mm slice thickness": {
+    "local": true
+  },
+  "3 mm slice thickness": {
+    "local": true
+  },
+  "5 mm slice thickness": {
+    "local": true
+  },
+  "abdominal organs unremarkable": {
+    "local": true
+  },
+  "abdominal organs with finding": {
+    "local": true
+  },
+  "aortic sclerosis": {
+    "rid": "RID5227",
+    "en": "sclerosis"
+  },
+  "basal atelectasis": {
+    "rid": "RID28493",
+    "en": "atelectasis"
+  },
+  "basal thorax other finding": {
+    "local": true
+  },
+  "basal thorax unremarkable": {
+    "local": true
+  },
+  "bilateral": {
+    "rid": "RID5771",
+    "en": "bilateral"
+  },
+  "calcium calculus": {
+    "local": true
+  },
+  "calculus": {
+    "rid": "RID4994",
+    "en": "calculus"
+  },
+  "calculus aggregate": {
+    "rid": "RID4994",
+    "en": "calculus"
+  },
+  "calculus density HU": {
+    "rid": "RID39166",
+    "en": "density"
+  },
+  "calculus diameter": {
+    "rid": "RID13432",
+    "en": "diameter"
+  },
+  "calculus volume": {
+    "local": true
+  },
+  "central density reduction absent": {
+    "local": true
+  },
+  "central density reduction present": {
+    "local": true
+  },
+  "degenerative changes": {
+    "rid": "RID5043",
+    "en": "degenerative disorder"
+  },
+  "distal ureter": {
+    "local": true
+  },
+  "dual energy CT": {
+    "rid": "RID38660",
+    "en": "dual-energy CT"
+  },
+  "enlarged lymph nodes": {
+    "local": true
+  },
+  "good image quality": {
+    "local": true
+  },
+  "intramural": {
+    "rid": "RID6247",
+    "en": "intramural"
+  },
+  "left": {
+    "rid": "RID5824",
+    "en": "left"
+  },
+  "limited image quality": {
+    "local": true
+  },
+  "low dose NECT": {
+    "rid": "RID35737",
+    "en": "low dose"
+  },
+  "lower calyceal group": {
+    "local": true
+  },
+  "lymph nodes unremarkable": {
+    "local": true
+  },
+  "massive hydronephrosis": {
+    "local": true
+  },
+  "mid ureter infrailiac": {
+    "local": true
+  },
+  "mid ureter suprailiac": {
+    "local": true
+  },
+  "middle calyceal group": {
+    "local": true
+  },
+  "mild hydronephrosis": {
+    "local": true
+  },
+  "moderate hydronephrosis": {
+    "local": true
+  },
+  "negative comet tail sign": {
+    "local": true
+  },
+  "negative soft tissue rim sign": {
+    "local": true
+  },
+  "no hydronephrosis": {
+    "local": true
+  },
+  "no perirenal edema": {
+    "local": true
+  },
+  "no ureteral dilatation": {
+    "local": true
+  },
+  "osseous lesion": {
+    "local": true
+  },
+  "other calculus": {
+    "local": true
+  },
+  "perirenal edema present": {
+    "local": true
+  },
+  "pleural effusion": {
+    "rid": "RID34539",
+    "en": "pleural effusion"
+  },
+  "positive comet tail sign": {
+    "local": true
+  },
+  "positive soft tissue rim sign": {
+    "local": true
+  },
+  "prevesical": {
+    "rid": "RID441",
+    "en": "prevesical space"
+  },
+  "prior study available": {
+    "local": true
+  },
+  "proximal ureter": {
+    "local": true
+  },
+  "renal pelvis": {
+    "rid": "RID228",
+    "en": "renal pelvis"
+  },
+  "right": {
+    "rid": "RID5825",
+    "en": "right"
+  },
+  "severe hydronephrosis": {
+    "local": true
+  },
+  "skeleton unremarkable": {
+    "local": true
+  },
+  "standard dose NECT": {
+    "local": true
+  },
+  "sufficient image quality": {
+    "local": true
+  },
+  "upper calyceal group": {
+    "local": true
+  },
+  "ureteral diameter left": {
+    "rid": "RID13432",
+    "en": "diameter"
+  },
+  "ureteral diameter right": {
+    "rid": "RID13432",
+    "en": "diameter"
+  },
+  "ureteral dilatation to distal third": {
+    "local": true
+  },
+  "ureteral dilatation to middle third": {
+    "local": true
+  },
+  "ureteral dilatation to proximal third": {
+    "local": true
+  },
+  "uric acid calculus": {
+    "rid": "RID5002",
+    "en": "uric acid stone"
+  },
+  "vesical": {
+    "local": true
+  },
+  "vessels unremarkable": {
+    "local": true
+  },
+  "vessels with other finding": {
+    "local": true
+  },
+  "CT protocol urolithiasis": {
+    "local": true
+  },
+  "slice thickness": {
+    "rid": "RID28669",
+    "en": "slice thickness"
+  },
+  "image quality": {
+    "rid": "RID10",
+    "en": "image quality"
+  },
+  "prior comparison study": {
+    "local": true
+  },
+  "urinary calculus": {
+    "rid": "RID4994",
+    "en": "calculus"
+  },
+  "laterality": {
+    "local": true
+  },
+  "urinary calculus location": {
+    "local": true
+  },
+  "calculus composition": {
+    "local": true
+  },
+  "soft tissue rim sign": {
+    "rid": "RID35558",
+    "en": "soft-tissue rim sign"
+  },
+  "central density reduction": {
+    "local": true
+  },
+  "comet tail sign": {
+    "rid": "RID34407",
+    "en": "comet tail sign"
+  },
+  "hydronephrosis left": {
+    "rid": "RID34393",
+    "en": "hydronephrosis"
+  },
+  "hydronephrosis right": {
+    "rid": "RID34393",
+    "en": "hydronephrosis"
+  },
+  "ureteral dilatation left": {
+    "local": true
+  },
+  "ureteral dilatation right": {
+    "local": true
+  },
+  "perirenal edema left": {
+    "local": true
+  },
+  "perirenal edema right": {
+    "local": true
+  },
+  "abdominal organs": {
+    "rid": "RID35810",
+    "en": "set of solid abdominal organs"
+  },
+  "vessels": {
+    "rid": "RID49921",
+    "en": "set of abdominal vessels"
+  },
+  "lymph nodes": {
+    "local": true
+  },
+  "skeleton": {
+    "rid": "RID39064",
+    "en": "skeleton"
+  }
+}
