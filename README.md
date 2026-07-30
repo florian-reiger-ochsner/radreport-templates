@@ -54,7 +54,7 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 │   │   │   └── knie-posttep/       # Röntgen Knie post-KTEP v1.1.1
 │   │   └── Thorax/
 │   │       ├── thorax-standard/    # Röntgen Thorax (p.a.) v2.3 (RadLex ✅ verifiziert)
-│   │       └── thorax-liegend/     # Röntgen Thorax liegend (ICU/portable) v1.0
+│   │       └── thorax-liegend/     # Röntgen Thorax liegend (ICU/portable) v1.1 (RadLex ✅ verifiziert)
 │   └── CT/
 │       ├── abdomen-becken/         # CT Abdomen + Becken v2.0
 │       ├── urolithiasis/           # CT Urolithiasis v1.1 (DRG CC BY 4.0)
@@ -93,7 +93,7 @@ Die Spalte **RadLex** zeigt den Verifizierungsstand der Kodierung:
 | Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.6 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-praetep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
 | Röntgen Thorax (p.a.) | HJK-MRRT-ROE-THORAX | v2.3 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-standard/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/) |
 | Röntgen Knie post-KTEP | HJK-MRRT-KNIE-POSTTEP | v1.1.1 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-posttep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/) |
-| Röntgen Thorax liegend (ICU/portable) | HJK-MRRT-ROE-THORAX-LIEGEND | v1.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-liegend/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax-liegend/) |
+| Röntgen Thorax liegend (ICU/portable) | HJK-MRRT-ROE-THORAX-LIEGEND | v1.1 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-liegend/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax-liegend/) |
 | CT Abdomen + Becken | HJK-MRRT-CT-ABDBECKEN | v2.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/abdomen-becken/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-abdomen/) |
 | CT Urolithiasis | HJK-MRRT-CT-UROLITHIASIS | v1.1 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/urolithiasis/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/) |
 | CT Lungenarterien (CTPA) | HJK-MRRT-CT-LUNGENEMBOLIE | v1.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lungenembolie/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/) |
@@ -155,10 +155,10 @@ Wo RadLex kein exaktes Konzept führt, wird bewusst der klinisch tragfähige
 Oberbegriff kodiert (Lokalisation/Spezifik über den Feldnamen) oder das Feld
 `local` belassen — statt einen unpassenden Code zu erzwingen.
 
-**Status:** `knie-praetep` und `thorax-standard` sind vollständig registry-
-verifiziert (✅). Für die übrigen Templates läuft die Verifikation/Neubelegung
-der Kodierung (🔧); die Vorlagen selbst sind nutzbar, die RadLex-RIDs dort aber
-noch nicht registry-bestätigt.
+**Status:** `knie-praetep`, `thorax-standard` und `thorax-liegend` sind vollständig
+registry-verifiziert (✅). Für die übrigen Templates läuft die Verifikation/
+Neubelegung der Kodierung (🔧); die Vorlagen selbst sind nutzbar, die RadLex-RIDs
+dort aber noch nicht registry-bestätigt.
 
 ---
 
