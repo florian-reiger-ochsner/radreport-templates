@@ -59,8 +59,8 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 │       ├── abdomen-becken/         # CT Abdomen + Becken v2.0
 │       ├── urolithiasis/           # CT Urolithiasis v1.1 (DRG CC BY 4.0)
 │       ├── lungenembolie/          # CT Lungenarterien/CTPA v1.0 (DRG CC BY 4.0)
-│       ├── lirads-leber/           # CT Leber LI-RADS v1.3 (A-Struktur)
-│       ├── ltx-hcc-evaluation/     # CT Leber LTx-Evaluation HCC v1.0 (DRG CC BY 4.0)
+│       ├── lirads-leber/           # CT Leber LI-RADS v1.4 (RadLex ✅ verifiziert)
+│       ├── ltx-hcc-evaluation/     # CT Leber LTx-Evaluation HCC v1.1 (RadLex ✅, DRG CC BY 4.0)
 │       └── schaedel-nativ/         # CT Schädel nativ v1.2
 ├── demo/                           # GitHub Pages Live-Demos
 │   ├── knie-prae-tep/
@@ -97,8 +97,8 @@ Die Spalte **RadLex** zeigt den Verifizierungsstand der Kodierung:
 | CT Abdomen + Becken | HJK-MRRT-CT-ABDBECKEN | v2.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/abdomen-becken/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-abdomen/) |
 | CT Urolithiasis | HJK-MRRT-CT-UROLITHIASIS | v1.1 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/urolithiasis/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-urolithiasis/) |
 | CT Lungenarterien (CTPA) | HJK-MRRT-CT-LUNGENEMBOLIE | v1.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lungenembolie/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lungenembolie/) |
-| CT Leber LI-RADS | HJK-MRRT-CT-LEBER-LIRADS | v1.3 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lirads-leber/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/) |
-| CT Leber LTx-Evaluation HCC | HJK-MRRT-LTX-HCC-EVAL | v1.0 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/ltx-hcc-evaluation/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-ltx-hcc-evaluation/) |
+| CT Leber LI-RADS | HJK-MRRT-CT-LEBER-LIRADS | v1.4 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/lirads-leber/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-lirads-leber/) |
+| CT Leber LTx-Evaluation HCC | HJK-MRRT-LTX-HCC-EVAL | v1.1 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/ltx-hcc-evaluation/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-ltx-hcc-evaluation/) |
 | CT Schädel nativ | HJK-MRRT-CT-SCHAEDEL-NATIV | v1.2 | 🔧 | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/CT/schaedel-nativ/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/ct-schaedel-nativ/) |
 
 ---
@@ -155,10 +155,10 @@ Wo RadLex kein exaktes Konzept führt, wird bewusst der klinisch tragfähige
 Oberbegriff kodiert (Lokalisation/Spezifik über den Feldnamen) oder das Feld
 `local` belassen — statt einen unpassenden Code zu erzwingen.
 
-**Status:** `knie-praetep`, `thorax-standard` und `thorax-liegend` sind vollständig
-registry-verifiziert (✅). Für die übrigen Templates läuft die Verifikation/
-Neubelegung der Kodierung (🔧); die Vorlagen selbst sind nutzbar, die RadLex-RIDs
-dort aber noch nicht registry-bestätigt.
+**Status:** `knie-praetep`, `thorax-standard`, `thorax-liegend`, `lirads-leber` und
+`ltx-hcc-evaluation` sind vollständig registry-verifiziert (✅). Für die übrigen
+Templates läuft die Verifikation/Neubelegung der Kodierung (🔧); die Vorlagen selbst
+sind nutzbar, die RadLex-RIDs dort aber noch nicht registry-bestätigt.
 
 ---
 
