@@ -1,0 +1,7 @@
+{
+  "stable": {"rid":"RID39268","en":"unchanged"},
+  "progression of disease": {"rid":"RID29041","en":"disease progression"},
+  "regression of disease": {"rid":"RID39105","en":"improved"},
+  "lesion size": {"rid":"RID13432","en":"diameter"},
+  "hepatic segment": {"rid":"RID29237","en":"segment of liver"}
+}

@@ -1,5 +1,14 @@
 # Changelog: CT Leber LI-RADS v2018
 
+## v1.4 – 2026-07-21
+
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+
+- Verlaufs-Codes: stable RID39157→**RID39268** (unchanged), progression RID36043→**RID29041** (disease progression), regression RID36044→**RID39105** (improved) — die alten RIDs trafen Fremdkonzepte (RID39157 = portion of gaseous body substance).
+- `lesion size` RID13432: data-en an den echten Term **diameter** angeglichen.
+- Lebersegment RID29237: data-en "hepatic segment" → **"segment of liver"** (Registry-Term).
+- Übrige RadLex-Codes bereits Registry-bestätigt. Feld-ids unverändert.
+
 ## v1.3 – 2026-07-06
 
 ### Umstellung auf A-Struktur (lean kanonisch + abgeleitete Demo)

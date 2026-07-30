@@ -15,11 +15,11 @@ Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
 | Feld | RadLex-Term | RID | LOINC | Status |
 |---|---|---|---|---|
-| Läsionsgröße / Durchmesser | lesion size | RID13432 | 21889-1 | ✅ |
-| Lokalisation / Segment | hepatic segment | RID29237 | – | ✅ |
-| Verlauf – stabil | stable | RID39157 | – | ✅ |
-| Verlauf – Progredienz | progression of disease | RID36043 | – | ✅ |
-| Verlauf – Regredienz | regression of disease | RID36044 | – | ✅ |
+| Läsionsgröße / Durchmesser | diameter | RID13432 | 21889-1 | ✅ |
+| Lokalisation / Segment | segment of liver | RID29237 | – | ✅ |
+| Verlauf – stabil | unchanged | RID39268 | – | ✅ |
+| Verlauf – Progredienz | disease progression | RID29041 | – | ✅ |
+| Verlauf – Regredienz | improved | RID39105 | – | ✅ |
 
 ## Local – Kandidaten ausstehend zur Verifikation (🔲)
 

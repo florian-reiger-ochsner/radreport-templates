@@ -11,7 +11,7 @@ siehe CLAUDE.md §2).
 
 | Feld | RadLex-Term | RID | LOINC | Status |
 |---|---|---|---|---|
-| Knoten-Durchmesser (1–3) | lesion size | RID13432 | 21889-1 | ✅ |
+| Knoten-Durchmesser (1–3) | diameter | RID13432 | 21889-1 | ✅ |
 | Anzahl HCC-Knoten | number of tumor nodules | – | – | 🔲 local |
 
 ## Tumorlast / Mailand-Eingänge
@@ -40,9 +40,9 @@ siehe CLAUDE.md §2).
 
 | Wert | RadLex-Term | RID | Status |
 |---|---|---|---|
-| weitgehend stabil | stable | RID39157 | ✅ |
-| Befundprogredienz | progression of disease | RID36043 | ✅ |
-| Befundregredienz | regression of disease | RID36044 | ✅ |
+| weitgehend stabil | unchanged | RID39268 | ✅ |
+| Befundprogredienz | disease progression | RID29041 | ✅ |
+| Befundregredienz | improved | RID39105 | ✅ |
 
 ## FHIR-Kodierung
 

@@ -4,7 +4,7 @@
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8" />
-<title>CT Leber – LI-RADS v2018 – Strukturierte Befundvorlage (v1.3)</title>
+<title>CT Leber – LI-RADS v2018 – Strukturierte Befundvorlage (v1.4)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
 <meta name="dcterms.title" content="CT Leber bei HCC-Risikopatient – LI-RADS v2018" />
@@ -12,7 +12,7 @@
 <meta name="dcterms.language" content="de" />
 <meta name="dcterms.creator" content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
 <meta name="dcterms.date" content="2026-07-06" />
-<meta name="dcterms.identifier" content="HJK-MRRT-CT-LEBER-LIRADS-v1.3" />
+<meta name="dcterms.identifier" content="HJK-MRRT-CT-LEBER-LIRADS-v1.4" />
 <meta name="dcterms.rights" content="Creative Commons Attribution 4.0 International (CC BY 4.0)." />
 <meta name="dcterms.license" content="https://creativecommons.org/licenses/by/4.0/" />
 <meta name="rrt:specialty" content="Radiology" />
@@ -46,7 +46,7 @@
 <section class="rr-input-pane">
 
   <h1 class="rr-doc-title">CT Leber – LI-RADS v2018</h1>
-  <div class="rr-doc-sub">MRRT-Template · HCC-Risikopatient · 4-Schritte-Algorithmus (Schima/Kopf/Eisenhuber 2023) · v1.3 · RadLex-codiert · HJK Wien</div>
+  <div class="rr-doc-sub">MRRT-Template · HCC-Risikopatient · 4-Schritte-Algorithmus (Schima/Kopf/Eisenhuber 2023) · v1.4 · RadLex-codiert · HJK Wien</div>
   <div class="rr-title-rule"></div>
 
   <!-- ===================== HCC-RISIKOPOPULATION ===================== -->
@@ -204,7 +204,7 @@
     <div class="rr-row">
       <label>
         <span class="rr-lbl"><span>Lokalisation (Segment) <span class="rr-rl-badge">RID29237</span></span></span>
-        <select data-field="segment" data-radlex="RID29237" data-en="hepatic segment" data-lesion="1">
+        <select data-field="segment" data-radlex="RID29237" data-en="segment of liver" data-lesion="1">
           <option value="" data-radlex-status="needs-mapping">– wählen –</option>
           <option value="I" data-radlex-status="local" data-en="Couinaud segment I">Segment I</option>
           <option value="II" data-radlex-status="local" data-en="Couinaud segment II">Segment II</option>
@@ -220,7 +220,7 @@
       </label>
       <label>
         <span class="rr-lbl"><span>Größe <span class="rr-rl-badge">RID13432 · LOINC 21889-1</span></span></span>
-        <input type="number" data-field="size" data-radlex="RID13432" data-loinc="21889-1" data-en="lesion size" data-lesion="1" min="1" step="1" placeholder="mm" />
+        <input type="number" data-field="size" data-radlex="RID13432" data-loinc="21889-1" data-en="diameter" data-lesion="1" min="1" step="1" placeholder="mm" />
         <div class="rr-field-note">Größter Durchmesser, mm</div>
       </label>
     </div>
@@ -388,9 +388,9 @@
           <span class="rr-lbl"><span>Verlauf</span></span>
           <select id="vu_trend">
             <option value="" data-radlex-status="needs-mapping">–</option>
-            <option value="stabil" data-radlex="RID39157" data-en="stable">weitgehend stabil</option>
-            <option value="progredient" data-radlex="RID36043" data-en="progression of disease">Befundprogredienz</option>
-            <option value="regredient" data-radlex="RID36044" data-en="regression of disease">Befundregredienz</option>
+            <option value="stabil" data-radlex="RID39268" data-en="unchanged">weitgehend stabil</option>
+            <option value="progredient" data-radlex="RID29041" data-en="disease progression">Befundprogredienz</option>
+            <option value="regredient" data-radlex="RID39105" data-en="improved">Befundregredienz</option>
           </select>
         </label>
       </div>

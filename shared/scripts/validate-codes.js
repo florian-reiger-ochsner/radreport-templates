@@ -164,6 +164,13 @@ function parseTemplate(html) {
     const a = parseAttrs(m[1]);
     entries.push(mkEntry('input', a, ''));
   }
+  // Region-/Sektions-Anker: Codes sitzen auf <select>/<div>/<fieldset> selbst.
+  // Nur Tags mit data-radlex ODER data-en erfassen (nicht jedes <div>).
+  const anchorRe = /<(select|div|fieldset)\b([^>]*)>/g;
+  while ((m = anchorRe.exec(body)) !== null) {
+    if (!/\sdata-(radlex|en)=/.test(m[2])) continue;
+    entries.push(mkEntry(m[1], parseAttrs(m[2]), ''));
+  }
   return entries;
 }
 
