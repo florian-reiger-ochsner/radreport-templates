@@ -1,5 +1,25 @@
 # Changelog – CT Lungenarterien (CTPA)
 
+## [1.1] – 2026-07-31
+### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
+- **Gesamte RadLex-Kodierung neu belegt.** Frühere RIDs waren großteils geraten und
+  trafen Fremdkonzepte – u. a. `RID5352` („pneumothorax") für die Lungenembolie selbst
+  sowie der erfundene Bereich `RID49850`/`RID49851` (KM-Menge/Bolus).
+- **20 Felder registry-verifiziert**: pulmonary embolism RID4834, pulmonary infarction
+  RID34889, Hampton hump sign RID35261, consolidation RID43255, ground-glass opacity
+  RID28531, emphysema RID4799, pleural effusion RID34539, pericardial effusion RID38588,
+  mediastinal lymph node RID28891, lymphadenopathy RID3798, sclerosis RID5227, osteolysis
+  RID5382, airway RID1245, thickening RID28509, compression RID4741, pleura RID1362,
+  upper abdomen RID29990; Rechtsherz-Struktur als right ventricle RID1389, left ventricle
+  RID1392, pulmonary arterial trunk RID35839 (LOINC-Messcodes bleiben erhalten).
+- **Bewusst lokal**: LE-Lokalisations-Sublagen (zentral/lobär/segmental/subsegmental),
+  Rechtsherzbelastung qualitativ, IVS-Shift, KM-Rückstau/Kontrastreflux, Bolus-Qualität,
+  KM-Menge, degenerative Veränderungen, alle Normal-/Negations-Optionen – RadLex führt
+  hierfür kein tragfähiges Konzept (`data-radlex-status="local"`).
+- Suffix-Konvention (`RID…-neg`/`-cen` etc.) vollständig aufgelöst. `RADLEX-MAPPING.md`
+  aus dem finalen Template regeneriert; xmllint, Offline-Lint und `--resolve` fehlerfrei.
+- Round-trip-stabil: Struktur, `rr-*`-Hooks und Andock-Anker (`anchor_rvlv`) unverändert.
+
 ## [1.0.1] – 2026-07-06 — A-Struktur-Migration
 ### Changed
 - Umstellung von B-Struktur (Inline-CSS-Build) auf A-Struktur: kanonisches

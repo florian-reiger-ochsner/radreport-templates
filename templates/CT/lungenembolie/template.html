@@ -4,16 +4,16 @@
       xmlns:rrt="http://radreport.org/MRRT/1.0">
 <head>
 <meta charset="UTF-8" />
-<title>CT Lungenarterien (CTPA) – Lungenembolie – Strukturierte Befundvorlage (v1.0)</title>
+<title>CT Lungenarterien (CTPA) – Lungenembolie – Strukturierte Befundvorlage (v1.1)</title>
 
 <!-- ===================== MRRT METADATA ===================== -->
 <meta name="dcterms.title"       content="CT Lungenarterien (CTPA) – Lungenembolie" />
 <meta name="dcterms.description" content="Strukturierte Befundvorlage CT Pulmonalisangiographie (CTPA). Basierend auf DRG-Template 041807.2.1806120000 (CC BY 4.0). RadLex-/LOINC-kodiert, FHIR-R4-Export. RV/LV-Ratio-Kalkulator mit ESC-2019-Risikostratifizierung wird nachgelagert in der Demo berechnet (nicht im kanonischen Template)." />
 <meta name="dcterms.language"    content="de" />
-<meta name="dcterms.identifier"  content="HJK-MRRT-CT-LUNGENEMBOLIE-v1.0" />
+<meta name="dcterms.identifier"  content="HJK-MRRT-CT-LUNGENEMBOLIE-v1.1" />
 <meta name="dcterms.source"      content="DRG AK Befundung AG Thoraxdiagnostik, Template 041807.2.1806120000, CC BY 4.0, https://github.com/DRGagit/ak_befundung" />
 <meta name="dcterms.creator"     content="F. Reiger-Ochsner, Herz Jesu Krankenhaus Wien" />
-<meta name="dcterms.date"        content="2026-07-06" />
+<meta name="dcterms.date"        content="2026-07-31" />
 <meta name="dcterms.rights"      content="Basierend auf DRG-Template CC BY 4.0. Adaption und Erweiterung: HJK Wien." />
 <meta name="dcterms.license"     content="https://creativecommons.org/licenses/by/4.0/" />
 <meta name="rrt:specialty"       content="Radiology" />
@@ -41,7 +41,7 @@
 <section class="rr-input-pane">
 
   <h1 class="rr-doc-title">CT Lungenarterien</h1>
-  <div class="rr-doc-sub">CTPA · Lungenembolie · RadLex-kodiert · v1.0 · HJK Wien</div>
+  <div class="rr-doc-sub">CTPA · Lungenembolie · RadLex-kodiert · v1.1 · HJK Wien</div>
   <div class="rr-title-rule"></div>
 
   <!-- ===================== TECHNIK &amp; KLINISCHE ANGABEN ===================== -->
@@ -53,14 +53,14 @@
     <label>
       <span class="rr-lbl"><span>KM-Menge (ml)</span></span>
       <input type="number" id="km_menge" placeholder="z. B. 70"
-        data-radlex="RID49850" data-en="contrast medium volume" />
+        data-en="contrast medium volume" data-radlex-status="local" />
     </label>
     <label>
       <span class="rr-lbl"><span>KM-Fluss / Bolus-Qualität <span class="rr-rl-badge">RID49851</span></span></span>
-      <select id="bolus" data-radlex="RID49851" data-en="bolus quality">
-        <option value="adäquate Kontrastierung der Lungenarterien" data-radlex="RID49851-ok" data-en="adequate contrast">Adäquat</option>
-        <option value="eingeschränkte Kontrastierung der Lungenarterien (suboptimaler Bolus)" data-radlex="RID49851-sub" data-en="suboptimal bolus">Suboptimal</option>
-        <option value="diagnostisch unzureichende Kontrastierung" data-radlex="RID49851-insuf" data-en="inadequate contrast">Unzureichend</option>
+      <select id="bolus" data-en="bolus quality" data-radlex-status="local">
+        <option value="adäquate Kontrastierung der Lungenarterien" data-en="adequate contrast" data-radlex-status="local">Adäquat</option>
+        <option value="eingeschränkte Kontrastierung der Lungenarterien (suboptimaler Bolus)" data-en="suboptimal bolus" data-radlex-status="local">Suboptimal</option>
+        <option value="diagnostisch unzureichende Kontrastierung" data-en="inadequate contrast" data-radlex-status="local">Unzureichend</option>
       </select>
     </label>
   </div>
@@ -99,13 +99,13 @@
       <span class="rr-lbl"><span>LE-Nachweis <span class="rr-rl-badge">RID5352</span></span></span>
       <div class="rr-side-toggle" id="le_toggle">
         <input type="radio" name="le_nachweis" id="le_ja" value="ja"
-          data-radlex="RID5352" data-en="pulmonary embolism" />
+          data-radlex="RID4834" data-en="pulmonary embolism" />
         <label for="le_ja">Ja – LE nachweisbar</label>
         <input type="radio" name="le_nachweis" id="le_nein" value="nein"
-          data-radlex="RID5352-neg" data-en="no pulmonary embolism" />
+          data-en="no pulmonary embolism" data-radlex-status="local" />
         <label for="le_nein">Nein – keine LE</label>
         <input type="radio" name="le_nachweis" id="le_fraglich" value="fraglich"
-          data-radlex="RID5352-frag" data-en="indeterminate for pulmonary embolism" />
+          data-en="indeterminate for pulmonary embolism" data-radlex-status="local" />
         <label for="le_fraglich">Fraglich</label>
       </div>
     </label>
@@ -118,13 +118,13 @@
   </div>
   <div class="ctpa-chips" id="lok_ebene">
     <label class="ctpa-chip"><input type="checkbox" id="lok_zentral"
-      data-radlex="RID5352-cen" data-en="central pulmonary embolism" /><span>Zentral</span></label>
+      data-en="central pulmonary embolism" data-radlex-status="local" /><span>Zentral</span></label>
     <label class="ctpa-chip"><input type="checkbox" id="lok_lobär"
-      data-radlex="RID5352-lob" data-en="lobar pulmonary embolism" /><span>Lobär</span></label>
+      data-en="lobar pulmonary embolism" data-radlex-status="local" /><span>Lobär</span></label>
     <label class="ctpa-chip"><input type="checkbox" id="lok_segmental"
-      data-radlex="RID5352-seg" data-en="segmental pulmonary embolism" /><span>Segmental</span></label>
+      data-en="segmental pulmonary embolism" data-radlex-status="local" /><span>Segmental</span></label>
     <label class="ctpa-chip"><input type="checkbox" id="lok_subsegmental"
-      data-radlex="RID5352-sub" data-en="subsegmental pulmonary embolism" /><span>Subsegmental</span></label>
+      data-en="subsegmental pulmonary embolism" data-radlex-status="local" /><span>Subsegmental</span></label>
   </div>
 
   <!-- Lokalisation – anatomisch -->
@@ -166,25 +166,25 @@
     <label>
       <span class="rr-lbl"><span>RV-Ø (mm)</span></span>
       <input type="number" id="rv_dia" step="0.1" placeholder="–"
-        data-radlex="RID5069" data-en="right ventricular diameter" data-loinc="79900-0" />
+        data-radlex="RID1389" data-en="right ventricle" data-loinc="79900-0" />
     </label>
     <label>
       <span class="rr-lbl"><span>LV-Ø (mm)</span></span>
       <input type="number" id="lv_dia" step="0.1" placeholder="–"
-        data-radlex="RID5073" data-en="left ventricular diameter" data-loinc="79901-8" />
+        data-radlex="RID1392" data-en="left ventricle" data-loinc="79901-8" />
     </label>
   </div>
   <div class="rr-row">
     <label>
       <span class="rr-lbl"><span>Tr. pulmonalis-Ø (mm)</span></span>
       <input type="number" id="trpulm_dia" step="0.1" placeholder="Norm ≤ 29 mm"
-        data-radlex="RID5074" data-en="pulmonary trunk diameter" />
+        data-radlex="RID35839" data-en="pulmonary arterial trunk" />
     </label>
     <label>
       <span class="rr-lbl"><span>IVS-Shift <span class="rr-rl-badge">RID5075</span></span></span>
-      <select id="ivs_shift" data-radlex="RID5075" data-en="interventricular septum shift">
-        <option value="kein IVS-Shift" data-radlex="RID5075-neg">Kein</option>
-        <option value="IVS-Shift nachweisbar" data-radlex="RID5075-pos">Vorhanden</option>
+      <select id="ivs_shift" data-en="interventricular septum shift" data-radlex-status="local">
+        <option value="kein IVS-Shift" data-radlex-status="local">Kein</option>
+        <option value="IVS-Shift nachweisbar" data-radlex-status="local">Vorhanden</option>
       </select>
     </label>
   </div>
@@ -195,19 +195,19 @@
   <div class="rr-row">
     <label>
       <span class="rr-lbl"><span>Rechtsherzbelastung (qualitativ) <span class="rr-rl-badge">RID5076</span></span></span>
-      <select id="rhb_qual" data-radlex="RID5076" data-en="right heart strain">
-        <option value="keine Rechtsherzbelastungszeichen" data-radlex="RID5076-neg" data-en="no right heart strain">Keine</option>
-        <option value="leichte Rechtsherzbelastung" data-radlex="RID5076-mild" data-en="mild right heart strain">Leichte RHB</option>
-        <option value="deutliche Rechtsherzbelastung" data-radlex="RID5076-sev" data-en="significant right heart strain">Deutliche RHB</option>
+      <select id="rhb_qual" data-en="right heart strain" data-radlex-status="local">
+        <option value="keine Rechtsherzbelastungszeichen" data-en="no right heart strain" data-radlex-status="local">Keine</option>
+        <option value="leichte Rechtsherzbelastung" data-en="mild right heart strain" data-radlex-status="local">Leichte RHB</option>
+        <option value="deutliche Rechtsherzbelastung" data-en="significant right heart strain" data-radlex-status="local">Deutliche RHB</option>
       </select>
     </label>
     <label>
       <span class="rr-lbl"><span>KM-Rückstau <span class="rr-rl-badge">RID5077</span></span></span>
-      <select id="km_stau" data-radlex="RID5077" data-en="contrast reflux">
-        <option value="kein KM-Rückstau" data-radlex="RID5077-neg">Kein</option>
-        <option value="KM-Rückstau in die V. cava inferior" data-radlex="RID5077-vci">In die VCI</option>
-        <option value="KM-Rückstau in die Lebervenen" data-radlex="RID5077-lv">In Lebervenen</option>
-        <option value="KM-Rückstau in VCI und Lebervenen" data-radlex="RID5077-bds">VCI + Lebervenen</option>
+      <select id="km_stau" data-en="contrast reflux" data-radlex-status="local">
+        <option value="kein KM-Rückstau" data-radlex-status="local">Kein</option>
+        <option value="KM-Rückstau in die V. cava inferior" data-radlex-status="local">In die VCI</option>
+        <option value="KM-Rückstau in die Lebervenen" data-radlex-status="local">In Lebervenen</option>
+        <option value="KM-Rückstau in VCI und Lebervenen" data-radlex-status="local">VCI + Lebervenen</option>
       </select>
     </label>
   </div>
@@ -220,18 +220,18 @@
         <label>
           <span class="rr-lbl"><span>Pleura <span class="rr-rl-badge">RID1362</span></span></span>
           <select id="pleura" data-radlex="RID1362" data-en="pleura">
-            <option value="unauffällig" data-radlex="RID1362-norm">Unauffällig</option>
-            <option value="Pleuraerguss re." data-radlex="RID4872" data-en="pleural effusion">Pleuraerguss re.</option>
-            <option value="Pleuraerguss li." data-radlex="RID4872-li" data-en="pleural effusion">Pleuraerguss li.</option>
-            <option value="Pleuraerguss bds." data-radlex="RID4872-bds" data-en="pleural effusion">Pleuraerguss bds.</option>
+            <option value="unauffällig" data-radlex-status="local">Unauffällig</option>
+            <option value="Pleuraerguss re." data-radlex="RID34539" data-en="pleural effusion">Pleuraerguss re.</option>
+            <option value="Pleuraerguss li." data-radlex="RID34539" data-en="pleural effusion">Pleuraerguss li.</option>
+            <option value="Pleuraerguss bds." data-radlex="RID34539" data-en="pleural effusion">Pleuraerguss bds.</option>
           </select>
         </label>
         <label>
           <span class="rr-lbl"><span>Zentrale Atemwege <span class="rr-rl-badge">RID1329</span></span></span>
-          <select id="atemwege" data-radlex="RID1329" data-en="central airways">
-            <option value="unauffällig" data-radlex="RID1329-norm">Unauffällig</option>
-            <option value="Wandverdickung" data-radlex="RID5088">Wandverdickung</option>
-            <option value="Kompression" data-radlex="RID5089">Kompression</option>
+          <select id="atemwege" data-radlex="RID1245" data-en="airway">
+            <option value="unauffällig" data-radlex-status="local">Unauffällig</option>
+            <option value="Wandverdickung" data-radlex="RID28509" data-en="thickening">Wandverdickung</option>
+            <option value="Kompression" data-radlex="RID4741" data-en="compression">Kompression</option>
           </select>
         </label>
       </div>
@@ -240,32 +240,32 @@
           <span class="rr-lbl"><span>Lungenparenchym <span class="rr-rl-badge">RID1326</span></span></span>
           <div class="ctpa-checkrow" id="par_wrap">
             <label class="ctpa-check"><input type="checkbox" id="par_norm"
-              data-radlex="RID1326-norm" data-en="lung parenchyma normal" /><span>Unauffällig</span></label>
+              data-en="lung parenchyma normal" data-radlex-status="local" /><span>Unauffällig</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_infarkt"
-              data-radlex="RID5085" data-en="pulmonary infarct" /><span>Infarktpneumonie</span></label>
+              data-radlex="RID34889" data-en="pulmonary infarction" /><span>Infarktpneumonie</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_hampton"
-              data-radlex="RID5086" data-en="Hampton hump" /><span>Hamptons Hump</span></label>
+              data-radlex="RID35261" data-en="Hampton hump sign" /><span>Hamptons Hump</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_konsol"
-              data-radlex="RID4803" data-en="consolidation" /><span>Konsolidierung/Infiltrat</span></label>
+              data-radlex="RID43255" data-en="consolidation" /><span>Konsolidierung/Infiltrat</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_ggo"
-              data-radlex="RID4800" data-en="ground-glass opacity" /><span>Milchglastrübung (GGO)</span></label>
+              data-radlex="RID28531" data-en="ground-glass opacity" /><span>Milchglastrübung (GGO)</span></label>
             <label class="ctpa-check"><input type="checkbox" id="par_emph"
-              data-radlex="RID4799" data-en="pulmonary emphysema" /><span>Emphysem</span></label>
+              data-radlex="RID4799" data-en="emphysema" /><span>Emphysem</span></label>
           </div>
         </label>
       </div>
       <div class="rr-row">
         <label>
           <span class="rr-lbl"><span>Lymphknoten mediastinal <span class="rr-rl-badge">RID1503</span></span></span>
-          <select id="lymph" data-radlex="RID1503" data-en="mediastinal lymph nodes">
-            <option value="unauffällig" data-radlex="RID1503-norm">Unauffällig</option>
-            <option value="vergrößert" data-radlex="RID5080">Vergrößert</option>
+          <select id="lymph" data-radlex="RID28891" data-en="mediastinal lymph node">
+            <option value="unauffällig" data-radlex-status="local">Unauffällig</option>
+            <option value="vergrößert" data-radlex="RID3798" data-en="lymphadenopathy">Vergrößert</option>
           </select>
         </label>
         <label>
           <span class="rr-lbl"><span>Oberbauch (soweit abgebildet) <span class="rr-rl-badge">RID1240</span></span></span>
-          <select id="oberbauch" data-radlex="RID1240" data-en="upper abdomen">
-            <option value="unauffällig" data-radlex="RID1240-norm">Unauffällig</option>
+          <select id="oberbauch" data-radlex="RID29990" data-en="upper abdomen">
+            <option value="unauffällig" data-radlex-status="local">Unauffällig</option>
             <option value="mit Zufallsbefund – Details Freitext">Mit Zufallsbefund</option>
           </select>
         </label>
@@ -275,11 +275,11 @@
           <span class="rr-lbl"><span>Herz &amp; übrige Gefäße</span></span>
           <div class="ctpa-checkrow" id="herz_gefaesse_wrap">
             <label class="ctpa-check"><input type="checkbox" id="hg_unauf"
-              data-radlex="RID1317-norm" data-en="heart vessels unremarkable" /><span>Unauffällig</span></label>
+              data-en="heart vessels unremarkable" data-radlex-status="local" /><span>Unauffällig</span></label>
             <label class="ctpa-check"><input type="checkbox" id="hg_peri"
-              data-radlex="RID5081" data-en="pericardial effusion" /><span>Perikarderguss</span></label>
+              data-radlex="RID38588" data-en="pericardial effusion" /><span>Perikarderguss</span></label>
             <label class="ctpa-check"><input type="checkbox" id="hg_ao"
-              data-radlex="RID5082" data-en="aortic sclerosis" /><span>Aortensklerose</span></label>
+              data-radlex="RID5227" data-en="sclerosis" /><span>Aortensklerose</span></label>
           </div>
         </label>
       </div>
@@ -288,11 +288,11 @@
           <span class="rr-lbl"><span>Knochen (soweit abgebildet) <span class="rr-rl-badge">RID13573</span></span></span>
           <div class="ctpa-checkrow" id="kno_wrap">
             <label class="ctpa-check"><input type="checkbox" id="kno_norm"
-              data-radlex="RID13573-norm" data-en="osseous structures unremarkable" /><span>Unauffällig</span></label>
+              data-en="osseous structures unremarkable" data-radlex-status="local" /><span>Unauffällig</span></label>
             <label class="ctpa-check"><input type="checkbox" id="kno_deg"
-              data-radlex="RID5222" data-en="degenerative changes" /><span>Degenerativ</span></label>
+              data-en="degenerative changes" data-radlex-status="local" /><span>Degenerativ</span></label>
             <label class="ctpa-check"><input type="checkbox" id="kno_dest"
-              data-radlex="RID5223" data-en="osseous destruction" /><span>Destruktion/Metastase</span></label>
+              data-radlex="RID5382" data-en="osteolysis" /><span>Destruktion/Metastase</span></label>
           </div>
         </label>
       </div>

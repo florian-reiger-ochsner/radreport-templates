@@ -1,0 +1,133 @@
+{
+  "adequate contrast": {
+    "local": true
+  },
+  "suboptimal bolus": {
+    "local": true
+  },
+  "inadequate contrast": {
+    "local": true
+  },
+  "no right heart strain": {
+    "local": true
+  },
+  "mild right heart strain": {
+    "local": true
+  },
+  "significant right heart strain": {
+    "local": true
+  },
+  "pleural effusion": {
+    "rid": "RID34539",
+    "en": "pleural effusion"
+  },
+  "contrast medium volume": {
+    "local": true
+  },
+  "pulmonary embolism": {
+    "rid": "RID4834",
+    "en": "pulmonary embolism"
+  },
+  "no pulmonary embolism": {
+    "local": true
+  },
+  "indeterminate for pulmonary embolism": {
+    "local": true
+  },
+  "central pulmonary embolism": {
+    "local": true
+  },
+  "lobar pulmonary embolism": {
+    "local": true
+  },
+  "segmental pulmonary embolism": {
+    "local": true
+  },
+  "subsegmental pulmonary embolism": {
+    "local": true
+  },
+  "right ventricle": {
+    "rid": "RID1389",
+    "en": "right ventricle"
+  },
+  "left ventricle": {
+    "rid": "RID1392",
+    "en": "left ventricle"
+  },
+  "pulmonary arterial trunk": {
+    "rid": "RID35839",
+    "en": "pulmonary arterial trunk"
+  },
+  "lung parenchyma normal": {
+    "local": true
+  },
+  "pulmonary infarction": {
+    "rid": "RID34889",
+    "en": "pulmonary infarction"
+  },
+  "Hampton hump sign": {
+    "rid": "RID35261",
+    "en": "Hampton hump sign"
+  },
+  "consolidation": {
+    "rid": "RID43255",
+    "en": "consolidation"
+  },
+  "ground-glass opacity": {
+    "rid": "RID28531",
+    "en": "ground-glass opacity"
+  },
+  "emphysema": {
+    "rid": "RID4799",
+    "en": "emphysema"
+  },
+  "heart vessels unremarkable": {
+    "local": true
+  },
+  "pericardial effusion": {
+    "rid": "RID38588",
+    "en": "pericardial effusion"
+  },
+  "sclerosis": {
+    "rid": "RID5227",
+    "en": "sclerosis"
+  },
+  "osseous structures unremarkable": {
+    "local": true
+  },
+  "degenerative changes": {
+    "local": true
+  },
+  "osteolysis": {
+    "rid": "RID5382",
+    "en": "osteolysis"
+  },
+  "bolus quality": {
+    "local": true
+  },
+  "interventricular septum shift": {
+    "local": true
+  },
+  "right heart strain": {
+    "local": true
+  },
+  "contrast reflux": {
+    "local": true
+  },
+  "pleura": {
+    "rid": "RID1362",
+    "en": "pleura"
+  },
+  "airway": {
+    "rid": "RID1245",
+    "en": "airway"
+  },
+  "mediastinal lymph node": {
+    "rid": "RID28891",
+    "en": "mediastinal lymph node"
+  },
+  "upper abdomen": {
+    "rid": "RID29990",
+    "en": "upper abdomen"
+  }
+}

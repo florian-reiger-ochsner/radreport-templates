@@ -2,42 +2,70 @@
 
 Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
-## LE-Nachweis
+> **Registry-Verifikation (2026-07-31):** RIDs gegen NCBO BioPortal (RADLEX) geprüft,
+> `system: http://radlex.org`. Suffix-Konvention aufgelöst (Feld/Anker trägt das
+> Konzept, Optionswerte/Grade/Lokalisations-Sublagen sind lokal). Wo RadLex kein
+> exaktes Konzept führt, ist der tragfähige Oberbegriff kodiert oder das Feld `local`.
+> Frühere RIDs waren großteils geraten (RID5352 „pneumothorax" statt Lungenembolie,
+> RID49850/49851 aus erfundenem Bereich); jetzt u. a. pulmonary embolism RID4834,
+> pulmonary infarction RID34889, Hampton hump sign RID35261 korrekt belegt.
 
-| Befund | RadLex-Term | RID | SNOMED | Status |
-|---|---|---|---|---|
-| Lungenembolie positiv | pulmonary embolism | RID5352 | 59282003 | ✅ |
-| Keine LE | no pulmonary embolism | RID5352-neg | – | 🟡 |
-| Zentral | central pulmonary embolism | RID5352-cen | – | 🟡 |
-| Lobär | lobar pulmonary embolism | RID5352-lob | – | 🟡 |
-| Segmental | segmental pulmonary embolism | RID5352-seg | – | 🟡 |
-| Subsegmental | subsegmental pulmonary embolism | RID5352-sub | – | 🟡 |
+## Registry-verifiziert (RadLex-RID)
 
-## Rechtsherzbelastung
+| Konzept (`data-en`) | RID | Status |
+|---|---|---|
+| Hampton hump sign | RID35261 | ✅ |
+| airway | RID1245 | ✅ |
+| compression | RID4741 | ✅ |
+| consolidation | RID43255 | ✅ |
+| emphysema | RID4799 | ✅ |
+| ground-glass opacity | RID28531 | ✅ |
+| left ventricle | RID1392 | ✅ |
+| lymphadenopathy | RID3798 | ✅ |
+| mediastinal lymph node | RID28891 | ✅ |
+| osteolysis | RID5382 | ✅ |
+| pericardial effusion | RID38588 | ✅ |
+| pleura | RID1362 | ✅ |
+| pleural effusion | RID34539 | ✅ |
+| pulmonary arterial trunk | RID35839 | ✅ |
+| pulmonary embolism | RID4834 | ✅ |
+| pulmonary infarction | RID34889 | ✅ |
+| right ventricle | RID1389 | ✅ |
+| sclerosis | RID5227 | ✅ |
+| thickening | RID28509 | ✅ |
+| upper abdomen | RID29990 | ✅ |
 
-| Feld | RadLex-Term | RID | LOINC | Status |
-|---|---|---|---|---|
-| RV-Durchmesser | right ventricular diameter | RID5069 | 79900-0 | ✅ |
-| LV-Durchmesser | left ventricular diameter | RID5073 | 79901-8 | ✅ |
-| RV/LV-Ratio | RV/LV ratio | RID5076 | – | 🟡 |
-| IVS-Shift | interventricular septum shift | RID5075 | – | 🟡 |
-| KM-Rückstau in VCI | contrast reflux to IVC | RID5077 | – | 🟡 |
-| Truncus pulmonalis dilatiert | dilated pulmonary trunk | RID5079 | – | 🟡 |
+## Lokal (Werte/Grade/Lokalisation/kein exaktes Konzept)
 
-## Parenchym / Pleura
-
-| Befund | RadLex-Term | RID | Status |
-|---|---|---|---|
-| Infarktpneumonie | pulmonary infarct | RID5085 | ✅ |
-| Hampton's Hump | Hampton hump | RID5086 | ✅ |
-| Milchglastrübung | ground-glass opacity | RID4800 | ✅ |
-| Pleuraerguss | pleural effusion | RID4872 | ✅ |
+| Konzept (`data-en`) | Status |
+|---|---|
+| adequate contrast | 🟡 |
+| bolus quality | 🟡 |
+| central pulmonary embolism | 🟡 |
+| contrast medium volume | 🟡 |
+| contrast reflux | 🟡 |
+| degenerative changes | 🟡 |
+| heart vessels unremarkable | 🟡 |
+| inadequate contrast | 🟡 |
+| indeterminate for pulmonary embolism | 🟡 |
+| interventricular septum shift | 🟡 |
+| lobar pulmonary embolism | 🟡 |
+| lung parenchyma normal | 🟡 |
+| mild right heart strain | 🟡 |
+| no pulmonary embolism | 🟡 |
+| no right heart strain | 🟡 |
+| osseous structures unremarkable | 🟡 |
+| right heart strain | 🟡 |
+| segmental pulmonary embolism | 🟡 |
+| significant right heart strain | 🟡 |
+| suboptimal bolus | 🟡 |
+| subsegmental pulmonary embolism | 🟡 |
 
 ## FHIR-Kodierung
 
 | Ressource | Code | System |
 |---|---|---|
 | DiagnosticReport | 24634-8 | http://loinc.org |
-| LE-Observation | RID5352 + SNOMED 59282003 | http://radlex.org + http://snomed.info/sct |
-| RV/LV-Observation | RID5076, interpretation: High wenn ≥ 1.0 | http://radlex.org |
-| Bundle meta (DRG) | drg-cc-by-4.0 | http://drg.de |
+| Condition (Lungenembolie) | 59282003 | http://snomed.info/sct |
+| Observations (RadLex) | RID* | http://radlex.org |
+| RV-/LV-Ø | 79900-0 / 79901-8 | http://loinc.org |
