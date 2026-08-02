@@ -1,5 +1,5 @@
 id: HJK-MRRT-KNIE-PRAETEP
-version: 1.6
+version: 1.7
 status: pilot
 modalitaet: Roentgen
 region: Knie
@@ -73,8 +73,18 @@ projektionen:
   - ganzbein-einseitig-kalibriert
   - rosenberg-optional
 modi:
-  - manuell
-  - lama-vorbefuellt
+  - manuell            # kein KI-Vorschlag -> Felder manual-entered/not-attested
+  - lama-attestiert    # KI-Vorschlag je Feld attestiert (5-Zustands-Modell)
+# Attestierung am Messwert (SPEC-ADDENDUM-A, Verification Floor):
+feldzustaende:
+  - active-confirmed
+  - active-corrected
+  - active-rejected     # Observation ohne value[x], mit dataAbsentReason
+  - passive-accepted    # durchgewinkt, nicht im Referenzset
+  - not-attested        # keine Observation
+  - manual-entered
+data-absent-reason-codesystem: http://hjk.wien/fhir/CodeSystem/measurement-absent-reason  # provisorisch (Addendum A12)
+attestierung-fhir: Observation.extension (feldgebunden), inkl. aiSource.rawValue/modelVersion/sourceArtifact/transform
 output:
   - fliesstext
   - json

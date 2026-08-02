@@ -112,3 +112,22 @@ Klinische Klassifikationskonzepte ohne verifizierten RadLex-RID → `local`.
 | DiagnosticReport | 24650-4 | http://loinc.org |
 | Observations (RadLex) | RID* | http://radlex.org |
 | Achsenmessungen (LOINC) | LP* | http://loinc.org |
+
+
+## Attestierung / dataAbsentReason (v1.7, SPEC-ADDENDUM-A)
+
+Die KI-Messfelder tragen eine feldgebundene Attestierungs-Extension
+(`http://hjk.wien/fhir/StructureDefinition/ai-attestation`). Bei Ablehnung
+(`active-rejected`) wird die Observation **ohne** `value[x]` mit `dataAbsentReason`
+über eine lokale CodeSystem-URI gefuehrt:
+
+| CodeSystem | Code | Bedeutung |
+|---|---|---|
+| `…/measurement-absent-reason` | `insufficient-acquisition` | unzureichende Ganzbeinaufnahme |
+| `…/measurement-absent-reason` | `rotation-malposition` | Rotationsfehlstellung |
+| `…/measurement-absent-reason` | `calibration-missing` | Kalibrationskugel nicht erkennbar |
+| `…/measurement-absent-reason` | `incomplete-imaging` | unvollständige Abbildung |
+
+> **Provisorisch (Addendum A12):** lokale Erweiterung vs. FHIR-Standard
+> `dataAbsentReason` (`unknown`/`not-applicable`/`error`) bei Implementierung
+> entscheiden. Ohne gewaehlten Grund faellt der Export auf HL7 `unknown` zurueck.

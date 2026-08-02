@@ -1,5 +1,46 @@
 # Changelog – Röntgen Knie präoperativ vor TEP
 
+## [1.7] – 2026-08-02
+### Neu (SPEC-ADDENDUM-A – Verification Floor / Feldzustände am Messwert)
+- **Fünf-Zustands-Modell am KI-Messfeld** ersetzt den früheren direkten
+  LAMA-Vorbefüll-Modus (der Wert direkt ins Feld schrieb = „stille Auffüllung"):
+  `active-confirmed`, `active-corrected`, `active-rejected`, `passive-accepted`,
+  `not-attested` (+ `manual-entered` ohne KI). Status wird **abgeleitet, nicht
+  gesetzt** (Ableitungsregel A3, Reihenfolge verbindlich: reject vor Wertvergleich).
+- **Interaktionsmodell (A6):** ein Auswahlakt pro Feld (bestätigen/korrigieren/
+  ablehnen, sich gegenseitig ausschließend), **keine Vorauswahl**, Korrekturfeld
+  erst nach Auswahl von „Korrigieren" eingabefähig, Vorschlag bleibt in jedem
+  Zustand sichtbar, jeder Zustandswechsel erzeugt ein Interaktionsereignis mit
+  Zeitstempel.
+- **Anzeige-Export-Konsistenz (A4/A6):** jeder im Befund angezeigte Messwert ist
+  durch genau eine Observation gedeckt; jede Observation mit `value[x]` hat einen
+  angezeigten Wert; Ablehnung erscheint als explizite Abwesenheitsangabe
+  („nicht beurteilbar"). In-Demo-Konsistenzprüfung (Assertions A5/A6/A7) in der
+  Vorschau, plus LoA-/Referenzset-Übersicht.
+- **`active-rejected`** → FHIR-Observation **ohne** `value[x]`, mit
+  `dataAbsentReason` über lokale CodeSystem-URI
+  (`…/measurement-absent-reason`: insufficient-acquisition, rotation-malposition,
+  calibration-missing, incomplete-imaging; Fallback HL7 `unknown`). Vokabular
+  provisorisch (A12).
+- **Attestierung als `Observation.extension`** (feldgebunden, nicht
+  `Provenance.activity`) mit `aiSource` (rawValue, modelVersion, sourceArtifact,
+  transform) und `interactionEvent` (kind, timestamp). **Rohwert bleibt in allen
+  Zuständen mit Vorschlag erhalten** (A2.2/A7), auch bei Korrektur/Ablehnung.
+- **Transform vor Anzeige (A5):** HKA trägt deklarativ `data-ai-transform="sign-inversion"`
+  im kanonischen Template; Schritt `sign-inversion-applied` erfolgt vor Anzeige/
+  Vergleich, Korrektur vs. Bestätigung wird **nach** dem Transform unterschieden
+  (Fixture 12). **HKA-Konvention (LAMA) noch nicht verifiziert – nicht geraten**,
+  vor Pilot gegen LAMA Conformance Statement prüfen (siehe README).
+- **CPAK** unverändert nie als vorberechneter Wert konsumiert, sondern intern aus
+  den aufgelösten aHKA/JLO abgeleitet.
+- **Provenance:** Bundle-Tag mit Vorlagenversion + aktiver Variante; Hinweis, dass
+  ein verblindeter Anbietervergleich eine eigene Vorlagenvariante ohne diese
+  Felder erfordert (A7), kein umschaltbarer Modus.
+- Kanonisches `template.html`: `data-ai`-Marker an den sechs KI-Messfeldern,
+  `data-ai-transform` an HKA. Weiterhin nackt (kein CSS/JS); Interaktivität in
+  `demo/knie-prae-tep/demo.js`. XML-Wohlgeformtheit und Demo-Build (build-demo.js)
+  grün; Headless-Test (jsdom) für Zustände, Fixtures 09–12 und Assertionen A5–A7.
+
 ## [1.6] – 2026-07-21
 ### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
 - **Neun falsch geratene RID-Codes ersetzt.** Registry-Abgleich (`validate-codes.js

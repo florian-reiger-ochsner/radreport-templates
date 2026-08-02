@@ -1,7 +1,7 @@
 # Röntgen Knie präoperativ vor TEP
 
 **ID:** HJK-MRRT-KNIE-PRAETEP
-**Version:** 1.5
+**Version:** 1.7
 **Status:** Pilot
 
 ## Auf einen Blick
@@ -16,20 +16,40 @@ Zweigeteilte Struktur — kanonisch ist die Quelle, die Demo ist abgeleitet:
 
 Strukturierte Befundvorlage für die **präoperative Planung einer Knie-TEP bei Primärarthrose**. Erfasst Beinachse, Arthrosegrad und patellofemoralen Status standardisiert und liefert daraus einen CPAK-Phänotyp sowie einen klickbaren Beurteilungsvorschlag. RadLex/LOINC-kodiert mit FHIR-R4-Export.
 
-## Vorbefüllung und Feldstatus
+## Vorbefüllung und Feldzustände (Verification Floor, SPEC-ADDENDUM-A)
 
-Es gibt **keine globalen Betriebsarten**. Die Vorbefüllung ist eine **einmalige
-Aktion** (Achsenmessungen aus LAMA, IB Lab, DICOM SR werden übernommen), kein
-dauerhafter Modus. Jedes Feld trägt anschließend einen **feldgranularen Status**:
+Es gibt **keine stille Auffüllung**. Ein KI-Vorschlag (Achsenmessung aus LAMA,
+IB Lab, DICOM SR) wird nie ungeprüft als Feldwert übernommen. Jedes Messfeld
+löst kanonisch in **einen von fünf Zuständen** auf; der Status wird **abgeleitet,
+nicht gesetzt** (Ableitungsregel A3):
 
-| Feldstatus | Bedeutung |
-|---|---|
-| unbestätigt | vorbefüllter Wert, noch nicht befundend bestätigt |
-| aktiv bestätigt | Wert vom Befundenden übernommen |
-| korrigiert | vorbefüllter Wert manuell überschrieben |
+| Zustand | Bedeutung | Export | Referenzlabel |
+|---|---|---|---|
+| `active-confirmed` | Vorschlag per Auswahlakt bestätigt | Observation mit Wert | ja |
+| `active-corrected` | Vorschlag per Auswahlakt geändert | Observation mit Wert | ja |
+| `active-rejected` | **nicht beurteilbar**, kein Ersatzwert | Observation **ohne** `value[x]`, mit `dataAbsentReason` | nein |
+| `passive-accepted` | durchgewinkt, kein Interaktionsereignis | Observation mit Wert | nein |
+| `not-attested` | kein Wert, kein Vorschlag | keine Observation | – |
+| `manual-entered` | Feld ohne KI-Beteiligung | Observation mit Wert | ja |
 
-Manuelle Eingabe ohne Vorbefüllung ist jederzeit möglich; ein leeres Feld ist
-schlicht unbefüllt.
+**Ein Auswahlakt pro Feld** (bestätigen / korrigieren / nicht beurteilbar) —
+sich gegenseitig ausschließend, keine Vorauswahl; das Korrekturfeld ist erst
+nach Auswahl von „Korrigieren" eingabefähig; der Vorschlag bleibt in jedem
+Zustand sichtbar; jeder Zustandswechsel erzeugt ein Interaktionsereignis mit
+Zeitstempel. Der **Rohwert** bleibt in allen Zuständen mit Vorschlag in
+`aiSource.rawValue` erhalten. Ausgeführt in `demo/knie-prae-tep/demo.js`; die
+Bedienoberfläche ist eine Darstellungsfrage, verbindlich ist der abgeleitete
+Zustand und was er emittiert.
+
+> **HKA-Vorzeichenkonvention (durch FR zu bestätigen):** Für HKA ist im Template
+> ein Transform-Schritt `sign-inversion-applied` deklariert (`data-ai-transform`
+> im kanonischen Template). Demo-Annahme: externer Rohwert als varus-positive
+> Abweichung → interner absoluter Tragachsenwinkel (`180 − Rohwert`, `<180° =
+> Varus`), Rohwert bleibt erhalten. Die **konkrete LAMA-Ausgabekonvention** ist
+> noch nicht verifiziert (nicht geraten) — vor Pilotbetrieb gegen das LAMA
+> Conformance Statement prüfen und den Transform ggf. anpassen. Der Mechanismus
+> (Transform vor Anzeige, Rohwert-Erhalt, Korrektur ≠ Bestätigung nach Transform)
+> ist unabhängig davon umgesetzt und getestet (Fixture 12).
 
 ## Sektionen
 
@@ -72,7 +92,7 @@ RadLex auf allen diskreten Befunden, LOINC auf Achsenmessungen und Report-Typ. D
 
 - Fließtext (Syngo/Carbon kompatibel, keine Flags im Text)
 - JSON strukturiert
-- FHIR Bundle R4 (DiagnosticReport + Observations, doppelte Kodierung LOINC + RadLex)
+- FHIR Bundle R4 (DiagnosticReport + Observations, doppelte Kodierung LOINC + RadLex; Messwert-Observations mit feldgebundener `ai-attestation`-Extension, `aiSource`-Provenance und – bei Ablehnung – `dataAbsentReason`)
 
 ## Quellen
 

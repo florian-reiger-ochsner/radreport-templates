@@ -50,7 +50,7 @@ Strukturierte Befundvorlagen, in denen radiologische Befundung und KI-Auswertung
 ├── templates/
 │   ├── Roentgen/
 │   │   ├── MSK/
-│   │   │   ├── knie-praetep/       # Röntgen Knie prä-TEP v1.6 (RadLex ✅ verifiziert)
+│   │   │   ├── knie-praetep/       # Röntgen Knie prä-TEP v1.7 (RadLex ✅ verifiziert)
 │   │   │   └── knie-posttep/       # Röntgen Knie post-KTEP v1.2 (RadLex ✅ verifiziert)
 │   │   └── Thorax/
 │   │       ├── thorax-standard/    # Röntgen Thorax (p.a.) v2.3 (RadLex ✅ verifiziert)
@@ -90,7 +90,7 @@ Die Spalte **RadLex** zeigt den Verifizierungsstand der Kodierung:
 
 | Template | ID | Version | RadLex | Kanonisch | Demo |
 |---|---|---|---|---|---|
-| Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.6 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-praetep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
+| Röntgen Knie prä-TEP | HJK-MRRT-KNIE-PRAETEP | v1.7 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-praetep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-prae-tep/) |
 | Röntgen Thorax (p.a.) | HJK-MRRT-ROE-THORAX | v2.3 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-standard/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax/) |
 | Röntgen Knie post-KTEP | HJK-MRRT-KNIE-POSTTEP | v1.2 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/MSK/knie-posttep/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/knie-posttep/) |
 | Röntgen Thorax liegend (ICU/portable) | HJK-MRRT-ROE-THORAX-LIEGEND | v1.1 | ✅ | [`template.html`](https://florian-reiger-ochsner.github.io/radreport-templates/templates/Roentgen/Thorax/thorax-liegend/template.html) | [Live-Demo](https://florian-reiger-ochsner.github.io/radreport-templates/demo/roentgen-thorax-liegend/) |
