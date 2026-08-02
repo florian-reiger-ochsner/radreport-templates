@@ -750,7 +750,7 @@ function showExport(format) {
   else if (format === 'fhir') {
     const obs = [];
     const bodySite = { coding: [
-      { system: 'http://radlex.org', code: 'RID2472', display: 'knee' },
+      { system: 'http://radlex.org', code: 'RID2743', display: 'knee' },
       { system: 'http://radlex.org', code: seite.getAttribute('data-radlex'), display: seite.getAttribute('data-en') }
     ], text: `Knie ${seite.value}` };
 

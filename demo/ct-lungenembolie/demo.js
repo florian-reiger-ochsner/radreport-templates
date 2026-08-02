@@ -333,8 +333,8 @@
         valueQuantity: { value: ratio, unit: 'ratio' },
         interpretation: ratio >= 1.0 ? [{ coding: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation', code: 'H', display: 'High' }] }] : undefined,
         component: [
-          { code: { coding: [{ system: 'http://radlex.org', code: 'RID1389', display: 'right ventricular diameter' }] }, valueQuantity: { value: rv, unit: 'mm' } },
-          { code: { coding: [{ system: 'http://radlex.org', code: 'RID1392', display: 'left ventricular diameter' }] }, valueQuantity: { value: lv, unit: 'mm' } }
+          { code: { coding: [{ system: 'http://radlex.org', code: 'RID1389', display: 'right ventricle' }] }, valueQuantity: { value: rv, unit: 'mm' } },
+          { code: { coding: [{ system: 'http://radlex.org', code: 'RID1392', display: 'left ventricle' }] }, valueQuantity: { value: lv, unit: 'mm' } }
         ]
       } });
     }

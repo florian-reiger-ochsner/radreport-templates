@@ -1,15 +1,435 @@
 {
   "codeSystem": "http://radlex.org",
   "source": "NCBO BioPortal (ontologies/RADLEX)",
-  "generated": "2026-07-21T20:43:38.892Z",
+  "generated": "2026-07-21T21:04:26.478Z",
   "ridUriScheme": "http://www.radlex.org/RID/RID<n>",
   "counts": {
-    "total": 20,
-    "resolved": 20,
-    "notFound": 0,
-    "errors": 0
+    "total": 538,
+    "resolved": 298,
+    "notFound": 41,
+    "errors": 14
   },
   "terms": {
+    "RID58": {
+      "uri": "http://www.radlex.org/RID/RID58",
+      "prefLabel": "hepar",
+      "englishLabel": "liver",
+      "synonyms": [
+        "Leber",
+        "liver"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID86": {
+      "uri": "http://www.radlex.org/RID/RID86",
+      "prefLabel": "splen",
+      "englishLabel": "spleen",
+      "synonyms": [
+        "lien",
+        "Milz",
+        "spleen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID120": {
+      "uri": "http://www.radlex.org/RID/RID120",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID132": {
+      "uri": "http://www.radlex.org/RID/RID132",
+      "prefLabel": "intestinum tenue",
+      "englishLabel": "small intestine",
+      "synonyms": [
+        "Dünndarm",
+        "small intestine"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID170": {
+      "uri": "http://www.radlex.org/RID/RID170",
+      "prefLabel": "Pankreas",
+      "englishLabel": "pancreas",
+      "synonyms": [
+        "pancreas"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID187": {
+      "uri": "http://www.radlex.org/RID/RID187",
+      "prefLabel": "Gallenblase",
+      "englishLabel": "gallbladder",
+      "synonyms": [
+        "vesica fellea",
+        "gallbladder"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID205": {
+      "uri": "http://www.radlex.org/RID/RID205",
+      "prefLabel": "Niere",
+      "englishLabel": "kidney",
+      "synonyms": [
+        "ren (Nephros)",
+        "kidney"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID480": {
+      "uri": "http://www.radlex.org/RID/RID480",
+      "prefLabel": "Aorta",
+      "englishLabel": null,
+      "synonyms": [
+        "aorta"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID1240": {
+      "uri": "http://www.radlex.org/RID/RID1240",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "lungenembolie/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID1241": {
+      "uri": "http://www.radlex.org/RID/RID1241",
+      "prefLabel": "Untere linke Pulmonalvene",
+      "englishLabel": "inferior left pulmonary vein",
+      "synonyms": [
+        "inferior left pulmonary vein"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID1248": {
+      "uri": "http://www.radlex.org/RID/RID1248",
+      "prefLabel": "Karina",
+      "englishLabel": "carina",
+      "synonyms": [
+        "carina"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1253": {
+      "uri": "http://www.radlex.org/RID/RID1253",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1263": {
+      "uri": "http://www.radlex.org/RID/RID1263",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1281": {
+      "uri": "http://www.radlex.org/RID/RID1281",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1282": {
+      "uri": "http://www.radlex.org/RID/RID1282",
+      "prefLabel": "Lingulabronchus des linken Oberlappens",
+      "englishLabel": "lingular bronchus of left upper lobe",
+      "synonyms": [
+        "lingular bronchus of left upper lobe"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1285": {
+      "uri": "http://www.radlex.org/RID/RID1285",
+      "prefLabel": "Superiorer Segmentbronchus der Lingula",
+      "englishLabel": "superior lingular bronchus",
+      "synonyms": [
+        "superior lingular bronchus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1301": {
+      "uri": "http://www.radlex.org/RID/RID1301",
+      "prefLabel": "Lunge",
+      "englishLabel": "lung",
+      "synonyms": [
+        "lung",
+        "Lunge",
+        "pulmo"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID1303": {
+      "uri": "http://www.radlex.org/RID/RID1303",
+      "prefLabel": "Oberlappen der rechten Lunge",
+      "englishLabel": "upper lobe of right lung",
+      "synonyms": [
+        "upper lobe of right lung",
+        "Oberlappen der rechten Lunge"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID1317": {
+      "uri": "http://www.radlex.org/RID/RID1317",
+      "notFound": true,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID1326": {
+      "uri": "http://www.radlex.org/RID/RID1326",
+      "prefLabel": "Linker Lungenflügel",
+      "englishLabel": "left lung",
+      "synonyms": [
+        "Linke Lunge",
+        "pulmo sinister",
+        "left lung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID1327": {
+      "uri": "http://www.radlex.org/RID/RID1327",
+      "prefLabel": "Oberlappen der linken Lunge",
+      "englishLabel": "upper lobe of left lung",
+      "synonyms": [
+        "upper lobe of left lung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID1329": {
+      "uri": "http://www.radlex.org/RID/RID1329",
+      "prefLabel": "Apikoposteriores Segment des Oberlappens der linken Lunge",
+      "englishLabel": "apicoposterior segment of upper lobe of left lung",
+      "synonyms": [
+        "apicoposterior segment of upper lobe of left lung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID1362": {
+      "uri": "http://www.radlex.org/RID/RID1362",
+      "prefLabel": "Pleura",
+      "englishLabel": "pleura",
+      "synonyms": [
+        "pleura",
+        "Pleura"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID1368": {
+      "uri": "http://www.radlex.org/RID/RID1368",
+      "prefLabel": "Mediastinale Pleura",
+      "englishLabel": "mediastinal pleura",
+      "synonyms": [
+        "mediastinal pleura"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1375": {
+      "uri": "http://www.radlex.org/RID/RID1375",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1376": {
+      "uri": "http://www.radlex.org/RID/RID1376",
+      "prefLabel": "Rechter kleiner Interlobärspalt",
+      "englishLabel": "right minor fissure",
+      "synonyms": [
+        "right minor fissure"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1385": {
+      "uri": "http://www.radlex.org/RID/RID1385",
+      "prefLabel": "Herz",
+      "englishLabel": "heart",
+      "synonyms": [
+        "heart",
+        "Herz"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID1393": {
+      "uri": "http://www.radlex.org/RID/RID1393",
+      "prefLabel": "Herzklappe",
+      "englishLabel": "heart valve",
+      "synonyms": [
+        "heart valve"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1448": {
+      "uri": "http://www.radlex.org/RID/RID1448",
+      "prefLabel": "Supra-azygos Region",
+      "englishLabel": "supra-azygos area",
+      "synonyms": [
+        "supra-azygos area"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID1460": {
+      "uri": "http://www.radlex.org/RID/RID1460",
+      "prefLabel": "Azygoösophagealer Rezessus",
+      "englishLabel": "azygoesophageal recess",
+      "synonyms": [
+        "azygoesophageal recess"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1461": {
+      "uri": "http://www.radlex.org/RID/RID1461",
+      "prefLabel": "Rechter inferiorer ösophagealer Streifen",
+      "englishLabel": "right inferior esophagopleural stripe",
+      "synonyms": [
+        "right inferior esophagopleural stripe"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID1503": {
+      "uri": "http://www.radlex.org/RID/RID1503",
+      "prefLabel": "Lobärer Lymphknoten",
+      "englishLabel": "lobar lymph node",
+      "synonyms": [
+        "lobar lymph node"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID1786": {
+      "uri": "http://www.radlex.org/RID/RID1786",
+      "prefLabel": "Harnröhrenoperation",
+      "englishLabel": "urethral surgery",
+      "synonyms": [
+        "urethral surgery",
+        "Harnröhrenoperation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID3798": {
+      "uri": "http://www.radlex.org/RID/RID3798",
+      "prefLabel": "Lymphadenopathie",
+      "englishLabel": "lymphadenopathy",
+      "synonyms": [
+        "lymphadenopathy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID3822": {
+      "uri": "http://www.radlex.org/RID/RID3822",
+      "prefLabel": "Zirrhose",
+      "englishLabel": "cirrhosis",
+      "synonyms": [
+        "cirrhosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md"
+      ]
+    },
     "RID3890": {
       "uri": "http://www.radlex.org/RID/RID3890",
       "prefLabel": "Zyste",
@@ -35,6 +455,137 @@
         "knie-praetep/template.html"
       ]
     },
+    "RID3987": {
+      "uri": "http://www.radlex.org/RID/RID3987",
+      "prefLabel": "Verruköses keratöses Hämangiom",
+      "englishLabel": "verrucous keratotic hemangioma",
+      "synonyms": [
+        "verrucous keratotic hemangioma"
+      ],
+      "obsolete": false,
+      "sources": [
+        "ltx-hcc-evaluation/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID4271": {
+      "uri": "http://www.radlex.org/RID/RID4271",
+      "prefLabel": "Hepatozelluläres Karzinom",
+      "englishLabel": "hepatocellular carcinoma",
+      "synonyms": [
+        "hepatocellular carcinoma"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID4675": {
+      "uri": "http://www.radlex.org/RID/RID4675",
+      "notFound": true,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4700": {
+      "uri": "http://www.radlex.org/RID/RID4700",
+      "prefLabel": "Hämorrhagie",
+      "englishLabel": "hemorrhage",
+      "synonyms": [
+        "hemorrhage"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4701": {
+      "uri": "http://www.radlex.org/RID/RID4701",
+      "prefLabel": "Apoplexie",
+      "englishLabel": "apoplexy",
+      "synonyms": [
+        "apoplexy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4702": {
+      "uri": "http://www.radlex.org/RID/RID4702",
+      "prefLabel": "Kontusion",
+      "englishLabel": "contusion",
+      "synonyms": [
+        "contusion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4703": {
+      "uri": "http://www.radlex.org/RID/RID4703",
+      "prefLabel": "Hämarthros",
+      "englishLabel": "hemarthrosis",
+      "synonyms": [
+        "hemarthrosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4705": {
+      "uri": "http://www.radlex.org/RID/RID4705",
+      "prefLabel": "Hämatom",
+      "englishLabel": "hematoma",
+      "synonyms": [
+        "hematoma"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4706": {
+      "uri": "http://www.radlex.org/RID/RID4706",
+      "prefLabel": "Subdurales Hämatom",
+      "englishLabel": "subdural hematoma",
+      "synonyms": [
+        "subdural hematoma"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4707": {
+      "uri": "http://www.radlex.org/RID/RID4707",
+      "notFound": true,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4724": {
+      "uri": "http://www.radlex.org/RID/RID4724",
+      "prefLabel": "Radialer Riss",
+      "englishLabel": "radial tear",
+      "synonyms": [
+        "radial tear"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
     "RID4757": {
       "uri": "http://www.radlex.org/RID/RID4757",
       "prefLabel": "Dextroskoliose",
@@ -47,6 +598,83 @@
         "knie-praetep/RADLEX-MAPPING.md"
       ]
     },
+    "RID4760": {
+      "uri": "http://www.radlex.org/RID/RID4760",
+      "prefLabel": "Kyphoskoliose",
+      "englishLabel": "kyphoscoliosis",
+      "synonyms": [
+        "kyphoscoliosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID4799": {
+      "uri": "http://www.radlex.org/RID/RID4799",
+      "prefLabel": "Emphysem",
+      "englishLabel": "emphysema",
+      "synonyms": [
+        "emphysema"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID4800": {
+      "uri": "http://www.radlex.org/RID/RID4800",
+      "prefLabel": "Pneumozephalus",
+      "englishLabel": "pneumocephalus",
+      "synonyms": [
+        "pneumocephalus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID4803": {
+      "uri": "http://www.radlex.org/RID/RID4803",
+      "prefLabel": "Pneumoperitoneum",
+      "englishLabel": null,
+      "synonyms": [
+        "pneumoperitoneum"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID4804": {
+      "uri": "http://www.radlex.org/RID/RID4804",
+      "prefLabel": "Verlagerte anatomische Struktur",
+      "englishLabel": "displaced anatomy",
+      "synonyms": [
+        "displaced anatomy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
     "RID4872": {
       "uri": "http://www.radlex.org/RID/RID4872",
       "prefLabel": "Erguss",
@@ -56,8 +684,171 @@
       ],
       "obsolete": false,
       "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html",
         "knie-praetep/RADLEX-MAPPING.md",
-        "knie-praetep/template.html"
+        "knie-praetep/template.html",
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID4941": {
+      "uri": "http://www.radlex.org/RID/RID4941",
+      "prefLabel": "Schwangerschaft",
+      "englishLabel": "pregnancy",
+      "synonyms": [
+        "pregnancy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID4961": {
+      "uri": "http://www.radlex.org/RID/RID4961",
+      "prefLabel": "Kavernöse Transformation",
+      "englishLabel": "cavernous transformation",
+      "synonyms": [
+        "cavernous transformation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5050": {
+      "uri": "http://www.radlex.org/RID/RID5050",
+      "prefLabel": "Zentrale pontine Myelinolyse",
+      "englishLabel": "central pontine myelinolysis",
+      "synonyms": [
+        "central pontine myelinolysis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5055": {
+      "uri": "http://www.radlex.org/RID/RID5055",
+      "prefLabel": "Enzephalopathie",
+      "englishLabel": "disorder of brain",
+      "synonyms": [
+        "disorder of brain"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5056": {
+      "uri": "http://www.radlex.org/RID/RID5056",
+      "prefLabel": "Hypoxisch-ischämische Enzephalopathie",
+      "englishLabel": "hypoxic-ischemic encephalopathy",
+      "synonyms": [
+        "hypoxic-ischemic encephalopathy",
+        "Hypoxisch-ischämische Enzephalopathie",
+        "Hypoxisch-ischämische Hirnschädigung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5060": {
+      "uri": "http://www.radlex.org/RID/RID5060",
+      "error": "http 429",
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID5069": {
+      "uri": "http://www.radlex.org/RID/RID5069",
+      "prefLabel": "Diffuse idiopathische Skeletthyperostose",
+      "englishLabel": "diffuse idiopathic skeletal hyperostosis",
+      "synonyms": [
+        "diffuse idiopathic skeletal hyperostosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5070": {
+      "uri": "http://www.radlex.org/RID/RID5070",
+      "notFound": true,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5072": {
+      "uri": "http://www.radlex.org/RID/RID5072",
+      "prefLabel": "Enthesophyt",
+      "englishLabel": "enthesophyte",
+      "synonyms": [
+        "enthesophyte"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5073": {
+      "uri": "http://www.radlex.org/RID/RID5073",
+      "prefLabel": "Enthesopathie",
+      "englishLabel": "enthesopathy",
+      "synonyms": [
+        "enthesopathy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5074": {
+      "uri": "http://www.radlex.org/RID/RID5074",
+      "prefLabel": "Neuropathisches Gelenk",
+      "englishLabel": "neuropathic joint",
+      "synonyms": [
+        "neuropathic joint"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID5075": {
+      "uri": "http://www.radlex.org/RID/RID5075",
+      "notFound": true,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html"
       ]
     },
     "RID5076": {
@@ -70,7 +861,733 @@
       "obsolete": false,
       "sources": [
         "knie-praetep/RADLEX-MAPPING.md",
-        "knie-praetep/template.html"
+        "knie-praetep/template.html",
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID5077": {
+      "uri": "http://www.radlex.org/RID/RID5077",
+      "notFound": true,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID5079": {
+      "uri": "http://www.radlex.org/RID/RID5079",
+      "prefLabel": "Marginaler Osteophyt",
+      "englishLabel": "marginal osteophyte",
+      "synonyms": [
+        "marginal osteophyte"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID5080": {
+      "uri": "http://www.radlex.org/RID/RID5080",
+      "prefLabel": "Osteophytose",
+      "englishLabel": "osteophytosis",
+      "synonyms": [
+        "osteophytosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5081": {
+      "uri": "http://www.radlex.org/RID/RID5081",
+      "prefLabel": "Zentraler Osteophyt",
+      "englishLabel": "central osteophyte",
+      "synonyms": [
+        "central osteophyte"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html",
+        "thorax-standard/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID5082": {
+      "uri": "http://www.radlex.org/RID/RID5082",
+      "prefLabel": "Periost Reaktion",
+      "englishLabel": "periosteal reaction",
+      "synonyms": [
+        "periosteal reaction"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5085": {
+      "uri": "http://www.radlex.org/RID/RID5085",
+      "prefLabel": "Wirbelsäulendegeneration",
+      "englishLabel": "spine degeneration",
+      "synonyms": [
+        "spine degeneration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID5086": {
+      "uri": "http://www.radlex.org/RID/RID5086",
+      "prefLabel": "Bandscheibendegeneration",
+      "englishLabel": "intervertebral disc degeneration",
+      "synonyms": [
+        "intervertebral disc degeneration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID5088": {
+      "uri": "http://www.radlex.org/RID/RID5088",
+      "prefLabel": "Höhenminderung der Bandscheibe",
+      "englishLabel": "disc height loss",
+      "synonyms": [
+        "disc height loss"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID5089": {
+      "uri": "http://www.radlex.org/RID/RID5089",
+      "prefLabel": "Bandscheibenvorwölbung",
+      "englishLabel": "disc bulge",
+      "synonyms": [
+        "Bandscheibenprotrusion",
+        "disc bulge"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID5090": {
+      "uri": "http://www.radlex.org/RID/RID5090",
+      "prefLabel": "Bandscheibenhernierung",
+      "englishLabel": "disc herniation",
+      "synonyms": [
+        "disc herniation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5091": {
+      "uri": "http://www.radlex.org/RID/RID5091",
+      "prefLabel": "Bandscheibenprotrusion",
+      "englishLabel": "disc protrusion",
+      "synonyms": [
+        "disc protrusion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5097": {
+      "uri": "http://www.radlex.org/RID/RID5097",
+      "prefLabel": "Bandscheibensequester",
+      "englishLabel": "sequestrated disc fragment",
+      "synonyms": [
+        "sequestrated disc fragment"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5098": {
+      "uri": "http://www.radlex.org/RID/RID5098",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5100": {
+      "uri": "http://www.radlex.org/RID/RID5100",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5102": {
+      "uri": "http://www.radlex.org/RID/RID5102",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5103": {
+      "uri": "http://www.radlex.org/RID/RID5103",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5104": {
+      "uri": "http://www.radlex.org/RID/RID5104",
+      "prefLabel": "Sequestrierte Bandscheibenextrusion",
+      "englishLabel": "migrated disc extrusion",
+      "synonyms": [
+        "migrated disc extrusion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5105": {
+      "uri": "http://www.radlex.org/RID/RID5105",
+      "prefLabel": "Intervertebrale Osteochondrose",
+      "englishLabel": "intervertebral osteochondrosis",
+      "synonyms": [
+        "intervertebral osteochondrosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5106": {
+      "uri": "http://www.radlex.org/RID/RID5106",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5107": {
+      "uri": "http://www.radlex.org/RID/RID5107",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5108": {
+      "uri": "http://www.radlex.org/RID/RID5108",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5109": {
+      "uri": "http://www.radlex.org/RID/RID5109",
+      "prefLabel": "Endplattenmarkveränderungen",
+      "englishLabel": "endplate marrow change",
+      "synonyms": [
+        "endplate marrow change"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5120": {
+      "uri": "http://www.radlex.org/RID/RID5120",
+      "prefLabel": "Spondylolyse",
+      "englishLabel": "spondylolysis",
+      "synonyms": [
+        "spondylolysis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5121": {
+      "uri": "http://www.radlex.org/RID/RID5121",
+      "prefLabel": "Spondylosis deformans",
+      "englishLabel": null,
+      "synonyms": [
+        "spondylosis deformans"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5122": {
+      "uri": "http://www.radlex.org/RID/RID5122",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5124": {
+      "uri": "http://www.radlex.org/RID/RID5124",
+      "prefLabel": "Myxomatöse Degeneration",
+      "englishLabel": "myxomatous degeneration",
+      "synonyms": [
+        "myxomatous degeneration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5125": {
+      "uri": "http://www.radlex.org/RID/RID5125",
+      "prefLabel": "Neurodegenerative Erkrankung",
+      "englishLabel": "neurodegenerative disease",
+      "synonyms": [
+        "neurodegenerative disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5126": {
+      "uri": "http://www.radlex.org/RID/RID5126",
+      "prefLabel": "Louis-Bar-Syndrom",
+      "englishLabel": "ataxia telangiectasia",
+      "synonyms": [
+        "ataxia telangiectasia"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5130": {
+      "uri": "http://www.radlex.org/RID/RID5130",
+      "prefLabel": "Zerebrotendinöse Xanthomatose",
+      "englishLabel": "cerebrotendinous xanthomatosis",
+      "synonyms": [
+        "cerebrotendinous xanthomatosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5131": {
+      "uri": "http://www.radlex.org/RID/RID5131",
+      "prefLabel": "Cockayne-Syndrom",
+      "englishLabel": "Cockayne Syndrome",
+      "synonyms": [
+        "Cockayne Syndrome"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5132": {
+      "uri": "http://www.radlex.org/RID/RID5132",
+      "prefLabel": "Olivopontozerebelläre Atrophie",
+      "englishLabel": "cerebellar olivary degeneration",
+      "synonyms": [
+        "cerebellar olivary degeneration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5133": {
+      "uri": "http://www.radlex.org/RID/RID5133",
+      "prefLabel": "kortikobasale Degeneration",
+      "englishLabel": "cortical basal ganglionic degeneration",
+      "synonyms": [
+        "cortical basal ganglionic degeneration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5134": {
+      "uri": "http://www.radlex.org/RID/RID5134",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5135": {
+      "uri": "http://www.radlex.org/RID/RID5135",
+      "prefLabel": "Erkrankung der tiefen grauen Kerngebiete",
+      "englishLabel": "deep grey nuclei disorder",
+      "synonyms": [
+        "deep grey nuclei disorder"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5136": {
+      "uri": "http://www.radlex.org/RID/RID5136",
+      "prefLabel": "Demenz",
+      "englishLabel": "dementia",
+      "synonyms": [
+        "dementia"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5137": {
+      "uri": "http://www.radlex.org/RID/RID5137",
+      "prefLabel": "Morbus Alzheimer",
+      "englishLabel": "Alzheimer disease",
+      "synonyms": [
+        "Alzheimer disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5138": {
+      "uri": "http://www.radlex.org/RID/RID5138",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5140": {
+      "uri": "http://www.radlex.org/RID/RID5140",
+      "prefLabel": "Frontotemporale Demenz",
+      "englishLabel": "frontotemporal dementia",
+      "synonyms": [
+        "frontotemporal dementia"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5141": {
+      "uri": "http://www.radlex.org/RID/RID5141",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5142": {
+      "uri": "http://www.radlex.org/RID/RID5142",
+      "prefLabel": "Lewy-Körperchen-Demenz",
+      "englishLabel": "dementia with Lewy bodies",
+      "synonyms": [
+        "dementia with Lewy bodies"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5143": {
+      "uri": "http://www.radlex.org/RID/RID5143",
+      "prefLabel": "Chronisch traumatische Enzephalopathie",
+      "englishLabel": "dementia pugilistica",
+      "synonyms": [
+        "dementia pugilistica"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5144": {
+      "uri": "http://www.radlex.org/RID/RID5144",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5150": {
+      "uri": "http://www.radlex.org/RID/RID5150",
+      "prefLabel": "Fahr Syndrom",
+      "englishLabel": "Fahr syndrome",
+      "synonyms": [
+        "Fahr syndrome"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5151": {
+      "uri": "http://www.radlex.org/RID/RID5151",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5152": {
+      "uri": "http://www.radlex.org/RID/RID5152",
+      "prefLabel": "Friedreich Ataxie",
+      "englishLabel": "Friedreich ataxia",
+      "synonyms": [
+        "Friedreich ataxia"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5153": {
+      "uri": "http://www.radlex.org/RID/RID5153",
+      "prefLabel": "Hereditäre zerebelläre Atrophie",
+      "englishLabel": "hereditary cerebellar atrophy",
+      "synonyms": [
+        "hereditary cerebellar atrophy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5154": {
+      "uri": "http://www.radlex.org/RID/RID5154",
+      "prefLabel": "Chorea Huntington",
+      "englishLabel": "Huntington chorea",
+      "synonyms": [
+        "Huntington chorea"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5155": {
+      "uri": "http://www.radlex.org/RID/RID5155",
+      "prefLabel": "Hypertrophe Olivendegeneration",
+      "englishLabel": "hypertrophic olivary degeneration",
+      "synonyms": [
+        "hypertrophic olivary degeneration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5156": {
+      "uri": "http://www.radlex.org/RID/RID5156",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5157": {
+      "uri": "http://www.radlex.org/RID/RID5157",
+      "prefLabel": "Machado-Joseph-Erkrankung",
+      "englishLabel": "Machado-Joseph disease",
+      "synonyms": [
+        "Machado-Joseph disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5158": {
+      "uri": "http://www.radlex.org/RID/RID5158",
+      "prefLabel": "Multiple Systematrophie",
+      "englishLabel": "multiple system atrophy",
+      "synonyms": [
+        "multiple system atrophy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5160": {
+      "uri": "http://www.radlex.org/RID/RID5160",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5161": {
+      "uri": "http://www.radlex.org/RID/RID5161",
+      "error": "http 429",
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5162": {
+      "uri": "http://www.radlex.org/RID/RID5162",
+      "prefLabel": "Olivopontozerebelläre Degeneration",
+      "englishLabel": "olivopontocerebellar degeneration",
+      "synonyms": [
+        "olivopontocerebellar degeneration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5163": {
+      "uri": "http://www.radlex.org/RID/RID5163",
+      "prefLabel": "Morbus Parkinson",
+      "englishLabel": "Parkinson disease",
+      "synonyms": [
+        "Parkinson disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5164": {
+      "uri": "http://www.radlex.org/RID/RID5164",
+      "prefLabel": "RID5164",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5165": {
+      "uri": "http://www.radlex.org/RID/RID5165",
+      "prefLabel": "Progressive supranukleäre Paralyse",
+      "englishLabel": "progressive supranuclear palsy",
+      "synonyms": [
+        "progressive supranuclear palsy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5166": {
+      "uri": "http://www.radlex.org/RID/RID5166",
+      "prefLabel": "Rett-Syndrom",
+      "englishLabel": "Rett syndrome",
+      "synonyms": [
+        "Rett syndrome"
+      ],
+      "obsolete": false,
+      "sources": [
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5167": {
+      "uri": "http://www.radlex.org/RID/RID5167",
+      "prefLabel": "Subakute kombinierte Rückenmarksdegeneration",
+      "englishLabel": "subacute combined degeneration of spinal cord",
+      "synonyms": [
+        "subacute combined degeneration of spinal cord"
+      ],
+      "obsolete": false,
+      "sources": [
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5168": {
+      "uri": "http://www.radlex.org/RID/RID5168",
+      "prefLabel": "Vaskuläre Myelopathie bei HIV",
+      "englishLabel": "vacuolar myelopathy of HIV",
+      "synonyms": [
+        "Vacuoläre Myelopathie bei HIV",
+        "vacuolar myelopathy of HIV"
+      ],
+      "obsolete": false,
+      "sources": [
+        "urolithiasis/RADLEX-MAPPING.md",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5169": {
+      "uri": "http://www.radlex.org/RID/RID5169",
+      "prefLabel": "Werdnig-Hoffmann Krankheit",
+      "englishLabel": "Wernig-Hoffman disease",
+      "synonyms": [
+        "Wernig-Hoffman disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5170": {
+      "uri": "http://www.radlex.org/RID/RID5170",
+      "prefLabel": "Phthisis bulbi",
+      "englishLabel": null,
+      "synonyms": [
+        "phthisis bulbi"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5171": {
+      "uri": "http://www.radlex.org/RID/RID5171",
+      "prefLabel": "Nekrose",
+      "englishLabel": "necrosis",
+      "synonyms": [
+        "necrosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
       ]
     },
     "RID5172": {
@@ -82,7 +1599,16 @@
       ],
       "obsolete": false,
       "sources": [
+        "abdomen-becken/template.html",
         "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID5173": {
+      "uri": "http://www.radlex.org/RID/RID5173",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
       ]
     },
     "RID5175": {
@@ -97,6 +1623,327 @@
         "knie-praetep/RADLEX-MAPPING.md"
       ]
     },
+    "RID5177": {
+      "uri": "http://www.radlex.org/RID/RID5177",
+      "notFound": true,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5178": {
+      "uri": "http://www.radlex.org/RID/RID5178",
+      "prefLabel": "Schlaganfall",
+      "englishLabel": "stroke",
+      "synonyms": [
+        "stroke"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5179": {
+      "uri": "http://www.radlex.org/RID/RID5179",
+      "error": "http 429",
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5180": {
+      "uri": "http://www.radlex.org/RID/RID5180",
+      "error": "http 429",
+      "sources": [
+        "abdomen-becken/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5181": {
+      "uri": "http://www.radlex.org/RID/RID5181",
+      "prefLabel": "Dysbarische Osteonekrose",
+      "englishLabel": "dysbaric osteonecrosis",
+      "synonyms": [
+        "dysbaric osteonecrosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5182": {
+      "uri": "http://www.radlex.org/RID/RID5182",
+      "prefLabel": "Lunatummalazie",
+      "englishLabel": "Kienbock disease",
+      "synonyms": [
+        "Morbus Kienböck",
+        "Kienbock disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5183": {
+      "uri": "http://www.radlex.org/RID/RID5183",
+      "prefLabel": "Morbus Panner",
+      "englishLabel": "Panner disease",
+      "synonyms": [
+        "Panner disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5184": {
+      "uri": "http://www.radlex.org/RID/RID5184",
+      "prefLabel": "Morbus Thiemann",
+      "englishLabel": "Theimann disease",
+      "synonyms": [
+        "Theimann disease"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5190": {
+      "uri": "http://www.radlex.org/RID/RID5190",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5192": {
+      "uri": "http://www.radlex.org/RID/RID5192",
+      "prefLabel": "Mononatriumuratablagerung",
+      "englishLabel": "monosodium urate deposition",
+      "synonyms": [
+        "monosodium urate deposition"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5193": {
+      "uri": "http://www.radlex.org/RID/RID5193",
+      "prefLabel": "Tophus",
+      "englishLabel": null,
+      "synonyms": [
+        "tophus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5194": {
+      "uri": "http://www.radlex.org/RID/RID5194",
+      "prefLabel": "Mineralablagerung",
+      "englishLabel": "mineral deposition disorder",
+      "synonyms": [
+        "mineral deposition disorder"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5200": {
+      "uri": "http://www.radlex.org/RID/RID5200",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5201": {
+      "uri": "http://www.radlex.org/RID/RID5201",
+      "prefLabel": "Drusen des Sehnerven",
+      "englishLabel": "optic nerve drusen",
+      "synonyms": [
+        "optic nerve drusen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5202": {
+      "uri": "http://www.radlex.org/RID/RID5202",
+      "prefLabel": "Tumorkalzinose",
+      "englishLabel": "tumoral calcinosis",
+      "synonyms": [
+        "tumoral calcinosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5204": {
+      "uri": "http://www.radlex.org/RID/RID5204",
+      "notFound": true,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5206": {
+      "uri": "http://www.radlex.org/RID/RID5206",
+      "prefLabel": "Transfusionsbedingte Siderose",
+      "englishLabel": "transfusional siderosis",
+      "synonyms": [
+        "transfusional siderosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5210": {
+      "uri": "http://www.radlex.org/RID/RID5210",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5211": {
+      "uri": "http://www.radlex.org/RID/RID5211",
+      "prefLabel": "Oberflächliche Siderose",
+      "englishLabel": "superficial siderosis",
+      "synonyms": [
+        "superficial siderosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5213": {
+      "uri": "http://www.radlex.org/RID/RID5213",
+      "error": "http 429",
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5214": {
+      "uri": "http://www.radlex.org/RID/RID5214",
+      "prefLabel": "Cholesterolablagerung",
+      "englishLabel": "cholesterol deposition",
+      "synonyms": [
+        "cholesterol deposition"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5215": {
+      "uri": "http://www.radlex.org/RID/RID5215",
+      "prefLabel": "Cholesterinose",
+      "englishLabel": "cholesterolosis",
+      "synonyms": [
+        "cholesterolosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5216": {
+      "uri": "http://www.radlex.org/RID/RID5216",
+      "prefLabel": "Fettablagerung",
+      "englishLabel": "fat deposition",
+      "synonyms": [
+        "fat deposition"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5222": {
+      "uri": "http://www.radlex.org/RID/RID5222",
+      "prefLabel": "Resorption",
+      "englishLabel": null,
+      "synonyms": [
+        "resorption"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "knie-posttep/template.html",
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5223": {
+      "uri": "http://www.radlex.org/RID/RID5223",
+      "prefLabel": "Ossifikation",
+      "englishLabel": "ossification",
+      "synonyms": [
+        "ossification"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "knie-posttep/template.html",
+        "lungenembolie/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5224": {
+      "uri": "http://www.radlex.org/RID/RID5224",
+      "prefLabel": "Ossifikation des posterioren Längsbandes",
+      "englishLabel": "ossification of posterior longitudinal ligament",
+      "synonyms": [
+        "ossification of posterior longitudinal ligament"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5225": {
+      "uri": "http://www.radlex.org/RID/RID5225",
+      "notFound": true,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID5226": {
+      "uri": "http://www.radlex.org/RID/RID5226",
+      "prefLabel": "Heterotope Ossifikation",
+      "englishLabel": "heterotopic ossification",
+      "synonyms": [
+        "heterotopic ossification"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
     "RID5227": {
       "uri": "http://www.radlex.org/RID/RID5227",
       "prefLabel": "Sklerose",
@@ -106,7 +1953,199 @@
       ],
       "obsolete": false,
       "sources": [
+        "abdomen-becken/template.html",
         "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID5231": {
+      "uri": "http://www.radlex.org/RID/RID5231",
+      "prefLabel": "Metastasierung",
+      "englishLabel": "metastasis",
+      "synonyms": [
+        "metastasis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5232": {
+      "uri": "http://www.radlex.org/RID/RID5232",
+      "prefLabel": "Metastasierung durch lymphatische und interstitielle Infiltration",
+      "englishLabel": "metastasis by lymphatic and interstitial infiltration",
+      "synonyms": [
+        "metastasis by lymphatic and interstitial infiltration"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5233": {
+      "uri": "http://www.radlex.org/RID/RID5233",
+      "notFound": true,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5234": {
+      "uri": "http://www.radlex.org/RID/RID5234",
+      "prefLabel": "Direkte Ausdehnung",
+      "englishLabel": "direct extension",
+      "synonyms": [
+        "direct extension"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5235": {
+      "uri": "http://www.radlex.org/RID/RID5235",
+      "prefLabel": "Lymphangitische Ausbreitung",
+      "englishLabel": "lymphangitic spread",
+      "synonyms": [
+        "lymphangitic spread"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5238": {
+      "uri": "http://www.radlex.org/RID/RID5238",
+      "prefLabel": "Motorische Dysfunktion",
+      "englishLabel": "motor dysfunction",
+      "synonyms": [
+        "motor dysfunction"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5241": {
+      "uri": "http://www.radlex.org/RID/RID5241",
+      "error": "http 429",
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5310": {
+      "uri": "http://www.radlex.org/RID/RID5310",
+      "prefLabel": "Proteinurie",
+      "englishLabel": "proteinuria",
+      "synonyms": [
+        "proteinuria"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5312": {
+      "uri": "http://www.radlex.org/RID/RID5312",
+      "prefLabel": "Interstitielle Nephritis",
+      "englishLabel": "interstitial nephritis",
+      "synonyms": [
+        "interstitial nephritis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5347": {
+      "uri": "http://www.radlex.org/RID/RID5347",
+      "prefLabel": "Andere Pneumokoniose durch Silikate",
+      "englishLabel": "other silicate pneumoconiosis",
+      "synonyms": [
+        "other silicate pneumoconiosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5350": {
+      "uri": "http://www.radlex.org/RID/RID5350",
+      "prefLabel": "Pneumonie",
+      "englishLabel": "pneumonia",
+      "synonyms": [
+        "pneumonia",
+        "Pneumonie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5352": {
+      "uri": "http://www.radlex.org/RID/RID5352",
+      "prefLabel": "Pneumothorax",
+      "englishLabel": null,
+      "synonyms": [
+        "pneumothorax"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lungenembolie/RADLEX-MAPPING.md",
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5355": {
+      "uri": "http://www.radlex.org/RID/RID5355",
+      "prefLabel": "Hauterkrankung",
+      "englishLabel": "integument disorder",
+      "synonyms": [
+        "integument disorder"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID5356": {
+      "uri": "http://www.radlex.org/RID/RID5356",
+      "notFound": true,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
       ]
     },
     "RID5367": {
@@ -161,6 +2200,171 @@
         "knie-praetep/template.html"
       ]
     },
+    "RID5722": {
+      "uri": "http://www.radlex.org/RID/RID5722",
+      "prefLabel": "behandelt",
+      "englishLabel": "fixed",
+      "synonyms": [
+        "fixed"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5733": {
+      "uri": "http://www.radlex.org/RID/RID5733",
+      "prefLabel": "abnehmend",
+      "englishLabel": "decreasing",
+      "synonyms": [
+        "decreasing"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5734": {
+      "uri": "http://www.radlex.org/RID/RID5734",
+      "prefLabel": "unverändert",
+      "englishLabel": "stable",
+      "synonyms": [
+        "stable"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5735": {
+      "uri": "http://www.radlex.org/RID/RID5735",
+      "prefLabel": "Modifikator Manifestation",
+      "englishLabel": "onset descriptor",
+      "synonyms": [
+        "onset descriptor"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5760": {
+      "uri": "http://www.radlex.org/RID/RID5760",
+      "error": "http 429",
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5782": {
+      "uri": "http://www.radlex.org/RID/RID5782",
+      "error": "http 429",
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5783": {
+      "uri": "http://www.radlex.org/RID/RID5783",
+      "prefLabel": "zusammengezogen",
+      "englishLabel": "contracted",
+      "synonyms": [
+        "contracted"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5784": {
+      "uri": "http://www.radlex.org/RID/RID5784",
+      "prefLabel": "kollabiert",
+      "englishLabel": "collapsed",
+      "synonyms": [
+        "collapsed"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5785": {
+      "uri": "http://www.radlex.org/RID/RID5785",
+      "prefLabel": "höhengemindert",
+      "englishLabel": "decreased in height",
+      "synonyms": [
+        "decreased in height"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5798": {
+      "uri": "http://www.radlex.org/RID/RID5798",
+      "notFound": true,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5799": {
+      "uri": "http://www.radlex.org/RID/RID5799",
+      "prefLabel": "rund",
+      "englishLabel": "round",
+      "synonyms": [
+        "round"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5800": {
+      "uri": "http://www.radlex.org/RID/RID5800",
+      "prefLabel": "oval",
+      "englishLabel": null,
+      "synonyms": [
+        "ovoid"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5801": {
+      "uri": "http://www.radlex.org/RID/RID5801",
+      "prefLabel": "lobulär",
+      "englishLabel": "lobular",
+      "synonyms": [
+        "lobular"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID5811": {
+      "uri": "http://www.radlex.org/RID/RID5811",
+      "prefLabel": "linear",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
     "RID5824": {
       "uri": "http://www.radlex.org/RID/RID5824",
       "prefLabel": "links",
@@ -172,7 +2376,9 @@
       "obsolete": false,
       "sources": [
         "knie-praetep/RADLEX-MAPPING.md",
-        "knie-praetep/template.html"
+        "knie-praetep/template.html",
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
       ]
     },
     "RID5825": {
@@ -186,19 +2392,173 @@
       "obsolete": false,
       "sources": [
         "knie-praetep/RADLEX-MAPPING.md",
-        "knie-praetep/template.html"
+        "knie-praetep/template.html",
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5826": {
+      "uri": "http://www.radlex.org/RID/RID5826",
+      "prefLabel": "Mittellinie",
+      "englishLabel": "midline",
+      "synonyms": [
+        "midline"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID5827": {
+      "uri": "http://www.radlex.org/RID/RID5827",
+      "prefLabel": "zentral",
+      "englishLabel": "central",
+      "synonyms": [
+        "central"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID6042": {
+      "uri": "http://www.radlex.org/RID/RID6042",
+      "prefLabel": "hypodens",
+      "englishLabel": "hypodense",
+      "synonyms": [
+        "hypodense"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID6043": {
+      "uri": "http://www.radlex.org/RID/RID6043",
+      "prefLabel": "isodens",
+      "englishLabel": "equal density",
+      "synonyms": [
+        "equal density"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID6044": {
+      "uri": "http://www.radlex.org/RID/RID6044",
+      "prefLabel": "hyperdens",
+      "englishLabel": "hyperdense",
+      "synonyms": [
+        "hyperdense"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
       ]
     },
     "RID6120": {
       "uri": "http://www.radlex.org/RID/RID6120",
-      "prefLabel": "subchondraler Knochen",
-      "englishLabel": "subchondral bone",
+      "error": "http 429",
+      "sources": [
+        "knie-praetep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID6434": {
+      "uri": "http://www.radlex.org/RID/RID6434",
+      "prefLabel": "encephalon",
+      "englishLabel": "brain",
       "synonyms": [
-        "subchondral bone"
+        "gehirn",
+        "brain"
       ],
       "obsolete": false,
       "sources": [
-        "knie-praetep/RADLEX-MAPPING.md"
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID8497": {
+      "uri": "http://www.radlex.org/RID/RID8497",
+      "notFound": true,
+      "sources": [
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID8595": {
+      "uri": "http://www.radlex.org/RID/RID8595",
+      "notFound": true,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID10211": {
+      "uri": "http://www.radlex.org/RID/RID10211",
+      "prefLabel": "Macula cribrosa media",
+      "englishLabel": null,
+      "synonyms": [
+        "macula cribrosa media"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-standard/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID10337": {
+      "uri": "http://www.radlex.org/RID/RID10337",
+      "prefLabel": "Positronen-Emissions-Tomografie",
+      "englishLabel": "positron emission tomography",
+      "synonyms": [
+        "positron emission tomography"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID10361": {
+      "uri": "http://www.radlex.org/RID/RID10361",
+      "prefLabel": "Durchleuchtung",
+      "englishLabel": "fluoroscopy",
+      "synonyms": [
+        "fluoroscopy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID10395": {
+      "uri": "http://www.radlex.org/RID/RID10395",
+      "prefLabel": "Markierung für Intervention",
+      "englishLabel": "marking for intervention",
+      "synonyms": [
+        "marking for intervention"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID10396": {
+      "uri": "http://www.radlex.org/RID/RID10396",
+      "prefLabel": "RID10396",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
       ]
     },
     "RID10523": {
@@ -214,6 +2574,154 @@
         "knie-praetep/template.html"
       ]
     },
+    "RID13166": {
+      "uri": "http://www.radlex.org/RID/RID13166",
+      "prefLabel": "klinische Informationen",
+      "englishLabel": "clinical information section",
+      "synonyms": [
+        "clinical information section"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID13173": {
+      "uri": "http://www.radlex.org/RID/RID13173",
+      "prefLabel": "normal",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID13430": {
+      "uri": "http://www.radlex.org/RID/RID13430",
+      "prefLabel": "RID13430",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID13432": {
+      "uri": "http://www.radlex.org/RID/RID13432",
+      "prefLabel": "Durchmesser",
+      "englishLabel": "diameter",
+      "synonyms": [
+        "dimension",
+        "long axis",
+        "size",
+        "diameter"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md",
+        "lirads-leber/template.html",
+        "ltx-hcc-evaluation/RADLEX-MAPPING.md",
+        "ltx-hcc-evaluation/template.html"
+      ]
+    },
+    "RID13573": {
+      "uri": "http://www.radlex.org/RID/RID13573",
+      "prefLabel": "Segment des Brodmann-Areals 39",
+      "englishLabel": "segment of Brodmann area 39",
+      "synonyms": [
+        "segment of Brodmann area 39",
+        "Segment des Brodmann-Areals 39"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html",
+        "lungenembolie/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID13882": {
+      "uri": "http://www.radlex.org/RID/RID13882",
+      "prefLabel": "rechter Parietallappen",
+      "englishLabel": "right parietal lobe proper",
+      "synonyms": [
+        "right parietal lobe proper",
+        "rechter Parietallappen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "knie-posttep/template.html",
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID28493": {
+      "uri": "http://www.radlex.org/RID/RID28493",
+      "prefLabel": "Atelektase",
+      "englishLabel": "atelectasis",
+      "synonyms": [
+        "atelectasis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html",
+        "urolithiasis/template.html"
+      ]
+    },
+    "RID28530": {
+      "uri": "http://www.radlex.org/RID/RID28530",
+      "prefLabel": "Verschattung",
+      "englishLabel": "opacity",
+      "synonyms": [
+        "Transparenzminderung",
+        "opacity"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID28572": {
+      "uri": "http://www.radlex.org/RID/RID28572",
+      "prefLabel": "fünftes lumbales Foramen intervertebrale",
+      "englishLabel": "fifth lumbar intervertebral foramen",
+      "synonyms": [
+        "fifth lumbar intervertebral foramen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID28657": {
+      "uri": "http://www.radlex.org/RID/RID28657",
+      "prefLabel": "Spotkompression",
+      "englishLabel": "spot compression",
+      "synonyms": [
+        "spot compression"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
     "RID28784": {
       "uri": "http://www.radlex.org/RID/RID28784",
       "prefLabel": "anteroposteriore Projektion",
@@ -225,6 +2733,14 @@
       "sources": [
         "knie-praetep/RADLEX-MAPPING.md",
         "knie-praetep/template.html"
+      ]
+    },
+    "RID28793": {
+      "uri": "http://www.radlex.org/RID/RID28793",
+      "notFound": true,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
       ]
     },
     "RID29041": {
@@ -240,6 +2756,140 @@
         "knie-praetep/template.html"
       ]
     },
+    "RID29237": {
+      "uri": "http://www.radlex.org/RID/RID29237",
+      "prefLabel": "Segment der Leber",
+      "englishLabel": "segment of liver",
+      "synonyms": [
+        "Lebersegment",
+        "segment of liver"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md",
+        "lirads-leber/template.html"
+      ]
+    },
+    "RID29896": {
+      "uri": "http://www.radlex.org/RID/RID29896",
+      "prefLabel": "rechte weibliche Brust",
+      "englishLabel": "right female breast",
+      "synonyms": [
+        "right female breast"
+      ],
+      "obsolete": false,
+      "sources": [
+        "ltx-hcc-evaluation/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID34669": {
+      "uri": "http://www.radlex.org/RID/RID34669",
+      "prefLabel": "maligne Neoplasie des Beckens",
+      "englishLabel": "malignant neoplasm of pelvis",
+      "synonyms": [
+        "malignant neoplasm of pelvis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID34948": {
+      "uri": "http://www.radlex.org/RID/RID34948",
+      "prefLabel": "Segment der Nasenhöhle",
+      "englishLabel": "subdivision of nasal cavity",
+      "synonyms": [
+        "subdivision of nasal cavity"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID34952": {
+      "uri": "http://www.radlex.org/RID/RID34952",
+      "prefLabel": "Sprunggenkfraktur Typ Weber A",
+      "englishLabel": "Weber type A fracture",
+      "synonyms": [
+        "Weber type A fracture"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID35577": {
+      "uri": "http://www.radlex.org/RID/RID35577",
+      "prefLabel": "stack of coins sign (EN)",
+      "englishLabel": "stack of coins sign",
+      "synonyms": [
+        "stack of coins sign"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID35795": {
+      "uri": "http://www.radlex.org/RID/RID35795",
+      "prefLabel": "Kamm der Maxilla",
+      "englishLabel": "crest of maxilla",
+      "synonyms": [
+        "crest of maxilla"
+      ],
+      "obsolete": false,
+      "sources": [
+        "schaedel-nativ/RADLEX-MAPPING.md",
+        "schaedel-nativ/template.html"
+      ]
+    },
+    "RID35936": {
+      "uri": "http://www.radlex.org/RID/RID35936",
+      "error": "http 429",
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID36043": {
+      "uri": "http://www.radlex.org/RID/RID36043",
+      "prefLabel": "erhöht",
+      "englishLabel": "increased",
+      "synonyms": [
+        "increased"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md",
+        "lirads-leber/template.html",
+        "ltx-hcc-evaluation/RADLEX-MAPPING.md",
+        "ltx-hcc-evaluation/template.html"
+      ]
+    },
+    "RID36044": {
+      "uri": "http://www.radlex.org/RID/RID36044",
+      "prefLabel": "verringert",
+      "englishLabel": "decreased",
+      "synonyms": [
+        "decreased"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md",
+        "lirads-leber/template.html",
+        "ltx-hcc-evaluation/RADLEX-MAPPING.md",
+        "ltx-hcc-evaluation/template.html"
+      ]
+    },
     "RID39105": {
       "uri": "http://www.radlex.org/RID/RID39105",
       "prefLabel": "verbessert",
@@ -253,6 +2903,21 @@
         "knie-praetep/template.html"
       ]
     },
+    "RID39157": {
+      "uri": "http://www.radlex.org/RID/RID39157",
+      "prefLabel": "Menge an gasförmiger Körpersubstanz",
+      "englishLabel": "portion of gaseous body substance",
+      "synonyms": [
+        "portion of gaseous body substance"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md",
+        "lirads-leber/template.html",
+        "ltx-hcc-evaluation/RADLEX-MAPPING.md",
+        "ltx-hcc-evaluation/template.html"
+      ]
+    },
     "RID39268": {
       "uri": "http://www.radlex.org/RID/RID39268",
       "prefLabel": "unverändert",
@@ -264,6 +2929,3878 @@
       "sources": [
         "knie-praetep/RADLEX-MAPPING.md",
         "knie-praetep/template.html"
+      ]
+    },
+    "RID39477": {
+      "uri": "http://www.radlex.org/RID/RID39477",
+      "prefLabel": "Pseudokapsel (Leber)",
+      "englishLabel": "pseudocapsule (liver)",
+      "synonyms": [
+        "pseudocapsule (liver)"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID43353": {
+      "uri": "http://www.radlex.org/RID/RID43353",
+      "prefLabel": "Signalminderung in der portalvenösen Phase",
+      "englishLabel": "portal venous phase hypoenhancement",
+      "synonyms": [
+        "portal venous phase hypoenhancement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID43355": {
+      "uri": "http://www.radlex.org/RID/RID43355",
+      "prefLabel": "Vermehrte Kontrastmittelaufnahme in der arteriellen Phase",
+      "englishLabel": "arterial phase hyperenhancement",
+      "synonyms": [
+        "APHE",
+        "hypervascularity",
+        "contrast uptake in arterial phase",
+        "increased contrast enhancement in hepatic arterial phase",
+        "high attenuation area in arterial phase",
+        "hypervascularity in arterial phase",
+        "increased contrast enhancement in late hepatic arterial phase",
+        "arterial hypervascularity",
+        "wash in",
+        "arterial phase hyperenhancement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "lirads-leber/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID49504": {
+      "uri": "http://www.radlex.org/RID/RID49504",
+      "prefLabel": "Samenblasen-Prostata-Winkel",
+      "englishLabel": "prostate-seminal vesicle angle",
+      "synonyms": [
+        "prostate-seminal vesicle angle"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49520": {
+      "uri": "http://www.radlex.org/RID/RID49520",
+      "prefLabel": "geringgradige intraepitheliale Neoplasie der Prostata",
+      "englishLabel": "low grade prostatic intraepithelial neoplasia",
+      "synonyms": [
+        "low grade prostatic intraepithelial neoplasia"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49521": {
+      "uri": "http://www.radlex.org/RID/RID49521",
+      "prefLabel": "atypische mikroazinäre Proliferation",
+      "englishLabel": "atypical small acinar proliferation",
+      "synonyms": [
+        "atypical small acinar proliferation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49522": {
+      "uri": "http://www.radlex.org/RID/RID49522",
+      "prefLabel": "fokale Prostatitis",
+      "englishLabel": "focal prostatitis",
+      "synonyms": [
+        "focal prostatitis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49557": {
+      "uri": "http://www.radlex.org/RID/RID49557",
+      "prefLabel": "Kontrastdarstellung des Ureterstents",
+      "englishLabel": "ureteral stent contrast",
+      "synonyms": [
+        "ureteral stent contrast"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49560": {
+      "uri": "http://www.radlex.org/RID/RID49560",
+      "prefLabel": "Arzneimittel",
+      "englishLabel": "therapeutic agent",
+      "synonyms": [
+        "therapeutic agent"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49600": {
+      "uri": "http://www.radlex.org/RID/RID49600",
+      "prefLabel": "Injektionsbehandlung",
+      "englishLabel": "injection treatment",
+      "synonyms": [
+        "injection treatment"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49601": {
+      "uri": "http://www.radlex.org/RID/RID49601",
+      "error": "http 429",
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49602": {
+      "uri": "http://www.radlex.org/RID/RID49602",
+      "error": "http 429",
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49603": {
+      "uri": "http://www.radlex.org/RID/RID49603",
+      "error": "http 429",
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49604": {
+      "uri": "http://www.radlex.org/RID/RID49604",
+      "prefLabel": "Thrombininjektion",
+      "englishLabel": "thrombin injection",
+      "synonyms": [
+        "thrombin injection"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49605": {
+      "uri": "http://www.radlex.org/RID/RID49605",
+      "prefLabel": "Training",
+      "englishLabel": null,
+      "synonyms": [
+        "Schulung",
+        "training"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49606": {
+      "uri": "http://www.radlex.org/RID/RID49606",
+      "prefLabel": "Muskelerkrankung",
+      "englishLabel": "muscular disorder",
+      "synonyms": [
+        "muscular disorder"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49610": {
+      "uri": "http://www.radlex.org/RID/RID49610",
+      "prefLabel": "Katheter-Deskriptor",
+      "englishLabel": "catheter descriptor",
+      "synonyms": [
+        "Katheterkennwerte",
+        "Katheterbeschreibung",
+        "catheter descriptor"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49611": {
+      "uri": "http://www.radlex.org/RID/RID49611",
+      "prefLabel": "mit Port",
+      "englishLabel": "with port",
+      "synonyms": [
+        "with port"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49612": {
+      "uri": "http://www.radlex.org/RID/RID49612",
+      "prefLabel": "ohne Port",
+      "englishLabel": "without port",
+      "synonyms": [
+        "without port"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49613": {
+      "uri": "http://www.radlex.org/RID/RID49613",
+      "prefLabel": "nach Entleerung der Harnblase",
+      "englishLabel": "post-void",
+      "synonyms": [
+        "post-void"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49620": {
+      "uri": "http://www.radlex.org/RID/RID49620",
+      "prefLabel": "Reparatur eines Geräts",
+      "englishLabel": "device repair",
+      "synonyms": [
+        "device repair"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49621": {
+      "uri": "http://www.radlex.org/RID/RID49621",
+      "prefLabel": "Wechsel des Materials",
+      "englishLabel": "device exchange",
+      "synonyms": [
+        "device exchange"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49630": {
+      "uri": "http://www.radlex.org/RID/RID49630",
+      "prefLabel": "Einführung eines langen Tubus",
+      "englishLabel": "long tube insertion",
+      "synonyms": [
+        "long tube insertion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49631": {
+      "uri": "http://www.radlex.org/RID/RID49631",
+      "prefLabel": "Legen des Drahtes",
+      "englishLabel": "wire placement",
+      "synonyms": [
+        "Drahtplatzierung",
+        "wire placement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49632": {
+      "uri": "http://www.radlex.org/RID/RID49632",
+      "prefLabel": "Prüfschlauch",
+      "englishLabel": "check tube",
+      "synonyms": [
+        "check tube"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49640": {
+      "uri": "http://www.radlex.org/RID/RID49640",
+      "prefLabel": "Gruppe von Lymphgefäßen",
+      "englishLabel": "set of lymph vessels",
+      "synonyms": [
+        "set of lymph vessels"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49641": {
+      "uri": "http://www.radlex.org/RID/RID49641",
+      "prefLabel": "Gefäße des Penis",
+      "englishLabel": "vasculature of penis",
+      "synonyms": [
+        "vasculature of penis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49699": {
+      "uri": "http://www.radlex.org/RID/RID49699",
+      "prefLabel": "Hautverdickung und Trabekelverdickung nach der Therapie",
+      "englishLabel": "post-therapy skin thickening and trabecular thickening",
+      "synonyms": [
+        "post-therapy skin thickening and trabecular thickening"
+      ],
+      "obsolete": false,
+      "sources": [
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/RADLEX-MAPPING.md",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49700": {
+      "uri": "http://www.radlex.org/RID/RID49700",
+      "prefLabel": "nicht signalverstärkende Masse",
+      "englishLabel": "non-enhancing mass",
+      "synonyms": [
+        "non-enhancing mass"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49701": {
+      "uri": "http://www.radlex.org/RID/RID49701",
+      "prefLabel": "signalbezogener Befund",
+      "englishLabel": "signal-related observation",
+      "synonyms": [
+        "signal-related observation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49702": {
+      "uri": "http://www.radlex.org/RID/RID49702",
+      "prefLabel": "Signalauslöschung durch Artefakt",
+      "englishLabel": "signal void from artifact",
+      "synonyms": [
+        "signal void from artifact"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49703": {
+      "uri": "http://www.radlex.org/RID/RID49703",
+      "prefLabel": "Invasion der Brustwarze",
+      "englishLabel": "nipple invasion",
+      "synonyms": [
+        "nipple invasion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49704": {
+      "uri": "http://www.radlex.org/RID/RID49704",
+      "prefLabel": "direkte Invasion der Haut",
+      "englishLabel": "direct skin invasion",
+      "synonyms": [
+        "direct skin invasion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49705": {
+      "uri": "http://www.radlex.org/RID/RID49705",
+      "prefLabel": "Invasion der Haut durch inflammatorisches Karzinom",
+      "englishLabel": "inflammatory cancer skin invasion",
+      "synonyms": [
+        "inflammatory cancer skin invasion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49706": {
+      "uri": "http://www.radlex.org/RID/RID49706",
+      "prefLabel": "Signalverstärkungsmuster der Invasion",
+      "englishLabel": "invasion enhancement pattern",
+      "synonyms": [
+        "invasion enhancement pattern"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49707": {
+      "uri": "http://www.radlex.org/RID/RID49707",
+      "prefLabel": "postoperatives Serom/Hämatom mit Fett",
+      "englishLabel": "postoperative seroma/hematoma with fat",
+      "synonyms": [
+        "postoperative seroma/hematoma with fat"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49708": {
+      "uri": "http://www.radlex.org/RID/RID49708",
+      "prefLabel": "langsame Initialphase",
+      "englishLabel": "slow initial phase",
+      "synonyms": [
+        "slow initial phase"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49709": {
+      "uri": "http://www.radlex.org/RID/RID49709",
+      "prefLabel": "mittlere Initialphase",
+      "englishLabel": "medium initial phase",
+      "synonyms": [
+        "medium initial phase"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49710": {
+      "uri": "http://www.radlex.org/RID/RID49710",
+      "prefLabel": "schnelle Initialphase",
+      "englishLabel": "fast initial phase",
+      "synonyms": [
+        "fast initial phase"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49711": {
+      "uri": "http://www.radlex.org/RID/RID49711",
+      "prefLabel": "Silikon-Brustimplantat",
+      "englishLabel": "silicone breast implant",
+      "synonyms": [
+        "silicone breast implant"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49712": {
+      "uri": "http://www.radlex.org/RID/RID49712",
+      "prefLabel": "mit Kochsalzlösung gefülltes Brustimplantat",
+      "englishLabel": "saline breast implant",
+      "synonyms": [
+        "saline breast implant"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49713": {
+      "uri": "http://www.radlex.org/RID/RID49713",
+      "prefLabel": "anderes Brustimplantat",
+      "englishLabel": "other breast implant",
+      "synonyms": [
+        "other breast implant"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49714": {
+      "uri": "http://www.radlex.org/RID/RID49714",
+      "prefLabel": "retroglandulär",
+      "englishLabel": "retroglandular",
+      "synonyms": [
+        "retroglandular"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49715": {
+      "uri": "http://www.radlex.org/RID/RID49715",
+      "prefLabel": "retropektoral",
+      "englishLabel": "retropectoral",
+      "synonyms": [
+        "retropectoral"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49716": {
+      "uri": "http://www.radlex.org/RID/RID49716",
+      "prefLabel": "Befund beim Brustimplantat",
+      "englishLabel": "breast implant observation",
+      "synonyms": [
+        "breast implant observation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49718": {
+      "uri": "http://www.radlex.org/RID/RID49718",
+      "prefLabel": "intrakapsulärer Silikonbefund",
+      "englishLabel": "intracapsular silicone finding",
+      "synonyms": [
+        "intracapsular silicone finding"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49719": {
+      "uri": "http://www.radlex.org/RID/RID49719",
+      "prefLabel": "radiale Falte",
+      "englishLabel": "radial fold",
+      "synonyms": [
+        "radial fold"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49720": {
+      "uri": "http://www.radlex.org/RID/RID49720",
+      "prefLabel": "subkapsuläre Linie",
+      "englishLabel": "subcapsular line sign",
+      "synonyms": [
+        "subcapsular line sign"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49730": {
+      "uri": "http://www.radlex.org/RID/RID49730",
+      "prefLabel": "Lymphographie",
+      "englishLabel": "lymphangiography",
+      "synonyms": [
+        "lymphangiography"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49731": {
+      "uri": "http://www.radlex.org/RID/RID49731",
+      "prefLabel": "intravesikale Kontrastdarstellung",
+      "englishLabel": "intravesical contrast",
+      "synonyms": [
+        "intravesical contrast"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49732": {
+      "uri": "http://www.radlex.org/RID/RID49732",
+      "prefLabel": "anatomischer Kontrast",
+      "englishLabel": "anatomical contrast",
+      "synonyms": [
+        "anatomical contrast"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49733": {
+      "uri": "http://www.radlex.org/RID/RID49733",
+      "prefLabel": "Kontrastdarstellung der Samenblase",
+      "englishLabel": "seminal vesicle contrast",
+      "synonyms": [
+        "seminal vesicle contrast"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49734": {
+      "uri": "http://www.radlex.org/RID/RID49734",
+      "prefLabel": "thrombolytische Substanz",
+      "englishLabel": "thrombolytic agent",
+      "synonyms": [
+        "thrombolytic agent"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49735": {
+      "uri": "http://www.radlex.org/RID/RID49735",
+      "prefLabel": "durch Ileum-Conduit",
+      "englishLabel": "through ilial conduit",
+      "synonyms": [
+        "through ilial conduit"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49736": {
+      "uri": "http://www.radlex.org/RID/RID49736",
+      "prefLabel": "transjugulär",
+      "englishLabel": "transjugular",
+      "synonyms": [
+        "transjugular"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49737": {
+      "uri": "http://www.radlex.org/RID/RID49737",
+      "prefLabel": "Entfernen des Katheters",
+      "englishLabel": "catheter removal",
+      "synonyms": [
+        "catheter removal"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49738": {
+      "uri": "http://www.radlex.org/RID/RID49738",
+      "prefLabel": "erneutes Legen des Katheters",
+      "englishLabel": "catheter reposition",
+      "synonyms": [
+        "catheter reposition"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49739": {
+      "uri": "http://www.radlex.org/RID/RID49739",
+      "prefLabel": "Cholangioskopie",
+      "englishLabel": "cholangioscopy",
+      "synonyms": [
+        "cholangioscopy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49740": {
+      "uri": "http://www.radlex.org/RID/RID49740",
+      "notFound": true,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49741": {
+      "uri": "http://www.radlex.org/RID/RID49741",
+      "prefLabel": "Überprüfung des Denver-Shunts",
+      "englishLabel": "Denver shunt check",
+      "synonyms": [
+        "Denver shunt check"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49742": {
+      "uri": "http://www.radlex.org/RID/RID49742",
+      "prefLabel": "Anlegen des Denver-Shunts",
+      "englishLabel": "Denver shunt placement",
+      "synonyms": [
+        "Denver shunt placement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49750": {
+      "uri": "http://www.radlex.org/RID/RID49750",
+      "prefLabel": "Legen der Nephrostomie",
+      "englishLabel": "nephrostomy placement",
+      "synonyms": [
+        "nephrostomy placement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49751": {
+      "uri": "http://www.radlex.org/RID/RID49751",
+      "prefLabel": "Entfernen des Harnleiter-Stents",
+      "englishLabel": "nephroureteral stent removal",
+      "synonyms": [
+        "nephroureteral stent removal"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49752": {
+      "uri": "http://www.radlex.org/RID/RID49752",
+      "prefLabel": "perkutane Implantation eines Harnleiter-Stents",
+      "englishLabel": "percutaneous nephroureteral stent placement",
+      "synonyms": [
+        "percutaneous nephroureteral stent placement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49753": {
+      "uri": "http://www.radlex.org/RID/RID49753",
+      "prefLabel": "perkutanes Entfernen eines Harnleiter-Stents",
+      "englishLabel": "percutaneous nephroureteral stent removal",
+      "synonyms": [
+        "percutaneous nephroureteral stent removal"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49754": {
+      "uri": "http://www.radlex.org/RID/RID49754",
+      "prefLabel": "perkutanes Entfernen einer Harnleiterschiene",
+      "englishLabel": "percutaneous nephroureteral tube removal",
+      "synonyms": [
+        "percutaneous nephroureteral tube removal"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49755": {
+      "uri": "http://www.radlex.org/RID/RID49755",
+      "prefLabel": "perkutane Sympathektomie",
+      "englishLabel": "percutaneous sympathectomy",
+      "synonyms": [
+        "percutaneous sympathectomy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49756": {
+      "uri": "http://www.radlex.org/RID/RID49756",
+      "prefLabel": "perkutane transhepatische Cholangiodrainage",
+      "englishLabel": "percutaneous transhepatic biliary drainage",
+      "synonyms": [
+        "percutaneous transhepatic biliary drainage"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49757": {
+      "uri": "http://www.radlex.org/RID/RID49757",
+      "prefLabel": "perkutane transluminale Angioplastie",
+      "englishLabel": "percutaneous transluminal angioplasty",
+      "synonyms": [
+        "percutaneous transluminal angioplasty"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49758": {
+      "uri": "http://www.radlex.org/RID/RID49758",
+      "prefLabel": "Wechsel eines peripher eingeführten zentralen Venenkatheters",
+      "englishLabel": "peripherally inserted central catheter exchange",
+      "synonyms": [
+        "peripherally inserted central catheter exchange"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49759": {
+      "uri": "http://www.radlex.org/RID/RID49759",
+      "prefLabel": "Legen eines peripher eingeführten zentralen Venenkatheters",
+      "englishLabel": "peripherally inserted central catheter placement",
+      "synonyms": [
+        "peripherally inserted central catheter placement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49760": {
+      "uri": "http://www.radlex.org/RID/RID49760",
+      "prefLabel": "Revision der Materiallage",
+      "englishLabel": "device revision",
+      "synonyms": [
+        "device revision"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49761": {
+      "uri": "http://www.radlex.org/RID/RID49761",
+      "prefLabel": "Revision eines Denver-Shunts",
+      "englishLabel": "Denver shunt revision",
+      "synonyms": [
+        "Denver shunt revision"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49762": {
+      "uri": "http://www.radlex.org/RID/RID49762",
+      "prefLabel": "perkutane transhepatische Cholangiographie",
+      "englishLabel": "percutaneous transhepatic biliary revision",
+      "synonyms": [
+        "percutaneous transhepatic biliary revision"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49763": {
+      "uri": "http://www.radlex.org/RID/RID49763",
+      "prefLabel": "Überprüfung des transjugulären intrahepatischen portosystemischen Shunts",
+      "englishLabel": "transjugular intrahepatic portosystemic shunt revision",
+      "synonyms": [
+        "transjugular intrahepatic portosystemic shunt revision"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49770": {
+      "uri": "http://www.radlex.org/RID/RID49770",
+      "prefLabel": "Reparatur des Ports",
+      "englishLabel": "port repair",
+      "synonyms": [
+        "port repair"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49771": {
+      "uri": "http://www.radlex.org/RID/RID49771",
+      "prefLabel": "Miniphlebektomie",
+      "englishLabel": "stab phlebectomy",
+      "synonyms": [
+        "stab phlebectomy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49772": {
+      "uri": "http://www.radlex.org/RID/RID49772",
+      "prefLabel": "Dilatationsverfahren",
+      "englishLabel": "dilation procedure",
+      "synonyms": [
+        "dilation procedure"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49773": {
+      "uri": "http://www.radlex.org/RID/RID49773",
+      "prefLabel": "Dilatation der Striktur",
+      "englishLabel": "stricture dilation",
+      "synonyms": [
+        "stricture dilation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49774": {
+      "uri": "http://www.radlex.org/RID/RID49774",
+      "prefLabel": "Implantation des Stents durch einen Katheter",
+      "englishLabel": "transcatheter stent placement",
+      "synonyms": [
+        "transcatheter stent placement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49780": {
+      "uri": "http://www.radlex.org/RID/RID49780",
+      "prefLabel": "mit zusätzlicher Bildgebung verbundenes Merkmal",
+      "englishLabel": "property related to additional imaging",
+      "synonyms": [
+        "property related to additional imaging"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49781": {
+      "uri": "http://www.radlex.org/RID/RID49781",
+      "prefLabel": "1 Stufe",
+      "englishLabel": "1 level",
+      "synonyms": [
+        "1 level"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49782": {
+      "uri": "http://www.radlex.org/RID/RID49782",
+      "prefLabel": "zusätzliche Punktion",
+      "englishLabel": "additional puncture",
+      "synonyms": [
+        "additional puncture"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49783": {
+      "uri": "http://www.radlex.org/RID/RID49783",
+      "prefLabel": "1-2 zusätzliche Gefäße",
+      "englishLabel": "1-2 additional vessels",
+      "synonyms": [
+        "1-2 additional vessels"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49784": {
+      "uri": "http://www.radlex.org/RID/RID49784",
+      "prefLabel": "zusätzlicher Tag",
+      "englishLabel": "additional day",
+      "synonyms": [
+        "additional day"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49785": {
+      "uri": "http://www.radlex.org/RID/RID49785",
+      "prefLabel": "zusätzliches Verfahren",
+      "englishLabel": "additional procedure",
+      "synonyms": [
+        "additional procedure"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49790": {
+      "uri": "http://www.radlex.org/RID/RID49790",
+      "error": "http 429",
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49791": {
+      "uri": "http://www.radlex.org/RID/RID49791",
+      "prefLabel": "Auffinden des Katheters",
+      "englishLabel": "catheter retrieval",
+      "synonyms": [
+        "Katheterbergung",
+        "catheter retrieval"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49792": {
+      "uri": "http://www.radlex.org/RID/RID49792",
+      "prefLabel": "zusätzlicher Bereich",
+      "englishLabel": "additional area",
+      "synonyms": [
+        "additional area"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49793": {
+      "uri": "http://www.radlex.org/RID/RID49793",
+      "prefLabel": "mehrere Bereiche",
+      "englishLabel": "multiple areas",
+      "synonyms": [
+        "multiple areas"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md",
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49800": {
+      "uri": "http://www.radlex.org/RID/RID49800",
+      "prefLabel": "LR-5g",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49801": {
+      "uri": "http://www.radlex.org/RID/RID49801",
+      "prefLabel": "LR-5us",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49802": {
+      "uri": "http://www.radlex.org/RID/RID49802",
+      "prefLabel": "LR-5V",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49803": {
+      "uri": "http://www.radlex.org/RID/RID49803",
+      "prefLabel": "LR-M",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49804": {
+      "uri": "http://www.radlex.org/RID/RID49804",
+      "prefLabel": "LR-Treated",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49805": {
+      "uri": "http://www.radlex.org/RID/RID49805",
+      "prefLabel": "< 10 mm",
+      "englishLabel": "<10mm",
+      "synonyms": [
+        "<10mm"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49820": {
+      "uri": "http://www.radlex.org/RID/RID49820",
+      "prefLabel": "Übergangsphase",
+      "englishLabel": "transitional phase",
+      "synonyms": [
+        "transitional phase",
+        "Übergangsphase"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "knie-posttep/template.html",
+        "thorax-liegend/RADLEX-MAPPING.md",
+        "thorax-liegend/template.html",
+        "thorax-standard/template.html"
+      ]
+    },
+    "RID49821": {
+      "uri": "http://www.radlex.org/RID/RID49821",
+      "prefLabel": "eindeutig",
+      "englishLabel": "unequivocal",
+      "synonyms": [
+        "unequivocal"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49822": {
+      "uri": "http://www.radlex.org/RID/RID49822",
+      "prefLabel": "geringer apparenter Diffusionskoeffizient",
+      "englishLabel": "low ADC value",
+      "synonyms": [
+        "low ADC value"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49823": {
+      "uri": "http://www.radlex.org/RID/RID49823",
+      "prefLabel": "LI-RADS-Klassifikation",
+      "englishLabel": "LI-RADS assessment",
+      "synonyms": [
+        "LI-RADS assessment"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID49830": {
+      "uri": "http://www.radlex.org/RID/RID49830",
+      "prefLabel": "Panorama-",
+      "englishLabel": "panoramic",
+      "synonyms": [
+        "panoramic"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID49831": {
+      "uri": "http://www.radlex.org/RID/RID49831",
+      "prefLabel": "Austausch des Schlauchs",
+      "englishLabel": "tube replacement",
+      "synonyms": [
+        "tube replacement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID49832": {
+      "uri": "http://www.radlex.org/RID/RID49832",
+      "prefLabel": "Legen der Jejunostomie-Sonde",
+      "englishLabel": "J-tube placement",
+      "synonyms": [
+        "J-tube placement"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID49833": {
+      "uri": "http://www.radlex.org/RID/RID49833",
+      "prefLabel": "Wahrheits-Deskriptor",
+      "englishLabel": "truth descriptor",
+      "synonyms": [
+        "truth descriptor"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID49834": {
+      "uri": "http://www.radlex.org/RID/RID49834",
+      "prefLabel": "echt",
+      "englishLabel": "true",
+      "synonyms": [
+        "true"
+      ],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/RADLEX-MAPPING.md"
+      ]
+    },
+    "RID49850": {
+      "uri": "http://www.radlex.org/RID/RID49850",
+      "prefLabel": "Radiochirurgie",
+      "englishLabel": "radiosurgery",
+      "synonyms": [
+        "radiosurgery"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID49851": {
+      "uri": "http://www.radlex.org/RID/RID49851",
+      "prefLabel": "reduziertes Kontrastvolumen",
+      "englishLabel": "reduced contrast volume",
+      "synonyms": [
+        "reduced contrast volume"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html",
+        "lungenembolie/template.html"
+      ]
+    },
+    "RID49852": {
+      "uri": "http://www.radlex.org/RID/RID49852",
+      "prefLabel": "Konkomitanz-Deskriptor",
+      "englishLabel": "concommitance descriptor",
+      "synonyms": [
+        "concommitance descriptor"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID49853": {
+      "uri": "http://www.radlex.org/RID/RID49853",
+      "prefLabel": "mit",
+      "englishLabel": "with",
+      "synonyms": [
+        "with"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID49860": {
+      "uri": "http://www.radlex.org/RID/RID49860",
+      "prefLabel": "Anteversion",
+      "englishLabel": null,
+      "synonyms": [
+        "anteversion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID49861": {
+      "uri": "http://www.radlex.org/RID/RID49861",
+      "prefLabel": "Gelenk der unteren Gliedmaße",
+      "englishLabel": "joint of lower extremity",
+      "synonyms": [
+        "joint of lower extremity"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID49862": {
+      "uri": "http://www.radlex.org/RID/RID49862",
+      "prefLabel": "Gelenk der oberen Gliedmaße",
+      "englishLabel": "joint of upper extremity",
+      "synonyms": [
+        "joint of upper extremity"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID49863": {
+      "uri": "http://www.radlex.org/RID/RID49863",
+      "prefLabel": "Gruppe der Gefäße der oberen Gliedmaße",
+      "englishLabel": "set of upper extremity vessels",
+      "synonyms": [
+        "set of upper extremity vessels"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID49864": {
+      "uri": "http://www.radlex.org/RID/RID49864",
+      "prefLabel": "Gruppe der ableitenden Gefäße",
+      "englishLabel": "set of runoff vessels",
+      "synonyms": [
+        "set of runoff vessels"
+      ],
+      "obsolete": false,
+      "sources": [
+        "abdomen-becken/RADLEX-MAPPING.md",
+        "abdomen-becken/template.html"
+      ]
+    },
+    "RID49900": {
+      "uri": "http://www.radlex.org/RID/RID49900",
+      "prefLabel": "scar marker",
+      "englishLabel": null,
+      "synonyms": [],
+      "obsolete": false,
+      "sources": [
+        "knie-posttep/template.html"
+      ]
+    },
+    "RID10": {
+      "uri": "http://www.radlex.org/RID/RID10",
+      "prefLabel": "Bildqualität",
+      "englishLabel": "image quality",
+      "synonyms": [
+        "image quality",
+        "Bildqualität"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID10363": {
+      "uri": "http://www.radlex.org/RID/RID10363",
+      "prefLabel": "Dual-energy Röntgenabsorptiometrie",
+      "englishLabel": "dual energy xray absorptiometry",
+      "synonyms": [
+        "dual energy xray absorptiometry",
+        "Dual-energy Röntgenabsorptiometrie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11052": {
+      "uri": "http://www.radlex.org/RID/RID11052",
+      "prefLabel": "interventioneller Draht",
+      "englishLabel": "interventional wire",
+      "synonyms": [
+        "interventional wire",
+        "interventioneller Draht"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11080": {
+      "uri": "http://www.radlex.org/RID/RID11080",
+      "prefLabel": "arterielle Phase",
+      "englishLabel": "arterial phase",
+      "synonyms": [
+        "arterial phase",
+        "arterielle Phase",
+        "angiographic phase",
+        "early phase",
+        "AP"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11081": {
+      "uri": "http://www.radlex.org/RID/RID11081",
+      "prefLabel": "verzögerte Phase",
+      "englishLabel": "delayed phase",
+      "synonyms": [
+        "delayed phase",
+        "verzögerte Phase"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11085": {
+      "uri": "http://www.radlex.org/RID/RID11085",
+      "prefLabel": "portalvenöse Phase",
+      "englishLabel": "portal venous phase",
+      "synonyms": [
+        "portal venous phase",
+        "portalvenöse Phase",
+        "early postarterial phase",
+        "portal dominant phase",
+        "PVP"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11086": {
+      "uri": "http://www.radlex.org/RID/RID11086",
+      "prefLabel": "native Phase",
+      "englishLabel": "unenhanced phase",
+      "synonyms": [
+        "unenhanced phase",
+        "native Phase"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11334": {
+      "uri": "http://www.radlex.org/RID/RID11334",
+      "prefLabel": "Metallartefakt",
+      "englishLabel": "metal artifact",
+      "synonyms": [
+        "metal artifact",
+        "Metallartefakt"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID114": {
+      "uri": "http://www.radlex.org/RID/RID114",
+      "prefLabel": "Magen",
+      "englishLabel": "stomach",
+      "synonyms": [
+        "stomach",
+        "Magen",
+        "ventriculus",
+        "gaster"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11423": {
+      "uri": "http://www.radlex.org/RID/RID11423",
+      "prefLabel": "bewegungsbedingter Artefakt",
+      "englishLabel": "motion related artifact",
+      "synonyms": [
+        "motion related artifact",
+        "bewegungsbedingter Artefakt"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11511": {
+      "uri": "http://www.radlex.org/RID/RID11511",
+      "prefLabel": "bildgebend komplette Remission",
+      "englishLabel": "complete imaging response",
+      "synonyms": [
+        "complete imaging response",
+        "bildgebend komplette Remission"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11513": {
+      "uri": "http://www.radlex.org/RID/RID11513",
+      "prefLabel": "partielle Remission",
+      "englishLabel": "partial response",
+      "synonyms": [
+        "partial response",
+        "partielle Remission"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11514": {
+      "uri": "http://www.radlex.org/RID/RID11514",
+      "prefLabel": "stabile Erkrankung",
+      "englishLabel": "stable disease",
+      "synonyms": [
+        "stable disease",
+        "stabile Erkrankung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11515": {
+      "uri": "http://www.radlex.org/RID/RID11515",
+      "prefLabel": "progressive Erkrankung",
+      "englishLabel": "progressive disease",
+      "synonyms": [
+        "progressive disease",
+        "progressive Erkrankung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID11521": {
+      "uri": "http://www.radlex.org/RID/RID11521",
+      "prefLabel": "Regression",
+      "englishLabel": "regression",
+      "synonyms": [
+        "regression",
+        "Regression"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID12": {
+      "uri": "http://www.radlex.org/RID/RID12",
+      "prefLabel": "diagnostische Qualität",
+      "englishLabel": "diagnostic quality",
+      "synonyms": [
+        "diagnostic quality",
+        "diagnostische Qualität"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1208": {
+      "uri": "http://www.radlex.org/RID/RID1208",
+      "prefLabel": "Pfortader",
+      "englishLabel": "portal vein",
+      "synonyms": [
+        "portal vein",
+        "Pfortader",
+        "PV",
+        "Vena porta"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1245": {
+      "uri": "http://www.radlex.org/RID/RID1245",
+      "prefLabel": "Luftwege",
+      "englishLabel": "airway",
+      "synonyms": [
+        "airway",
+        "Luftwege"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID12759": {
+      "uri": "http://www.radlex.org/RID/RID12759",
+      "prefLabel": "multi-planare Reformatierung",
+      "englishLabel": "multiplanar reformat",
+      "synonyms": [
+        "multiplanar reformat",
+        "multi-planare Reformatierung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1389": {
+      "uri": "http://www.radlex.org/RID/RID1389",
+      "prefLabel": "Rechter Ventrikel",
+      "englishLabel": "right ventricle",
+      "synonyms": [
+        "right ventricle",
+        "Rechter Ventrikel"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1392": {
+      "uri": "http://www.radlex.org/RID/RID1392",
+      "prefLabel": "Linker Ventrikel",
+      "englishLabel": "left ventricle",
+      "synonyms": [
+        "left ventricle",
+        "Linker Ventrikel"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1541": {
+      "uri": "http://www.radlex.org/RID/RID1541",
+      "prefLabel": "Aszites",
+      "englishLabel": "ascites",
+      "synonyms": [
+        "ascites",
+        "Aszites"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1670": {
+      "uri": "http://www.radlex.org/RID/RID1670",
+      "prefLabel": "Cholezystektomie",
+      "englishLabel": "cholecystectomy",
+      "synonyms": [
+        "cholecystectomy",
+        "Cholezystektomie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID176": {
+      "uri": "http://www.radlex.org/RID/RID176",
+      "prefLabel": "Pankreasgang",
+      "englishLabel": "pancreatic duct",
+      "synonyms": [
+        "pancreatic duct",
+        "Pankreasgang",
+        "DP",
+        "Ductus Wirsungianus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1845": {
+      "uri": "http://www.radlex.org/RID/RID1845",
+      "prefLabel": "Arthroplastie",
+      "englishLabel": "arthroplasty",
+      "synonyms": [
+        "arthroplasty",
+        "Arthroplastie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1846": {
+      "uri": "http://www.radlex.org/RID/RID1846",
+      "prefLabel": "Ein-Kompartiment Arthroplastie",
+      "englishLabel": "unicompartmental arthroplasty",
+      "synonyms": [
+        "unicompartmental arthroplasty",
+        "Ein-Kompartiment Arthroplastie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID199": {
+      "uri": "http://www.radlex.org/RID/RID199",
+      "prefLabel": "Ductus hepato-choledochus",
+      "englishLabel": "common bile duct",
+      "synonyms": [
+        "common bile duct",
+        "Ductus hepato-choledochus",
+        "DHC"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID228": {
+      "uri": "http://www.radlex.org/RID/RID228",
+      "prefLabel": "Nierenbecken",
+      "englishLabel": "renal pelvis",
+      "synonyms": [
+        "renal pelvis",
+        "Nierenbecken"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID237": {
+      "uri": "http://www.radlex.org/RID/RID237",
+      "prefLabel": "vesica urinaria",
+      "englishLabel": "urinary bladder",
+      "synonyms": [
+        "urinary bladder",
+        "vesica urinaria",
+        "Harnblase"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID2472": {
+      "uri": "http://www.radlex.org/RID/RID2472",
+      "prefLabel": "Rippenknorpel",
+      "englishLabel": "costal cartilage of rib",
+      "synonyms": [
+        "costal cartilage of rib",
+        "Rippenknorpel"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID28509": {
+      "uri": "http://www.radlex.org/RID/RID28509",
+      "prefLabel": "Verdickung",
+      "englishLabel": "thickening",
+      "synonyms": [
+        "thickening",
+        "Verdickung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID28531": {
+      "uri": "http://www.radlex.org/RID/RID28531",
+      "prefLabel": "Milchglaszeichnung",
+      "englishLabel": "ground-glass opacity",
+      "synonyms": [
+        "ground-glass opacity",
+        "Milchglaszeichnung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID28537": {
+      "uri": "http://www.radlex.org/RID/RID28537",
+      "prefLabel": "dynamische Lungenüberblähung",
+      "englishLabel": "air trapping",
+      "synonyms": [
+        "air trapping",
+        "dynamische Lungenüberblähung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID28579": {
+      "uri": "http://www.radlex.org/RID/RID28579",
+      "prefLabel": "Nasennebenhöhlen",
+      "englishLabel": "paranasal sinuses",
+      "synonyms": [
+        "paranasal sinuses",
+        "Nasennebenhöhlen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID28665": {
+      "uri": "http://www.radlex.org/RID/RID28665",
+      "prefLabel": "Rekonstruktion",
+      "englishLabel": "reconstruction",
+      "synonyms": [
+        "reconstruction",
+        "Rekonstruktion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID28669": {
+      "uri": "http://www.radlex.org/RID/RID28669",
+      "prefLabel": "Schichtdicke",
+      "englishLabel": "slice thickness",
+      "synonyms": [
+        "slice thickness",
+        "Schichtdicke"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID28891": {
+      "uri": "http://www.radlex.org/RID/RID28891",
+      "prefLabel": "mediastinaler Lymphknoten",
+      "englishLabel": "mediastinal lymph node",
+      "synonyms": [
+        "mediastinal lymph node",
+        "mediastinaler Lymphknoten"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID29990": {
+      "uri": "http://www.radlex.org/RID/RID29990",
+      "prefLabel": "oberes Abdomen",
+      "englishLabel": "upper abdomen",
+      "synonyms": [
+        "upper abdomen",
+        "oberes Abdomen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3320": {
+      "uri": "http://www.radlex.org/RID/RID3320",
+      "prefLabel": "Aortendissektion",
+      "englishLabel": "aortic dissection",
+      "synonyms": [
+        "aortic dissection",
+        "Aortendissektion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3321": {
+      "uri": "http://www.radlex.org/RID/RID3321",
+      "prefLabel": "Aneurysma",
+      "englishLabel": "aneurysm",
+      "synonyms": [
+        "aneurysm",
+        "Aneurysma"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3376": {
+      "uri": "http://www.radlex.org/RID/RID3376",
+      "prefLabel": "Ischämie",
+      "englishLabel": "ischemia",
+      "synonyms": [
+        "ischemia",
+        "Ischämie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3383": {
+      "uri": "http://www.radlex.org/RID/RID3383",
+      "prefLabel": "Appendizitis",
+      "englishLabel": "appendicitis",
+      "synonyms": [
+        "appendicitis",
+        "Appendizitis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3394": {
+      "uri": "http://www.radlex.org/RID/RID3394",
+      "prefLabel": "Cholezystitis",
+      "englishLabel": "cholecystitis",
+      "synonyms": [
+        "cholecystitis",
+        "Cholezystitis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3409": {
+      "uri": "http://www.radlex.org/RID/RID3409",
+      "prefLabel": "Divertikulitis",
+      "englishLabel": "diverticulitis",
+      "synonyms": [
+        "diverticulitis",
+        "Divertikulitis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID343": {
+      "uri": "http://www.radlex.org/RID/RID343",
+      "prefLabel": "Prostata",
+      "englishLabel": "prostate",
+      "synonyms": [
+        "prostate",
+        "Prostata",
+        "prostata"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34393": {
+      "uri": "http://www.radlex.org/RID/RID34393",
+      "prefLabel": "Hydronephrose",
+      "englishLabel": "hydronephrosis",
+      "synonyms": [
+        "hydronephrosis",
+        "Hydronephrose"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34407": {
+      "uri": "http://www.radlex.org/RID/RID34407",
+      "prefLabel": "Kometenschweifzeichen",
+      "englishLabel": "comet tail sign",
+      "synonyms": [
+        "comet tail sign",
+        "Kometenschweifzeichen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34539": {
+      "uri": "http://www.radlex.org/RID/RID34539",
+      "prefLabel": "Pleuraerguss",
+      "englishLabel": "pleural effusion",
+      "synonyms": [
+        "pleural effusion",
+        "Pleuraerguss"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34587": {
+      "uri": "http://www.radlex.org/RID/RID34587",
+      "prefLabel": "vergrößerte Milz",
+      "englishLabel": "enlarged spleen",
+      "synonyms": [
+        "enlarged spleen",
+        "vergrößerte Milz"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34593": {
+      "uri": "http://www.radlex.org/RID/RID34593",
+      "prefLabel": "vergrößerte Leber",
+      "englishLabel": "enlarged liver",
+      "synonyms": [
+        "enlarged liver",
+        "vergrößerte Leber"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34614": {
+      "uri": "http://www.radlex.org/RID/RID34614",
+      "prefLabel": "portale Hypertension",
+      "englishLabel": "portal hypertension",
+      "synonyms": [
+        "portal hypertension",
+        "portale Hypertension"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34656": {
+      "uri": "http://www.radlex.org/RID/RID34656",
+      "prefLabel": "Ovarialzyste",
+      "englishLabel": "ovarian cyst",
+      "synonyms": [
+        "ovarian cyst",
+        "Ovarialzyste"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID34889": {
+      "uri": "http://www.radlex.org/RID/RID34889",
+      "prefLabel": "Lungeninfarkt",
+      "englishLabel": "pulmonary infarction",
+      "synonyms": [
+        "pulmonary infarction",
+        "Lungeninfarkt"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35261": {
+      "uri": "http://www.radlex.org/RID/RID35261",
+      "prefLabel": "Hampton hump sign",
+      "englishLabel": "Hampton hump sign",
+      "synonyms": [
+        "Hampton hump sign"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35280": {
+      "uri": "http://www.radlex.org/RID/RID35280",
+      "prefLabel": "Wabenlunge",
+      "englishLabel": "honeycomb lung",
+      "synonyms": [
+        "honeycomb lung",
+        "Wabenlunge"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3529": {
+      "uri": "http://www.radlex.org/RID/RID3529",
+      "prefLabel": "Pankreatitis",
+      "englishLabel": "pancreatitis",
+      "synonyms": [
+        "pancreatitis",
+        "Pankreatitis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3535": {
+      "uri": "http://www.radlex.org/RID/RID3535",
+      "prefLabel": "Peritonitis",
+      "englishLabel": "peritonitis",
+      "synonyms": [
+        "peritonitis",
+        "Peritonitis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3547": {
+      "uri": "http://www.radlex.org/RID/RID3547",
+      "prefLabel": "Pyelonephritis",
+      "englishLabel": "pyelonephritis",
+      "synonyms": [
+        "pyelonephritis",
+        "Pyelonephritis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35558": {
+      "uri": "http://www.radlex.org/RID/RID35558",
+      "prefLabel": "soft-tissue rim sign",
+      "englishLabel": "soft-tissue rim sign",
+      "synonyms": [
+        "soft-tissue rim sign"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35730": {
+      "uri": "http://www.radlex.org/RID/RID35730",
+      "prefLabel": "Menge an Weichgewebe",
+      "englishLabel": "portion of soft tissue",
+      "synonyms": [
+        "portion of soft tissue",
+        "Menge an Weichgewebe"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35737": {
+      "uri": "http://www.radlex.org/RID/RID35737",
+      "prefLabel": "geringe Dosis",
+      "englishLabel": "low dose",
+      "synonyms": [
+        "low dose",
+        "geringe Dosis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35810": {
+      "uri": "http://www.radlex.org/RID/RID35810",
+      "prefLabel": "Gruppe der soliden Bauchorgane",
+      "englishLabel": "set of solid abdominal organs",
+      "synonyms": [
+        "set of solid abdominal organs",
+        "Gruppe der soliden Bauchorgane"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35811": {
+      "uri": "http://www.radlex.org/RID/RID35811",
+      "prefLabel": "Nierenzyste",
+      "englishLabel": "renal cyst",
+      "synonyms": [
+        "renal cyst",
+        "Nierenzyste"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID35839": {
+      "uri": "http://www.radlex.org/RID/RID35839",
+      "prefLabel": "Truncus pulmonalis",
+      "englishLabel": "pulmonary arterial trunk",
+      "synonyms": [
+        "pulmonary arterial trunk",
+        "Truncus pulmonalis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3711": {
+      "uri": "http://www.radlex.org/RID/RID3711",
+      "prefLabel": "Abszess",
+      "englishLabel": "abscess",
+      "synonyms": [
+        "abscess",
+        "Abszess"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3775": {
+      "uri": "http://www.radlex.org/RID/RID3775",
+      "prefLabel": "Vergrößerung",
+      "englishLabel": "enlargement",
+      "synonyms": [
+        "enlargement",
+        "Vergrößerung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3777": {
+      "uri": "http://www.radlex.org/RID/RID3777",
+      "prefLabel": "Hyperplasie",
+      "englishLabel": "hyperplasia",
+      "synonyms": [
+        "hyperplasia",
+        "Hyperplasie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3784": {
+      "uri": "http://www.radlex.org/RID/RID3784",
+      "prefLabel": "Benigne Prostatahyperplasie",
+      "englishLabel": "benign prostatic hyperplasia",
+      "synonyms": [
+        "benign prostatic hyperplasia",
+        "Benigne Prostatahyperplasie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3840": {
+      "uri": "http://www.radlex.org/RID/RID3840",
+      "prefLabel": "Lymphom",
+      "englishLabel": "lymphoma",
+      "synonyms": [
+        "lymphoma",
+        "Lymphom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38586": {
+      "uri": "http://www.radlex.org/RID/RID38586",
+      "prefLabel": "Nierenstein",
+      "englishLabel": "renal calculus",
+      "synonyms": [
+        "renal calculus",
+        "Nierenstein"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38588": {
+      "uri": "http://www.radlex.org/RID/RID38588",
+      "prefLabel": "Perikarderguss",
+      "englishLabel": "pericardial effusion",
+      "synonyms": [
+        "pericardial effusion",
+        "Perikarderguss"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38592": {
+      "uri": "http://www.radlex.org/RID/RID38592",
+      "prefLabel": "mesenteriale Ischämie",
+      "englishLabel": "mesenteric ischemia",
+      "synonyms": [
+        "mesenteric ischemia",
+        "mesenteriale Ischämie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38660": {
+      "uri": "http://www.radlex.org/RID/RID38660",
+      "prefLabel": "Dual-Energy-CT",
+      "englishLabel": "dual-energy CT",
+      "synonyms": [
+        "dual-energy CT",
+        "Dual-Energy-CT"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38701": {
+      "uri": "http://www.radlex.org/RID/RID38701",
+      "prefLabel": "Iohexol",
+      "englishLabel": "iohexol",
+      "synonyms": [
+        "iohexol",
+        "Iohexol"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38708": {
+      "uri": "http://www.radlex.org/RID/RID38708",
+      "prefLabel": "Iomeprol",
+      "englishLabel": "iomeprol",
+      "synonyms": [
+        "iomeprol",
+        "Iomeprol"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38723": {
+      "uri": "http://www.radlex.org/RID/RID38723",
+      "prefLabel": "Iopromid",
+      "englishLabel": "iopromide",
+      "synonyms": [
+        "iopromide",
+        "Iopromid"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3874": {
+      "uri": "http://www.radlex.org/RID/RID3874",
+      "prefLabel": "Raumforderung",
+      "englishLabel": "mass",
+      "synonyms": [
+        "mass",
+        "Raumforderung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38741": {
+      "uri": "http://www.radlex.org/RID/RID38741",
+      "prefLabel": "Iodixanol",
+      "englishLabel": "iodixanol",
+      "synonyms": [
+        "iodixanol",
+        "Iodixanol"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID38801": {
+      "uri": "http://www.radlex.org/RID/RID38801",
+      "prefLabel": "Ausrichtung",
+      "englishLabel": "alignment",
+      "synonyms": [
+        "alignment",
+        "Ausrichtung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID39064": {
+      "uri": "http://www.radlex.org/RID/RID39064",
+      "prefLabel": "Skelett",
+      "englishLabel": "skeleton",
+      "synonyms": [
+        "skeleton",
+        "Skelett"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID39115": {
+      "uri": "http://www.radlex.org/RID/RID39115",
+      "prefLabel": "intakt",
+      "englishLabel": "intact",
+      "synonyms": [
+        "intact",
+        "intakt"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID39166": {
+      "uri": "http://www.radlex.org/RID/RID39166",
+      "prefLabel": "density",
+      "englishLabel": "density",
+      "synonyms": [
+        "density"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID39260": {
+      "uri": "http://www.radlex.org/RID/RID39260",
+      "prefLabel": "Patella baja",
+      "englishLabel": "patella infera",
+      "synonyms": [
+        "patella infera",
+        "Patella baja"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID39270": {
+      "uri": "http://www.radlex.org/RID/RID39270",
+      "prefLabel": "Fibromyom",
+      "englishLabel": "fibromyoma",
+      "synonyms": [
+        "fibromyoma",
+        "Fibromyom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID39334": {
+      "uri": "http://www.radlex.org/RID/RID39334",
+      "prefLabel": "intraoperativ",
+      "englishLabel": "intraoperative",
+      "synonyms": [
+        "intraoperative",
+        "intraoperativ"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3954": {
+      "uri": "http://www.radlex.org/RID/RID3954",
+      "prefLabel": "Pseudozyste",
+      "englishLabel": "pseudocyst",
+      "synonyms": [
+        "pseudocyst",
+        "Pseudozyste"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID3969": {
+      "uri": "http://www.radlex.org/RID/RID3969",
+      "prefLabel": "Hämangiom",
+      "englishLabel": "hemangioma",
+      "synonyms": [
+        "hemangioma",
+        "Hämangiom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4157": {
+      "uri": "http://www.radlex.org/RID/RID4157",
+      "prefLabel": "Intraduktale papilläre muzinöse Neoplasie",
+      "englishLabel": "intraductal papillary mucinous neoplasm",
+      "synonyms": [
+        "intraductal papillary mucinous neoplasm",
+        "Intraduktale papilläre muzinöse Neoplasie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4164": {
+      "uri": "http://www.radlex.org/RID/RID4164",
+      "prefLabel": "Muzinöse zystische Neoplasie",
+      "englishLabel": "mucinous cystic neoplasm",
+      "synonyms": [
+        "mucinous cystic neoplasm",
+        "Muzinöse zystische Neoplasie",
+        "Muzinöses Zystadenokarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4214": {
+      "uri": "http://www.radlex.org/RID/RID4214",
+      "prefLabel": "Nebennierenadenom",
+      "englishLabel": "adrenal cortical adenoma",
+      "synonyms": [
+        "adrenal cortical adenoma",
+        "Nebennierenadenom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4228": {
+      "uri": "http://www.radlex.org/RID/RID4228",
+      "prefLabel": "Duktales Adenokarzinom",
+      "englishLabel": "ductal adenocarcinoma",
+      "synonyms": [
+        "ductal adenocarcinoma",
+        "Duktales Adenokarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4230": {
+      "uri": "http://www.radlex.org/RID/RID4230",
+      "prefLabel": "Renales Adenokarzinom",
+      "englishLabel": "renal adenocarcinoma",
+      "synonyms": [
+        "renal adenocarcinoma",
+        "Renales Adenokarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4247": {
+      "uri": "http://www.radlex.org/RID/RID4247",
+      "prefLabel": "Karzinom",
+      "englishLabel": "carcinoma",
+      "synonyms": [
+        "carcinoma",
+        "Karzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4251": {
+      "uri": "http://www.radlex.org/RID/RID4251",
+      "prefLabel": "Magenkarzinom",
+      "englishLabel": "gastric carcinoma",
+      "synonyms": [
+        "gastric carcinoma",
+        "Magenkarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4264": {
+      "uri": "http://www.radlex.org/RID/RID4264",
+      "prefLabel": "Karzinomatose",
+      "englishLabel": "carcinomatosis",
+      "synonyms": [
+        "carcinomatosis",
+        "Karzinomatose"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4266": {
+      "uri": "http://www.radlex.org/RID/RID4266",
+      "prefLabel": "Cholangiokarzinom",
+      "englishLabel": "cholangiocarcinoma",
+      "synonyms": [
+        "cholangiocarcinoma",
+        "Cholangiokarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID43255": {
+      "uri": "http://www.radlex.org/RID/RID43255",
+      "prefLabel": "Konsolidierung",
+      "englishLabel": "consolidation",
+      "synonyms": [
+        "consolidation",
+        "Konsolidierung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID43256": {
+      "uri": "http://www.radlex.org/RID/RID43256",
+      "prefLabel": "crazy-paving Muster",
+      "englishLabel": "crazy-paving pattern",
+      "synonyms": [
+        "crazy-paving pattern",
+        "crazy-paving Muster"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID43271": {
+      "uri": "http://www.radlex.org/RID/RID43271",
+      "prefLabel": "retikuläres Muster",
+      "englishLabel": "reticular pattern",
+      "synonyms": [
+        "reticular pattern",
+        "retikuläres Muster"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID43272": {
+      "uri": "http://www.radlex.org/RID/RID43272",
+      "prefLabel": "retikulonoduläres Muster",
+      "englishLabel": "reticulonodular pattern",
+      "synonyms": [
+        "reticulonodular pattern",
+        "retikulonoduläres Muster"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4343": {
+      "uri": "http://www.radlex.org/RID/RID4343",
+      "prefLabel": "Angiomyolipom",
+      "englishLabel": "angiomyolipoma",
+      "synonyms": [
+        "angiomyolipoma",
+        "Angiomyolipom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID441": {
+      "uri": "http://www.radlex.org/RID/RID441",
+      "prefLabel": "Prävesikaler Raum",
+      "englishLabel": "prevesical space",
+      "synonyms": [
+        "prevesical space",
+        "Prävesikaler Raum"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4483": {
+      "uri": "http://www.radlex.org/RID/RID4483",
+      "prefLabel": "Neuroendokrine Neoplasie",
+      "englishLabel": "neuroendocrine neoplasm",
+      "synonyms": [
+        "neuroendocrine neoplasm",
+        "Neuroendokrine Neoplasie",
+        "endocrine tumor",
+        "neuroendocrine tumor"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4521": {
+      "uri": "http://www.radlex.org/RID/RID4521",
+      "prefLabel": "Sarkom",
+      "englishLabel": "sarcoma",
+      "synonyms": [
+        "sarcoma",
+        "Sarkom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID45685": {
+      "uri": "http://www.radlex.org/RID/RID45685",
+      "prefLabel": "Endometriumkarzinom",
+      "englishLabel": "endometrial cancer",
+      "synonyms": [
+        "endometrial cancer",
+        "Endometriumkarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID45687": {
+      "uri": "http://www.radlex.org/RID/RID45687",
+      "prefLabel": "Ovarialkarzinom",
+      "englishLabel": "ovarian cancer",
+      "synonyms": [
+        "ovarian cancer",
+        "Ovarialkarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID45688": {
+      "uri": "http://www.radlex.org/RID/RID45688",
+      "prefLabel": "Pankreaskarzinom",
+      "englishLabel": "pancreatic cancer",
+      "synonyms": [
+        "pancreatic cancer",
+        "Pankreaskarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID45689": {
+      "uri": "http://www.radlex.org/RID/RID45689",
+      "prefLabel": "Prostatakarzinom",
+      "englishLabel": "prostate cancer",
+      "synonyms": [
+        "prostate cancer",
+        "Prostatakarzinom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4591": {
+      "uri": "http://www.radlex.org/RID/RID4591",
+      "prefLabel": "Postoperative Veränderung",
+      "englishLabel": "postoperative change",
+      "synonyms": [
+        "postoperative change",
+        "Postoperative Veränderung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID46044": {
+      "uri": "http://www.radlex.org/RID/RID46044",
+      "prefLabel": "Budd-Chiari-Syndrom",
+      "englishLabel": "Budd-Chiari syndrome",
+      "synonyms": [
+        "Budd-Chiari syndrome",
+        "Budd-Chiari-Syndrom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4619": {
+      "uri": "http://www.radlex.org/RID/RID4619",
+      "prefLabel": "Arthroplastielockerung",
+      "englishLabel": "arthroplasty loosening",
+      "synonyms": [
+        "arthroplasty loosening",
+        "Arthroplastielockerung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4650": {
+      "uri": "http://www.radlex.org/RID/RID4650",
+      "prefLabel": "Fraktur",
+      "englishLabel": "fracture",
+      "synonyms": [
+        "fracture",
+        "Fraktur"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4658": {
+      "uri": "http://www.radlex.org/RID/RID4658",
+      "prefLabel": "Kompressionsfraktur",
+      "englishLabel": "compression fracture",
+      "synonyms": [
+        "compression fracture",
+        "Kompressionsfraktur"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4708": {
+      "uri": "http://www.radlex.org/RID/RID4708",
+      "prefLabel": "Epidurales Hämatom",
+      "englishLabel": "epidural hematoma",
+      "synonyms": [
+        "epidural hematoma",
+        "Epidurales Hämatom",
+        "Epiduralhämatom"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4710": {
+      "uri": "http://www.radlex.org/RID/RID4710",
+      "prefLabel": "Subarachnoidalblutung",
+      "englishLabel": "subarachnoid hemorrhage",
+      "synonyms": [
+        "subarachnoid hemorrhage",
+        "Subarachnoidalblutung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4741": {
+      "uri": "http://www.radlex.org/RID/RID4741",
+      "prefLabel": "Kompression",
+      "englishLabel": "compression",
+      "synonyms": [
+        "compression",
+        "Kompression"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4743": {
+      "uri": "http://www.radlex.org/RID/RID4743",
+      "prefLabel": "Dilatation",
+      "englishLabel": "dilation",
+      "synonyms": [
+        "dilation",
+        "Dilatation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4765": {
+      "uri": "http://www.radlex.org/RID/RID4765",
+      "prefLabel": "Beugedeformität",
+      "englishLabel": "flexion deformity",
+      "synonyms": [
+        "flexion deformity",
+        "Beugedeformität"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4768": {
+      "uri": "http://www.radlex.org/RID/RID4768",
+      "prefLabel": "Valgus Deformität",
+      "englishLabel": "valgus deformity",
+      "synonyms": [
+        "valgus deformity",
+        "Valgus Deformität"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4769": {
+      "uri": "http://www.radlex.org/RID/RID4769",
+      "prefLabel": "Varus Deformität",
+      "englishLabel": "varus deformity",
+      "synonyms": [
+        "varus deformity",
+        "Varus Deformität"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4778": {
+      "uri": "http://www.radlex.org/RID/RID4778",
+      "prefLabel": "Subluxation",
+      "englishLabel": "subluxation",
+      "synonyms": [
+        "subluxation",
+        "Subluxation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4782": {
+      "uri": "http://www.radlex.org/RID/RID4782",
+      "prefLabel": "Neigung",
+      "englishLabel": "tilt",
+      "synonyms": [
+        "tilt",
+        "Neigung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4834": {
+      "uri": "http://www.radlex.org/RID/RID4834",
+      "prefLabel": "Lungenembolie",
+      "englishLabel": "pulmonary embolism",
+      "synonyms": [
+        "pulmonary embolism",
+        "Lungenembolie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4863": {
+      "uri": "http://www.radlex.org/RID/RID4863",
+      "prefLabel": "Stauung",
+      "englishLabel": "congestion",
+      "synonyms": [
+        "congestion",
+        "Stauung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4865": {
+      "uri": "http://www.radlex.org/RID/RID4865",
+      "prefLabel": "Ödem",
+      "englishLabel": "edema",
+      "synonyms": [
+        "edema",
+        "Ödem"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4883": {
+      "uri": "http://www.radlex.org/RID/RID4883",
+      "prefLabel": "Hydrops",
+      "englishLabel": "hydrops",
+      "synonyms": [
+        "hydrops",
+        "Hydrops"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4885": {
+      "uri": "http://www.radlex.org/RID/RID4885",
+      "prefLabel": "Hydrozephalus",
+      "englishLabel": "hydrocephalus",
+      "synonyms": [
+        "hydrocephalus",
+        "Hydrozephalus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4920": {
+      "uri": "http://www.radlex.org/RID/RID4920",
+      "prefLabel": "Inzisionshernie",
+      "englishLabel": "incisional hernia",
+      "synonyms": [
+        "incisional hernia",
+        "Inzisionshernie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4926": {
+      "uri": "http://www.radlex.org/RID/RID4926",
+      "prefLabel": "Leistenhernie",
+      "englishLabel": "inguinal hernia",
+      "synonyms": [
+        "inguinal hernia",
+        "Leistenhernie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4948": {
+      "uri": "http://www.radlex.org/RID/RID4948",
+      "prefLabel": "Zerebrale Hernierung",
+      "englishLabel": "cerebral herniation",
+      "synonyms": [
+        "cerebral herniation",
+        "Zerebrale Hernierung",
+        "Zerebrale Herniation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4949": {
+      "uri": "http://www.radlex.org/RID/RID4949",
+      "prefLabel": "Subfalzine Hernierung",
+      "englishLabel": "subfalcine herniation",
+      "synonyms": [
+        "subfalcine herniation",
+        "Subfalzine Hernierung",
+        "Subfalzine Herniation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4950": {
+      "uri": "http://www.radlex.org/RID/RID4950",
+      "prefLabel": "Unkale Hernierung",
+      "englishLabel": "uncal herniation",
+      "synonyms": [
+        "uncal herniation",
+        "Unkale Hernierung",
+        "Unkale Herniation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4951": {
+      "uri": "http://www.radlex.org/RID/RID4951",
+      "prefLabel": "Transtentorielle Hernierung",
+      "englishLabel": "transtentorial herniation",
+      "synonyms": [
+        "transtentorial herniation",
+        "Transtentorielle Hernierung",
+        "Transtentorielle Herniation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4962": {
+      "uri": "http://www.radlex.org/RID/RID4962",
+      "prefLabel": "Obstruktion",
+      "englishLabel": "obstruction",
+      "synonyms": [
+        "obstruction",
+        "Obstruktion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4990": {
+      "uri": "http://www.radlex.org/RID/RID4990",
+      "prefLabel": "Gallenblasestein",
+      "englishLabel": "gallstone in gallbladder",
+      "synonyms": [
+        "gallstone in gallbladder",
+        "Gallenblasestein"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID49910": {
+      "uri": "http://www.radlex.org/RID/RID49910",
+      "prefLabel": "mastectomy",
+      "englishLabel": "mastectomy",
+      "synonyms": [
+        "mastectomy"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4992": {
+      "uri": "http://www.radlex.org/RID/RID4992",
+      "prefLabel": "Gallengangstein",
+      "englishLabel": "gallstone in bile duct",
+      "synonyms": [
+        "gallstone in bile duct",
+        "Gallengangstein"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID49921": {
+      "uri": "http://www.radlex.org/RID/RID49921",
+      "prefLabel": "set of abdominal vessels",
+      "englishLabel": "set of abdominal vessels",
+      "synonyms": [
+        "set of abdominal vessels"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID4994": {
+      "uri": "http://www.radlex.org/RID/RID4994",
+      "prefLabel": "Kalkulus",
+      "englishLabel": "calculus",
+      "synonyms": [
+        "calculus",
+        "Kalkulus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5002": {
+      "uri": "http://www.radlex.org/RID/RID5002",
+      "prefLabel": "Uratstein",
+      "englishLabel": "uric acid stone",
+      "synonyms": [
+        "uric acid stone",
+        "Uratstein"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5008": {
+      "uri": "http://www.radlex.org/RID/RID5008",
+      "prefLabel": "Blasenkalkulus",
+      "englishLabel": "bladder calculus",
+      "synonyms": [
+        "bladder calculus",
+        "Blasenkalkulus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID50149": {
+      "uri": "http://www.radlex.org/RID/RID50149",
+      "prefLabel": "pulmonary nodule",
+      "englishLabel": "pulmonary nodule",
+      "synonyms": [
+        "pulmonary nodule"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID50336": {
+      "uri": "http://www.radlex.org/RID/RID50336",
+      "prefLabel": "port",
+      "englishLabel": "port",
+      "synonyms": [
+        "port"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID50341": {
+      "uri": "http://www.radlex.org/RID/RID50341",
+      "prefLabel": "jejunostomy tube",
+      "englishLabel": "jejunostomy tube",
+      "synonyms": [
+        "jejunostomy tube"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5043": {
+      "uri": "http://www.radlex.org/RID/RID5043",
+      "prefLabel": "Degenerative Erkrankung",
+      "englishLabel": "degenerative disorder",
+      "synonyms": [
+        "degenerative disorder",
+        "Degenerative Erkrankung"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5046": {
+      "uri": "http://www.radlex.org/RID/RID5046",
+      "prefLabel": "Atrophie",
+      "englishLabel": "atrophy",
+      "synonyms": [
+        "atrophy",
+        "Atrophie"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID50530": {
+      "uri": "http://www.radlex.org/RID/RID50530",
+      "prefLabel": "dialysis catheter",
+      "englishLabel": "dialysis catheter",
+      "synonyms": [
+        "dialysis catheter"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5196": {
+      "uri": "http://www.radlex.org/RID/RID5196",
+      "prefLabel": "Kalzifikation",
+      "englishLabel": "calcification",
+      "synonyms": [
+        "calcification",
+        "Kalzifikation"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5217": {
+      "uri": "http://www.radlex.org/RID/RID5217",
+      "prefLabel": "Fettleber",
+      "englishLabel": "steatosis",
+      "synonyms": [
+        "steatosis",
+        "Fettleber"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5382": {
+      "uri": "http://www.radlex.org/RID/RID5382",
+      "prefLabel": "Osteolytische Läsion",
+      "englishLabel": "osteolysis",
+      "synonyms": [
+        "osteolysis",
+        "Osteolyse",
+        "Osteolytische Läsion"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5425": {
+      "uri": "http://www.radlex.org/RID/RID5425",
+      "prefLabel": "Fremdkörper",
+      "englishLabel": "foreign body",
+      "synonyms": [
+        "foreign body",
+        "Fremdkörper"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5429": {
+      "uri": "http://www.radlex.org/RID/RID5429",
+      "prefLabel": "Medizinisches Gerät",
+      "englishLabel": "implantable device",
+      "synonyms": [
+        "implantable device",
+        "Medizinisches Gerät"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5431": {
+      "uri": "http://www.radlex.org/RID/RID5431",
+      "prefLabel": "Herzrhythmustherapie-Gerät",
+      "englishLabel": "cardiac rhythm therapy device",
+      "synonyms": [
+        "cardiac rhythm therapy device",
+        "Herzrhythmustherapie-Gerät"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5434": {
+      "uri": "http://www.radlex.org/RID/RID5434",
+      "prefLabel": "Automatischer implantierbarer Herzdefibrillator",
+      "englishLabel": "automated implantable cardiac defibrillator",
+      "synonyms": [
+        "automated implantable cardiac defibrillator",
+        "Automatischer implantierbarer Herzdefibrillator"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5436": {
+      "uri": "http://www.radlex.org/RID/RID5436",
+      "prefLabel": "Herzschrittmacher",
+      "englishLabel": "pacemaker",
+      "synonyms": [
+        "pacemaker",
+        "Herzschrittmacher"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5557": {
+      "uri": "http://www.radlex.org/RID/RID5557",
+      "prefLabel": "Endotrachealtubus",
+      "englishLabel": "endotracheal tube",
+      "synonyms": [
+        "endotracheal tube",
+        "Endotrachealtubus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5560": {
+      "uri": "http://www.radlex.org/RID/RID5560",
+      "prefLabel": "Tracheostomietubus",
+      "englishLabel": "tracheostomy tube",
+      "synonyms": [
+        "tracheostomy tube",
+        "Tracheostomietubus"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5566": {
+      "uri": "http://www.radlex.org/RID/RID5566",
+      "prefLabel": "Nasogastrische Sonde",
+      "englishLabel": "nasogastric tube",
+      "synonyms": [
+        "nasogastric tube",
+        "Nasogastrische Sonde"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5573": {
+      "uri": "http://www.radlex.org/RID/RID5573",
+      "prefLabel": "Pleuradrainage",
+      "englishLabel": "thoracostomy tube",
+      "synonyms": [
+        "thoracostomy tube",
+        "Pleuradrainage"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5576": {
+      "uri": "http://www.radlex.org/RID/RID5576",
+      "prefLabel": "Katheter",
+      "englishLabel": "catheter",
+      "synonyms": [
+        "catheter",
+        "Katheter"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5578": {
+      "uri": "http://www.radlex.org/RID/RID5578",
+      "prefLabel": "Zentraler Venenkatheter",
+      "englishLabel": "central venous catheter",
+      "synonyms": [
+        "central venous catheter",
+        "Zentraler Venenkatheter"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5581": {
+      "uri": "http://www.radlex.org/RID/RID5581",
+      "prefLabel": "Peripherer intravenöser Katheter",
+      "englishLabel": "peripheral intravenous central catheter",
+      "synonyms": [
+        "peripheral intravenous central catheter",
+        "Peripherer intravenöser Katheter"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5587": {
+      "uri": "http://www.radlex.org/RID/RID5587",
+      "prefLabel": "Intraaortale Ballonpumpe",
+      "englishLabel": "intraaortic balloon pump",
+      "synonyms": [
+        "intraaortic balloon pump",
+        "Intraaortale Ballonpumpe"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5610": {
+      "uri": "http://www.radlex.org/RID/RID5610",
+      "prefLabel": "chirurgische Drainage",
+      "englishLabel": "surgical drain",
+      "synonyms": [
+        "surgical drain",
+        "chirurgische Drainage"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5696": {
+      "uri": "http://www.radlex.org/RID/RID5696",
+      "prefLabel": "altersgemäß",
+      "englishLabel": "age appropriate",
+      "synonyms": [
+        "age appropriate",
+        "altersgemäß"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5718": {
+      "uri": "http://www.radlex.org/RID/RID5718",
+      "prefLabel": "akut",
+      "englishLabel": "acute",
+      "synonyms": [
+        "acute",
+        "akut"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5719": {
+      "uri": "http://www.radlex.org/RID/RID5719",
+      "prefLabel": "chronisch",
+      "englishLabel": "chronic",
+      "synonyms": [
+        "chronic",
+        "chronisch"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5729": {
+      "uri": "http://www.radlex.org/RID/RID5729",
+      "prefLabel": "postoperativ",
+      "englishLabel": "postoperative",
+      "synonyms": [
+        "postoperative",
+        "postoperativ"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5771": {
+      "uri": "http://www.radlex.org/RID/RID5771",
+      "prefLabel": "bilateral",
+      "englishLabel": "bilateral",
+      "synonyms": [
+        "bilateral"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5786": {
+      "uri": "http://www.radlex.org/RID/RID5786",
+      "prefLabel": "dilatiert",
+      "englishLabel": "dilated",
+      "synonyms": [
+        "dilated",
+        "dilatiert"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5871": {
+      "uri": "http://www.radlex.org/RID/RID5871",
+      "prefLabel": "komprimiert",
+      "englishLabel": "compressed",
+      "synonyms": [
+        "compressed",
+        "komprimiert"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5872": {
+      "uri": "http://www.radlex.org/RID/RID5872",
+      "prefLabel": "Konglomerat",
+      "englishLabel": "conglomerate",
+      "synonyms": [
+        "conglomerate",
+        "Konglomerat"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID5895": {
+      "uri": "http://www.radlex.org/RID/RID5895",
+      "prefLabel": "persistierend",
+      "englishLabel": "patent",
+      "synonyms": [
+        "patent",
+        "persistierend"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID6247": {
+      "uri": "http://www.radlex.org/RID/RID6247",
+      "prefLabel": "intramural",
+      "englishLabel": "intramural",
+      "synonyms": [
+        "intramural"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID6408": {
+      "uri": "http://www.radlex.org/RID/RID6408",
+      "prefLabel": "Schranke",
+      "englishLabel": "watershed",
+      "synonyms": [
+        "watershed",
+        "Schranke",
+        "Wasserscheide"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID6414": {
+      "uri": "http://www.radlex.org/RID/RID6414",
+      "prefLabel": "Vollständig zusammengelegtes/zusammengepresstes Implantat",
+      "englishLabel": "fully constrained implant",
+      "synonyms": [
+        "fully constrained implant",
+        "Vollständig zusammengelegtes/zusammengepresstes Implantat"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID6677": {
+      "uri": "http://www.radlex.org/RID/RID6677",
+      "prefLabel": "Hirnstamm",
+      "englishLabel": "brainstem",
+      "synonyms": [
+        "brainstem",
+        "Hirnstamm",
+        "truncus encephali"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID6815": {
+      "uri": "http://www.radlex.org/RID/RID6815",
+      "prefLabel": "kleinhirn",
+      "englishLabel": "cerebellum",
+      "synonyms": [
+        "cerebellum",
+        "kleinhirn"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID7123": {
+      "uri": "http://www.radlex.org/RID/RID7123",
+      "prefLabel": "Zerebraler Ventrikel",
+      "englishLabel": "cerebral ventricle",
+      "synonyms": [
+        "cerebral ventricle",
+        "Zerebraler Ventrikel"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID7180": {
+      "uri": "http://www.radlex.org/RID/RID7180",
+      "prefLabel": "Subarachnoidale Zisternen",
+      "englishLabel": "subarachnoid cistern",
+      "synonyms": [
+        "subarachnoid cistern",
+        "Subarachnoidale Zisternen"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID7475": {
+      "uri": "http://www.radlex.org/RID/RID7475",
+      "prefLabel": "kavitär",
+      "englishLabel": "cavitary",
+      "synonyms": [
+        "cavitary",
+        "kavitär"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID905": {
+      "uri": "http://www.radlex.org/RID/RID905",
+      "prefLabel": "Aorta abdominalis",
+      "englishLabel": "abdominal aorta",
+      "synonyms": [
+        "abdominal aorta",
+        "Aorta abdominalis"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID9196": {
+      "uri": "http://www.radlex.org/RID/RID9196",
+      "prefLabel": "Schädel",
+      "englishLabel": "skull",
+      "synonyms": [
+        "skull",
+        "calvarium",
+        "Schädel"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID1524": {
+      "uri": "http://www.radlex.org/RID/RID1524",
+      "prefLabel": "Zwerchfell",
+      "englishLabel": "diaphragm",
+      "synonyms": [
+        "diaphragm",
+        "Zwerchfell"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
+      ]
+    },
+    "RID2743": {
+      "uri": "http://www.radlex.org/RID/RID2743",
+      "prefLabel": "Knie",
+      "englishLabel": "knee",
+      "synonyms": [
+        "knee",
+        "Knie",
+        "genu"
+      ],
+      "obsolete": false,
+      "sources": [
+        "resolved 2026-08-02"
       ]
     }
   }
