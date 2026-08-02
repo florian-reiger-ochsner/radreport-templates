@@ -49,8 +49,7 @@ standorte:
 loinc-codes:
   - code: "21889-1"
     description: Size Tumor
-  - code: LP202113-1
-    description: LI-RADS Category
+  # LP202113-1 (LI-RADS Category) entfernt: auf loinc.org nicht aufloesbar
 risikopopulation:
   - leberzirrhose-ausser-gefaesserkrankungen
   - chronische-hbv

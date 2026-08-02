@@ -1,5 +1,10 @@
 # Changelog – CT Abdomen + Becken
 
+## [LOINC-Korrektur] - 2026-08-02
+### Korrigiert (LOINC gegen loinc.org verifiziert, "nie raten")
+- Geratene/ungueltige LOINC-Codes entfernt: 30652-8 (auf loinc.org leer/unbelegt).
+- Betroffene Felder auf lokales CodeSystem (`http://hjk.wien/fhir/CodeSystem/radiology-templates`) + `data-en` zurueckgefuehrt; `loinc-codes` in frontmatter geleert. Verifizierte LOINC-Codes bei Bedarf via resolve-loinc.js gegen fhir.loinc.org nachtragen.
+
 ## [2.1] – 2026-07-21
 ### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
 - **Gesamte RadLex-Kodierung neu belegt** (Rebuild 7/8, umfangreichstes Template, 202 Konzepte).

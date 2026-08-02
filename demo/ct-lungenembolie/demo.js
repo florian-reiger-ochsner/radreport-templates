@@ -329,7 +329,6 @@
         resourceType: 'Observation', status: 'final', id: 'rvlv-obs',
         code: { coding: [
           { system: 'http://radlex.org', code: 'RID5076', display: 'RV/LV ratio' },
-          { system: 'http://loinc.org', code: '79900-0', display: 'Right ventricular internal diameter' }
         ] },
         valueQuantity: { value: ratio, unit: 'ratio' },
         interpretation: ratio >= 1.0 ? [{ coding: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation', code: 'H', display: 'High' }] }] : undefined,
@@ -343,7 +342,6 @@
     var dr = {
       resourceType: 'DiagnosticReport', status: 'final', id: 'ctpa-report',
       code: { coding: [
-        { system: 'http://loinc.org', code: '24634-8', display: 'CT Pulmonary Angiography' },
         { system: 'http://radlex.org', code: 'RID10361', display: 'CT pulmonary angiography' }
       ] },
       effectiveDateTime: now,

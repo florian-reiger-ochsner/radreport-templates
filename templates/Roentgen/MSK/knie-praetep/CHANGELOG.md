@@ -1,5 +1,10 @@
 # Changelog – Röntgen Knie präoperativ vor TEP
 
+## [LOINC-Korrektur] - 2026-08-02
+### Korrigiert (LOINC gegen loinc.org verifiziert, "nie raten")
+- Geratene/ungueltige LOINC-Codes entfernt: LP410789-0 (=Revised Prenatal Distress Questionnaire), 24650-4 (=Thorax lat.-decub.-Roentgen), 36572-4 (leer), LP35279-5 und LP410785-8 (auf loinc.org nicht aufloesbar).
+- Betroffene Felder auf lokales CodeSystem (`http://hjk.wien/fhir/CodeSystem/radiology-templates`) + `data-en` zurueckgefuehrt; `loinc-codes` in frontmatter geleert. Verifizierte LOINC-Codes bei Bedarf via resolve-loinc.js gegen fhir.loinc.org nachtragen.
+
 ## [1.7] – 2026-08-02
 ### Neu (SPEC-ADDENDUM-A – Verification Floor / Feldzustände am Messwert)
 - **Fünf-Zustands-Modell am KI-Messfeld** ersetzt den früheren direkten

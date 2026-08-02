@@ -449,7 +449,7 @@
 
     var dr = {
       resourceType: 'DiagnosticReport', status: 'final', id: 'ct-abd-report',
-      code: { coding: [{ system: 'http://loinc.org', code: '30652-8', display: 'CT Abdomen and Pelvis' }] },
+      code: { coding: [{ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'ct-abdomen-pelvis', display: 'CT Abdomen and Pelvis' }] },
       effectiveDateTime: now,
       identifier: [{ value: 'HJK-MRRT-CT-ABDBECKEN-v2.0' }],
       conclusion: gv('beurt'),

@@ -557,12 +557,12 @@ function measurementObservation(res, meta, bodySite) {
 }
 
 const AXIS_FHIR = {
-  hka:   { code: 'LP410789-0', sys: 'http://loinc.org', display: 'Hip-knee-ankle angle', unit: 'deg' },
+  hka:   { code: 'HKA', sys: LOCAL_CS, display: 'Hip-knee-ankle angle', unit: 'deg' },
   mad:   { code: 'MAD',        sys: LOCAL_CS, display: 'Mechanical axis deviation', unit: 'mm' },
   mldfa: { code: 'mLDFA',      sys: LOCAL_CS, display: 'Mechanical lateral distal femoral angle', unit: 'deg' },
   mmpta: { code: 'mMPTA',      sys: LOCAL_CS, display: 'Mechanical medial proximal tibial angle', unit: 'deg' },
   jlca:  { code: 'JLCA',       sys: LOCAL_CS, display: 'Joint line convergence angle', unit: 'deg' },
-  lld:   { code: 'LP35279-5',  sys: 'http://loinc.org', display: 'Leg length discrepancy', unit: 'mm' }
+  lld:   { code: 'LLD', sys: LOCAL_CS, display: 'Leg length discrepancy', unit: 'mm' }
 };
 
 
@@ -765,7 +765,7 @@ function showExport(format) {
       const v = parseInt(gv(id));
       if (!isNaN(v)) {
         const sel = document.getElementById(id), opt = sel.options[sel.selectedIndex], rid = opt.getAttribute('data-radlex');
-        const coding = [{ system:'http://loinc.org', code:'LP410785-8', display:`Kellgren-Lawrence ${kompart}` }];
+        const coding = [{ system:LOCAL_CS, code:'kellgren-lawrence', display:`Kellgren-Lawrence ${kompart}` }];
         if (rid) coding.push({ system:'http://radlex.org', code:rid, display:opt.getAttribute('data-en') });
         else coding.push({ system:LOCAL_CS, code:`kl-${kompart}-grade-${v}`, display:opt.getAttribute('data-en') });
         obs.push({ resourceType:'Observation', status:'final', code:{ coding }, bodySite, valueInteger:v, interpretation:[{ text:opt.text }] });
@@ -795,8 +795,7 @@ function showExport(format) {
              tag:[{ system:'http://hjk.wien/fhir/template-variant', code: data.metadata.variante, display:`Vorlage ${TEMPLATE_ID} v${TEMPLATE_VERSION}` }] },
       entry:[ { resource:{ resourceType:'DiagnosticReport', status:'final',
             category:[{ coding:[{ system:'http://loinc.org', code:'LP29684-5', display:'Radiology' }] }],
-            code:{ coding:[ { system:'http://loinc.org', code:'36572-4', display:'Knee X-ray, preoperative' },
-                            { system:'http://radlex.org', code:'RPID218', display:'Knee X-ray' } ] },
+            code:{ coding:[ { system:'http://radlex.org', code:'RPID218', display:'Knee X-ray' } ] },
             bodySite, conclusion: data.fliesstext.beurteilung,
             presentedForm:[{ contentType:'text/plain', data:btoa(unescape(encodeURIComponent(Object.values(data.fliesstext).join('\n\n')))) }] } },
         ...obs.map(o => ({ resource:o })) ] };

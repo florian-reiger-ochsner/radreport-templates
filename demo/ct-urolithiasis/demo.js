@@ -288,7 +288,6 @@
         resourceType: 'Observation', status: 'final', id: 'calculus-' + (i + 1),
         code: { coding: [
           { system: 'http://radlex.org', code: 'RID5154', display: 'urinary calculus' },
-          { system: 'http://loinc.org', code: '24634-8', display: 'CT KUB' }
         ] },
         bodySite: { text: s.seite + ' ' + s.lok },
         component: [
@@ -303,7 +302,6 @@
     var dr = {
       resourceType: 'DiagnosticReport', status: 'final', id: 'uro-report',
       code: { coding: [
-        { system: 'http://loinc.org', code: '24634-8', display: 'CT KUB' },
         { system: 'http://radlex.org', code: 'RID10361', display: 'CT urolithiasis' }
       ] },
       effectiveDateTime: now,

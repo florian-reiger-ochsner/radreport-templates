@@ -1,5 +1,10 @@
 # Changelog – CT Lungenarterien (CTPA)
 
+## [LOINC-Korrektur] - 2026-08-02
+### Korrigiert (LOINC gegen loinc.org verifiziert, "nie raten")
+- Geratene/ungueltige LOINC-Codes entfernt: 24634-8 (=portables Thorax-Roentgen, nicht CTPA), 79900-0 und 79901-8 (leer). 48065-7 (Fibrin D-Dimer) bleibt gueltig..
+- Betroffene Felder auf lokales CodeSystem (`http://hjk.wien/fhir/CodeSystem/radiology-templates`) + `data-en` zurueckgefuehrt; `loinc-codes` in frontmatter geleert. Verifizierte LOINC-Codes bei Bedarf via resolve-loinc.js gegen fhir.loinc.org nachtragen.
+
 ## [1.1] – 2026-07-31
 ### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
 - **Gesamte RadLex-Kodierung neu belegt.** Frühere RIDs waren großteils geraten und

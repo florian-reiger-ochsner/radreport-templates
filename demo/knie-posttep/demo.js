@@ -693,7 +693,7 @@
     addObs(optData('imp_const', 'radlex') || 'RID49706', optData('imp_const', 'en') || 'constraint', gv('imp_const'), null, null);
     addObs('RID49730', 'femoral component coronal alignment', gn('fem_cor'), null, '°');
     addObs('RID49750', 'tibial component coronal alignment', gn('tib_cor'), null, '°');
-    addObs('RID49504', 'hip-knee-ankle angle postoperative', gn('hka_post'), 'LP410789-0', '°');
+    addObs('RID49504', 'hip-knee-ankle angle postoperative', gn('hka_post'), null, '°');
     addObs(optData('align_ges', 'radlex') || 'RID49770', optData('align_ges', 'en') || 'postoperative alignment', gv('align_ges'), null, null);
     addObs(optData('peri_ges', 'radlex') || 'RID49790', optData('peri_ges', 'en') || 'periprosthetic assessment', gv('peri_ges'), null, null);
 
@@ -709,7 +709,7 @@
 
     var dr = {
       resourceType: 'DiagnosticReport', status: 'final', id: 'knee-posttep-report',
-      code: { coding: [{ system: 'http://loinc.org', code: '24650-4', display: 'Knee X-ray AP and Lateral' }] },
+      code: { coding: [{ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'knee-xray-ap-lateral', display: 'Knee X-ray AP and Lateral' }] },
       effectiveDateTime: now,
       identifier: [{ value: 'HJK-MRRT-KNIE-POSTTEP-v1.1' }],
       conclusion: gv('beurt'),

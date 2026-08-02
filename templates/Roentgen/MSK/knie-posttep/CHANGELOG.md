@@ -1,5 +1,10 @@
 # Changelog – Röntgen Knie postoperativ nach KTEP
 
+## [LOINC-Korrektur] - 2026-08-02
+### Korrigiert (LOINC gegen loinc.org verifiziert, "nie raten")
+- Geratene/ungueltige LOINC-Codes entfernt: LP410789-0 (=Revised Prenatal Distress Questionnaire), 24650-4 (=Thorax lat.-decub.-Roentgen).
+- Betroffene Felder auf lokales CodeSystem (`http://hjk.wien/fhir/CodeSystem/radiology-templates`) + `data-en` zurueckgefuehrt; `loinc-codes` in frontmatter geleert. Verifizierte LOINC-Codes bei Bedarf via resolve-loinc.js gegen fhir.loinc.org nachtragen.
+
 ## [1.2] – 2026-07-21
 ### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
 - **Gesamte RadLex-Kodierung neu belegt** (Rebuild 8/8, letztes Template). Frühere RIDs

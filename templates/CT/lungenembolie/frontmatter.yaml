@@ -23,13 +23,7 @@ referenzen:
 ki-tools: []
 standorte:
   - Herz-Jesu-Krankenhaus Wien (HJK)
-loinc-codes:
-  - code: "24634-8"
-    description: CT Pulmonary Angiography
-  - code: "79900-0"
-    description: Right ventricular internal diameter
-  - code: "79901-8"
-    description: Left ventricular internal diameter
+loinc-codes: []  # 24634-8=portables Thorax-Roe (nicht CTPA), 79900-0/79901-8 unbelegt (loinc.org) -> entfernt
 features:
   - rv-lv-ratio-kalkulator
   - risikostratifizierung-esc-2019

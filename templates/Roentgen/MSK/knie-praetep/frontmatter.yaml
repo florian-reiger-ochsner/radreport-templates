@@ -29,14 +29,12 @@ messgroessen:
   - id: hka
     name: HKA (hip-knee-ankle angle)
     einheit: grad
-    loinc: LP410789-0
   - id: mad
     name: MAD (mechanical axis deviation)
     einheit: mm
   - id: lld
     name: LLD (leg length discrepancy)
     einheit: mm
-    loinc: LP35279-5
   - id: jlca
     name: JLCA (joint line convergence angle)
     einheit: grad
@@ -57,15 +55,7 @@ ki-tools:
     output: DICOM SR
 standorte:
   - Herz-Jesu-Krankenhaus Wien (HJK)
-loinc-codes:
-  - code: LP410789-0
-    description: Hip-knee-ankle angle
-  - code: LP35279-5
-    description: Leg length discrepancy
-  - code: LP410785-8
-    description: Kellgren-Lawrence score
-  - code: "24650-4"
-    description: Knee X-ray AP and Lateral
+loinc-codes: []  # v1.7.1: geratene LOINC-Codes entfernt (loinc.org: LP410789-0=Prenatal Distress, 24650-4=Thorax, LP35279-5/LP410785-8 unbelegbar); lokal + data-en, siehe RADLEX-MAPPING
 projektionen:
   - ap-stehend
   - seitlich

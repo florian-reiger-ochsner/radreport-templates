@@ -122,12 +122,12 @@
   </div>
   <div class="rr-row rr-row-three" id="row_achsen">
     <fieldset class="rr-ai-field" id="field_hka" data-ai="1" data-ai-transform="sign-inversion">
-      <legend>HKA <span class="rr-rl-badge">LOINC LP410789-0</span> <span class="rr-ai-badge">KI</span></legend>
+      <legend>HKA <span class="rr-ai-badge">KI</span></legend>
 
       <label class="rr-ai-sr">
         <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
         <input type="number" id="hka_sr" data-ai-role="suggestion"
-               data-en="hip-knee-ankle angle" data-loinc="LP410789-0" step="0.1"
+               data-en="hip-knee-ankle angle" data-radlex-status="local" step="0.1"
                readonly="readonly" placeholder="aus DICOM SR" />
       </label>
 
@@ -140,7 +140,7 @@
 
       <label class="rr-ai-own">
         <span class="rr-lbl"><span>Eigene Messung</span></span>
-        <input type="number" id="hka" data-ai-role="own" data-en="hip-knee-ankle angle" data-loinc="LP410789-0" step="0.1"
+        <input type="number" id="hka" data-ai-role="own" data-en="hip-knee-ankle angle" data-radlex-status="local" step="0.1"
                placeholder="eigene Messung eintragen" />
       </label>
 
@@ -196,12 +196,12 @@
     </fieldset>
 
     <fieldset class="rr-ai-field" id="field_lld" data-ai="1">
-      <legend>LLD <span class="rr-rl-badge">LOINC LP35279-5</span> <span class="rr-ai-badge">KI</span></legend>
+      <legend>LLD <span class="rr-ai-badge">KI</span></legend>
 
       <label class="rr-ai-sr">
         <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
         <input type="number" id="lld_sr" data-ai-role="suggestion"
-               data-en="leg length discrepancy" data-loinc="LP35279-5" step="0.1"
+               data-en="leg length discrepancy" data-radlex-status="local" step="0.1"
                readonly="readonly" placeholder="aus DICOM SR" />
       </label>
 
@@ -214,7 +214,7 @@
 
       <label class="rr-ai-own">
         <span class="rr-lbl"><span>Eigene Messung</span></span>
-        <input type="number" id="lld" data-ai-role="own" data-en="leg length discrepancy" data-loinc="LP35279-5" step="0.1"
+        <input type="number" id="lld" data-ai-role="own" data-en="leg length discrepancy" data-radlex-status="local" step="0.1"
                placeholder="eigene Messung eintragen" />
       </label>
 
@@ -346,7 +346,7 @@
 
   <!-- KL -->
   <div class="rr-h2-wrap">
-    <h2>Arthrosegrad – Kellgren-Lawrence <span class="rr-rl-badge">LOINC LP410785-8</span></h2>
+    <h2>Arthrosegrad – Kellgren-Lawrence</h2>
     <div class="rr-h2-rule"></div>
     <div class="rr-h2-sub">Kompartiment-spezifisch (KL 1957). Werte 0–4. Pflichtfelder.</div>
   </div>

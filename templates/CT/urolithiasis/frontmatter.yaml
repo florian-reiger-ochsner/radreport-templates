@@ -20,9 +20,7 @@ referenzen:
 ki-tools: []
 standorte:
   - Herz-Jesu-Krankenhaus Wien (HJK)
-loinc-codes:
-  - code: "24634-8"
-    description: CT KUB
+loinc-codes: []  # 24634-8 = portables Thorax-Roe (nicht CT KUB, loinc.org) -> entfernt
 protokolle:
   - nativ-niedrigdosis
   - nativ-standarddosis

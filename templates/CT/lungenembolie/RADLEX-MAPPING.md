@@ -1,5 +1,7 @@
 # RadLex-Mapping – CT Lungenarterien (CTPA)
 
+> **LOINC-Korrektur 2026-08-02:** Zuvor gelistete LOINC-Codes wurden gegen loinc.org geprueft und als falsch/unbelegbar entfernt (siehe CHANGELOG). Messfelder tragen lokales CodeSystem + `data-en`; verifizierte LOINC-Codes sind ein nachgelagerter Schritt (resolve-loinc.js). Historische Tabellen unten koennen entfernte Codes noch nennen.
+
 Status: ✅ verifiziert · 🟡 lokal/plausibel · 🔲 ausstehend
 
 > **Registry-Verifikation (2026-07-31):** RIDs gegen NCBO BioPortal (RADLEX) geprüft,

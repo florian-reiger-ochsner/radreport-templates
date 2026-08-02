@@ -29,11 +29,7 @@ ki-tools:
     output: DICOM SR
 standorte:
   - Herz-Jesu-Krankenhaus Wien (HJK)
-loinc-codes:
-  - code: "24650-4"
-    description: Knee X-ray AP and Lateral
-  - code: LP410789-0
-    description: Hip-knee-ankle angle postoperative
+loinc-codes: []  # 24650-4=Thorax-Roe, LP410789-0=Prenatal Distress (loinc.org) -> entfernt; lokal + data-en
 endocert:
   - pflicht: true
     beschreibung: Intraoperatives/unmittelbar postoperatives Roentgen nach KTEP-Implantation

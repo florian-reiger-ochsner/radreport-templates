@@ -21,9 +21,7 @@ referenzen:
 ki-tools: []
 standorte:
   - Herz-Jesu-Krankenhaus Wien (HJK)
-loinc-codes:
-  - code: "30652-8"
-    description: CT Abdomen and Pelvis
+loinc-codes: []  # 30652-8 auf loinc.org unbelegt -> entfernt
 sektionen:
   - organsystematik-basis
   - akutes-abdomen-notfall-optional

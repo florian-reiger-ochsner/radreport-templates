@@ -1,5 +1,10 @@
 # Changelog: CT Leber LI-RADS v2018
 
+## [LOINC-Korrektur] - 2026-08-02
+### Korrigiert (LOINC gegen loinc.org verifiziert, "nie raten")
+- Geratene/ungueltige LOINC-Codes entfernt: LP202113-1 (LI-RADS Category, nicht aufloesbar). 21889-1 (Size Tumor) bleibt gueltig..
+- Betroffene Felder auf lokales CodeSystem (`http://hjk.wien/fhir/CodeSystem/radiology-templates`) + `data-en` zurueckgefuehrt; `loinc-codes` in frontmatter geleert. Verifizierte LOINC-Codes bei Bedarf via resolve-loinc.js gegen fhir.loinc.org nachtragen.
+
 ## v1.4 – 2026-07-21
 
 ### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)
