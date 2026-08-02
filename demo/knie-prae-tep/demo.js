@@ -1,37 +1,28 @@
 // =============================================================================
 // Demo-Interaktivität für "Planungsröntgen Knie vor TEP" (v1.7)
 //
-// ABGELEITET / Demo-Schicht: Dieses Skript gehört NICHT ins kanonische
-// template.html (das ist nacktes, JS-freies, form-only MRRT). Es baut das
-// Viewer-Chrome (Attestierungs-Bedienelemente, Live-Vorschau, CPAK-/KL-
-// Anzeigeboxen, Export-Buttons, Konsistenzprüfung) zur Laufzeit auf und liefert
-// die gesamte Interaktivität für die GitHub-Pages-Demo. Eingebunden via
-// build-demo.js in demo/index.html.
-//
-// v1.7 – Umsetzung SPEC-ADDENDUM-A (Verification Floor / Feldzustände am
-// Messwert). Der frühere direkte LAMA-Vorbefüll-Modus ("stille Auffüllung")
-// ist durch das kanonische Fünf-Zustands-Modell ersetzt:
-//   active-confirmed · active-corrected · active-rejected ·
-//   passive-accepted · not-attested  (+ manual-entered ohne KI-Beteiligung)
-// Status wird ABGELEITET (A3), nicht gesetzt. Anzeige-Export-Konsistenz (A4/A6),
-// Vorschlag-Erhalt in aiSource.rawValue (A2.2/A7), Transform vor Anzeige (A5).
+// ABGELEITET / Demo-Schicht. Das kanonische template.html trägt die
+// Attestierungs-STRUKTUR jetzt selbst deklarativ (je KI-Messfeld ein
+// <fieldset> mit: schreibgeschütztem KI-/DICOM-SR-Feld, Verdict-Radiogruppe
+// [übernommen | eigene Messung | nicht verwertbar], eigenem Messfeld und
+// Grund-Select). Dieses Skript INJIZIERT diese Bedienelemente nicht mehr,
+// sondern VERDRAHTET nur ihr Verhalten (Ein-/Ausblenden, Vorbelegen), leitet
+// den Feldzustand ab (SPEC-ADDENDUM-A, A3) und erzeugt Vorschau, Konsistenz-
+// prüfung und FHIR-/JSON-Export. Kein CSS/JS im kanonischen Template.
 // =============================================================================
 
 
 // =============================================================================
 // KONFIGURATION – KI-Quelle, Rohwerte, Transformationen, Ablehngründe
 // =============================================================================
-
-// Modell-/Quellprovenance (feldübergreifend; landet je Feld in aiSource)
 const MODEL_VERSION   = 'IB Lab LAMA 4.2';
 const SOURCE_ARTIFACT = 'DICOM SR (LAMA) · StudyUID …7731 · Serie 3';
 
 // Rohwerte, wie sie das externe Werkzeug ausgibt (externe Konvention).
 // transform bildet Rohwert -> interne Anzeige-/Vergleichskonvention ab (A5).
-// HKA: externe Ausgabe als varus-positive Abweichung; interne Konvention als
-// absoluter Tragachsenwinkel (<180° = Varus). Der Schritt kehrt das Vorzeichen
-// der Abweichung um (sign-inversion-applied) und erfolgt VOR der Anzeige.
-// >>> KLINISCHE KONVENTION (HKA) durch FR zu bestätigen – siehe README/CHANGELOG.
+// HKA: extern varus-positive Abweichung -> intern absoluter Winkel (<180°=Varus),
+// Schritt sign-inversion-applied VOR der Anzeige. LAMA-Konvention noch zu
+// bestätigen (nicht geraten) – siehe README/CHANGELOG.
 const AI_RAW = {
   hka:   { raw: 5.8,   transform: 'sign-inversion' },
   mad:   { raw: -12.4, transform: 'identity' },
@@ -42,28 +33,24 @@ const AI_RAW = {
 };
 
 const TRANSFORMS = {
-  'identity':       { step: 'identity', label: 'unverändert',
-                      apply: v => v },
+  'identity':       { step: 'identity', label: 'unverändert', apply: v => v },
   'sign-inversion': { step: 'sign-inversion-applied',
                       label: 'Konventionsanpassung: Vorzeicheninversion der Abweichung (extern varus-positiv → intern absolut, <180° = Varus)',
                       apply: v => 180 - v }
 };
 
-// Lokale Ablehngründe (dataAbsentReason). Vokabular provisorisch (Addendum A12).
 const ABSENT_CS = 'http://hjk.wien/fhir/CodeSystem/measurement-absent-reason';
-const ABSENT_REASONS = [
-  { code: 'insufficient-acquisition', de: 'unzureichende Ganzbeinaufnahme' },
-  { code: 'rotation-malposition',     de: 'Rotationsfehlstellung' },
-  { code: 'calibration-missing',      de: 'Kalibrationskugel nicht erkennbar' },
-  { code: 'incomplete-imaging',       de: 'unvollständige Abbildung' }
-];
+const ABSENT_DE = {
+  'insufficient-acquisition': 'unzureichende Ganzbeinaufnahme',
+  'rotation-malposition':     'Rotationsfehlstellung',
+  'calibration-missing':      'Kalibrationskugel nicht erkennbar',
+  'incomplete-imaging':       'unvollständige Abbildung'
+};
 const LOCAL_CS = 'http://hjk.wien/fhir/CodeSystem/radiology-templates';
 const ATTEST_EXT_URL = 'http://hjk.wien/fhir/StructureDefinition/ai-attestation';
-
 const TEMPLATE_ID = 'HJK-MRRT-KNIE-PRAETEP';
 const TEMPLATE_VERSION = '1.7';
 
-// Feld-Metadaten für Befundtext/Export (Reihenfolge = Anzeigereihenfolge)
 const AXIS_SPEC = [
   { id: 'hka',   label: 'Tragachsenwinkel (HKA)', unit: '°',  direction: true },
   { id: 'mad',   label: 'MAD',                     unit: ' mm', signed: true },
@@ -73,14 +60,13 @@ const AXIS_SPEC = [
   { id: 'lld',   label: 'Beinlängendifferenz',     unit: ' mm', signed: true }
 ];
 
-// KI-Felder deklarativ aus dem Formular lesen (data-ai im kanonischen Template)
-const AI_FIELDS = Array.from(document.querySelectorAll('input[data-ai]')).map(e => e.id);
+// KI-Felder deklarativ aus dem Template lesen (eigenes Messfeld trägt die id)
+const AI_FIELDS = Array.from(document.querySelectorAll('input[data-ai-role="own"]')).map(e => e.id);
 
-// Laufzeit-Zustand pro KI-Feld. aiSource wird beim Aktivieren des LAMA-Modus
-// gesetzt (nicht null => Vorschlag liegt vor). interaction: null bis ein
-// Auswahlakt stattfindet. reason: Ablehngrund-Code bei reject.
+// Laufzeit-Zustand: aiSource (bei LAMA gesetzt) + interaction-Zeitstempel.
+// Verdict/own/reason werden live aus den kanonischen Controls gelesen.
 const fieldState = {};
-AI_FIELDS.forEach(id => { fieldState[id] = { aiSource: null, interaction: null, reason: null }; });
+AI_FIELDS.forEach(id => { fieldState[id] = { aiSource: null, tsByKind: {} }; });
 
 let currentMode = 'manual'; // 'manual' | 'lama'
 
@@ -91,126 +77,110 @@ let currentMode = 'manual'; // 'manual' | 'lama'
 function round1(v) { return Math.round(v * 10) / 10; }
 function parseNum(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
 function approxEq(a, b) { return Math.abs(a - b) < 0.05; }
-function fmt(v, spec) {
-  const s = (spec && spec.signed && v > 0) ? '+' : '';
-  return `${s}${v.toFixed(1)}${spec ? spec.unit : ''}`;
-}
+function fmt(v, spec) { const s = (spec && spec.signed && v > 0) ? '+' : ''; return `${s}${v.toFixed(1)}${spec ? spec.unit : ''}`; }
 function gv(id) { const e = document.getElementById(id); return e ? e.value : ''; }
 function gn(id) { return parseNum(gv(id)); }
 function gc(id) { const e = document.getElementById(id); return e ? e.checked : false; }
-function reasonDe(code) { const r = ABSENT_REASONS.find(x => x.code === code); return r ? r.de : null; }
+
+const srEl     = id => document.getElementById(id + '_sr');
+const ownEl    = id => document.getElementById(id);
+const reasonEl = id => document.getElementById(id + '_reason');
+const fieldset = id => document.getElementById('field_' + id);
+function verdictOf(id) { const r = document.querySelector(`input[name="verdict_${id}"]:checked`); return r ? r.value : null; }
+const VERDICT_KIND = { accept: 'confirm', own: 'correct', reject: 'reject' };
+
 function transformOf(id) { const r = AI_RAW[id]; return TRANSFORMS[(r && r.transform) || 'identity']; }
-function displayFromRaw(id) {
-  const r = AI_RAW[id]; if (!r) return null;
-  return round1(TRANSFORMS[r.transform].apply(r.raw));
-}
+function displayFromRaw(id) { const r = AI_RAW[id]; if (!r) return null; return round1(TRANSFORMS[r.transform].apply(r.raw)); }
+function reasonDe(code) { return ABSENT_DE[code] || null; }
 
 
 // =============================================================================
 // FELDZUSTAND ABLEITEN (Addendum A3 – Reihenfolge verbindlich)
 //   kein Vorschlag & kein Wert            -> not-attested
 //   aiSource == null                      -> manual-entered
-//   interactionEvent == null              -> passive-accepted
-//   interactionEvent.kind == 'reject'     -> active-rejected
+//   verdict == null (kein Auswahlakt)     -> passive-accepted
+//   verdict == reject                     -> active-rejected
 //   value == transform(rawValue)          -> active-confirmed
 //   sonst                                 -> active-corrected
 // =============================================================================
 function resolveField(id) {
-  const inp = document.getElementById(id);
-  const st = fieldState[id] || { aiSource: null, interaction: null, reason: null };
-  const valNum = parseNum(inp ? inp.value : '');
+  const st = fieldState[id] || { aiSource: null, tsByKind: {} };
   const hasSug = !!st.aiSource;
+  const own = parseNum(ownEl(id) ? ownEl(id).value : '');
+  const verdict = verdictOf(id);
 
-  if (!hasSug && valNum === null) {
-    return { id, status: 'not-attested', value: null, referenceLabel: false,
-             aiSource: null, interaction: null };
+  if (!hasSug && verdict === null && own === null) {
+    return { id, status: 'not-attested', value: null, referenceLabel: false, aiSource: null, interaction: null };
   }
   if (!hasSug) {
-    return { id, status: 'manual-entered', value: valNum, referenceLabel: true,
-             aiSource: null, interaction: null };
+    return { id, status: 'manual-entered', value: own, referenceLabel: true, aiSource: null, interaction: null };
   }
   const disp = st.aiSource.displayValue;
-  const ie = st.interaction;
-  const base = { id, aiSource: st.aiSource, interaction: ie };
-  if (ie == null) {
-    return { ...base, status: 'passive-accepted', value: disp, referenceLabel: false };
+  const kind = verdict ? VERDICT_KIND[verdict] : null;
+  const interaction = verdict ? { kind, timestamp: st.tsByKind[kind] || null } : null;
+  const base = { id, aiSource: st.aiSource, interaction };
+
+  if (verdict === null) return { ...base, status: 'passive-accepted', value: disp, referenceLabel: false };
+  if (verdict === 'reject') {
+    const reason = reasonEl(id) ? (reasonEl(id).value || null) : null;
+    return { ...base, status: 'active-rejected', value: null, referenceLabel: false, absentReason: reason };
   }
-  if (ie.kind === 'reject') {
-    return { ...base, status: 'active-rejected', value: null, referenceLabel: false,
-             absentReason: st.reason };
-  }
-  if (valNum !== null && approxEq(valNum, disp)) {
-    return { ...base, status: 'active-confirmed', value: disp, referenceLabel: true };
-  }
-  return { ...base, status: 'active-corrected', value: valNum, referenceLabel: true };
+  const value = (verdict === 'own') ? (own !== null ? own : disp) : disp;
+  if (approxEq(value, disp)) return { ...base, status: 'active-confirmed', value: disp, referenceLabel: true };
+  return { ...base, status: 'active-corrected', value, referenceLabel: true };
 }
 
 const STATUS_LABEL = {
   'not-attested':    'nicht attestiert',
   'manual-entered':  'manuell erfasst · Referenzlabel',
   'passive-accepted':'durchgewinkt (passive-accepted) · nicht im Referenzset',
-  'active-confirmed':'bestätigt (active-confirmed) · Referenzlabel',
-  'active-corrected':'korrigiert (active-corrected) · Referenzlabel',
-  'active-rejected': 'nicht beurteilbar (active-rejected) · Observation ohne Wert'
+  'active-confirmed':'übernommen (active-confirmed) · Referenzlabel',
+  'active-corrected':'eigene Messung (active-corrected) · Referenzlabel',
+  'active-rejected': 'nicht verwertbar (active-rejected) · Observation ohne Wert'
 };
 
 
 // =============================================================================
-// DEMO-CHROME AUFBAUEN
+// DEMO-CHROME AUFBAUEN (Controls existieren bereits im Template)
 // =============================================================================
 (function buildChrome() {
   const app = document.querySelector('.rr-app');
   const pane = document.querySelector('.rr-input-pane');
 
-  // --- Laufzeit-Styles nur für die Demo (kanonisches Template bleibt nackt) --
   const style = document.createElement('style');
   style.textContent = `
     .rr-mode-switch input[type="radio"]{display:none;}
-    .rr-attest{margin-top:6px;padding:8px 10px;border:1px solid var(--rr-rule);
-      border-radius:var(--rr-radius-sm);background:var(--rr-bg-alt);display:none;}
-    .rr-attest.rr-is-on{display:block;}
-    .rr-attest-suggestion{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
-      font-size:var(--rr-fs-xs);color:var(--rr-ink-soft);margin-bottom:6px;}
-    .rr-attest-sug-label{font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-      color:var(--rr-accent);}
-    .rr-attest-sug-value{font-family:var(--rr-font-serif);font-size:var(--rr-fs-lg);
-      font-weight:600;color:var(--rr-ink);}
-    .rr-attest-sug-meta{color:var(--rr-ink-muted);font-family:var(--rr-font-mono);
-      font-size:10px;}
-    .rr-attest-choices{display:flex;gap:4px;}
-    .rr-attest-choices label{flex:1;text-align:center;font-size:var(--rr-fs-xs);
-      padding:5px 6px;border:1px solid var(--rr-field-border);border-radius:var(--rr-radius-xs);
-      background:var(--rr-bg);color:var(--rr-ink-soft);cursor:pointer;letter-spacing:0.02em;
-      text-transform:none;font-weight:500;margin:0;}
-    .rr-attest-choices input[type="radio"]{display:none;}
-    .rr-attest-choices label:has(input[value="confirm"]:checked){
-      background:var(--rr-accent-pale);border-color:var(--rr-accent);color:var(--rr-accent);font-weight:700;}
-    .rr-attest-choices label:has(input[value="correct"]:checked){
-      background:#fdf4e3;border-color:#c4a558;color:#8b6914;font-weight:700;}
-    .rr-attest-choices label:has(input[value="reject"]:checked){
-      background:#fbe9e7;border-color:#c45848;color:#9c2c1a;font-weight:700;}
-    .rr-attest-reason{margin-top:6px;}
-    .rr-attest-reason select{font-size:var(--rr-fs-sm);padding:6px 8px;}
-    .rr-attest-status{margin-top:6px;font-size:10px;font-family:var(--rr-font-mono);
-      color:var(--rr-ink-muted);letter-spacing:0.02em;}
+    fieldset.rr-ai-field{border:1px solid var(--rr-rule);border-radius:var(--rr-radius-sm);
+      padding:10px 12px 12px;margin:0;background:var(--rr-bg);}
+    fieldset.rr-ai-field legend{font-size:var(--rr-fs-xs);font-weight:700;letter-spacing:0.08em;
+      text-transform:uppercase;color:var(--rr-ink-muted);padding:0 6px;display:flex;gap:6px;align-items:center;}
+    .rr-ai-field .rr-lbl{margin-bottom:4px;}
+    .rr-ai-field .rr-ai-sr input{background:var(--rr-ai-tint);border-color:var(--rr-ai-border);}
+    .rr-ai-verdict{margin:8px 0 6px;}
+    .rr-ai-verdict > .rr-lbl{margin-bottom:4px;}
+    .rr-ai-opt{display:inline-flex;align-items:center;gap:4px;font-size:var(--rr-fs-xs);
+      padding:4px 7px;margin:2px 4px 2px 0;border:1px solid var(--rr-field-border);
+      border-radius:var(--rr-radius-xs);background:var(--rr-bg-alt);cursor:pointer;
+      text-transform:none;letter-spacing:0;font-weight:500;color:var(--rr-ink-soft);}
+    .rr-ai-opt input{margin:0;}
+    .rr-ai-opt:has(input[value="accept"]:checked){background:var(--rr-accent-pale);border-color:var(--rr-accent);color:var(--rr-accent);font-weight:700;}
+    .rr-ai-opt:has(input[value="own"]:checked){background:#fdf4e3;border-color:#c4a558;color:#8b6914;font-weight:700;}
+    .rr-ai-opt:has(input[value="reject"]:checked){background:#fbe9e7;border-color:#c45848;color:#9c2c1a;font-weight:700;}
+    .rr-ai-reason.rr-u-hidden,.rr-ai-own.rr-u-hidden{display:none;}
+    .rr-ai-status{margin-top:6px;font-size:10px;font-family:var(--rr-font-mono);color:var(--rr-ink-muted);letter-spacing:0.02em;}
     input[readonly]{background:var(--rr-bg-alt);color:var(--rr-ink-soft);cursor:default;}
-    input:disabled{background:#f2eceb;color:var(--rr-ink-faint);}
-    .rr-consistency{margin-top:16px;padding:12px 14px;border-radius:var(--rr-radius);
-      border:1px solid var(--rr-rule);background:var(--rr-bg);}
-    .rr-consistency h4{margin:0 0 8px;font-size:10px;letter-spacing:0.14em;
-      text-transform:uppercase;color:var(--rr-ink-muted);font-weight:600;}
-    .rr-check{display:flex;gap:8px;align-items:flex-start;font-size:var(--rr-fs-xs);
-      color:var(--rr-ink-soft);margin:4px 0;line-height:1.4;}
-    .rr-check .rr-dot{flex:none;width:14px;height:14px;border-radius:50%;margin-top:1px;
-      font-size:10px;line-height:14px;text-align:center;color:#fff;font-weight:700;}
+    input:disabled,select:disabled{background:#f2eceb;color:var(--rr-ink-faint);cursor:not-allowed;}
+    .rr-ai-field.rr-is-manual .rr-ai-sr,.rr-ai-field.rr-is-manual .rr-ai-verdict{opacity:.45;}
+    .rr-consistency{margin-top:16px;padding:12px 14px;border-radius:var(--rr-radius);border:1px solid var(--rr-rule);background:var(--rr-bg);}
+    .rr-consistency h4{margin:0 0 8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--rr-ink-muted);font-weight:600;}
+    .rr-check{display:flex;gap:8px;align-items:flex-start;font-size:var(--rr-fs-xs);color:var(--rr-ink-soft);margin:4px 0;line-height:1.4;}
+    .rr-check .rr-dot{flex:none;width:14px;height:14px;border-radius:50%;margin-top:1px;font-size:10px;line-height:14px;text-align:center;color:#fff;font-weight:700;}
     .rr-check.rr-ok .rr-dot{background:var(--rr-success);}
     .rr-check.rr-fail .rr-dot{background:var(--rr-critical);}
-    .rr-loa{margin-top:8px;font-size:10px;font-family:var(--rr-font-mono);
-      color:var(--rr-ink-muted);line-height:1.5;}
+    .rr-loa{margin-top:8px;font-size:10px;font-family:var(--rr-font-mono);color:var(--rr-ink-muted);line-height:1.5;}
   `;
   document.head.appendChild(style);
 
-  // --- Modus-Switch (nur zwei Modi: Manuell ohne KI / LAMA mit Attestierung) --
   pane.querySelector('.rr-title-rule').insertAdjacentHTML('afterend', `
     <div class="rr-mode-switch">
       <input type="radio" name="mode" id="mode-manual" value="manual" checked="checked">
@@ -218,50 +188,21 @@ const STATUS_LABEL = {
       <input type="radio" name="mode" id="mode-lama" value="lama">
       <label for="mode-lama">LAMA-Vorschlag (attestieren)</label>
     </div>
-    <div class="rr-helper-info" id="modeHelper"><strong>Modus Manuell:</strong> Achsenwerte werden manuell erfasst (kein KI-Vorschlag). Ausgefüllte Felder gelten als <em>manual-entered</em> und zählen als Referenzlabel.</div>
+    <div class="rr-helper-info" id="modeHelper"></div>
   `);
 
-  // --- Attestierungs-Block je KI-Feld unter das Feld hängen ------------------
+  // je Feld: Status-Zeile (Demo-only) ans fieldset hängen + Verhalten verdrahten
   AI_FIELDS.forEach(id => {
-    const inp = document.getElementById(id);
-    const label = inp.closest('label');
-    const note = label.querySelector('.rr-field-note');
-    const reasonOpts = ABSENT_REASONS
-      .map(r => `<option value="${r.code}">${r.de}</option>`).join('');
-    const block = document.createElement('div');
-    block.className = 'rr-attest';
-    block.dataset.field = id;
-    block.innerHTML = `
-      <div class="rr-attest-suggestion">
-        <span class="rr-attest-sug-label">KI-Vorschlag</span>
-        <span class="rr-attest-sug-value" data-role="sug"></span>
-        <span class="rr-attest-sug-meta" data-role="meta"></span>
-      </div>
-      <div class="rr-attest-choices" role="radiogroup" aria-label="Attestierung ${id}">
-        <label><input type="radio" name="attest-${id}" value="confirm">Bestätigen</label>
-        <label><input type="radio" name="attest-${id}" value="correct">Korrigieren</label>
-        <label><input type="radio" name="attest-${id}" value="reject">Nicht beurteilbar</label>
-      </div>
-      <div class="rr-attest-reason rr-u-hidden">
-        <select data-role="reason">
-          <option value="">– Grund der Nicht-Beurteilbarkeit –</option>
-          ${reasonOpts}
-        </select>
-      </div>
-      <div class="rr-attest-status" data-role="status"></div>`;
-    if (note && note.parentNode) note.parentNode.insertBefore(block, note.nextSibling);
-    else label.appendChild(block);
-
-    block.querySelectorAll(`input[name="attest-${id}"]`).forEach(radio => {
-      radio.addEventListener('change', () => onAttestChoice(id, radio.value));
-    });
-    block.querySelector('[data-role="reason"]').addEventListener('change', e => {
-      fieldState[id].reason = e.target.value || null;
-      updatePreview();
+    const fs = fieldset(id);
+    const status = document.createElement('div');
+    status.className = 'rr-ai-status';
+    status.dataset.field = id;
+    fs.appendChild(status);
+    document.querySelectorAll(`input[name="verdict_${id}"]`).forEach(radio => {
+      radio.addEventListener('change', () => onVerdict(id, radio.value));
     });
   });
 
-  // --- CPAK-Ergebnisbox nach der Achsen-Zeile --------------------------------
   document.getElementById('row_achsen').insertAdjacentHTML('afterend', `
     <div class="rr-result-box">
       <div class="rr-result-value" id="cpak_result">–</div>
@@ -269,7 +210,6 @@ const STATUS_LABEL = {
     </div>
   `);
 
-  // --- Kellgren-Lawrence-Zusammenfassung nach der KL-Zeile -------------------
   document.getElementById('row_kl').insertAdjacentHTML('afterend', `
     <div class="rr-grade-summary">
       <div class="rr-grade-item">Medial<strong id="kl_sum_med">–</strong></div>
@@ -278,7 +218,6 @@ const STATUS_LABEL = {
     </div>
   `);
 
-  // --- Vorschau-Pane + Aktionen + Konsistenzprüfung --------------------------
   app.insertAdjacentHTML('beforeend', `
     <aside class="rr-preview-pane">
       <h2 class="rr-preview-title">Befund-Vorschau</h2>
@@ -306,93 +245,85 @@ const STATUS_LABEL = {
 
 
 // =============================================================================
-// MODUS-UMSCHALTUNG
+// MODUS + CONTROL-VERHALTEN
 // =============================================================================
 const modeHelpers = {
-  manual: "<strong>Modus Manuell:</strong> Achsenwerte werden manuell erfasst (kein KI-Vorschlag). Ausgefüllte Felder gelten als <em>manual-entered</em> und zählen als Referenzlabel.",
-  lama:   "<strong>Modus LAMA-Vorschlag:</strong> KI-Werte liegen vor und sind je Feld zu attestieren: bestätigen, korrigieren oder als nicht beurteilbar ablehnen. Ohne Auswahlakt bleibt der Wert <em>passive-accepted</em> (durchgewinkt) und wird aus dem Referenzset ausgeschlossen."
+  manual: "<strong>Modus Manuell:</strong> kein KI-Wert aus DICOM SR. Nur die eigene Messung ist aktiv; ausgefüllt = <em>manual-entered</em> (Referenzlabel), leer = <em>not-attested</em>.",
+  lama:   "<strong>Modus LAMA-Vorschlag:</strong> KI-Wert aus DICOM SR (schreibgeschützt). Je Feld ein Auswahlakt: übernommen / eigene Messung / nicht verwertbar. Ohne Auswahl bleibt der Wert <em>passive-accepted</em> (durchgewinkt, nicht im Referenzset)."
 };
+
+// Steuert Sichtbarkeit/Aktivierung der Controls je Feld anhand von Modus+Verdict
+function syncControls(id) {
+  const fs = fieldset(id), own = ownEl(id), reason = reasonEl(id), sr = srEl(id);
+  const reasonWrap = fs.querySelector('.rr-ai-reason');
+  const ownWrap = fs.querySelector('.rr-ai-own');
+  const verdict = verdictOf(id);
+
+  if (currentMode === 'manual') {
+    fs.classList.add('rr-is-manual');
+    sr.value = ''; sr.setAttribute('disabled', 'disabled');
+    fs.querySelectorAll(`input[name="verdict_${id}"]`).forEach(r => r.setAttribute('disabled', 'disabled'));
+    reason.setAttribute('disabled', 'disabled'); reasonWrap.classList.add('rr-u-hidden');
+    ownWrap.classList.remove('rr-u-hidden');
+    own.removeAttribute('disabled'); own.removeAttribute('readonly');
+    return;
+  }
+
+  fs.classList.remove('rr-is-manual');
+  sr.removeAttribute('disabled'); sr.setAttribute('readonly', 'readonly');
+  fs.querySelectorAll(`input[name="verdict_${id}"]`).forEach(r => r.removeAttribute('disabled'));
+
+  // Grund nur bei "nicht verwertbar"
+  if (verdict === 'reject') { reason.removeAttribute('disabled'); reasonWrap.classList.remove('rr-u-hidden'); }
+  else { reason.setAttribute('disabled', 'disabled'); reason.value = ''; reasonWrap.classList.add('rr-u-hidden'); }
+
+  // eigenes Messfeld nur bei "eigene Messung" eingabefähig (A6.3)
+  if (verdict === 'own') {
+    ownWrap.classList.remove('rr-u-hidden');
+    own.removeAttribute('disabled'); own.removeAttribute('readonly');
+  } else {
+    own.value = '';
+    own.setAttribute('disabled', 'disabled');
+    ownWrap.classList.add('rr-u-hidden');
+  }
+}
+
+function onVerdict(id, value) {
+  const kind = VERDICT_KIND[value];
+  fieldState[id].tsByKind[kind] = new Date().toISOString();   // Interaktionsereignis (A6.5)
+  syncControls(id);
+  if (value === 'own') {                                       // Vorschlag als Startwert der Korrektur
+    const own = ownEl(id);
+    if (parseNum(own.value) === null) own.value = fieldState[id].aiSource.displayValue;
+    if (typeof own.focus === 'function') own.focus();
+  }
+  updatePreview();
+}
 
 function applyMode(mode) {
   currentMode = mode;
   document.getElementById('modeHelper').innerHTML = modeHelpers[mode];
-
   AI_FIELDS.forEach(id => {
-    const inp = document.getElementById(id);
-    const label = inp.closest('label');
-    const badge = label.querySelector('.rr-ai-badge');
-    const attest = label.querySelector('.rr-attest');
-
-    // Zustand zurücksetzen (keine Vorauswahl – Invariante A6.2)
-    fieldState[id] = { aiSource: null, interaction: null, reason: null };
-    attest.querySelectorAll('input[type="radio"]').forEach(r => { r.checked = false; });
-    attest.querySelector('[data-role="reason"]').value = '';
-    attest.querySelector('.rr-attest-reason').classList.add('rr-u-hidden');
-    inp.removeAttribute('readonly');
-    inp.removeAttribute('disabled');
-
+    // Auswahl zurücksetzen (keine Vorauswahl – A6.2)
+    document.querySelectorAll(`input[name="verdict_${id}"]`).forEach(r => { r.checked = false; });
+    fieldState[id].tsByKind = {};
+    const badge = fieldset(id).querySelector('.rr-ai-badge');
     if (mode === 'lama') {
-      // aiSource setzen; Rohwert bleibt erhalten (A2.2/A7)
-      const disp = displayFromRaw(id);
       const tf = transformOf(id);
       fieldState[id].aiSource = {
-        rawValue: AI_RAW[id].raw,
-        modelVersion: MODEL_VERSION,
-        sourceArtifact: SOURCE_ARTIFACT,
+        rawValue: AI_RAW[id].raw, modelVersion: MODEL_VERSION, sourceArtifact: SOURCE_ARTIFACT,
         transform: { name: AI_RAW[id].transform, step: tf.step, label: tf.label },
-        displayValue: disp
+        displayValue: displayFromRaw(id)
       };
-      // Vorschlag anzeigen; Feld read-only bis "Korrigieren" (Default: passive-accepted)
-      inp.value = disp;
-      inp.setAttribute('readonly', 'readonly');
-      inp.classList.add('rr-is-ai-filled');
-      badge.classList.add('rr-is-active');
-      attest.classList.add('rr-is-on');
-      const unit = (AXIS_SPEC.find(a => a.id === id) || {}).unit || '';
-      const meta = AI_RAW[id].transform === 'identity'
-        ? `${MODEL_VERSION} · Rohwert ${AI_RAW[id].raw}`
-        : `${MODEL_VERSION} · Rohwert ${AI_RAW[id].raw} · ${tf.step}`;
-      attest.querySelector('[data-role="sug"]').textContent = disp + unit.trim();
-      attest.querySelector('[data-role="meta"]').textContent = meta;
+      srEl(id).value = displayFromRaw(id);
+      if (badge) badge.style.visibility = 'visible';
     } else {
-      inp.value = '';
-      inp.classList.remove('rr-is-ai-filled');
-      badge.classList.remove('rr-is-active');
-      attest.classList.remove('rr-is-on');
+      fieldState[id].aiSource = null;
+      srEl(id).value = '';
+      if (badge) badge.style.visibility = 'hidden';
     }
+    syncControls(id);
   });
-  updatePreview();
-}
-
-// Auswahlakt an einem Feld (erzeugt Interaktionsereignis mit Zeitstempel, A6.5)
-function onAttestChoice(id, kind) {
-  const inp = document.getElementById(id);
-  const attest = inp.closest('label').querySelector('.rr-attest');
-  const reasonWrap = attest.querySelector('.rr-attest-reason');
-  const st = fieldState[id];
-  if (!st.aiSource) return; // ohne Vorschlag kein Attestierungsakt
-
-  st.interaction = { kind, timestamp: new Date().toISOString() };
-
-  if (kind === 'confirm') {
-    reasonWrap.classList.add('rr-u-hidden');
-    inp.removeAttribute('disabled');
-    inp.setAttribute('readonly', 'readonly');       // Vorschlag bleibt, nicht editierbar
-    inp.value = st.aiSource.displayValue;
-    st.reason = null;
-  } else if (kind === 'correct') {
-    reasonWrap.classList.add('rr-u-hidden');
-    inp.removeAttribute('disabled');
-    inp.removeAttribute('readonly');                 // erst jetzt eingabefähig (A6.3)
-    if (typeof inp.focus === 'function') inp.focus();
-    st.reason = null;
-  } else if (kind === 'reject') {
-    reasonWrap.classList.remove('rr-u-hidden');      // Grund erfassbar
-    inp.value = '';                                  // kein Wert
-    inp.setAttribute('readonly', 'readonly');
-    inp.setAttribute('disabled', 'disabled');
-    st.reason = attest.querySelector('[data-role="reason"]').value || null;
-  }
   updatePreview();
 }
 
@@ -402,7 +333,7 @@ document.querySelectorAll('input[name="mode"]').forEach(r => {
 
 
 // =============================================================================
-// CPAK  (nie vorberechnet konsumiert – intern aus aufgelösten aHKA/JLO, A5)
+// CPAK (nie vorberechnet konsumiert – intern aus aufgelösten aHKA/JLO, A5)
 // =============================================================================
 function calculateCPAK() {
   const mldfa = resolveField('mldfa').value;
@@ -414,8 +345,7 @@ function calculateCPAK() {
     if (detail) detail.textContent = 'aHKA und JLO benötigen mLDFA + mMPTA';
     return null;
   }
-  const aHKA = mmpta - mldfa;          // Varus negativ (interne Konvention)
-  const JLO = mmpta + mldfa;
+  const aHKA = mmpta - mldfa, JLO = mmpta + mldfa;
   let aHKAcat, aHKAtxt;
   if (aHKA < -2) { aHKAcat = 'varus'; aHKAtxt = 'Varus'; }
   else if (aHKA > 2) { aHKAcat = 'valgus'; aHKAtxt = 'Valgus'; }
@@ -449,8 +379,7 @@ function generateTechnik() {
   if (gv('proj_lla') === 'ja') proj.push('Ganzbein-Standaufnahme der Untersuchungsseite');
   if (gv('proj_rb') === 'ja') proj.push('Rosenberg-Aufnahme');
   const seite = seiteEl.value;
-  const kugel = gv('proj_kugel') === 'ja'
-    ? ' Kalibrationskugel mitabgebildet, Längenmessungen entsprechend kalibriert.' : '';
+  const kugel = gv('proj_kugel') === 'ja' ? ' Kalibrationskugel mitabgebildet, Längenmessungen entsprechend kalibriert.' : '';
   return `Planungsröntgen Knie ${seite} in folgenden Projektionen: ${proj.join(', ') || '–'}.${kugel}`;
 }
 
@@ -467,22 +396,18 @@ function generateBefund() {
   const lines = [];
   const cpak = calculateCPAK();
 
-  // Achsenvermessung – jeder angezeigte Wert ist durch eine Observation gedeckt,
-  // Ablehnungen erscheinen als explizite Abwesenheitsangabe (A4/A6).
   const achseTeile = [];
   AXIS_SPEC.forEach(spec => {
     const res = resolveField(spec.id);
     if (res.status === 'not-attested') return;
     if (res.status === 'active-rejected') {
       const grund = res.absentReason ? ` (${reasonDe(res.absentReason)})` : '';
-      achseTeile.push(`${spec.label} nicht beurteilbar${grund}`);
-      return;
+      achseTeile.push(`${spec.label} nicht beurteilbar${grund}`); return;
     }
     if (res.value === null) return;
     if (spec.direction) {
       let dir = ' (neutrale Achse)';
-      if (res.value < 178) dir = ' (Varus)';
-      else if (res.value > 182) dir = ' (Valgus)';
+      if (res.value < 178) dir = ' (Varus)'; else if (res.value > 182) dir = ' (Valgus)';
       achseTeile.push(`${spec.label} ${res.value.toFixed(1)}°${dir}`);
     } else {
       achseTeile.push(`${spec.label} ${fmt(res.value, spec)}`);
@@ -530,7 +455,6 @@ function generateBefund() {
 
   const ft = gv('freetext');
   if (ft) lines.push(ft);
-
   return lines.join(' ');
 }
 
@@ -542,21 +466,16 @@ function generateBeurteilung() {
   const cpak = calculateCPAK();
   const klM = gv('kl_med'), klL = gv('kl_lat'), klPF = gv('kl_pf');
   if (!klM && !klL && !klPF) return '';
-
   const parts = [];
   const klMax = Math.max(parseInt(klM)||0, parseInt(klL)||0, parseInt(klPF)||0);
   if (klMax >= 3) {
-    const kompartimente = [];
-    if (parseInt(klM) >= 3) kompartimente.push('medial');
-    if (parseInt(klL) >= 3) kompartimente.push('lateral');
-    if (parseInt(klPF) >= 3) kompartimente.push('patellofemoral');
-    parts.push(`Fortgeschrittene Gonarthrose ${seite}, ${kompartimente.join('-')}-betont (KL ${klMax}).`);
-  } else if (klMax === 2) {
-    parts.push(`Mäßige Gonarthrose ${seite} (KL 2).`);
-  } else if (klMax <= 1) {
-    parts.push(`Keine bzw. allenfalls fragliche radiologische Arthrosezeichen ${seite}.`);
-  }
-
+    const komp = [];
+    if (parseInt(klM) >= 3) komp.push('medial');
+    if (parseInt(klL) >= 3) komp.push('lateral');
+    if (parseInt(klPF) >= 3) komp.push('patellofemoral');
+    parts.push(`Fortgeschrittene Gonarthrose ${seite}, ${komp.join('-')}-betont (KL ${klMax}).`);
+  } else if (klMax === 2) parts.push(`Mäßige Gonarthrose ${seite} (KL 2).`);
+  else if (klMax <= 1) parts.push(`Keine bzw. allenfalls fragliche radiologische Arthrosezeichen ${seite}.`);
   if (hka !== null) {
     if (hka < 178) parts.push(`Varus-Beinachse (Tragachsenwinkel ${hka.toFixed(1)}°).`);
     else if (hka > 182) parts.push(`Valgus-Beinachse (Tragachsenwinkel ${hka.toFixed(1)}°).`);
@@ -570,31 +489,26 @@ function generateBeurteilung() {
 
 
 // =============================================================================
-// PFLICHTFELD-VALIDIERUNG (visuell, nur Demo)
+// PFLICHTFELD-VALIDIERUNG + ATTESTIERUNGS-STATUS
 // =============================================================================
 function updateRequiredIndicators() {
   const seiteEl = document.querySelector('input[name="seite"]:checked');
-  const seiteOk = seiteEl && seiteEl.value;
-  document.getElementById('side_toggle').classList.toggle('rr-is-required-empty', !seiteOk);
+  document.getElementById('side_toggle').classList.toggle('rr-is-required-empty', !(seiteEl && seiteEl.value));
   ['kl_med','kl_lat','kl_pf'].forEach(id => {
     const sel = document.getElementById(id);
     sel.classList.toggle('rr-is-required-empty', sel.value === '');
   });
 }
 
-
-// =============================================================================
-// ATTESTIERUNGS-STATUS je Feld anzeigen
-// =============================================================================
 function updateAttestStatus() {
   AI_FIELDS.forEach(id => {
     const res = resolveField(id);
-    const st = document.querySelector(`.rr-attest[data-field="${id}"] [data-role="status"]`);
-    if (!st) return;
+    const el = document.querySelector(`.rr-ai-status[data-field="${id}"]`);
+    if (!el) return;
     let txt = STATUS_LABEL[res.status] || res.status;
-    if (res.status === 'active-rejected')
-      txt += res.absentReason ? ` · ${reasonDe(res.absentReason)}` : ' · Grund offen (dataAbsentReason unknown)';
-    st.textContent = txt;
+    if (res.status === 'active-rejected') txt += res.absentReason ? ` · ${reasonDe(res.absentReason)}` : ' · Grund offen (dataAbsentReason unknown)';
+    if (res.aiSource) txt += ` · Rohwert ${res.aiSource.rawValue}${res.aiSource.transform.name !== 'identity' ? ' (' + res.aiSource.transform.step + ')' : ''}`;
+    el.textContent = txt;
   });
 }
 
@@ -603,7 +517,6 @@ function updateAttestStatus() {
 // FHIR-MAPPING – Bausteine
 // =============================================================================
 function attestationExtension(res) {
-  // Attestierung als Observation.extension, feldgebunden (A8)
   const sub = [
     { url: 'attestationState', valueCode: res.status },
     { url: 'referenceLabel',  valueBoolean: res.referenceLabel }
@@ -630,13 +543,9 @@ function attestationExtension(res) {
 }
 
 function measurementObservation(res, meta, bodySite) {
-  const obs = {
-    resourceType: 'Observation', status: 'final',
-    code: { coding: [{ system: meta.sys, code: meta.code, display: meta.display }] },
-    bodySite: bodySite
-  };
+  const obs = { resourceType: 'Observation', status: 'final',
+    code: { coding: [{ system: meta.sys, code: meta.code, display: meta.display }] }, bodySite };
   if (res.status === 'active-rejected') {
-    // Observation OHNE value[x], mit dataAbsentReason (A8)
     obs.dataAbsentReason = res.absentReason
       ? { coding: [{ system: ABSENT_CS, code: res.absentReason, display: reasonDe(res.absentReason) }] }
       : { coding: [{ system: 'http://terminology.hl7.org/CodeSystem/data-absent-reason', code: 'unknown', display: 'Unknown' }] };
@@ -664,60 +573,41 @@ function buildObservationList(bodySite) {
   const obs = [];
   AXIS_SPEC.forEach(spec => {
     const res = resolveField(spec.id);
-    if (res.status === 'not-attested') return;      // keine Observation
+    if (res.status === 'not-attested') return;
     obs.push({ field: spec.id, res, obs: measurementObservation(res, AXIS_FHIR[spec.id], bodySite) });
   });
   return obs;
 }
 
 function runConsistencyCheck() {
-  const dummyBody = { text: 'Knie' };
-  const list = buildObservationList(dummyBody);
-
-  // A5 – keine stille Auffüllung
-  let a5ok = true; const a5detail = [];
+  const list = buildObservationList({ text: 'Knie' });
+  let a5ok = true; const a5 = [];
   list.forEach(({ field, res, obs }) => {
-    if (res.status === 'active-rejected') {
-      if ('valueQuantity' in obs || !obs.dataAbsentReason) { a5ok = false; a5detail.push(`${field}: rejected mit Wert`); }
-    }
+    if (res.status === 'active-rejected' && ('valueQuantity' in obs || !obs.dataAbsentReason)) { a5ok = false; a5.push(`${field}: rejected mit Wert`); }
   });
-  AI_FIELDS.forEach(id => {
-    const res = resolveField(id);
-    if (res.status === 'not-attested' && list.some(x => x.field === id)) {
-      a5ok = false; a5detail.push(`${id}: not-attested emittiert`);
-    }
-  });
+  AI_FIELDS.forEach(id => { if (resolveField(id).status === 'not-attested' && list.some(x => x.field === id)) { a5ok = false; a5.push(`${id}: not-attested emittiert`); } });
 
-  // A6 – Anzeige-Export-Konsistenz
-  let a6ok = true; const a6detail = [];
+  let a6ok = true; const a6 = [];
   AXIS_SPEC.forEach(spec => {
     const res = resolveField(spec.id);
     const entry = list.find(x => x.field === spec.id);
     const displayed = res.value !== null && res.status !== 'not-attested';
     const hasValue = entry && 'valueQuantity' in entry.obs;
-    if (displayed && !hasValue) { a6ok = false; a6detail.push(`${spec.id}: angezeigt ohne value[x]`); }
-    if (hasValue && !displayed) { a6ok = false; a6detail.push(`${spec.id}: value[x] ohne Anzeige`); }
-    if (hasValue && displayed && !approxEq(entry.obs.valueQuantity.value, res.value)) {
-      a6ok = false; a6detail.push(`${spec.id}: Wert ≠ Anzeige`);
-    }
+    if (displayed && !hasValue) { a6ok = false; a6.push(`${spec.id}: angezeigt ohne value[x]`); }
+    if (hasValue && !displayed) { a6ok = false; a6.push(`${spec.id}: value[x] ohne Anzeige`); }
+    if (hasValue && displayed && !approxEq(entry.obs.valueQuantity.value, res.value)) { a6ok = false; a6.push(`${spec.id}: Wert ≠ Anzeige`); }
   });
 
-  // A7 – Erhalt des Vorschlags: rawValue in jedem Zustand mit Vorschlag auflösbar
-  let a7ok = true; const a7detail = [];
+  let a7ok = true; const a7 = [];
   AI_FIELDS.forEach(id => {
     const res = resolveField(id);
-    if (res.aiSource) {
-      const raw = res.aiSource.rawValue;
-      if (raw === null || raw === undefined || raw !== AI_RAW[id].raw) {
-        a7ok = false; a7detail.push(`${id}: rawValue nicht erhalten`);
-      }
-    }
+    if (res.aiSource && res.aiSource.rawValue !== AI_RAW[id].raw) { a7ok = false; a7.push(`${id}: rawValue nicht erhalten`); }
   });
 
   return [
-    { id: 'A5', label: 'Keine stille Auffüllung', ok: a5ok, detail: a5detail.join('; ') },
-    { id: 'A6', label: 'Anzeige-Export-Konsistenz', ok: a6ok, detail: a6detail.join('; ') },
-    { id: 'A7', label: 'Erhalt des Vorschlags (rawValue)', ok: a7ok, detail: a7detail.join('; ') }
+    { id: 'A5', label: 'Keine stille Auffüllung', ok: a5ok, detail: a5.join('; ') },
+    { id: 'A6', label: 'Anzeige-Export-Konsistenz', ok: a6ok, detail: a6.join('; ') },
+    { id: 'A7', label: 'Erhalt des Vorschlags (rawValue)', ok: a7ok, detail: a7.join('; ') }
   ];
 }
 
@@ -729,7 +619,6 @@ function renderConsistency() {
       <span class="rr-dot">${c.ok ? '✓' : '!'}</span>
       <span><strong>${c.id}</strong> ${c.label}${c.ok ? '' : ' — ' + c.detail}</span>
     </div>`).join('');
-
   const ref = [], excl = [];
   AI_FIELDS.forEach(id => {
     const res = resolveField(id);
@@ -737,13 +626,12 @@ function renderConsistency() {
     (res.referenceLabel ? ref : excl).push(`${id}:${res.status}`);
   });
   const loa = document.getElementById('loaBox');
-  if (loa) loa.innerHTML =
-    `LoA-Referenzset: ${ref.length ? ref.join(', ') : '–'}<br>ausgeschlossen: ${excl.length ? excl.join(', ') : '–'}`;
+  if (loa) loa.innerHTML = `LoA-Referenzset: ${ref.length ? ref.join(', ') : '–'}<br>ausgeschlossen: ${excl.length ? excl.join(', ') : '–'}`;
 }
 
 
 // =============================================================================
-// PREVIEW UPDATE
+// PREVIEW
 // =============================================================================
 function updatePreview() {
   updateRequiredIndicators();
@@ -765,56 +653,43 @@ document.getElementById('prev_beurteilung').addEventListener('input', e => e.tar
 // COPY / RESET / EXPORT
 // =============================================================================
 function copyAll() {
-  const t = ['TECHNIK', document.getElementById('prev_technik').textContent,
-             '', 'KLINISCHE ANGABE', document.getElementById('prev_klinik').textContent,
-             '', 'BEFUND', document.getElementById('prev_befund').textContent,
-             '', 'BEURTEILUNG', document.getElementById('prev_beurteilung').value].join('\n');
+  const t = ['TECHNIK', document.getElementById('prev_technik').textContent, '',
+             'KLINISCHE ANGABE', document.getElementById('prev_klinik').textContent, '',
+             'BEFUND', document.getElementById('prev_befund').textContent, '',
+             'BEURTEILUNG', document.getElementById('prev_beurteilung').value].join('\n');
   navigator.clipboard.writeText(t).then(() => alert('Befund in Zwischenablage kopiert.'));
 }
-
-function resetForm() {
-  if (!confirm('Wirklich alles zurücksetzen?')) return;
-  location.reload();
-}
+function resetForm() { if (confirm('Wirklich alles zurücksetzen?')) location.reload(); }
 
 function getCodingFromSelectedOption(selectId) {
   const sel = document.getElementById(selectId);
   if (!sel) return null;
   const opt = sel.options[sel.selectedIndex];
   if (!opt || !opt.value) return null;
-  const rid = opt.getAttribute('data-radlex');
-  const en = opt.getAttribute('data-en');
-  const status = opt.getAttribute('data-radlex-status');
+  const rid = opt.getAttribute('data-radlex'), en = opt.getAttribute('data-en'), status = opt.getAttribute('data-radlex-status');
   const coding = [];
   if (rid) coding.push({ system: 'http://radlex.org', code: rid, display: en || opt.text });
   else if (status === 'local') coding.push({ system: LOCAL_CS, code: opt.value.toLowerCase().replace(/\s+/g,'-'), display: en || opt.text });
   return { coding, text: opt.text };
 }
-
 function getCodingFromCheckbox(checkboxId) {
   const cb = document.getElementById(checkboxId);
   if (!cb || !cb.checked) return null;
-  const rid = cb.getAttribute('data-radlex');
-  const en = cb.getAttribute('data-en');
-  const status = cb.getAttribute('data-radlex-status');
+  const rid = cb.getAttribute('data-radlex'), en = cb.getAttribute('data-en'), status = cb.getAttribute('data-radlex-status');
   const coding = [];
   if (rid) coding.push({ system: 'http://radlex.org', code: rid, display: en });
   else if (status === 'local') coding.push({ system: LOCAL_CS, code: checkboxId, display: en });
   return coding;
 }
 
-// baut die Achsen-Attestierungsübersicht für den JSON-Export
 function achsenAttestierung() {
   const out = {};
   AXIS_SPEC.forEach(spec => {
     const res = resolveField(spec.id);
     out[spec.id.toUpperCase()] = {
-      status: res.status,
-      wert: res.value,
-      referenzlabel: res.referenceLabel,
+      status: res.status, wert: res.value, referenzlabel: res.referenceLabel,
       aiSource: res.aiSource ? {
-        rawValue: res.aiSource.rawValue,
-        modelVersion: res.aiSource.modelVersion,
+        rawValue: res.aiSource.rawValue, modelVersion: res.aiSource.modelVersion,
         sourceArtifact: res.aiSource.sourceArtifact,
         transform: res.aiSource.transform.name === 'identity' ? null : res.aiSource.transform.step
       } : null,
@@ -830,19 +705,13 @@ function showExport(format) {
   const seite = document.querySelector('input[name="seite"]:checked');
   if (!seite || !seite.value) {
     area.textContent = '// Export nicht möglich: Bitte zuerst Seite (re. / li.) wählen.';
-    area.classList.add('rr-is-visible');
-    return;
+    area.classList.add('rr-is-visible'); return;
   }
   const cpak = calculateCPAK();
-  const mode = currentMode;   // Quelle der Wahrheit; von applyMode gesetzt
+  const mode = currentMode;
   const konsistenz = runConsistencyCheck();
-
   const refSet = [], exclSet = [];
-  AI_FIELDS.forEach(id => {
-    const r = resolveField(id);
-    if (r.status === 'not-attested') return;
-    (r.referenceLabel ? refSet : exclSet).push(id);
-  });
+  AI_FIELDS.forEach(id => { const r = resolveField(id); if (r.status === 'not-attested') return; (r.referenceLabel ? refSet : exclSet).push(id); });
 
   const data = {
     metadata: {
@@ -851,31 +720,20 @@ function showExport(format) {
       hinweis_variante: 'Verblindeter Anbietervergleich erfordert eine eigene Vorlagenvariante ohne diese Felder (Addendum A7), kein umschaltbarer Modus.',
       seite: seite.value,
       seite_radlex: { code: seite.getAttribute('data-radlex'), system: 'http://radlex.org', display: seite.getAttribute('data-en') },
-      datum: new Date().toISOString(),
-      modus: mode
+      datum: new Date().toISOString(), modus: mode
     },
-    technik: {
-      ap_stehend: gv('proj_ap'), seitlich: gv('proj_lat'),
-      patella_tangential: gv('proj_pat'), ganzbein_einseitig: gv('proj_lla'),
-      rosenberg: gv('proj_rb'), kalibrationskugel: gv('proj_kugel')
-    },
+    technik: { ap_stehend: gv('proj_ap'), seitlich: gv('proj_lat'), patella_tangential: gv('proj_pat'),
+      ganzbein_einseitig: gv('proj_lla'), rosenberg: gv('proj_rb'), kalibrationskugel: gv('proj_kugel') },
     klinische_angabe: gv('indikation'),
     achsenvermessung: achsenAttestierung(),
     loa_referenzset: { referenzlabel: refSet, ausgeschlossen: exclSet },
     cpak: cpak,
-    kellgren_lawrence: {
-      medial: parseInt(gv('kl_med'))||null,
-      lateral: parseInt(gv('kl_lat'))||null,
-      patellofemoral: parseInt(gv('kl_pf'))||null
-    },
+    kellgren_lawrence: { medial: parseInt(gv('kl_med'))||null, lateral: parseInt(gv('kl_lat'))||null, patellofemoral: parseInt(gv('kl_pf'))||null },
     patellofemoral: { insall_salvati: gv('ps_is'), caton_deschamps: gv('ps_cd'), tilt: gv('ps_tilt'), dejour: gv('ps_dejour') },
     slope: gn('slope'),
-    zusatzbefunde: {
-      osteophyten: gc('add_osteophyten'), zysten: gc('add_zysten'),
-      sklerose: gc('add_sklerose'), freikoerper: gc('add_freikorper'),
-      erguss: gc('add_erguss'), baker: gc('add_baker'),
-      verkalkungen: gc('add_verkalk'), chondrokalzinose: gc('add_chondrocalc')
-    },
+    zusatzbefunde: { osteophyten: gc('add_osteophyten'), zysten: gc('add_zysten'), sklerose: gc('add_sklerose'),
+      freikoerper: gc('add_freikorper'), erguss: gc('add_erguss'), baker: gc('add_baker'),
+      verkalkungen: gc('add_verkalk'), chondrokalzinose: gc('add_chondrocalc') },
     knochenstruktur: gv('bone_q'),
     voruntersuchung: { datum: gv('vu_date'), trend: gv('vu_trend') },
     freitext: gv('freetext'),
@@ -888,39 +746,25 @@ function showExport(format) {
     _konsistenz: konsistenz
   };
 
-  if (format === 'json') {
-    area.textContent = JSON.stringify(data, null, 2);
-  } else if (format === 'fhir') {
+  if (format === 'json') { area.textContent = JSON.stringify(data, null, 2); }
+  else if (format === 'fhir') {
     const obs = [];
-    const bodySite = {
-      coding: [
-        { system: 'http://radlex.org', code: 'RID2472', display: 'knee' },
-        { system: 'http://radlex.org', code: seite.getAttribute('data-radlex'), display: seite.getAttribute('data-en') }
-      ],
-      text: `Knie ${seite.value}`
-    };
+    const bodySite = { coding: [
+      { system: 'http://radlex.org', code: 'RID2472', display: 'knee' },
+      { system: 'http://radlex.org', code: seite.getAttribute('data-radlex'), display: seite.getAttribute('data-en') }
+    ], text: `Knie ${seite.value}` };
 
-    // Achsenmessungen – zustandsabhängig (value[x] ODER dataAbsentReason), immer
-    // mit feldgebundener Attestierungs-Extension inkl. aiSource-Provenance.
     buildObservationList(bodySite).forEach(entry => obs.push(entry.obs));
 
-    // Tibialer Slope (kein KI-Feld) – klassisch
     const slopeVal = gn('slope');
-    if (slopeVal !== null) {
-      obs.push({
-        resourceType:'Observation', status:'final',
-        code:{ coding:[{ system:LOCAL_CS, code:'tibial-slope', display:'Posterior tibial slope' }] },
-        bodySite: bodySite,
-        valueQuantity:{ value:slopeVal, unit:'deg', system:'http://unitsofmeasure.org', code:'deg' }
-      });
-    }
+    if (slopeVal !== null) obs.push({ resourceType:'Observation', status:'final',
+      code:{ coding:[{ system:LOCAL_CS, code:'tibial-slope', display:'Posterior tibial slope' }] }, bodySite,
+      valueQuantity:{ value:slopeVal, unit:'deg', system:'http://unitsofmeasure.org', code:'deg' } });
 
     [['kl_med','medial'],['kl_lat','lateral'],['kl_pf','patellofemoral']].forEach(([id,kompart]) => {
       const v = parseInt(gv(id));
       if (!isNaN(v)) {
-        const sel = document.getElementById(id);
-        const opt = sel.options[sel.selectedIndex];
-        const rid = opt.getAttribute('data-radlex');
+        const sel = document.getElementById(id), opt = sel.options[sel.selectedIndex], rid = opt.getAttribute('data-radlex');
         const coding = [{ system:'http://loinc.org', code:'LP410785-8', display:`Kellgren-Lawrence ${kompart}` }];
         if (rid) coding.push({ system:'http://radlex.org', code:rid, display:opt.getAttribute('data-en') });
         else coding.push({ system:LOCAL_CS, code:`kl-${kompart}-grade-${v}`, display:opt.getAttribute('data-en') });
@@ -928,27 +772,17 @@ function showExport(format) {
       }
     });
 
-    if (cpak) {
-      obs.push({
-        resourceType:'Observation', status:'final',
-        code:{ coding:[{ system:LOCAL_CS, code:'CPAK', display:'Coronal Plane Alignment of the Knee phenotype (MacDessi 2021)' }] },
-        bodySite,
-        valueString:`Type ${cpak.type}`,
-        component:[
-          { code:{ text:'aHKA' }, valueQuantity:{ value:parseFloat(cpak.aHKA), unit:'deg' } },
-          { code:{ text:'JLO' }, valueQuantity:{ value:parseFloat(cpak.JLO), unit:'deg' } }
-        ],
-        note:[{ text:'Abgeleitet aus mMPTA/mLDFA – nicht als KI-Wert konsumiert.' }]
-      });
-    }
+    if (cpak) obs.push({ resourceType:'Observation', status:'final',
+      code:{ coding:[{ system:LOCAL_CS, code:'CPAK', display:'Coronal Plane Alignment of the Knee phenotype (MacDessi 2021)' }] }, bodySite,
+      valueString:`Type ${cpak.type}`,
+      component:[ { code:{ text:'aHKA' }, valueQuantity:{ value:parseFloat(cpak.aHKA), unit:'deg' } },
+                  { code:{ text:'JLO' }, valueQuantity:{ value:parseFloat(cpak.JLO), unit:'deg' } } ],
+      note:[{ text:'Abgeleitet aus mMPTA/mLDFA – nicht als KI-Wert konsumiert.' }] });
 
     ['ps_is','ps_cd','ps_tilt','ps_dejour','bone_q','vu_trend'].forEach(id => {
       const c = getCodingFromSelectedOption(id);
-      if (c && c.coding.length > 0) {
-        obs.push({ resourceType:'Observation', status:'final',
-          code:{ coding:[{ system:LOCAL_CS, code:id, display:id }] },
-          bodySite, valueCodeableConcept:{ coding:c.coding, text:c.text } });
-      }
+      if (c && c.coding.length > 0) obs.push({ resourceType:'Observation', status:'final',
+        code:{ coding:[{ system:LOCAL_CS, code:id, display:id }] }, bodySite, valueCodeableConcept:{ coding:c.coding, text:c.text } });
     });
 
     ['add_osteophyten','add_zysten','add_sklerose','add_freikorper','add_erguss','add_baker','add_verkalk','add_chondrocalc'].forEach(id => {
@@ -956,27 +790,16 @@ function showExport(format) {
       if (c) obs.push({ resourceType:'Observation', status:'final', code:{ coding:c }, bodySite, valueBoolean:true });
     });
 
-    const bundle = {
-      resourceType:'Bundle', type:'collection',
+    const bundle = { resourceType:'Bundle', type:'collection',
       meta:{ profile:['http://hjk.local/StructureDefinition/KneePreTEPReport'],
              tag:[{ system:'http://hjk.wien/fhir/template-variant', code: data.metadata.variante, display:`Vorlage ${TEMPLATE_ID} v${TEMPLATE_VERSION}` }] },
-      entry:[
-        {
-          resource:{
-            resourceType:'DiagnosticReport', status:'final',
+      entry:[ { resource:{ resourceType:'DiagnosticReport', status:'final',
             category:[{ coding:[{ system:'http://loinc.org', code:'LP29684-5', display:'Radiology' }] }],
-            code:{ coding:[
-              { system:'http://loinc.org', code:'36572-4', display:'Knee X-ray, preoperative' },
-              { system:'http://radlex.org', code:'RPID218', display:'Knee X-ray' }
-            ] },
-            bodySite,
-            conclusion: data.fliesstext.beurteilung,
-            presentedForm:[{ contentType:'text/plain', data:btoa(unescape(encodeURIComponent(Object.values(data.fliesstext).join('\n\n')))) }]
-          }
-        },
-        ...obs.map(o => ({ resource:o }))
-      ]
-    };
+            code:{ coding:[ { system:'http://loinc.org', code:'36572-4', display:'Knee X-ray, preoperative' },
+                            { system:'http://radlex.org', code:'RPID218', display:'Knee X-ray' } ] },
+            bodySite, conclusion: data.fliesstext.beurteilung,
+            presentedForm:[{ contentType:'text/plain', data:btoa(unescape(encodeURIComponent(Object.values(data.fliesstext).join('\n\n')))) }] } },
+        ...obs.map(o => ({ resource:o })) ] };
     area.textContent = JSON.stringify(bundle, null, 2);
   }
   area.classList.add('rr-is-visible');
@@ -984,18 +807,16 @@ function showExport(format) {
 
 
 // =============================================================================
-// BUTTON-WIRING (kanonisches Template ist onclick-frei; hier verdrahten)
+// BUTTON-WIRING + INIT
 // =============================================================================
 document.getElementById('btn_copy').addEventListener('click', copyAll);
 document.getElementById('btn_fhir').addEventListener('click', () => showExport('fhir'));
 document.getElementById('btn_json').addEventListener('click', () => showExport('json'));
 document.getElementById('btn_reset').addEventListener('click', resetForm);
 
-// Testbarkeit im Headless-DOM (jsdom): interne Funktionen exponieren
 try {
   if (typeof window !== 'undefined')
-    window.__demo = { resolveField, runConsistencyCheck, applyMode, onAttestChoice, showExport, fieldState, AI_RAW, displayFromRaw, buildObservationList };
+    window.__demo = { resolveField, runConsistencyCheck, applyMode, onVerdict, showExport, fieldState, AI_RAW, displayFromRaw, buildObservationList };
 } catch (e) {}
 
-// Initiales Rendern (Startzustand: Manuell, keine Vorauswahl)
-updatePreview();
+applyMode('manual');   // Startzustand: Manuell, keine Vorauswahl (setzt Controls + rendert)

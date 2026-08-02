@@ -37,9 +37,12 @@ sich gegenseitig ausschließend, keine Vorauswahl; das Korrekturfeld ist erst
 nach Auswahl von „Korrigieren" eingabefähig; der Vorschlag bleibt in jedem
 Zustand sichtbar; jeder Zustandswechsel erzeugt ein Interaktionsereignis mit
 Zeitstempel. Der **Rohwert** bleibt in allen Zuständen mit Vorschlag in
-`aiSource.rawValue` erhalten. Ausgeführt in `demo/knie-prae-tep/demo.js`; die
-Bedienoberfläche ist eine Darstellungsfrage, verbindlich ist der abgeleitete
-Zustand und was er emittiert.
+`aiSource.rawValue` erhalten. Die **Bedienelemente liegen deklarativ im kanonischen
+`template.html`** (je Feld ein `<fieldset>`: schreibgeschütztes KI-/DICOM-SR-Feld,
+Verdict-Radiogruppe übernommen/eigene Messung/nicht verwertbar, eigenes Messfeld,
+Grund-Select) — reine MRRT-Formelemente ohne JS. `demo/knie-prae-tep/demo.js`
+verdrahtet nur das Verhalten und leitet den Zustand ab; verbindlich ist der
+abgeleitete Zustand und was er emittiert.
 
 > **HKA-Vorzeichenkonvention (durch FR zu bestätigen):** Für HKA ist im Template
 > ein Transform-Schritt `sign-inversion-applied` deklariert (`data-ai-transform`

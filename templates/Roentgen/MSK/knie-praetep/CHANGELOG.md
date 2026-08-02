@@ -36,10 +36,17 @@
 - **Provenance:** Bundle-Tag mit Vorlagenversion + aktiver Variante; Hinweis, dass
   ein verblindeter Anbietervergleich eine eigene Vorlagenvariante ohne diese
   Felder erfordert (A7), kein umschaltbarer Modus.
-- Kanonisches `template.html`: `data-ai`-Marker an den sechs KI-Messfeldern,
-  `data-ai-transform` an HKA. Weiterhin nackt (kein CSS/JS); Interaktivität in
-  `demo/knie-prae-tep/demo.js`. XML-Wohlgeformtheit und Demo-Build (build-demo.js)
-  grün; Headless-Test (jsdom) für Zustände, Fixtures 09–12 und Assertionen A5–A7.
+- **Attestierungs-Struktur deklarativ im kanonischen `template.html`:** Je
+  KI-Messfeld ein `<fieldset>` mit schreibgeschütztem KI-/DICOM-SR-Feld
+  (`data-ai-role="suggestion"`), Verdict-Radiogruppe (übernommen / eigene Messung /
+  nicht verwertbar — **eine** Auswahl, erfüllt A6.1 deklarativ statt zwei getrennter
+  Checkboxen), eigenem Messfeld (`data-ai-role="own"`) und Grund-Select
+  (`data-ai-role="reason"`), plus `data-ai-transform="sign-inversion"` an HKA.
+  Reine MRRT-Formelemente — **kein CSS/JS** im Template. `demo.js` injiziert die
+  Controls nicht mehr, sondern verdrahtet nur ihr Verhalten (Ein-/Ausblenden,
+  Vorbelegen), leitet den Zustand ab und exportiert. XML-Wohlgeformtheit und
+  Demo-Build (build-demo.js) grün; Headless-Test (jsdom, 47 Checks) für Zustände,
+  Fixtures 09–12, A6.1-Exklusivität und Assertionen A5–A7.
 
 ## [1.6] – 2026-07-21
 ### Korrigiert (RadLex-Kodierung – Registry-verifiziert gegen NCBO BioPortal)

@@ -111,45 +111,230 @@
   <div class="rr-h2-wrap">
     <h2>Achsenvermessung <span class="rr-rl-badge">RID11052</span></h2>
     <div class="rr-h2-rule"></div>
-    <div class="rr-h2-sub">KI-Vermessung (LAMA/DICOM-SR) feldweise attestiert: bestätigen, korrigieren oder als nicht beurteilbar ablehnen</div>
+    <div class="rr-h2-sub">Je Messwert: KI-Wert aus DICOM SR (schreibgeschützt), Attestierung (übernommen / eigene Messung / nicht verwertbar) und optionale eigene Messung. Rein deklarativ; Ableitung des Feldzustands siehe SPEC-ADDENDUM-A.</div>
   </div>
   <div class="rr-row rr-row-three" id="row_achsen">
-    <label>
-      <span class="rr-lbl"><span>HKA <span class="rr-rl-badge">LOINC LP410789-0</span></span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="hka" data-en="hip-knee-ankle angle"
-             data-loinc="LP410789-0" data-ai="1" data-ai-transform="sign-inversion" step="0.1" placeholder="z. B. 174.2" />
-      <div class="rr-field-note">Hip-knee-ankle angle, °</div>
-    </label>
-    <label>
-      <span class="rr-lbl"><span>MAD</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="mad" data-en="mechanical axis deviation"
-             data-radlex-status="local" data-ai="1" step="0.1" placeholder="z. B. -12.4" />
+    <fieldset class="rr-ai-field" id="field_hka" data-ai="1" data-ai-transform="sign-inversion">
+      <legend>HKA <span class="rr-rl-badge">LOINC LP410789-0</span> <span class="rr-ai-badge">KI</span></legend>
+
+      <label class="rr-ai-sr">
+        <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
+        <input type="number" id="hka_sr" data-ai-role="suggestion"
+               data-en="hip-knee-ankle angle" data-loinc="LP410789-0" step="0.1"
+               readonly="readonly" placeholder="aus DICOM SR" />
+      </label>
+
+      <div class="rr-ai-verdict" data-ai-role="verdict" role="radiogroup" aria-label="Attestierung HKA">
+        <span class="rr-lbl"><span>Befund (ein Auswahlakt)</span></span>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_hka" id="hka_v_accept" value="accept" /> übernommen</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_hka" id="hka_v_own" value="own" /> eigene Messung</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_hka" id="hka_v_reject" value="reject" /> nicht verwertbar</label>
+      </div>
+
+      <label class="rr-ai-own">
+        <span class="rr-lbl"><span>Eigene Messung</span></span>
+        <input type="number" id="hka" data-ai-role="own" data-en="hip-knee-ankle angle" data-loinc="LP410789-0" step="0.1"
+               placeholder="eigene Messung eintragen" />
+      </label>
+
+      <label class="rr-ai-reason">
+        <span class="rr-lbl"><span>Grund (falls nicht verwertbar)</span></span>
+        <select id="hka_reason" data-ai-role="reason">
+          <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
+          <option value="insufficient-acquisition" data-radlex-status="local" data-en="insufficient long-leg acquisition">unzureichende Ganzbeinaufnahme</option>
+          <option value="rotation-malposition" data-radlex-status="local" data-en="rotational malposition">Rotationsfehlstellung</option>
+          <option value="calibration-missing" data-radlex-status="local" data-en="calibration sphere not identifiable">Kalibrationskugel nicht erkennbar</option>
+          <option value="incomplete-imaging" data-radlex-status="local" data-en="incomplete imaging">unvollständige Abbildung</option>
+        </select>
+      </label>
+
+      <div class="rr-field-note">Hip-knee-ankle angle, ° · KI-Rohwert extern; Transform sign-inversion vor Anzeige</div>
+    </fieldset>
+
+    <fieldset class="rr-ai-field" id="field_mad" data-ai="1">
+      <legend>MAD <span class="rr-ai-badge">KI</span></legend>
+
+      <label class="rr-ai-sr">
+        <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
+        <input type="number" id="mad_sr" data-ai-role="suggestion"
+               data-en="mechanical axis deviation" data-radlex-status="local" step="0.1"
+               readonly="readonly" placeholder="aus DICOM SR" />
+      </label>
+
+      <div class="rr-ai-verdict" data-ai-role="verdict" role="radiogroup" aria-label="Attestierung MAD">
+        <span class="rr-lbl"><span>Befund (ein Auswahlakt)</span></span>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mad" id="mad_v_accept" value="accept" /> übernommen</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mad" id="mad_v_own" value="own" /> eigene Messung</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mad" id="mad_v_reject" value="reject" /> nicht verwertbar</label>
+      </div>
+
+      <label class="rr-ai-own">
+        <span class="rr-lbl"><span>Eigene Messung</span></span>
+        <input type="number" id="mad" data-ai-role="own" data-en="mechanical axis deviation" data-radlex-status="local" step="0.1"
+               placeholder="eigene Messung eintragen" />
+      </label>
+
+      <label class="rr-ai-reason">
+        <span class="rr-lbl"><span>Grund (falls nicht verwertbar)</span></span>
+        <select id="mad_reason" data-ai-role="reason">
+          <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
+          <option value="insufficient-acquisition" data-radlex-status="local" data-en="insufficient long-leg acquisition">unzureichende Ganzbeinaufnahme</option>
+          <option value="rotation-malposition" data-radlex-status="local" data-en="rotational malposition">Rotationsfehlstellung</option>
+          <option value="calibration-missing" data-radlex-status="local" data-en="calibration sphere not identifiable">Kalibrationskugel nicht erkennbar</option>
+          <option value="incomplete-imaging" data-radlex-status="local" data-en="incomplete imaging">unvollständige Abbildung</option>
+        </select>
+      </label>
+
       <div class="rr-field-note">Mechanical axis deviation, mm (− = medial)</div>
-    </label>
-    <label>
-      <span class="rr-lbl"><span>LLD <span class="rr-rl-badge">LOINC LP35279-5</span></span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="lld" data-en="leg length discrepancy"
-             data-loinc="LP35279-5" data-ai="1" step="0.1" placeholder="z. B. -3.0" />
+    </fieldset>
+
+    <fieldset class="rr-ai-field" id="field_lld" data-ai="1">
+      <legend>LLD <span class="rr-rl-badge">LOINC LP35279-5</span> <span class="rr-ai-badge">KI</span></legend>
+
+      <label class="rr-ai-sr">
+        <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
+        <input type="number" id="lld_sr" data-ai-role="suggestion"
+               data-en="leg length discrepancy" data-loinc="LP35279-5" step="0.1"
+               readonly="readonly" placeholder="aus DICOM SR" />
+      </label>
+
+      <div class="rr-ai-verdict" data-ai-role="verdict" role="radiogroup" aria-label="Attestierung LLD">
+        <span class="rr-lbl"><span>Befund (ein Auswahlakt)</span></span>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_lld" id="lld_v_accept" value="accept" /> übernommen</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_lld" id="lld_v_own" value="own" /> eigene Messung</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_lld" id="lld_v_reject" value="reject" /> nicht verwertbar</label>
+      </div>
+
+      <label class="rr-ai-own">
+        <span class="rr-lbl"><span>Eigene Messung</span></span>
+        <input type="number" id="lld" data-ai-role="own" data-en="leg length discrepancy" data-loinc="LP35279-5" step="0.1"
+               placeholder="eigene Messung eintragen" />
+      </label>
+
+      <label class="rr-ai-reason">
+        <span class="rr-lbl"><span>Grund (falls nicht verwertbar)</span></span>
+        <select id="lld_reason" data-ai-role="reason">
+          <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
+          <option value="insufficient-acquisition" data-radlex-status="local" data-en="insufficient long-leg acquisition">unzureichende Ganzbeinaufnahme</option>
+          <option value="rotation-malposition" data-radlex-status="local" data-en="rotational malposition">Rotationsfehlstellung</option>
+          <option value="calibration-missing" data-radlex-status="local" data-en="calibration sphere not identifiable">Kalibrationskugel nicht erkennbar</option>
+          <option value="incomplete-imaging" data-radlex-status="local" data-en="incomplete imaging">unvollständige Abbildung</option>
+        </select>
+      </label>
+
       <div class="rr-field-note">Beinlängendifferenz, mm (− = Untersuchungsseite kürzer)</div>
-    </label>
-    <label>
-      <span class="rr-lbl"><span>mLDFA</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="mldfa" data-en="mechanical lateral distal femoral angle"
-             data-radlex-status="local" data-ai="1" step="0.1" placeholder="z. B. 88.5" />
+    </fieldset>
+
+    <fieldset class="rr-ai-field" id="field_mldfa" data-ai="1">
+      <legend>mLDFA <span class="rr-ai-badge">KI</span></legend>
+
+      <label class="rr-ai-sr">
+        <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
+        <input type="number" id="mldfa_sr" data-ai-role="suggestion"
+               data-en="mechanical lateral distal femoral angle" data-radlex-status="local" step="0.1"
+               readonly="readonly" placeholder="aus DICOM SR" />
+      </label>
+
+      <div class="rr-ai-verdict" data-ai-role="verdict" role="radiogroup" aria-label="Attestierung mLDFA">
+        <span class="rr-lbl"><span>Befund (ein Auswahlakt)</span></span>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mldfa" id="mldfa_v_accept" value="accept" /> übernommen</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mldfa" id="mldfa_v_own" value="own" /> eigene Messung</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mldfa" id="mldfa_v_reject" value="reject" /> nicht verwertbar</label>
+      </div>
+
+      <label class="rr-ai-own">
+        <span class="rr-lbl"><span>Eigene Messung</span></span>
+        <input type="number" id="mldfa" data-ai-role="own" data-en="mechanical lateral distal femoral angle" data-radlex-status="local" step="0.1"
+               placeholder="eigene Messung eintragen" />
+      </label>
+
+      <label class="rr-ai-reason">
+        <span class="rr-lbl"><span>Grund (falls nicht verwertbar)</span></span>
+        <select id="mldfa_reason" data-ai-role="reason">
+          <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
+          <option value="insufficient-acquisition" data-radlex-status="local" data-en="insufficient long-leg acquisition">unzureichende Ganzbeinaufnahme</option>
+          <option value="rotation-malposition" data-radlex-status="local" data-en="rotational malposition">Rotationsfehlstellung</option>
+          <option value="calibration-missing" data-radlex-status="local" data-en="calibration sphere not identifiable">Kalibrationskugel nicht erkennbar</option>
+          <option value="incomplete-imaging" data-radlex-status="local" data-en="incomplete imaging">unvollständige Abbildung</option>
+        </select>
+      </label>
+
       <div class="rr-field-note">Mech. lateraler distaler Femurwinkel, °</div>
-    </label>
-    <label>
-      <span class="rr-lbl"><span>mMPTA</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="mmpta" data-en="mechanical medial proximal tibial angle"
-             data-radlex-status="local" data-ai="1" step="0.1" placeholder="z. B. 84.1" />
+    </fieldset>
+
+    <fieldset class="rr-ai-field" id="field_mmpta" data-ai="1">
+      <legend>mMPTA <span class="rr-ai-badge">KI</span></legend>
+
+      <label class="rr-ai-sr">
+        <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
+        <input type="number" id="mmpta_sr" data-ai-role="suggestion"
+               data-en="mechanical medial proximal tibial angle" data-radlex-status="local" step="0.1"
+               readonly="readonly" placeholder="aus DICOM SR" />
+      </label>
+
+      <div class="rr-ai-verdict" data-ai-role="verdict" role="radiogroup" aria-label="Attestierung mMPTA">
+        <span class="rr-lbl"><span>Befund (ein Auswahlakt)</span></span>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mmpta" id="mmpta_v_accept" value="accept" /> übernommen</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mmpta" id="mmpta_v_own" value="own" /> eigene Messung</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_mmpta" id="mmpta_v_reject" value="reject" /> nicht verwertbar</label>
+      </div>
+
+      <label class="rr-ai-own">
+        <span class="rr-lbl"><span>Eigene Messung</span></span>
+        <input type="number" id="mmpta" data-ai-role="own" data-en="mechanical medial proximal tibial angle" data-radlex-status="local" step="0.1"
+               placeholder="eigene Messung eintragen" />
+      </label>
+
+      <label class="rr-ai-reason">
+        <span class="rr-lbl"><span>Grund (falls nicht verwertbar)</span></span>
+        <select id="mmpta_reason" data-ai-role="reason">
+          <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
+          <option value="insufficient-acquisition" data-radlex-status="local" data-en="insufficient long-leg acquisition">unzureichende Ganzbeinaufnahme</option>
+          <option value="rotation-malposition" data-radlex-status="local" data-en="rotational malposition">Rotationsfehlstellung</option>
+          <option value="calibration-missing" data-radlex-status="local" data-en="calibration sphere not identifiable">Kalibrationskugel nicht erkennbar</option>
+          <option value="incomplete-imaging" data-radlex-status="local" data-en="incomplete imaging">unvollständige Abbildung</option>
+        </select>
+      </label>
+
       <div class="rr-field-note">Mech. medialer proximaler Tibiawinkel, °</div>
-    </label>
-    <label>
-      <span class="rr-lbl"><span>JLCA</span><span class="rr-ai-badge">KI</span></span>
-      <input type="number" id="jlca" data-en="joint line convergence angle"
-             data-radlex-status="local" data-ai="1" step="0.1" placeholder="z. B. 3.8" />
+    </fieldset>
+
+    <fieldset class="rr-ai-field" id="field_jlca" data-ai="1">
+      <legend>JLCA <span class="rr-ai-badge">KI</span></legend>
+
+      <label class="rr-ai-sr">
+        <span class="rr-lbl"><span>KI-Wert (DICOM SR)</span></span>
+        <input type="number" id="jlca_sr" data-ai-role="suggestion"
+               data-en="joint line convergence angle" data-radlex-status="local" step="0.1"
+               readonly="readonly" placeholder="aus DICOM SR" />
+      </label>
+
+      <div class="rr-ai-verdict" data-ai-role="verdict" role="radiogroup" aria-label="Attestierung JLCA">
+        <span class="rr-lbl"><span>Befund (ein Auswahlakt)</span></span>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_jlca" id="jlca_v_accept" value="accept" /> übernommen</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_jlca" id="jlca_v_own" value="own" /> eigene Messung</label>
+        <label class="rr-ai-opt"><input type="radio" name="verdict_jlca" id="jlca_v_reject" value="reject" /> nicht verwertbar</label>
+      </div>
+
+      <label class="rr-ai-own">
+        <span class="rr-lbl"><span>Eigene Messung</span></span>
+        <input type="number" id="jlca" data-ai-role="own" data-en="joint line convergence angle" data-radlex-status="local" step="0.1"
+               placeholder="eigene Messung eintragen" />
+      </label>
+
+      <label class="rr-ai-reason">
+        <span class="rr-lbl"><span>Grund (falls nicht verwertbar)</span></span>
+        <select id="jlca_reason" data-ai-role="reason">
+          <option value="" data-radlex-status="needs-mapping" selected="selected">–</option>
+          <option value="insufficient-acquisition" data-radlex-status="local" data-en="insufficient long-leg acquisition">unzureichende Ganzbeinaufnahme</option>
+          <option value="rotation-malposition" data-radlex-status="local" data-en="rotational malposition">Rotationsfehlstellung</option>
+          <option value="calibration-missing" data-radlex-status="local" data-en="calibration sphere not identifiable">Kalibrationskugel nicht erkennbar</option>
+          <option value="incomplete-imaging" data-radlex-status="local" data-en="incomplete imaging">unvollständige Abbildung</option>
+        </select>
+      </label>
+
       <div class="rr-field-note">Joint line convergence angle, °</div>
-    </label>
+    </fieldset>
   </div>
 
   <!-- KL -->
