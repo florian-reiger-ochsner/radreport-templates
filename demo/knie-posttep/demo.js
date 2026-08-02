@@ -49,14 +49,14 @@
   // 0b. KOMPLIKATIONS-FLAGS (intern – kein Fließtext-Output, aber FHIR-kodiert)
   // ---------------------------------------------------------------------------
   var FLAGS = [
-    { id: 'fl_fraktur',   label: 'Periprothetische Fraktur',        note: 'Vancouver-Klassifikation empfohlen',   rid: 'RID49830', en: 'periprosthetic fracture',            sev: 'alert' },
-    { id: 'fl_luxation',  label: 'Luxation / Subluxation',          note: 'Sofortige Klinik-Info',                rid: 'RID49831', en: 'prosthesis dislocation',             sev: 'alert' },
-    { id: 'fl_loosening', label: 'Lockerungszeichen',               note: 'Signifikanter Lysesaum / Migration',   rid: 'RID49832', en: 'prosthetic loosening',               sev: 'warn' },
-    { id: 'fl_infekt',    label: 'V.a. periprothetische Infektion', note: 'Osteolyse + klinische Korrelation',    rid: 'RID49833', en: 'periprosthetic infection',           sev: 'alert' },
-    { id: 'fl_malalign',  label: 'Relevantes Malalignment',         note: 'Korrektur prüfen',                     rid: 'RID49834', en: 'prosthetic malalignment',            sev: 'warn' },
-    { id: 'fl_notching',  label: 'Relevantes Notching',             note: 'Frakturrisiko suprakondylär erhöht',   rid: 'RID49835', en: 'anterior femoral notching',          sev: 'warn' },
-    { id: 'fl_ptx_alta',  label: 'Patella baja / infera',           note: 'Streckapparat prüfen',                 rid: 'RID49836', en: 'patella baja postoperative',         sev: 'warn' },
-    { id: 'fl_hto',       label: 'Ausgeprägte HTO',                 note: 'Brooker III–IV',                       rid: 'RID49837', en: 'significant heterotopic ossification', sev: 'warn' }
+    { id: 'fl_fraktur',   label: 'Periprothetische Fraktur',        note: 'Vancouver-Klassifikation empfohlen',   rid: 'periprosthetic-fracture', en: 'periprosthetic fracture',            sev: 'alert' },
+    { id: 'fl_luxation',  label: 'Luxation / Subluxation',          note: 'Sofortige Klinik-Info',                rid: 'prosthesis-dislocation', en: 'prosthesis dislocation',             sev: 'alert' },
+    { id: 'fl_loosening', label: 'Lockerungszeichen',               note: 'Signifikanter Lysesaum / Migration',   rid: 'prosthetic-loosening', en: 'prosthetic loosening',               sev: 'warn' },
+    { id: 'fl_infekt',    label: 'V.a. periprothetische Infektion', note: 'Osteolyse + klinische Korrelation',    rid: 'periprosthetic-infection', en: 'periprosthetic infection',           sev: 'alert' },
+    { id: 'fl_malalign',  label: 'Relevantes Malalignment',         note: 'Korrektur prüfen',                     rid: 'prosthetic-malalignment', en: 'prosthetic malalignment',            sev: 'warn' },
+    { id: 'fl_notching',  label: 'Relevantes Notching',             note: 'Frakturrisiko suprakondylär erhöht',   rid: 'anterior-femoral-notching', en: 'anterior femoral notching',          sev: 'warn' },
+    { id: 'fl_ptx_alta',  label: 'Patella baja / infera',           note: 'Streckapparat prüfen',                 rid: 'patella-baja-postoperative', en: 'patella baja postoperative',         sev: 'warn' },
+    { id: 'fl_hto',       label: 'Ausgeprägte HTO',                 note: 'Brooker III–IV',                       rid: 'heterotopic-ossification', en: 'significant heterotopic ossification', sev: 'warn' }
   ];
 
   // ---------------------------------------------------------------------------
@@ -82,12 +82,12 @@
   // 0d. ENDOCERT-KERNCHECKLISTE
   // ---------------------------------------------------------------------------
   var EC_CHECKLIST = [
-    { id: 'ec_pos',   label: 'Implantat korrekt positioniert',            note: 'Regelrechte Verankerung Femur + Tibia, kein offensichtliches Malalignment', rid: 'RID49770', en: 'implant position satisfactory' },
-    { id: 'ec_zem',   label: 'Zementierung vollständig',                  note: 'Vollständiger Mantel, kein relevanter Defekt, keine bedenkliche Extrusion',  rid: 'RID49800', en: 'cement mantle complete' },
-    { id: 'ec_frak',  label: 'Keine periprothetische Fraktur',            note: 'Kein Frakturhinweis im abgebildeten Bereich',                               rid: 'RID49830', en: 'no periprosthetic fracture' },
-    { id: 'ec_lux',   label: 'Kein Hinweis auf Luxation',                 note: 'Kongruente Gelenkstellung, kein Implantat-Dislokationszeichen',              rid: 'RID49831', en: 'no dislocation' },
-    { id: 'ec_align', label: 'Alignment ohne dringlichen Korrekturbedarf', note: 'Coronares + sagittales Alignment beider Komponenten akzeptabel',            rid: 'RID49771', en: 'alignment acceptable' },
-    { id: 'ec_pat',   label: 'Patella zentriert (falls Patellaersatz)',   note: 'Tracking ok, kein Tilt, kein Überhang; n.a. ohne Patellaersatz',             rid: 'RID49780', en: 'patellar tracking satisfactory' }
+    { id: 'ec_pos',   label: 'Implantat korrekt positioniert',            note: 'Regelrechte Verankerung Femur + Tibia, kein offensichtliches Malalignment', rid: 'implant-position-satisfactory', en: 'implant position satisfactory' },
+    { id: 'ec_zem',   label: 'Zementierung vollständig',                  note: 'Vollständiger Mantel, kein relevanter Defekt, keine bedenkliche Extrusion',  rid: 'cement-mantle-complete', en: 'cement mantle complete' },
+    { id: 'ec_frak',  label: 'Keine periprothetische Fraktur',            note: 'Kein Frakturhinweis im abgebildeten Bereich',                               rid: 'no-periprosthetic-fracture', en: 'no periprosthetic fracture' },
+    { id: 'ec_lux',   label: 'Kein Hinweis auf Luxation',                 note: 'Kongruente Gelenkstellung, kein Implantat-Dislokationszeichen',              rid: 'no-dislocation', en: 'no dislocation' },
+    { id: 'ec_align', label: 'Alignment ohne dringlichen Korrekturbedarf', note: 'Coronares + sagittales Alignment beider Komponenten akzeptabel',            rid: 'alignment-acceptable', en: 'alignment acceptable' },
+    { id: 'ec_pat',   label: 'Patella zentriert (falls Patellaersatz)',   note: 'Tracking ok, kein Tilt, kein Überhang; n.a. ohne Patellaersatz',             rid: 'patellar-tracking-satisfactory', en: 'patellar tracking satisfactory' }
   ];
 
   // ---------------------------------------------------------------------------
@@ -672,7 +672,7 @@
       if (val === null || val === undefined || val === '') return;
       idx++;
       var coding = [];
-      if (rid) coding.push({ system: 'http://radlex.org', code: rid, display: en });
+      if (rid) coding.push({ system: /^RID\d+$/.test(rid) ? 'http://radlex.org' : 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: rid, display: en });
       if (loinc) coding.push({ system: 'http://loinc.org', code: loinc, display: en });
       var obs = {
         resourceType: 'Observation', status: 'final', id: 'obs-' + idx,
@@ -689,19 +689,19 @@
       return o && o.dataset ? (o.dataset[key] || '') : '';
     };
 
-    addObs(optData('imp_typ', 'radlex') || 'RID49700', optData('imp_typ', 'en') || 'knee arthroplasty type', gv('imp_typ'), null, null);
-    addObs(optData('imp_const', 'radlex') || 'RID49706', optData('imp_const', 'en') || 'constraint', gv('imp_const'), null, null);
-    addObs('RID49730', 'femoral component coronal alignment', gn('fem_cor'), null, '°');
-    addObs('RID49750', 'tibial component coronal alignment', gn('tib_cor'), null, '°');
-    addObs('RID49504', 'hip-knee-ankle angle postoperative', gn('hka_post'), null, '°');
-    addObs(optData('align_ges', 'radlex') || 'RID49770', optData('align_ges', 'en') || 'postoperative alignment', gv('align_ges'), null, null);
-    addObs(optData('peri_ges', 'radlex') || 'RID49790', optData('peri_ges', 'en') || 'periprosthetic assessment', gv('peri_ges'), null, null);
+    addObs(optData('imp_typ', 'radlex') || 'knee-arthroplasty-type', optData('imp_typ', 'en') || 'knee arthroplasty type', gv('imp_typ'), null, null);
+    addObs(optData('imp_const', 'radlex') || 'implant-constraint', optData('imp_const', 'en') || 'constraint', gv('imp_const'), null, null);
+    addObs('femoral-coronal-alignment', 'femoral component coronal alignment', gn('fem_cor'), null, '°');
+    addObs('tibial-coronal-alignment', 'tibial component coronal alignment', gn('tib_cor'), null, '°');
+    addObs('hka-postoperative', 'hip-knee-ankle angle postoperative', gn('hka_post'), null, '°');
+    addObs(optData('align_ges', 'radlex') || 'postoperative-alignment', optData('align_ges', 'en') || 'postoperative alignment', gv('align_ges'), null, null);
+    addObs(optData('peri_ges', 'radlex') || 'periprosthetic-assessment', optData('peri_ges', 'en') || 'periprosthetic assessment', gv('peri_ges'), null, null);
 
     getActiveFlags().forEach(function (f) {
       idx++;
       obsArr.push({ fullUrl: 'urn:uuid:obs-' + idx, resource: {
         resourceType: 'Observation', status: 'final', id: 'obs-' + idx,
-        code: { coding: [{ system: 'http://radlex.org', code: f.rid, display: f.en }] },
+        code: { coding: [{ system: /^RID\d+$/.test(f.rid) ? 'http://radlex.org' : 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: f.rid, display: f.en }] },
         valueString: 'KOMPLIKATIONS-FLAG: ' + f.label,
         interpretation: [{ coding: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation', code: 'A', display: 'Abnormal' }] }]
       } });

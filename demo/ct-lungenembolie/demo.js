@@ -311,7 +311,7 @@
     var rv = num('rv_dia'), lv = num('lv_dia');
     var obsArr = [];
 
-    var leRid = le === 'ja' ? 'RID5352' : le === 'nein' ? 'RID5352-neg' : 'RID5352-frag';
+    var leRid = 'RID4834'; // pulmonary embolism (RadLex, Rebuild-verifiziert; Wert unterscheidet nachgewiesen/nein/fraglich)
     var leEn = le === 'ja' ? 'pulmonary embolism' : le === 'nein' ? 'no pulmonary embolism' : 'indeterminate for pulmonary embolism';
     obsArr.push({ fullUrl: 'urn:uuid:pe-obs', resource: {
       resourceType: 'Observation', status: 'final', id: 'pe-obs',
@@ -328,13 +328,13 @@
       obsArr.push({ fullUrl: 'urn:uuid:rvlv-obs', resource: {
         resourceType: 'Observation', status: 'final', id: 'rvlv-obs',
         code: { coding: [
-          { system: 'http://radlex.org', code: 'RID5076', display: 'RV/LV ratio' },
+          { system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'rv-lv-ratio', display: 'RV/LV ratio' },
         ] },
         valueQuantity: { value: ratio, unit: 'ratio' },
         interpretation: ratio >= 1.0 ? [{ coding: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation', code: 'H', display: 'High' }] }] : undefined,
         component: [
-          { code: { coding: [{ system: 'http://radlex.org', code: 'RID5069', display: 'right ventricular diameter' }] }, valueQuantity: { value: rv, unit: 'mm' } },
-          { code: { coding: [{ system: 'http://radlex.org', code: 'RID5073', display: 'left ventricular diameter' }] }, valueQuantity: { value: lv, unit: 'mm' } }
+          { code: { coding: [{ system: 'http://radlex.org', code: 'RID1389', display: 'right ventricular diameter' }] }, valueQuantity: { value: rv, unit: 'mm' } },
+          { code: { coding: [{ system: 'http://radlex.org', code: 'RID1392', display: 'left ventricular diameter' }] }, valueQuantity: { value: lv, unit: 'mm' } }
         ]
       } });
     }
@@ -342,7 +342,7 @@
     var dr = {
       resourceType: 'DiagnosticReport', status: 'final', id: 'ctpa-report',
       code: { coding: [
-        { system: 'http://radlex.org', code: 'RID10361', display: 'CT pulmonary angiography' }
+        { system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'ct-pulmonary-angiography', display: 'CT pulmonary angiography' }
       ] },
       effectiveDateTime: now,
       identifier: [

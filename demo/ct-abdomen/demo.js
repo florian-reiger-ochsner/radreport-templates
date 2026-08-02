@@ -426,7 +426,7 @@
     var respSel = $('recist_response');
     if (respSel && respSel.value) {
       var opt = respSel.options[respSel.selectedIndex];
-      addObs(opt.dataset.radlex || 'RID49860', opt.dataset.en || 'RECIST response', respSel.value, null);
+      addObs(opt.dataset.radlex || 'recist-response', opt.dataset.en || 'RECIST response', respSel.value, null);
     }
 
     // Notfall-Positiva (Abnormal)

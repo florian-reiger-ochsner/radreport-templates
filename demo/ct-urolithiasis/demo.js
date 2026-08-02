@@ -287,12 +287,12 @@
       var obs = {
         resourceType: 'Observation', status: 'final', id: 'calculus-' + (i + 1),
         code: { coding: [
-          { system: 'http://radlex.org', code: 'RID5154', display: 'urinary calculus' },
+          { system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'urinary-calculus', display: 'urinary calculus' },
         ] },
         bodySite: { text: s.seite + ' ' + s.lok },
         component: [
-          s.dia !== null ? { code: { coding: [{ system: 'http://radlex.org', code: 'RID5161', display: 'calculus diameter' }] }, valueQuantity: { value: s.dia, unit: 'mm' } } : null,
-          s.hu !== null ? { code: { coding: [{ system: 'http://radlex.org', code: 'RID5163', display: 'calculus density' }] }, valueQuantity: { value: s.hu, unit: 'HU' } } : null,
+          s.dia !== null ? { code: { coding: [{ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'calculus-diameter', display: 'calculus diameter' }] }, valueQuantity: { value: s.dia, unit: 'mm' } } : null,
+          s.hu !== null ? { code: { coding: [{ system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'calculus-density', display: 'calculus density' }] }, valueQuantity: { value: s.hu, unit: 'HU' } } : null,
           s.subst ? { code: { text: 'composition' }, valueString: s.subst } : null
         ].filter(Boolean)
       };
@@ -302,7 +302,7 @@
     var dr = {
       resourceType: 'DiagnosticReport', status: 'final', id: 'uro-report',
       code: { coding: [
-        { system: 'http://radlex.org', code: 'RID10361', display: 'CT urolithiasis' }
+        { system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'ct-urolithiasis', display: 'CT urolithiasis' }
       ] },
       effectiveDateTime: now,
       identifier: [

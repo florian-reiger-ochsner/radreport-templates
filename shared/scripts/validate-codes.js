@@ -428,6 +428,63 @@ function printOne(r, opts, header) {
   console.log(line);
 }
 
+/* --- Demo-Schicht + Badge-Prüfung (nur --resolve) ------------------------ *
+ * Der Kern-Linter prüft nur template.html/RADLEX-MAPPING.md. Diese Pass ergänzt:
+ * hardcodierte RadLex-Codes in demo/<id>/demo.js sowie RID-Text in rr-rl-badge-
+ * Spans der template.html — beides für den Kern-Linter unsichtbar. Semantik-
+ * Abgleich identisch zu [REGISTRY]: falsches Konzept = Fehler, noch nicht im
+ * Cache = Report (Cache via resolve-radlex.js auffrischen). */
+function scanDemoLayer(cache) {
+  const repoRoot = path.resolve(__dirname, '..', '..');
+  const errors = [], warnings = [];
+  const files = [];
+  const demoRoot = path.join(repoRoot, 'demo');
+  if (fs.existsSync(demoRoot)) {
+    for (const d of fs.readdirSync(demoRoot)) {
+      const p = path.join(demoRoot, d, 'demo.js');
+      if (fs.existsSync(p)) files.push({ p, rel: 'demo/' + d + '/demo.js', code: true });
+    }
+  }
+  for (const t of allTargets()) files.push({ p: t.html, rel: path.relative(repoRoot, t.html), code: false });
+
+  const cmp = (rid, display, where) => {
+    const base = (rid.match(/^(RID\d+)/) || [])[1] || rid;
+    if (/^RID0$/.test(rid)) { errors.push(`[DEMO/FORMAT] ${where}: ungültiger Platzhalter '${rid}'.`); return; }
+    const suffix = rid.length > base.length;
+    const c = cache && cache.terms && cache.terms[base];
+    if (!c) { warnings.push(`[DEMO/REGISTRY] ${where}: ${rid} ("${display || '—'}") nicht im Cache — resolve-radlex.js auffrischen.`); return; }
+    if (c.notFound) { errors.push(`[DEMO/REGISTRY] ${where}: ${rid} in BioPortal nicht gefunden.`); return; }
+    if (suffix) { warnings.push(`[DEMO/NORMALISIEREN] ${where}: Basis ${base}="${c.englishLabel || c.prefLabel}", Suffix ${rid}.`); return; }
+    if (display) {
+      const cand = new Set([c.englishLabel, c.prefLabel, ...(c.synonyms || [])].filter(Boolean).map(normTerm));
+      if (cand.size && !cand.has(normTerm(display))) {
+        const alt = [c.englishLabel, c.prefLabel].filter(Boolean).join(' | ');
+        errors.push(`[DEMO/REGISTRY] ${where}: ${rid} als "${display}" ≠ RadLex [${alt}].`);
+      }
+    }
+  };
+
+  const pairPats = [
+    /code:\s*'(RID\d+)'\s*,\s*display:\s*'([^']*)'/g,
+    /addObs\(\s*['"](RID\d+)['"]\s*,\s*['"]([^'"]*)['"]/g,
+    /rid:\s*'(RID\d+)'\s*,\s*en:\s*'([^']*)'/g,
+    /data-radlex="(RID\d+)"[^>]*?data-en="([^"]*)"/g,
+  ];
+  const badgePat = /rr-rl-badge">\s*(RID\d+)\s*</g;
+  const litPat = /'(RID\d+(?:-[\w-]+)?)'/g;
+
+  for (const f of files) {
+    const src = fs.readFileSync(f.p, 'utf8');
+    const seen = new Set();
+    if (f.code) {
+      for (const re of pairPats) { let m; while ((m = re.exec(src))) { const k = m[1] + '|' + m[2]; if (!seen.has(k)) { seen.add(k); cmp(m[1], m[2], f.rel); } } }
+      let m; while ((m = litPat.exec(src))) { const rid = m[1]; if (!seen.has('L' + rid)) { seen.add('L' + rid); if (/^RID0$/.test(rid) || rid.includes('-')) cmp(rid, null, f.rel); } }
+    }
+    let b; while ((b = badgePat.exec(src))) cmp(b[1], null, f.rel + ' (Badge)');
+  }
+  return { errors: [...new Set(errors)], warnings: [...new Set(warnings)] };
+}
+
 function main() {
   const opts = parseArgs(process.argv.slice(2));
   const cache = loadCache(opts);
@@ -435,7 +492,8 @@ function main() {
   if (opts.all && !targets.length) fail('Keine Templates unter templates/ gefunden.', 2);
 
   const results = targets.map((t) => runOne(t, cache, opts));
-  const totalErr = results.reduce((n, r) => n + r.errors.length, 0);
+  const demoLayer = opts.resolve ? scanDemoLayer(cache) : { errors: [], warnings: [] };
+  const totalErr = results.reduce((n, r) => n + r.errors.length, 0) + demoLayer.errors.length;
 
   if (opts.json) {
     process.stdout.write(JSON.stringify(
@@ -460,6 +518,14 @@ function main() {
     printOne(results[0], opts, true);
   }
 
+  if (opts.resolve && !opts.json) {
+    const l2 = '═'.repeat(72);
+    console.log('\n' + l2 + '\nDEMO-SCHICHT + BADGES  [--resolve]');
+    if (!demoLayer.errors.length && !demoLayer.warnings.length) console.log('  ✓ keine RadLex-Probleme in demo.js / Badges.');
+    demoLayer.errors.forEach((e) => console.log('  ✗ ' + e));
+    demoLayer.warnings.forEach((w) => console.log('  ⚠ ' + w));
+    console.log(l2);
+  }
   process.exit(totalErr === 0 ? 0 : 1);
 }
 

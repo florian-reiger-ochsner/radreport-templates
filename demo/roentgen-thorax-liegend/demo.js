@@ -135,9 +135,9 @@ button.rr-tx-act{padding:9px 18px;border:none;border-radius:6px;font-family:inhe
 // -----------------------------------------------------------------------------
 const gv = id => document.getElementById(id)?.value?.trim() ?? '';
 const gc = id => !!document.getElementById(id)?.checked;
-const regRid = key => document.getElementById('rg-' + key)?.dataset.radlex || 'RID0';
+const regRid = key => document.getElementById('rg-' + key)?.dataset.radlex || '';
 const regEn  = key => document.getElementById('rg-' + key)?.dataset.en || '';
-const elRid  = id  => document.getElementById(id)?.dataset.radlex || 'RID0';
+const elRid  = id  => document.getElementById(id)?.dataset.radlex || '';
 const elEn   = id  => document.getElementById(id)?.dataset.en || '';
 
 // Befundungs-/Ausgabe-Reihenfolge – Lage-/Device-Kontrolle FÜHREND.
@@ -470,7 +470,7 @@ function buildFhir() {
     n++;
     obsArr.push({ fullUrl: `urn:uuid:obs-${key || n}`, resource: {
       resourceType: 'Observation', status: 'final', id: `obs-${key || n}`,
-      code: { coding: [{ system: 'http://radlex.org', code: rid || 'RID0', display: en || '' }] },
+      code: { coding: [{ system: /^RID\d+$/.test(rid) ? 'http://radlex.org' : 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: rid || 'unspecified', display: en || '' }] },
       interpretation: [{ coding: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation', code: isNeg ? 'NEG' : 'POS', display: isNeg ? 'Negative' : 'Positive' }] }],
       valueCodeableConcept: { text: text },
       note: [{ text: isNeg ? 'Ärztlich attestierter Negativbefund (o.B.).' : 'Befund.' }],
@@ -508,7 +508,7 @@ function buildFhir() {
   const lo = (gv('loinc_override') || '36589-0|Portable XR Chest AP single view').split('|');
   const dr = {
     resourceType: 'DiagnosticReport', status: 'final', id: 'thorax-liegend-report',
-    code: { coding: [{ system: 'http://loinc.org', code: lo[0], display: lo[1] }, { system: 'http://radlex.org', code: 'RID10211', display: 'chest radiograph' }] },
+    code: { coding: [{ system: 'http://loinc.org', code: lo[0], display: lo[1] }, { system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'chest-radiograph', display: 'chest radiograph' }] },
     effectiveDateTime: now, identifier: [{ value: 'HJK-MRRT-ROE-THORAX-LIEGEND-v1.0' }],
     conclusion: buildBeurteilung(), result: obsArr.map(o => ({ reference: o.fullUrl })),
     presentedForm: [{ contentType: 'text/plain', title: 'Röntgen Thorax a.p. liegend', data: btoa(unescape(encodeURIComponent('TECHNIK\n' + buildTechnik() + '\n\nBEFUND\n' + buildBefund() + '\n\nBEURTEILUNG\n' + buildBeurteilung()))) }],
