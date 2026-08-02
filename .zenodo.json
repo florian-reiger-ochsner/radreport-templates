@@ -1,0 +1,37 @@
+{
+  "title": "radreport-templates: Standards-based structured radiology reporting templates (MRRT/RadLex/LOINC/FHIR)",
+  "upload_type": "software",
+  "description": "<p>Vendor-neutral, standards-based structured radiology reporting templates. MRRT-compliant HTML5 with RadLex/LOINC coding and FHIR R4 export.</p><p>The additive attestation model implements structured reports as a native verification reference (&quot;verification floor&quot;) for the evaluation of AI-based image analysis: reference labels are generated at the point of care, without retrospective surrogate reconstruction. Attestation is recorded per field and distinguishes active confirmation, active correction, active rejection (value not assessable) and passive acceptance; only actively attested values qualify as reference labels. An overwritten or rejected suggestion remains resolvable after export.</p><p>The repository includes synthetic fixtures and a validation protocol that allow the required platform properties to be verified without patient data and without vendor involvement.</p><p>Template content is in German; the coding layer is language-neutral (RadLex/LOINC). Template content is licensed under CC BY 4.0; build and validation scripts under MIT.</p>",
+  "creators": [
+	{
+	  "name": "Reiger-Ochsner, Florian",
+	  "orcid": "0009-0007-0619-9478",
+	  "affiliation": "Herz-Jesu-Krankenhaus Wien"
+	}
+  ],
+  "license": "cc-by-4.0",
+  "keywords": [
+	"structured reporting",
+	"radiology",
+	"MRRT",
+	"IHE",
+	"RadLex",
+	"LOINC",
+	"FHIR",
+	"HL7",
+	"report templates",
+	"AI evaluation",
+	"reference labels",
+	"post-deployment monitoring",
+	"provenance"
+  ],
+  "language": "deu",
+  "related_identifiers": [
+	{
+	  "identifier": "https://github.com/florian-reiger-ochsner/radreport-templates",
+	  "relation": "isSupplementTo",
+	  "scheme": "url"
+	}
+  ],
+  "notes": "Coding follows a local CodeSystem URI where RadLex RIDs are not yet verified; verified RIDs are a subsequent interoperability step."
+}
