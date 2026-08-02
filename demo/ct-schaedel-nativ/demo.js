@@ -201,6 +201,12 @@
     + '.rr-badge.ok{background:#ecf7f2;color:var(--rr-success)}'
     + '.rr-badge.warn{background:#fdf6ec;color:var(--rr-warn)}'
     + '.rr-badge.crit{background:var(--notfall-pale);color:var(--notfall)}'
+    // Geteilter RIS-/Signatur-Block: fieldset/legend im Core stillos → hier Reset
+    + '.rr-fieldset{border:1px solid var(--rr-rule);border-radius:var(--rr-radius);'
+    + 'padding:6px 14px 10px;margin:16px 0 4px;min-inline-size:0}'
+    + '.rr-fieldset>legend{font-size:11px;font-weight:700;letter-spacing:.05em;'
+    + 'text-transform:uppercase;color:var(--rr-ink-soft);padding:0 6px}'
+    + '.rr-fieldset .rr-h2-sub{margin:0 0 6px}'
     + '[data-show-if]{display:none}[data-show-if].rr-shown{display:grid}';
   var st = document.createElement('style');
   st.textContent = css;
@@ -357,8 +363,20 @@
   // ---------------------------------------------------------------------------
   // 9. FHIR (nur beurteilte Regionen → Observation; o.B. = attestierter Neg.)
   // ---------------------------------------------------------------------------
+  // yyyy-mm-dd (aus <input type=date>) → ISO-DateTime für FHIR; sonst durchreichen
+  function isoDate(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : ''; }
+
   function buildFhir() {
     var now = new Date().toISOString();
+
+    // --- Geteilter RIS-/Signatur-Block auslesen ------------------------------
+    var accession  = gv('ris_accession');
+    var patientId  = gv('ris_patient_id');
+    var studyDate  = isoDate(gv('ris_study_date'));
+    var interpId   = gv('sig_interpreter_id');
+    var interpName = gv('sig_interpreter_name');
+    var signedDate = isoDate(gv('sig_datetime'));
+
     var obsArr = [];
     REGIONS.forEach(function (r) {
       var st = regStatus(r.key);
@@ -374,22 +392,52 @@
       obsArr.push({ fullUrl: 'urn:uuid:obs-' + r.key, resource: obs });
     });
 
+    // --- Report-Identifier: Template-ID, DRG-Quelle, Accession (falls RIS) ---
+    var drIdent = [
+      { value: 'HJK-MRRT-CT-SCHAEDEL-NATIV-v1.3' },
+      { system: 'http://drg.de', value: 'DRG-041807.2.2104072101-CC-BY-4.0' }
+    ];
+    if (accession) {
+      drIdent.push({
+        type: { coding: [{ system: 'http://terminology.hl7.org/CodeSystem/v2-0203', code: 'ACSN', display: 'Accession ID' }] },
+        value: accession
+      });
+    }
+
+    // --- Signierender Befunder → contained/referenced Practitioner -----------
+    // interpreter-id ist ein GENERISCHER, stabiler Identifier (Personalnr./LANR).
+    // Er landet als DiagnosticReport.resultsInterpreter → macht "nur meine
+    // Befunde" über eine FHIR-Query auswertbar (search-param results-interpreter).
+    var extra = [];
+    var interpRef = null;
+    if (interpId) {
+      var pract = {
+        resourceType: 'Practitioner', id: 'interpreter',
+        identifier: [{ system: 'http://hjk.wien/fhir/sid/interpreter', value: interpId }]
+      };
+      if (interpName) pract.name = [{ text: interpName }];
+      extra.push({ fullUrl: 'urn:uuid:practitioner-interpreter', resource: pract });
+      interpRef = { reference: 'urn:uuid:practitioner-interpreter' };
+      if (interpName) interpRef.display = interpName;
+    }
+
     var dr = {
       resourceType: 'DiagnosticReport', status: 'final', id: 'cct-report',
       code: { coding: [
         { system: 'http://loinc.org', code: '30799-1', display: 'CT Head' },
-        { system: 'http://radlex.org', code: 'RID10337', display: 'CT head' }
+        { system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'ct-head-native', display: 'CT head' }
       ] },
-      effectiveDateTime: now,
-      identifier: [
-        { value: 'HJK-MRRT-CT-SCHAEDEL-NATIV-v1.1' },
-        { system: 'http://drg.de', value: 'DRG-041807.2.2104072101-CC-BY-4.0' }
-      ],
+      effectiveDateTime: studyDate || now,
+      identifier: drIdent,
       conclusion: gv('beurt'),
       result: obsArr.map(function (o) { return { reference: o.fullUrl }; }),
       presentedForm: [{ contentType: 'text/plain', title: 'CT Schädel nativ',
         data: btoa(unescape(encodeURIComponent('TECHNIK\n' + buildTechnik() + '\n\nBEFUND\n' + buildBefund() + '\n\nBEURTEILUNG\n' + gv('beurt')))) }]
     };
+    // Subjekt nur als Identifier-Referenz (keine PII-Demographie im Template).
+    if (patientId) dr.subject = { identifier: { system: 'http://hjk.wien/fhir/sid/patient', value: patientId } };
+    if (signedDate) dr.issued = signedDate;              // Signatur-/Freigabezeit
+    if (interpRef) dr.resultsInterpreter = [interpRef];   // signierender Befunder
 
     return JSON.stringify({
       resourceType: 'Bundle', type: 'document', timestamp: now,
@@ -397,7 +445,7 @@
         { system: 'http://hjk.wien/fhir/CodeSystem/radiology-templates', code: 'radlex-coded' },
         { system: 'http://drg.de', code: 'drg-cc-by-4.0' }
       ] },
-      entry: [{ fullUrl: 'urn:uuid:cct-report', resource: dr }].concat(obsArr)
+      entry: [{ fullUrl: 'urn:uuid:cct-report', resource: dr }].concat(obsArr).concat(extra)
     }, null, 2);
   }
   function toggleFhir() {
@@ -408,12 +456,34 @@
     box.classList.add('show');
   }
 
+  // yyyy-mm-dd → dd.mm.yyyy für die Textausgabe; sonst unverändert
+  function deDate(s) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s); return m ? m[3] + '.' + m[2] + '.' + m[1] : s; }
+  function reportHeader() {
+    var l = [];
+    if (gv('ris_accession')) l.push('Accession: ' + gv('ris_accession'));
+    if (gv('ris_patient_id')) l.push('Patient-ID: ' + gv('ris_patient_id'));
+    if (gv('ris_study_date')) l.push('Untersuchung: ' + deDate(gv('ris_study_date')));
+    if (gv('ris_referrer')) l.push('Zuweiser: ' + gv('ris_referrer'));
+    return l.join(' · ');
+  }
+  function reportSignature() {
+    var id = gv('sig_interpreter_id'), nm = gv('sig_interpreter_name');
+    var who = nm || id;
+    if (!who) return '';
+    var idTag = (nm && id) ? ' [' + id + ']' : '';
+    var d = gv('sig_datetime') ? ', ' + deDate(gv('sig_datetime')) : '';
+    return 'Signiert: ' + who + idTag + d;
+  }
   function buildReport() {
+    var head = reportHeader();
+    var sig = reportSignature();
     return 'CT SCHÄDEL NATIV\n'
       + new Date().toLocaleDateString('de-AT', { day: '2-digit', month: '2-digit', year: 'numeric' })
+      + (head ? '\n' + head : '')
       + '\n\nTECHNIK\n' + buildTechnik()
       + '\n\nBEFUND\n' + buildBefund()
-      + '\n\nBEURTEILUNG\n' + gv('beurt');
+      + '\n\nBEURTEILUNG\n' + gv('beurt')
+      + (sig ? '\n\n' + sig : '');
   }
   function copyReport(btn) {
     var t = buildReport();
@@ -429,7 +499,7 @@
   function resetAll() {
     if (!window.confirm('Alle Eingaben zurücksetzen?')) return;
     pane.querySelectorAll('select').forEach(function (s) { s.selectedIndex = 0; });
-    pane.querySelectorAll('textarea, input[type=text], input[type=number]').forEach(function (i) { i.value = ''; });
+    pane.querySelectorAll('textarea, input[type=text], input[type=number], input[type=date]').forEach(function (i) { i.value = ''; });
     pane.querySelectorAll('input[type=checkbox]').forEach(function (c) { c.checked = false; });
     REGIONS.forEach(function (r) {
       var u = document.getElementById('st_' + r.key + '_unset');

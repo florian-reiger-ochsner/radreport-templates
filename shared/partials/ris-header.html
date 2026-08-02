@@ -1,0 +1,72 @@
+<!--
+  GETEILTER RIS-/SIGNATUR-BLOCK  ·  Quelle der Wahrheit für alle Templates.
+
+  Dieses Fragment ist das EINZIGE Definitionsorgan der administrativen
+  Auftrags-/RIS- und Signatur-Felder. Es wird NICHT von Hand in die einzelnen
+  template.html kopiert, sondern per shared/scripts/stamp-ris-header.js zwischen
+  die rr:ris-header-Marker (start/end) in jede kanonische template.html
+  gestempelt (idempotent). Änderungen also hier machen und neu stempeln, damit
+  die Templates nicht auseinanderdriften. (Hinweis: die Marker bewusst NICHT als
+  Kommentar-Syntax hier ausschreiben – sonst Kollision beim Ersetzen.)
+
+  Architektur-Konformität (CLAUDE.md):
+  - Deklaratives, XML-wohlgeformtes MRRT. Kein CSS, kein JS, kein Script-Tag.
+  - rr-*-Klassen sind Struktur-Hooks; fieldset/legend gruppiert lesbar
+    (Styling-Reset in demo.js).
+  - ADMINISTRATIVE Felder → data-ris-source (HL7/RIS-Mapping-Schlüssel),
+    bewusst KEIN data-radlex (RadLex kodiert Befunde, nicht Auftragsmetadaten).
+  - Keine klinisch/administrativ vorbefüllten Defaults: alle Felder leer.
+    In Produktion füllt das RIS/HL7 die Werte; im Standalone-Export sind sie
+    manuell überschreibbar.
+  - Signierender Befunder = GENERISCHER Practitioner-Identifier (stabile ID),
+    nicht der Klartextname. Die konkrete Personenliste ist Deployment-Config,
+    NICHT Repo-Inhalt (respektiert „keine institutsspezifischen Inhalte").
+    interpreter-id → FHIR DiagnosticReport.resultsInterpreter, damit sich
+    Befunde später je Signierendem auswerten lassen („nur meine Befunde").
+
+  data-ris-source-Vokabular (HL7/RIS-Mapping):
+    accession-number · patient-id · study-datetime · referring-physician
+    interpreter-id · interpreter-name · signed-datetime
+-->
+  <fieldset class="rr-fieldset" id="fs_ris">
+    <legend>Auftrag / RIS</legend>
+    <div class="rr-h2-sub">In Produktion vom RIS/HL7 gesetzt; im Standalone-Export manuell überschreibbar. Kein diagnostisches Feld.</div>
+    <div class="rr-row rr-row-three">
+      <label>
+        <span class="rr-lbl"><span>Zugangsnummer (Accession)</span></span>
+        <input type="text" id="ris_accession" data-ris-source="accession-number" placeholder="vom RIS gesetzt" data-voice="accession" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Patient-ID</span></span>
+        <input type="text" id="ris_patient_id" data-ris-source="patient-id" placeholder="vom RIS gesetzt" data-voice="patienten id" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Untersuchungsdatum</span></span>
+        <input type="date" id="ris_study_date" data-ris-source="study-datetime" data-voice="untersuchungsdatum" />
+      </label>
+    </div>
+    <div class="rr-row">
+      <label>
+        <span class="rr-lbl"><span>Zuweiser</span></span>
+        <input type="text" id="ris_referrer" data-ris-source="referring-physician" placeholder="vom RIS gesetzt" data-voice="zuweiser" />
+      </label>
+    </div>
+  </fieldset>
+  <fieldset class="rr-fieldset" id="fs_sig">
+    <legend>Signatur</legend>
+    <div class="rr-h2-sub">Signierender Befunder als stabiler Practitioner-Identifier (Personalnr./LANR o.&#160;ä.). Klartextname optional. Grundlage für die Auswertung „nur meine Befunde".</div>
+    <div class="rr-row rr-row-three">
+      <label>
+        <span class="rr-lbl"><span>Signierender Befunder – ID</span></span>
+        <input type="text" id="sig_interpreter_id" data-ris-source="interpreter-id" placeholder="z.&#160;B. Personalnr./LANR" data-voice="befunder kennung" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Signierender Befunder – Klartext</span></span>
+        <input type="text" id="sig_interpreter_name" data-ris-source="interpreter-name" placeholder="Anzeigename (optional)" data-voice="befunder name" />
+      </label>
+      <label>
+        <span class="rr-lbl"><span>Signaturdatum</span></span>
+        <input type="date" id="sig_datetime" data-ris-source="signed-datetime" data-voice="signaturdatum" />
+      </label>
+    </div>
+  </fieldset>
